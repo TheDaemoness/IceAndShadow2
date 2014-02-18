@@ -1,0 +1,16 @@
+[
+{
+  "modid": "IceAndShadow2",
+  "name": "Ice and Shadow 2 - Doomed Cities",
+  "description": "A brutal new realm for the avaricious and masochistic.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Albatross"],
+  "credits": "Special thanks to Anciendraak for being an awesome tester and source of ideas.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
