@@ -1,5 +1,6 @@
 package iceandshadow2;
 
+import iceandshadow2.nyx.InitNyx;
 import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -9,15 +10,16 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(name = "Ice and Shadow 2", modid = "IceAndShadow2", dependencies="required-after:FML", version = IceAndShadow2.VERSION)
+@Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies="required-after:FML", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
+    public static final String MODID = "IceAndShadow2";
     public static final String VERSION = "Alpha 0.0";
     public static final int CONFIG_MAJ = 2;
     public static final int CONFIG_MIN = 0;
     
     private static IaSConfigManager cfg;
     
-    @Instance("IceAndShadow2")
+    @Instance(MODID)
     public static IceAndShadow2 instance;
     
     @EventHandler
@@ -29,6 +31,7 @@ public class IceAndShadow2 {
     	cfg.read();
     	if(cfg.needsWrite())
     		cfg.write();
+    	InitNyx.init();
     }
     
     @EventHandler
