@@ -2,6 +2,7 @@ package iceandshadow2;
 
 import iceandshadow2.nyx.InitNyx;
 import net.minecraft.init.Blocks;
+import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

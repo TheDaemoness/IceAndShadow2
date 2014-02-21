@@ -1,10 +1,9 @@
-package iceandshadow2.compat;
+package iceandshadow2.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.bases.*;
-import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {

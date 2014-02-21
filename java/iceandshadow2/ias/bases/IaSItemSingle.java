@@ -1,8 +1,8 @@
 package iceandshadow2.ias.bases;
 
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.compat.IaSRegistration;
 import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.util.IaSRegistration;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
