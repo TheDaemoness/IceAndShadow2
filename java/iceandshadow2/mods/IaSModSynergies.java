@@ -1,4 +1,4 @@
-package iceandshadow2.mod;
+package iceandshadow2.mods;
 
 public class IaSModSynergies {
 }
