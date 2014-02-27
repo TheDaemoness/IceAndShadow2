@@ -31,9 +31,9 @@ public class NyxChunkProvider implements IChunkProvider {
     private NoiseGeneratorOctaves noiseGen1;
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
-    private NoiseGeneratorPerlin perlinGen4;
-    public NoiseGeneratorOctaves noiseGen5;
-    public NoiseGeneratorOctaves noiseGen6;
+    private NoiseGeneratorOctaves noiseGen4;
+    private NoiseGeneratorPerlin noiseGenStone;
+    public NoiseGeneratorOctaves noiseGenPublic;
     /**
      * Reference to the World object.
      */
@@ -48,7 +48,7 @@ public class NyxChunkProvider implements IChunkProvider {
     double[] noiseArr3;
     double[] noiseArr1;
     double[] noiseArr2;
-    double[] noiseArr6;
+    double[] noiseArr4;
     int[][] field_73219_j = new int[32][32];
 
     public NyxChunkProvider(World par1World, long par2, boolean par4)
@@ -59,9 +59,9 @@ public class NyxChunkProvider implements IChunkProvider {
         this.noiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
         this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
         this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
-        this.perlinGen4 = new NoiseGeneratorPerlin(this.rand, 4);
-        this.noiseGen5 = new NoiseGeneratorOctaves(this.rand, 10);
-        this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 16);
+        this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 16);
+        this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); //Do we even need this anymore?
+        this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10); //Or this?
         this.enigmaArray = new double[825];
         this.parabolicField = new float[25];
 
@@ -188,7 +188,7 @@ public class NyxChunkProvider implements IChunkProvider {
      * specified chunk from the map seed and chunk seed
      */
     public Chunk provideChunk(int x, int z) {
-        this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
+        this.rand.setSeed((long)z * 341873128712L + (long)x * 132897987541L);
         Block[] ablock = new Block[65536];
         byte[] abyte = new byte[65536];
         this.genTerrain(x, z, ablock);
@@ -210,7 +210,7 @@ public class NyxChunkProvider implements IChunkProvider {
         double d1 = 684.412D;
         double d2 = 512.0D;
         double d3 = 512.0D;
-        this.noiseArr6 = this.noiseGen6.generateNoiseOctaves(this.noiseArr6, x, z, 5, 5, 200.0D, 200.0D, 0.5D);
+        this.noiseArr4 = this.noiseGen4.generateNoiseOctaves(this.noiseArr4, x, z, 5, 5, 200.0D, 200.0D, 0.5D);
         this.noiseArr3 = this.noiseGen3.generateNoiseOctaves(this.noiseArr3, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
         this.noiseArr1 = this.noiseGen1.generateNoiseOctaves(this.noiseArr1, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
         this.noiseArr2 = this.noiseGen2.generateNoiseOctaves(this.noiseArr2, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
@@ -249,7 +249,7 @@ public class NyxChunkProvider implements IChunkProvider {
                 f1 /= f2;
                 f = f * 0.9F + 0.1F;
                 f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-                double d13 = this.noiseArr6[i1] / 8000.0D;
+                double d13 = this.noiseArr4[i1] / 8000.0D;
 
                 if (d13 < 0.0D)
                     d13 = -d13 * 0.3D;

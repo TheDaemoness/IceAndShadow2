@@ -1,12 +1,17 @@
 package iceandshadow2.nyx.world;
 
+import iceandshadow2.IaSFlags;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
+import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraftforge.client.IRenderHandler;
 
 public class NyxWorldProvider extends WorldProvider {
@@ -124,7 +129,28 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public IChunkProvider createChunkGenerator() {
-		// TODO Auto-generated method stub
-		return super.createChunkGenerator();
+		return new NyxChunkProvider(worldObj, worldObj.getSeed(), true);
+	}
+	
+	@Override
+	public void registerWorldChunkManager()
+	{
+		BiomeGenBase[] nyxBiomes = {
+				NyxBiomes.nyxMountains,
+				NyxBiomes.nyxMesas,
+				NyxBiomes.nyxHills,
+				NyxBiomes.nyxCliffs, 
+				NyxBiomes.nyxForest,
+				NyxBiomes.nyxRugged,
+				NyxBiomes.nyxInfested
+				};
+        GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
+        biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
+        GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
+        biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
+        
+		this.worldChunkMgr = new NyxChunkManager(nyxBiomes,biomesGenLayer,biomesIndexLayer,this.worldObj);
+		this.dimensionId = IaSFlags.dim_nyx_id;
+		this.hasNoSky = true;
 	}
 }

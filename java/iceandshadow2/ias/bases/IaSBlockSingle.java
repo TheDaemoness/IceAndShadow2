@@ -19,6 +19,8 @@ public class IaSBlockSingle extends IaSBaseBlock {
 		this.setBlockName(naem);
 		this.setBlockTextureName(IceAndShadow2.MODID+':'+naem);
 	}
+	
+	
 
 	@Override
 	public String getModName() {

@@ -8,10 +8,17 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class NyxBiome extends BiomeGenBase {
 
-	public NyxBiome(int par1, boolean register, float heightRoot, float heightVari) {
+	private boolean rare;
+	
+	public boolean isRare() {
+		return rare;
+	}
+	
+	public NyxBiome(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register);
 		this.setHeight(new Height(heightRoot, heightVari));
 		this.setTemperatureRainfall(0.0F, 0.0F);
+		rare = isRare;
 	}
 	
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {

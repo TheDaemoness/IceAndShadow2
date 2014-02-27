@@ -11,7 +11,8 @@ public class NyxBlocks {
 	public static Block test, stone;
 	
 	public static void init() {
-		test = IaSRegistration.registerBlock(new IaSBlockSingle(EnumIaSModule.MODULE_NYX,"Test",Material.portal));
+		test = new IaSBlockSingle(EnumIaSModule.MODULE_NYX,"Test",Material.portal);
+		IaSRegistration.register(test);
 	}
 	
 	public static void setCreativeTabs() {

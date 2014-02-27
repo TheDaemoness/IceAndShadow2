@@ -11,7 +11,8 @@ public class NyxItems {
 	public static Item test;
 	
 	public static void init() {
-		test = IaSRegistration.registerItem(new IaSItemSingle(EnumIaSModule.MODULE_NYX,"Test"));
+		test = new IaSItemSingle(EnumIaSModule.MODULE_NYX,"Test");
+		IaSRegistration.register(test);
 	}
 	
 	public static void setCreativeTabs() {
