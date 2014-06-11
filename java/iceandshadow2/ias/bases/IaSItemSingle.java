@@ -11,9 +11,8 @@ public class IaSItemSingle extends IaSBaseItem {
 	
 	public IaSItemSingle(EnumIaSModule mod, String texName) {
 		super(mod);
-		String naem = mod.prefix+"Item"+texName;
-		this.setUnlocalizedName(naem);
-		this.setTextureName(IceAndShadow2.MODID+':'+naem);
+		this.setUnlocalizedName(mod.prefix+"Item"+texName);
+		this.setTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
 	}
 
 	@Override

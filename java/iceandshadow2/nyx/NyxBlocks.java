@@ -8,14 +8,13 @@ import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlocks {
-	public static Block test, stone;
+	public static Block stone;
 	
 	public static void init() {
-		test = new IaSBlockSingle(EnumIaSModule.MODULE_NYX,"Test",Material.portal);
-		IaSRegistration.register(test);
+		stone = new IaSBlockSingle(EnumIaSModule.NYX,"Stone",Material.rock).register();
 	}
 	
 	public static void setCreativeTabs() {
-		test.setCreativeTab(CreativeTabs.tabMisc);
+		stone.setCreativeTab(CreativeTabs.tabBlock);
 	}
 }

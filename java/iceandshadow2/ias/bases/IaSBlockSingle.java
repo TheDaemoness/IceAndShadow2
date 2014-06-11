@@ -15,13 +15,10 @@ import net.minecraft.util.IIcon;
 public class IaSBlockSingle extends IaSBaseBlock {
 	public IaSBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
-		String naem = mod.prefix+"Item"+texName;
-		this.setBlockName(naem);
-		this.setBlockTextureName(IceAndShadow2.MODID+':'+naem);
+		this.setBlockName(mod.prefix+"Block"+texName);
+		this.setBlockTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
 	}
 	
-	
-
 	@Override
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
