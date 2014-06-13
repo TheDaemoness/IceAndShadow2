@@ -1,4 +1,4 @@
-package iceandshadow2.ias.bases;
+package iceandshadow2.ias.items;
 
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.util.EnumIaSModule;

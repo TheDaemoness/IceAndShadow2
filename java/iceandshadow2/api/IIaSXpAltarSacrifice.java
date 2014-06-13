@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public interface IaSXpAltarSacrifice {
+public interface IIaSXpAltarSacrifice {
 	public int getXpValue(World world, ItemStack is);
 	public boolean rejectWhenZero();
 }

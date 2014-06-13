@@ -3,7 +3,9 @@ package iceandshadow2.util;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import iceandshadow2.ias.bases.*;
+import iceandshadow2.ias.blocks.*;
+import iceandshadow2.ias.items.IaSBaseItem;
+import iceandshadow2.ias.items.IaSItemSingle;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {
@@ -15,8 +17,8 @@ public class IaSRegistration {
 	}
 	
 	private static Block registerBlock(Block block) {
-		if(block instanceof IaSBlockSingle)
-			return GameRegistry.registerBlock((Block)block, ((IaSBlockSingle)block).getModName());
+		if(block instanceof IaSBaseBlockSingle)
+			return GameRegistry.registerBlock((Block)block, ((IaSBaseBlockSingle)block).getModName());
 		else
 			return GameRegistry.registerBlock((Block)block, block.getUnlocalizedName().substring(5));
 	}

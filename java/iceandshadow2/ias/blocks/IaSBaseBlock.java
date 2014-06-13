@@ -1,4 +1,4 @@
-package iceandshadow2.ias.bases;
+package iceandshadow2.ias.blocks;
 
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;

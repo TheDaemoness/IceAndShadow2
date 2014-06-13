@@ -3,7 +3,7 @@ package iceandshadow2.nyx;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import iceandshadow2.ias.bases.IaSItemSingle;
+import iceandshadow2.ias.items.IaSItemSingle;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 

@@ -1,4 +1,4 @@
-package iceandshadow2.ias.bases;
+package iceandshadow2.ias.blocks;
 
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.util.EnumIaSModule;
@@ -12,8 +12,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-public class IaSBlockSingle extends IaSBaseBlock {
-	public IaSBlockSingle(EnumIaSModule mod, String texName, Material mat) {
+public class IaSBaseBlockSingle extends IaSBaseBlock {
+	public IaSBaseBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
 		this.setBlockName(mod.prefix+"Block"+texName);
 		this.setBlockTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
