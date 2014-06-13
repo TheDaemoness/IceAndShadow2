@@ -18,6 +18,10 @@ public class NyxBiome extends BiomeGenBase {
 		super(par1, register);
 		this.setHeight(new Height(heightRoot, heightVari));
 		this.setTemperatureRainfall(0.0F, 0.0F);
+		this.spawnableCaveCreatureList.clear();
+		this.spawnableCreatureList.clear();
+		this.spawnableMonsterList.clear();
+		this.spawnableWaterCreatureList.clear();
 		rare = isRare;
 	}
 	

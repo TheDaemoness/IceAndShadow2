@@ -18,5 +18,10 @@ public abstract class IaSBaseBlock extends Block {
 		return this;
 	}
 	
+	public EnumIaSModule getIaSModule() {return MODULE;}
+	
+	public abstract String getShortName();
+	public abstract String getLongName();
+	
 	public abstract String getModName();
 }

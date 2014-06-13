@@ -147,7 +147,7 @@ public class NyxChunkProvider implements IChunkProvider {
         
         for (int xit = 0; xit < 16; ++xit) {
             for (int zit = 0; zit < 16; ++zit) {
-            	for (int yit = 0; yit <= 2; --yit) {
+            	for (int yit = 0; yit <= 2; ++yit) {
                 	int arrIndex = xit << 12 | zit << 8 | yit;
                 	if(this.rand.nextInt(yit+1) == 0)
                 		blockArr[arrIndex] = Blocks.bedrock;
@@ -315,7 +315,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
         int xit, zit, yval;
 
-        biomegenbase.decorate(this.worldObj, this.rand, k, l);
+        //biomegenbase.decorate(this.worldObj, this.rand, k, l);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
         k += 8;
         l += 8;

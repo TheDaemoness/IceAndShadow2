@@ -13,14 +13,28 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 public class IaSBaseBlockSingle extends IaSBaseBlock {
+	
+	protected final String blockNaem;
+	
 	public IaSBaseBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
 		this.setBlockName(mod.prefix+"Block"+texName);
 		this.setBlockTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
+		blockNaem = texName;
 	}
 	
 	@Override
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public String getShortName() {
+		return blockNaem;
+	}
+	
+	@Override
+	public String getLongName() {
+		return this.getIaSModule().prefix+"Block"+blockNaem;
 	}
 }

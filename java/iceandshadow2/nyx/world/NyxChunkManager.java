@@ -29,8 +29,9 @@ public class NyxChunkManager extends WorldChunkManager {
     {
     	biomeGenList = new BiomeGenBase[256];
     	
-    	for(int i = 0; i < biomesToGen.length; ++i)
+    	for(int i = 0; i < biomesToGen.length; ++i) {
     		biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
+    	}
     	
         this.biomeCache = new BiomeCache(this);
         this.genBiomes = genBiomes;
