@@ -1,11 +1,11 @@
 package iceandshadow2.nyx.world;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -29,13 +29,12 @@ public class NyxChunkManager extends WorldChunkManager {
     {
     	biomeGenList = new BiomeGenBase[256];
     	
-    	for(int i = 0; i < biomesToGen.length; ++i) {
+    	for(int i = 0; i < biomesToGen.length; ++i)
     		biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
-    	}
-    	
-        this.biomeCache = new BiomeCache(this);
+
         this.genBiomes = genBiomes;
         this.biomeIndexLayer = biomeIndexLayer;
+        this.biomeCache = new BiomeCache(this);
     }
 
     /**
@@ -86,6 +85,12 @@ public class NyxChunkManager extends WorldChunkManager {
     public float getTemperatureAtHeight(float par1, int par2)
     {
         return par1;
+    }
+    
+    @Override
+    public List getBiomesToSpawnIn()
+    {
+        return new ArrayList<BiomeGenBase>();
     }
 
     /**
@@ -141,8 +146,9 @@ public class NyxChunkManager extends WorldChunkManager {
         {
             int[] var7 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
             
-            for (int var8 = 0; var8 < par4 * par5; ++var8)
+            for (int var8 = 0; var8 < par4 * par5; ++var8) {
                 par1ArrayOfBiomeGenBase[var8] = this.biomeGenList[var7[var8]];
+            }
         	
             return par1ArrayOfBiomeGenBase;
         }

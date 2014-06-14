@@ -21,8 +21,14 @@ public class NyxWorldProvider extends WorldProvider {
 	public NyxWorldProvider() {
 		this.isHellWorld = false;
 		this.hasNoSky = true;
+		registerWorldChunkManager();
 	}
 	
+	@Override
+	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
+		return worldChunkMgr.getBiomeGenAt(x, z);
+	}
+
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.5F;

@@ -301,7 +301,7 @@ public class NyxChunkProvider implements IChunkProvider {
     /**
      * Populates chunk with ores etc etc
      */
-    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
+    public void populate(IChunkProvider cp, int par2, int par3)
     {
         BlockFalling.fallInstantly = true;
         int k = par2 * 16;
@@ -315,7 +315,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
         int xit, zit, yval;
 
-        //biomegenbase.decorate(this.worldObj, this.rand, k, l);
+        biomegenbase.decorate(this.worldObj, this.rand, k, l);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
         k += 8;
         l += 8;

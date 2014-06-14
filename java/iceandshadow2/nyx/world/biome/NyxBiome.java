@@ -22,6 +22,7 @@ public class NyxBiome extends BiomeGenBase {
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
+		this.biomeName = "Nyx";
 		rare = isRare;
 	}
 	
@@ -31,7 +32,7 @@ public class NyxBiome extends BiomeGenBase {
 	
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
-		genStructures(par1World, par2Random, xchunk, zchunk);
+		//genStructures(par1World, par2Random, xchunk, zchunk);
 		return;
 	}
 
