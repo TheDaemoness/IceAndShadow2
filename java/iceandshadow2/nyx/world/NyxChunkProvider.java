@@ -32,8 +32,8 @@ public class NyxChunkProvider implements IChunkProvider {
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
     private NoiseGeneratorOctaves noiseGen4;
-    private NoiseGeneratorPerlin noiseGenStone;
-    public NoiseGeneratorOctaves noiseGenPublic;
+    //private NoiseGeneratorPerlin noiseGenStone;
+    //public NoiseGeneratorOctaves noiseGenPublic;
     /**
      * Reference to the World object.
      */
@@ -60,8 +60,8 @@ public class NyxChunkProvider implements IChunkProvider {
         this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
         this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
         this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 16);
-        this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); //Do we even need this anymore?
-        this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10); //Or this?
+        //this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); //Do we even need this anymore?
+        //this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10); //Or this?
         this.enigmaArray = new double[825];
         this.parabolicField = new float[25];
 

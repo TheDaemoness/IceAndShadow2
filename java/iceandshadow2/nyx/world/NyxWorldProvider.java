@@ -16,7 +16,7 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class NyxWorldProvider extends WorldProvider {
 
-	public static final Vec3 NYX_COLOR = Vec3.fakePool.getVecFromPool(0.0, 0.0, 0.05F);
+	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0, 0.05F);
 	
 	public NyxWorldProvider() {
 		this.isHellWorld = false;

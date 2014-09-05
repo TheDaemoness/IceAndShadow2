@@ -13,4 +13,7 @@ public class IaSFlags {
 	
 	//Mod plugin flags.
 	public static boolean flag_mod_thaumcraft = false;
+	
+	//Forces portals to remain open at all times.
+	public static boolean force_portals_open = false;
 }

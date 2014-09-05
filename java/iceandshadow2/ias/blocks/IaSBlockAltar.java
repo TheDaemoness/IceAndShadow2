@@ -27,8 +27,9 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 		return 0;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		this.iconTop = 
 				reg.registerIcon("IceAndShadow:"+getIaSModule().prefix+getShortName()+"Top");
 		this.iconSide = 
