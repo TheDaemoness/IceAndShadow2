@@ -1,11 +1,12 @@
 package iceandshadow2.ias.blocks;
 
+import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public abstract class IaSBaseBlock extends Block {
+public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	public final EnumIaSModule MODULE;
 	
 	private float lum;
@@ -38,6 +39,4 @@ public abstract class IaSBaseBlock extends Block {
 	
 	public abstract String getShortName();
 	public abstract String getLongName();
-	
-	public abstract String getModName();
 }

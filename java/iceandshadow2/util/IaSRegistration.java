@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.blocks.*;
 import iceandshadow2.ias.items.IaSBaseItem;
-import iceandshadow2.ias.items.IaSItemSingle;
+import iceandshadow2.ias.items.IaSBaseItemSingle;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {
@@ -23,8 +23,8 @@ public class IaSRegistration {
 			return GameRegistry.registerBlock((Block)block, block.getUnlocalizedName().substring(5));
 	}
 	private static Item registerItem(Item it) {
-		if(it instanceof IaSItemSingle)
-			GameRegistry.registerItem((Item)it, ((IaSItemSingle)it).getModName());
+		if(it instanceof IaSBaseItemSingle)
+			GameRegistry.registerItem((Item)it, ((IaSBaseItemSingle)it).getModName());
 		else
 			GameRegistry.registerItem((Item)it, it.getUnlocalizedName().substring(5));
 		return it;
