@@ -36,7 +36,4 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	}
 	
 	public EnumIaSModule getIaSModule() {return MODULE;}
-	
-	public abstract String getShortName();
-	public abstract String getLongName();
 }

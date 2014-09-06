@@ -2,6 +2,7 @@ package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.blocks.IaSBaseBlock;
+import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxItems;
 //import iceandshadow2.renderer.fx.IaSFxManager;
@@ -31,7 +32,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class NyxBlockPortal extends IaSBaseBlockSingle {
+public class NyxBlockPortal extends IaSBaseBlockMulti {
 
 	IIcon closed;
 
@@ -229,6 +230,17 @@ public class NyxBlockPortal extends IaSBaseBlockSingle {
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
+	}
+
+	@Override
+	public String getModName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSubtypeCount() {
+		return 2;
 	}
 
 	/*

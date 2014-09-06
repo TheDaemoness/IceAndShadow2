@@ -27,14 +27,4 @@ public class IaSBaseBlockSingle extends IaSBaseBlock {
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
 	}
-
-	@Override
-	public String getShortName() {
-		return blockNaem;
-	}
-	
-	@Override
-	public String getLongName() {
-		return this.getIaSModule().prefix+"Block"+blockNaem;
-	}
 }

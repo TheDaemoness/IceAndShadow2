@@ -31,11 +31,11 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
 		this.iconTop = 
-				reg.registerIcon("IceAndShadow:"+getIaSModule().prefix+getShortName()+"Top");
+				reg.registerIcon("IceAndShadow:"+this.getModName()+"Top");
 		this.iconSide = 
-				reg.registerIcon("IceAndShadow:"+getIaSModule().prefix+getShortName()+"Side");
+				reg.registerIcon("IceAndShadow:"+this.getModName()+"Side");
 		this.iconBottom = 
-				reg.registerIcon("IceAndShadow:"+getIaSModule().prefix+getShortName()+"Bottom");
+				reg.registerIcon("IceAndShadow:"+this.getModName()+"Bottom");
 		this.blockIcon = iconSide;
 	}
 	
