@@ -18,4 +18,6 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 		IaSRegistration.register(this);
 		return this;
 	}
+	
+	
 }

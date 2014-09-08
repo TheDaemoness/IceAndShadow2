@@ -6,6 +6,7 @@ import iceandshadow2.nyx.world.biome.NyxBiome;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -23,6 +24,8 @@ import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class NyxChunkProvider implements IChunkProvider {
@@ -32,7 +35,7 @@ public class NyxChunkProvider implements IChunkProvider {
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
     private NoiseGeneratorOctaves noiseGen4;
-    //private NoiseGeneratorPerlin noiseGenStone;
+    private NoiseGeneratorPerlin noiseGenStone;
     //public NoiseGeneratorOctaves noiseGenPublic;
     /**
      * Reference to the World object.
@@ -60,7 +63,7 @@ public class NyxChunkProvider implements IChunkProvider {
         this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
         this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
         this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 16);
-        //this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); //Do we even need this anymore?
+        this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); //Do we even need this anymore?
         //this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10); //Or this?
         this.enigmaArray = new double[825];
         this.parabolicField = new float[25];
@@ -140,38 +143,16 @@ public class NyxChunkProvider implements IChunkProvider {
         }
     }
 
-    public void replaceBlocksForBiome(int x, int z, Block[] blockArr, byte[] metaArr, BiomeGenBase[] biomeArr)
-    {
+    public void replaceBlocksForBiome(int x, int z, Block[] blockArr, byte[] metaArr, BiomeGenBase[] biomeArr) {
         double d0 = 0.03125D;
-        //this.stoneNoise = this.perlinGen4.func_151599_a(this.stoneNoise, (double)(x * 16), (double)(z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
-        
-        for (int xit = 0; xit < 16; ++xit) {
-            for (int zit = 0; zit < 16; ++zit) {
-            	for (int yit = 0; yit <= 2; ++yit) {
-                	int arrIndex = xit << 12 | zit << 8 | yit;
-                	if(this.rand.nextInt(yit+1) == 0)
-                		blockArr[arrIndex] = Blocks.bedrock;
-                }
-                int var12 = (int)(this.stoneNoise[zit + xit * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
-                BiomeGenBase biomegen = biomeArr[zit + xit * 16];
-                int dep = 0;
-        		if(!(biomegen instanceof NyxBiome))
-        			continue;
-                for (int yit = 255; yit >= 0; --yit) {
-                	int arrIndex = xit << 12 | zit << 8 | yit;
-                	if(blockArr[arrIndex] == Blocks.water) {
-                		blockArr[arrIndex] = Blocks.ice;
-                		if(dep == 1)
-                			break;
-                		++dep;
-                	}
-                	else if(blockArr[arrIndex] == NyxBlocks.stone) {
-                		Block rep = ((NyxBiome)biomegen).getReplacementBlock(xit, yit, zit, dep, this.worldObj.rand);
-                		if(rep == null)
-                			break;
-                		++dep;
-                	}
-                }
+        this.stoneNoise = this.noiseGenStone.func_151599_a(this.stoneNoise, (double)(x * 16), (double)(z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+
+        for (int k = 0; k < 16; ++k)
+        {
+            for (int l = 0; l < 16; ++l)
+            {
+                BiomeGenBase biomegenbase = biomeArr[l + k * 16];
+                biomegenbase.genTerrainBlocks(this.worldObj, this.rand, blockArr, metaArr, x * 16 + k, z * 16 + l, this.stoneNoise[l + k * 16]);
             }
         }
     }
@@ -323,10 +304,6 @@ public class NyxChunkProvider implements IChunkProvider {
         for (xit = 0; xit < 16; ++xit) {
             for (zit = 0; zit < 16; ++zit) {
                 yval = this.worldObj.getPrecipitationHeight(k + xit, l + zit);
-
-                if (this.worldObj.isBlockFreezable(xit + k, yval - 1, zit + l))
-                    this.worldObj.setBlock(xit + k, yval - 1, zit + l, Blocks.ice, 0, 2);
-
                 if (this.worldObj.func_147478_e(xit + k, yval, zit + l, true))
                     this.worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
             }

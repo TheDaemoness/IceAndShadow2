@@ -2,9 +2,12 @@ package iceandshadow2.util;
 
 import iceandshadow2.IaSFlags;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 
 public class IaSPlayerHelper {
 	private static boolean dochat = true;

@@ -1,5 +1,6 @@
 package iceandshadow2;
 
+import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.nyx.InitNyx;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.DimensionManager;
@@ -33,6 +34,7 @@ public class IceAndShadow2 {
     	if(cfg.needsWrite())
     		cfg.write();
     	InitNyx.init();
+    	IaSDamageSources.init();
     }
     
     @EventHandler

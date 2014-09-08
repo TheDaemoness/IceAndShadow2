@@ -1,7 +1,9 @@
 package iceandshadow2.nyx.world.biome;
 
 import java.util.Random; //Fuck you, Scala.
+
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -23,6 +25,8 @@ public class NyxBiome extends BiomeGenBase {
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.biomeName = "Nyx";
+		this.topBlock = Blocks.snow_layer;
+		this.fillerBlock = Blocks.snow;
 		rare = isRare;
 	}
 	

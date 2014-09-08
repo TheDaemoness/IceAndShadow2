@@ -72,7 +72,7 @@ public class NyxWorldProvider extends WorldProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getCloudHeight() {
-		return 176;
+		return 192;
 	}
 
 	@Override

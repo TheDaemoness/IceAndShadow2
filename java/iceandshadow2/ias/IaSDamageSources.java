@@ -12,8 +12,7 @@ public class IaSDamageSources {
 		dmgStalagmite,
 		dmgGatestone,
 		dmgXpAltar,
-		dmgFreezing,
-		dmgFreezingNovira;
+		dmgFreezing;
 	
 	public static void init() {
 		dmgStone = new IaSDamageSource("IceAndShadow.nyxStoneDamage",0.5F,true);
@@ -23,6 +22,5 @@ public class IaSDamageSources {
 		dmgGatestone = new IaSDamageSource("IceAndShadow.nyxGatestoneDamage",0.9F,true);
 		dmgXpAltar = new IaSDamageSource("IceAndShadow.nyxXpAltarDamage",0.1F,true).setMagicDamage();
 		dmgFreezing = new IaSDamageSource("IceAndShadow.nyxFreezingDamage",0.0F,true);
-		dmgFreezingNovira = new IaSDamageSource("IceAndShadow.nyxFreezingNoviraDamage",0.0F,true);
 	}
 }

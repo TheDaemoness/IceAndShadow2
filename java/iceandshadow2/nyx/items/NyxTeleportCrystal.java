@@ -78,8 +78,8 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		if((is.getItemDamage() & 1) == 1) {
 			if(pl instanceof EntityPlayerMP) {
 				EntityPlayerMP plm = (EntityPlayerMP)pl;
-				if((is.getItemDamage() & 2) == 2) {
-					is.setItemDamage(is.getItemDamage()-2);
+				if((is.getItemDamage() & 2) == 0) {
+					is.setItemDamage(is.getItemDamage()+2);
 					//GIMME SEED!
 				}
 				if (pl.dimension != IaSFlags.dim_nyx_id) {
@@ -92,8 +92,8 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 									plm.mcServer
 									.worldServerForDimension(IaSFlags.dim_nyx_id)));
 				} else {
-					if((is.getItemDamage() & 4) == 4)
-						is.setItemDamage(is.getItemDamage()-4);
+					if((is.getItemDamage() & 4) == 0)
+						is.setItemDamage(is.getItemDamage()+4);
 					plm.mcServer.getConfigurationManager()
 					.transferPlayerToDimension(
 							plm,

@@ -43,45 +43,7 @@ public class NyxTeleporter extends Teleporter {
 		if(this.field_85192_a.provider.dimensionId == 0)
 			this.placeInOverworld(par1Entity, xcoord, ycoord, zcoord);
 		else if (!placeOnExistingPlatform(par1Entity, xcoord, ycoord, zcoord)) {
-
-			byte var12 = 1;
-			byte var13 = 0;
-			
-			//Limit the portal platform's height to 128 (portal spawns 1 below ycoord).
-			if(ycoord > 128)
-				ycoord = 128;
-			
-			//Limit the portal platform's height to more than 64.
-			if(ycoord < 64)
-				ycoord = 64;
-
-			for (int xit = -2; xit <= 2; ++xit) {
-				for (int yit = -2; yit <= 2; ++yit) {
-					for (int zit = -1; zit < 3; ++zit) {
-						int xbuild = xcoord + yit * var12 + xit * var13;
-						int ybuild = ycoord + zit;
-						int zbuild = zcoord + yit * var13 - xit * var12;
-
-						// Code to add obsidian borders to crying obsidian.
-						// platforms.
-						if (MathHelper.abs_int(xit) == 2
-								|| MathHelper.abs_int(yit) == 2) {
-							this.field_85192_a.setBlock(xbuild, ybuild, zbuild,
-									(zit < 0) ? Blocks.obsidian : Blocks.air,
-									0, 0x2);
-						} else {
-							this.field_85192_a
-										.setBlock(
-												xbuild,
-												ybuild,
-												zbuild,
-												(zit < 0) ? NyxBlocks.cryingObsidian
-														: Blocks.air, 1, 0x2);
-						}
-
-					}
-				}
-			}
+			placeInOverworld(par1Entity, xcoord, ycoord, zcoord); //Replace later.
 			par1Entity.setLocationAndAngles((double) xcoord, (double) ycoord,
 					(double) zcoord, par1Entity.rotationYaw, 0.0F);
 		}
@@ -107,10 +69,6 @@ public class NyxTeleporter extends Teleporter {
 		}
 		if(field_85192_a.getBlock(x, ycoord, z) == Blocks.water)
 			field_85192_a.setBlock(x, ycoord, z, Blocks.ice);
-		else if(field_85192_a.getBlock(x, ycoord, z) == Blocks.water)
-			field_85192_a.setBlock(x, ycoord, z, Blocks.ice);
-		else if(field_85192_a.getBlock(x, ycoord, z) == Blocks.lava)
-			field_85192_a.setBlock(x, ycoord, z, Blocks.obsidian);
 		else if(field_85192_a.getBlock(x, ycoord, z) == Blocks.lava)
 			field_85192_a.setBlock(x, ycoord, z, Blocks.cobblestone);
 		else if(field_85192_a.getBlock(x, ycoord, z) == Blocks.cactus)

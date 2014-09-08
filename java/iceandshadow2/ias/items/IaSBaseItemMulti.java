@@ -14,11 +14,10 @@ public abstract class IaSBaseItemMulti extends IaSBaseItem {
 		super(mod);
 	}
 	
+	@Override
 	public abstract String getUnlocalizedName(ItemStack par1ItemStack);
 
 	public abstract int getSubtypeCount();
-	
-	public abstract String getHumanReadableName(int meta);
 	
 	public boolean getHasSubtypes() {
 		return true;
