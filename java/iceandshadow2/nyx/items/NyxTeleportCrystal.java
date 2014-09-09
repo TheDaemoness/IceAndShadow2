@@ -12,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.EnumIaSModule;
@@ -62,7 +63,7 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 				active &= IaSEntityHelper.getLight(tree) <= 5;
 		}
 		else {
-			//active = IaSEntityHelper.getBlock(tree,0,-0.1,0) == NyxBlocks.cryingObsidian;
+			active = IaSEntityHelper.getBlock(tree,0,-0.1,0) == NyxBlocks.cryingObsidian;
 			active &= pile.getItemDamage() < 4;
 		}
 		if(!active & (pile.getItemDamage() & 1) == 1)
