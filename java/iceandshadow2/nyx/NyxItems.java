@@ -9,15 +9,13 @@ import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxItems {
-	public static Item test, teleportCrystal;
+	public static Item teleportCrystal;
 	
 	public static void init() {
-		test = new IaSBaseItemSingle(EnumIaSModule.NYX,"Test").register();
 		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").register();
 	}
 	
 	public static void setCreativeTabs() {
-		test.setCreativeTab(CreativeTabs.tabMisc);
 		teleportCrystal.setCreativeTab(CreativeTabs.tabMisc);
 	}
 }

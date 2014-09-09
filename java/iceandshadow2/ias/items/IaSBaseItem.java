@@ -19,5 +19,4 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 		return this;
 	}
 	
-	
 }

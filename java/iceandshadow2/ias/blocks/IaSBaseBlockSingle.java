@@ -14,7 +14,7 @@ import net.minecraft.util.IIcon;
 
 public class IaSBaseBlockSingle extends IaSBaseBlock {
 	
-	protected final String blockNaem;
+	private final String blockNaem;
 	
 	public IaSBaseBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
@@ -25,6 +25,16 @@ public class IaSBaseBlockSingle extends IaSBaseBlock {
 	
 	@Override
 	public String getModName() {
+		return blockNaem;
+	}
+	
+	@Override
+	public String getRegName() {
 		return this.getUnlocalizedName().substring(5);
+	}
+	
+	@Override
+	public String getTexName() {
+		return IceAndShadow2.MODID+':'+MODULE.prefix+blockNaem;
 	}
 }

@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.items;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,9 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
@@ -21,8 +25,25 @@ import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxTeleportCrystal extends IaSBaseItemSingle {
 
+	IIcon empty;
+	
 	public NyxTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
+	}
+
+	
+	
+	@Override
+	public IIcon getIconFromDamage(int dmg) {
+		if((dmg & 4) == 4)
+			return empty;
+		return this.itemIcon;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		empty = reg.registerIcon(this.getTexName()+"Empty");
 	}
 
 	@Override
@@ -63,7 +84,9 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		if(count < 50)
+		if(player.dimension != IaSFlags.dim_nyx_id && count < 50)
+			player.addPotionEffect(new PotionEffect(Potion.blindness.id,Math.min(50-count,25),0));
+		else if(count < 40 && player.dimension == IaSFlags.dim_nyx_id)
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id,Math.min(50-count,25),0));
 	}
 
@@ -111,8 +134,15 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 			EntityPlayer pwai) {
 		pwai.setItemInUse(heap,
 				this.getMaxItemUseDuration(heap));
+		if((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
+			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from etherium cores made from merged etherium dust...");
+			return heap;
+		}
 		if((heap.getItemDamage() & 1) == 0) {
-			IaSPlayerHelper.messagePlayer(pwai, "The crystal barely responds. It seems to prefer cold and dark places.");
+			if(pwai.dimension == IaSFlags.dim_nyx_id)
+				IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
+			else
+				IaSPlayerHelper.messagePlayer(pwai, "The crystal barely responds. It seems to prefer cold and dark places.");
 			return heap;
 		}
 		pwai.addPotionEffect(new PotionEffect(Potion.confusion.id,200,0));

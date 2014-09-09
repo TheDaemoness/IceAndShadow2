@@ -9,21 +9,31 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemShears;
 
 public class IaSItemShears extends ItemShears implements IIaSModName {
+	
+	private final String itemNaem;
+	public final EnumIaSModule MODULE;
 
 	public IaSItemShears(EnumIaSModule mod, String texName) {
 		super();
 		this.setUnlocalizedName(mod.prefix+"Item"+texName);
 		this.setTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
+		MODULE = mod;
+		itemNaem = texName;
 	}
-	
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon("IceAndShadow:" + this.getUnlocalizedName().split("\\.")[1]);
+
+	@Override
+	public String getRegName() {
+		return this.getUnlocalizedName().substring(5);
 	}
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return itemNaem;
+	}
+
+	@Override
+	public String getTexName() {
+		return IceAndShadow2.MODID+':'+MODULE.prefix+itemNaem;
 	}
 
 }
