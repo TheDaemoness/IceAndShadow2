@@ -60,9 +60,9 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 				active &= IaSEntityHelper.getLight(tree) <= 5;
 		}
 		else {
+			//active = IaSEntityHelper.getBlock(tree,0,-0.1,0) == NyxBlocks.cryingObsidian;
 			active &= pile.getItemDamage() < 4;
 		}
-		//active = IaSEntityHelper.getBlock(tree,0,-0.1,0) == NyxBlocks.cryingObsidian;
 		if(!active & (pile.getItemDamage() & 1) == 1)
 			pile.setItemDamage(pile.getItemDamage()-1);
 		else if(active & (pile.getItemDamage() & 1) == 0)
@@ -132,10 +132,9 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
-		pwai.setItemInUse(heap,
-				this.getMaxItemUseDuration(heap));
 		if((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
 			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from etherium cores made from merged etherium dust...");
+			pwai.setItemInUse(heap,72000);
 			return heap;
 		}
 		if((heap.getItemDamage() & 1) == 0) {
@@ -143,8 +142,11 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 				IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
 			else
 				IaSPlayerHelper.messagePlayer(pwai, "The crystal barely responds. It seems to prefer cold and dark places.");
+			pwai.setItemInUse(heap,72000);
 			return heap;
 		}
+		pwai.setItemInUse(heap,
+				this.getMaxItemUseDuration(heap));
 		pwai.addPotionEffect(new PotionEffect(Potion.confusion.id,200,0));
 		return heap;
 	}
