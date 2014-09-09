@@ -27,7 +27,7 @@ public class IceAndShadow2 {
     public void preInit(FMLPreInitializationEvent event) {
     	event.getModLog().info("Ice and Shadow 2, version " + VERSION + ".");
     	if(event.getSide() == Side.SERVER)
-        	event.getModLog().warn("While being SMP compatible, any major lag can make Ice and Shadow virtually unplayable. You've been warned.");
+        	event.getModLog().warn("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
     	cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), CONFIG_MAJ, CONFIG_MIN);
     	cfg.read();
     	if(cfg.needsWrite())
@@ -40,6 +40,8 @@ public class IceAndShadow2 {
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
+		//Be nice, Thaumcraft.
+		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""+IaSFlags.dim_nyx_id+":0");
     }
     
     @EventHandler
