@@ -29,10 +29,9 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 	
 	public NyxTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
+		this.setMaxStackSize(1);
 	}
 
-	
-	
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if((dmg & 4) == 4)
