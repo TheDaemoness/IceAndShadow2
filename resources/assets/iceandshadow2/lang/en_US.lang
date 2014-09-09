@@ -1,3 +1,5 @@
-item.nyxItemTeleportCrystal.name=Mysterious Crystal
+item.nyxTeleportCrystal.name=Mysterious Crystal
+item.nyxSeedObsidian.name=Crying Obsidian Seed
 
-tile.nyxBlockStone.name=Nyxian Stone
+tile.nyxStone.name=Nyxian Stone
+tile.nyxCryingObsidian.name=Crying Obsidian

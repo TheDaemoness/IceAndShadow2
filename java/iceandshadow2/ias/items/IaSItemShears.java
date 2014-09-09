@@ -9,8 +9,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemShears;
 
 public class IaSItemShears extends ItemShears implements IIaSModName {
-	
-	private final String itemNaem;
 	public final EnumIaSModule MODULE;
 
 	public IaSItemShears(EnumIaSModule mod, String texName) {
@@ -18,22 +16,16 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 		this.setUnlocalizedName(mod.prefix+"Item"+texName);
 		this.setTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
 		MODULE = mod;
-		itemNaem = texName;
-	}
-
-	@Override
-	public String getRegName() {
-		return this.getUnlocalizedName().substring(5);
 	}
 
 	@Override
 	public String getModName() {
-		return itemNaem;
+		return this.getUnlocalizedName().substring(5);
 	}
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID+':'+MODULE.prefix+itemNaem;
+		return IceAndShadow2.MODID+':'+MODULE.prefix+getModName();
 	}
 
 }
