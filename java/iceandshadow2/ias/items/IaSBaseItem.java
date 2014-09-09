@@ -17,5 +17,10 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 		IaSRegistration.register(this);
 		return this;
 	}
+
+	@Override
+	public EnumIaSModule getIaSModule() {
+		return MODULE;
+	}
 	
 }

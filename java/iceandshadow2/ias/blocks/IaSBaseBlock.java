@@ -35,5 +35,9 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 		return this;
 	}
 	
+	public int getMobilityFlag() {
+		return 1;
+	}
+	
 	public EnumIaSModule getIaSModule() {return MODULE;}
 }

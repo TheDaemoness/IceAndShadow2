@@ -3,9 +3,7 @@ package iceandshadow2.util;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import iceandshadow2.ias.blocks.*;
-import iceandshadow2.ias.items.IaSBaseItem;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.IIaSModName;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {
@@ -17,23 +15,16 @@ public class IaSRegistration {
 	}
 	
 	private static Block registerBlock(Block block) {
-		if(block instanceof IaSBaseBlockSingle)
-			return GameRegistry.registerBlock(block, ((IaSBaseBlockSingle)block).getModName());
+		if(block instanceof IIaSModName)
+			return GameRegistry.registerBlock(block, ((IIaSModName)block).getModName());
 		else
 			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
 	private static Item registerItem(Item it) {
-		if(it instanceof IaSBaseItemSingle)
-			GameRegistry.registerItem(it, ((IaSBaseItemSingle)it).getModName());
+		if(it instanceof IIaSModName)
+			GameRegistry.registerItem(it, ((IIaSModName)it).getModName());
 		else
 			GameRegistry.registerItem(it, it.getUnlocalizedName().substring(5));
 		return it;
-	}
-	
-	public static void setCreativeTab(IaSBaseItem it, CreativeTabs ct) {
-		it.setCreativeTab(ct);
-	}
-	public static void setCreativeTab(IaSBaseBlock bl, CreativeTabs ct) {
-		bl.setCreativeTab(ct);
 	}
 }

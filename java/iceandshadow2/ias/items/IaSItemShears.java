@@ -25,4 +25,9 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 		return IceAndShadow2.MODID+':'+MODULE.prefix+getModName();
 	}
 
+	@Override
+	public EnumIaSModule getIaSModule() {
+		return MODULE;
+	}
+
 }
