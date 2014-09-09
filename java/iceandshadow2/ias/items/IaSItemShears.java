@@ -3,9 +3,6 @@ package iceandshadow2.ias.items;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemShears;
 
 public class IaSItemShears extends ItemShears implements IIaSModName {

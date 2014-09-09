@@ -19,6 +19,7 @@ public abstract class IaSBaseItemMulti extends IaSBaseItem {
 
 	public abstract int getSubtypeCount();
 	
+	@Override
 	public boolean getHasSubtypes() {
 		return true;
 	}

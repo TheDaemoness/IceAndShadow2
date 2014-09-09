@@ -4,12 +4,8 @@ import iceandshadow2.util.EnumIaSModule;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -27,7 +23,8 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    @Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
     	tryFalling = true;
         par1World.scheduleBlockUpdate(par2, par3, par4, this, this.tickRate(par1World));
@@ -46,7 +43,8 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    @Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote) {
             this.tryToFall(par1World, par2, par3, par4);
@@ -67,7 +65,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
             {
                 if (!par1World.isRemote)
                 {
-                    EntityFallingBlock entityfallingsand = new EntityFallingBlock(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), this, par1World.getBlockMetadata(par2, par3, par4));
+                    EntityFallingBlock entityfallingsand = new EntityFallingBlock(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, this, par1World.getBlockMetadata(par2, par3, par4));
                     this.onStartFalling(entityfallingsand);
                     par1World.spawnEntityInWorld(entityfallingsand);
                 }
@@ -97,7 +95,8 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World par1World)
+    @Override
+	public int tickRate(World par1World)
     {
         return 2;
     }

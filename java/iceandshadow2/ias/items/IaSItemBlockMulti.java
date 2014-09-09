@@ -1,6 +1,5 @@
 package iceandshadow2.ias.items;
 
-import iceandshadow2.ias.blocks.IaSBaseBlock;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -25,16 +24,19 @@ public class IaSItemBlockMulti extends ItemBlock {
 		return damageValue;
 	}
 	
+	@Override
 	public String getUnlocalizedName() {
 		return theblock.getUnlocalizedName();
 	}
 	
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    @Override
+	public String getUnlocalizedName(ItemStack par1ItemStack)
     {
         return theblock.getUnlocalizedName(par1ItemStack.getItemDamage());
     }
     
-    public IIcon getIconFromDamage(int par1)
+    @Override
+	public IIcon getIconFromDamage(int par1)
     {
         return theblock.getIcon(0, par1);
     }

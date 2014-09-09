@@ -2,21 +2,12 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.NyxBlocks;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Direction;
-import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
@@ -30,6 +21,7 @@ public class NyxTeleporter extends Teleporter {
 		this.random = new Random(par1WorldServer.getSeed());
 	}
 
+	@Override
 	public void placeInPortal(Entity par1Entity, double par2, double par4,
 			double par6, float par8) {
 
@@ -44,8 +36,8 @@ public class NyxTeleporter extends Teleporter {
 			this.placeInOverworld(par1Entity, xcoord, ycoord, zcoord);
 		else if (!placeOnExistingPlatform(par1Entity, xcoord, ycoord, zcoord)) {
 			placeInNyx(par1Entity, xcoord, ycoord, zcoord);
-			par1Entity.setLocationAndAngles((double) xcoord, (double) ycoord,
-					(double) zcoord, par1Entity.rotationYaw, 0.0F);
+			par1Entity.setLocationAndAngles(xcoord, ycoord,
+					zcoord, par1Entity.rotationYaw, 0.0F);
 		}
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	}
@@ -76,8 +68,8 @@ public class NyxTeleporter extends Teleporter {
 		else if(world.getBlock(x, ycoord, z) == Blocks.fire)
 			world.setBlock(x, ycoord, z, Blocks.air);
 		
-		par1Entity.setLocationAndAngles(((double)x)+0.5, (double)ycoord+1.0,
-				((double)z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((x)+0.5, ycoord+1.0,
+				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
 	private void placeInOverworld(Entity par1Entity, int x, int y, int z) {
@@ -106,8 +98,8 @@ public class NyxTeleporter extends Teleporter {
 		else if(world.getBlock(x, ycoord, z) == Blocks.fire)
 			world.setBlock(x, ycoord, z, Blocks.air);
 		
-		par1Entity.setLocationAndAngles(((double)x)+0.5, (double)ycoord+1.0,
-				((double)z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((x)+0.5, ycoord+1.0,
+				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
 	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y,
@@ -139,9 +131,9 @@ public class NyxTeleporter extends Teleporter {
 										yvalue + 2, zvalue);
 								if (bid == Blocks.air && bid2 == Blocks.air) {
 									par1Entity.setLocationAndAngles(
-											(double) xvalue,
-											(double) (yvalue + 1),
-											(double) zvalue,
+											xvalue,
+											yvalue + 1,
+											zvalue,
 											par1Entity.rotationYaw, 0.0F);
 									return true;
 								}

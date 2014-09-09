@@ -2,14 +2,7 @@ package iceandshadow2.ias.blocks;
 
 import iceandshadow2.util.EnumIaSModule;
 
-import java.util.Random;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 
 public class IaSBlockDeco extends IaSBaseBlockSingle {
 

@@ -1,12 +1,9 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.world.biome.NyxBiome;
-
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -20,13 +17,8 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class NyxChunkProvider implements IChunkProvider {
 	
@@ -70,7 +62,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
         for (int j = -2; j <= 2; ++j) {
             for (int k = -2; k <= 2; ++k) {
-                float f = 10.0F / MathHelper.sqrt_float((float)(j * j + k * k) + 0.2F);
+                float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
                 this.parabolicField[j + 2 + (k + 2) * 5] = f;
             }
         }
@@ -145,7 +137,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
     public void replaceBlocksForBiome(int x, int z, Block[] blockArr, byte[] metaArr, BiomeGenBase[] biomeArr) {
         double d0 = 0.03125D;
-        this.stoneNoise = this.noiseGenStone.func_151599_a(this.stoneNoise, (double)(x * 16), (double)(z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+        this.stoneNoise = this.noiseGenStone.func_151599_a(this.stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
         for (int k = 0; k < 16; ++k)
         {
@@ -160,7 +152,8 @@ public class NyxChunkProvider implements IChunkProvider {
     /**
      * loads or generates the chunk at the chunk location specified
      */
-    public Chunk loadChunk(int par1, int par2) {
+    @Override
+	public Chunk loadChunk(int par1, int par2) {
         return this.provideChunk(par1, par2);
     }
 
@@ -168,8 +161,9 @@ public class NyxChunkProvider implements IChunkProvider {
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
-    public Chunk provideChunk(int x, int z) {
-        this.rand.setSeed((long)z * 341873128712L + (long)x * 132897987541L);
+    @Override
+	public Chunk provideChunk(int x, int z) {
+        this.rand.setSeed(z * 341873128712L + x * 132897987541L);
         Block[] ablock = new Block[65536];
         byte[] abyte = new byte[65536];
         this.genTerrain(x, z, ablock);
@@ -250,14 +244,14 @@ public class NyxChunkProvider implements IChunkProvider {
                 }
 
                 ++i1;
-                double d12 = (double)f1;
-                double d14 = (double)f;
+                double d12 = f1;
+                double d14 = f;
                 d12 += d13 * 0.2D;
                 d12 = d12 * 8.5D / 8.0D;
                 double d5 = 8.5D + d12 * 4.0D;
 
                 for (int j2 = 0; j2 < 33; ++j2) {
-                    double d6 = ((double)j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
+                    double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
 
                     if (d6 < 0.0D)
                         d6 *= 4.0D;
@@ -268,7 +262,7 @@ public class NyxChunkProvider implements IChunkProvider {
                     double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
 
                     if (j2 > 29)  {
-                        double d11 = (double)((float)(j2 - 29) / 3.0F);
+                        double d11 = (j2 - 29) / 3.0F;
                         d10 = d10 * (1.0D - d11) + -10.0D * d11;
                     }
 
@@ -282,7 +276,8 @@ public class NyxChunkProvider implements IChunkProvider {
     /**
      * Populates chunk with ores etc etc
      */
-    public void populate(IChunkProvider cp, int par2, int par3)
+    @Override
+	public void populate(IChunkProvider cp, int par2, int par3)
     {
         BlockFalling.fallInstantly = true;
         int k = par2 * 16;
@@ -291,7 +286,7 @@ public class NyxChunkProvider implements IChunkProvider {
         this.rand.setSeed(this.worldObj.getSeed());
         long i1 = this.rand.nextLong() / 2L * 2L + 1L;
         long j1 = this.rand.nextLong() / 2L * 2L + 1L;
-        this.rand.setSeed((long)par2 * i1 + (long)par3 * j1 ^ this.worldObj.getSeed());
+        this.rand.setSeed(par2 * i1 + par3 * j1 ^ this.worldObj.getSeed());
         boolean flag = false;
 
         int xit, zit, yval;

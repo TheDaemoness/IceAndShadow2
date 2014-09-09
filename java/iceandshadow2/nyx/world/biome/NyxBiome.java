@@ -3,7 +3,6 @@ package iceandshadow2.nyx.world.biome;
 import java.util.Random; //Fuck you, Scala.
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;

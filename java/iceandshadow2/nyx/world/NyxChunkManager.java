@@ -63,7 +63,7 @@ public class NyxChunkManager extends WorldChunkManager {
 
         for (int var7 = 0; var7 < par4 * par5; ++var7)
         {
-            float var8 = (float)biomeGenList[var6[var7]].getIntRainfall() / 65536.0F;
+            float var8 = biomeGenList[var6[var7]].getIntRainfall() / 65536.0F;
 
             if (var8 > 1.0F)
             {

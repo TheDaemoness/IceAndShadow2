@@ -64,7 +64,7 @@ public class NyxWorldProvider extends WorldProvider {
 	protected void generateLightBrightnessTable() {
 		float f = 0.005F;
         for (int i = 0; i <= 15; ++i) {
-            float var3 = 1.0F - (float)(i) / 15.0F;
+            float var3 = 1.0F - (i) / 15.0F;
             this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F) * (1.0F - f) + f;
         }
 	}

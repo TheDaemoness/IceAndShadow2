@@ -18,15 +18,15 @@ public class IaSRegistration {
 	
 	private static Block registerBlock(Block block) {
 		if(block instanceof IaSBaseBlockSingle)
-			return GameRegistry.registerBlock((Block)block, ((IaSBaseBlockSingle)block).getModName());
+			return GameRegistry.registerBlock(block, ((IaSBaseBlockSingle)block).getModName());
 		else
-			return GameRegistry.registerBlock((Block)block, block.getUnlocalizedName().substring(5));
+			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
 	private static Item registerItem(Item it) {
 		if(it instanceof IaSBaseItemSingle)
-			GameRegistry.registerItem((Item)it, ((IaSBaseItemSingle)it).getModName());
+			GameRegistry.registerItem(it, ((IaSBaseItemSingle)it).getModName());
 		else
-			GameRegistry.registerItem((Item)it, it.getUnlocalizedName().substring(5));
+			GameRegistry.registerItem(it, it.getUnlocalizedName().substring(5));
 		return it;
 	}
 	

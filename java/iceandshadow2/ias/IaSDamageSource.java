@@ -1,6 +1,5 @@
 package iceandshadow2.ias;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.util.DamageSource;
 
 public class IaSDamageSource extends DamageSource {

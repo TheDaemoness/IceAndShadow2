@@ -1,31 +1,12 @@
 package iceandshadow2.ias.blocks;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSAltarDistillable;
 import iceandshadow2.ias.blocks.IaSBlockAltar;
-import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.IaSFlags;
 import iceandshadow2.util.EnumIaSModule;
 
 public class IaSBlockAltarSacrifice extends IaSBlockAltar {
@@ -34,7 +15,7 @@ public class IaSBlockAltarSacrifice extends IaSBlockAltar {
 		super(mod, id);
 		this.setLightLevel(0.5F);
 		this.setResistance(9001.0F);
-		this.setStepSound(this.soundTypeStone);
+		this.setStepSound(Block.soundTypeStone);
 		this.setTickRandomly(true);
 	}
 

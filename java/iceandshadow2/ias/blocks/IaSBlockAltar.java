@@ -3,10 +3,8 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockEnchantmentTable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 
 /*
@@ -23,6 +21,7 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
         this.setLightOpacity(7);
 	}
 	
+	@Override
 	public int getMobilityFlag() {
 		return 0;
 	}
@@ -39,12 +38,14 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 		this.blockIcon = iconSide;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2)
     {
         return par1 == 0 ? this.iconBottom : (par1 == 1 ? this.iconTop : this.blockIcon);
     }
 	
+	@Override
 	public boolean isOpaqueCube() {
         return false;
     }
