@@ -4,6 +4,7 @@ import iceandshadow2.IaSFlags;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -19,5 +20,12 @@ public class IaSPlayerHelper {
 		}
 		else
 			dochat = true;
+	}
+	
+	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
+		boolean added = plai.inventory.addItemStackToInventory(is);
+		if(!added)
+			plai.dropPlayerItemWithRandomChoice(is, false);
+		return added;
 	}
 }

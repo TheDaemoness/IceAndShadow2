@@ -13,9 +13,11 @@ public class NyxBlocks {
 	
 	public static void init() {
 		stone = new NyxBlockStone("Stone").register();
+		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
 	}
 	
 	public static void setCreativeTabs() {
 		stone.setCreativeTab(CreativeTabs.tabBlock);
+		cryingObsidian.setCreativeTab(CreativeTabs.tabBlock);
 	}
 }

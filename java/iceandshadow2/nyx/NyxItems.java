@@ -9,13 +9,15 @@ import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxItems {
-	public static Item teleportCrystal;
+	public static Item teleportCrystal, seedObsidian;
 	
 	public static void init() {
 		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").register();
+		seedObsidian = new NyxSeedObsidian("SeedObsidian").register();
 	}
 	
 	public static void setCreativeTabs() {
 		teleportCrystal.setCreativeTab(CreativeTabs.tabMisc);
+		seedObsidian.setCreativeTab(CreativeTabs.tabMisc);
 	}
 }

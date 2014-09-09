@@ -18,6 +18,7 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSEntityHelper;
@@ -50,6 +51,14 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 			Entity tree, int time, boolean boule) {
 		if(tree.worldObj.isRemote)
 			return;
+		if((pile.getItemDamage() & 2) == 0 && tree.dimension == IaSFlags.dim_nyx_id) {
+			pile.setItemDamage(pile.getItemDamage()+2);
+			if(tree instanceof EntityPlayer) {
+				EntityPlayer ep = (EntityPlayer)tree;
+				if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
+					IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
+			}
+		}
 		boolean active = true;
 		if(tree.dimension != IaSFlags.dim_nyx_id) {
 			active &= IaSEntityHelper.getTemperatureFloat(tree) <= 0.15;
@@ -100,10 +109,6 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		if((is.getItemDamage() & 1) == 1) {
 			if(pl instanceof EntityPlayerMP) {
 				EntityPlayerMP plm = (EntityPlayerMP)pl;
-				if((is.getItemDamage() & 2) == 0) {
-					is.setItemDamage(is.getItemDamage()+2);
-					//GIMME SEED!
-				}
 				if (pl.dimension != IaSFlags.dim_nyx_id) {
 					plm.mcServer
 					.getConfigurationManager()
@@ -150,7 +155,11 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		return heap;
 	}
 
-	/*
-
-	 */
+	@Override
+	public void onPlayerStoppedUsing(ItemStack p_77615_1_, World p_77615_2_,
+			EntityPlayer plai, int time) {
+		if(time > 40)
+			plai.removePotionEffect(Potion.confusion.id);
+		super.onPlayerStoppedUsing(p_77615_1_, p_77615_2_, plai, time);
+	}
 }

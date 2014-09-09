@@ -5,7 +5,6 @@ public class IaSCreativeTabs {
 	
 	public static void init() {
 		blocks = new IaSCreativeTab("Nyxian Blocks", null);
-		magic = new IaSCreativeTab("Nyxian Consumables", null);
 		combat = new IaSCreativeTab("Nyxian Combat", null);
 		tools = new IaSCreativeTab("Nyxian Tools", null);
 		resources = new IaSCreativeTab("Nyxian Resources", null);
