@@ -1,5 +1,6 @@
 package iceandshadow2;
 
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.nyx.InitNyx;
 import cpw.mods.fml.common.Mod;
@@ -32,6 +33,8 @@ public class IceAndShadow2 {
     	if(cfg.needsWrite())
     		cfg.write();
     	InitNyx.init();
+    	IaSCreativeTabs.init();
+    	InitNyx.postInit();
     	IaSDamageSources.init();
     }
     

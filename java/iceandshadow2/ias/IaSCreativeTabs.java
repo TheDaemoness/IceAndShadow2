@@ -1,13 +1,17 @@
 package iceandshadow2.ias;
 
+import net.minecraft.item.ItemBlock;
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
+
 public class IaSCreativeTabs {
 	public static IaSCreativeTab blocks, magic, tools, combat, resources, misc;
 	
 	public static void init() {
-		blocks = new IaSCreativeTab("Nyxian Blocks", null);
-		combat = new IaSCreativeTab("Nyxian Combat", null);
-		tools = new IaSCreativeTab("Nyxian Tools", null);
-		resources = new IaSCreativeTab("Nyxian Resources", null);
-		misc = new IaSCreativeTab("Nyxian Odds and Ends", null);
+		blocks = new IaSCreativeTab("IaSBlocks", NyxBlocks.stone.getItem(null, 0, 0, 0));
+		//combat = new IaSCreativeTab("IaSCombat", null);
+		//tools = new IaSCreativeTab("IaSTools", null);
+		//resources = new IaSCreativeTab("IaSMaterials", null);
+		misc = new IaSCreativeTab("IaSMisc", NyxItems.teleportCrystal);
 	}
 }

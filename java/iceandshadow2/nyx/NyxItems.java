@@ -2,6 +2,7 @@ package iceandshadow2.nyx;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.items.*;
 
 public class NyxItems {
@@ -13,7 +14,7 @@ public class NyxItems {
 	}
 	
 	public static void setCreativeTabs() {
-		teleportCrystal.setCreativeTab(CreativeTabs.tabMisc);
-		seedObsidian.setCreativeTab(CreativeTabs.tabMisc);
+		teleportCrystal.setCreativeTab(IaSCreativeTabs.misc);
+		seedObsidian.setCreativeTab(IaSCreativeTabs.misc);
 	}
 }

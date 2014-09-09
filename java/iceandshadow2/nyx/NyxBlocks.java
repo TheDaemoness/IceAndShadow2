@@ -2,6 +2,7 @@ package iceandshadow2.nyx;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.blocks.*;
 
 public class NyxBlocks {
@@ -13,7 +14,7 @@ public class NyxBlocks {
 	}
 	
 	public static void setCreativeTabs() {
-		stone.setCreativeTab(CreativeTabs.tabBlock);
-		cryingObsidian.setCreativeTab(CreativeTabs.tabBlock);
+		stone.setCreativeTab(IaSCreativeTabs.blocks);
+		cryingObsidian.setCreativeTab(IaSCreativeTabs.blocks);
 	}
 }
