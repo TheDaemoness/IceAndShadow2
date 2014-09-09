@@ -37,7 +37,7 @@ public class IaSEntityHelper {
 		long y = (int)(ent.posY + offsetY);
 		long z = (int)(ent.posZ + offsetZ);
 		int[] c = splitCoords(x,z);
-		return ent.worldObj.getChunkFromChunkCoords(c[0],c[1]).getBlock(c[2], (int)Math.min(y, 255), c[3]);
+		return ent.worldObj.getChunkFromChunkCoords(c[0],c[1]).getBlock(c[2], (int)Math.min(Math.max(0,y), 255), c[3]);
 	}
 	
 	public static BiomeGenBase getBiome(Entity ent, double offsetX, double offsetZ) {

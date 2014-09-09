@@ -10,12 +10,13 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies="required-after:FML", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
     public static final String MODID = "IceAndShadow2";
-    public static final String VERSION = "Alpha 0.0";
+    public static final String VERSION = "Alpha 1.0";
     public static final int CONFIG_MAJ = 2;
     public static final int CONFIG_MIN = 0;
     
@@ -47,5 +48,10 @@ public class IceAndShadow2 {
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    }
+    
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+      event.registerServerCommand(new IaSServerCommand());
     }
 }

@@ -22,84 +22,50 @@ public class NyxTeleporter extends Teleporter {
 	}
 
 	@Override
-	public void placeInPortal(Entity par1Entity, double par2, double par4,
-			double par6, float par8) {
-
-		int xcoord = MathHelper.floor_double(par1Entity.posX);
-		int ycoord = MathHelper.floor_double(par1Entity.posY
-				+ MathHelper.sqrt_double(MathHelper
-						.sqrt_double(256.0 - par1Entity.posY)
-						* (par1Entity.posY))) - 1;
-		int zcoord = MathHelper.floor_double(par1Entity.posZ);
+	public void placeInPortal(Entity par1Entity, double x, double y,
+			double z, float par8) {
 
 		if(this.world.provider.dimensionId == 0)
-			this.placeInOverworld(par1Entity, xcoord, ycoord, zcoord);
-		else if (!placeOnExistingPlatform(par1Entity, xcoord, ycoord, zcoord)) {
-			placeInNyx(par1Entity, xcoord, ycoord, zcoord);
-			par1Entity.setLocationAndAngles(xcoord, ycoord,
-					zcoord, par1Entity.rotationYaw, 0.0F);
-		}
+			this.placeInOverworld(par1Entity, (int)x, (int)z);
+		else if (!placeOnExistingPlatform(par1Entity, (int)x, (int)y, (int)z))
+			placeInNyx(par1Entity, (int)x, (int)z);
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	}
 	
-	private void placeInNyx(Entity par1Entity, int x, int y, int z) {
-		int ycoord = -10;
-		for(int yit = 0; y-yit > 0 || y+yit <= 255; ++yit) {
-			ycoord = 0;
-			if(y-yit > 0) {
-				if(!world.isAirBlock(x, y-yit, z))
-					ycoord = y-yit;
-			}
-			if(ycoord == 0 && y+yit <= 255) {
-				if(!world.isAirBlock(x, y+yit, z))
-					ycoord = y+yit;
-			}
-			if(ycoord != 0) {
-				if(world.isAirBlock(x, ycoord+1, z) && world.isAirBlock(x, ycoord+2, z))
-					break;
-			}
-		}
-		if(world.getBlock(x, ycoord, z) == Blocks.water)
-			world.setBlock(x, ycoord, z, Blocks.ice);
-		else if(world.getBlock(x, ycoord, z) == Blocks.lava)
-			world.setBlock(x, ycoord, z, Blocks.cobblestone);
-		else if(world.getBlock(x, ycoord, z) == Blocks.cactus)
-			world.setBlock(x, ycoord, z, Blocks.sandstone);
-		else if(world.getBlock(x, ycoord, z) == Blocks.fire)
-			world.setBlock(x, ycoord, z, Blocks.air);
+	private void placeInNyx(Entity par1Entity, int x, int z) {
+		int y = 255;
+		y = world.getPrecipitationHeight(x, z);
 		
-		par1Entity.setLocationAndAngles((x)+0.5, ycoord+1.0,
-				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((double)(x)+0.5, (double)y,
+				(double)(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
-	private void placeInOverworld(Entity par1Entity, int x, int y, int z) {
-		int ycoord = -10;
-		for(int yit = 0; y-yit > 0 || y+yit <= 255; ++yit) {
-			ycoord = 0;
-			if(y-yit > 0) {
-				if(!world.isAirBlock(x, y-yit, z))
-					ycoord = y-yit;
-			}
-			if(ycoord == 0 && y+yit <= 255) {
-				if(!world.isAirBlock(x, y+yit, z))
-					ycoord = y+yit;
-			}
-			if(ycoord != 0) {
-				if(world.isAirBlock(x, ycoord+1, z) && world.isAirBlock(x, ycoord+2, z))
-					break;
-			}
+	private void placeInOverworld(Entity par1Entity, int x, int z) {
+		int y = 5;
+		for(; y+2 <= 255; ++y) {
+			if(!world.isAirBlock(x, y, z))
+				continue;
+			if(!world.isAirBlock(x, y+1, z))
+				continue;
+			if(!world.isAirBlock(x, y+2, z))
+				continue;
+			break;
 		}
-		if(world.getBlock(x, ycoord, z) == Blocks.water)
-			world.setBlock(x, ycoord, z, Blocks.ice);
-		else if(world.getBlock(x, ycoord, z) == Blocks.lava)
-			world.setBlock(x, ycoord, z, Blocks.cobblestone);
-		else if(world.getBlock(x, ycoord, z) == Blocks.cactus)
-			world.setBlock(x, ycoord, z, Blocks.sandstone);
-		else if(world.getBlock(x, ycoord, z) == Blocks.fire)
-			world.setBlock(x, ycoord, z, Blocks.air);
+		if(y == 253)
+			y = 255;
+		if(world.getBlock(x, y-1, z) == Blocks.water)
+			world.setBlock(x, y-1, z, Blocks.ice);
+		else if(world.getBlock(x, y-1, z) == Blocks.lava)
+			world.setBlock(x, y-1, z, Blocks.cobblestone);
+		else if(world.getBlock(x, y-1, z) == Blocks.cactus)
+			world.setBlock(x, y-1, z, Blocks.sandstone);
+		else if(world.getBlock(x, y-1, z) == Blocks.end_portal)
+			world.setBlock(x, y-1, z, Blocks.end_stone);
+		else if(world.getBlock(x, y-1, z) == Blocks.fire)
+			world.setBlock(x, y-1, z, Blocks.air);
 		
-		par1Entity.setLocationAndAngles((x)+0.5, ycoord+1.0,
-				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((double)(x)+0.5, (double)(y)+1.0,
+				(double)(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
 	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y,
@@ -108,9 +74,9 @@ public class NyxTeleporter extends Teleporter {
 			for (int yi = 0; yi < 32; ++yi) {
 				for (int zi = 0; zi < 32; ++zi) {
 					for (byte flip = 0; flip < 8; ++flip) {
-						int xfactor = (flip | 0x1) > 0 ? -1 : 1;
-						int yfactor = (flip | 0x2) > 0 ? -1 : 1;
-						int zfactor = (flip | 0x4) > 0 ? -1 : 1;
+						int xfactor = (flip & 0x1) > 0 ? -1 : 1;
+						int yfactor = (flip & 0x2) > 0 ? -1 : 1;
+						int zfactor = (flip & 0x4) > 0 ? -1 : 1;
 
 						int ycalc = (y + yi * yfactor);
 						ycalc = ycalc > 255 ? 255 : ycalc;
