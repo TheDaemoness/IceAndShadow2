@@ -19,6 +19,6 @@ public class IaSBaseBlockSingle extends IaSBaseBlock {
 	
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID+':'+MODULE.prefix+getModName();
+		return IceAndShadow2.MODID+':'+getModName();
 	}
 }

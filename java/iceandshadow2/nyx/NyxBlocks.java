@@ -6,11 +6,12 @@ import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.blocks.*;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce;
+	public static Block stone, cryingObsidian, unstableIce, permafrost;
 	
 	public static void init() {
 		stone = new NyxBlockStone("Stone").register();
 		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
+		permafrost = new NyxBlockPermafrost("Permafrost").register();
 		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
 	}
 	
@@ -18,5 +19,6 @@ public class NyxBlocks {
 		stone.setCreativeTab(IaSCreativeTabs.blocks);
 		cryingObsidian.setCreativeTab(IaSCreativeTabs.blocks);
 		unstableIce.setCreativeTab(IaSCreativeTabs.blocks);
+		permafrost.setCreativeTab(IaSCreativeTabs.blocks);
 	}
 }

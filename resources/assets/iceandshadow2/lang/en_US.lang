@@ -4,6 +4,7 @@ item.nyxSeedObsidian.name=Crying Obsidian Seed
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
+tile.nyxPermafrost.name=Permafrost
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
