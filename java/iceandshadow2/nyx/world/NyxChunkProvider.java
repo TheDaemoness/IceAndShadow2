@@ -299,8 +299,10 @@ public class NyxChunkProvider implements IChunkProvider {
         for (xit = 0; xit < 16; ++xit) {
             for (zit = 0; zit < 16; ++zit) {
                 yval = this.worldObj.getPrecipitationHeight(k + xit, l + zit);
-                if (this.worldObj.func_147478_e(xit + k, yval, zit + l, true))
-                    this.worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
+                if (this.worldObj.func_147478_e(xit + k, yval, zit + l, true)) {
+                	if(this.worldObj.getBlock(xit + k, yval-1, zit + l) != NyxBlocks.stone);
+                		this.worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
+                }
             }
         }
 

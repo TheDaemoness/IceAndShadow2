@@ -26,12 +26,18 @@ public class NyxBiome extends BiomeGenBase {
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		this.biomeName = "Nyx";
-		this.topBlock = Blocks.snow_layer;
-		this.fillerBlock = Blocks.snow;
+		this.topBlock = Blocks.snow;
+		this.fillerBlock = NyxBlocks.permafrost;
+		this.setBiomeName("Nyx");
 		rare = isRare;
 	}
 
+	public NyxBiome setBlocks(Block top, Block filler) {
+		this.topBlock = top;
+		this.fillerBlock = filler;
+		return this;
+	}
+	
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
