@@ -9,12 +9,7 @@ public class NyxItems {
 	public static Item teleportCrystal, seedObsidian;
 	
 	public static void init() {
-		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").register();
-		seedObsidian = new NyxSeedObsidian("SeedObsidian").register();
-	}
-	
-	public static void setCreativeTabs() {
-		teleportCrystal.setCreativeTab(IaSCreativeTabs.misc);
-		seedObsidian.setCreativeTab(IaSCreativeTabs.misc);
+		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").register().setCreativeTab(IaSCreativeTabs.misc);
+		seedObsidian = new NyxSeedObsidian("SeedObsidian").register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 }

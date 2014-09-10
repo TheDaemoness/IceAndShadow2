@@ -15,7 +15,9 @@ public abstract class IaSBaseItemMulti extends IaSBaseItem {
 	}
 	
 	@Override
-	public abstract String getUnlocalizedName(ItemStack par1ItemStack);
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		return this.getUnlocalizedName()+par1ItemStack.getItemDamage();
+	}
 
 	public abstract int getSubtypeCount();
 	

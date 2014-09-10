@@ -9,16 +9,9 @@ public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost;
 	
 	public static void init() {
-		stone = new NyxBlockStone("Stone").register();
-		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
-		permafrost = new NyxBlockPermafrost("Permafrost").register();
-		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
-	}
-	
-	public static void setCreativeTabs() {
-		stone.setCreativeTab(IaSCreativeTabs.blocks);
-		cryingObsidian.setCreativeTab(IaSCreativeTabs.blocks);
-		unstableIce.setCreativeTab(IaSCreativeTabs.blocks);
-		permafrost.setCreativeTab(IaSCreativeTabs.blocks);
+		stone = new NyxBlockStone("Stone").register().setCreativeTab(IaSCreativeTabs.blocks);
+		unstableIce = new NyxBlockUnstableIce("UnstableIce").register().setCreativeTab(IaSCreativeTabs.blocks);
+		permafrost = new NyxBlockPermafrost("Permafrost").register().setCreativeTab(IaSCreativeTabs.blocks);
+		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register().setCreativeTab(IaSCreativeTabs.blocks);
 	}
 }

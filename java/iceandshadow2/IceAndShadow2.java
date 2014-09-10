@@ -34,9 +34,8 @@ public class IceAndShadow2 {
     	cfg.read();
     	if(cfg.needsWrite())
     		cfg.write();
-    	InitNyx.init();
     	IaSCreativeTabs.init();
-    	InitNyx.postInit();
+    	InitNyx.init();
     	IaSDamageSources.init();
     }
     

@@ -35,10 +35,6 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 			reg.registerIcon(getTexName()+i);
 	}
 	
-	public boolean getHasSubtypes() {
-		return true;
-	}
-	
     public String getUnlocalizedName(int val) {
 		return super.getUnlocalizedName()+val;
     }

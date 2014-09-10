@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.IIaSModName;
+import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
+import iceandshadow2.ias.items.IaSItemBlockMulti;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {
@@ -15,7 +17,9 @@ public class IaSRegistration {
 	}
 	
 	private static Block registerBlock(Block block) {
-		if(block instanceof IIaSModName)
+		if(block instanceof IaSBaseBlockMulti)
+			return GameRegistry.registerBlock(block, IaSItemBlockMulti.class, ((IIaSModName)block).getModName());
+		else if(block instanceof IIaSModName)
 			return GameRegistry.registerBlock(block, ((IIaSModName)block).getModName());
 		else
 			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
