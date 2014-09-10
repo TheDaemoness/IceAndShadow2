@@ -142,11 +142,12 @@ public class NyxWorldProvider extends WorldProvider {
 	public void registerWorldChunkManager()
 	{
 		BiomeGenBase[] nyxBiomes = {
-				NyxBiomes.nyxMountains,
-				NyxBiomes.nyxMesas,
-				NyxBiomes.nyxHills,
-				NyxBiomes.nyxCliffs, 
-				NyxBiomes.nyxForest,
+				NyxBiomes.nyxHighMountains,
+				NyxBiomes.nyxLowMountains,
+				NyxBiomes.nyxHighHills,
+				NyxBiomes.nyxLowHills, 
+				NyxBiomes.nyxHighForest,
+				NyxBiomes.nyxLowForest,
 				NyxBiomes.nyxRugged,
 				NyxBiomes.nyxInfested
 				};
