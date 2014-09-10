@@ -9,7 +9,7 @@ public class IaSPlayerHelper {
 	private static boolean dochat = true;
 	
 	public static void messagePlayer(EntityPlayer plai, String str) {
-		if(dochat && plai.worldObj.isRemote && IaSFlags.flag_player_messages) {
+		if(dochat && plai.worldObj.isRemote && IaSFlags.flag_help_messages) {
 			plai.addChatMessage(new ChatComponentText(str));
 			dochat = false;
 		}
