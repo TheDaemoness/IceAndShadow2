@@ -3,6 +3,8 @@ package iceandshadow2.util;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.items.IaSItemBlockMulti;
@@ -14,8 +16,14 @@ public class IaSRegistration {
 			registerBlock((Block)obj);
 		else if(obj instanceof Item)
 			registerItem((Item)obj);
+		else if(obj instanceof Fluid)
+			registerFluid((Fluid)obj);
 	}
 	
+	private static void registerFluid(Fluid obj) {
+		FluidRegistry.registerFluid(obj);
+	}
+
 	private static Block registerBlock(Block block) {
 		if(block instanceof IaSBaseBlockMulti)
 			return GameRegistry.registerBlock(block, IaSItemBlockMulti.class, ((IIaSModName)block).getModName());

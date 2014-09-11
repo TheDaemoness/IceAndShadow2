@@ -64,9 +64,16 @@ public class NyxBiome extends BiomeGenBase {
 		{
 			int i2 = (j1 * 16 + i1) * k1 + l1;
 
-			if (l1 <= 0 + rand.nextInt(3))
-			{
+			if (l1 <= 0 + rand.nextInt(3)) {
 				blocks[i2] = Blocks.bedrock;
+			}
+			else if (l1 < 63 && (
+					blocks[i2].getMaterial() != Material.air && 
+					blocks[i2].getMaterial() != Material.water)) {
+				blocks[i2] = NyxBlocks.stone;
+			}
+			else if (l1 == 63 && (blocks[i2] == null || blocks[i2].getMaterial() == Material.air)) {
+				blocks[i2] = NyxBlocks.exousicIce;
 			}
 			else
 			{
@@ -93,16 +100,8 @@ public class NyxBiome extends BiomeGenBase {
 
 							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
 							{
-								if (this.getFloatTemperature(a, l1, b) < 0.15F)
-								{
-									block = Blocks.ice;
-									b0 = 0;
-								}
-								else
-								{
-									block = Blocks.water;
-									b0 = 0;
-								}
+								block = NyxBlocks.exousicIce;
+								b0 = 0;
 							}
 
 							k = l;

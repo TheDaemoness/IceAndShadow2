@@ -5,6 +5,8 @@ tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
 tile.nyxPermafrost.name=Permafrost
+tile.nyxExousicWater.name=Exousic Ether
+tile.nyxExousicIce.name=Exousic Ice
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized

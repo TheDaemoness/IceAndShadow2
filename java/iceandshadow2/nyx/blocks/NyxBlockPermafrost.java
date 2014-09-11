@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.util.EnumIaSModule;
@@ -17,13 +19,15 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle {
 	
 	public NyxBlockPermafrost(String id) {
 		super(EnumIaSModule.NYX, id, Material.packedIce);
-    	setHardness(3.0F);
+    	setHardness(5.0F);
     	setResistance(10.0F);
         this.setHarvestLevel("pickaxe", 1);
 	}
-	
+
+    @SideOnly(Side.CLIENT)
 	private IIcon iconTop, iconSide;
 
+    @SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
     	this.iconTop = reg.registerIcon(this.getTexName()+"Top");

@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 
 public class IaSBlockAltar extends IaSBaseBlockSingle {
 
+	@SideOnly(Side.CLIENT)
 	protected IIcon iconTop, iconSide, iconBottom;
 	
 	protected IaSBlockAltar(EnumIaSModule mod, String id) {

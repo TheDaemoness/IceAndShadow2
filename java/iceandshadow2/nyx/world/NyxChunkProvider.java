@@ -115,7 +115,7 @@ public class NyxChunkProvider implements IChunkProvider {
                                     blockArr[arrIndex += 256] = NyxBlocks.stone;
                                 
                                 else if (yit * 8 + l2 < b0)
-                                    blockArr[arrIndex += 256] = Blocks.ice;
+                                    blockArr[arrIndex += 256] = NyxBlocks.exousicWater;
                                 
                                 else
                                     blockArr[arrIndex += 256] = null;
