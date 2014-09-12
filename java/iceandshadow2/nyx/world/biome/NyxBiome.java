@@ -74,6 +74,7 @@ public class NyxBiome extends BiomeGenBase {
 			}
 			else if (l1 == 63 && (blocks[i2] == null || blocks[i2].getMaterial() == Material.air)) {
 				blocks[i2] = NyxBlocks.exousicIce;
+				blocks[i2-1] = NyxBlocks.exousicWater;
 			}
 			else
 			{
