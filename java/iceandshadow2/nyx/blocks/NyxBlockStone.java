@@ -9,6 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.world.World;
 
 public class NyxBlockStone extends IaSBaseBlockSingle {
@@ -35,13 +37,15 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 		doDamage(theWorld,x,y,z,theEntity,theEntity.worldObj.difficultySetting.getDifficultyId()+2);
 	}
 	
-	protected void doDamage(World theWorld, int x, int y, int z, Entity theEntity, int dmg) {
+	public static void doDamage(World theWorld, int x, int y, int z, Entity theEntity, int dmg) {
 		if(!(theEntity instanceof EntityMob)) {
 			if(theEntity instanceof EntityLivingBase) {
 				if(((EntityLivingBase)theEntity).getEquipmentInSlot(1) != null) {
-					if(((EntityLivingBase)theEntity).getEquipmentInSlot(1).getItem() == Items.leather_boots) {
-						theEntity.attackEntityFrom(IaSDamageSources.dmgStone, dmg/2+1);	
-						((EntityLivingBase)theEntity).getEquipmentInSlot(1).damageItem(1, ((EntityLivingBase)theEntity));
+					Item it = ((EntityLivingBase)theEntity).getEquipmentInSlot(1).getItem();
+					if(it instanceof ItemArmor) {
+						if(((ItemArmor)it).getArmorMaterial().getDamageReductionAmount(3) == 1)
+							theEntity.attackEntityFrom(IaSDamageSources.dmgStone, dmg/2+1);	
+							((EntityLivingBase)theEntity).getEquipmentInSlot(1).damageItem(1, ((EntityLivingBase)theEntity));
 					}
 					return;
 				}
