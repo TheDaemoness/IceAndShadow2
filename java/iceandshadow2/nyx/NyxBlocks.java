@@ -24,7 +24,7 @@ public class NyxBlocks {
 		exousicIce = new NyxBlockIce("ExousicIce").register().setCreativeTab(IaSCreativeTabs.blocks);
 		
 		fluidExousia = new Fluid("nyxFluidExousicWater");
-		fluidExousia.setDensity(1500).setLuminosity(5).setTemperature(10).setViscosity(500);
+		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10).setViscosity(500);
 		IaSRegistration.register(fluidExousia);
 		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register().setCreativeTab(IaSCreativeTabs.blocks);
 	}

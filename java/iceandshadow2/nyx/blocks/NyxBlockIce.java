@@ -20,8 +20,8 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 
 	public NyxBlockIce(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.ice);
-		this.setLuminescence(0.2F);
-		this.setLightOpacity(4);
+		this.setLuminescence(0.3F);
+		this.setLightOpacity(2);
 		this.setHardness(3.0F);
 		this.setResistance(5.0F);
 		this.setTickRandomly(true);

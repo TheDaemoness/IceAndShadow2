@@ -20,8 +20,7 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 
 	public NyxBlockWater(String id, Fluid fluid) {
 		super(EnumIaSModule.NYX, id, fluid);
-		this.setStepSound(soundTypeSand);
-		this.setLightOpacity(4);
+		this.setLightOpacity(0);
 		this.setResistance(300F);
 	}
 
