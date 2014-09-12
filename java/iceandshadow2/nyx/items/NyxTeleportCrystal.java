@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.items;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +23,15 @@ import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxTeleportCrystal extends IaSBaseItemSingle {
 
-	IIcon empty;
+	@SideOnly(Side.CLIENT)
+	protected IIcon empty;
 	
 	public NyxTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(1);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if((dmg & 4) == 4)
@@ -35,6 +39,7 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		return this.itemIcon;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
@@ -78,6 +83,7 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		return EnumAction.block;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
 		if((par1ItemStack.getItemDamage() & 1) == 1)

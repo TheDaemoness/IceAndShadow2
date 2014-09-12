@@ -1,5 +1,15 @@
 item.nyxTeleportCrystal.name=Mysterious Crystal
 item.nyxSeedObsidian.name=Crying Obsidian Seed
+item.nyxEchirIngot.name=Echir Ingot
+item.nyxBloodstone.name=Bloodstone
+item.nyxNavistraShard.name=Navistra Shard
+item.nyxCortraDust.name=Cortra Dust
+item.nyxNifelhiumPowder.name=Nifelhium Powder
+item.nyxExousium0.name=Exousium Dust
+item.nyxExousium1.name=Exousium Rock
+item.nyxExousium2.name=Exousium Crystal
+item.nyxDevora0.name=Devora Chunk
+item.nyxDevora1.name=Small Devora Chunk
 
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
@@ -10,3 +20,4 @@ tile.nyxExousicIce.name=Exousic Ice
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
+itemGroup.IaSMaterials=Nyxian Resources

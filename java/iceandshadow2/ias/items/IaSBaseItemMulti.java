@@ -1,5 +1,7 @@
 package iceandshadow2.ias.items;
 
+import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 
 import java.util.List;
@@ -8,22 +10,19 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public abstract class IaSBaseItemMulti extends IaSBaseItem {
+public class IaSBaseItemMulti extends IaSBaseItemSingle {
 
-	public IaSBaseItemMulti(EnumIaSModule mod) {
-		super(mod);
+	private int subtypeCount;
+	
+	public IaSBaseItemMulti(EnumIaSModule mod, String id, int subtypes) {
+		super(mod, id);
+		this.setHasSubtypes(true);
+		subtypeCount = subtypes;
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
 		return this.getUnlocalizedName()+par1ItemStack.getItemDamage();
-	}
-
-	public abstract int getSubtypeCount();
-	
-	@Override
-	public boolean getHasSubtypes() {
-		return true;
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -33,4 +32,8 @@ public abstract class IaSBaseItemMulti extends IaSBaseItem {
             par3List.add(new ItemStack(par1, 1, meta));
         }
     }
+
+	public int getSubtypeCount() {
+		return subtypeCount;
+	}
 }
