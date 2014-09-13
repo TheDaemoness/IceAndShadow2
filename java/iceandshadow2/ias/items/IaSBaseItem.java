@@ -6,7 +6,7 @@ import iceandshadow2.util.IaSRegistration;
 import net.minecraft.item.Item;
 
 public abstract class IaSBaseItem extends Item implements IIaSModName {
-	public final EnumIaSModule MODULE;
+	private final EnumIaSModule MODULE;
 	
 	protected IaSBaseItem(EnumIaSModule mod) {
 		super();

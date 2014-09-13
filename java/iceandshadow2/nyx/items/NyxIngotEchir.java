@@ -19,6 +19,7 @@ public class NyxIngotEchir extends IaSBaseItemSingle {
 		super(EnumIaSModule.NYX, texName);
 		this.setHasSubtypes(true);
 		GameRegistry.addSmelting(this, new ItemStack(this,1,1), 0);
+		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
 	}
 
 	@SideOnly(Side.CLIENT)

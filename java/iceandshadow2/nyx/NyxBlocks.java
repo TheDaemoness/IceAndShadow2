@@ -10,7 +10,7 @@ import iceandshadow2.nyx.blocks.ore.*;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce, permafrost, exousicIce, exousicWater;
+	public static Block stone, cryingObsidian, unstableIce, permafrost, exousicIce, exousicWater, crystalBloodstone;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium;
 	
@@ -36,5 +36,6 @@ public class NyxBlocks {
 		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10).setViscosity(500);
 		IaSRegistration.register(fluidExousia);
 		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register().setCreativeTab(IaSCreativeTabs.blocks);
+		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register().setCreativeTab(IaSCreativeTabs.blocks);
 	}
 }
