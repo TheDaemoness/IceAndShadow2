@@ -2,16 +2,6 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-import net.minecraftforge.event.terraingen.OreGenEvent;
-import net.minecraftforge.event.terraingen.TerrainGen;
-
 public class NyxBiomeBarren extends NyxBiome {
 
 	public NyxBiomeBarren(int par1, boolean register, float heightRoot,

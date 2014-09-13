@@ -6,16 +6,13 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 
 public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName {
 	

@@ -2,18 +2,10 @@ package iceandshadow2.ias.blocks;
 
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IIaSModName;
-import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
 
 public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName {
 	public final EnumIaSModule MODULE;

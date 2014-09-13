@@ -1,13 +1,7 @@
 package iceandshadow2;
 
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.world.biome.NyxBiome;
 import iceandshadow2.nyx.world.biome.NyxBiomeBarren;
-import iceandshadow2.nyx.world.biome.NyxBiomeForest;
-import iceandshadow2.nyx.world.biome.NyxBiomeFrozen;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
-import iceandshadow2.nyx.world.biome.NyxBiomeMountains;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class IaSFlags {

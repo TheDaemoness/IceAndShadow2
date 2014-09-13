@@ -7,7 +7,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
@@ -36,8 +35,8 @@ public class NyxTeleporter extends Teleporter {
 		int y = 255;
 		y = world.getPrecipitationHeight(x, z);
 		
-		par1Entity.setLocationAndAngles((double)(x)+0.5, (double)y,
-				(double)(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((x)+0.5, y,
+				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
 	private void placeInOverworld(Entity par1Entity, int x, int z) {
@@ -64,8 +63,8 @@ public class NyxTeleporter extends Teleporter {
 		else if(world.getBlock(x, y-1, z) == Blocks.fire)
 			world.setBlock(x, y-1, z, Blocks.air);
 		
-		par1Entity.setLocationAndAngles((double)(x)+0.5, (double)(y)+1.0,
-				(double)(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
+		par1Entity.setLocationAndAngles((x)+0.5, (y)+1.0,
+				(z)+0.5, this.world.rand.nextFloat()*360.0F, 0.0F);
 	}
 
 	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y,

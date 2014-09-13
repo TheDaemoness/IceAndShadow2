@@ -3,17 +3,13 @@ package iceandshadow2.nyx.blocks.ore;
 import java.util.ArrayList;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.blocks.NyxBlockStone;
 import iceandshadow2.util.EnumIaSModule;
 
 public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
@@ -25,6 +21,7 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 		this.setResistance(1.5F);
 	}
 
+	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune){
 		return 9;
 	}

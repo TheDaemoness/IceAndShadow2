@@ -1,19 +1,12 @@
 package iceandshadow2.nyx.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.util.EnumIaSModule;
 
 public class NyxBlockWater extends IaSBaseBlockFluid {

@@ -1,16 +1,8 @@
 package iceandshadow2.nyx.world.biome;
 
-import net.minecraftforge.event.terraingen.OreGenEvent;
 import iceandshadow2.nyx.NyxBlocks;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 public class NyxBiomeFrozen extends NyxBiome {
 

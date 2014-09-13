@@ -1,8 +1,5 @@
 package iceandshadow2.ias;
 
-import net.minecraft.item.ItemBlock;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.EnumIaSModule;
 
 public class IaSCreativeTabs {

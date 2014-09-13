@@ -48,6 +48,7 @@ public class NyxBiome extends BiomeGenBase {
 		return;
 	}
 
+	@Override
 	public void genTerrainBlocks(World world, Random rand, Block[] blocks, byte[] meta, int a, int b, double c)
 	{
 		boolean flag = true;

@@ -2,17 +2,11 @@ package iceandshadow2.nyx.blocks;
 
 import java.util.Random;
 
-import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
@@ -28,10 +22,12 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 		this.setHarvestLevel("spade", 0);
 	}
 	
+	@Override
 	public int getMobilityFlag() {
 		return 0;
 	}
 	
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
         if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
@@ -43,10 +39,12 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
         }
     }
 	
+	@Override
 	public boolean isOpaqueCube() {
         return false;
     }
 	
+	@Override
 	public int getRenderBlockPass() {
 		return 1;
 	}

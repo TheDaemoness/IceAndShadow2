@@ -1,9 +1,7 @@
 package iceandshadow2.nyx;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.nyx.blocks.ore.*;

@@ -1,6 +1,5 @@
 package iceandshadow2.nyx;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
