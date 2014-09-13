@@ -19,6 +19,14 @@ tile.nyxPermafrost.name=Permafrost
 tile.nyxExousicWater.name=Exousic Ether
 tile.nyxExousicIce.name=Exousic Ice
 
+tile.nyxOreEchir.name=Echir Ore
+tile.nyxOreDevora.name=Devora Ore
+tile.nyxOreCortra.name=Cortra Ore
+tile.nyxOreNavistra.name=Navistra Ore
+tile.nyxOreExousium.name=Exousium Ore
+tile.nyxOreNifelhium.name=Nifelhium Ore
+tile.nyxOreDraconium.name=Draconium Ore
+
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources
