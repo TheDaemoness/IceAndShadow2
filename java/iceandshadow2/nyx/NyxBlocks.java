@@ -15,25 +15,25 @@ public class NyxBlocks {
 	public static Fluid fluidExousia;
 	
 	public static void init() {
-		stone = new NyxBlockStone("Stone").register().setCreativeTab(IaSCreativeTabs.blocks);
-		unstableIce = new NyxBlockUnstableIce("UnstableIce").register().setCreativeTab(IaSCreativeTabs.blocks);
-		permafrost = new NyxBlockPermafrost("Permafrost").register().setCreativeTab(IaSCreativeTabs.blocks);
-		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register().setCreativeTab(IaSCreativeTabs.blocks);
+		stone = new NyxBlockStone("Stone").register();
+		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
+		permafrost = new NyxBlockPermafrost("Permafrost").register();
+		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
 		
-		exousicIce = new NyxBlockIce("ExousicIce").register().setCreativeTab(IaSCreativeTabs.blocks);
+		exousicIce = new NyxBlockIce("ExousicIce").register();
 		
-		oreEchir = new NyxBlockOreEchir("OreEchir").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreDevora = new NyxBlockOreDevora("OreDevora").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreNavistra = new NyxBlockOreNavistra("OreNavistra").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreCortra = new NyxBlockOreCortra("OreCortra").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreExousium = new NyxBlockOreExousium("OreExousium").register().setCreativeTab(IaSCreativeTabs.blocks);
-		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register().setCreativeTab(IaSCreativeTabs.blocks);
+		oreEchir = new NyxBlockOreEchir("OreEchir").register();
+		oreDevora = new NyxBlockOreDevora("OreDevora").register();
+		oreNavistra = new NyxBlockOreNavistra("OreNavistra").register();
+		oreCortra = new NyxBlockOreCortra("OreCortra").register();
+		oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
+		oreExousium = new NyxBlockOreExousium("OreExousium").register();
+		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
 		
 		fluidExousia = new Fluid("nyxFluidExousicWater");
 		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10).setViscosity(500);
 		IaSRegistration.register(fluidExousia);
-		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register().setCreativeTab(IaSCreativeTabs.blocks);
-		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register().setCreativeTab(IaSCreativeTabs.blocks);
+		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register();
+		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
 	}
 }

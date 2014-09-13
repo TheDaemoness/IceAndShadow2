@@ -1,6 +1,8 @@
 package iceandshadow2.ias.blocks;
 
 import iceandshadow2.ias.IIaSModName;
+import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.IaSFakeBlock;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
@@ -15,6 +17,8 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
 		MODULE = mod;
+		if(mod == EnumIaSModule.NYX)
+			this.setCreativeTab(IaSCreativeTabs.blocks);
 	}
 	
 	public IaSBaseBlock setLuminescence(float lum) {
