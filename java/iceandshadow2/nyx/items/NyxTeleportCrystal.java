@@ -1,11 +1,13 @@
 package iceandshadow2.nyx.items;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -29,6 +31,10 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 	public NyxTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(1);
+		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), 
+				new ItemStack(Items.nether_star), 
+				new ItemStack(Items.ender_pearl), 
+				new ItemStack(Items.snowball));
 	}
 
 	@SideOnly(Side.CLIENT)

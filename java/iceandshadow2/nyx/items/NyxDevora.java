@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
@@ -20,6 +21,7 @@ public class NyxDevora extends IaSBaseItemMulti {
 	
 	public NyxDevora(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
+		GameRegistry.addShapelessRecipe(new ItemStack(this,8,1), new ItemStack(this,1,0));
 	}
 
 	@SideOnly(Side.CLIENT)
