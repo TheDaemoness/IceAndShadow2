@@ -100,8 +100,23 @@ public class NyxBiome extends BiomeGenBase {
 				1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
-
-		return;
+		
+		int x = xchunk + par1World.rand.nextInt(16);
+		int z = zchunk + par1World.rand.nextInt(16);
+		int y = par1World.getPrecipitationHeight(x, z);
+		if(y >= 230) {
+			boolean makestone = true;
+			for(int xit = -32; xit <= 32 && makestone; ++xit) {
+				for(int zit = -32; zit <= 32 && makestone; ++zit) {
+					for(int yit = 230; yit <= 250 && makestone; ++yit) {
+						if(par1World.getBlock(x+xit, yit, z+zit) == NyxBlocks.crystalBloodstone)
+							makestone = false;
+					}
+				}
+			}
+			if(makestone)
+				par1World.setBlock(x, y, z, NyxBlocks.crystalBloodstone);
+		}
 	}
 
 	@Override
