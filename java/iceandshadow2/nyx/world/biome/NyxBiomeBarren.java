@@ -8,6 +8,8 @@ public class NyxBiomeBarren extends NyxBiome {
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		this.setBlocks(NyxBlocks.stone, NyxBlocks.stone);
+		this.doGenNifelhium = false;
+		this.doGenUnstableIce = false;
 	}
 	
 	/*

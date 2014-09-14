@@ -7,12 +7,20 @@ import java.util.Random; //Fuck you, Scala.
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class NyxBiome extends BiomeGenBase {
 
 	private boolean rare;
+
+	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genUnstableIce;
+
+	protected boolean doGenNifelhium;
+	protected boolean doGenDevora;
+	protected boolean doGenUnstableIce;
 
 	public boolean isRare() {
 		return rare;
@@ -28,8 +36,15 @@ public class NyxBiome extends BiomeGenBase {
 		this.spawnableWaterCreatureList.clear();
 		this.topBlock = Blocks.snow;
 		this.fillerBlock = NyxBlocks.permafrost;
+
+		doGenDevora = true;
+		doGenNifelhium = true;
+		doGenUnstableIce = true;
+
 		this.setBiomeName("Nyx");
 		rare = isRare;
+
+		this.setColor(257);
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {
@@ -37,14 +52,55 @@ public class NyxBiome extends BiomeGenBase {
 		this.fillerBlock = filler;
 		return this;
 	}
-	
+
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
-		//genStructures(par1World, par2Random, xchunk, zchunk);
+		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 10,
+				NyxBlocks.stone);
+		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 5,
+				NyxBlocks.stone);
+		genCortra = new WorldGenMinable(NyxBlocks.oreCortra, 10,
+				NyxBlocks.stone);
+		genDraconium = new WorldGenMinable(NyxBlocks.oreDraconium,
+				4, NyxBlocks.stone);
+
+		if (doGenDevora)
+			genDevora = new WorldGenMinable(NyxBlocks.oreDevora, 8,
+					NyxBlocks.stone);
+
+		// Unstable ice.
+		if (doGenUnstableIce) {
+			genUnstableIce = new WorldGenMinable(
+					NyxBlocks.unstableIce, 36,
+					NyxBlocks.stone);
+			NyxOreGen.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
+					128, 10);
+		}
+
+
+		if (doGenDevora)
+			NyxOreGen.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
+					20);
+
+		NyxOreGen.genOreStandard(genEchir, par1World, xchunk, zchunk, 192, 255, 4);
+		NyxOreGen.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 255, 4);
+		NyxOreGen.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
+		NyxOreGen.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 10);
+		NyxOreGen.genOreStandard(genDraconium, par1World, xchunk, zchunk, 192, 255, 3);
+
+		if (doGenNifelhium)
+			NyxOreGen.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
+					zchunk);
+
+		NyxOreGen.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
+				1 + par2Random.nextInt(3));
+
+		genStructures(par1World, par2Random, xchunk, zchunk);
+
 		return;
 	}
 
