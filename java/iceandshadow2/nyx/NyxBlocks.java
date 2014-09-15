@@ -8,9 +8,11 @@ import iceandshadow2.nyx.blocks.ore.*;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce, permafrost, exousicIce, exousicWater, crystalBloodstone;
+	public static Block stone, cryingObsidian, unstableIce, permafrost, 
+	exousicIce, exousicWater, crystalBloodstone, thornyVines;
 	
-	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium;
+	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
+	oreNifelhium, oreExousium, oreDraconium;
 	
 	public static Fluid fluidExousia;
 	
@@ -19,7 +21,7 @@ public class NyxBlocks {
 		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		permafrost = new NyxBlockPermafrost("Permafrost").register();
 		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
-		
+		thornyVines = new NyxBlockThornyVines("ThornyVines").register();
 		exousicIce = new NyxBlockIce("ExousicIce").register();
 		
 		oreEchir = new NyxBlockOreEchir("OreEchir").register();

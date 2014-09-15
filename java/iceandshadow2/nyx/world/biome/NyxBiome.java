@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.world.gen.NyxGenOre;
 
 import java.util.Random; //Fuck you, Scala.
 
@@ -77,26 +78,26 @@ public class NyxBiome extends BiomeGenBase {
 			genUnstableIce = new WorldGenMinable(
 					NyxBlocks.unstableIce, 36,
 					NyxBlocks.stone);
-			NyxOreGen.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
+			NyxGenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
 					128, 10);
 		}
 
 
 		if (doGenDevora)
-			NyxOreGen.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
+			NyxGenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
 					20);
 
-		NyxOreGen.genOreStandard(genEchir, par1World, xchunk, zchunk, 192, 255, 4);
-		NyxOreGen.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 255, 4);
-		NyxOreGen.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
-		NyxOreGen.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 10);
-		NyxOreGen.genOreStandard(genDraconium, par1World, xchunk, zchunk, 192, 255, 3);
+		NyxGenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 192, 255, 4);
+		NyxGenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 255, 4);
+		NyxGenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
+		NyxGenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 10);
+		NyxGenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 192, 255, 3);
 
 		if (doGenNifelhium)
-			NyxOreGen.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
+			NyxGenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
 					zchunk);
 
-		NyxOreGen.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
+		NyxGenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
 				1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);

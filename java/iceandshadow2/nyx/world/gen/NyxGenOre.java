@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.world.biome;
+package iceandshadow2.nyx.world.gen;
 
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
@@ -7,7 +7,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class NyxOreGen {
+public class NyxGenOre {
 	
 	public static void genOreWater(Block bloque, World par1World, int xchunk,
 			int zchunk, int rate) {
