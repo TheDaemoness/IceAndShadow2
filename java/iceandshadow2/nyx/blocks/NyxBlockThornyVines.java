@@ -17,10 +17,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
@@ -39,8 +39,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
 	@Override
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.isSideSolid(par2 - 1, par3, par4, ForgeDirection.EAST) ||
                par1World.isSideSolid(par2 + 1, par3, par4, ForgeDirection.WEST,  false) ||
                par1World.isSideSolid(par2, par3, par4 - 1, ForgeDirection.SOUTH, false) ||

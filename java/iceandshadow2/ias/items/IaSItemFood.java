@@ -2,7 +2,7 @@ package iceandshadow2.ias.items;
 
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.IIaSXpAltarSacrifice;
-import iceandshadow2.ias.IIaSModName;
+import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.item.ItemFood;

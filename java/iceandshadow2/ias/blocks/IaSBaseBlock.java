@@ -1,8 +1,8 @@
 package iceandshadow2.ias.blocks;
 
-import iceandshadow2.ias.IIaSModName;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSFakeBlock;
+import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
