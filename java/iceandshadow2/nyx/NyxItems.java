@@ -1,5 +1,6 @@
 package iceandshadow2.nyx;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
@@ -9,7 +10,7 @@ import iceandshadow2.util.EnumIaSModule;
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard;
+		exousicIceShard, poisonFruit;
 	
 	public static void init() {
 		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").

@@ -21,26 +21,39 @@ public class NyxBiomeForest extends NyxBiome {
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
 		super.decorate(par1World, par2Random, par3, par4);
-        
+        /*
         for (int i = 0; i < 10; ++i)
         {
             int x = par3 + par2Random.nextInt(16) + 8;
             int z = par4 + par2Random.nextInt(16) + 8;
-            int y = 255;
-            for(y = 255; y > 0; --y) {
+            int y;
+            if(i%2 == 0)
+            	y = 192;
+            else
+            	y = 64;
+            while(y >= 64 && y <= 192) {
             	Block bid = par1World.getBlock(x, y, z);
-            	if(bid == Blocks.snow)
+            	if(bid == Blocks.snow_layer)
             		break;
-            	if(IaSBlockHelper.isAir(bid)) {
-            		++y;
-            		break;
-            	}
+                if(i%2 == 0) {
+                	if(!IaSBlockHelper.isAir(bid)) {
+                		++y;
+                		break;
+                	}
+                	--y;
+                }
+                else {
+                	if(IaSBlockHelper.isAir(bid))
+                		break;
+                	++y;
+                }
             }
             if(y == 0)
             	continue;
             WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
             var5.generate(par1World, par2Random, x, y, z);
         }
+        */
     }
 	
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
