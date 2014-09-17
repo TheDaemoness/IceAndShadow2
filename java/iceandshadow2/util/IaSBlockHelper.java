@@ -1,6 +1,7 @@
 package iceandshadow2.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
 public class IaSBlockHelper {
@@ -10,5 +11,8 @@ public class IaSBlockHelper {
 				return true;
 		}
 		return false;
+	}
+	public static boolean isAir(Block bl) {
+		return bl.getMaterial() == Material.air;
 	}
 }

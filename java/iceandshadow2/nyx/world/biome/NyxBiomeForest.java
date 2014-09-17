@@ -1,6 +1,14 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.nyx.world.gen.NyxGenPoisonTrees;
+import iceandshadow2.util.IaSBlockHelper;
+
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForest extends NyxBiome {
 	
@@ -10,36 +18,32 @@ public class NyxBiomeForest extends NyxBiome {
 		this.setBlocks(Blocks.snow, Blocks.snow);
 	}
 
-	/*
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
 		super.decorate(par1World, par2Random, par3, par4);
         
         for (int i = 0; i < 10; ++i)
         {
-            int x = par3 + this.randomGenerator.nextInt(16) + 8;
-            int z = par4 + this.randomGenerator.nextInt(16) + 8;
+            int x = par3 + par2Random.nextInt(16) + 8;
+            int z = par4 + par2Random.nextInt(16) + 8;
             int y = 255;
             for(y = 255; y > 0; --y) {
-            	int bid = par1World.getBlockId(x, y, z);
-            	if(bid == Block.snow.blockID)
+            	Block bid = par1World.getBlock(x, y, z);
+            	if(bid == Blocks.snow)
             		break;
-            	if(bid != 0) {
+            	if(IaSBlockHelper.isAir(bid)) {
             		++y;
             		break;
             	}
             }
             if(y == 0)
             	continue;
-            WorldGenerator var5 = this.getRandomWorldGenForTrees(this.randomGenerator);
-            var5.generate(par1World, this.randomGenerator, x, y, z);
-    		par1World.updateAllLightTypes(x, y, z);
+            WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
+            var5.generate(par1World, par2Random, x, y, z);
         }
-        randomGenerator = null;
     }
 	
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
-		return new NyxWorldGenPoisonTrees(false);
+		return new NyxGenPoisonTrees();
 	}
-	*/
 }
