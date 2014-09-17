@@ -53,7 +53,8 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
+	@Override
+	public void registerBlockIcons(IIconRegister reg) {
 		iconFancy = reg.registerIcon(getTexName()+"Fancy");
 		iconFast = reg.registerIcon(getTexName()+"Fast");
 		this.blockIcon = iconFast;
