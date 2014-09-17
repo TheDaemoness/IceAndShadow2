@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.blocks;
 
-import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.util.EnumIaSModule;
 
@@ -19,30 +18,26 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-public class NyxBlockPoisonLog extends IaSBlockDirectional {
-	@SideOnly(Side.CLIENT)
-	IIcon ringsIcon, barkIcon;
-	
-    public NyxBlockPoisonLog(String par1) {
-        super(EnumIaSModule.NYX, par1, Material.wood);
-        this.setLuminescence(0.2F);
-        this.setLightColor(0.5F, 1.0F, 0.5F);
-        this.setHardness(2.0F);
-        this.setResistance(5.0F);
-		this.setHarvestLevel("axe", 0);
-		this.setStepSound(soundTypeWood);
-    }
+public class NyxBlockInfestedLog extends IaSBlockDirectional {
 
-    /**
+	public NyxBlockInfestedLog(String par1) {
+		super(EnumIaSModule.NYX, par1, Material.wood);
+		this.setLuminescence(0.2F);
+		this.setLightColor(0.0F, 1.0F, 0.7F);
+        this.setHardness(7.5F);
+        this.setResistance(3.0F);
+		this.setHarvestLevel("axe", 1);
+		this.setStepSound(soundTypeWood);
+	}    
+	
+	/**
      * The type of render function that is called for this block
      */
 	@SideOnly(Side.CLIENT)
-    @Override
     public int getRenderType() {
         return 31;
     }
@@ -50,7 +45,6 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
-    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }
@@ -58,8 +52,7 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         byte var7 = 4;
         int var8 = var7 + 1;
@@ -74,15 +67,14 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional {
                     {
                         Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
 
-                        if (var12 != null) {
+                        if (var12 != null)
                             var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
-                        }
                     }
                 }
             }
         }
     }
-
+	
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
@@ -112,22 +104,19 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional {
     
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
-        float var5 = 0.0125F;
+        float var5 = 0.05F;
         return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3 + var5), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
     }
     
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-    	if(par5Entity instanceof EntityLivingBase) {
-    		if(!(par5Entity instanceof EntityMob)) {
-    			((EntityLivingBase)par5Entity).attackEntityFrom(IaSDamageSources.dmgPoisonwood, 1);
-    			if(!(((EntityLivingBase)par5Entity).isPotionActive(Potion.poison)))
-    				((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 35*(par1World.difficultySetting.getDifficultyId()+1), 1));
-    		}
-    	}
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    {
+    	if(!(par5Entity instanceof EntityMob))
+    		par5Entity.setInWeb();
     }
     
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-    	if(par5EntityPlayer.getCurrentEquippedItem() == null)
-    		par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.poison.id, 20*(par1World.difficultySetting.getDifficultyId()+1), 1));
+    	par5EntityPlayer.setInWeb();
+    	par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 35, 4));
     }
+
 }
