@@ -513,14 +513,14 @@ public class NyxGenInfestedTrees extends WorldGenerator {
 		}
 	}
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World par1World, Random par2Random, int x, int y, int z)
     {
         this.worldObj = par1World;
         long l = par2Random.nextLong();
         this.rand.setSeed(l);
-        this.basePos[0] = par3;
-        this.basePos[1] = par4;
-        this.basePos[2] = par5;
+        this.basePos[0] = x;
+        this.basePos[1] = y;
+        this.basePos[2] = z;
 
         if (this.heightLimit == 0)
             this.heightLimit = 6 + this.rand.nextInt(this.heightLimitLimit);
