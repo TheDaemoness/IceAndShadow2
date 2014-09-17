@@ -13,7 +13,7 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 
 	public NyxBlockWater(String id, Fluid fluid) {
 		super(EnumIaSModule.NYX, id, fluid);
-		this.setLightOpacity(0);
+		this.setLightOpacity(4);
 		this.setResistance(300F);
 	}
 
