@@ -48,12 +48,9 @@ public class NyxGenPoisonTrees extends WorldGenerator {
                         {
                             Block block = par1World.getBlock(var13, var11, var14);
 
-                            if (block != null)
-                            {
-                            	if(par1World.isAirBlock(var13, var11, var14) && 
-                            			!block.isLeaves(par1World, var13, var11, var14))
-                            			var10 = false;
-                            }
+                            if(!par1World.isAirBlock(var13, var11, var14) && 
+                            	!block.isLeaves(par1World, var13, var11, var14))
+                            	var10 = false;
                         }
                         else
                         {

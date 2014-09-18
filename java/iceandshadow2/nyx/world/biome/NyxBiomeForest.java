@@ -21,8 +21,7 @@ public class NyxBiomeForest extends NyxBiome {
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
 		super.decorate(par1World, par2Random, par3, par4);
-        for (int i = 0; i < 10; ++i)
-        {
+        for (int i = 0; i < 10; ++i) {
             int x = par3 + par2Random.nextInt(16) + 8;
             int z = par4 + par2Random.nextInt(16) + 8;
             int y;
