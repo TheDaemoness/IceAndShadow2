@@ -11,6 +11,9 @@ item.nyxExousium2.name=Exousium Crystal
 item.nyxDevora0.name=Devora Chunk
 item.nyxDevora1.name=Small Devora Chunk
 item.nyxExousicIceShard.name=Exousic Ice Shard
+item.nyxPoisonFruit.name=Poisonwood Plum
+item.nyxSilkBerries.name=Silk Berries
+item.nyxSilkBerriesMature.name=Mature Silk Berries
 
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
@@ -24,13 +27,13 @@ tile.nyxPoisonwoodLeaves.name=Poisonwood Leaves
 tile.nyxPoisonwoodLog.name=Poisonwood Log
 tile.nyxInfestedLeaves.name=Infested Leaves
 tile.nyxInfestedLog.name=Infested Log
+tile.nyxSilkBerryPod.name=Silk Berry Pod
 
 tile.nyxOreEchir.name=Echir Ore
 tile.nyxOreDevora.name=Devora Ore
 tile.nyxOreCortra.name=Cortra Ore
 tile.nyxOreNavistra.name=Navistra Ore
 tile.nyxOreExousium.name=Exousium Ore
-tile.nyxOreExousiumEmpty.name=Exousium Ore
 tile.nyxOreNifelhium.name=Nifelhium Ore
 tile.nyxOreDraconium.name=Draconium Ore
 

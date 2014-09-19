@@ -35,6 +35,7 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfe
         this.setLightColor(0.5F, 1.0F, 0.5F);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
+        this.setLightOpacity(14);
 		this.setHarvestLevel("axe", 0);
 		this.setStepSound(soundTypeWood);
     }

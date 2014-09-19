@@ -28,6 +28,7 @@ public class NyxBlocks {
 		poisonLog = new NyxBlockPoisonLog("PoisonwoodLog").register();
 		infestLeaves = new NyxBlockInfestedLeaves("InfestedLeaves").register();
 		infestLog = new NyxBlockInfestedLog("InfestedLog").register();
+		silkBerryPod = new NyxBlockSilkBerryPod("SilkBerryPod").register();
 		
 		oreEchir = new NyxBlockOreEchir("OreEchir").register();
 		oreDevora = new NyxBlockOreDevora("OreDevora").register();
