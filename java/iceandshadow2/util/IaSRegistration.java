@@ -31,6 +31,7 @@ public class IaSRegistration {
 		else
 			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
+	
 	private static Item registerItem(Item it) {
 		if(it instanceof IIaSModName)
 			GameRegistry.registerItem(it, ((IIaSModName)it).getModName());

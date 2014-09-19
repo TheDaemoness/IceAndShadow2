@@ -1,4 +1,4 @@
-package iceandshadow2.ias.blocks;
+package iceandshadow2.nyx.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -10,14 +10,13 @@ import iceandshadow2.ias.blocks.IaSBlockAltar;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.util.EnumIaSModule;
 
-public class IaSBlockAltarSacrifice extends IaSBlockAltar {
+public class NyxBlockAltarSacrifice extends IaSBlockAltar {
 
-	public IaSBlockAltarSacrifice(EnumIaSModule mod, String id) {
+	public NyxBlockAltarSacrifice(EnumIaSModule mod, String id) {
 		super(mod, id);
 		this.setLightLevel(0.5F);
 		this.setResistance(9001.0F);
 		this.setStepSound(Block.soundTypeStone);
-		this.setTickRandomly(true);
 	}
 
 	@Override
