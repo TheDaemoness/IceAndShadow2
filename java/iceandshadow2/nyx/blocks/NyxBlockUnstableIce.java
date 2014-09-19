@@ -2,12 +2,15 @@ package iceandshadow2.nyx.blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
@@ -20,6 +23,15 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 		this.setTickRandomly(true);
 		this.slipperiness = 1.08F;
 		this.setHarvestLevel("spade", 0);
+	}
+	
+	@SideOnly(Side.CLIENT)
+    @Override
+	public boolean shouldSideBeRendered(IBlockAccess w,
+			int x, int y, int z, int s) {
+		if(w.getBlock(x, y, z) == this)
+			return false;
+		return super.shouldSideBeRendered(w, x, y, z, s);
 	}
 	
 	@Override

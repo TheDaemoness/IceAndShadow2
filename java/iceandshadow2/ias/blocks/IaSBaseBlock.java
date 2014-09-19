@@ -23,6 +23,8 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	
 	public IaSBaseBlock setLuminescence(float lum) {
 		this.lum = lum;
+		if(this.getLightOpacity() == 15)
+			this.setLightOpacity(14);
 		this.setLightLevel(lum);
 		return this;
 	}
