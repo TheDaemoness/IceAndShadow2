@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	
 	@SideOnly(Side.CLIENT)
-	IIcon iconSide, iconSideRotated;
+	IIcon iconSide;
 	
 	public IaSBlockDirectional(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, texName, mat);
@@ -27,7 +27,6 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	public void registerBlockIcons(IIconRegister reg) {
     	this.blockIcon = reg.registerIcon(this.getTexName()+"Top");
     	this.iconSide = reg.registerIcon(this.getTexName()+"Side");
-    	this.iconSideRotated = reg.registerIcon(this.getTexName()+"SideR");
     }
 	
 	@Override
@@ -47,11 +46,11 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
                 break;
             case 2:
             case 3:
-            	align = 0x2;
+            	align = 0x8;
                 break;
             case 4:
             case 5:
-            	align = 0x1;
+            	align = 0x4;
         }
 
         return align;
@@ -62,28 +61,28 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
     {
 		
         //Connector
-        if((meta & 0x3) == 0x3) {
+        if((meta & 0xB) == 0xB) {
         	return this.blockIcon;	
         }
         
     	//East-West
-        else if((meta & 0x1) == 0x1) { 
+        else if((meta & 0x4) == 0x4) { 
         	if(side == 4 || side == 5)
         		return this.blockIcon;
         	else if(side == 0 || side == 1)
-        		return iconSideRotated;
+        		return iconSide;
         	else
-        		return iconSideRotated;
+        		return iconSide;
         }
         
         //North-South
-        else if((meta & 0x2) == 0x2) {
+        else if((meta & 0x8) == 0x8) {
         	if(side == 2 || side == 3)
         		return this.blockIcon;
         	else if(side == 0 || side == 1)
         		return iconSide;
         	else
-        		return iconSideRotated;
+        		return iconSide;
         }
         //Up-down
         else {
