@@ -24,6 +24,13 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
+    public int getRenderType() {
+        return 31;
+    }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
     	this.blockIcon = reg.registerIcon(this.getTexName()+"Top");
     	this.iconSide = reg.registerIcon(this.getTexName()+"Side");
@@ -57,6 +64,7 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
     }
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
     {
 		

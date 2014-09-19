@@ -26,6 +26,8 @@ public class NyxBlocks {
 		exousicIce = new NyxBlockIce("ExousicIce").register();
 		poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
 		poisonLog = new NyxBlockPoisonLog("PoisonwoodLog").register();
+		infestLeaves = new NyxBlockInfestedLeaves("InfestedLeaves").register();
+		infestLog = new NyxBlockInfestedLog("InfestedLog").register();
 		
 		oreEchir = new NyxBlockOreEchir("OreEchir").register();
 		oreDevora = new NyxBlockOreDevora("OreDevora").register();

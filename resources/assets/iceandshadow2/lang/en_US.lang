@@ -22,12 +22,15 @@ tile.nyxCrystalBloodstone.name=Bloodstone Crystal
 tile.nyxThornyVines.name=Thorny Vines
 tile.nyxPoisonwoodLeaves.name=Poisonwood Leaves
 tile.nyxPoisonwoodLog.name=Poisonwood Log
+tile.nyxInfestedLeaves.name=Infested Leaves
+tile.nyxInfestedLog.name=Infested Log
 
 tile.nyxOreEchir.name=Echir Ore
 tile.nyxOreDevora.name=Devora Ore
 tile.nyxOreCortra.name=Cortra Ore
 tile.nyxOreNavistra.name=Navistra Ore
 tile.nyxOreExousium.name=Exousium Ore
+tile.nyxOreExousiumEmpty.name=Exousium Ore
 tile.nyxOreNifelhium.name=Nifelhium Ore
 tile.nyxOreDraconium.name=Draconium Ore
 

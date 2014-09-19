@@ -176,7 +176,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
                     }
                     else
                     {
-                    	this.worldObj.setBlock(aint1[0], aint1[1], aint1[2], par6, 0, 0x2);
+                    	this.worldObj.setBlock(aint1[0], aint1[1], aint1[2], par6, 0, 0x8);
                         ++k1;
                     }
                 }
@@ -289,11 +289,11 @@ public class NyxGenInfestedTrees extends WorldGenerator {
                 {
                     if (l == j1)
                     {
-                        b5 = 1;
+                        b5 = 0x4;
                     }
                     else if (i1 == j1)
                     {
-                        b5 = 2;
+                        b5 = 0x8;
                     }
                 }
 
@@ -509,7 +509,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
 			--x; //West
 		meta |= (this.rand.nextInt(3)==0?0x8:0x4);
 		if(this.worldObj.isAirBlock(x, y, z) || this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
-			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta, 0x2);
+			//this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta, 0x2);
 		}
 	}
 
