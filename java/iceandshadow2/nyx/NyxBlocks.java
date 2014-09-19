@@ -10,7 +10,7 @@ import iceandshadow2.util.IaSRegistration;
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, 
 	exousicIce, exousicWater, crystalBloodstone, thornyVines, silkBerryPod,
-	stickyLog, stickyLeaves, poisonLeaves, poisonLog;
+	infestLog, infestLeaves, poisonLeaves, poisonLog;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
 	oreNifelhium, oreExousium, oreDraconium;
