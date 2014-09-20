@@ -1,8 +1,10 @@
 package iceandshadow2;
 
+import net.minecraftforge.common.MinecraftForge;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.nyx.InitNyx;
+import iceandshadow2.nyx.forge.NyxDeathSystem;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -41,6 +43,9 @@ public class IceAndShadow2 {
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
+
+		if(IaSFlags.flag_death_system)
+			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		//Be nice, Thaumcraft.
 		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""+IaSFlags.dim_nyx_id+":0");
     }

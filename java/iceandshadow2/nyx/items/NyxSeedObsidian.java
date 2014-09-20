@@ -4,12 +4,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import iceandshadow2.api.IIaSKeepOnDeath;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxSeedObsidian extends IaSBaseItemSingle {
+public class NyxSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOnDeath {
 	
 	public NyxSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
