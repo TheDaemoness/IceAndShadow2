@@ -58,12 +58,14 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 		if(tree.worldObj.isRemote)
 			return;
 		if((pile.getItemDamage() & 2) == 0 && tree.dimension == IaSFlags.dim_nyx_id) {
-			pile.setItemDamage(pile.getItemDamage()+2);
 			if(tree instanceof EntityPlayer) {
 				EntityPlayer ep = (EntityPlayer)tree;
+				if(!ep.capabilities.isCreativeMode)
+					pile.setItemDamage(pile.getItemDamage()|2);
 				if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
 					IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
-			}
+			} else
+				pile.setItemDamage(pile.getItemDamage()|2);
 		}
 		boolean active = true;
 		if(tree.dimension != IaSFlags.dim_nyx_id) {
@@ -125,9 +127,11 @@ public class NyxTeleportCrystal extends IaSBaseItemSingle {
 							new NyxTeleporter(
 									plm.mcServer
 									.worldServerForDimension(IaSFlags.dim_nyx_id)));
+					plm.worldObj.playSoundAtEntity(plm,
+							"IceAndShadow2:portal_travel", 0.7F,
+							plm.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 				} else {
-					if((is.getItemDamage() & 4) == 0)
-						is.setItemDamage(is.getItemDamage()+4);
+					is.setItemDamage(is.getItemDamage()|4);
 					plm.mcServer.getConfigurationManager()
 					.transferPlayerToDimension(
 							plm,

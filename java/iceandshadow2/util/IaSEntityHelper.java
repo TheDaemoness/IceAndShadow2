@@ -18,11 +18,11 @@ public class IaSEntityHelper {
 		else
 			ret[1] = (int)(z/16);
 		if(x < 0)
-			ret[2] = (int)(16-Math.abs(x%16));
+			ret[2] = (int)(15-Math.abs(x%16));
 		else
 			ret[2] = (int)(x%16);
 		if(z < 0)
-			ret[3] = (int)(16-Math.abs(z%16));
+			ret[3] = (int)(15-Math.abs(z%16));
 		else
 			ret[3] = (int)(z%16);
 		return ret;

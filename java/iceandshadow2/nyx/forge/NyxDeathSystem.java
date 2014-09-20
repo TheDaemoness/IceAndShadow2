@@ -66,6 +66,8 @@ public class NyxDeathSystem {
 	@SubscribeEvent
 	public void onRespawn(PlayerEvent.Clone e) {
 		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id) {
+			if(!e.original.isDead)
+				return;
 			e.entityPlayer.inventory.copyInventory((InventoryPlayer)death_inv
 					.get(e.original.getEntityId()));
 			//Raise madness.

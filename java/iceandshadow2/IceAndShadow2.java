@@ -43,7 +43,6 @@ public class IceAndShadow2 {
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
-
 		if(IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		//Be nice, Thaumcraft.
