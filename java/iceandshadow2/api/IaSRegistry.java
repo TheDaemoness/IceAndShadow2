@@ -10,4 +10,10 @@ public final class IaSRegistry {
 			throw new IllegalArgumentException("Material " + key + " already exists!");
 		toolMaterials.put(key, mat);
 	}
+	
+	public static IaSToolMaterial getToolMaterial(String key) {
+		if(toolMaterials.containsKey(key))
+			return toolMaterials.get(key);
+		return null; //In case I decide to switch to TreeMap later for some reason.
+	}
 }

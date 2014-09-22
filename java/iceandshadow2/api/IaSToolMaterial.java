@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -16,14 +17,45 @@ import net.minecraft.world.World;
  */
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	
+	public static IaSToolMaterial extractMaterial(ItemStack is) {
+		if(!is.getTagCompound().hasKey("iasMaterial")) {
+			is.stackSize = 0;
+			return null;
+		}
+		IaSToolMaterial m  = IaSRegistry.getToolMaterial(is.getTagCompound().getString("iasMaterial"));
+		if(m == null) {
+			is.stackSize = 0;
+			return null;
+		}
+		return m;
+	}
+	
+	/**
+	 * Gets the prefix associated with the textures for the tool.
+	 * This would be something like "IceAndShadow2:iasTool".
+	 * The tool class and tool material name would then be tacked on to that name.
+	 * The final string texture ends up looking something like "IceAndShadow2:iasToolEchirPickaxe".
+	 */
+	public String getTextureNamePrefix() {
+		return "IceAndShadow2:iasTool";
+	}
+	
+	/**
+	 * Gets the material name associated with a tool, for the purposes of unlocalized names and texture names.
+	 * This should be capitalized, but not allcaps.
+	 * The tool name will end up something like item.iasToolMaterialClass.name
+	 */
+	public abstract String getMaterialName();
+	
 	/**
 	 * Gets the item's mine speed against a target block.
 	 * Throwing knives encouraged to have the player's harvest speed or half the harvest speed of a sword.
 	 * @param is The tool.
 	 * @param target The innocent block victim. You monster.
+	 * @param meta The block metadata.
 	 * @return The mine speed that the tool has against the target block.
 	 */
-	public abstract float getMineSpeed(ItemStack is, Block target, boolean isThrowingKnife);
+	public abstract float getHarvestSpeed(ItemStack is, Block target, int meta, boolean isThrowingKnife);
 	
 	/**
 	 * Gets the tool's damage bonus against certain entities.
@@ -48,12 +80,12 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	/**
 	 * Gets the tool's mining level. This determines what materials it can mine.
 	 * This is IGNORED by throwing knives.
-	 * Cheat sheet: 0 = stone, 1 = iron, 2 = redstone/diamond, 3 = obsidian, 4 - ???
+	 * Cheat sheet: -1 = fists, 0 = stone, 1 = iron, 2 = redstone/diamond, 3 = obsidian, 4 - ???
 	 * @param is The stack.
-	 * @param user The user.
+	 * @param toolClass The user.
 	 * @return The tool's mining level.
 	 */
-	public abstract int getMineLevel(ItemStack is, EntityPlayer user);
+	public abstract int getHarvestLevel(ItemStack is, String toolClass);
 	
 	/**
 	 * Get the tool's maximum durability.
@@ -69,15 +101,22 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param w The world object for the block being harvested.
 	 * @return The number of points of durability that should be deducted by this harvest.
 	 */
-	public int onHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z) {
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
 		return 1;
+	}
+	
+	/**
+	 * Gets whether or not a tool can be repaired in an anvil.
+	 */
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return false;
 	}
 	
 	/**
 	 * Called when a player uses the left click of a tool.
 	 * @param is The item stack being used.
 	 * @param user The user of the item stack.
-	 * @return The number of points of durability that should be deducted by this left-click.
+	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
 	public int onLeftClick(ItemStack is, EntityPlayer user, boolean isThrowingKnife) {
 		return 1;
@@ -107,14 +146,17 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 	
 	/**
-	 * Called whenever the tool does damage. Is also called when a throwing knife hits a target.
-	 * @param is The item stack the player used to hit, or null if called by a throwing knife.
+	 * Called whenever the tool does damage. This is NOT called when a thrown knife hits its target.
+	 * @param is The item stack the player used to hit.
 	 * @param user The player using the tool.
 	 * @param target The entity damaged by the tool.
-	 * @return The number of points of durability that should be deducted by this left-click.
+	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
-	public int onAttack(ItemStack is, EntityPlayer user, Entity target, boolean isThrowingKnife) {
-		return 1;
+	public int onAttack(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife) {
+		if(is.getItem() instanceof ItemSword)
+			return 1;
+		else
+			return 2;
 	}
 	
 	/**
