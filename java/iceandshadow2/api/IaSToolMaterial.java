@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -196,6 +197,16 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param knife The throwing knife entity.
 	 */
 	protected static final ItemStack getDefaultThrowingKnifeDrop(IIaSThrowingKnife knife) {
+		return null;
+	}
+
+	public String getUnlocalizedName(ItemStack is) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IIcon getIcon(ItemStack is) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

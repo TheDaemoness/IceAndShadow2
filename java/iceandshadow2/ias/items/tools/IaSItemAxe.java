@@ -15,6 +15,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class IaSItemAxe extends ItemAxe implements IIaSModName {
@@ -27,6 +29,7 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 	@Override
 	public boolean hitEntity(ItemStack is, EntityLivingBase user,
 			EntityLivingBase target) {
+		//TODO: Damage control.
 		return true;
 	}
 	
@@ -94,8 +97,36 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 	}
 	
 	@Override
+	@Deprecated
 	public String getTexName() {
-		return IceAndShadow2.MODID+':'+getModName();
+		return null;
+	}
+	
+
+	@Override
+	public String getUnlocalizedName(ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return null;
+		return m.getUnlocalizedName(is);
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack is, int pass) {
+		if(pass != 0)
+			return null;
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return null;
+		return m.getIcon(is);
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return 0;
+		return m.getDurability(is, false);
 	}
 
 	@Override
