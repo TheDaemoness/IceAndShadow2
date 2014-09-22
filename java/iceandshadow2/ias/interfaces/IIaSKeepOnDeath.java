@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.interfaces;
 
 import iceandshadow2.util.EnumIaSModule;
 

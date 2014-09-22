@@ -11,8 +11,8 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 	
 	private final EnumIaSModule MODULE;
 
-	public IaSItemAxe(EnumIaSModule m, String id, ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
+	public IaSItemAxe(EnumIaSModule m, String id) {
+		super(ToolMaterial.IRON);
 		this.setUnlocalizedName(m.prefix+id);
 		MODULE = m;
 	}

@@ -13,19 +13,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 public class IaSItemThrowingKnife extends IaSItemSword {
 
-	/*
-	 * Entity damage cheat sheet:
-	 * 0: Echir. 1: Navistra. 2: Devora. 3: Cortra. 4: Warped
-	 */
-
-	public IaSItemThrowingKnife(EnumIaSModule m, String par1, ToolMaterial mat) {
-		super(m, par1, mat);
+	public IaSItemThrowingKnife(EnumIaSModule m, String par1) {
+		super(m, par1);
 		this.setNoRepair();
 		this.setMaxDamage(0);
 		this.setMaxStackSize(32);
@@ -111,6 +107,8 @@ public class IaSItemThrowingKnife extends IaSItemSword {
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
 	}
+	
+	
 
 	
 }

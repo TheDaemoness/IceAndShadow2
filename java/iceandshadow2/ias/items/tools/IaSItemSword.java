@@ -6,13 +6,14 @@ import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.Item.ToolMaterial;
 
 public class IaSItemSword extends ItemSword implements IIaSModName {
 	
 	private final EnumIaSModule MODULE;
 
-	public IaSItemSword(EnumIaSModule m, String id, ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
+	public IaSItemSword(EnumIaSModule m, String id) {
+		super(ToolMaterial.IRON);
 		this.setUnlocalizedName(m.prefix+id);
 		MODULE = m;
 	}

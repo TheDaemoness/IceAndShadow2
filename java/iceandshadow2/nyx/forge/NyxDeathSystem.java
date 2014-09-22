@@ -3,7 +3,7 @@ package iceandshadow2.nyx.forge;
 import java.util.HashMap;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSKeepOnDeath;
+import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

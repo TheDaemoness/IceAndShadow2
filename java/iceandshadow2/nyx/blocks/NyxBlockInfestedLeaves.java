@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.api.IIaSNoInfest;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
 import iceandshadow2.util.EnumIaSModule;
 

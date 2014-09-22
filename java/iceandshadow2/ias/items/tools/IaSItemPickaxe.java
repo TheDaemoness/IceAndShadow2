@@ -6,13 +6,14 @@ import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.Item.ToolMaterial;
 
 public class IaSItemPickaxe extends ItemPickaxe implements IIaSModName {
 	
 	private final EnumIaSModule MODULE;
 
-	public IaSItemPickaxe(EnumIaSModule m, String id, ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
+	public IaSItemPickaxe(EnumIaSModule m, String id) {
+		super(ToolMaterial.IRON);
 		this.setUnlocalizedName(m.prefix+id);
 		MODULE = m;
 	}

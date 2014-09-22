@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSNoInfest;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.interfaces.IIaSModName;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import cpw.mods.fml.relauncher.Side;
