@@ -1,5 +1,8 @@
 package iceandshadow2.ias.items.tools;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.collect.Multimap;
 
 import iceandshadow2.IceAndShadow2;
@@ -10,11 +13,16 @@ import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -25,11 +33,36 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 		super(ToolMaterial.IRON);
 		this.setUnlocalizedName("iasToolAxe");
 	}
+	
+	@Override
+	public boolean getHasSubtypes() {
+		return true;
+	}
+
+	@Override
+	public void getSubItems(Item it, CreativeTabs ct,
+			List l) {
+		Collection<IaSToolMaterial> mats = IaSRegistry.getToolMaterials();
+		l.add(new ItemStack(this));
+			for(IaSToolMaterial m : mats) {
+				ItemStack is;
+				is = new ItemStack(this);
+				is.setTagCompound(new NBTTagCompound());
+				is.getTagCompound().setString("iasMaterial", m.getMaterialName());
+				l.add(is.copy());
+			}
+	}
 
 	@Override
 	public boolean hitEntity(ItemStack is, EntityLivingBase user,
 			EntityLivingBase target) {
-		//TODO: Damage control.
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return false;
+		if(user instanceof EntityPlayer)
+			target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, target, false));
+		else
+			target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user, target, false));
 		return true;
 	}
 	
@@ -112,13 +145,17 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack is, int pass) {
-		if(pass != 0)
-			return null;
+	public IIcon getIconIndex(ItemStack is) {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if(m == null)
 			return null;
 		return m.getIcon(is);
+	}
+	
+	@Override
+	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
+			ItemStack usingItem, int useRemaining) {
+		return getIconIndex(is);
 	}
 
 	@Override

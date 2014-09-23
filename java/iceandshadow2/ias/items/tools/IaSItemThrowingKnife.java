@@ -2,6 +2,7 @@ package iceandshadow2.ias.items.tools;
 
 //import iceandshadow2.nyx.entity.projectile.EntityThrowingKnife;
 
+import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,10 +21,11 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 public class IaSItemThrowingKnife extends IaSItemSword {
 
-	public IaSItemThrowingKnife(EnumIaSModule m, String par1) {
-		super(m, par1);
+	public IaSItemThrowingKnife() {
+		super();
 		this.setNoRepair();
 		this.setMaxDamage(0);
+		this.setUnlocalizedName("iasThrowingKnife");
 		this.setMaxStackSize(32);
 	}
 	
@@ -95,10 +97,10 @@ public class IaSItemThrowingKnife extends IaSItemSword {
 			EntityLivingBase par3EntityLivingBase) {
 		return true;
 	}
-
+	
 	@Override
-	public float func_150893_a(ItemStack p_150893_1_, Block p_150893_2_) {
-		return 1.5F;
+	public int getMaxDamage(ItemStack is) {
+		return 0;
 	}
 
 	@Override
@@ -107,8 +109,4 @@ public class IaSItemThrowingKnife extends IaSItemSword {
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
 	}
-	
-	
-
-	
 }

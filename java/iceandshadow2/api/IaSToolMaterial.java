@@ -1,6 +1,10 @@
 package iceandshadow2.api;
 
+import iceandshadow2.ias.items.tools.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 
@@ -18,16 +23,19 @@ import net.minecraft.world.World;
  */
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	
+	@SideOnly(Side.CLIENT)
+	IIcon iconAxe, iconPickaxe, iconSpade, iconSword, iconKnife;
+	
 	public static IaSToolMaterial extractMaterial(ItemStack is) {
-		if(!is.getTagCompound().hasKey("iasMaterial")) {
-			is.stackSize = 0;
-			return null;
-		}
+		if(is == null)
+			return IaSRegistry.getDefaultMaterial();
+		if (is.getTagCompound() == null)
+			return IaSRegistry.getDefaultMaterial();
+		if(!is.getTagCompound().hasKey("iasMaterial"))
+			return IaSRegistry.getDefaultMaterial();
 		IaSToolMaterial m  = IaSRegistry.getToolMaterial(is.getTagCompound().getString("iasMaterial"));
-		if(m == null) {
-			is.stackSize = 0;
-			return null;
-		}
+		if(m == null)
+			IaSRegistry.getDefaultMaterial();
 		return m;
 	}
 	
@@ -38,7 +46,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * The final string texture ends up looking something like "IceAndShadow2:iasToolEchirPickaxe".
 	 */
 	public String getTextureNamePrefix() {
-		return "IceAndShadow2:iasTool";
+		return "IceAndShadow2:tools/iasTool";
 	}
 	
 	/**
@@ -66,7 +74,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The target.
 	 * @return The damage that the tool should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public abstract float getToolDamageBonus(ItemStack is, EntityPlayer user, Entity target, boolean isThrowingKnife);
+	public abstract float getToolDamage(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife);
 	
 	/**
 	 * Gets a thrown throwing knife's damage bonus against certain entities.
@@ -76,7 +84,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The target.
 	 * @return The damage that the knife should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public abstract float getKnifeDamageBonus(IIaSThrowingKnife knife, EntityPlayer user, Entity target);
+	public abstract float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, EntityLivingBase target);
 	
 	/**
 	 * Gets the tool's mining level. This determines what materials it can mine.
@@ -201,12 +209,39 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 
 	public String getUnlocalizedName(ItemStack is) {
-		// TODO Auto-generated method stub
-		return null;
+		if(is.getItem() instanceof IaSItemAxe)
+			return "item.iasTool"+this.getMaterialName()+"Axe";
+		if(is.getItem()  instanceof IaSItemPickaxe)
+			return "item.iasTool"+this.getMaterialName()+"Pickaxe";
+		if(is.getItem()  instanceof IaSItemSpade)
+			return "item.iasTool"+this.getMaterialName()+"Spade";
+		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
+			return "item.iasTool"+this.getMaterialName()+"Knife";
+		if(is.getItem()  instanceof IaSItemSword)
+			return "item.iasTool"+this.getMaterialName()+"Sword";
+		is.getDisplayName();
+		return "item.iasTool";
 	}
 
 	public IIcon getIcon(ItemStack is) {
-		// TODO Auto-generated method stub
+		if(is.getItem() instanceof IaSItemAxe)
+			return iconAxe;
+		if(is.getItem()  instanceof IaSItemPickaxe)
+			return iconPickaxe;
+		if(is.getItem()  instanceof IaSItemSpade)
+			return iconSpade;
+		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
+			return iconKnife;
+		if(is.getItem()  instanceof IaSItemSword)
+			return iconSword;
 		return null;
+	}
+
+	public void registerIcons(IIconRegister i) {
+		iconAxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Axe");
+		iconPickaxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Pickaxe");
+		iconSpade = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Spade");
+		iconSword = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Sword");
+		iconKnife = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Knife");
 	}
 }

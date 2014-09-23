@@ -1,8 +1,10 @@
 package iceandshadow2;
 
 import net.minecraftforge.common.MinecraftForge;
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
 import cpw.mods.fml.common.Mod;
@@ -39,6 +41,8 @@ public class IceAndShadow2 {
     	IaSCreativeTabs.init();
     	InitNyx.init();
     	IaSDamageSources.init();
+    	IaSTools.init();
+    	IaSRegistry.postInit();
     }
     
     @EventHandler
