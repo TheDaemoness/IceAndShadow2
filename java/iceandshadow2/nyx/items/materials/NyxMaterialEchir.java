@@ -25,8 +25,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getHarvestSpeed(ItemStack is, Block target, int meta,
-			boolean isThrowingKnife) {
+	public float getHarvestSpeed(ItemStack is, Block target, int meta) {
 		return 12;
 	}
 
@@ -36,7 +35,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 	}
 
 	@Override
-	public int getDurability(ItemStack is, boolean isThrowingKnife) {
+	public int getDurability(ItemStack is) {
 		return 500;
 	}
 
