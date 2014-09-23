@@ -2,6 +2,7 @@ package iceandshadow2.ias.items.tools;
 
 //import iceandshadow2.nyx.entity.projectile.EntityThrowingKnife;
 
+import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
@@ -15,14 +16,15 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
-public class IaSItemThrowingKnife extends IaSItemSword {
+public class IaSItemThrowingKnife extends IaSItemTool {
 
 	public IaSItemThrowingKnife() {
-		super();
+		super(EnumIaSToolClass.KNIFE);
 		this.setNoRepair();
 		this.setMaxDamage(0);
 		this.setUnlocalizedName("iasThrowingKnife");
@@ -79,6 +81,13 @@ public class IaSItemThrowingKnife extends IaSItemSword {
     }
     */
 	
+	@Override
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		m.onAttack(is, user, target);
+		return true;
+	}
 
 	public void onUpdate(ItemStack par1ItemStack, World world,
 			Entity player, int par4, boolean par5) {
@@ -108,5 +117,21 @@ public class IaSItemThrowingKnife extends IaSItemSword {
 			Block p_150894_3_, int p_150894_4_, int p_150894_5_,
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
+	}
+	
+	@Override
+	public IIcon getIconIndex(ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return null;
+		return m.getIcon(is);
+	}
+	
+	@Override
+	public String getUnlocalizedName(ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(m == null)
+			return null;
+		return m.getUnlocalizedName(is);
 	}
 }

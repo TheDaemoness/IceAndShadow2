@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
@@ -18,8 +19,6 @@ import net.minecraft.world.World;
 
 
 /**Ice and Shadow 2's own tool material for rapid, modular, and flexible tool creation! Yaaaay!
- * Different properties can be set for different tool classes by returning different values based on instanceof checks on the item in the ItemStack.
- * Note that throwing knives inherit from ItemSword. Applicable functions have a boolean parameter to narrow down instanceof tool determination.
  */
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	
@@ -64,7 +63,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param meta The block metadata.
 	 * @return The mine speed that the tool has against the target block.
 	 */
-	public abstract float getHarvestSpeed(ItemStack is, Block target, int meta, boolean isThrowingKnife);
+	public abstract float getHarvestSpeed(ItemStack is, Block target, int meta);
 	
 	/**
 	 * Gets the item's base attack damage.
@@ -85,16 +84,17 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The target.
 	 * @return The damage that the tool should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public float getToolDamage(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife) {
-		if(is.getItem() instanceof IaSItemAxe)
+	public float getToolDamage(ItemStack is, EntityLivingBase user, Entity target) {
+		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
+		if(t == EnumIaSToolClass.AXE)
 			return getBaseDamage()+3;
-		if(is.getItem()  instanceof IaSItemPickaxe)
+		if(t == EnumIaSToolClass.PICKAXE)
 			return getBaseDamage()+2;
-		if(is.getItem()  instanceof IaSItemSpade)
+		if(t == EnumIaSToolClass.SPADE)
 			return getBaseDamage()+1;
-		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
+		if(t == EnumIaSToolClass.KNIFE)
 			return getBaseDamage()+2;
-		if(is.getItem()  instanceof IaSItemSword)
+		if(t == EnumIaSToolClass.SWORD)
 			return getBaseDamage()+4;
 		return getBaseDamage();
 	}
@@ -107,7 +107,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The target.
 	 * @return The damage that the knife should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, EntityLivingBase target) {
+	public float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, Entity target) {
 		return getBaseDamage()+2;
 	}
 	
@@ -126,7 +126,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param is The tool.
 	 * @return The tool's durability. Each point of durability is one use.
 	 */
-	public abstract int getDurability(ItemStack is, boolean isThrowingKnife);
+	public abstract int getDurability(ItemStack is);
 	
 	/**
 	 * Called when a tool successfully harvests a block.
@@ -152,7 +152,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param user The user of the item stack.
 	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
-	public int onLeftClick(ItemStack is, EntityPlayer user, boolean isThrowingKnife) {
+	public int onLeftClick(ItemStack is, EntityPlayer user) {
 		return 1;
 	}
 	
@@ -175,7 +175,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param user The entity that is going to pick up this tool.
 	 * @return True if the Nyxian enemy should pick up and use this tool, false otherwise.
 	 */
-	public boolean shouldEnemiesUse(ItemStack is, EntityLivingBase user, boolean isThrowingKnife) {
+	public boolean shouldEnemiesUse(ItemStack is, EntityLivingBase user) {
 		return false;
 	}
 	
@@ -186,7 +186,13 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The entity damaged by the tool.
 	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
-	public int onAttack(ItemStack is, EntityLivingBase user, Entity target, boolean isThrowingKnife) {
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		if(target instanceof EntityLivingBase) {
+			if(user instanceof EntityPlayer)
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), getToolDamage(is, user, target));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user), getToolDamage(is, user, target));
+		}
 		if(is.getItem() instanceof ItemSword)
 			return 1;
 		else
@@ -234,31 +240,32 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 
 	public String getUnlocalizedName(ItemStack is) {
-		if(is.getItem() instanceof IaSItemAxe)
+		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
+		if(t == EnumIaSToolClass.AXE)
 			return "item.iasTool"+this.getMaterialName()+"Axe";
-		if(is.getItem()  instanceof IaSItemPickaxe)
+		if(t == EnumIaSToolClass.PICKAXE)
 			return "item.iasTool"+this.getMaterialName()+"Pickaxe";
-		if(is.getItem()  instanceof IaSItemSpade)
+		if(t == EnumIaSToolClass.SPADE)
 			return "item.iasTool"+this.getMaterialName()+"Spade";
-		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
-			return "item.iasTool"+this.getMaterialName()+"Knife";
-		if(is.getItem()  instanceof IaSItemSword)
+		if(t == EnumIaSToolClass.SWORD)
 			return "item.iasTool"+this.getMaterialName()+"Sword";
-		is.getDisplayName();
+		if(t == EnumIaSToolClass.KNIFE)
+			return "item.iasTool"+this.getMaterialName()+"Knife";
 		return "item.iasTool";
 	}
 
 	public IIcon getIcon(ItemStack is) {
-		if(is.getItem() instanceof IaSItemAxe)
+		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
+		if(t == EnumIaSToolClass.AXE)
 			return iconAxe;
-		if(is.getItem()  instanceof IaSItemPickaxe)
+		if(t == EnumIaSToolClass.PICKAXE)
 			return iconPickaxe;
-		if(is.getItem()  instanceof IaSItemSpade)
+		if(t == EnumIaSToolClass.SPADE)
 			return iconSpade;
-		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
-			return iconKnife;
-		if(is.getItem()  instanceof IaSItemSword)
+		if(t == EnumIaSToolClass.SWORD)
 			return iconSword;
+		if(t == EnumIaSToolClass.KNIFE)
+			return iconKnife;
 		return null;
 	}
 
