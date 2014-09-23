@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -52,16 +53,17 @@ public class IaSItemSword extends ItemSword implements IIaSModName {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase user,
-			EntityLivingBase target) {
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return false;
-		if(user instanceof EntityPlayer)
-			target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, target, false));
-		else
-			target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user, target, false));
-		return true;
+		if(target instanceof EntityLivingBase) {
+			if(user instanceof EntityPlayer)
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, (EntityLivingBase)target, false));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user,(EntityLivingBase)target, false));
+			return true;
+		}
+		return false;
 	}
 	
 	/**

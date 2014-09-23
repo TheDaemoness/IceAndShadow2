@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -49,6 +50,20 @@ public class IaSItemPickaxe extends ItemPickaxe implements IIaSModName {
 				is.getTagCompound().setString("iasMaterial", m.getMaterialName());
 				l.add(is.copy());
 			}
+	}
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(target instanceof EntityLivingBase) {
+			if(user instanceof EntityPlayer)
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, (EntityLivingBase)target, false));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user,(EntityLivingBase)target, false));
+			return true;
+		}
+		return false;
 	}
 
 	@Override

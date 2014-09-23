@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -33,7 +34,7 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 		super(ToolMaterial.IRON);
 		this.setUnlocalizedName("iasToolAxe");
 	}
-	
+
 	@Override
 	public boolean getHasSubtypes() {
 		return true;
@@ -44,38 +45,28 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 			List l) {
 		Collection<IaSToolMaterial> mats = IaSRegistry.getToolMaterials();
 		l.add(new ItemStack(this));
-			for(IaSToolMaterial m : mats) {
-				ItemStack is;
-				is = new ItemStack(this);
-				is.setTagCompound(new NBTTagCompound());
-				is.getTagCompound().setString("iasMaterial", m.getMaterialName());
-				l.add(is.copy());
-			}
+		for(IaSToolMaterial m : mats) {
+			ItemStack is;
+			is = new ItemStack(this);
+			is.setTagCompound(new NBTTagCompound());
+			is.getTagCompound().setString("iasMaterial", m.getMaterialName());
+			l.add(is.copy());
+		}
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase user,
-			EntityLivingBase target) {
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return false;
-		if(user instanceof EntityPlayer)
-			target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, target, false));
-		else
-			target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user, target, false));
-		return true;
+		if(target instanceof EntityLivingBase) {
+			if(user instanceof EntityPlayer)
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)user), m.getToolDamage(is, user, (EntityLivingBase)target, false));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user), m.getToolDamage(is, user,(EntityLivingBase)target, false));
+			return true;
+		}
+		return false;
 	}
-	
-	/**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
-	@Override
-    public Multimap getItemAttributeModifiers()
-    {
-        Multimap multimap = super.getItemAttributeModifiers();
-        //multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", (double)this.damageVsEntity, 0));
-        return multimap;
-    }
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World w,
@@ -128,13 +119,13 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
 	}
-	
+
 	@Override
 	@Deprecated
 	public String getTexName() {
 		return null;
 	}
-	
+
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
@@ -151,7 +142,7 @@ public class IaSItemAxe extends ItemAxe implements IIaSModName {
 			return null;
 		return m.getIcon(is);
 	}
-	
+
 	@Override
 	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {

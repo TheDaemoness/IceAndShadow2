@@ -31,18 +31,6 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getToolDamage(ItemStack is, EntityLivingBase user,
-			EntityLivingBase target, boolean isThrowingKnife) {
-		return 7;
-	}
-
-	@Override
-	public float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user,
-			EntityLivingBase target) {
-		return 5;
-	}
-
-	@Override
 	public int getHarvestLevel(ItemStack is, String toolClass) {
 		return 2;
 	}

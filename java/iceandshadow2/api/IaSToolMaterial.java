@@ -67,14 +67,37 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public abstract float getHarvestSpeed(ItemStack is, Block target, int meta, boolean isThrowingKnife);
 	
 	/**
+	 * Gets the item's base attack damage.
+	 * This is called by the default implementations of getToolDamage() and getKnifeDamage().
+	 * Players are not forced to override it if it won't be used. 
+	 * @return 
+	 */
+	public float getBaseDamage() {
+		return 3.0F;
+	}
+	
+	/**
 	 * Gets the tool's damage bonus against certain entities.
 	 * This is NOT called by in-flight throwing knives, but is called on throwing knife left-click.
+	 * Default implementation emulates vanilla damage variances between tools.
 	 * @param is The tool.
 	 * @param user The user.
 	 * @param target The target.
 	 * @return The damage that the tool should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public abstract float getToolDamage(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife);
+	public float getToolDamage(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife) {
+		if(is.getItem() instanceof IaSItemAxe)
+			return getBaseDamage()+3;
+		if(is.getItem()  instanceof IaSItemPickaxe)
+			return getBaseDamage()+2;
+		if(is.getItem()  instanceof IaSItemSpade)
+			return getBaseDamage()+1;
+		if(is.getItem()  instanceof IaSItemThrowingKnife) //DO NOT PUT BELOW ITEMSWORD CHECK.
+			return getBaseDamage()+2;
+		if(is.getItem()  instanceof IaSItemSword)
+			return getBaseDamage()+4;
+		return getBaseDamage();
+	}
 	
 	/**
 	 * Gets a thrown throwing knife's damage bonus against certain entities.
@@ -84,7 +107,9 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @param target The target.
 	 * @return The damage that the knife should do. Note that this is pure damage, not bonus damage, so returning 0.0F will cause the tool to do no damage.
 	 */
-	public abstract float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, EntityLivingBase target);
+	public float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, EntityLivingBase target) {
+		return getBaseDamage()+2;
+	}
 	
 	/**
 	 * Gets the tool's mining level. This determines what materials it can mine.
@@ -155,13 +180,13 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 	
 	/**
-	 * Called whenever the tool does damage. This is NOT called when a thrown knife hits its target.
+	 * Called whenever the tool does is swung at an entity. This is NOT called when a thrown knife hits its target.
 	 * @param is The item stack the player used to hit.
 	 * @param user The player using the tool.
 	 * @param target The entity damaged by the tool.
 	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
-	public int onAttack(ItemStack is, EntityLivingBase user, EntityLivingBase target, boolean isThrowingKnife) {
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target, boolean isThrowingKnife) {
 		if(is.getItem() instanceof ItemSword)
 			return 1;
 		else
