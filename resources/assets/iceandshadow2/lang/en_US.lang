@@ -15,6 +15,12 @@ item.nyxPoisonFruit.name=Poisonwood Plum
 item.nyxSilkBerries.name=Silk Berries
 item.nyxSilkBerriesMature.name=Mature Silk Berries
 
+item.iasToolEchirAxe.name=Echir Axe
+item.iasToolEchirPickaxe.name=Echir Pickaxe
+item.iasToolEchirSpade.name=Echir Spade
+item.iasToolEchirSword.name=Echir Sword
+item.iasToolEchirKnife.name=Echir Throwing Knife
+
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
@@ -40,3 +46,4 @@ tile.nyxOreDraconium.name=Draconium Ore
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources
+itemGroup.IaSTools=Nyxian Tools
