@@ -1,7 +1,9 @@
 package iceandshadow2.ias.items.tools;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Multimap;
 
@@ -38,7 +40,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	private EnumIaSToolClass classe;
 	
 	public IaSItemTool(EnumIaSToolClass cl) {
-		super(cl.getBaseDamage(), ToolMaterial.EMERALD, cl.getClassSet());
+		super(cl.getBaseDamage(), ToolMaterial.EMERALD, cl.getToolClassSet());
 		this.setUnlocalizedName("iasTool");
 		classe = cl;
 	}
@@ -46,6 +48,43 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	@Override
 	public boolean getHasSubtypes() {
 		return true;
+	}
+
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(stack);
+		return m.onSwing(stack, entityLiving);
+	}
+	
+	@Override
+	public float func_150893_a(ItemStack is, Block block) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getHarvestSpeed(is, block);
+	}
+
+	@Override
+	public boolean canHarvestBlock(Block bl, ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		Set<String> s = this.getToolClasses(is);
+		for(String str : s) {
+			if(bl.getHarvestLevel(0) <= m.getHarvestLevel(is, str))
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public Set<String> getToolClasses(ItemStack stack) {
+		EnumIaSToolClass cl = EnumIaSToolClass.fromId(stack.getItemDamage());
+		if(cl != null)
+			return cl.getToolClassSet();
+		return new HashSet<String>();
+    }
+	
+	@Override
+	public int getHarvestLevel(ItemStack is, String toolClass) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getHarvestLevel(is, toolClass);
 	}
 
 	@Override
@@ -100,21 +139,8 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	}
 
 	@Override
-	public int getHarvestLevel(ItemStack is, String toolClass) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return 0;
-		return m.getHarvestLevel(is, toolClass);
-	}
-
-	@Override
 	public float getDigSpeed(ItemStack is, Block block, int meta) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return 0;
-		if (ForgeHooks.isToolEffective(is, block, meta))
-			return m.getHarvestSpeed(is, block, meta);
-		return 1.0F;
+		return func_150893_a(is, block); //meta sensitivity is pointless ATM, I wish it wasn't.
 	}
 
 	@Override

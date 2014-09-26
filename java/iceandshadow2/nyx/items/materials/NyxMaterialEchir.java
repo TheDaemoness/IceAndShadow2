@@ -25,18 +25,18 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getHarvestSpeed(ItemStack is, Block target, int meta) {
-		return 12;
+	public float getBaseSpeed() {
+		return 8;
 	}
 
 	@Override
-	public int getHarvestLevel(ItemStack is, String toolClass) {
+	public int getBaseLevel() {
 		return 2;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 500;
+		return 384;
 	}
 
 }

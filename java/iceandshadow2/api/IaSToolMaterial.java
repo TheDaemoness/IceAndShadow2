@@ -1,6 +1,7 @@
 package iceandshadow2.api;
 
 import iceandshadow2.ias.items.tools.*;
+import iceandshadow2.util.IaSEntityHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -11,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
@@ -57,14 +60,23 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	
 	/**
 	 * Gets the item's mine speed against a target block.
-	 * Throwing knives encouraged to have the player's harvest speed or half the harvest speed of a sword.
+	 * Default implementation mimics vanilla tool behavior.
 	 * @param is The tool.
 	 * @param target The innocent block victim. You monster.
-	 * @param meta The block metadata.
 	 * @return The mine speed that the tool has against the target block.
 	 */
-	public abstract float getHarvestSpeed(ItemStack is, Block target, int meta);
+	public float getHarvestSpeed(ItemStack is, Block target) {
+		if(is.getItem().canHarvestBlock(target, is))
+			return this.getBaseSpeed();
+		return 1.0F;
+	}
 	
+	/**
+	 * Gets the item's base mining speed. Used in default implementations of getHarvestSpeed.
+	 * @return The number of times faster than hand this tool is.
+	 */
+	public abstract float getBaseSpeed();
+
 	/**
 	 * Gets the item's base attack damage.
 	 * This is called by the default implementations of getToolDamage() and getKnifeDamage().
@@ -112,21 +124,43 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 	
 	/**
-	 * Gets the tool's mining level. This determines what materials it can mine.
-	 * This is IGNORED by throwing knives.
-	 * Cheat sheet: -1 = fists, 0 = stone, 1 = iron, 2 = redstone/diamond, 3 = obsidian, 4 - ???
+	 * Gets the tool's harvest level. This determines what materials it can mine.
+	 * Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
+	 * Default implementation mimics vanilla behavior.
 	 * @param is The stack.
 	 * @param toolClass The user.
 	 * @return The tool's mining level.
 	 */
-	public abstract int getHarvestLevel(ItemStack is, String toolClass);
+	public int getHarvestLevel(ItemStack is, String toolClass) {
+		if(is.getItem().getToolClasses(is).contains(toolClass))
+			return this.getBaseLevel();
+		return -1;
+	}
 	
+	/**
+	 * Gets the tool's base harvest level. Used by the default implementation of getHarvestLevel().
+	 * Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
+	 */
+	public int getBaseLevel() {
+		return 0;
+	}
+
 	/**
 	 * Get the tool's maximum durability.
 	 * @param is The tool.
 	 * @return The tool's durability. Each point of durability is one use.
 	 */
 	public abstract int getDurability(ItemStack is);
+	
+	/**
+	 * Called when a tool is swung.
+	 * @param is The tool being swing
+	 * @param user The user of the tool.
+	 * @return True if further processing should be canceled.
+	 */
+	public boolean onSwing(ItemStack is, EntityLivingBase user) {
+		return false;
+	}
 	
 	/**
 	 * Called when a tool successfully harvests a block.
@@ -254,6 +288,9 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 		return "item.iasTool";
 	}
 
+	/**
+	 * Get an icon for an item stack.
+	 */
 	public IIcon getIcon(ItemStack is) {
 		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
 		if(t == EnumIaSToolClass.AXE)
@@ -269,6 +306,9 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 		return null;
 	}
 
+	/**
+	 * Called to register icons for a certain set of tools.
+	 */
 	public void registerIcons(IIconRegister i) {
 		iconAxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Axe");
 		iconPickaxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Pickaxe");

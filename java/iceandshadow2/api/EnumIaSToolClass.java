@@ -37,7 +37,15 @@ public enum EnumIaSToolClass {
 		return dmg;
 	}
 
-	public Set<String> getClassSet() {
+	public Set<String> getToolClassSet() {
 		return classes;
+	}
+
+	public static EnumIaSToolClass fromId(int itemDamage) {
+		for(EnumIaSToolClass cl : values()) {
+			if(cl.id == itemDamage)
+				return cl;
+		}
+		return null;
 	}
 }
