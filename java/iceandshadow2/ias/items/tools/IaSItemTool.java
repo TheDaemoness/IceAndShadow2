@@ -112,7 +112,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if(m == null)
 			return false;
-		m.onHarvest(is, user, w, x, y, z);
+		is.damageItem(m.onHarvest(is, user, w, x, y, z), user);
 		return true;
 	}
 
