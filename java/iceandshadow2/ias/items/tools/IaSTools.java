@@ -25,5 +25,9 @@ public class IaSTools {
 		spade = tools[EnumIaSToolClass.SPADE.getClassId()];
 		sword = tools[EnumIaSToolClass.SWORD.getClassId()];
 		knife = (IaSItemThrowingKnife)tools[EnumIaSToolClass.KNIFE.getClassId()];
+
+		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
+		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
+		IaSRegistry.addToolMaterial(new NyxMaterialNavistra());
 	}
 }

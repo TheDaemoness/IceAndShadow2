@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import iceandshadow2.api.IIaSThrowingKnife;
 import iceandshadow2.api.IaSToolMaterial;
 
-public class NyxMaterialEchir extends IaSToolMaterial {
+public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public int getXpValue(World world, ItemStack is) {
@@ -21,22 +21,22 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 
 	@Override
 	public String getMaterialName() {
-		return "Echir";
+		return "Cortra";
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 10;
+		return 6;
 	}
 
 	@Override
 	public int getBaseLevel() {
-		return 2;
+		return 8;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 384;
+		return 256;
 	}
 
 }

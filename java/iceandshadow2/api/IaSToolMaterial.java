@@ -187,7 +187,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @return The number of points of durability that should be deducted by this left-click. This is ignored by throwing knives.
 	 */
 	public int onLeftClick(ItemStack is, EntityPlayer user) {
-		return 1;
+		return 0;
 	}
 	
 	/**
@@ -227,10 +227,18 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			else
 				target.attackEntityFrom(DamageSource.causeMobDamage(user), getToolDamage(is, user, target));
 		}
-		if(is.getItem() instanceof ItemSword)
-			return 1;
-		else
-			return 2;
+		return damageToolOnAttack(is,user,target);
+	}
+	
+	/**
+	 * Called by the default implementation of onAttack to determine how much damage a tool takes from attacking.
+	 * @param is
+	 * @param user
+	 * @param target
+	 * @return
+	 */
+	public int damageToolOnAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		return 1;
 	}
 	
 	/**
