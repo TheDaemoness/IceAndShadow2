@@ -17,6 +17,7 @@ import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,7 +41,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	private EnumIaSToolClass classe;
 	
 	public IaSItemTool(EnumIaSToolClass cl) {
-		super(cl.getBaseDamage(), ToolMaterial.EMERALD, cl.getToolClassSet());
+		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
 		this.setUnlocalizedName("iasTool");
 		classe = cl;
 	}
@@ -66,19 +67,14 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	public boolean canHarvestBlock(Block bl, ItemStack is) {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		Set<String> s = this.getToolClasses(is);
-		for(String str : s) {
-			if(bl.getHarvestLevel(0) <= m.getHarvestLevel(is, str))
-				return true;
-		}
-		return false;
+		if(!s.contains(bl.getHarvestTool(0)))
+			return false;
+		return bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
 	}
 	
 	@Override
 	public Set<String> getToolClasses(ItemStack stack) {
-		EnumIaSToolClass cl = EnumIaSToolClass.fromId(stack.getItemDamage());
-		if(cl != null)
-			return cl.getToolClassSet();
-		return new HashSet<String>();
+		return ((IaSItemTool)(stack.getItem())).getIaSToolClass().getToolClassSet();
     }
 	
 	@Override

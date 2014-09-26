@@ -2,23 +2,23 @@ package iceandshadow2.api;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.google.common.collect.ImmutableSet;
 
 public enum EnumIaSToolClass {
-	AXE(0, 3.0F, new String[]{"axe"}),
-	PICKAXE(1, 2.0F, new String[]{"pickaxe"}),
-	SPADE(2, 1.0F, new String[]{"spade"}),
-	SWORD(3, 4.0F, new String[]{"sword"}),
-	KNIFE(4, 2.0F, new String[]{});
-	private int id;
-	private float dmg;
-	private Set<String> classes;
+	AXE(0, 3.0F, ImmutableSet.of("axe")),
+	PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe")),
+	SPADE(2, 1.0F, ImmutableSet.of("spade")),
+	SWORD(3, 4.0F, ImmutableSet.of("sword")),
+	KNIFE(4, 2.0F, ImmutableSet.of());
 	
-	EnumIaSToolClass(int id, float dmg, String[] cls) {
+	private int id;
+	private float attackDmg;
+	private final Set<String> classes;
+	
+	EnumIaSToolClass(int id, float dmg, Set cls) {
 		this.id = id;
-		this.dmg = dmg;
-		classes = new HashSet<String>();
-		for(String s : cls)
-			classes.add(s);
+		this.attackDmg = dmg;
+		classes = cls;
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public enum EnumIaSToolClass {
 		return id;
 	}
 	public float getBaseDamage() {
-		return dmg;
+		return attackDmg;
 	}
 
 	public Set<String> getToolClassSet() {
