@@ -26,7 +26,17 @@ import net.minecraft.world.World;
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	
 	@SideOnly(Side.CLIENT)
-	IIcon iconAxe, iconPickaxe, iconSpade, iconSword, iconKnife;
+	protected IIcon iconTool[], iconBroken[];
+	
+	/**
+	 * Called when a tool breaks to determine whether or not a "broken" tool item should be given.
+	 * @param is The tool being used to harvest.
+	 * @param user The user of the tool.
+	 * @return True if a broken tool item should be returned, false otherwise.
+	 */
+	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
+		return true;
+	}
 	
 	public static IaSToolMaterial extractMaterial(ItemStack is) {
 		if(is == null)
@@ -283,17 +293,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 
 	public String getUnlocalizedName(ItemStack is) {
 		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
-		if(t == EnumIaSToolClass.AXE)
-			return "item.iasTool"+this.getMaterialName()+"Axe";
-		if(t == EnumIaSToolClass.PICKAXE)
-			return "item.iasTool"+this.getMaterialName()+"Pickaxe";
-		if(t == EnumIaSToolClass.SPADE)
-			return "item.iasTool"+this.getMaterialName()+"Spade";
-		if(t == EnumIaSToolClass.SWORD)
-			return "item.iasTool"+this.getMaterialName()+"Sword";
-		if(t == EnumIaSToolClass.KNIFE)
-			return "item.iasTool"+this.getMaterialName()+"Knife";
-		return "item.iasTool";
+		return "item.iasTool"+this.getMaterialName()+t.toString();
 	}
 
 	/**
@@ -301,27 +301,20 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 */
 	public IIcon getIcon(ItemStack is) {
 		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
-		if(t == EnumIaSToolClass.AXE)
-			return iconAxe;
-		if(t == EnumIaSToolClass.PICKAXE)
-			return iconPickaxe;
-		if(t == EnumIaSToolClass.SPADE)
-			return iconSpade;
-		if(t == EnumIaSToolClass.SWORD)
-			return iconSword;
-		if(t == EnumIaSToolClass.KNIFE)
-			return iconKnife;
-		return null;
+		if(is.getItem() instanceof IIaSTool)
+			return iconTool[t.getClassId()];
+		return iconBroken[t.getClassId()];
 	}
 
 	/**
 	 * Called to register icons for a certain set of tools.
 	 */
-	public void registerIcons(IIconRegister i) {
-		iconAxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Axe");
-		iconPickaxe = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Pickaxe");
-		iconSpade = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Spade");
-		iconSword = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Sword");
-		iconKnife = i.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+"Knife");
+	public void registerIcons(IIconRegister reg) {
+		iconTool = new IIcon[EnumIaSToolClass.values().length];
+		for(int i = 0; i < iconTool.length; ++i)
+			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
+		iconBroken = new IIcon[EnumIaSToolClass.values().length];
+		for(int i = 0; i < iconTool.length; ++i)
+			iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
 	}
 }

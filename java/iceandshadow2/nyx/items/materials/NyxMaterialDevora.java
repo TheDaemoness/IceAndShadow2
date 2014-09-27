@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items.materials;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -22,6 +23,11 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	@Override
 	public int getXpValue(World world, ItemStack is) {
 		return 0;
+	}
+	
+	@Override
+	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
+		return false;
 	}
 
 	@Override
