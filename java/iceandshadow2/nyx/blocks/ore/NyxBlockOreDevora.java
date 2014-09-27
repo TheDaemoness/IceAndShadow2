@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks.ore;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import iceandshadow2.nyx.NyxItems;
@@ -26,9 +27,18 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 		int e = world.rand.nextInt(5);
 		for(int i = 0; i < e; ++i)
 			is.add(new ItemStack(NyxItems.devora,1,1));
-		if(world.rand.nextInt(Math.max(1,5-world.rand.nextInt(fortune))) == 0)
+		if(world.rand.nextInt(Math.max(1,5-world.rand.nextInt(Math.min(1,fortune+1)))) == 0)
 			is.add(new ItemStack(NyxItems.devora,1));
 		return is;
+	}
+	
+	@Override
+	public void onBlockExploded(World world, int x, int y, int z,
+			Explosion explosion) {
+		if(!world.isRemote) {
+			world.setBlockToAir(x, y, z);
+			world.createExplosion(explosion.exploder, 0.5+x, 0.5+y, 0.5+z, 2.5F, true);
+		}
 	}
 
 	@Override
