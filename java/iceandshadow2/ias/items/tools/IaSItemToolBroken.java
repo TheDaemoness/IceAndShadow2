@@ -9,8 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemAxe;
 
 public class IaSItemToolBroken extends IaSBaseItemMulti {
-
-	//Metadata cheats: 0 = Axe, 1 = Pickaxe, 2 = Spade, 3 = Sword
 	
 	public IaSItemToolBroken(String id) {
 		super(EnumIaSModule.NYX,id,4);

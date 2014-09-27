@@ -18,6 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -44,6 +45,11 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
 		this.setUnlocalizedName("iasTool");
 		classe = cl;
+	}
+	
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		//See IaSRegistry.
 	}
 
 	@Override
