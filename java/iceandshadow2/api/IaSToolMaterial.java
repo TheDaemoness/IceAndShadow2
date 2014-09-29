@@ -314,7 +314,8 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 		for(int i = 0; i < iconTool.length; ++i)
 			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
 		iconBroken = new IIcon[EnumIaSToolClass.values().length];
-		for(int i = 0; i < iconTool.length; ++i)
-			iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
-	}
+		for(int i = 0; i < iconTool.length; ++i) {
+				//iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
+			}
+		}
 }
