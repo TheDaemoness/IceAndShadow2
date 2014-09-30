@@ -1,11 +1,16 @@
 package iceandshadow2.ias.items.tools;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.materials.*;
 
 public class IaSTools {
@@ -32,6 +37,15 @@ public class IaSTools {
 		sword = tools[EnumIaSToolClass.SWORD.getClassId()];
 		knife = (IaSItemThrowingKnife)tools[EnumIaSToolClass.KNIFE.getClassId()];
 
+		makeEchirToolRecipe(axe, "ee ", "es ", " s ", Items.stick);
+		makeEchirToolRecipe(axe, "ee ", "es ", " s ", Items.bone);
+		makeEchirToolRecipe(pickaxe, "eee", " s ", " s ", Items.stick);
+		makeEchirToolRecipe(pickaxe, "eee", " s ", " s ", Items.bone);
+		makeEchirToolRecipe(spade, " e ", " s ", " s ", Items.stick);
+		makeEchirToolRecipe(spade, " e ", " s ", " s ", Items.bone);
+		makeEchirToolRecipe(sword, " e ", " e ", " s ", Items.stick);
+		makeEchirToolRecipe(sword, " e ", " e ", " s ", Items.bone);
+		
 		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
 		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
 		IaSRegistry.addToolMaterial(new NyxMaterialNavistra());
@@ -42,6 +56,11 @@ public class IaSTools {
 		initArmor(armorCortra, IaSItemArmor.MATERIAL_CORTRA, "IceAndShadow2:textures/armor/cortra");
 		armorNavistra = new IaSItemArmor[4];
 		initArmor(armorNavistra, IaSItemArmor.MATERIAL_NAVISTRA, "IceAndShadow2:textures/armor/navistra");
+		
+		makeEchirArmorRecipe(armorEchir[0], "eee", "e e");
+		makeEchirArmorRecipe(armorEchir[1], "e e", "eee", "eee");
+		makeEchirArmorRecipe(armorEchir[2], "eee", "e e", "e e");
+		makeEchirArmorRecipe(armorEchir[3], "e e", "e e");
 	}
 	
 	protected static void initArmor(IaSItemArmor[] arm, ItemArmor.ArmorMaterial mat, String tex) {
@@ -49,7 +68,24 @@ public class IaSTools {
 			arm[i] = new IaSItemArmor(mat, 3, i, tex);
 			GameRegistry.registerItem(arm[i],arm[i].getModName());
 			arm[i].setCreativeTab(IaSCreativeTabs.combat);
-		}
-		
+		}	
+	}
+	
+	protected static void makeEchirToolRecipe(Item it, String a, String b, String c, Item stick) {
+		GameRegistry.addShapedRecipe(new ItemStack(it,1),
+				a,b,c,
+				'e', new ItemStack(NyxItems.echirIngot,1,1),
+				's', new ItemStack(stick));
+	}
+	
+	protected static void makeEchirArmorRecipe(Item it, String a, String b, String c) {
+		GameRegistry.addShapedRecipe(new ItemStack(it,1),
+				a,b,c,
+				'e', new ItemStack(NyxItems.echirIngot,1,1));
+	}
+	protected static void makeEchirArmorRecipe(Item it, String a, String b) {
+		GameRegistry.addShapedRecipe(new ItemStack(it,1),
+				a,b,
+				'e', new ItemStack(NyxItems.echirIngot,1,1));
 	}
 }
