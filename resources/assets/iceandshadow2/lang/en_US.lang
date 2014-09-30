@@ -36,6 +36,19 @@ item.iasToolNavistraSpade.name=Navistra Spade
 item.iasToolNavistraSword.name=Navistra Sword
 item.iasToolNavistraKnife.name=Navistra Throwing Knife
 
+item.iasArmorEchir0.name=Echir Helmet
+item.iasArmorEchir1.name=Echir Chestplate
+item.iasArmorEchir2.name=Echir Greaves
+item.iasArmorEchir3.name=Echir Boots
+item.iasArmorNavistra0.name=Navistra Helmet
+item.iasArmorNavistra1.name=Navistra Chestplate
+item.iasArmorNavistra2.name=Navistra Greaves
+item.iasArmorNavistra3.name=Navistra Boots
+item.iasArmorCortra0.name=Cortra Helmet
+item.iasArmorCortra1.name=Cortra Chestplate
+item.iasArmorCortra2.name=Cortra Greaves
+item.iasArmorCortra3.name=Cortra Boots
+
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
