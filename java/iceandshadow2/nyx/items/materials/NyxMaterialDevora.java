@@ -16,7 +16,7 @@ import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.util.entity.IaSEntityHelper;
 
 public class NyxMaterialDevora extends IaSToolMaterial {
 

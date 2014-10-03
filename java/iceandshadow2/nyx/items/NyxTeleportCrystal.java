@@ -20,8 +20,8 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.EnumIaSModule;
-import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.util.entity.IaSEntityHelper;
 
 public class NyxTeleportCrystal extends IaSBaseItemSingle {
 

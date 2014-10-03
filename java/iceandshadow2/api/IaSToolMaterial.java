@@ -1,7 +1,7 @@
 package iceandshadow2.api;
 
 import iceandshadow2.ias.items.tools.*;
-import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.util.entity.IaSEntityHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

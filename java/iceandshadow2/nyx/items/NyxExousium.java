@@ -22,6 +22,8 @@ public class NyxExousium extends IaSBaseItemMulti {
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,2), 
 				new ItemStack(this,1,1), new ItemStack(this,1,1), 
 				new ItemStack(this,1,1), new ItemStack(this,1,1));
+		GameRegistry.addShapelessRecipe(new ItemStack(this,4,1), new ItemStack(this,1,2));
+		GameRegistry.addShapelessRecipe(new ItemStack(this,4,0), new ItemStack(this,1,1));
 	}
 
 	@SideOnly(Side.CLIENT)

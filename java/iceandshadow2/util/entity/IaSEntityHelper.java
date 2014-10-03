@@ -1,4 +1,4 @@
-package iceandshadow2.util;
+package iceandshadow2.util.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
