@@ -1,5 +1,6 @@
-package iceandshadow2.util.entity;
+package iceandshadow2.nyx.entities.ai.senses;
 
+import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
