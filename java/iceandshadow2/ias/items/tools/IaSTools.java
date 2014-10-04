@@ -1,6 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -61,6 +62,22 @@ public class IaSTools {
 		makeEchirArmorRecipe(armorEchir[1], "e e", "eee", "eee");
 		makeEchirArmorRecipe(armorEchir[2], "eee", "e e", "e e");
 		makeEchirArmorRecipe(armorEchir[3], "e e", "e e");
+	}
+	
+	public static ItemStack getArmorForSlot(int slot, int tier) {
+		if(tier == 0)
+			return new ItemStack(armorCortra[slot],0);
+		if(tier == 1)
+			return new ItemStack(armorEchir[slot],0);
+		if(tier == 2) {
+			ItemStack is = new ItemStack(armorCortra[slot],0);
+			if(slot == 4)
+				is.addEnchantment(Enchantment.featherFalling, 3);
+			is.addEnchantment(Enchantment.projectileProtection, 2);
+			is.addEnchantment(Enchantment.thorns, 3);
+			return is;
+		}
+		return new ItemStack(armorNavistra[slot],0);
 	}
 	
 	protected static void initArmor(IaSItemArmor[] arm, ItemArmor.ArmorMaterial mat, String tex) {

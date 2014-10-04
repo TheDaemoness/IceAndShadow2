@@ -11,7 +11,7 @@ import iceandshadow2.util.EnumIaSModule;
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit, silkBerries;
+		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong;
 	
 	public static void init() {
 		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").
