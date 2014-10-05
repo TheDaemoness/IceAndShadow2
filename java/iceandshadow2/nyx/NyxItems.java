@@ -38,5 +38,9 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
+		frostBowShort = new NyxItemFrostShortBow("FrostShortBow").
+				register().setCreativeTab(IaSCreativeTabs.combat);
+		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
+				register().setCreativeTab(IaSCreativeTabs.combat);
 	}
 }

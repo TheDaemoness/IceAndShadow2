@@ -5,6 +5,7 @@ import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;
+import iceandshadow2.ias.render.IaSRenderers;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
 import cpw.mods.fml.common.Mod;
@@ -39,10 +40,13 @@ public class IceAndShadow2 {
     	if(cfg.needsWrite())
     		cfg.write();
     	IaSCreativeTabs.init();
-    	InitNyx.init();
+    	InitNyx.init(this);
     	IaSDamageSources.init();
     	IaSTools.init();
     	IaSRegistry.postInit();
+    	
+    	if(event.getSide() == Side.CLIENT)
+    		IaSRenderers.init();
     }
     
     @EventHandler
