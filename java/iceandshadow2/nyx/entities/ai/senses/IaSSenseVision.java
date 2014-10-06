@@ -11,10 +11,6 @@ public class IaSSenseVision extends IaSSense {
 		super(elb, range);
 	}
 
-	public double getRange(Entity ent) {
-		return dist;
-	}
-
 	public static boolean isTargetInvisible(Entity ent) {
 		if(ent.isInvisible()) {
 			if(ent instanceof EntityLivingBase) {
@@ -34,11 +30,17 @@ public class IaSSenseVision extends IaSSense {
 	}
 
 	public boolean canSense(Entity ent) {
+		
 		if(!this.isInRange(ent))
 			return false;
 
 		if(isTargetInvisible(ent))
 			return false;
+		
+		if(owner instanceof EntityMob) {
+			if(((EntityMob)owner).getAttackTarget() == ent)
+				owner.canEntityBeSeen(ent);
+		}
 
 		double xdif = ent.posX - owner.posX;
 		double zdif = ent.posZ - owner.posZ;
@@ -46,7 +48,6 @@ public class IaSSenseVision extends IaSSense {
 		if(xdif == 0.0)
 			xdif += 0.0001;
 
-		double r = Math.sqrt(xdif*xdif + zdif*zdif);
 		double ang = Math.atan(zdif/xdif);
 
 		ang *= 180.0/Math.PI;
@@ -57,6 +58,8 @@ public class IaSSenseVision extends IaSSense {
 			ang += 360.0;
 
 		double delta = ang-owner.rotationYawHead; //NOTE: When the skeleton looks directly at the player, this will be 90.
+		
+		delta = delta%360;
 		if(delta > 180)
 			return false;
 

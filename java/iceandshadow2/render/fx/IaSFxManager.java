@@ -1,4 +1,4 @@
-package iceandshadow2.ias.render.fx;
+package iceandshadow2.render.fx;
 
 import iceandshadow2.IaSFlags;
 import cpw.mods.fml.relauncher.Side;

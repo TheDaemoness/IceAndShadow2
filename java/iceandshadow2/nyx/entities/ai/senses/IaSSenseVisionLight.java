@@ -10,9 +10,8 @@ public class IaSSenseVisionLight extends IaSSenseVision {
 		super(elb, range);
 	}
 	
-	@Override
 	public double getRange(Entity ent) {
-		return super.getRange(ent)*15.0/IaSEntityHelper.getLight(ent);
+		return super.getRange()*15.0/IaSEntityHelper.getLight(ent);
 	}
 	
 	public boolean canSense(Entity ent) {

@@ -1,4 +1,4 @@
-package iceandshadow2.ias.render.item;
+package iceandshadow2.render.item;
 
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
 import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;

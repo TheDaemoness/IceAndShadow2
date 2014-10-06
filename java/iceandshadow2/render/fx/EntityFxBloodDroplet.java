@@ -1,4 +1,4 @@
-package iceandshadow2.ias.render.fx;
+package iceandshadow2.render.fx;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.ai;
 
+import iceandshadow2.ias.interfaces.IIaSMobGetters;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 
 import java.util.Collections;
@@ -22,21 +23,17 @@ import net.minecraft.util.MathHelper;
 
 public class EntityAINyxTargeter extends EntityAITarget {
 
-	protected double base_range;
-	protected int lastseen;
+	protected int lastSeen;
     protected EntityLivingBase targetEntity;
 
-	public EntityAINyxTargeter(EntityMob par1EntityCreature, double range) {
+	public EntityAINyxTargeter(EntityMob par1EntityCreature) {
 		super(par1EntityCreature, false, false);
-		base_range = range;
+		lastSeen = 0;
 	}
 
-	/*
-	 * Simulate the conditions to maximize an entity's seek range and return
-	 * that value.
-	 */
-	public double getMaxSeekRange() {
-		return base_range*2.0F; //canSenseMadness
+	@Override
+	public void resetTask() {
+		super.resetTask();
 	}
 
 	/**
@@ -50,15 +47,17 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		} else if (!elb.isEntityAlive()) {
 			return false;
 		} else if(!((IIaSSensate)this.taskOwner).getSense().canSense(elb)) {
-			this.taskOwner.getNavigator().
-				tryMoveToEntityLiving(elb, 
-						this.taskOwner.getAttributeMap().
-						getAttributeInstance(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-			return false;
+			++lastSeen;
+			if(lastSeen > 30) {
+				((IIaSMobGetters)this.taskOwner).setSearchTarget(elb);
+				return false;
+			}
+			return true;
 		} else if(elb instanceof EntityPlayer) {
 			if(((EntityPlayer)elb).capabilities.isCreativeMode)
 				return false;
 		}
+		lastSeen = 0;
 		return true;
 	}
 
@@ -67,7 +66,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		double d0 = this.getMaxSeekRange();
+		double d0 = ((IIaSSensate)this.taskOwner).getSense().getRange();
 		List<Entity> list = this.taskOwner.worldObj
 				.getEntitiesWithinAABBExcludingEntity((Entity) this.taskOwner,
 						this.taskOwner.boundingBox.expand(d0, d0 / 2.0, d0));
@@ -109,16 +108,18 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	
     public void startExecuting()
     {
-    	lastseen = 0;
+    	lastSeen = 0;
         this.taskOwner.setAttackTarget(this.targetEntity);
+        targetEntity = null;
+		this.taskOwner.getNavigator().clearPathEntity();
         super.startExecuting();
     }
 
 	@Override
 	protected boolean isSuitableTarget(EntityLivingBase candi, boolean par2) {
-		if (((IIaSSensate)this.taskOwner).getSense().canSense(candi))
-			return super.isSuitableTarget(candi, par2);
-		return false;
+		if (!super.isSuitableTarget(candi, par2))
+			return false;
+		return ((IIaSSensate)this.taskOwner).getSense().canSense(candi);
 	}
 
 }

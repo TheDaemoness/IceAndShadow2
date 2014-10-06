@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.ai.senses;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,14 +11,17 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 
-	private HashSet<IaSSense> senses;
+	private ArrayList<IaSSense> senses;
 	
 	public IaSSetSenses(EntityLivingBase elb) {
 		super(elb, 0.0);
+		senses = new ArrayList<IaSSense>();
+		this.dist = 0.0;
 	}
 	
 	@Override
 	public boolean add(IaSSense sense) {
+		dist = Math.max(dist, sense.getRange());
 		return senses.add(sense);
 	}
 

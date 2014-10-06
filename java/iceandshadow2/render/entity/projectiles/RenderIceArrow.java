@@ -1,4 +1,4 @@
-package iceandshadow2.ias.render.entity;
+package iceandshadow2.render.entity.projectiles;
 
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import cpw.mods.fml.relauncher.Side;

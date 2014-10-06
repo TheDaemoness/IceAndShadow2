@@ -26,6 +26,9 @@ public class IaSFlags {
 		biome_id_nyxRugged = 249,
 		biome_id_nyxInfested = 248;
 	
+	//LIAR!
+		public static int entity_id_start = 512;
+	
 	public static BiomeGenBase 
 		nyxRugged = new NyxBiomeBarren(249, true, 1.8F, 2.2F, false).setBiomeName("NyxRugged"),
 		nyxInfested = new NyxBiomeInfested(248, true, 1.5F, 0.1F, false).setBiomeName("NyxInfested");

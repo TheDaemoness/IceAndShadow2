@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.entities.projectile;
 
-import iceandshadow2.ias.render.fx.IaSFxManager;
+import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.List;
 

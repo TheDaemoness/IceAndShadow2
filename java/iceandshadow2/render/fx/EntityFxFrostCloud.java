@@ -1,4 +1,4 @@
-package iceandshadow2.ias.render.fx;
+package iceandshadow2.render.fx;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;

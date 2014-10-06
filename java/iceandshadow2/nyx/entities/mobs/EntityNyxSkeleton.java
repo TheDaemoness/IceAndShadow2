@@ -1,11 +1,13 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.interfaces.IIaSMobGetters;
 import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
+import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
@@ -25,6 +27,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -51,7 +54,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
+public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, IIaSMobGetters {
 	
 	public enum EnumNyxSkeletonType {
 		BOW_FROST_SHORT(0),
@@ -80,7 +83,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 35, 45, 12.0F);
 	protected EntityAINyxRangedAttack knifeAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 10, 15, 12.0F);
 
-	protected IaSSetSenses senses;
+	protected IaSSense senses;
+	private EntityLivingBase searched;
 	
     /** Probability to get armor */
     protected static float[] nyxSkeletonArmorProbability = new float[] {0.0F, 0.01F, 0.03F, 0.09F};
@@ -91,11 +95,14 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
 
 	protected static double moveSpeed = 0.5;
 	
+	public double getMoveSpeed() {
+		return moveSpeed;
+	}
+	
 	public EntityNyxSkeleton(World par1World) {    
 		super(par1World);
 		
-		senses = new IaSSetSenses(this);
-		senses.add(new IaSSenseVision(this,24.0));
+		senses = new IaSSenseVision(this,24.0);
 		
         this.setSkeletonType(0);
         this.experienceValue = 7;
@@ -106,11 +113,12 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAINyxSkeletonWeaponSwitch(this));
         this.tasks.addTask(3, new EntityAIFleeSun(this, this.moveSpeed+0.5));
+        this.tasks.addTask(4, new EntityAINyxSearch(this));
         this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINyxTargeter(this, 24.0));
+        this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
         
         if (par1World != null && !par1World.isRemote)
             this.setCombatTask();
@@ -444,8 +452,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
         this.motionY = 1.2D*0.41999998688697815D;
     }
     
+    
+    
     @Override
-    public void entityInit() {
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
     	this.altWeaponFlag = false;
     	
     	//Sword skeleton.
@@ -481,6 +491,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
         }
     
     	this.addRandomArmor();
+    	return dat;
     }
     
     /**
@@ -516,12 +527,22 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate {
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
             this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.33D);
             this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.moveSpeed);
-            this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
+            this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0);
     }
 
 	@Override
 	public IaSSense getSense() {
 		return senses;
+	}
+
+	@Override
+	public void setSearchTarget(EntityLivingBase ent) {
+		searched = ent;
+	}
+
+	@Override
+	public EntityLivingBase getSearchTarget() {
+		return searched;
 	}
 
 }

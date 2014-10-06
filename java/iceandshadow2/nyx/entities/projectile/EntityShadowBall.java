@@ -2,9 +2,11 @@ package iceandshadow2.nyx.entities.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.Iterator;
 import java.util.List;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -125,7 +127,6 @@ public class EntityShadowBall extends EntityThrowable {
 			}
 		}
 
-		/*
 		String id = (strong?"shadowSmokeLarge":"shadowSmokeSmall");
 		for(int i = 0; i < 32; ++i) {
 			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", 
@@ -139,7 +140,7 @@ public class EntityShadowBall extends EntityThrowable {
 				this.posZ-3.5F+7.0F*this.rand.nextDouble(), 
 				0.0, -0.01, 0.0, false, false);
 		}
-		*/
+		
 		
 		if(!this.worldObj.isRemote)
 			this.setDead();
