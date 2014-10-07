@@ -5,9 +5,8 @@ import net.minecraft.entity.EntityList;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
-import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.entities.mobs.*;
+import iceandshadow2.nyx.entities.projectile.*;
 
 public class NyxEntities {
 	
@@ -16,14 +15,9 @@ public class NyxEntities {
 	public static void init(IceAndShadow2 owner) {
 		startEntityId = IaSFlags.entity_id_start;
 		// Set up Spider Wisps.
-		/*
 		EntityRegistry.registerModEntity(EntityNyxSpider.class,
 				"IceAndShadow_SpiderWisp", 1, owner, 60, 1, true); 
-		LanguageRegistry.instance().addStringLocalization(
-				(new EntityNyxSpider(null)).getEntityName(),
-				"Spider Wisp");
 		registerEntityEgg(EntityNyxSpider.class, 0x77ffdd, 0xff4444);
-		*/
 
 		// Set up Winter Skeletons.
 		EntityRegistry.registerModEntity(EntityNyxSkeleton.class,

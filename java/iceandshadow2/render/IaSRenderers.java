@@ -15,6 +15,8 @@ public class IaSRenderers {
 		//Mobs.
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSkeleton.class,
 				new RenderNyxSkeleton());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class,
+				new RenderNyxSpider());
 
 		//Projectiles.
 		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class,
