@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.ai;
 
-import iceandshadow2.ias.interfaces.IIaSMobGetters;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
+import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;

@@ -4,9 +4,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 
-public class IaSSenseHearingMovement extends IaSSense {
+public class IaSSenseMovement extends IaSSense {
 	
-	public IaSSenseHearingMovement(EntityLivingBase elb, double range) {
+	public IaSSenseMovement(EntityLivingBase elb, double range) {
 		super(elb, range);
 	}
 
@@ -18,7 +18,7 @@ public class IaSSenseHearingMovement extends IaSSense {
 	}
 	
 	public boolean canSense(Entity ent) {
-		if(ent.isAirBorne || ent.isSneaking() || (ent.posX == ent.prevPosX && ent.posZ == ent.prevPosZ))
+		if(ent.isAirBorne || ent.isSneaking() || (ent.posX == ent.prevPosX && ent.posZ == ent.prevPosZ && !ent.isInWater()))
 			return false;
 		return this.isInRange(ent);
 	}

@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.ai;
 
-import iceandshadow2.ias.interfaces.IIaSMobGetters;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
+import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
 import java.util.Collections;
 import java.util.List;

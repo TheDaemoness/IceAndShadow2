@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.ias.interfaces.IIaSMobGetters;
 import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.ias.items.tools.IaSTools;
@@ -12,10 +11,13 @@ import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 import iceandshadow2.nyx.entities.ai.senses.IaSSense;
+import iceandshadow2.nyx.entities.ai.senses.IaSSenseMovement;
+import iceandshadow2.nyx.entities.ai.senses.IaSSenseTouch;
 import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
 import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.items.NyxItemFrostLongBow;
 import iceandshadow2.util.IaSWorldHelper;
 
 import com.ibm.icu.util.Calendar;
@@ -77,14 +79,16 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	}
 
     protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 15, 25, 24.0F);
-    protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, this.moveSpeed, 25, 35, 32.0F);
+    protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, this.moveSpeed, 35, 45, 32.0F);
     protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed+0.5, false);
     protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class, this.moveSpeed+0.5, true);
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 35, 45, 12.0F);
 	protected EntityAINyxRangedAttack knifeAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 10, 15, 12.0F);
 
-	protected IaSSense senses;
+	protected IaSSetSenses senses;
 	private EntityLivingBase searched;
+	
+	private int regenDelay;
 	
     /** Probability to get armor */
     protected static float[] nyxSkeletonArmorProbability = new float[] {0.0F, 0.01F, 0.03F, 0.09F};
@@ -102,10 +106,14 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	public EntityNyxSkeleton(World par1World) {    
 		super(par1World);
 		
-		senses = new IaSSenseVision(this,24.0);
+		senses = new IaSSetSenses(this);
+		senses.add(new IaSSenseMovement(this,8.0));
+		senses.add(new IaSSenseTouch(this));
+		senses.add(new IaSSenseVision(this,32.0F));
 		
         this.setSkeletonType(0);
         this.experienceValue = 7;
+        this.regenDelay = 0;
         
         this.tasks.taskEntries.clear();
         this.targetTasks.taskEntries.clear();
@@ -214,10 +222,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         ItemStack var1 = this.getHeldItem();
 
         if (var1 != null && var1.getItem() instanceof ItemBow) {
-        	if(this.typpe == EnumNyxSkeletonType.BOW_FROST_LONG)
+        	if(this.typpe == EnumNyxSkeletonType.BOW_FROST_LONG) {
         		this.tasks.addTask(4, rangedAttackLong);
-        	else
+        	} else {
                 this.tasks.addTask(4, rangedAttackShort);
+        	}
         }
         else if (this.typpe == EnumNyxSkeletonType.MAGIC_SHADOW) {
             this.tasks.addTask(4, shadowAttack);
@@ -297,8 +306,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving, float par2) {
     	ItemStack wielding = this.getHeldItem();
-    	if(wielding.getItem() instanceof ItemBow)
-    		doBowAttack(par1EntityLiving, par2);
+    	if(wielding.getItem() instanceof ItemBow) {
+    		doBowAttack(par1EntityLiving, par2, wielding.getItem() instanceof NyxItemFrostLongBow);
+    	}
     	else {
     		doShadowAttack(par1EntityLiving, par2);
     		if(typpe != EnumNyxSkeletonType.MAGIC_SHADOW)
@@ -329,13 +339,25 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		this.worldObj.spawnEntityInWorld(entityball);
 	}
     
-    public void doBowAttack(EntityLivingBase par1EntityLiving, float par2)
+    public void doBowAttack(EntityLivingBase par1EntityLiving, float par2, boolean longe)
     {
-    	int slowtime = IaSWorldHelper.getDifficulty(this.worldObj) * 70;
-        EntityIceArrow var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.70F, 5.0F, IaSWorldHelper.getDifficulty(this.worldObj)-1, slowtime);
+    	int slowtime = IaSWorldHelper.getDifficulty(this.worldObj) * (longe?70:15);
+    	int slowstr = IaSWorldHelper.getDifficulty(this.worldObj) + (longe?1:-1);
+    	int dif = IaSWorldHelper.getDifficulty(worldObj);
+        EntityIceArrow var2;
+        if(longe) {
+        	var2 = new EntityIceArrow(this.worldObj, this, 2.4F, slowstr, slowtime);
+        	double ydelta = par1EntityLiving.posY-this.posY;
+        	var2.setThrowableHeading(par1EntityLiving.posX-this.posX, ydelta+(dif==3?1:1.25F), par1EntityLiving.posZ-this.posZ, 3.2F, 2.0F);
+        }
+        	//var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 2.4F, 2.0F, slowstr, slowtime);
+        else
+        	var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.7F, 5.0F, slowstr, slowtime);
+        var2.setIsCritical(longe);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-        var2.setIsCritical(false);
+        var3 += dif==3?1:0;
+        var4 += longe?1:0;
         
         var2.setDamage(getAttackStrength(par1EntityLiving));
 
@@ -351,10 +373,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.3F + 0.6F));
         this.worldObj.spawnEntityInWorld(var2);
-    }
-	
-    public boolean canPickupLoot() {
-    	return this.typpe == EnumNyxSkeletonType.MELEE || this.isUsingAlternateWeapon();
     }
     
     @Override
@@ -456,32 +474,26 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     
     @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
+    	this.equipmentDropChances[0] = 0.0F;
     	this.altWeaponFlag = false;
+    	int dif = IaSWorldHelper.getDifficulty(worldObj);
     	
     	//Sword skeleton.
     	if (this.rand.nextInt(4) == 0) {
     		setNyxSkeletonCombatType(EnumNyxSkeletonType.MELEE);
     	}
     	
-    	//Shadow skeleton.
-    	else if (this.rand.nextInt(12) == 0) {
+    	//Special skeleton.
+    	else if (dif >= 2 && (this.rand.nextInt(dif==3?8:12) == 0)) {
     		ItemStack helm = new ItemStack(Items.leather_helmet);
     		((ItemArmor)helm.getItem()).func_82813_b(helm, 0x773333);
             this.setCurrentItemOrArmor(4, helm);
             this.equipmentDropChances[4] = 0.0F;
             
-    		setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-    	}
-    	
-    	//Shadow skeleton.
-    	else if (this.rand.nextInt(8) == 0) {
-    		ItemStack helm = new ItemStack(Items.leather_helmet);
-    		((ItemArmor)helm.getItem()).func_82813_b(helm, 0x333377);
-            this.setCurrentItemOrArmor(4, helm);
-            this.equipmentDropChances[4] = 0.0F;
-
-            this.setCurrentItemOrArmor(0, this.getDefaultWeapon(EnumNyxSkeletonType.MAGIC_SHADOW));
-    		setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
+            if(rand.nextBoolean())
+            	setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
+            else
+            	setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
     	}
     	
     	//Bow skeleton.
@@ -497,6 +509,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         if(par1NBTTagCompound.hasKey("NyxSkeletonCombatStyle"))
@@ -507,6 +520,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         this.setCombatTask();
     }
     
+    @Override
     public double getScaledMaxHealth() {
     	return 30.0D;
     }
@@ -514,6 +528,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -527,7 +542,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
             this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.33D);
             this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.moveSpeed);
-            this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0);
+            this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
     }
 
 	@Override
