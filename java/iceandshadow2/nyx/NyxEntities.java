@@ -16,21 +16,21 @@ public class NyxEntities {
 		startEntityId = IaSFlags.entity_id_start;
 		// Set up Spider Wisps.
 		EntityRegistry.registerModEntity(EntityNyxSpider.class,
-				"IceAndShadow_SpiderWisp", 1, owner, 60, 1, true); 
+				"nyxMobSpiderWisp", 1, owner, 60, 1, true); 
 		registerEntityEgg(EntityNyxSpider.class, 0x77ffdd, 0xff4444);
 
 		// Set up Winter Skeletons.
 		EntityRegistry.registerModEntity(EntityNyxSkeleton.class,
-				"IceAndShadow_WinterSkeleton", 2, owner, 80, 1, true);
+				"nyxMobWinterSkeleton", 2, owner, 80, 1, true);
 		registerEntityEgg(EntityNyxSkeleton.class, 0x112222, 0xccffff);
 
 		// Set up Ice Arrows
 		EntityRegistry.registerModEntity(EntityIceArrow.class,
-				"IceAndShadow_Projectile_IceArrow", 3, owner, 120, 2, true);
+				"nyxProjectileIceArrow", 3, owner, 120, 2, true);
 		
 		//Set up Shadow Balls
 		EntityRegistry.registerModEntity(EntityShadowBall.class,
-				"IceAndShadow_Projectile_ShadowBall", 14, owner, 80, 2, true);
+				"nyxProjectileShadowBall", 14, owner, 80, 2, true);
 		
 		
 	}

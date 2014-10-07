@@ -14,6 +14,8 @@ item.nyxExousicIceShard.name=Exousic Ice Shard
 item.nyxPoisonFruit.name=Poisonwood Plum
 item.nyxSilkBerries.name=Silk Berries
 item.nyxSilkBerriesMature.name=Mature Silk Berries
+item.nyxFrostShortBow.name=Frost Shortbow
+item.nyxFrostLongBow.name=Frost Longbow
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
@@ -76,3 +78,8 @@ itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources
 itemGroup.IaSTools=Nyxian Tools
 itemGroup.IaSCombat=Nyxian Combat Items
+
+entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
+entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
+entity.IceAndShadow2.nyxProjectileIceArrow.name=Ice Arrow
+entity.IceAndShadow2.nyxProjectileShadowBall.name=Shadow Ball
