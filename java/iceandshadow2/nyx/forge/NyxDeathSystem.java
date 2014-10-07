@@ -7,6 +7,7 @@ import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.GameRules;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -53,7 +54,8 @@ public class NyxDeathSystem {
 
 	@SubscribeEvent
 	public void onDrop(PlayerDropsEvent e) {
-		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id) {
+		boolean gr = e.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory");
+		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
 			System.out.println(e.entityPlayer.getEntityId());
 			e.setCanceled(true);
 			boolean drop_main = true;
@@ -65,10 +67,12 @@ public class NyxDeathSystem {
 
 	@SubscribeEvent
 	public void onRespawn(PlayerEvent.Clone e) {
-		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id) {
+		boolean gr = e.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory");
+		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
 			if(!e.original.isDead)
 				return;
-			e.entityPlayer.inventory.copyInventory((InventoryPlayer)death_inv
+			if(death_inv.get(e.original.getEntityId()) != null)
+				e.entityPlayer.inventory.copyInventory((InventoryPlayer)death_inv
 					.get(e.original.getEntityId()));
 			//Raise madness.
 		}
