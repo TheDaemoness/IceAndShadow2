@@ -68,4 +68,9 @@ public class NyxItemCursedBone extends IaSBaseItemSingle implements IIaSGlowing 
 		}
 		return par1Stack;
 	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
+	}
 }

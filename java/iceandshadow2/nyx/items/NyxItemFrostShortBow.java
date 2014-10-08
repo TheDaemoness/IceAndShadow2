@@ -186,5 +186,10 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 		IaSRegistration.register(this);
 		return this;
 	}
+	
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return false;
+	}
 
 }

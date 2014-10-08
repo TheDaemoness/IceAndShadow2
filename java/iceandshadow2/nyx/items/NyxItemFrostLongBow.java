@@ -185,4 +185,9 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlo
 		return 1;
 	}
 
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return false;
+	}
+
 }

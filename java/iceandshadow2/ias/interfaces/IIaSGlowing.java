@@ -4,4 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IIaSGlowing {
 	public int getFirstGlowPass(ItemStack is);
+	public boolean usesDefaultGlowRenderer();
 }

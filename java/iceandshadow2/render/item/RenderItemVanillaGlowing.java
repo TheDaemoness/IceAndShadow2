@@ -66,13 +66,13 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		if(item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 			doGlowTransforms = ((IIaSGlowing)item.getItem()).getFirstGlowPass(item) <= 0;
 
-		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer, doGlowTransforms);
+		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 
 		if (item.getItem().requiresMultipleRenderPasses()) {
 			for (int x = 1; x < item.getItem().getRenderPasses(item.getItemDamage()); x++) {
 				if(item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 					doGlowTransforms = x >= ((IIaSGlowing)item.getItem()).getFirstGlowPass(item);
-				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer, doGlowTransforms);
+				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 			}
 		}
 
@@ -80,7 +80,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			GL11.glPushMatrix();
 	}
 	
-	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr, boolean doGlowTransforms) {
+	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr, boolean doGlowTransforms, ItemRenderType type) {
 		
 		GL11.glPushMatrix();
 		
@@ -92,7 +92,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 
         if (icon == null)
         {
-            GL11.glPopMatrix();
+    		GL11.glPopMatrix();
             return;
         }
         
@@ -113,13 +113,16 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
         float f3 = icon.getMaxV();
         float f4 = 0.0F;
         float f5 = 0.3F;
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glTranslatef(-f4, -f5, 0.0F);
-        float f6 = 1.5F;
-        GL11.glScalef(f6, f6, f6);
-        GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
-        GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
+        if(type != ItemRenderType.ENTITY) {
+        	GL11.glTranslatef(-f4, -f5, 0.0F);
+        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        	float f6 = 1.5F;
+        	GL11.glScalef(f6, f6, f6);
+        	GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
+        	GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
+        	GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
+        } else
+        	GL11.glTranslatef(-0.5F, 0.0F, 0.0F);
         rendr.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
         
         if(doGlowTransforms) {
@@ -161,7 +164,9 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
             GL11.glDepthFunc(GL11.GL_LEQUAL);
         }
 
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        GL11.glPopMatrix();
+        if(type != ItemRenderType.ENTITY) {
+        	GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        }
+    	GL11.glPopMatrix();
 	}
 }
