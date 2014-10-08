@@ -53,6 +53,11 @@ public class NyxItemCursedBone extends IaSBaseItemSingle implements IIaSGlowing 
 	}
 
 	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
 			EntityPlayer player) {
 		if(!par2World.isRemote)
@@ -62,10 +67,5 @@ public class NyxItemCursedBone extends IaSBaseItemSingle implements IIaSGlowing 
 			player.attackEntityFrom(DamageSource.magic, player.worldObj.difficultySetting.getDifficultyId());
 		}
 		return par1Stack;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
 	}
 }

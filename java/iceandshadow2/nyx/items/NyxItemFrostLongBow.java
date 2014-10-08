@@ -3,6 +3,7 @@ package iceandshadow2.nyx.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.util.EnumIaSModule;
@@ -22,10 +23,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
-public class NyxItemFrostLongBow extends ItemBow implements IIaSModName {
+public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlowing {
 
 	@SideOnly(Side.CLIENT)
-	private IIcon[] iconArray;
+	private IIcon[][] iconArray;
+	
+	@SideOnly(Side.CLIENT)
+	private IIcon glow;
 
 	public boolean inuse;
 
@@ -40,10 +44,13 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 		this.itemIcon = reg.registerIcon(getTexName());
-		this.iconArray = new IIcon[3];
+		this.glow = reg.registerIcon(getTexName()+"Glow");
+		this.iconArray = new IIcon[3][2];
 
 		for (int i = 0; i < this.iconArray.length; ++i) {
-			this.iconArray[i] = reg.registerIcon(getTexName()+"Anim"
+			this.iconArray[i][0] = reg.registerIcon(getTexName()+"Anim"
+					+ (i + 1));
+			this.iconArray[i][1] = reg.registerIcon(getTexName()+"GlowAnim"
 					+ (i + 1));
 		}
 	}
@@ -117,15 +124,15 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName {
 			this.inuse = false;
 
 		if (!(((NyxItemFrostLongBow)stack.getItem()).inuse))
-			return this.itemIcon;
+			return renderPass>0?this.glow:this.itemIcon;
 
 		int j = getMaxItemUseDuration(stack) - useRemaining;
 
 		if (j >= 30)
-			return this.iconArray[2];
+			return this.iconArray[2][renderPass];
 		if (j >= 14)
-			return this.iconArray[1];
-		return this.iconArray[0];
+			return this.iconArray[1][renderPass];
+		return this.iconArray[0][renderPass];
 
 	}
 
@@ -159,6 +166,23 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName {
 	public final Item register() {
 		IaSRegistration.register(this);
 		return this;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 
 }

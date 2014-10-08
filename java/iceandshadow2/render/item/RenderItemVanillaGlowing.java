@@ -61,20 +61,18 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			GL11.glPopMatrix();
 
 		Entity entity = (Entity) data[1];
+		
+		boolean doGlowTransforms = false;
+		if(item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
+			doGlowTransforms = ((IIaSGlowing)item.getItem()).getFirstGlowPass(item) <= 0;
 
-		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer);
+		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer, doGlowTransforms);
 
 		if (item.getItem().requiresMultipleRenderPasses()) {
 			for (int x = 1; x < item.getItem().getRenderPasses(item.getItemDamage()); x++) {
-				if(item.getItem() instanceof IIaSGlowing) {
-					if(x >= ((IIaSGlowing)item.getItem()).getFirstGlowPass(item)) {
-						char c0 = 61680;
-						int j = c0 % 65536;
-						int k = c0 / 65536;
-						OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
-					}
-				}
-				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer);
+				if(item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
+					doGlowTransforms = x >= ((IIaSGlowing)item.getItem()).getFirstGlowPass(item);
+				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer, doGlowTransforms);
 			}
 		}
 
@@ -82,7 +80,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			GL11.glPushMatrix();
 	}
 	
-	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr) {
+	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr, boolean doGlowTransforms) {
 		
 		GL11.glPushMatrix();
 		
@@ -98,6 +96,14 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
             return;
         }
         
+        if(doGlowTransforms) {
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            int j = 61680;
+            int k = 0;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
+        }
         TextureManager texturemanager = this.mc.getTextureManager();
         texturemanager.bindTexture(texturemanager.getResourceLocation(item.getItemSpriteNumber()));
         Tessellator tessellator = Tessellator.instance;
@@ -115,14 +121,21 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
         GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
         GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
         rendr.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+        
+        if(doGlowTransforms) {
+            //GL11.glDisable(GL11.GL_BLEND); //Find a way to re-enable this later.
+            GL11.glEnable(GL11.GL_LIGHTING);
+        }
 
         if (item.hasEffect(pass))
         {
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_LIGHTING);
             texturemanager.bindTexture(new ResourceLocation("textures/misc/enchanted_item_glint.png"));
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            if(!doGlowTransforms) {
+            	GL11.glEnable(GL11.GL_BLEND);
+            	GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            }
             float f7 = 0.76F;
             GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
             GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -142,7 +155,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
             rendr.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
             GL11.glPopMatrix();
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
+            if(!doGlowTransforms)
+            	GL11.glDisable(GL11.GL_BLEND);
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glDepthFunc(GL11.GL_LEQUAL);
         }
