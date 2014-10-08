@@ -10,9 +10,9 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOnDeath {
+public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOnDeath {
 	
-	public NyxSeedObsidian(String texName) {
+	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(16);
 	}

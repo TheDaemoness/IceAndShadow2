@@ -23,12 +23,12 @@ import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxTeleportCrystal extends IaSBaseItemSingle {
+public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon empty;
 	
-	public NyxTeleportCrystal(String texName) {
+	public NyxItemTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(1);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), 

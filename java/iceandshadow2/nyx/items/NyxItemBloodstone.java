@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxBloodstone extends IaSItemFood {
+public class NyxItemBloodstone extends IaSItemFood {
 
-	public NyxBloodstone(String texName) {
+	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -3, 0.0F, false);
 		this.setAlwaysEdible();
 	}

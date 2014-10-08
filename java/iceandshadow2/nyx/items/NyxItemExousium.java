@@ -9,12 +9,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxExousium extends IaSBaseItemMulti {
+public class NyxItemExousium extends IaSBaseItemMulti {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon rockIcon, crystalIcon;
 	
-	public NyxExousium(String texName) {
+	public NyxItemExousium(String texName) {
 		super(EnumIaSModule.NYX, texName, 3);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,1), 
 				new ItemStack(this,1,0), new ItemStack(this,1,0),

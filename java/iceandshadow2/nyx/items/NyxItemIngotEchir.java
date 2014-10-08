@@ -10,12 +10,12 @@ import net.minecraft.world.World;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxIngotEchir extends IaSBaseItemSingle {
+public class NyxItemIngotEchir extends IaSBaseItemSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active;
 	
-	public NyxIngotEchir(String texName) {
+	public NyxItemIngotEchir(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setHasSubtypes(true);
 		GameRegistry.addSmelting(this, new ItemStack(this,1,1), 0);

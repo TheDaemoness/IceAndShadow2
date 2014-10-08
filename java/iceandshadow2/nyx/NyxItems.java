@@ -11,26 +11,26 @@ import iceandshadow2.util.EnumIaSModule;
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong;
+		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone;
 	
 	public static void init() {
-		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").
+		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
 				register().setCreativeTab(IaSCreativeTabs.misc);
-		seedObsidian = new NyxSeedObsidian("SeedObsidian").
+		seedObsidian = new NyxItemSeedObsidian("SeedObsidian").
 				register().setCreativeTab(IaSCreativeTabs.misc);
-		echirIngot = new NyxIngotEchir("EchirIngot").
+		echirIngot = new NyxItemIngotEchir("EchirIngot").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		nifelhiumPowder = new NyxNifelhiumPowder("NifelhiumPowder").
+		nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		bloodstone = new NyxBloodstone("Bloodstone").
+		bloodstone = new NyxItemBloodstone("Bloodstone").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		navistraShard = new NyxNavistraShard("NavistraShard").
+		navistraShard = new NyxItemNavistraShard("NavistraShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		cortraDust = new NyxCortraDust("CortraDust").
+		cortraDust = new NyxItemCortraDust("CortraDust").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		exousium = new NyxExousium("Exousium").
+		exousium = new NyxItemExousium("Exousium").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		devora = new NyxDevora("Devora").
+		devora = new NyxItemDevora("Devora").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
@@ -42,5 +42,7 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.combat);
 		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
 				register().setCreativeTab(IaSCreativeTabs.combat);
+		cursedBone = new NyxItemCursedBone("CursedBone").
+				register().setCreativeTab(IaSCreativeTabs.resources);
 	}
 }

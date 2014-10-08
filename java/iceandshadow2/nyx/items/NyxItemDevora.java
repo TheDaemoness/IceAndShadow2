@@ -9,12 +9,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxDevora extends IaSBaseItemMulti {
+public class NyxItemDevora extends IaSBaseItemMulti {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
 	
-	public NyxDevora(String texName) {
+	public NyxItemDevora(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,8,1), new ItemStack(this,1,0));
 	}
