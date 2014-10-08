@@ -8,11 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxItemCursedBone extends IaSBaseItemSingle {
+public class NyxItemCursedBone extends IaSBaseItemSingle implements IIaSGlowing {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon glow;
@@ -61,5 +62,10 @@ public class NyxItemCursedBone extends IaSBaseItemSingle {
 			player.attackEntityFrom(DamageSource.magic, player.worldObj.difficultySetting.getDifficultyId());
 		}
 		return par1Stack;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 }
