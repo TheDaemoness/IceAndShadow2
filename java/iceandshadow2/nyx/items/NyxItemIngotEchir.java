@@ -7,10 +7,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
+public class NyxItemIngotEchir extends IaSBaseItemSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active;
