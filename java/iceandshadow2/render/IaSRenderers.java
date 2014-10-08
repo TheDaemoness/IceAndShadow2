@@ -1,5 +1,6 @@
 package iceandshadow2.render;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.*;
@@ -7,6 +8,7 @@ import iceandshadow2.nyx.entities.projectile.*;
 import iceandshadow2.render.entity.mobs.*;
 import iceandshadow2.render.entity.projectiles.*;
 import iceandshadow2.render.item.RenderItemBow;
+import iceandshadow2.render.item.RenderItemVanillaGlowing;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class IaSRenderers {
@@ -27,6 +29,7 @@ public class IaSRenderers {
 		//Items
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
+		MinecraftForgeClient.registerItemRenderer(NyxItems.cursedBone, new RenderItemVanillaGlowing());
 	}
 
 }

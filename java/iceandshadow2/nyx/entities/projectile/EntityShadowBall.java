@@ -114,8 +114,12 @@ public class EntityShadowBall extends EntityThrowable {
 
 						if(!harmUndead && entitylivingbase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							entitylivingbase.heal(power);
-						else if(entitylivingbase.getEntityId() == this.getThrower().getEntityId())
-							entitylivingbase.heal(power);
+						else if(entitylivingbase.getEntityId() == this.getThrower().getEntityId()) {
+							if(entitylivingbase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+								entitylivingbase.heal(power);
+							else
+								entitylivingbase.attackEntityFrom(DamageSource.magic, power/2);
+						}
 						else
 							entitylivingbase.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(
@@ -128,7 +132,7 @@ public class EntityShadowBall extends EntityThrowable {
 		}
 
 		String id = (strong?"shadowSmokeLarge":"shadowSmokeSmall");
-		for(int i = 0; i < 32; ++i) {
+		for(int i = 0; i < 48; ++i) {
 			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", 
 					this.posX-3.5F+7.0F*this.rand.nextDouble(), 
 					this.posY-1.5F+3.0F*this.rand.nextDouble(), 

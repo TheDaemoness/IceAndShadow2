@@ -136,7 +136,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     
 	@Override
     protected void dropRareDrop(int par1) {
-		//this.dropItem(NyxItems.nyxEscapeBomb.itemID,1);
+		this.dropItem(NyxItems.cursedBone,1);
     }
 
     /**
@@ -421,7 +421,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
     		return new ItemStack(NyxItems.frostBowShort,1,385-this.rand.nextInt(16));
     	if(taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
-    		return new ItemStack(Items.bone);
+    		return new ItemStack(NyxItems.cursedBone);
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_LONG)
     		return new ItemStack(NyxItems.frostBowLong,1,255-this.rand.nextInt(16));
     	if(taipe == EnumNyxSkeletonType.KNIFE_DEVORA)
@@ -470,8 +470,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         this.motionY = 1.2D*0.41999998688697815D;
     }
     
-    
-    
     @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
     	this.equipmentDropChances[0] = 0.0F;
@@ -490,16 +488,20 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             this.setCurrentItemOrArmor(4, helm);
             this.equipmentDropChances[4] = 0.0F;
             
-            if(rand.nextBoolean())
+            if(rand.nextBoolean()) {
             	setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-            else
+                this.equipmentDropChances[0] = 1.0F;
+            } else {
             	setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
+                this.equipmentDropChances[0] = 0.33F;
+            }
     	}
     	
     	//Bow skeleton.
         else {
             this.setCurrentItemOrArmor(0, this.getDefaultWeapon(EnumNyxSkeletonType.BOW_FROST_SHORT));
     		setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_SHORT);
+        	this.equipmentDropChances[0] = 0.05F;
         }
     
     	this.addRandomArmor();

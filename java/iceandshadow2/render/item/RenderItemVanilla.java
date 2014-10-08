@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,11 +41,11 @@ public class RenderItemVanilla implements IItemRenderer {
 		return false;
 	}
 
-	public void renderItem(EntityLivingBase entity, ItemStack item, int pass, ItemRenderer rendr) {
+	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr) {
 		
 		GL11.glPushMatrix();
 		
-        IIcon icon = entity.getItemIcon(item, pass);
+		IIcon icon = item.getItem().getIcon(item, pass);
 
         if (icon == null)
         {
