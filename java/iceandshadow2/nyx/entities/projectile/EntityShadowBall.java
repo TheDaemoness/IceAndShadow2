@@ -73,12 +73,13 @@ public class EntityShadowBall extends EntityThrowable {
 	/**
 	 * Called when this EntityThrowable hits a block or entity.
 	 */
+	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
-		if (!this.worldObj.isRemote) {
-			
-			float basepower = (strong?6.0F:3.0F);
-			
+
+		if(par1MovingObjectPosition.typeOfHit == par1MovingObjectPosition.typeOfHit.ENTITY) {
 			/*
+			if(this.worldObj.isRemote)
+				return;
 			if(par1MovingObjectPosition.entityHit instanceof EntityNyxNecromancer && 
 					this.getThrower() instanceof EntityNyxNecromancer) {
 				par1MovingObjectPosition.entityHit.attackEntityFrom(
@@ -87,9 +88,12 @@ public class EntityShadowBall extends EntityThrowable {
 									(this.getThrower()==null?this:this.getThrower())), 
 									basepower + basepower*this.rand.nextFloat());
 				this.setDead();
-				return;
-			}
-			*/
+			}*/
+			return;
+		}
+
+		if (!this.worldObj.isRemote) {
+			float basepower = (strong?6.0F:3.0F);
 
 			AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D, 2.0D,
 					4.0D);
@@ -112,6 +116,8 @@ public class EntityShadowBall extends EntityThrowable {
 
 						float power = basepower*d1 + basepower;
 
+						entitylivingbase.addPotionEffect(new PotionEffect(Potion.blindness.id,39,0));
+
 						if(!harmUndead && entitylivingbase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							entitylivingbase.heal(power);
 						else if(entitylivingbase.getEntityId() == this.getThrower().getEntityId()) {
@@ -124,13 +130,13 @@ public class EntityShadowBall extends EntityThrowable {
 							entitylivingbase.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(
 											entitylivingbase,(this.getThrower()==null?this:this.getThrower())),
-									power);
+											power);
 					}
 
 				}
 			}
 		}
-
+		
 		String id = (strong?"shadowSmokeLarge":"shadowSmokeSmall");
 		for(int i = 0; i < 48; ++i) {
 			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", 
@@ -139,17 +145,15 @@ public class EntityShadowBall extends EntityThrowable {
 					this.posZ-3.5F+7.0F*this.rand.nextDouble(), 
 					0.0, -0.01, 0.0, false, true);
 			IaSFxManager.spawnParticle(this.worldObj, id, 
-				this.posX-3.5F+7.0F*this.rand.nextDouble(), 
-				this.posY-1.5F+3.0F*this.rand.nextDouble(), 
-				this.posZ-3.5F+7.0F*this.rand.nextDouble(), 
-				0.0, -0.01, 0.0, false, false);
+					this.posX-3.5F+7.0F*this.rand.nextDouble(), 
+					this.posY-1.5F+3.0F*this.rand.nextDouble(), 
+					this.posZ-3.5F+7.0F*this.rand.nextDouble(), 
+					0.0, -0.01, 0.0, false, false);
 		}
 		
-		
-		if(!this.worldObj.isRemote)
-			this.setDead();
+		this.setDead();
 	}
-	
+
 	public void onUpdate() {
 		super.onUpdate();
 		/*
@@ -158,7 +162,7 @@ public class EntityShadowBall extends EntityThrowable {
 				this.posX, this.posY, this.posZ, true);
 		IaSFxManager.spawnParticle(this.worldObj, id, 
 				this.posX+this.motionX, this.posY+this.motionY, this.posZ+this.motionZ, true);
-				*/
+		 */
 	}
 
 	/**
@@ -172,5 +176,6 @@ public class EntityShadowBall extends EntityThrowable {
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+		super.writeEntityToNBT(par1NBTTagCompound);
 	}
 }
