@@ -24,10 +24,10 @@ import net.minecraft.world.World;
 /**Ice and Shadow 2's own tool material for rapid, modular, and flexible tool creation! Yaaaay!
  */
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
-	
+
 	@SideOnly(Side.CLIENT)
 	protected IIcon iconTool[], iconBroken[];
-	
+
 	/**
 	 * Called when a tool breaks to determine whether or not a "broken" tool item should be given.
 	 * @param is The tool being used to harvest.
@@ -37,7 +37,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
 		return true;
 	}
-	
+
 	public static IaSToolMaterial extractMaterial(ItemStack is) {
 		if(is == null)
 			return IaSRegistry.getDefaultMaterial();
@@ -50,7 +50,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			IaSRegistry.getDefaultMaterial();
 		return m;
 	}
-	
+
 	/**
 	 * Gets the prefix associated with the textures for the tool.
 	 * This would be something like "IceAndShadow2:iasTool".
@@ -60,14 +60,14 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public String getTextureNamePrefix() {
 		return "IceAndShadow2:tools/iasTool";
 	}
-	
+
 	/**
 	 * Gets the material name associated with a tool, for the purposes of unlocalized names and texture names.
 	 * This should be capitalized, but not allcaps.
 	 * The tool name will end up something like item.iasToolMaterialClass.name
 	 */
 	public abstract String getMaterialName();
-	
+
 	/**
 	 * Gets the item's mine speed against a target block.
 	 * Default implementation mimics vanilla tool behavior.
@@ -80,7 +80,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			return this.getBaseSpeed();
 		return 1.0F;
 	}
-	
+
 	/**
 	 * Gets the item's base mining speed. Used in default implementations of getHarvestSpeed.
 	 * @return The number of times faster than hand this tool is.
@@ -96,7 +96,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public float getBaseDamage() {
 		return 3.0F;
 	}
-	
+
 	/**
 	 * Gets the tool's damage bonus against certain entities.
 	 * This is NOT called by in-flight throwing knives, but is called on throwing knife left-click.
@@ -120,7 +120,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			return getBaseDamage()+4;
 		return getBaseDamage();
 	}
-	
+
 	/**
 	 * Gets a thrown throwing knife's damage bonus against certain entities.
 	 * This is NOT called by left-click attacks.
@@ -132,7 +132,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public float getKnifeDamage(IIaSThrowingKnife knife, EntityLivingBase user, Entity target) {
 		return getBaseDamage()+2;
 	}
-	
+
 	/**
 	 * Gets the tool's harvest level. This determines what materials it can mine.
 	 * Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
@@ -146,7 +146,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			return this.getBaseLevel();
 		return -1;
 	}
-	
+
 	/**
 	 * Gets the tool's base harvest level. Used by the default implementation of getHarvestLevel().
 	 * Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
@@ -161,7 +161,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * @return The tool's durability. Each point of durability is one use.
 	 */
 	public abstract int getDurability(ItemStack is);
-	
+
 	/**
 	 * Called when a tool is swung.
 	 * @param is The tool being swing
@@ -171,7 +171,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public boolean onSwing(ItemStack is, EntityLivingBase user) {
 		return false;
 	}
-	
+
 	/**
 	 * Called when a tool successfully harvests a block.
 	 * @param is The tool being used to harvest.
@@ -182,14 +182,14 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
 		return 1;
 	}
-	
+
 	/**
 	 * Gets whether or not a tool can be repaired in an anvil.
 	 */
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return false;
 	}
-	
+
 	/**
 	 * Called when a player uses the left click of a tool.
 	 * @param is The item stack being used.
@@ -199,7 +199,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public int onLeftClick(ItemStack is, EntityPlayer user) {
 		return 0;
 	}
-	
+
 	/**
 	 * Called when a player uses the right click of a tool.
 	 * This does NOT get called when using throwing knives. Use onThrowingKnifeThrow() instead.
@@ -210,7 +210,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public int onRightClick(ItemStack is, EntityPlayer user) {
 		return 0;
 	}
-	
+
 	/**
 	 * Called when an intelligent Nyxian enemy is going to pick up this tool (namely, Winter Skeletons).
 	 * Note that onRightClick() will NOT get called while the tool is being used by a intelligent Nyxian enemy.
@@ -222,7 +222,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public boolean shouldEnemiesUse(ItemStack is, EntityLivingBase user) {
 		return false;
 	}
-	
+
 	/**
 	 * Called whenever the tool does is swung at an entity. This is NOT called when a thrown knife hits its target.
 	 * @param is The item stack the player used to hit.
@@ -239,7 +239,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 		}
 		return damageToolOnAttack(is,user,target);
 	}
-	
+
 	/**
 	 * Called by the default implementation of onAttack to determine how much damage a tool takes from attacking.
 	 * @param is
@@ -250,7 +250,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public int damageToolOnAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		return 1;
 	}
-	
+
 	/**
 	 * Called when a throwing knife is thrown, just before the entity is spawned into the world.
 	 * @param is The item stack the player was going to throw.
@@ -259,8 +259,8 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public void onThrowingKnifeThrow(ItemStack is, EntityLivingBase user, IIaSThrowingKnife knife) {
 		return;
 	}
-	
-	
+
+
 	/**
 	 * Called when a throwing knife collides with an entity or block.
 	 * Note that returning false with this may result in this function being called a number of times if knife passes through its target.
@@ -271,7 +271,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public boolean onThrowingKnifeHit(EntityLivingBase user, IIaSThrowingKnife knife, MovingObjectPosition target) {
 		return true;
 	}
-	
+
 	/**
 	 * Called when a throwing knife collides with an entity or block and onThrowingKnifeHit returns true.
 	 * Used to determine the item stack that the knife should drop.
@@ -282,7 +282,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	public ItemStack getThrowingKnifeDrop(EntityLivingBase user, IIaSThrowingKnife knife, MovingObjectPosition target) {
 		return getDefaultThrowingKnifeDrop(knife);
 	}
-	
+
 	/**
 	 * Helper function to get the default item stack drop of a throwing knife.
 	 * @param knife The throwing knife entity.
@@ -307,6 +307,13 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 
 	/**
+	 * Indicates whether or not this tool glows.
+	 */
+	public boolean glows(EnumIaSToolClass mat) {
+		return false;
+	}
+
+	/**
 	 * Called to register icons for a certain set of tools.
 	 */
 	public void registerIcons(IIconRegister reg) {
@@ -315,7 +322,7 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
 		iconBroken = new IIcon[EnumIaSToolClass.values().length];
 		for(int i = 0; i < iconTool.length; ++i) {
-				//iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
-			}
+			//iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
 		}
+	}
 }

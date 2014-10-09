@@ -12,6 +12,7 @@ import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
@@ -37,9 +38,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
+public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaSGlowing {
 
 	private EnumIaSToolClass classe;
+	protected IIcon invisible;
 	
 	public IaSItemTool(EnumIaSToolClass cl) {
 		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
@@ -49,6 +51,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	
 	@Override
 	public void registerIcons(IIconRegister reg) {
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 		//See IaSRegistry.
 	}
 
@@ -156,6 +159,11 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 		return null;
 	}
 
+	@Override
+	public IIcon getIconIndex(ItemStack is) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getIcon(is);
+	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
@@ -166,17 +174,20 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	}
 
 	@Override
-	public IIcon getIconIndex(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return null;
-		return m.getIcon(is);
-	}
-
-	@Override
 	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {
-		return getIconIndex(is);
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(renderPass == 1 && !m.glows(this.getIaSToolClass()))
+			return invisible;
+		return m.getIcon(is);
+	}
+	
+	@Override
+	public IIcon getIcon(ItemStack is, int renderPass) {
+		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if(renderPass == 1 && !m.glows(this.getIaSToolClass()))
+			return invisible;
+		return m.getIcon(is);
 	}
 
 	@Override
@@ -195,6 +206,27 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool {
 	@Override
 	public EnumIaSToolClass getIaSToolClass() {
 		return classe;
+	}
+	
+	@Override
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 
 }

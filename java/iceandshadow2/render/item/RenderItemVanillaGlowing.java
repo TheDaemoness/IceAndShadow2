@@ -5,6 +5,8 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -33,6 +35,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
+@SideOnly(Side.CLIENT)
 public class RenderItemVanillaGlowing implements IItemRenderer {
 
 	private RenderItem rend;
@@ -92,6 +95,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 
         if (icon == null)
         {
+        	System.out.println("Missingno");
     		GL11.glPopMatrix();
             return;
         }

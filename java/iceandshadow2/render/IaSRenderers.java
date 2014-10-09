@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.*;
 import iceandshadow2.nyx.entities.projectile.*;
@@ -45,6 +46,12 @@ public class IaSRenderers {
 		}
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
+		
+		MinecraftForgeClient.registerItemRenderer(IaSTools.axe, new RenderItemVanillaGlowing());
+		MinecraftForgeClient.registerItemRenderer(IaSTools.pickaxe, new RenderItemVanillaGlowing());
+		MinecraftForgeClient.registerItemRenderer(IaSTools.spade, new RenderItemVanillaGlowing());
+		MinecraftForgeClient.registerItemRenderer(IaSTools.sword, new RenderItemVanillaGlowing());
+		MinecraftForgeClient.registerItemRenderer(IaSTools.knife, new RenderItemVanillaGlowing());
 	}
 
 }

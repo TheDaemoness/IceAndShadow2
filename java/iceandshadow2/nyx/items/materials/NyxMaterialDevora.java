@@ -29,6 +29,11 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
 		return false;
 	}
+	
+	@Override
+	public boolean glows(EnumIaSToolClass mat) {
+		return true;
+	}
 
 	@Override
 	public boolean rejectWhenZero() {
