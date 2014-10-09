@@ -7,7 +7,9 @@ import java.util.List;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.server.CommandBanPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraft.util.ChatComponentText;
 
@@ -49,35 +51,47 @@ public class IaSServerCommand implements ICommand {
 			return;
 		}
 
-		if(snder instanceof EntityPlayerMP) {
-			EntityPlayerMP plai = (EntityPlayerMP)snder;
-			if(args[0].contentEquals("goto")) {
-				if(args.length >= 2) {
-					if(args.length == 3)
-						plai = (EntityPlayerMP)(plai.getServerForPlayer().getPlayerEntityByName(args[2]));
-					int dim;
-					if(args[1].contentEquals("overworld"))
-						dim = 0;
-					else if(args[1].contentEquals("nyx"))
-						dim = IaSFlags.dim_nyx_id;
+		if(args[0].contentEquals("goto")) {
+			if(args.length >= 2) {
+				EntityPlayerMP plai = null;
+				if(args.length == 2) {
+					if(snder instanceof EntityPlayerMP)
+						plai = (EntityPlayerMP)snder;
 					else {
-						send(snder,"Invalid arguments, expected 'goto <overworld|nyx>'");
+						send(snder,"This command can only be used by an opped player.");
 						return;
 					}
-					if(dim == plai.dimension) {
-						send(snder,"You're already in that dimension!");
-						return;
-					}
-					plai.mcServer
-					.getConfigurationManager()
-					.transferPlayerToDimension(
-							plai, dim,
-							new NyxTeleporter(
-									plai.mcServer
-									.worldServerForDimension(dim)));
 				} else {
-					send(snder,"Insufficient arguments, expected 'goto <overworld|nyx>'");
+					send(snder,"Excessive arguments, expected 'goto <overworld|nyx>'");
+					return;
 				}
+				/*
+				if(plai == null) {
+					send(snder,"Could not find the player to teleport.");
+					return;
+				}*/
+				int dim;
+				if(args[1].contentEquals("overworld"))
+					dim = 0;
+				else if(args[1].contentEquals("nyx"))
+					dim = IaSFlags.dim_nyx_id;
+				else {
+					send(snder,"Invalid arguments, expected 'goto <overworld|nyx>'");
+					return;
+				}
+				if(dim == plai.dimension) {
+					send(snder,"You're already in that dimension!");
+					return;
+				}
+				plai.mcServer
+				.getConfigurationManager()
+				.transferPlayerToDimension(
+						plai, dim,
+						new NyxTeleporter(
+								plai.mcServer
+								.worldServerForDimension(dim)));
+			} else {
+				send(snder,"Insufficient arguments, expected 'goto <overworld|nyx>'");
 			}
 		} else {
 			send(snder,"Unknown operation.");
@@ -88,18 +102,11 @@ public class IaSServerCommand implements ICommand {
 	public boolean canCommandSenderUseCommand(ICommandSender snd) {
 		if(snd instanceof EntityPlayerMP) {
 			EntityPlayerMP ep = (EntityPlayerMP)snd;
-			if (ep.mcServer.getConfigurationManager().func_152596_g(ep.getGameProfile()))
-            {
-                UserListOpsEntry userlistopsentry = (UserListOpsEntry)ep.mcServer.getConfigurationManager().func_152603_m().func_152683_b(ep.getGameProfile());
-                return userlistopsentry != null ? false : ep.mcServer.getOpPermissionLevel() >= 3;
-            }
-            else
-            {
-                return false;
-            }
+			return snd.canCommandSenderUseCommand(3, "ban");
 		}
-		else
-			return false;
+		else if(snd instanceof MinecraftServer)
+			return true;
+		return false;
 	}
 
 	@Override
