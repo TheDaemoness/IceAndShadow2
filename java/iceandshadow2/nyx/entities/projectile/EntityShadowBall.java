@@ -104,32 +104,29 @@ public class EntityShadowBall extends EntityThrowable {
 				Iterator iterator = list1.iterator();
 
 				while (iterator.hasNext()) {
-					EntityLivingBase entitylivingbase = (EntityLivingBase) iterator
+					EntityLivingBase elmo = (EntityLivingBase) iterator
 							.next();
-					float d0 = (float)this.getDistanceSqToEntity(entitylivingbase);
+					float d0 = (float)this.getDistanceSqToEntity(elmo);
 
 					if (d0 < 16.0D) {
-						float d1 =  1.0F - (float)Math.sqrt(d0) / 4.0F;
-
-						if (entitylivingbase == par1MovingObjectPosition.entityHit)
-							d1 = 1.0F;
+						float d1 =  1.0F - (float)(d0*d0) / 256.0F;
 
 						float power = basepower*d1 + basepower;
 
-						entitylivingbase.addPotionEffect(new PotionEffect(Potion.blindness.id,39,0));
+						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id,39,0));
 
-						if(!harmUndead && entitylivingbase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-							entitylivingbase.heal(power);
-						else if(entitylivingbase.getEntityId() == this.getThrower().getEntityId()) {
-							if(entitylivingbase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-								entitylivingbase.heal(power);
+						if(!harmUndead && elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+							elmo.heal(power);
+						else if(elmo.getEntityId() == this.getThrower().getEntityId()) {
+							if(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+								elmo.heal(power);
 							else
-								entitylivingbase.attackEntityFrom(DamageSource.magic, power/2);
+								elmo.attackEntityFrom(DamageSource.magic, power/2);
 						}
 						else
-							entitylivingbase.attackEntityFrom(
+							elmo.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(
-											entitylivingbase,(this.getThrower()==null?this:this.getThrower())),
+											elmo,(this.getThrower()==null?this:this.getThrower())),
 											power);
 					}
 
