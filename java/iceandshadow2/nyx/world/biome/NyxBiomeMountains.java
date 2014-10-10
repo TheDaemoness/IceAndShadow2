@@ -18,7 +18,7 @@ public class NyxBiomeMountains extends NyxBiome {
 		
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				7, 1, 3));
+				6, 2, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(
 				EntityNyxSkeleton.class, 4, 1, 2));
 	}

@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.NyxGenInfestedTrees;
 
 import java.util.Random;
@@ -7,6 +8,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeInfested extends NyxBiome {
@@ -17,6 +19,10 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.setBlocks(Blocks.snow, Blocks.snow);
 
 		this.setColor(64 << 16 | 255 << 8 | 192);
+		
+		this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
+				7, 3, 4));
 	}
 
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {

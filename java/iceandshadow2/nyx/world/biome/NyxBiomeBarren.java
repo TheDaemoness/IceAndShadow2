@@ -1,6 +1,8 @@
 package iceandshadow2.nyx.world.biome;
 
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 
 public class NyxBiomeBarren extends NyxBiome {
 
@@ -12,6 +14,10 @@ public class NyxBiomeBarren extends NyxBiome {
 		this.doGenUnstableIce = false;
 
 		this.setColor(96 << 16 | 96 << 8 | 96);
+		
+		this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.add(new SpawnListEntry(
+				EntityNyxSkeleton.class, 6, 2, 3));
 	}
 	
 	/*
