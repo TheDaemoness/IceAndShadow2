@@ -35,8 +35,6 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		this.setTextureName("IceAndShadow2:armor/iasArmor"+arm.name()+this.armorType);
 	}
 	
-	
-
 	@Override
 	public boolean isDamaged(ItemStack stack) {
 		return ((IaSItemArmor)stack.getItem()).getArmorMaterial() == MATERIAL_NAVISTRA?false:super.isDamaged(stack);
