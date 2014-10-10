@@ -16,8 +16,7 @@ public class NyxBiomeBarren extends NyxBiome {
 		this.setColor(96 << 16 | 96 << 8 | 96);
 		
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 6, 2, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 60, 2, 3));
 	}
 	
 	/*

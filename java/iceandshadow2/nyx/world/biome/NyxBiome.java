@@ -8,6 +8,7 @@ import iceandshadow2.nyx.world.gen.NyxGenOre;
 import java.util.List;
 import java.util.Random; //Fuck you, Scala.
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
@@ -46,23 +47,13 @@ public class NyxBiome extends BiomeGenBase {
 		doGenUnstableIce = true;
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				5, 2, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 5, 1, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 50, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 50, 2, 3));
 
 		this.setBiomeName("Nyx");
 		rare = isRare;
 
 		this.setColor(255 << 16 | 255 << 8 | 255);
-	}
-	
-	
-
-	@Override
-	public List getSpawnableList(EnumCreatureType p_76747_1_) {
-		// TODO Auto-generated method stub
-		return super.getSpawnableList(p_76747_1_);
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {

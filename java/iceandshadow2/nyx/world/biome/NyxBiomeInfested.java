@@ -21,8 +21,7 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.setColor(64 << 16 | 255 << 8 | 192);
 		
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				7, 3, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 60, 2, 4));
 	}
 
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {
