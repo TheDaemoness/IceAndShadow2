@@ -14,7 +14,7 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 			new int[] { 3, 8, 6, 3 }, 16);
 
 	public static ArmorMaterial MATERIAL_NAVISTRA = EnumHelper.addArmorMaterial("Navistra", 88,
-			new int[] { 4, 9, 7, 4 }, 8);
+			new int[] { 4, 8, 6, 3 }, 8);
 
 	public static ArmorMaterial MATERIAL_CORTRA = EnumHelper.addArmorMaterial("Cortra", 33,
 			new int[] { 3, 7, 5, 3 }, 24);
@@ -35,6 +35,18 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		this.setTextureName("IceAndShadow2:armor/iasArmor"+arm.name()+this.armorType);
 	}
 	
+	
+
+	@Override
+	public boolean isDamaged(ItemStack stack) {
+		return ((IaSItemArmor)stack.getItem()).getArmorMaterial() == MATERIAL_NAVISTRA?false:super.isDamaged(stack);
+	}
+
+	@Override
+	public int getDamage(ItemStack stack) {
+		return ((IaSItemArmor)stack.getItem()).getArmorMaterial() == MATERIAL_NAVISTRA?0:super.getDamage(stack);
+	}
+
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, String type) {
 		if(entity.isInvisible())
