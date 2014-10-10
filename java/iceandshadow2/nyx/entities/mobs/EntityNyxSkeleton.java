@@ -181,6 +181,12 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             return entityitem;
         }
     }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+    	return this.posY > 64.0F && super.getCanSpawnHere();
+    }
+    
 
     @Override
     public float getBlockPathWeight(int i, int j, int k)

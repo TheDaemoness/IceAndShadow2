@@ -61,7 +61,7 @@ public class EntityNyxSpider extends EntitySpider {
 				}
 			}
 		}
-		return true;
+		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
 
 	protected void fall(float par1) {
