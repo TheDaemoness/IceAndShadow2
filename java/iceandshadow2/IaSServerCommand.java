@@ -101,7 +101,6 @@ public class IaSServerCommand implements ICommand {
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender snd) {
 		if(snd instanceof EntityPlayerMP) {
-			EntityPlayerMP ep = (EntityPlayerMP)snd;
 			return snd.canCommandSenderUseCommand(3, "ban");
 		}
 		else if(snd instanceof MinecraftServer)

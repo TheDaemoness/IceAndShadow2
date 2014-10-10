@@ -1,12 +1,16 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.NyxGenOre;
 
+import java.util.List;
 import java.util.Random; //Fuck you, Scala.
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -33,7 +37,6 @@ public class NyxBiome extends BiomeGenBase {
 		this.setTemperatureRainfall(0.0F, 0.0F);
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.topBlock = Blocks.snow;
 		this.fillerBlock = NyxBlocks.permafrost;
@@ -42,10 +45,24 @@ public class NyxBiome extends BiomeGenBase {
 		doGenNifelhium = true;
 		doGenUnstableIce = true;
 
+		this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
+				5, 2, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(
+				EntityNyxSkeleton.class, 5, 1, 3));
+
 		this.setBiomeName("Nyx");
 		rare = isRare;
 
-		this.setColor(257);
+		this.setColor(255 << 16 | 255 << 8 | 255);
+	}
+	
+	
+
+	@Override
+	public List getSpawnableList(EnumCreatureType p_76747_1_) {
+		// TODO Auto-generated method stub
+		return super.getSpawnableList(p_76747_1_);
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {

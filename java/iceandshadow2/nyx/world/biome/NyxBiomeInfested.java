@@ -15,6 +15,8 @@ public class NyxBiomeInfested extends NyxBiome {
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		this.setBlocks(Blocks.snow, Blocks.snow);
+
+		this.setColor(64 << 16 | 255 << 8 | 192);
 	}
 
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {

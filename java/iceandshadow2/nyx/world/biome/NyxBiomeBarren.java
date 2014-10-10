@@ -10,6 +10,8 @@ public class NyxBiomeBarren extends NyxBiome {
 		this.setBlocks(NyxBlocks.stone, NyxBlocks.stone);
 		this.doGenNifelhium = false;
 		this.doGenUnstableIce = false;
+
+		this.setColor(96 << 16 | 96 << 8 | 96);
 	}
 	
 	/*

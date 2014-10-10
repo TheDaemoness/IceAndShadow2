@@ -1,17 +1,26 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.NyxGenThornyVines;
 
 import java.util.Random;
 
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
 public class NyxBiomeMountains extends NyxBiome {
 
 	public NyxBiomeMountains(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
+		
+		this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
+				7, 1, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(
+				EntityNyxSkeleton.class, 4, 1, 2));
 	}
 	
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
