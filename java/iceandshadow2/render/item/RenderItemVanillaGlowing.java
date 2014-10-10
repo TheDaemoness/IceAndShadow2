@@ -5,6 +5,7 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import scala.Char;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -76,6 +77,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 				if(item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 					doGlowTransforms = x >= ((IIaSGlowing)item.getItem()).getFirstGlowPass(item);
 				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer, doGlowTransforms, type);
+				if(doGlowTransforms && x == item.getItem().getRenderPasses(item.getItemDamage())-1);
+		            GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 
@@ -104,7 +107,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-            int j = 61680;
+            int j = Char.MaxValue();
             int k = 0;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
         }
