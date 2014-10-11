@@ -78,7 +78,7 @@ public class EntityNyxSpider extends EntitySpider {
     protected String getHurtSound()
     {
     	if(this.isInvisible())
-    		return "";
+    		return null;
         return "mob.spider.say";
     }
 
@@ -88,7 +88,7 @@ public class EntityNyxSpider extends EntitySpider {
     protected String getDeathSound()
     {
     	if(this.isInvisible())
-    		return "";
+    		return null;
         return "mob.spider.death";
     }
 
@@ -214,7 +214,7 @@ public class EntityNyxSpider extends EntitySpider {
 	}
 
 	protected String getLivingSound() {
-		return "";
+		return null;
 	}
 
 	protected void playStepSound(int par1, int par2, int par3, int par4) {
