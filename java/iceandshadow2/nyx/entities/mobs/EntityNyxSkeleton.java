@@ -306,7 +306,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             return false;
         if (par1DamageSource.isFireDamage())
         	return super.attackEntityFrom(par1DamageSource, par2*3);
-        if(!par1DamageSource.isUnblockable() && !par1DamageSource.isDamageAbsolute() &&
+        if(this.getEquipmentInSlot(2) != null && 
+        		!par1DamageSource.isUnblockable() &&
+        		!par1DamageSource.isDamageAbsolute() &&
         		this.getEquipmentInSlot(2).getItem() == IaSTools.armorNavistra[2])
         	return false;
         return super.attackEntityFrom(par1DamageSource, par2);
