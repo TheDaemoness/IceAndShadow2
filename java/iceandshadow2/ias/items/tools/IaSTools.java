@@ -50,14 +50,14 @@ public class IaSTools {
 		sword = tools[EnumIaSToolClass.SWORD.getClassId()];
 		knife = (IaSItemThrowingKnife)tools[EnumIaSToolClass.KNIFE.getClassId()];
 
-		makeEchirToolRecipe(axe, "ee ", "es ", " s ", Items.stick);
-		makeEchirToolRecipe(axe, "ee ", "es ", " s ", Items.bone);
-		makeEchirToolRecipe(pickaxe, "eee", " s ", " s ", Items.stick);
-		makeEchirToolRecipe(pickaxe, "eee", " s ", " s ", Items.bone);
-		makeEchirToolRecipe(spade, " e ", " s ", " s ", Items.stick);
-		makeEchirToolRecipe(spade, " e ", " s ", " s ", Items.bone);
-		makeEchirToolRecipe(sword, " e ", " e ", " s ", Items.stick);
-		makeEchirToolRecipe(sword, " e ", " e ", " s ", Items.bone);
+		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
+		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
+		makeEchirToolRecipe(1, "eee", " s ", " s ", Items.stick);
+		makeEchirToolRecipe(1, "eee", " s ", " s ", Items.bone);
+		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.stick);
+		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
+		makeEchirToolRecipe(3, " e ", " e ", " s ", Items.stick);
+		makeEchirToolRecipe(3, " e ", " e ", " s ", Items.bone);
 		
 		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
 		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
@@ -104,23 +104,22 @@ public class IaSTools {
 		}	
 	}
 	
-	protected static void makeEchirToolRecipe(Item it, String a, String b, String c, Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(it,1),
+	protected static void makeEchirToolRecipe(int slot, String a, String b, String c, Item stick) {
+		GameRegistry.addShapedRecipe(new ItemStack(toolsActiveEchir[slot],1),
 				a,b,c,
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
-		int classId = ((IaSItemTool)it).getIaSToolClass().getClassId();
-		GameRegistry.addSmelting(new ItemStack(it,1,0), new ItemStack(IaSTools.toolsActiveEchir[classId]), 0);
+		GameRegistry.addSmelting(new ItemStack(tools[slot],1,0), new ItemStack(IaSTools.toolsActiveEchir[slot]), 0);
 	}
 	
 	protected static void makeEchirArmorRecipe(String a, String b, String c, int slot) {
-		GameRegistry.addShapedRecipe(new ItemStack(armorEchir[slot],1),
+		GameRegistry.addShapedRecipe(new ItemStack(armorActiveEchir[slot],1),
 				a,b,c,
 				'e', new ItemStack(NyxItems.echirIngot,1,1));
 		GameRegistry.addSmelting(new ItemStack(armorEchir[slot],1,0), new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
 	}
 	protected static void makeEchirArmorRecipe(String a, String b, int slot) {
-		GameRegistry.addShapedRecipe(new ItemStack(armorEchir[slot],1),
+		GameRegistry.addShapedRecipe(new ItemStack(armorActiveEchir[slot],1),
 				a,b,
 				'e', new ItemStack(NyxItems.echirIngot,1,1));
 		GameRegistry.addSmelting(new ItemStack(armorEchir[slot],1,0), new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
