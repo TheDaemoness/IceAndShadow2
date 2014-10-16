@@ -38,8 +38,14 @@ public class IceAndShadow2 {
     	cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), CONFIG_MAJ, CONFIG_MIN);
     	cfg.read();
     	if(cfg.needsWrite())
-    		cfg.write();
+    		cfg.write(); 
+    }
+    
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+    	
     	IaSCreativeTabs.init();
+    	
     	InitNyx.init(this);
     	IaSDamageSources.init();
     	IaSTools.init();
@@ -47,10 +53,7 @@ public class IceAndShadow2 {
     	
     	if(event.getSide() == Side.CLIENT)
     		IaSRenderers.init();
-    }
-    
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
+    	
 		if(IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		//Be nice, Thaumcraft.
