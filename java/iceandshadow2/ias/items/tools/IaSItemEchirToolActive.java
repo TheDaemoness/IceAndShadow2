@@ -30,7 +30,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w,
 			EntityPlayer ninja) {
-		if(ninja.isSneaking()) //Do NOT remove this if statement.
+		if(ninja.isSneaking()) //Do NOT remove this if statement, it actually isn't redundant.
 			par1 = new ItemStack(IaSTools.tools[slot],1,par1.getItemDamage());
 		return par1;
 	}

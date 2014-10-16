@@ -99,7 +99,7 @@ public class IaSTools {
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
 		int classId = ((IaSItemTool)it).getIaSToolClass().getClassId();
-		GameRegistry.addSmelting(it, new ItemStack(IaSTools.toolsActiveEchir[classId]), 0);
+		GameRegistry.addSmelting(new ItemStack(it,1,0), new ItemStack(IaSTools.toolsActiveEchir[classId]), 0);
 	}
 	
 	protected static void makeEchirArmorRecipe(Item it, String a, String b, String c) {
