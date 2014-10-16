@@ -1,5 +1,6 @@
 package iceandshadow2;
 
+import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
@@ -38,11 +39,7 @@ public class IceAndShadow2 {
     	cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), CONFIG_MAJ, CONFIG_MIN);
     	cfg.read();
     	if(cfg.needsWrite())
-    		cfg.write(); 
-    }
-    
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
+    		cfg.write();
     	
     	IaSCreativeTabs.init();
     	
@@ -53,7 +50,10 @@ public class IceAndShadow2 {
     	
     	if(event.getSide() == Side.CLIENT)
     		IaSRenderers.init();
-    	
+    }
+    
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
 		if(IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		//Be nice, Thaumcraft.
