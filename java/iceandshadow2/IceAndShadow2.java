@@ -1,5 +1,7 @@
 package iceandshadow2;
 
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import iceandshadow2.api.IaSRegistry;
@@ -8,6 +10,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
+import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -27,6 +30,7 @@ public class IceAndShadow2 {
     public static final int CONFIG_MIN = 0;
     
     private static IaSConfigManager cfg;
+    private static Logger logger;
     
     @Instance(MODID)
     public static IceAndShadow2 instance;
@@ -34,6 +38,7 @@ public class IceAndShadow2 {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	event.getModLog().info("Ice and Shadow 2, version " + VERSION + ".");
+    	logger = event.getModLog();
     	if(event.getSide() == Side.SERVER)
         	event.getModLog().warn("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
     	cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), CONFIG_MAJ, CONFIG_MIN);
@@ -56,6 +61,9 @@ public class IceAndShadow2 {
     public void init(FMLInitializationEvent event) {
 		if(IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
+		
+		NyxBiomes.registerBiomes();
+		
 		//Be nice, Thaumcraft.
 		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""+IaSFlags.dim_nyx_id+":0");
     }
@@ -68,4 +76,8 @@ public class IceAndShadow2 {
     public void serverLoad(FMLServerStartingEvent event) {
       event.registerServerCommand(new IaSServerCommand());
     }
+
+	public static Logger getLogger() {
+		return logger;
+	}
 }

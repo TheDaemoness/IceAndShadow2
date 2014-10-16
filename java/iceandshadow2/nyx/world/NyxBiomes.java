@@ -5,6 +5,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.biome.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class NyxBiomes {
 
@@ -39,6 +40,38 @@ public class NyxBiomes {
 				setBiomeName("NyxRugged");
 		nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.5F, 0.1F, false).
 				setBiomeName("NyxInfested");
+		
+	}
+	
+	public static void registerBiomes() {
+		BiomeDictionary.registerBiomeType(nyxLowMountains, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+		BiomeDictionary.registerBiomeType(nyxHighMountains, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+		
+		BiomeDictionary.registerBiomeType(nyxHills, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+		BiomeDictionary.registerBiomeType(nyxMesas, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+		
+		BiomeDictionary.registerBiomeType(nyxHillForest, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.DRY, 
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.MOUNTAIN);
+		BiomeDictionary.registerBiomeType(nyxMesaForest, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.CONIFEROUS,
+				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+		
+		BiomeDictionary.registerBiomeType(nyxRugged, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SNOWY, 
+				BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL);
+		
+		BiomeDictionary.registerBiomeType(nyxInfested, 
+				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SNOWY, 
+				BiomeDictionary.Type.FOREST, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.SPOOKY);
 	}
 
 }
