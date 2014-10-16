@@ -11,11 +11,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.materials.*;
 
 public class IaSTools {
 		public static IaSItemTool tools[];
+		public static IaSBaseItem toolsActiveEchir[];
 		public static IaSItemTool axe, pickaxe, spade, sword;
 		public static IaSItemThrowingKnife knife;
 		
@@ -24,12 +26,15 @@ public class IaSTools {
 		
 	public static void init() {
 		tools = new IaSItemTool[EnumIaSToolClass.values().length];
+		toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
 		for(EnumIaSToolClass c : EnumIaSToolClass.values()) {
 			if(c == EnumIaSToolClass.KNIFE)
 				tools[c.getClassId()] = new IaSItemThrowingKnife();
 			else
 				tools[c.getClassId()] = new IaSItemTool(c);
+			toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId());
 			GameRegistry.registerItem(tools[c.getClassId()], "ias"+c.toString());
+			GameRegistry.registerItem(toolsActiveEchir[c.getClassId()], "ias"+c.toString()+"EchirActive");
 		}
 		
 		axe = tools[EnumIaSToolClass.AXE.getClassId()];
@@ -93,6 +98,8 @@ public class IaSTools {
 				a,b,c,
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
+		int classId = ((IaSItemTool)it).getIaSToolClass().getClassId();
+		GameRegistry.addSmelting(it, new ItemStack(IaSTools.toolsActiveEchir[classId]), 0);
 	}
 	
 	protected static void makeEchirArmorRecipe(Item it, String a, String b, String c) {

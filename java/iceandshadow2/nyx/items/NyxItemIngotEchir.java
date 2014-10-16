@@ -8,12 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.EnumIaSModule;
 
-public class NyxItemIngotEchir extends IaSBaseItemSingle {
+public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 
 	@SideOnly(Side.CLIENT)
-	protected IIcon active;
+	protected IIcon active, invisible;
 	
 	public NyxItemIngotEchir(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -21,12 +22,14 @@ public class NyxItemIngotEchir extends IaSBaseItemSingle {
 		GameRegistry.addSmelting(this, new ItemStack(this,1,1), 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIconFromDamage(int dmg) {
+	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if(dmg > 0)
 			return active;
+		if(pass == 1)
+			return invisible;
 		return this.itemIcon;
 	}
 
@@ -35,6 +38,14 @@ public class NyxItemIngotEchir extends IaSBaseItemSingle {
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
 		active = reg.registerIcon(this.getTexName()+"Active");
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		if(stack.getItemDamage() == 1)
+			return super.getUnlocalizedName()+"Active";
+		return super.getUnlocalizedName();
 	}
 
 	@Override

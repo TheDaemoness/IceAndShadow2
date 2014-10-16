@@ -1,6 +1,7 @@
 item.nyxTeleportCrystal.name=Mysterious Crystal
 item.nyxSeedObsidian.name=Crying Obsidian Seed
 item.nyxEchirIngot.name=Echir Ingot
+item.nyxEchirIngotActive.name=Primed Echir Ingot
 item.nyxBloodstone.name=Bloodstone
 item.nyxNavistraShard.name=Navistra Shard
 item.nyxCortraDust.name=Cortra Dust
@@ -17,6 +18,13 @@ item.nyxSilkBerriesMature.name=Mature Silk Berries
 item.nyxFrostShortBow.name=Frost Shortbow
 item.nyxFrostLongBow.name=Frost Longbow
 item.nyxCursedBone.name=Cursed Bone
+
+
+item.iasToolEchirAxeActive.name=Primed Echir Axe
+item.iasToolEchirPickaxeActive.name=Primed Echir Pickaxe
+item.iasToolEchirSpadeActive.name=Primed Echir Spade
+item.iasToolEchirSwordActive.name=Primed Echir Sword
+item.iasToolEchirKnifeActive.name=Primed Echir Throwing Knife
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
