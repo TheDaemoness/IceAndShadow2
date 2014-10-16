@@ -7,6 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
+import static net.minecraftforge.common.BiomeDictionary.Type;
+
 public class NyxBiomes {
 
 	public static BiomeGenBase 
@@ -45,33 +47,33 @@ public class NyxBiomes {
 	
 	public static void registerBiomes() {
 		BiomeDictionary.registerBiomeType(nyxLowMountains, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
+				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
 		BiomeDictionary.registerBiomeType(nyxHighMountains, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
+				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
 		
 		BiomeDictionary.registerBiomeType(nyxHills, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
+				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
 		BiomeDictionary.registerBiomeType(nyxMesas, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY,
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
+				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
 		
 		BiomeDictionary.registerBiomeType(nyxHillForest, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.DRY, 
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.DENSE, Type.CONIFEROUS, Type.DRY, 
+				Type.SNOWY, Type.FOREST, Type.MOUNTAIN);
 		BiomeDictionary.registerBiomeType(nyxMesaForest, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.CONIFEROUS,
-				BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN);
+				Type.COLD, Type.DRY, Type.CONIFEROUS,
+				Type.SNOWY, Type.MOUNTAIN);
 		
 		BiomeDictionary.registerBiomeType(nyxRugged, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SNOWY, 
-				BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL);
+				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY, Type.SNOWY, 
+				Type.WASTELAND, Type.MOUNTAIN, Type.SPOOKY);
 		
 		BiomeDictionary.registerBiomeType(nyxInfested, 
-				BiomeDictionary.Type.COLD, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SNOWY, 
-				BiomeDictionary.Type.FOREST, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.SPOOKY);
+				Type.COLD, Type.DENSE, Type.DRY, Type.SNOWY, 
+				Type.FOREST, Type.MOUNTAIN, Type.SPOOKY);
 	}
 
 }
