@@ -15,5 +15,7 @@ public class NyxRecipes {
 	public static void init() {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.teleportCrystal, 1, 2), 
 				new ItemStack(NyxItems.teleportCrystal, 1, 6), new ItemStack(NyxItems.exousium,1,2));
+		
+		GameRegistry.addSmelting(NyxBlocks.oreEchir, new ItemStack(NyxItems.echirIngot,1,1), 1);
 	}
 }

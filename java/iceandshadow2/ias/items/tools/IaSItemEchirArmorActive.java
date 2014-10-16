@@ -1,8 +1,13 @@
 package iceandshadow2.ias.items.tools;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +29,14 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {
 	@Override
 	public int getMaxDamage() {
 		return IaSTools.armorEchir[slot].getMaxDamage();
+	}
+
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p,
+			List l, boolean b) {
+		l.add(	EnumChatFormatting.GRAY.toString()+
+				EnumChatFormatting.ITALIC.toString()+
+				"Sneak and Use Item to finalize.");
 	}
 
 	@Override
