@@ -78,6 +78,9 @@ public class IaSTools {
 		makeEchirArmorRecipe("e e", "eee", "eee", 1);
 		makeEchirArmorRecipe("eee", "e e", "e e", 2);
 		makeEchirArmorRecipe("e e", "e e", 3);
+		
+		makeEchirArmorInfusionRecipe(NyxItems.navistraShard, armorNavistra);
+		makeEchirArmorInfusionRecipe(NyxItems.cortraDust, armorCortra);
 	}
 	
 	public static ItemStack getArmorForSlot(int slot, int tier) {
@@ -133,5 +136,12 @@ public class IaSTools {
 			rslt.getTagCompound().setString("iasMaterial", result);
 			GameRegistry.addShapelessRecipe(rslt, reag, reag, reag, tule);
 		}
+	}
+	protected static void makeEchirArmorInfusionRecipe(Item reagent, IaSItemArmor[] armors) {
+		ItemStack r = new ItemStack(reagent);
+		GameRegistry.addShapelessRecipe(new ItemStack(armors[0]), r, r, r, r, r, new ItemStack(armorActiveEchir[0]));
+		GameRegistry.addShapelessRecipe(new ItemStack(armors[1]), r, r, r, r, r, r, r, r, new ItemStack(armorActiveEchir[1]));
+		GameRegistry.addShapelessRecipe(new ItemStack(armors[2]), r, r, r, r, r, r, r, new ItemStack(armorActiveEchir[2]));
+		GameRegistry.addShapelessRecipe(new ItemStack(armors[3]), r, r, r, r, new ItemStack(armorActiveEchir[3]));
 	}
 }
