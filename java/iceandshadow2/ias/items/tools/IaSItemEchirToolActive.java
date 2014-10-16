@@ -20,6 +20,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 		super(EnumIaSModule.IAS, texName);
 		slot = tab; //FtM sex change, wot?
 		this.setMaxStackSize(1);
+		this.setFull3D();
 	}
 
 	@Override
