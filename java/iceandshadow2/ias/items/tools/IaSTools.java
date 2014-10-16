@@ -63,6 +63,10 @@ public class IaSTools {
 		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
 		IaSRegistry.addToolMaterial(new NyxMaterialNavistra());
 		
+		makeEchirToolInfusionRecipe(NyxItems.devora, "Devora");
+		makeEchirToolInfusionRecipe(NyxItems.navistraShard, "Navistra");
+		makeEchirToolInfusionRecipe(NyxItems.cortraDust, "Cortra");
+		
 		armorEchir = new IaSItemArmor[4];
 		initArmor(armorEchir, IaSItemArmor.MATERIAL_ECHIR, "IceAndShadow2:textures/armor/echir");
 		armorCortra = new IaSItemArmor[4];
@@ -120,5 +124,15 @@ public class IaSTools {
 				a,b,
 				'e', new ItemStack(NyxItems.echirIngot,1,1));
 		GameRegistry.addSmelting(new ItemStack(armorEchir[slot],1,0), new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
+	}
+	protected static void makeEchirToolInfusionRecipe(Item reagent, String result) {
+		ItemStack reag = new ItemStack(reagent);
+		for(EnumIaSToolClass tool : EnumIaSToolClass.values()) {
+			ItemStack tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);
+			ItemStack rslt = new ItemStack(tools[tool.getClassId()]);
+			rslt.setTagCompound(new NBTTagCompound());
+			rslt.getTagCompound().setString("iasMaterial", result);
+			GameRegistry.addShapelessRecipe(rslt, reag, reag, reag, tule);
+		}
 	}
 }
