@@ -19,13 +19,6 @@ item.nyxFrostShortBow.name=Frost Shortbow
 item.nyxFrostLongBow.name=Frost Longbow
 item.nyxCursedBone.name=Cursed Bone
 
-
-item.iasToolEchirAxeActive.name=Primed Echir Axe
-item.iasToolEchirPickaxeActive.name=Primed Echir Pickaxe
-item.iasToolEchirSpadeActive.name=Primed Echir Spade
-item.iasToolEchirSwordActive.name=Primed Echir Sword
-item.iasToolEchirKnifeActive.name=Primed Echir Throwing Knife
-
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
 item.iasToolEchirSpade.name=Echir Spade
@@ -59,6 +52,16 @@ item.iasArmorCortra0.name=Cortra Helmet
 item.iasArmorCortra1.name=Cortra Chestplate
 item.iasArmorCortra2.name=Cortra Greaves
 item.iasArmorCortra3.name=Cortra Boots
+
+item.iasToolEchirAxeActive.name=Primed Echir Axe
+item.iasToolEchirPickaxeActive.name=Primed Echir Pickaxe
+item.iasToolEchirSpadeActive.name=Primed Echir Spade
+item.iasToolEchirSwordActive.name=Primed Echir Sword
+item.iasToolEchirKnifeActive.name=Primed Echir Throwing Knife
+item.iasArmorEchir0Active.name=Primed Echir Helmet
+item.iasArmorEchir1Active.name=Primed Echir Chestplate
+item.iasArmorEchir2Active.name=Primed Echir Greaves
+item.iasArmorEchir3Active.name=Primed Echir Boots
 
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian

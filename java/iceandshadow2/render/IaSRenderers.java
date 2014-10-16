@@ -52,6 +52,8 @@ public class IaSRenderers {
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for(Item item : IaSTools.toolsActiveEchir)
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		for(Item item : IaSTools.armorActiveEchir)
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 	}
 
 }

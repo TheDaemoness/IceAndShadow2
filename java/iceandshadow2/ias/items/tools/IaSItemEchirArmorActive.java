@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.util.IaSPlayerHelper;
 
 public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {
  
@@ -27,8 +28,11 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w,
-			EntityPlayer ep) {
-		par1 = new ItemStack(IaSTools.armorEchir[slot],1,par1.getItemDamage());
+			EntityPlayer hulk) {
+		if(hulk.isSneaking()) //Does not always evaluate to false, see that one jumpscare in The Avengers.
+			par1 = new ItemStack(IaSTools.armorEchir[slot],1,par1.getItemDamage());
+		else
+			IaSPlayerHelper.messagePlayer(hulk, "It's probably not safe to wear this while it's primed.");
 		return par1;
 	}
 }
