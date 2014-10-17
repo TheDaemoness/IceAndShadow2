@@ -88,7 +88,7 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 		float var7 = (float) var6 / 20.0F;
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
-		if ((double) var7 < 0.1D) {
+		if ((double) var7 < 0.4D) {
 			return;
 		}
 
