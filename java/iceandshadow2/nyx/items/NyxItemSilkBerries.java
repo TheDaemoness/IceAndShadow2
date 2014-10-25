@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 public class NyxItemSilkBerries extends IaSItemFood {
 
 	public NyxItemSilkBerries(String id) {
-		super(EnumIaSModule.NYX, id, 1, 4.8F, false);
+		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
 		this.setMaxStackSize(16);
 		this.setEatTime(16);

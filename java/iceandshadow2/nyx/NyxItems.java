@@ -11,7 +11,8 @@ import iceandshadow2.util.EnumIaSModule;
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone;
+		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone,
+		vineBundle, bread, cookie;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -34,7 +35,7 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		poisonFruit = new IaSBaseItemSingle(EnumIaSModule.NYX,"PoisonFruit").
+		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
@@ -43,6 +44,12 @@ public class NyxItems {
 		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
 				register().setCreativeTab(IaSCreativeTabs.combat);
 		cursedBone = new NyxItemCursedBone("CursedBone").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		vineBundle = new NyxItemVineBundle("VineBundle").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		bread = new NyxItemFoodBread("Bread").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		cookie = new NyxItemFoodCookie("Cookie").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 	}
 }
