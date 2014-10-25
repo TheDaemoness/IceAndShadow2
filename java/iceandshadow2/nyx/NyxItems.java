@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.util.EnumIaSModule;
 
@@ -12,7 +13,7 @@ public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
 		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone,
-		vineBundle, bread, cookie;
+		vineBundle, bread, cookie, echirShears;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -48,8 +49,10 @@ public class NyxItems {
 		vineBundle = new NyxItemVineBundle("VineBundle").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		bread = new NyxItemFoodBread("Bread").
-				register().setCreativeTab(IaSCreativeTabs.resources);
+				register().setCreativeTab(CreativeTabs.tabFood);
 		cookie = new NyxItemFoodCookie("Cookie").
-				register().setCreativeTab(IaSCreativeTabs.resources);
+				register().setCreativeTab(CreativeTabs.tabFood);
+		echirShears = new IaSItemShears(EnumIaSModule.NYX,"EchirShears").
+				register().setCreativeTab(IaSCreativeTabs.tools);
 	}
 }

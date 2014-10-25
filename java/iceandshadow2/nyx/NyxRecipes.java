@@ -24,5 +24,7 @@ public class NyxRecipes {
 		GameRegistry.addRecipe(new ItemStack(NyxItems.cookie,8), "vbv", 
 				'v', new ItemStack(NyxItems.vineBundle),
 				'b', new ItemStack(NyxItems.silkBerries));
+		
+		GameRegistry.addRecipe(new ItemStack(NyxItems.echirShears), "e ", " e", 'e', new ItemStack(NyxItems.echirIngot,1,1));
 	}
 }
