@@ -91,6 +91,14 @@ itemGroup.IaSMaterials=Nyxian Resources
 itemGroup.IaSTools=Nyxian Tools
 itemGroup.IaSCombat=Nyxian Combat Items
 
+death.attack.IceAndShadow2.nyxStoneDamage=%1$s bled to death on Nyxian stone
+death.attack.IceAndShadow2.nyxVinesDamage=%1$s was entangled in thorny vines
+death.attack.IceAndShadow2.nyxPoisonwoodDamage=%1$s tried to hug a poisonwood tree
+death.attack.IceAndShadow2.nyxStalagmiteDamage=%1$s sat on some stalagmites
+death.attack.IceAndShadow2.nyxGatestoneDamage=%1$s didn't survive the gatestones
+death.attack.IceAndShadow2.nyxXpAltarDamage=%1$s was converted into experience
+death.attack.IceAndShadow2.nyxFreezingDamage=%1$s froze to death
+
 entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
 entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
 entity.IceAndShadow2.nyxProjectileIceArrow.name=Ice Arrow
