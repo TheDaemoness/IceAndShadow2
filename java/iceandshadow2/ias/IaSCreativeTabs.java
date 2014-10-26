@@ -1,6 +1,6 @@
 package iceandshadow2.ias;
 
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.EnumIaSModule;
 
 public class IaSCreativeTabs {
 	public static IaSCreativeTab blocks, magic, tools, combat, resources, misc;

@@ -4,8 +4,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class IaSItemArmor extends ItemArmor implements IIaSModName {

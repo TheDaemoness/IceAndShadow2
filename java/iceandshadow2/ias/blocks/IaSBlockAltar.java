@@ -1,6 +1,6 @@
 package iceandshadow2.ias.blocks;
 
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;

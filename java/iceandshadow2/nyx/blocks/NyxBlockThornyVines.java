@@ -16,13 +16,13 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlockThornyVines extends BlockVine implements IIaSModName {

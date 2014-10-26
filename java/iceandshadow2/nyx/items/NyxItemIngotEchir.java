@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 

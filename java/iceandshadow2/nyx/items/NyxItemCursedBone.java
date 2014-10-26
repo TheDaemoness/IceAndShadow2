@@ -8,10 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItemCursedBone extends IaSBaseItemSingle implements IIaSGlowing {
 

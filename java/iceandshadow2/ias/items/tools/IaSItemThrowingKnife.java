@@ -2,9 +2,9 @@ package iceandshadow2.ias.items.tools;
 
 //import iceandshadow2.nyx.entity.projectile.EntityThrowingKnife;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;

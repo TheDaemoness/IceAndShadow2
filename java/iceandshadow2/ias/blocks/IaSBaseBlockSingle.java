@@ -1,7 +1,7 @@
 package iceandshadow2.ias.blocks;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.material.Material;
 
 public class IaSBaseBlockSingle extends IaSBaseBlock {

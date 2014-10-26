@@ -1,10 +1,10 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.nyx.world.NyxWorldProvider;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSPlayerHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

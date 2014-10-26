@@ -2,7 +2,7 @@ package iceandshadow2.ias.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.EnumIaSModule;
 import net.minecraft.block.material.Material;
 
 public class IaSBlockDeco extends IaSBaseBlockSingle {

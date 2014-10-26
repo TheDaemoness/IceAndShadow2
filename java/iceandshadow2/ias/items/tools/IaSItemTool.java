@@ -7,14 +7,14 @@ import java.util.Set;
 
 import com.google.common.collect.Multimap;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

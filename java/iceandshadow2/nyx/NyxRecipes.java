@@ -6,10 +6,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.items.*;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxRecipes {
 	

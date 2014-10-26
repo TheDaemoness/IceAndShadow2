@@ -1,9 +1,9 @@
 package iceandshadow2.nyx.blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

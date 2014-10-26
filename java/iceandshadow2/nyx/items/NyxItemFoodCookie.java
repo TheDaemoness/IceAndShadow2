@@ -3,8 +3,8 @@ package iceandshadow2.nyx.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSItemFood;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItemFoodCookie extends IaSItemFood {
 

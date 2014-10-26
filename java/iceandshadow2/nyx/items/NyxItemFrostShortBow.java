@@ -2,11 +2,11 @@ package iceandshadow2.nyx.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.ias.items.IaSItemFood;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;

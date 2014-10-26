@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSItemFood;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItemPlumPoison extends IaSItemFood {
 

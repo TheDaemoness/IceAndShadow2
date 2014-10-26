@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow {
 

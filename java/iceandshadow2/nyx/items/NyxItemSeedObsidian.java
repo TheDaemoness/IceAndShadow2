@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOnDeath {

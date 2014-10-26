@@ -12,8 +12,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSPlayerHelper;
 
 public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {

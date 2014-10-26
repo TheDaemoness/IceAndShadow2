@@ -4,8 +4,8 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
-import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;

@@ -10,10 +10,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.util.EnumIaSModule;
 
 public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 

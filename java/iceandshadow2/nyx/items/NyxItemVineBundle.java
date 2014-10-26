@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.util.EnumIaSModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

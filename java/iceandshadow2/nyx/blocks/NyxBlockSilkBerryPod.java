@@ -1,10 +1,10 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 
 import java.util.ArrayList;

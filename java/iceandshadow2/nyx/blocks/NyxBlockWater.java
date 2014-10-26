@@ -6,8 +6,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxBlockWater extends IaSBaseBlockFluid {
 

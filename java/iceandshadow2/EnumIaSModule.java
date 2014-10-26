@@ -1,4 +1,4 @@
-package iceandshadow2.util;
+package iceandshadow2;
 
 public enum EnumIaSModule {
 	IAS("ias"),

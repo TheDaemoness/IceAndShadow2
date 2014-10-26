@@ -1,6 +1,5 @@
-package iceandshadow2.ias.interfaces;
+package iceandshadow2;
 
-import iceandshadow2.util.EnumIaSModule;
 
 public interface IIaSModName {
 	public String getModName();

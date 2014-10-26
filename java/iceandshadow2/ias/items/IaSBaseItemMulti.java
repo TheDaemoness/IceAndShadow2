@@ -1,6 +1,6 @@
 package iceandshadow2.ias.items;
 
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.EnumIaSModule;
 
 import java.util.List;
 

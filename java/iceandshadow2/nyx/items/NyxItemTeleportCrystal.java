@@ -14,12 +14,12 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
 

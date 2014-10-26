@@ -1,10 +1,10 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
-import iceandshadow2.util.EnumIaSModule;
 
 import java.util.Random;
 

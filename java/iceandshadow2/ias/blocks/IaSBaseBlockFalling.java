@@ -1,8 +1,8 @@
 package iceandshadow2.ias.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
