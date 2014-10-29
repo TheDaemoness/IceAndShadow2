@@ -31,11 +31,11 @@ public class NyxBiomes {
 
 		nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 1.5F, 0.1F, false).
 				setBiomeName("NyxHills");
-		nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 2.3F, 1.5F, false).
+		nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 2.5F, 1.0F, false).
 				setBiomeName("NyxMesas");
 		nyxHillForest = new NyxBiomeForest(IaSFlags.biome_id_nyxHillForest, true, 0.8F, 1.8F, false).
 				setBiomeName("NyxHillForest");
-		nyxMesaForest = new NyxBiomeFrozen(IaSFlags.biome_id_nyxMesaForest, true, 2.4F, 1.8F, false).
+		nyxMesaForest = new NyxBiomeFrozen(IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false).
 				setBiomeName("NyxMesaForest");
 
 		nyxRugged = new NyxBiomeBarren(IaSFlags.biome_id_nyxRugged, true, 1.8F, 2.2F, false).
@@ -58,14 +58,14 @@ public class NyxBiomes {
 				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
 		BiomeDictionary.registerBiomeType(nyxMesas, 
 				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
-				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
+				Type.SNOWY, Type.WASTELAND, Type.MESA);
 		
 		BiomeDictionary.registerBiomeType(nyxHillForest, 
 				Type.COLD, Type.DENSE, Type.CONIFEROUS, Type.DRY, 
 				Type.SNOWY, Type.FOREST, Type.MOUNTAIN);
 		BiomeDictionary.registerBiomeType(nyxMesaForest, 
 				Type.COLD, Type.DRY, Type.CONIFEROUS,
-				Type.SNOWY, Type.MOUNTAIN);
+				Type.SNOWY, Type.MESA);
 		
 		BiomeDictionary.registerBiomeType(nyxRugged, 
 				Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY, Type.SNOWY, 
