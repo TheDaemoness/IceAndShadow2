@@ -25,6 +25,16 @@ public class NyxWorldProvider extends WorldProvider {
 	}
 	
 	@Override
+	public void calculateInitialWeather() {
+		this.worldObj.getWorldInfo().setRaining(false);
+		this.worldObj.getWorldInfo().setThundering(false);
+	}
+	
+	@Override
+	public void updateWeather() {
+	}
+	
+	@Override
 	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
 		return worldChunkMgr.getBiomeGenAt(x, z);
 	}
@@ -41,7 +51,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public boolean canDoLightning(Chunk chunk) {
-		return false;
+		return true;
 	}
 
 	@Override

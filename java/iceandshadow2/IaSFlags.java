@@ -9,6 +9,7 @@ public class IaSFlags {
 	public static boolean flag_help_messages = true;
 	public static boolean flag_death_system = true;
 	public static boolean flag_portal_sounds = true;
+	public static boolean flag_low_particles = false;
 
 	//YOU LIED.
 	public static int dim_nyx_id = -2;
@@ -24,6 +25,9 @@ public class IaSFlags {
 		biome_id_nyxMesaForest = 250,
 		biome_id_nyxRugged = 249,
 		biome_id_nyxInfested = 248;
+	
+	//LIAR!
+		public static int entity_id_start = 512;
 	
 	public static BiomeGenBase 
 		nyxRugged = new NyxBiomeBarren(249, true, 1.8F, 2.2F, false).setBiomeName("NyxRugged"),

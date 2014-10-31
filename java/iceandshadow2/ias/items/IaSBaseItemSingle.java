@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.util.EnumIaSModule;
 
 public class IaSBaseItemSingle extends IaSBaseItem {
 	

@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
-import iceandshadow2.ias.interfaces.IIaSModName;
 import iceandshadow2.ias.items.IaSItemBlockMulti;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -31,6 +31,7 @@ public class IaSRegistration {
 		else
 			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
+	
 	private static Item registerItem(Item it) {
 		if(it instanceof IIaSModName)
 			GameRegistry.registerItem(it, ((IIaSModName)it).getModName());

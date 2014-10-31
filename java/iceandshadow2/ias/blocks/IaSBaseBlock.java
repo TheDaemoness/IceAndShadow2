@@ -1,9 +1,9 @@
 package iceandshadow2.ias.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSFakeBlock;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,6 +23,8 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	
 	public IaSBaseBlock setLuminescence(float lum) {
 		this.lum = lum;
+		if(this.getLightOpacity() == 15)
+			this.setLightOpacity(14);
 		this.setLightLevel(lum);
 		return this;
 	}

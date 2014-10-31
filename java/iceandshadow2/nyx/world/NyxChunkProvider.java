@@ -324,12 +324,14 @@ public class NyxChunkProvider implements IChunkProvider {
 		return 0;
 	}
 
-	@Override
-	public List getPossibleCreatures(EnumCreatureType var1, int var2, int var3,
-			int var4) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+     * Returns a list of creatures of the specified type that can spawn at the given location.
+     */
+    public List getPossibleCreatures(EnumCreatureType p_73155_1_, int p_73155_2_, int p_73155_3_, int p_73155_4_)
+    {
+        BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(p_73155_2_, p_73155_4_);
+        return biomegenbase.getSpawnableList(p_73155_1_);
+    }
 
 	@Override
 	public String makeString() {

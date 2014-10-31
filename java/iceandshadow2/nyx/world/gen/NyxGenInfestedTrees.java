@@ -176,7 +176,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
                     }
                     else
                     {
-                    	this.worldObj.setBlock(aint1[0], aint1[1], aint1[2], par6, 0, 0x2);
+                    	this.worldObj.setBlock(aint1[0], aint1[1], aint1[2], par6, 0, 0x8);
                         ++k1;
                     }
                 }
@@ -232,7 +232,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
         for (int i1 = par2 + this.leafDistanceLimit; l < i1; ++l)
         {
             float f = this.leafSize(l - par2);
-            this.genTreeLayer(par1, l, par3, f, (byte)1, NyxBlocks.stickyLeaves);
+            this.genTreeLayer(par1, l, par3, f, (byte)1, NyxBlocks.infestLeaves);
         }
     }
 
@@ -289,11 +289,11 @@ public class NyxGenInfestedTrees extends WorldGenerator {
                 {
                     if (l == j1)
                     {
-                        b5 = 1;
+                        b5 = 0x4;
                     }
                     else if (i1 == j1)
                     {
-                        b5 = 2;
+                        b5 = 0x8;
                     }
                 }
 
@@ -338,19 +338,19 @@ public class NyxGenInfestedTrees extends WorldGenerator {
         int l = this.basePos[2];
         int[] aint = new int[] {i, j, l};
         int[] aint1 = new int[] {i, k, l};
-        this.placeBlockLine(aint, aint1, NyxBlocks.stickyLog);
+        this.placeBlockLine(aint, aint1, NyxBlocks.infestLog);
 
         if (this.trunkSize == 2)
         {
             ++aint[0];
             ++aint1[0];
-            this.placeBlockLine(aint, aint1, NyxBlocks.stickyLog);
+            this.placeBlockLine(aint, aint1, NyxBlocks.infestLog);
             ++aint[2];
             ++aint1[2];
-            this.placeBlockLine(aint, aint1, NyxBlocks.stickyLog);
+            this.placeBlockLine(aint, aint1, NyxBlocks.infestLog);
             aint[0] += -1;
             aint1[0] += -1;
-            this.placeBlockLine(aint, aint1, NyxBlocks.stickyLog);
+            this.placeBlockLine(aint, aint1, NyxBlocks.infestLog);
         }
     }
 
@@ -371,7 +371,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
 
             if (this.leafNodeNeedsBase(k))
             {
-                this.placeBlockLine(aint, aint2, NyxBlocks.stickyLog);
+                this.placeBlockLine(aint, aint2, NyxBlocks.infestLog);
             }
         }
     }
@@ -508,8 +508,8 @@ public class NyxGenInfestedTrees extends WorldGenerator {
 		else if(dir == 3)
 			--x; //West
 		meta |= (this.rand.nextInt(3)==0?0x8:0x4);
-		if(this.worldObj.isAirBlock(x, y, z) || this.worldObj.getBlock(x, y, z) == NyxBlocks.stickyLeaves) {
-			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta, 0x2);
+		if(this.worldObj.isAirBlock(x, y, z) || this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
+			//this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta, 0x2);
 		}
 	}
 

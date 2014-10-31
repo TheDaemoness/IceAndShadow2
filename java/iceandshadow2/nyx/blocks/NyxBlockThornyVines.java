@@ -16,12 +16,13 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
@@ -29,7 +30,6 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	public NyxBlockThornyVines(String texName) {
 		this.setBlockName("nyx"+texName);
 		this.setBlockTextureName(this.getTexName());
-		this.setCreativeTab(IaSCreativeTabs.blocks);
         this.setLightLevel(0.1F);
         this.setLightOpacity(0);
         this.setStepSound(soundTypeGrass);
@@ -60,6 +60,14 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 			else
 				theEntity.attackEntityFrom(IaSDamageSources.dmgVines, 1);
 		}
+	}
+
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
+			int x, int y, int z, int fortune) {
+		ArrayList<ItemStack> li = new ArrayList<ItemStack>();
+		li.add(new ItemStack(NyxItems.vineBundle,1));
+		return li;
 	}
 
 	@SideOnly(Side.CLIENT)

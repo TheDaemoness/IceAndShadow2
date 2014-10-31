@@ -1,12 +1,17 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.NyxGenOre;
 
+import java.util.List;
 import java.util.Random; //Fuck you, Scala.
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -33,7 +38,6 @@ public class NyxBiome extends BiomeGenBase {
 		this.setTemperatureRainfall(0.0F, 0.0F);
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.topBlock = Blocks.snow;
 		this.fillerBlock = NyxBlocks.permafrost;
@@ -42,10 +46,14 @@ public class NyxBiome extends BiomeGenBase {
 		doGenNifelhium = true;
 		doGenUnstableIce = true;
 
+		this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 50, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 50, 2, 3));
+
 		this.setBiomeName("Nyx");
 		rare = isRare;
 
-		this.setColor(257);
+		this.setColor(255 << 16 | 255 << 8 | 255);
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {
@@ -145,7 +153,9 @@ public class NyxBiome extends BiomeGenBase {
 					blocks[i2].getMaterial() != Material.water)) {
 				blocks[i2] = NyxBlocks.stone;
 			}
-			else if (l1 == 63 && (blocks[i2] == null || blocks[i2].getMaterial() == Material.air)) {
+			else if (l1 == 63 && (blocks[i2] == null 
+					|| blocks[i2].getMaterial() == Material.air
+					|| blocks[i2] == Blocks.snow_layer)) {
 				blocks[i2] = NyxBlocks.exousicIce;
 				blocks[i2-1] = NyxBlocks.exousicWater;
 			}
@@ -172,7 +182,9 @@ public class NyxBiome extends BiomeGenBase {
 								block1 = this.fillerBlock;
 							}
 
-							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
+							if (l1 < 63 && (block == null || 
+									block.getMaterial() == Material.air ||
+									block == Blocks.snow_layer))
 							{
 								block = NyxBlocks.exousicIce;
 								b0 = 0;

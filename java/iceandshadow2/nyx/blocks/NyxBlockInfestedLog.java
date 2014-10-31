@@ -1,7 +1,10 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
 
 import java.util.Random;
 
@@ -22,7 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-public class NyxBlockInfestedLog extends IaSBlockDirectional {
+public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoInfest {
 
 	public NyxBlockInfestedLog(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.wood);
@@ -32,17 +35,17 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional {
         this.setResistance(3.0F);
 		this.setHarvestLevel("axe", 1);
 		this.setStepSound(soundTypeWood);
-	}    
+		this.setTickRandomly(true);
+	}
 	
-	/**
-     * The type of render function that is called for this block
-     */
-	@SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return 31;
-    }
+	
+    @Override
+	public void updateTick(World w, int x, int y,
+			int z, Random r) {
+    	NyxBlockFunctionsInfested.updateTick(w, x, y, z, r);
+	}
 
-    /**
+	/**
      * Returns the quantity of items to drop on block destruction.
      */
     public int quantityDropped(Random par1Random) {
@@ -102,21 +105,21 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional {
         return true;
     }
     
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
-        float var5 = 0.05F;
-        return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3 + var5), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
+        return NyxBlockFunctionsInfested.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
     }
-    
+
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
-    	if(!(par5Entity instanceof EntityMob))
-    		par5Entity.setInWeb();
+    	NyxBlockFunctionsInfested.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
     }
-    
+
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-    	par5EntityPlayer.setInWeb();
-    	par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 35, 4));
+    	NyxBlockFunctionsInfested.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
     }
 
 }

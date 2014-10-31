@@ -3,10 +3,11 @@ package iceandshadow2.ias.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.interfaces.IIaSModName;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.util.IaSRegistration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,7 +44,7 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
         this.setTickRandomly(true);
         this.setCreativeTab(IaSCreativeTabs.blocks);
         this.setHardness(0.3F);
-        this.setLightOpacity(1);
+        this.setLightOpacity(2);
         this.setStepSound(soundTypeGrass);
 	}
 	

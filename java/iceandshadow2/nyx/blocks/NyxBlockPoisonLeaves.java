@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,15 +12,25 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsPoisonwood;
 
-public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves {
+public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
 
+	private static Random r = new Random();
+	
 	public NyxBlockPoisonLeaves(String texName) {
 		super(EnumIaSModule.NYX, texName);
+	}
+	
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
+			int x, int y, int z, int fortune) {
+		return super.onSheared(item, world, x, y, z, fortune);
 	}
 
 	@Override
@@ -34,19 +45,13 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves {
 	}
 	
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-    {
-    	if(par5Entity instanceof EntityLivingBase  && !(par5Entity instanceof EntityMob)) {
-			((EntityLivingBase)par5Entity).attackEntityFrom(IaSDamageSources.dmgPoisonwood, 1);
-    		if(!(((EntityLivingBase)par5Entity).isPotionActive(Potion.poison)))
-    			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 35*(par1World.difficultySetting.getDifficultyId()+1), 0));
-    	}
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+		NyxBlockFunctionsPoisonwood.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
     }
 
 	@Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-    	if(par5EntityPlayer.getCurrentEquippedItem() == null)
-    		par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.poison.id, 20*(par1World.difficultySetting.getDifficultyId()+1), 0));
+    	NyxBlockFunctionsPoisonwood.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
     }
 
 }

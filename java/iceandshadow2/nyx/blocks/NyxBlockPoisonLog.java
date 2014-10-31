@@ -1,8 +1,9 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
-import iceandshadow2.util.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
 
 import java.util.Random;
 
@@ -24,7 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-public class NyxBlockPoisonLog extends IaSBlockDirectional {
+public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfest {
 	@SideOnly(Side.CLIENT)
 	IIcon ringsIcon, barkIcon;
 	

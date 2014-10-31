@@ -1,37 +1,58 @@
 package iceandshadow2.nyx;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
-import iceandshadow2.util.EnumIaSModule;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit;
+		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone,
+		vineBundle, bread, cookie, echirShears;
 	
 	public static void init() {
-		teleportCrystal = new NyxTeleportCrystal("TeleportCrystal").
+		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
 				register().setCreativeTab(IaSCreativeTabs.misc);
-		seedObsidian = new NyxSeedObsidian("SeedObsidian").
+		seedObsidian = new NyxItemSeedObsidian("SeedObsidian").
 				register().setCreativeTab(IaSCreativeTabs.misc);
-		echirIngot = new NyxIngotEchir("EchirIngot").
+		echirIngot = new NyxItemIngotEchir("EchirIngot").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		nifelhiumPowder = new NyxNifelhiumPowder("NifelhiumPowder").
+		nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		bloodstone = new NyxBloodstone("Bloodstone").
+		bloodstone = new NyxItemBloodstone("Bloodstone").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		navistraShard = new NyxNavistraShard("NavistraShard").
+		navistraShard = new NyxItemNavistraShard("NavistraShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		cortraDust = new NyxCortraDust("CortraDust").
+		cortraDust = new NyxItemCortraDust("CortraDust").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		exousium = new NyxExousium("Exousium").
+		exousium = new NyxItemExousium("Exousium").
 				register().setCreativeTab(IaSCreativeTabs.resources);
-		devora = new NyxDevora("Devora").
+		devora = new NyxItemDevora("Devora").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
+		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		silkBerries = new NyxItemSilkBerries("SilkBerries").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		frostBowShort = new NyxItemFrostShortBow("FrostShortBow").
+				register().setCreativeTab(IaSCreativeTabs.combat);
+		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
+				register().setCreativeTab(IaSCreativeTabs.combat);
+		cursedBone = new NyxItemCursedBone("CursedBone").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		vineBundle = new NyxItemVineBundle("VineBundle").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		bread = new NyxItemFoodBread("Bread").
+				register().setCreativeTab(CreativeTabs.tabFood);
+		cookie = new NyxItemFoodCookie("Cookie").
+				register().setCreativeTab(CreativeTabs.tabFood);
+		echirShears = new IaSItemShears(EnumIaSModule.NYX,"EchirShears").
+				register().setCreativeTab(IaSCreativeTabs.tools);
 	}
 }
