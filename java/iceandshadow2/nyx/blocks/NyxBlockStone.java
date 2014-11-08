@@ -22,6 +22,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
         this.setHardness(2.0F);
         this.setHarvestLevel("pickaxe", 0);
         GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(this));
+        GameRegistry.addSmelting(this, new ItemStack(Blocks.stone), 0);
 	}
 	
 	@Override

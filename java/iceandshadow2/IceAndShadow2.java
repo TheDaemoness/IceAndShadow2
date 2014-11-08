@@ -22,7 +22,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies="required-after:FML", version = IceAndShadow2.VERSION)
+@Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies="required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
     public static final String MODID = "IceAndShadow2";
     public static final String VERSION = "Alpha 1.0";

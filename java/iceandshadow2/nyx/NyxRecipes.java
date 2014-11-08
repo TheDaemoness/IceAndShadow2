@@ -26,5 +26,7 @@ public class NyxRecipes {
 				'b', new ItemStack(NyxItems.silkBerries));
 		
 		GameRegistry.addRecipe(new ItemStack(NyxItems.echirShears), "e ", " e", 'e', new ItemStack(NyxItems.echirIngot,1,1));
+        
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.frozenBrick,4), "bb", "bb", 'b', new ItemStack(NyxBlocks.stone));
 	}
 }
