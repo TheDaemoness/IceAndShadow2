@@ -89,6 +89,10 @@ tile.nyxOreExousium.name=Exousium Ore
 tile.nyxOreNifelhium.name=Nifelhium Ore
 tile.nyxOreDraconium.name=Draconium Ore
 
+tile.nyxGatestone0.name=Active Gatestone
+tile.nyxGatestone1.name=Inactive Gatestone
+tile.nyxGatestone2.name=Inactive Gatestone
+
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources

@@ -1,5 +1,7 @@
 package iceandshadow2.ias.blocks;
 
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
@@ -7,6 +9,9 @@ import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModName {
@@ -29,7 +34,7 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID+':'+MODULE.prefix+getModName();
+		return IceAndShadow2.MODID+':'+getModName();
 	}
 
     @SideOnly(Side.CLIENT)
@@ -44,4 +49,12 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 		return super.getUnlocalizedName()+val;
     }
 
+	@Override
+	public void getSubBlocks(Item par1, CreativeTabs p_149666_2_,
+			List list) {
+		for(int meta = 0; meta < subtypeCount; ++meta)
+			list.add(new ItemStack(par1, 1, meta));
+	}
+
+    
 }

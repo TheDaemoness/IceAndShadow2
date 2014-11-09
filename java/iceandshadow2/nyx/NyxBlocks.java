@@ -10,7 +10,7 @@ import iceandshadow2.util.IaSRegistration;
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, 
 	exousicIce, exousicWater, crystalBloodstone, thornyVines, silkBerryPod,
-	infestLog, infestLeaves, poisonLeaves, poisonLog, frozenBrick;
+	infestLog, infestLeaves, poisonLeaves, poisonLog, frozenBrick, gatestone;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
 	oreNifelhium, oreExousium, oreDraconium;
@@ -45,5 +45,6 @@ public class NyxBlocks {
 		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
 		
 		frozenBrick = new NyxBlockFrozenBrick("FrozenBrick").register();
+		gatestone = new NyxBlockGatestone("Gatestone").register();
 	}
 }
