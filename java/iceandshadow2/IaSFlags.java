@@ -1,6 +1,6 @@
 package iceandshadow2;
 
-import iceandshadow2.nyx.world.biome.NyxBiomeBarren;
+import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -30,7 +30,7 @@ public class IaSFlags {
 		public static int entity_id_start = 512;
 	
 	public static BiomeGenBase 
-		nyxRugged = new NyxBiomeBarren(249, true, 1.8F, 2.2F, false).setBiomeName("NyxRugged"),
+		nyxRugged = new NyxBiomeRugged(249, true, 1.8F, 2.2F, false).setBiomeName("NyxRugged"),
 		nyxInfested = new NyxBiomeInfested(248, true, 1.5F, 0.1F, false).setBiomeName("NyxInfested");
 	
 	//Mod plugin flags.

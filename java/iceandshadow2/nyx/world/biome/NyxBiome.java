@@ -65,6 +65,9 @@ public class NyxBiome extends BiomeGenBase {
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
+
+	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
@@ -109,6 +112,7 @@ public class NyxBiome extends BiomeGenBase {
 				1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
+		genFoliage(par1World, par2Random, xchunk, zchunk);
 		
 		int x = xchunk + par1World.rand.nextInt(16);
 		int z = zchunk + par1World.rand.nextInt(16);
