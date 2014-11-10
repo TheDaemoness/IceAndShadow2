@@ -32,7 +32,7 @@ public class NyxBiomeInfested extends NyxBiome {
 			int x = par3 + par2Random.nextInt(16) + 8;
 			int z = par4 + par2Random.nextInt(16) + 8;
 			int y = 255;
-			for (y = 255; y > 0; --y) {
+			for (y = 255; y > 64; --y) {
 				Block bid = par1World.getBlock(x, y, z);
 				if (bid == Blocks.snow) {
 					++y;

@@ -63,7 +63,23 @@ public class NyxBiome extends BiomeGenBase {
 	}
 
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
+		// Gatestone generation.
+		if ((xchunk) % 128 == 0 && (zchunk) % 128 == 0) {
+			int x = xchunk + 8;
+			int z = zchunk + 8;
+			int y = par1World.getTopSolidOrLiquidBlock(x, z);
+			for (int xit = -1; xit <= 1; ++xit) {
+				for (int zit = -1; zit <= 1; ++zit) {
+					par1World.setBlock(x + xit, y-1, z + zit,
+							Blocks.obsidian);
+					for (int yit = y+3; yit > y; --yit)
+						par1World.setBlockToAir(x + xit, yit, z + zit);
 
+				}
+			}
+			par1World.setBlock(x, y, z, NyxBlocks.gatestone,
+					1 + par1World.rand.nextInt(2), 0x2);
+		}
 	}
 	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 
@@ -113,7 +129,7 @@ public class NyxBiome extends BiomeGenBase {
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
 		genFoliage(par1World, par2Random, xchunk, zchunk);
-		
+
 		int x = xchunk + par1World.rand.nextInt(16);
 		int z = zchunk + par1World.rand.nextInt(16);
 		int y = par1World.getPrecipitationHeight(x, z);

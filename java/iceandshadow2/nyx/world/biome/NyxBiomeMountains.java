@@ -17,12 +17,11 @@ public class NyxBiomeMountains extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 	}
 
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
-	{
-		super.decorate(par1World, par2Random, par3, par4);
-
-		int x = par3 + par2Random.nextInt(16) + 8;
-		int z = par4 + par2Random.nextInt(16) + 8;
+	@Override
+	protected void genFoliage(World par1World, Random par2Random, int xchunk,
+			int zchunk) {
+		int x = xchunk + par2Random.nextInt(16) + 8;
+		int z = zchunk + par2Random.nextInt(16) + 8;
 
 		/*
 		if (par2Random.nextInt(16) == 0) {
@@ -32,9 +31,9 @@ public class NyxBiomeMountains extends NyxBiome {
 		NyxGenThornyVines nyxvines = new NyxGenThornyVines();
 		for (int var6 = 0; var6 < 25; ++var6)
 		{
-			int var7 = par3 + par2Random.nextInt(16) + 8;
+			int var7 = xchunk + par2Random.nextInt(16) + 8;
 			byte var8 = 64;
-			int var9 = par4 + par2Random.nextInt(16) + 8;
+			int var9 = zchunk + par2Random.nextInt(16) + 8;
 			nyxvines.generate(par1World, par2Random, var7, var8, var9);
 			par1World.updateLightByType(EnumSkyBlock.Block, var7, var8, var9);
 		}

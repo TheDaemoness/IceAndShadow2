@@ -18,12 +18,15 @@ public class NyxBiomeForest extends NyxBiome {
 		this.setBlocks(Blocks.snow, Blocks.snow);
 	}
 
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
-    {
-		super.decorate(par1World, par2Random, par3, par4);
+	
+	
+	@Override
+	protected void genFoliage(World par1World, Random par2Random, int xchunk,
+			int zchunk) {
+
         for (int i = 0; i < 10; ++i) {
-            int x = par3 + par2Random.nextInt(16) + 8;
-            int z = par4 + par2Random.nextInt(16) + 8;
+            int x = xchunk + par2Random.nextInt(16) + 8;
+            int z = zchunk + par2Random.nextInt(16) + 8;
             int y;
             if(i%2 == 0)
             	y = 192;
@@ -51,7 +54,7 @@ public class NyxBiomeForest extends NyxBiome {
             WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
             var5.generate(par1World, par2Random, x, y, z);
         }
-    }
+	}
 	
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
 		return new NyxGenPoisonTrees();
