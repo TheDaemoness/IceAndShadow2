@@ -11,7 +11,7 @@ import iceandshadow2.ias.items.IaSItemFood;
 public class NyxItemPlumPoison extends IaSItemFood {
 
 	public NyxItemPlumPoison(String texName) {
-		super(EnumIaSModule.NYX, texName, 4, 6.4F, false);
+		super(EnumIaSModule.NYX, texName, 4, 14.4F, false);
 	}
 
 	@Override

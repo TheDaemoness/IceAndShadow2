@@ -11,8 +11,9 @@ import iceandshadow2.nyx.items.*;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
-		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone,
+		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
+		poisonFruit, poisonFruitFertile, silkBerries, 
+		frostBowShort, frostBowLong, cursedBone,
 		vineBundle, bread, cookie, echirShears;
 	
 	public static void init() {
@@ -37,6 +38,8 @@ public class NyxItems {
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
