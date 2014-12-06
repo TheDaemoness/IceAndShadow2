@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.world.gen.NyxGenInfestedTrees;
+import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 
 import java.util.Random;
 
@@ -56,7 +56,7 @@ public class NyxBiomeInfested extends NyxBiome {
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
-		return new NyxGenInfestedTrees();
+		return new GenInfestedTrees();
 	}
 
 }

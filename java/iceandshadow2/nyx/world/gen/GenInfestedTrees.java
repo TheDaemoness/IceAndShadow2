@@ -11,7 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class NyxGenInfestedTrees extends WorldGenerator {
+public class GenInfestedTrees extends WorldGenerator {
     /**
      * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
      * and 2 for 1, and 0 and 1 for 2.
@@ -50,7 +50,7 @@ public class NyxGenInfestedTrees extends WorldGenerator {
     /** Contains a list of a points at which to generate groups of leaves. */
     int[][] leafNodes;
 
-    public NyxGenInfestedTrees() {
+    public GenInfestedTrees() {
         super();
     }
 

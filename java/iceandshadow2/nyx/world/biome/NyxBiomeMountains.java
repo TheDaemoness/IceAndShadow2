@@ -2,7 +2,7 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.world.gen.NyxGenThornyVines;
+import iceandshadow2.nyx.world.gen.GenThornyVines;
 
 import java.util.Random;
 
@@ -28,7 +28,7 @@ public class NyxBiomeMountains extends NyxBiome {
 			WorldGenerator aden = new WorldGenNyxNecromancerDen();
 			aden.generate(par1World, par2Random, x, 66+par2Random.nextInt(18), z);
 		}*/
-		NyxGenThornyVines nyxvines = new NyxGenThornyVines();
+		GenThornyVines nyxvines = new GenThornyVines();
 		for (int var6 = 0; var6 < 25; ++var6)
 		{
 			int var7 = xchunk + par2Random.nextInt(16) + 8;

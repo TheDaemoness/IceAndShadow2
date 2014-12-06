@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.world.gen.NyxGenPoisonTrees;
+import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 
 public class NyxItemPlumPoisonFertile extends IaSBaseItemSingle {
 
@@ -23,7 +23,7 @@ public class NyxItemPlumPoisonFertile extends IaSBaseItemSingle {
 			World world, int x, int y, int z,
 			int meta, float watA, float watB,
 			float watC) {
-		NyxGenPoisonTrees nyxPoisonTree = new NyxGenPoisonTrees();
+		GenPoisonTrees nyxPoisonTree = new GenPoisonTrees();
 		Block bl = world.getBlock(x, y, z);
 		if (bl == Blocks.snow_layer || bl == NyxBlocks.permafrost) {
 			if (nyxPoisonTree.generate(world, world.rand, x, y+1,

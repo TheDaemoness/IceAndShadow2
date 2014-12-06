@@ -11,7 +11,7 @@ import net.minecraft.util.Facing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class NyxGenThornyVines extends WorldGenerator {
+public class GenThornyVines extends WorldGenerator {
 
 	@Override
 	public boolean generate(World par1World, Random par2Random,

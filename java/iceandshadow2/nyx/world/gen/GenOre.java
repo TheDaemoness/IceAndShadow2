@@ -7,7 +7,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class NyxGenOre {
+public class GenOre {
 	
 	public static void genOreWater(Block bloque, World par1World, int xchunk,
 			int zchunk, int rate) {

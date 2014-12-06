@@ -10,7 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class NyxGenPoisonTrees extends WorldGenerator {
+public class GenPoisonTrees extends WorldGenerator {
 
 	@Override
 	public boolean generate(World par1World, Random par2Random,

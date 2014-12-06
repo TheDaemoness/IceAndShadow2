@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.world.biome;
 
-import iceandshadow2.nyx.world.gen.NyxGenPoisonTrees;
+import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 import iceandshadow2.util.IaSBlockHelper;
 
 import java.util.Random;
@@ -57,6 +57,6 @@ public class NyxBiomeForest extends NyxBiome {
 	}
 	
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
-		return new NyxGenPoisonTrees();
+		return new GenPoisonTrees();
 	}
 }
