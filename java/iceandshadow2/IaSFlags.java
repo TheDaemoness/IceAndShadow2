@@ -10,6 +10,7 @@ public class IaSFlags {
 	public static boolean flag_death_system = true;
 	public static boolean flag_portal_sounds = true;
 	public static boolean flag_low_particles = false;
+	public static boolean flag_report_ruins_gen = false;
 
 	//YOU LIED.
 	public static int dim_nyx_id = -2;
