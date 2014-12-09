@@ -156,7 +156,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 				xloc, y, zloc);
 
 		// Add more random loot.
-		int chestcontentamount = 3 + var2.nextInt(5);
+		int chestcontentamount = 4 + var2.nextInt(4);
 		boolean bowflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			int rewardid = var2.nextInt(100);
@@ -175,11 +175,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 			
 			// Sanctified Bone
-			else if (rewardid < 5)
+			else if (rewardid < 10)
 				itemz = new ItemStack(NyxItems.boneSanctified);
 			
 			// Sword or armor!
-			else if (rewardid < 10) {
+			else if (rewardid < 15) {
 				if(var2.nextInt(3) == 0) {
 					itemz = new ItemStack(Items.diamond_sword);
 					itemz.addEnchantment(Enchantment.smite, 1+var2.nextInt(2));
@@ -195,7 +195,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 						itemz = new ItemStack(Items.diamond_helmet); 
 						itemz.addEnchantment(Enchantment.thorns, 1+var2.nextInt(2)); break;
 					case 5:
-						itemz = new ItemStack(Items.diamond_helmet); 
+						itemz = new ItemStack(Items.diamond_boots); 
 						itemz.addEnchantment(Enchantment.featherFalling, 1+var2.nextInt(2)); break;
 					}
 					itemz.addEnchantment(Enchantment.protection, 1+var2.nextInt(2));
@@ -203,7 +203,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Torches
-			else if (rewardid < 20) {
+			else if (rewardid < 25) {
 				if(var2.nextInt(3) != 0)
 					itemz = new ItemStack(Blocks.glowstone, 2 + var2.nextInt(4));
 				else
@@ -211,7 +211,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Devora.
-			else if (rewardid < 35)
+			else if (rewardid < 40)
 				itemz = new ItemStack(NyxItems.devora, 1 + var2.nextInt(8));
 
 			// Food.
