@@ -14,7 +14,7 @@ public class NyxItems {
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
 		poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
-		vineBundle, bread, cookie, echirShears, icicle;
+		vineBundle, bread, cookie, echirShears, icicle, page;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -61,5 +61,7 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.tools);
 		icicle = new NyxItemIcicle("Icicle").
 				register().setCreativeTab(IaSCreativeTabs.resources);
+		page = new NyxItemLorePage("Page").
+				register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 }
