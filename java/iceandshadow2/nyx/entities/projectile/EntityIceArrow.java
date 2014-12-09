@@ -252,7 +252,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 				this.worldObj.playSoundAtEntity(
 						this,
-						"random.glass",
+						"dig.glass",
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
 								.lengthVector() / 5.0F), 1.2F / (this.rand
 										.nextFloat() * 0.2F + 0.9F));
@@ -324,7 +324,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 		if (var4 != null) {
 			if (var4.entityHit != null) {
-				this.worldObj.playSoundAtEntity(this, "random.glass",
+				this.worldObj.playSoundAtEntity(this, "dig.glass",
 						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 								: var4.hitVec.lengthVector() / 5.0F),
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -436,7 +436,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 							this.worldObj, this.xTile, this.yTile, this.zTile,
 							this);
 
-					this.worldObj.playSoundAtEntity(this, "random.glass",
+					this.worldObj.playSoundAtEntity(this, "dig.glass",
 							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 									: var4.hitVec.lengthVector() / 5.0F),
 									1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
