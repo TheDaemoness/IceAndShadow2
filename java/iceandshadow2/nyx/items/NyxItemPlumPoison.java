@@ -1,9 +1,12 @@
 package iceandshadow2.nyx.items;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSItemFood;
@@ -21,6 +24,12 @@ public class NyxItemPlumPoison extends IaSItemFood {
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
 	}
 	
-	
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p,
+			List l, boolean b) {
+		l.add(EnumChatFormatting.GRAY.toString()+
+					EnumChatFormatting.ITALIC.toString()+
+					"It won't grow on its own. Maybe some bonemeal would help.");
+	}
 
 }

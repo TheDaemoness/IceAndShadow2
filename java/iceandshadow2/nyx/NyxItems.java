@@ -59,7 +59,7 @@ public class NyxItems {
 				register().setCreativeTab(CreativeTabs.tabFood);
 		echirShears = new IaSItemShears(EnumIaSModule.NYX,"EchirShears").
 				register().setCreativeTab(IaSCreativeTabs.tools);
-		icicle = new IaSBaseItemSingle(EnumIaSModule.NYX, "Icicle").
+		icicle = new NyxItemIcicle("Icicle").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 	}
 }

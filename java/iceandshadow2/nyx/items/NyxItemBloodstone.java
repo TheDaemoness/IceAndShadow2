@@ -1,11 +1,15 @@
 package iceandshadow2.nyx.items;
 
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
@@ -18,10 +22,23 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 		this.setAlwaysEdible();
 		this.setMaxStackSize(1);
 	}
+	
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p,
+			List l, boolean b) {
+		l.add(EnumChatFormatting.GRAY.toString()+
+					EnumChatFormatting.ITALIC.toString()+
+					"Its depths pulse with an alien presence.");
+	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 16;
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override

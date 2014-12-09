@@ -148,7 +148,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
 		if((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
-			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from etherium cores made from merged etherium dust...");
+			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
 			pwai.setItemInUse(heap,72000);
 			return heap;
 		}

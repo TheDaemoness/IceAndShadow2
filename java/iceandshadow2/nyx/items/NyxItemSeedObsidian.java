@@ -1,8 +1,11 @@
 package iceandshadow2.nyx.items;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
@@ -15,6 +18,14 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOn
 	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(16);
+	}
+	
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p,
+			List l, boolean b) {
+		l.add(EnumChatFormatting.GRAY.toString()+
+					EnumChatFormatting.ITALIC.toString()+
+					"This could probably turn stone to magical obsidian.");
 	}
 
 	@Override

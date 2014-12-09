@@ -218,7 +218,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			else if (rewardid < 55) {
 				int foodtype = var2.nextInt(20);
 				if(foodtype < 5)
-					itemz = new ItemStack(Items.golden_apple, 1 + var2.nextInt(3));
+					itemz = new ItemStack(Items.golden_apple, 1 + var2.nextInt(2));
 				else if (foodtype < 9)
 					itemz = new ItemStack(Items.golden_carrot, 1 + var2.nextInt(3));
 				else if (foodtype < 12)
