@@ -20,6 +20,7 @@ public class NyxItemCortraDust extends IaSBaseItemSingle {
 			List l, boolean b) {
 		l.add(EnumChatFormatting.GRAY.toString()+
 					EnumChatFormatting.ITALIC.toString()+
-					"It crackles with energy when you shake it.");
+					"It crackles with energy.");
 	}
+
 }

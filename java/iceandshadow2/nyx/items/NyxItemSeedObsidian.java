@@ -19,14 +19,6 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSKeepOn
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(16);
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"This could probably turn stone to magical obsidian.");
-	}
 
 	@Override
 	public boolean onItemUse(ItemStack staq, EntityPlayer playuh,

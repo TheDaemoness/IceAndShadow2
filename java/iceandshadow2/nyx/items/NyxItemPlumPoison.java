@@ -29,7 +29,7 @@ public class NyxItemPlumPoison extends IaSItemFood {
 			List l, boolean b) {
 		l.add(EnumChatFormatting.GRAY.toString()+
 					EnumChatFormatting.ITALIC.toString()+
-					"It won't grow on its own. Maybe some bonemeal would help.");
+					"It won't grow without some bonemeal.");
 	}
 
 }
