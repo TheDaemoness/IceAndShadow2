@@ -19,10 +19,11 @@ item.nyxSilkBerriesMature.name=Mature Silk Berries
 item.nyxFrostShortBow.name=Frost Shortbow
 item.nyxFrostLongBow.name=Frost Longbow
 item.nyxCursedBone.name=Cursed Bone
-item.nyxCursedBone.name=Sanctified Bone
-item.nyxBread=Sweet Bread
-item.nyxCookie=Silk Cookie
-item.nyxVineBundle=Thorny Vine Bundle
+item.nyxSanctifiedBone.name=Sanctified Bone
+item.nyxBread.name=Sweet Bread
+item.nyxCookie.name=Silk Cookie
+item.nyxVineBundle.name=Thorny Vine Bundle
+item.nyxIcicle.name=Shimmering Icicle
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
