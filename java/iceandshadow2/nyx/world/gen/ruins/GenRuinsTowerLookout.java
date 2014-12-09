@@ -207,12 +207,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 				if(var2.nextInt(3) != 0)
 					itemz = new ItemStack(Blocks.glowstone, 2 + var2.nextInt(4));
 				else
-					itemz = new ItemStack(Blocks.redstone_torch, 8 + var2.nextInt(16));
+					itemz = new ItemStack(Blocks.redstone_torch, 4 + var2.nextInt(8));
 			}
 
 			// Devora.
 			else if (rewardid < 40)
-				itemz = new ItemStack(NyxItems.devora, 1 + var2.nextInt(8));
+					itemz = new ItemStack(NyxItems.devora, 2 + var2.nextInt(6));
 
 			// Food.
 			else if (rewardid < 55) {
