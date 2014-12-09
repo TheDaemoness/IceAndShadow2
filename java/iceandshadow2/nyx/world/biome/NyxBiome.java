@@ -86,7 +86,7 @@ public class NyxBiome extends BiomeGenBase {
 			int z = zchunk + 8;
 			int y = par1World.getTopSolidOrLiquidBlock(x, z);
 			GenRuins gengen = null;
-			if(par2Random.nextInt(9) == 0)
+			if(par2Random.nextInt(16) == 0)
 				gengen = new GenRuinsTowerLookout();
 			if(gengen != null)
 				gengen.generate(par1World, par2Random, x, y, z);
