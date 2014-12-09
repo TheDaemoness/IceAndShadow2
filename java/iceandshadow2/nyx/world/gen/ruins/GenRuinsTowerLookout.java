@@ -45,6 +45,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	public void buildPass(World world, Random var2, int x, int y, int z) {
 		Sculptor.terrainFlatten(world, x-3, y-1, z-3, x+3, 4, z+3);
 
+		Sculptor.walls(world, x-1, y-3, z-1, x+1, y-3, z+1, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.cube(world, x-2, y-2, z-2, x+2, y-2, z+2, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.walls(world, x-3, y-1, z-3, x+3, y-1, z+3, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.cube(world, x-2, y-1, z-2, x+2, y, z+2, NyxBlocks.frozenBrick, 0);

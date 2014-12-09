@@ -20,6 +20,6 @@ public class NyxItemIcicle extends IaSBaseItemSingle {
 			List l, boolean b) {
 		l.add(EnumChatFormatting.GRAY.toString()+
 				EnumChatFormatting.ITALIC.toString()+
-				"It's feels similar to the skeletons' ice arrows.");
+				"It feels similar to the skeletons' ice arrows.");
 	}
 }

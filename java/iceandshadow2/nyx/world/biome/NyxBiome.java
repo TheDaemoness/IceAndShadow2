@@ -6,6 +6,7 @@ import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
+import iceandshadow2.util.gen.Sculptor;
 
 import java.util.List;
 import java.util.Random; //Fuck you, Scala.
@@ -79,6 +80,7 @@ public class NyxBiome extends BiomeGenBase {
 
 				}
 			}
+			Sculptor.terrainFlatten(par1World, x-1, y-2, z-1, x+1, 4, z+1);
 			par1World.setBlock(x, y, z, NyxBlocks.gatestone,
 					1 + par1World.rand.nextInt(2), 0x2);
 		} else {
