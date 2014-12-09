@@ -136,7 +136,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     
 	@Override
     protected void dropRareDrop(int par1) {
-		this.dropItem(NyxItems.cursedBone,1);
+		this.dropItem(NyxItems.boneCursed,1);
     }
 
     /**
@@ -432,7 +432,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
     		return new ItemStack(NyxItems.frostBowShort,1,385-this.rand.nextInt(16));
     	if(taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
-    		return new ItemStack(NyxItems.cursedBone);
+    		return new ItemStack(NyxItems.boneCursed);
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_LONG)
     		return new ItemStack(NyxItems.frostBowLong,1,255-this.rand.nextInt(16));
     	if(taipe == EnumNyxSkeletonType.KNIFE_DEVORA)

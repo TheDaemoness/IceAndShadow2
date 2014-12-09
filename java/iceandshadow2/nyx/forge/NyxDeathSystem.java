@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
+import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -84,9 +85,9 @@ public class NyxDeathSystem {
 		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
 			if (plai_inv.mainInventory[i] != null) {
 				ItemStack is = plai_inv.mainInventory[i];
-				/*if (is.getItem() == NyxItems.charm;
+				if (is.getItem() instanceof NyxItemBoneSanctified
 						&& is.isItemDamaged())
-					drop_main = false;*/
+					drop_main = false;
 			}
 		}
 		if (drop_main) {

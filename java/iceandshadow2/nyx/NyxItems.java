@@ -13,8 +13,8 @@ public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
 		poisonFruit, poisonFruitFertile, silkBerries, 
-		frostBowShort, frostBowLong, cursedBone,
-		vineBundle, bread, cookie, echirShears;
+		frostBowShort, frostBowLong, boneCursed, boneSanctified,
+		vineBundle, bread, cookie, echirShears, icicle;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -47,7 +47,9 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.combat);
 		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
 				register().setCreativeTab(IaSCreativeTabs.combat);
-		cursedBone = new NyxItemCursedBone("CursedBone").
+		boneCursed = new NyxItemBoneCursed("CursedBone").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		boneSanctified = new NyxItemBoneSanctified("SanctifiedBone").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		vineBundle = new NyxItemVineBundle("VineBundle").
 				register().setCreativeTab(IaSCreativeTabs.resources);
@@ -57,5 +59,7 @@ public class NyxItems {
 				register().setCreativeTab(CreativeTabs.tabFood);
 		echirShears = new IaSItemShears(EnumIaSModule.NYX,"EchirShears").
 				register().setCreativeTab(IaSCreativeTabs.tools);
+		icicle = new IaSBaseItemSingle(EnumIaSModule.NYX, "Icicle").
+				register().setCreativeTab(IaSCreativeTabs.resources);
 	}
 }
