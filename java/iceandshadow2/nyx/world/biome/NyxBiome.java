@@ -25,7 +25,7 @@ public class NyxBiome extends BiomeGenBase {
 
 	private boolean rare;
 
-	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genUnstableIce;
+	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
@@ -107,6 +107,8 @@ public class NyxBiome extends BiomeGenBase {
 		genCortra = new WorldGenMinable(NyxBlocks.oreCortra, 10,
 				NyxBlocks.stone);
 		genDraconium = new WorldGenMinable(NyxBlocks.oreDraconium,
+				6, NyxBlocks.stone);
+		genGemstone = new WorldGenMinable(NyxBlocks.oreGemstone,
 				4, NyxBlocks.stone);
 
 		if (doGenDevora)
@@ -132,6 +134,7 @@ public class NyxBiome extends BiomeGenBase {
 		GenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
 		GenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 10);
 		GenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 192, 255, 3);
+		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 8);
 
 		if (doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
