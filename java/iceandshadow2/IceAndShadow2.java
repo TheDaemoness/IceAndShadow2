@@ -10,6 +10,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
+import iceandshadow2.nyx.forge.NyxFuelHandler;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
 import cpw.mods.fml.common.Mod;
@@ -20,6 +21,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies="required-after:FML;", version = IceAndShadow2.VERSION)
@@ -63,6 +65,7 @@ public class IceAndShadow2 {
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		
 		NyxBiomes.registerBiomes();
+		GameRegistry.registerFuelHandler(new NyxFuelHandler());
 		
 		//Be nice, Thaumcraft.
 		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""+IaSFlags.dim_nyx_id+":0");
