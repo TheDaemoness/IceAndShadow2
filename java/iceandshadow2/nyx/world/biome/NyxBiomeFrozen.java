@@ -1,7 +1,14 @@
 package iceandshadow2.nyx.world.biome;
 
+import java.util.Random;
+
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.world.gen.GenPoisonTrees;
+import iceandshadow2.util.IaSBlockHelper;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeFrozen extends NyxBiome {
 
@@ -12,54 +19,47 @@ public class NyxBiomeFrozen extends NyxBiome {
 		this.setBlocks(Blocks.snow, NyxBlocks.permafrost);
 	}
 
-	/*
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
-    {
-		super.decorate(par1World, par2Random, par3, par4);
-		
-		randomGenerator = par2Random;
-        for (int i = 0; i < 10; ++i)
-        {
-            int x = par3 + this.randomGenerator.nextInt(16) + 8;
-            int z = par4 + this.randomGenerator.nextInt(16) + 8;
-            int y = 255;
-            for(y = 255; y > 0; --y) {
-            	int bid = par1World.getBlockId(x, y, z);
-            	if(i < 5) {
-            		if(bid == Block.snow.blockID)
-            			break;
-            		else if(bid != 0) {
+	@Override
+	protected void genFoliage(World par1World, Random par2Random, int xchunk,
+			int zchunk) {
+
+        for (int i = 0; i < 10; ++i) {
+            int x = xchunk + par2Random.nextInt(16) + 8;
+            int z = zchunk + par2Random.nextInt(16) + 8;
+            int y;
+            if(i%2 == 0)
+            	y = 192;
+            else
+            	y = 64;
+            while(y >= 64 && y <= 192) {
+            	Block bid = par1World.getBlock(x, y, z);
+            	if(bid == Blocks.snow_layer)
+            		break;
+                if(i%2 == 0) {
+                	if(!IaSBlockHelper.isAir(bid)) {
                 		++y;
                 		break;
                 	}
-            	}
-            	else {
-            		if(bid == IaSIDs.nyxBlockPermafrost_id) {
-            			bid = par1World.getBlockId(x, y+1, z);
-            			if(bid == Block.snow.blockID || bid == 0) {
-            				++y;
-            				break;
-            			}
-            			else
-            				continue;
-            		}
-            	}
+                	--y;
+                }
+                else {
+                	if(IaSBlockHelper.isAir(bid))
+                		break;
+                	++y;
+                }
             }
             if(y == 0)
             	continue;
-            if(i < 5) {
-            	WorldGenerator var5 = this.getRandomWorldGenForTrees(this.randomGenerator);
-            	var5.generate(par1World, this.randomGenerator, x, y, z);
-            	par1World.updateAllLightTypes(x, y, z);
+            if(par2Random.nextInt(3) == 0) {
+            	//Icicles at the ready, sah.
+            } else {
+            	WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
+            	var5.generate(par1World, par2Random, x, y, z);
             }
-            else
-            	par1World.setBlock(x, y, z, IaSIDs.nyxBlockStalagmites_id);
         }
-        randomGenerator = null;
-    }
+	}
 	
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
-		return new NyxWorldGenPoisonTrees(false);
+		return new GenPoisonTrees();
 	}
-	*/
 }
