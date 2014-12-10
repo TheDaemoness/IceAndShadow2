@@ -10,10 +10,11 @@ import iceandshadow2.util.IaSRegistration;
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, 
 	exousicIce, exousicWater, crystalBloodstone, thornyVines, silkBerryPod,
-	infestLog, infestLeaves, poisonLeaves, poisonLog, frozenBrick, gatestone;
+	infestLog, infestLeaves, poisonLeaves, poisonLog, brickFrozen, planks,
+	gatestone, brickPale, brickPaleCracked;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
-	oreNifelhium, oreExousium, oreDraconium;
+	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
 	
 	public static Fluid fluidExousia;
 	
@@ -29,7 +30,9 @@ public class NyxBlocks {
 		infestLeaves = new NyxBlockInfestedLeaves("InfestedLeaves").register();
 		infestLog = new NyxBlockInfestedLog("InfestedLog").register();
 		silkBerryPod = new NyxBlockSilkBerryPod("SilkBerryPod").register();
-		
+		planks = new NyxBlockPlanks("Planks").register();
+
+		oreGemstone = new NyxBlockOreGemstone("OreGemstone").register();
 		oreEchir = new NyxBlockOreEchir("OreEchir").register();
 		oreDevora = new NyxBlockOreDevora("OreDevora").register();
 		oreNavistra = new NyxBlockOreNavistra("OreNavistra").register();
@@ -44,7 +47,9 @@ public class NyxBlocks {
 		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register();
 		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
 		
-		frozenBrick = new NyxBlockFrozenBrick("FrozenBrick").register();
+		brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
+		brickPale = new NyxBlockBrickPale("PaleBrick").register();
+		brickPaleCracked = new NyxBlockBrickPale("PaleBrickCracked").register();
 		gatestone = new NyxBlockGatestone("Gatestone").register();
 	}
 }

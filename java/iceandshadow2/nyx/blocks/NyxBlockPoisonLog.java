@@ -111,12 +111,13 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfe
         return true;
     }
     
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         float var5 = 0.0125F;
         return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3 + var5), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
     }
     
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
     	if(par5Entity instanceof EntityLivingBase) {
     		if(!(par5Entity instanceof EntityMob)) {
@@ -127,6 +128,7 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfe
     	}
     }
     
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
     	if(par5EntityPlayer.getCurrentEquippedItem() == null)
     		par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.poison.id, 20*(par1World.difficultySetting.getDifficultyId()+1), 1));

@@ -16,8 +16,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class NyxBlockFrozenBrick extends IaSBaseBlockSingle {
-	public NyxBlockFrozenBrick(String id) {
+public class NyxBlockBrickFrozen extends IaSBaseBlockSingle {
+	public NyxBlockBrickFrozen(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		this.setResistance(9.0F);
         this.setHardness(2.0F);

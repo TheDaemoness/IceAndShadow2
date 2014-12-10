@@ -48,12 +48,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 		Sculptor.walls(world, x-1, y-3, z-1, x+1, y-3, z+1, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.cube(world, x-2, y-2, z-2, x+2, y-2, z+2, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.walls(world, x-3, y-1, z-3, x+3, y-1, z+3, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
-		Sculptor.cube(world, x-2, y-1, z-2, x+2, y, z+2, NyxBlocks.frozenBrick, 0);
+		Sculptor.cube(world, x-2, y-1, z-2, x+2, y, z+2, NyxBlocks.brickFrozen, 0);
 		Sculptor.cube(world, x-4, y, z-4, x+4, y+13, z+4, Blocks.air, 0);
 
-		Sculptor.walls(world, x-2, y, z-2, x+2, y+10, z+2, NyxBlocks.frozenBrick, 0);
-		Sculptor.walls(world, x-3, y+11, z-3, x+3, y+11, z+3, NyxBlocks.frozenBrick, 0);
-		Sculptor.corners(world, x-2, y+10, z-2, x+2, y+10, z+2, NyxBlocks.frozenBrick, 0);
+		Sculptor.walls(world, x-2, y, z-2, x+2, y+10, z+2, NyxBlocks.brickFrozen, 0);
+		Sculptor.walls(world, x-3, y+11, z-3, x+3, y+11, z+3, NyxBlocks.brickFrozen, 0);
+		Sculptor.corners(world, x-2, y+10, z-2, x+2, y+10, z+2, NyxBlocks.brickFrozen, 0);
 	}
 
 	/**

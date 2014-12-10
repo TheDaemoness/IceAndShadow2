@@ -12,7 +12,6 @@ public class NyxItemIcicle extends IaSBaseItemSingle {
 
 	public NyxItemIcicle(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

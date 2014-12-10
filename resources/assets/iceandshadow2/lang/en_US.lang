@@ -83,8 +83,13 @@ tile.nyxPoisonwoodLog.name=Poisonwood Log
 tile.nyxInfestedLeaves.name=Infested Leaves
 tile.nyxInfestedLog.name=Infested Log
 tile.nyxSilkBerryPod.name=Silk Berry Pod
-tile.nyxFrozenBrick.name=Winter-worn Brick
+tile.nyxFrozenBrick.name=Winterworn Brick
+tile.nyxPlanks0.name=Poisonwood Planks
+tile.nyxPlanks1.name=Infested Planks
+tile.nyxPaleBrick.name=Pale Brick
+tile.nyxPaleBrickCracked.name=Cracked Pale Brick
 
+tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore
 tile.nyxOreDevora.name=Devora Ore
 tile.nyxOreCortra.name=Cortra Ore
