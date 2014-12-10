@@ -21,10 +21,10 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	
 	public final byte subtypeCount;
 	
-	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat, byte subtypes) {
+	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat, int subtypes) {
 		super(mod, mat);
 		this.setBlockName(mod.prefix+id);
-		subtypeCount = subtypes;
+		subtypeCount = (byte)Math.min(subtypes,16);
 	}
 	
 	@Override
@@ -42,10 +42,17 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[subtypeCount];
 		for(byte i = 0; i < subtypeCount; ++i)
-			reg.registerIcon(getTexName()+i);
+			icons[i]=reg.registerIcon(getTexName()+i);
+    }
+    
+    @Override
+	public IIcon getIcon(int side, int meta) {
+		if(meta >= subtypeCount)
+			return icons[0];
+		return icons[meta];
 	}
-	
-    public String getUnlocalizedName(int val) {
+
+	public String getUnlocalizedName(int val) {
 		return super.getUnlocalizedName()+val;
     }
 
