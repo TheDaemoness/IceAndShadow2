@@ -49,7 +49,7 @@ public class NyxBlocks {
 		
 		brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
 		brickPale = new NyxBlockBrickPale("PaleBrick").register();
-		brickPaleCracked = new NyxBlockBrickPale("PaleBrickCracked").register();
+		brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked").register();
 		gatestone = new NyxBlockGatestone("Gatestone").register();
 	}
 }

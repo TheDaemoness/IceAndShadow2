@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
@@ -42,6 +43,4 @@ public class NyxBlockBrickPaleCracked extends IaSBaseBlockSingle {
 			int p_149670_3_, int p_149670_4_, Entity p_149670_5_) {
 		NyxBlocks.brickPale.onEntityCollidedWithBlock(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_4_, p_149670_5_);
 	}
-	
-	
 }

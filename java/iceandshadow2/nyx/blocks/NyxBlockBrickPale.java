@@ -25,7 +25,7 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	
 	public NyxBlockBrickPale(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(10.0F);
+		this.setResistance(9.0F);
         this.setHardness(2.0F);
         this.setHarvestLevel("pickaxe", 0);
         this.setLuminescence(0.3F);
@@ -59,9 +59,8 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public void onBlockExploded(World world, int x, int y, int z,
-			Explosion explosion) {
+	public void onBlockDestroyedByExplosion(World world, int x,
+			int y, int z, Explosion e) {
 		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
 	}
-	
 }
