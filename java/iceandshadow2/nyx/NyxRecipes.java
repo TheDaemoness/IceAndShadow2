@@ -32,5 +32,14 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.poisonFruitFertile), 
 				new ItemStack(NyxItems.poisonFruit), 
 				new ItemStack(Items.dye,15), new ItemStack(Items.dye,15), new ItemStack(Items.dye,15));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.planks, 4, 0), new ItemStack(NyxBlocks.poisonLog));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.planks, 4, 1), new ItemStack(NyxBlocks.infestLog));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale, 2), new ItemStack(NyxBlocks.brickFrozen),
+				new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale), new ItemStack(NyxBlocks.brickPaleCracked),
+				new ItemStack(NyxItems.exousicIceShard));
 	}
 }
