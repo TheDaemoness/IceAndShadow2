@@ -42,6 +42,12 @@ public class NyxRecipes {
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.planks, 1, 0), new ItemStack(Blocks.planks, 1, 1), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.planks, 1, 1), new ItemStack(Blocks.planks, 1, 2), 0);
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.planks, 1, 2), 
+				new ItemStack(NyxBlocks.planks, 1, 1), new ItemStack(NyxItems.exousium,1,0));
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.log, 1), 
+				new ItemStack(NyxBlocks.infestLog), new ItemStack(NyxItems.exousium, 1, 0),
+				new ItemStack(NyxItems.exousium, 1, 0), new ItemStack(NyxItems.exousium, 1, 0));
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale, 2), new ItemStack(NyxBlocks.brickFrozen),
 				new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard));
 		

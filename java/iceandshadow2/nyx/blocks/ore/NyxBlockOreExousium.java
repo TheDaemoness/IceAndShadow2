@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import iceandshadow2.nyx.NyxBlocks;
@@ -21,7 +22,6 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	public NyxBlockOreExousium(String texName) {
 		super(texName);
-		this.setHarvestLevel("pickaxe", 2);
 		this.setHardness(20.0F);
 		this.setLuminescence(1.0F);
 		this.setLightColor(0.9F, 1.0F, 0.9F);
@@ -40,6 +40,12 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 			int y, int z, int meta) {
 		if(meta == 0)
 			w.setBlock(x, y, z, this, 1, 0x2);
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World w, int x,
+			int y, int z, Explosion e) {
+		w.setBlockToAir(x, y, z);
 	}
 
 	@Override
@@ -71,11 +77,9 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
 		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		if(metadata != 0) {
+		if(metadata != 0)
 			is.add(new ItemStack(NyxBlocks.stone,1));
-			return is;
-		}
-		if(world.rand.nextInt(3+fortune) != 0)
+		else if(world.rand.nextInt(3+fortune) != 0)
 			is.add(new ItemStack(NyxItems.exousium,1,0));
 		return is;
 	}
