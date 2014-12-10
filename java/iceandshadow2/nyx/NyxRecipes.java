@@ -3,6 +3,7 @@ package iceandshadow2.nyx;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,6 +36,11 @@ public class NyxRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.planks, 4, 0), new ItemStack(NyxBlocks.poisonLog));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.planks, 4, 1), new ItemStack(NyxBlocks.infestLog));
+
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.poisonLog), new ItemStack(Blocks.log), 0); //Data values?
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.infestLog), new ItemStack(Blocks.log), 0); //Data values?
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.planks, 1, 0), new ItemStack(Blocks.planks, 1, 1), 0);
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.planks, 1, 1), new ItemStack(Blocks.planks, 1, 2), 0);
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale, 2), new ItemStack(NyxBlocks.brickFrozen),
 				new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard), new ItemStack(NyxItems.exousicIceShard));
