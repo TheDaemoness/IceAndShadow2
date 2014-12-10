@@ -15,13 +15,5 @@ public class NyxItemCortraDust extends IaSBaseItemSingle {
 		super(EnumIaSModule.NYX, texName);
 		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"It crackles with energy.");
-	}
 
 }

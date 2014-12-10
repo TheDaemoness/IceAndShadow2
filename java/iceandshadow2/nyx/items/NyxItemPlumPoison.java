@@ -24,13 +24,4 @@ public class NyxItemPlumPoison extends IaSItemFood {
 		pwai.addPotionEffect(new PotionEffect(Potion.poison.id,69,1)); //Lol, 69.
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"It won't grow without some bonemeal.");
-	}
-
 }

@@ -24,14 +24,6 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 		super(EnumIaSModule.NYX, texName, 2);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,8,1), new ItemStack(this,1,0));
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"It's warm and shakes slightly.");
-	}
 
 	@SideOnly(Side.CLIENT)
 	@Override

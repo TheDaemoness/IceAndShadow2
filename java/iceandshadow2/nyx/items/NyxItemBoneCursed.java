@@ -36,14 +36,6 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	}
 	
 	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"A dark power leeches from it.");
-	}
-	
-	@Override
 	public IIcon getIcon(ItemStack stack, int pass) {
 		if(pass == 1)
 			return glow;

@@ -30,14 +30,6 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 	public boolean usesDefaultGlowRenderer() {
 		return true;
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"It should ease death if broken in time.");
-	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) {

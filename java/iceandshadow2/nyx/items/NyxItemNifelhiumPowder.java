@@ -15,12 +15,4 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow {
 		super(EnumIaSModule.NYX, texName);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"Cold air flows from it like an amplifying energy.");
-	}
 }
