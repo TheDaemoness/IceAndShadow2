@@ -1,5 +1,9 @@
 package iceandshadow2.nyx.blocks.utility;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSDistillable;
+import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+
 import java.util.List;
 import java.util.Random;
 
@@ -7,17 +11,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSDistillable;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.util.IaSBlockHelper;
 
 public class NyxBlockDistiller extends IaSBaseBlockSingle {
 

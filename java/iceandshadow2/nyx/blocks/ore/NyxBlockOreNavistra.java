@@ -1,11 +1,12 @@
 package iceandshadow2.nyx.blocks.ore;
 
+import iceandshadow2.nyx.NyxItems;
+
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.nyx.NyxItems;
 
 public class NyxBlockOreNavistra extends NyxBlockOre {
 

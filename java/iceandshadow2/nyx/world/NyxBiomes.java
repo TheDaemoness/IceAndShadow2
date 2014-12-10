@@ -2,12 +2,16 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.world.biome.*;
+import iceandshadow2.nyx.world.biome.NyxBiome;
+import iceandshadow2.nyx.world.biome.NyxBiomeForest;
+import iceandshadow2.nyx.world.biome.NyxBiomeFrozen;
+import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
+import iceandshadow2.nyx.world.biome.NyxBiomeMountains;
+import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-
-import static net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class NyxBiomes {
 

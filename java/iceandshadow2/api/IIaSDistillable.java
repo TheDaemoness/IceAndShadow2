@@ -2,9 +2,7 @@ package iceandshadow2.api;
 
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public interface IIaSDistillable {
 	/**

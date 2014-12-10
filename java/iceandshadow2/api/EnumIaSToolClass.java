@@ -1,7 +1,7 @@
 package iceandshadow2.api;
 
-import java.util.HashSet;
 import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
 
 public enum EnumIaSToolClass {

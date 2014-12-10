@@ -4,7 +4,6 @@ import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
 
 import java.util.Random;
-import java.util.logging.Level;
 
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;

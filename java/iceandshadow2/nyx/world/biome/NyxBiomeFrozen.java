@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
-
 import net.minecraft.init.Blocks;
 
 public class NyxBiomeFrozen extends NyxBiome {

@@ -1,6 +1,5 @@
 package iceandshadow2.ias;
 
-import iceandshadow2.ias.IaSDamageSource;
 import net.minecraft.util.DamageSource;
 
 public class IaSDamageSources {

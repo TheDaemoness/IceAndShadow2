@@ -1,13 +1,11 @@
 package iceandshadow2.nyx.items;
 
-import java.util.List;
-
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -27,6 +25,7 @@ public class NyxItemVineBundle extends IaSBaseItemSingle {
 					"One could make paper or bread from this.");
 	}
 	
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int i, int j,
 			int k, int sideHit, float par8, float par9, float par10) {

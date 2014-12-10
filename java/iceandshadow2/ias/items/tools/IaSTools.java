@@ -1,6 +1,13 @@
 package iceandshadow2.ias.items.tools;
 
-import net.minecraft.creativetab.CreativeTabs;
+import iceandshadow2.api.EnumIaSToolClass;
+import iceandshadow2.api.IaSRegistry;
+import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.items.IaSBaseItem;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.items.materials.NyxMaterialCortra;
+import iceandshadow2.nyx.items.materials.NyxMaterialDevora;
+import iceandshadow2.nyx.items.materials.NyxMaterialNavistra;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -8,12 +15,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.registry.GameRegistry;
-import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IaSRegistry;
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.items.IaSBaseItem;
-import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.materials.*;
 
 public class IaSTools {
 		public static IaSItemTool tools[];

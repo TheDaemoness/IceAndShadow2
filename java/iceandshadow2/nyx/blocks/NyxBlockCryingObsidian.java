@@ -63,7 +63,7 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
     @Override
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
 			int x, int y, int z) {
-		return type != type.monster;
+		return type != EnumCreatureType.monster;
 	}
 
     @Override

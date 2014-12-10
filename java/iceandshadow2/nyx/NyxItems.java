@@ -1,13 +1,32 @@
 package iceandshadow2.nyx;
 
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
-import iceandshadow2.nyx.items.*;
+import iceandshadow2.nyx.items.NyxItemBloodstone;
+import iceandshadow2.nyx.items.NyxItemBoneCursed;
+import iceandshadow2.nyx.items.NyxItemBoneSanctified;
+import iceandshadow2.nyx.items.NyxItemCortraDust;
+import iceandshadow2.nyx.items.NyxItemDevora;
+import iceandshadow2.nyx.items.NyxItemExousium;
+import iceandshadow2.nyx.items.NyxItemFoodBread;
+import iceandshadow2.nyx.items.NyxItemFoodCookie;
+import iceandshadow2.nyx.items.NyxItemFrostLongBow;
+import iceandshadow2.nyx.items.NyxItemFrostShortBow;
+import iceandshadow2.nyx.items.NyxItemIcicle;
+import iceandshadow2.nyx.items.NyxItemIngotEchir;
+import iceandshadow2.nyx.items.NyxItemLorePage;
+import iceandshadow2.nyx.items.NyxItemNavistraShard;
+import iceandshadow2.nyx.items.NyxItemNifelhiumPowder;
+import iceandshadow2.nyx.items.NyxItemPlumPoison;
+import iceandshadow2.nyx.items.NyxItemPlumPoisonFertile;
+import iceandshadow2.nyx.items.NyxItemSeedObsidian;
+import iceandshadow2.nyx.items.NyxItemSilkBerries;
+import iceandshadow2.nyx.items.NyxItemTeleportCrystal;
+import iceandshadow2.nyx.items.NyxItemVineBundle;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,

@@ -7,8 +7,6 @@ import iceandshadow2.ias.interfaces.IIaSNoInfest;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -19,11 +17,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfest {
 	@SideOnly(Side.CLIENT)
@@ -114,7 +112,7 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfe
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         float var5 = 0.0125F;
-        return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3 + var5), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
+        return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4 + var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
     }
     
     @Override

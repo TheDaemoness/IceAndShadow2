@@ -1,22 +1,20 @@
 package iceandshadow2.nyx.forge;
 
-import java.util.HashMap;
-
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
+
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.GameRules;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 public class NyxDeathSystem {
 
@@ -73,7 +71,7 @@ public class NyxDeathSystem {
 			if(!e.original.isDead)
 				return;
 			if(death_inv.get(e.original.getEntityId()) != null)
-				e.entityPlayer.inventory.copyInventory((InventoryPlayer)death_inv
+				e.entityPlayer.inventory.copyInventory(death_inv
 					.get(e.original.getEntityId()));
 			//Raise madness.
 		}

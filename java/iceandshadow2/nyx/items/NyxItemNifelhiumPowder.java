@@ -1,12 +1,13 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
 public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow {
 

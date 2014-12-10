@@ -1,13 +1,13 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 
 public class NyxBiomeRugged extends NyxBiome {
 
@@ -24,6 +24,7 @@ public class NyxBiomeRugged extends NyxBiome {
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 60, 2, 3));
 	}
 	
+	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
 		for(int xit = 0; xit < 16; ++xit) {
 			for(int zit = 0; zit < 16; ++zit) {

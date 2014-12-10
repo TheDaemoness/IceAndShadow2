@@ -1,11 +1,11 @@
 package iceandshadow2.ias.blocks;
 
 import iceandshadow2.EnumIaSModule;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /*
  * A block to provide the formfactor for the altars used in Ice and Shadow.

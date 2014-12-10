@@ -1,5 +1,9 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.IaSBaseItemMulti;
+
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,9 +20,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItemMulti;
 
 public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
 

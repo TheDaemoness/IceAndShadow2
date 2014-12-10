@@ -1,12 +1,12 @@
 package iceandshadow2.util;
 
+import iceandshadow2.IIaSModName;
+import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
+import iceandshadow2.ias.items.IaSItemBlockMulti;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import iceandshadow2.IIaSModName;
-import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
-import iceandshadow2.ias.items.IaSItemBlockMulti;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {

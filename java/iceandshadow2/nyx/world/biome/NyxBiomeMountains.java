@@ -1,14 +1,11 @@
 package iceandshadow2.nyx.world.biome;
 
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenThornyVines;
 
 import java.util.Random;
 
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
 public class NyxBiomeMountains extends NyxBiome {
 

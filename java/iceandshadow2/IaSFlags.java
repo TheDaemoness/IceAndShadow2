@@ -1,7 +1,7 @@
 package iceandshadow2;
 
-import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
+import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class IaSFlags {

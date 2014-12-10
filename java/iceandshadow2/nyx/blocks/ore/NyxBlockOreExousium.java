@@ -1,10 +1,11 @@
 package iceandshadow2.nyx.blocks.ore;
 
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,8 +13,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.NyxItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockOreExousium extends NyxBlockOre {
 	

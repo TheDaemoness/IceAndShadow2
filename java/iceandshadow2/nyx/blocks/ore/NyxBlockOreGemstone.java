@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.nyx.NyxItems;
 
 public class NyxBlockOreGemstone extends NyxBlockOre {
 

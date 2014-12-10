@@ -1,32 +1,25 @@
 package iceandshadow2.nyx.blocks;
 
-import java.util.List;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.util.IaSPlayerHelper;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import net.minecraft.block.Block;
+import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockGatestone extends IaSBaseBlockMulti {
 
@@ -69,6 +62,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	 * or not to render the shared face of two adjacent blocks and also whether
 	 * the player can attach torches, redstone wire, etc to this block.
 	 */
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
@@ -77,6 +71,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	 * If this block doesn't render as an ordinary block it will return False
 	 * (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
@@ -125,7 +120,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					EntityLivingBase elb = (EntityLivingBase) theEntity;
 					if (elb.isSprinting()) {
 						int fac = MathHelper
-								.floor_double((double) (elb.rotationYaw * 90.0F) + 0.5D) & 3;
+								.floor_double(elb.rotationYaw * 90.0F + 0.5D) & 3;
 						int posXMod = 0;
 						int posZMod = 0;
 						if (fac == 0)
@@ -148,12 +143,12 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 						doTPFX(theWorld, ppX, ppY, ppZ, posXMod, posZMod);
 						if (!theWorld.isRemote)
 							elb.setPositionAndUpdate(elb.posX
-									+ (double) posXMod, (double) posYNew,
-									elb.posZ + (double) posZMod);
+									+ posXMod, posYNew,
+									elb.posZ + posZMod);
 						elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
 								5.0F);
-						doTPFX(theWorld, ppX + (double) posXMod,
-								(double) posYNew, ppZ + (double) posZMod,
+						doTPFX(theWorld, ppX + posXMod,
+								posYNew, ppZ + posZMod,
 								posXMod, posZMod);
 					}
 				}
@@ -171,7 +166,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		if (theWorld.isRemote)
 			theWorld.spawnParticle("portal", posX,
 					posY + theWorld.rand.nextDouble() * 2.0D, posZ,
-					theWorld.rand.nextGaussian() * (double) (modX / 128), 0.0D,
-					theWorld.rand.nextGaussian() * (double) (modZ / 128));
+					theWorld.rand.nextGaussian() * (modX / 128), 0.0D,
+					theWorld.rand.nextGaussian() * (modZ / 128));
 	}
 }

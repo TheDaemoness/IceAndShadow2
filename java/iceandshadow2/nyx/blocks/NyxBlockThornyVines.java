@@ -1,29 +1,26 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IIaSModName;
+import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSRegistration;
+
 import java.util.ArrayList;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IIaSModName;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSRegistration;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 

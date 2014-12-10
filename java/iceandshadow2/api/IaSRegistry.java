@@ -1,21 +1,15 @@
 package iceandshadow2.api;
 
 import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.IaSFakeItem;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 class IaSMaterialIconGetter extends Item {
 	@Override

@@ -1,27 +1,22 @@
 package iceandshadow2.nyx.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSItemFood;
+import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGlowing {
 
@@ -58,6 +53,7 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 		return 1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 		this.itemIcon = reg.registerIcon(getTexName());
@@ -85,10 +81,10 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 		int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
 		inuse = false;
 
-		float var7 = (float) var6 / 20.0F;
+		float var7 = var6 / 20.0F;
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
-		if ((double) var7 < 0.4D) {
+		if (var7 < 0.4D) {
 			return;
 		}
 
@@ -103,7 +99,7 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 		EntityIceArrow var8 = new EntityIceArrow(par2World,
 				par3EntityPlayer, var7 * 2.0F, var10 + 1, var9 * 30 + 70);
 
-		var8.setDamage(var8.getDamage() + (double) var9 * 0.5D + 0.5D);
+		var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
 
 		if (var10 > 0) {
 			var8.setKnockbackStrength(var10);
@@ -121,15 +117,18 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 
 	}
 
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 20;
 	}
 
+	@Override
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer plai) {
 		((NyxItemFrostShortBow)item.getItem()).inuse = false;
 		return true;
 	}
 
+	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World,
 			Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
@@ -155,6 +154,7 @@ public class NyxItemFrostShortBow extends ItemBow implements IIaSModName, IIaSGl
 
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 

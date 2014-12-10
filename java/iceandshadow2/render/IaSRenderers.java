@@ -1,23 +1,26 @@
 package iceandshadow2.render;
 
-import java.lang.reflect.Field;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.MinecraftForgeClient;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.entities.mobs.*;
-import iceandshadow2.nyx.entities.projectile.*;
-import iceandshadow2.render.entity.mobs.*;
-import iceandshadow2.render.entity.projectiles.*;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
+import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
+import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.render.entity.mobs.RenderNyxSkeleton;
+import iceandshadow2.render.entity.mobs.RenderNyxSpider;
+import iceandshadow2.render.entity.projectiles.RenderIceArrow;
+import iceandshadow2.render.entity.projectiles.RenderNot;
 import iceandshadow2.render.item.RenderItemBow;
 import iceandshadow2.render.item.RenderItemVanillaGlowing;
+
+import java.lang.reflect.Field;
+
+import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class IaSRenderers {

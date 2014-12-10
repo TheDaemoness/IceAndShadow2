@@ -2,24 +2,16 @@ package iceandshadow2.ias.items.tools;
 
 //import iceandshadow2.nyx.entity.projectile.EntityThrowingKnife;
 
-import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 public class IaSItemThrowingKnife extends IaSItemTool {
 
@@ -89,6 +81,7 @@ public class IaSItemThrowingKnife extends IaSItemTool {
 		return true;
 	}
 
+	@Override
 	public void onUpdate(ItemStack par1ItemStack, World world,
 			Entity player, int par4, boolean par5) {
 		if(par1ItemStack.getItemDamage() > 0)

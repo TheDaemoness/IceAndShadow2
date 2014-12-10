@@ -1,5 +1,9 @@
 package iceandshadow2.nyx.blocks.ore;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.blocks.IaSBlockDeco;
+import iceandshadow2.nyx.NyxItems;
+
 import java.util.ArrayList;
 
 import net.minecraft.block.material.Material;
@@ -8,9 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.blocks.IaSBlockDeco;
-import iceandshadow2.nyx.NyxItems;
 
 public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 

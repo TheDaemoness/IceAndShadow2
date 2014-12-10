@@ -36,7 +36,7 @@ public class Sculptor {
 		for(int yit = 0; yit <= radius; ++yit) {
 			for(int xit = -radius; xit <= radius; ++xit) {
 				for(int zit = -radius; zit <= radius; ++zit) {
-					if(Math.sqrt((double)(xit*xit + yit*yit + zit*zit)) < radius)
+					if(Math.sqrt(xit*xit + yit*yit + zit*zit) < radius)
 						world.setBlock(x+xit, y+yit, z+zit, bl, meta, 0x2);
 				}
 			}
@@ -57,7 +57,7 @@ public class Sculptor {
 		for(int yit = less; yit <= more; ++yit) {
 			for(int xit = less; xit <= more; ++xit) {
 				for(int zit = less; zit <= more; ++zit) {
-					if(Math.sqrt((double)(xit*xit + yit*yit + zit*zit)) < Math.sqrt(world.rand.nextDouble())*radius)
+					if(Math.sqrt(xit*xit + yit*yit + zit*zit) < Math.sqrt(world.rand.nextDouble())*radius)
 						world.setBlockToAir(x+xit, y+yit, z+zit);
 				}
 			}
@@ -76,7 +76,7 @@ public class Sculptor {
 		for(int yit = -radius; yit <= radius; ++yit) {
 			for(int xit = -radius; xit <= radius; ++xit) {
 				for(int zit = -radius; zit <= radius; ++zit) {
-					if(Math.sqrt((double)(xit*xit + yit*yit + zit*zit)) < radius)
+					if(Math.sqrt(xit*xit + yit*yit + zit*zit) < radius)
 						world.setBlock(x+xit, y+yit, z+zit, bl, meta, 0x2);
 				}
 			}
@@ -96,7 +96,7 @@ public class Sculptor {
 		for(int yit = 0; yit <= height; ++yit) {
 			for(int xit = -radius; xit <= radius; ++xit) {
 				for(int zit = -radius; zit <= radius; ++zit) {
-					if(Math.sqrt((double)(xit*xit + zit*zit)) < radius)
+					if(Math.sqrt(xit*xit + zit*zit) < radius)
 						world.setBlock(x+xit, y+yit, z+zit, bl, meta, 0x2);
 				}
 			}

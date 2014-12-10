@@ -1,9 +1,12 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,10 +14,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
-import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing {
 

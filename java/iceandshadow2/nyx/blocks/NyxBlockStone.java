@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
@@ -14,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NyxBlockStone extends IaSBaseBlockSingle {
 	public NyxBlockStone(String id) {

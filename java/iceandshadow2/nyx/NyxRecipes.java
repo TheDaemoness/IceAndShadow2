@@ -1,16 +1,9 @@
 package iceandshadow2.nyx;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
-import iceandshadow2.nyx.items.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NyxRecipes {
 	

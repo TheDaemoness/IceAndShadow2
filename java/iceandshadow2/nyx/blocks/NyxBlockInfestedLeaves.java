@@ -1,5 +1,10 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
+import iceandshadow2.ias.interfaces.IIaSNoInfest;
+import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,10 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
-import iceandshadow2.ias.interfaces.IIaSNoInfest;
-import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
 
 public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
 

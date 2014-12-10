@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
@@ -19,12 +18,8 @@ import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.items.NyxItemFrostLongBow;
 import iceandshadow2.util.IaSWorldHelper;
-
-import com.ibm.icu.util.Calendar;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,17 +38,14 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, IIaSMobGetters {
@@ -99,6 +91,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
 	protected static double moveSpeed = 0.5;
 	
+	@Override
 	public double getMoveSpeed() {
 		return moveSpeed;
 	}
@@ -120,9 +113,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAINyxSkeletonWeaponSwitch(this));
-        this.tasks.addTask(3, new EntityAIFleeSun(this, this.moveSpeed+0.5));
+        this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxSkeleton.moveSpeed+0.5));
         this.tasks.addTask(4, new EntityAINyxSearch(this));
-        this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(5, new EntityAIWander(this, EntityNyxSkeleton.moveSpeed));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -246,7 +239,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     @Override
     public boolean attackEntityAsMob(Entity par1Entity)
     {
-        float f = (float)this.getAttackStrength(par1Entity);
+        float f = this.getAttackStrength(par1Entity);
         int i = 0;
 
         if (par1Entity instanceof EntityLivingBase)
@@ -261,7 +254,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         {
             if (i > 0)
             {
-                par1Entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F));
+                par1Entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F);
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -300,7 +293,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    @Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable() || par1DamageSource == DamageSource.drown)
             return false;
@@ -334,7 +328,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		double d0 = par1EntityLiving.posX + par1EntityLiving.motionX
 				- this.posX;
 		double d1 = par1EntityLiving.posY
-				+ (double) par1EntityLiving.getEyeHeight() - this.getEyeHeight()
+				+ par1EntityLiving.getEyeHeight() - this.getEyeHeight()
 				- this.posY;
 		double d2 = par1EntityLiving.posZ + par1EntityLiving.motionZ
 				- this.posZ;
@@ -345,7 +339,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 					0.40F, 8.0F);
 		else
 			entityball.rotationPitch += 20.0F;
-			entityball.setThrowableHeading(d0, d1 + (double) (f1 * 0.2F), d2,
+			entityball.setThrowableHeading(d0, d1 + f1 * 0.2F, d2,
 				0.80F, 8.0F);
 		this.worldObj.spawnEntityInWorld(entityball);
 	}
@@ -374,7 +368,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
         if (var3 > 0)
         {
-            var2.setDamage(var2.getDamage() + (double)var3 * 0.5D + 0.5D);
+            var2.setDamage(var2.getDamage() + var3 * 0.5D + 0.5D);
         }
 
         if (var4 > 0)
@@ -475,7 +469,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	this.reserveWeapon = this.getDefaultAlternateWeapon(taipe);
     }
     
-    protected void jump()
+    @Override
+	protected void jump()
     {
     	super.jump();
         this.motionY = 1.2D*0.41999998688697815D;
@@ -545,7 +540,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setByte("NyxSkeletonCombatStyle", (byte)this.typpe.id);
+        par1NBTTagCompound.setByte("NyxSkeletonCombatStyle", this.typpe.id);
     }
     
     @Override
@@ -554,7 +549,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             super.applyEntityAttributes();
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
             this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.33D);
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.moveSpeed);
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EntityNyxSkeleton.moveSpeed);
             this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
     }
 

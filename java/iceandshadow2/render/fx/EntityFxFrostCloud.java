@@ -2,7 +2,6 @@ package iceandshadow2.render.fx;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class EntityFxFrostCloud extends EntityFX {
@@ -24,7 +23,7 @@ public class EntityFxFrostCloud extends EntityFX {
         this.particleScale *= f;
         this.field_70569_a = this.particleScale;
         this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.3D));
-        this.particleMaxAge = (int)((float)this.particleMaxAge * f);
+        this.particleMaxAge = (int)(this.particleMaxAge * f);
         this.noClip = false;
         
     }
@@ -33,9 +32,10 @@ public class EntityFxFrostCloud extends EntityFX {
     	return 0;
     }
 
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
+    @Override
+	public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
     {
-        float f6 = ((float)this.particleAge + par2) / (float)this.particleMaxAge * 32.0F;
+        float f6 = (this.particleAge + par2) / this.particleMaxAge * 32.0F;
 
         if (f6 < 0.0F)
         {
@@ -54,7 +54,8 @@ public class EntityFxFrostCloud extends EntityFX {
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

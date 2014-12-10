@@ -1,12 +1,14 @@
 package iceandshadow2.nyx;
 
+import iceandshadow2.IaSFlags;
+import iceandshadow2.IceAndShadow2;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
+import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
+import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import iceandshadow2.IaSFlags;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.nyx.entities.mobs.*;
-import iceandshadow2.nyx.entities.projectile.*;
 
 public class NyxEntities {
 	

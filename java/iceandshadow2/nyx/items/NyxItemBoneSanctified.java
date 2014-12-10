@@ -1,24 +1,20 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSFlags;
+import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.util.IaSPlayerHelper;
+
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IaSFlags;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
-import iceandshadow2.util.IaSPlayerHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 
@@ -60,6 +56,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
 		return par1ItemStack.getItemDamage() > 0;

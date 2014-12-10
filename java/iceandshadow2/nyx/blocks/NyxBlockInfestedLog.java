@@ -3,27 +3,18 @@ package iceandshadow2.nyx.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoInfest {
 
@@ -47,7 +38,8 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 	/**
      * Returns the quantity of items to drop on block destruction.
      */
-    public int quantityDropped(Random par1Random) {
+    @Override
+	public int quantityDropped(Random par1Random) {
         return 1;
     }
 

@@ -1,9 +1,5 @@
 package iceandshadow2;
 
-import org.apache.logging.log4j.Logger;
-
-import net.minecraft.block.material.Material;
-import net.minecraftforge.common.MinecraftForge;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
@@ -13,6 +9,10 @@ import iceandshadow2.nyx.forge.NyxDeathSystem;
 import iceandshadow2.nyx.forge.NyxFuelHandler;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

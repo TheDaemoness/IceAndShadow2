@@ -8,15 +8,11 @@ import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
 import iceandshadow2.util.gen.Sculptor;
 
-import java.util.List;
 import java.util.Random; //Fuck you, Scala.
 
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;

@@ -1,12 +1,10 @@
 package iceandshadow2.nyx.items.materials;
 
-import net.minecraft.block.Block;
+import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.api.IIaSThrowingKnife;
-import iceandshadow2.api.IaSToolMaterial;
 
 public class NyxMaterialNavistra extends IaSToolMaterial {
 

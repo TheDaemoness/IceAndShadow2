@@ -1,11 +1,10 @@
 package iceandshadow2.ias.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.item.ItemStack;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
 
 public class IaSBaseItemSingleGlow extends IaSBaseItemSingle implements IIaSGlowing {
 	

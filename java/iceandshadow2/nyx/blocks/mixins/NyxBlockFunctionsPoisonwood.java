@@ -1,22 +1,12 @@
 package iceandshadow2.nyx.blocks.mixins;
 
 import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.ias.interfaces.IIaSNoInfest;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.blocks.NyxBlockPoisonLeaves;
-import iceandshadow2.nyx.blocks.NyxBlockPoisonLog;
-
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class NyxBlockFunctionsPoisonwood {

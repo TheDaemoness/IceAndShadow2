@@ -2,31 +2,20 @@ package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSWorldHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityNyxSpider extends EntitySpider {
 	
@@ -49,10 +38,12 @@ public class EntityNyxSpider extends EntitySpider {
         return super.getBrightnessForRender(par1)/2 + Integer.MAX_VALUE/2;
     }
 
+	@Override
 	public float getBrightness(float par1) {
 		return super.getBrightness(par1) * 0.5F + 0.5F;
 	}
 
+	@Override
 	public boolean getCanSpawnHere() {
 		for (int x = -15; x < 16; ++x) {
 			for (int y = -15; y < 16; ++y) {
@@ -64,9 +55,11 @@ public class EntityNyxSpider extends EntitySpider {
 		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
 
+	@Override
 	protected void fall(float par1) {
 	}
 	
+	@Override
 	protected boolean isValidLightLevel() {
         return true;
     }
@@ -75,7 +68,8 @@ public class EntityNyxSpider extends EntitySpider {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
+    @Override
+	protected String getHurtSound()
     {
     	if(this.isInvisible())
     		return null;
@@ -85,7 +79,8 @@ public class EntityNyxSpider extends EntitySpider {
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
+    @Override
+	protected String getDeathSound()
     {
     	if(this.isInvisible())
     		return null;
@@ -109,6 +104,7 @@ public class EntityNyxSpider extends EntitySpider {
 	 * has recently been hit by a player. @param par2 - Level of Looting used to
 	 * kill this mob.
 	 */
+	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1)
 			return;
@@ -127,12 +123,13 @@ public class EntityNyxSpider extends EntitySpider {
 	}
 
 
-    public boolean attackEntityAsMob(Entity par1Entity)
+    @Override
+	public boolean attackEntityAsMob(Entity par1Entity)
     {
 		
 		this.setInvisible(false);
 		
-		float dmg = (float)(IaSWorldHelper.getDifficulty(this.worldObj) + (IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0));
+		float dmg = IaSWorldHelper.getDifficulty(this.worldObj) + (IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0);
 		
 		DamageSource dmgsrc = DamageSource.causeMobDamage(this);
 		dmgsrc.setMagicDamage();
@@ -155,6 +152,7 @@ public class EntityNyxSpider extends EntitySpider {
 		}
 	}
 	
+	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
     {
         Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
@@ -173,6 +171,7 @@ public class EntityNyxSpider extends EntitySpider {
 				this.rand.nextFloat() * 0.2F + 0.9F);
 	}
 	
+	@Override
 	public void setRevengeTarget(EntityLivingBase elb) {
 		super.setRevengeTarget(elb);
 		if(this.isInvisible()) {
@@ -213,6 +212,7 @@ public class EntityNyxSpider extends EntitySpider {
 		return 5.0F;
 	}
 
+	@Override
 	protected String getLivingSound() {
 		return null;
 	}
@@ -226,7 +226,8 @@ public class EntityNyxSpider extends EntitySpider {
 			this.playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 	
-    public float getBlockPathWeight(int i, int j, int k)
+    @Override
+	public float getBlockPathWeight(int i, int j, int k)
     {
     	int lightb = worldObj.getBlockLightValue(i, j, k);
     	return (lightb>7?0:1);

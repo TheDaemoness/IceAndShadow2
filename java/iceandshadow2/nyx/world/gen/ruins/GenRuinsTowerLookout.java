@@ -1,13 +1,10 @@
 package iceandshadow2.nyx.world.gen.ruins;
 
-import iceandshadow2.IaSFlags;
-import iceandshadow2.IceAndShadow2;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
-import java.util.logging.Level;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -16,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class GenRuinsTowerLookout extends GenRuins {
 
@@ -28,6 +24,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	/**
 	 * Determines whether or not ruins can be generated here. Does not do any building.
 	 */
+	@Override
 	public boolean canGenerateHere(World var1, Random var2, int x, int y, int z) {
 		for(int xdelta = -36; xdelta <= 36; ++xdelta) {
 			for(int zdelta = -36; zdelta <= 36; ++zdelta)
@@ -42,6 +39,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	/**
 	 * Generates the basic structure of the building. May also even out terrain that the building is on.
 	 */
+	@Override
 	public void buildPass(World world, Random var2, int x, int y, int z) {
 		Sculptor.terrainFlatten(world, x-3, y-1, z-3, x+3, 4, z+3);
 
@@ -59,6 +57,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	/**
 	 * "Ruins" the basic structure and adds a few decorative and functional touches to the building, like ladders, doorways, and spawners.
 	 */
+	@Override
 	public void damagePass(World var1, Random var2, int x, int y, int z) {
 		/*
 		 * Direction (f) variable cheat sheet: 0: South (+z) 1: West (-x) 2:
@@ -126,6 +125,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	/**
 	 * Adds primarily reward chests. Not all ruins will have rewards, but most will and a coder is free to have this return instantly.
 	 */
+	@Override
 	public void rewardPass(World var1, Random var2, int x, int y, int z) {
 		if(var2.nextInt(3) == 0)
 			return;

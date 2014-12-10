@@ -1,11 +1,9 @@
 package iceandshadow2.nyx.forge;
 
-import cpw.mods.fml.common.IFuelHandler;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.IFuelHandler;
 
 public class NyxFuelHandler implements IFuelHandler {
 	@Override

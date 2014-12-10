@@ -1,23 +1,19 @@
 package iceandshadow2.nyx.blocks;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsPoisonwood;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
 
