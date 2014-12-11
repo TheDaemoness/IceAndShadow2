@@ -10,6 +10,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase
 {
     /** The entity the AI instance has been applied to */
     private final EntityLiving entityHost;
+    private boolean reflexDelay;
 
     /**
      * The entity (as a RangedAttackMob) the AI instance has been applied to.
@@ -102,6 +103,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase
         this.attackTarget = null;
         this.stopMovingDelay = 0;
         this.rangedAttackTime = -1;
+        this.reflexDelay = false;
     }
 
     /**
@@ -152,8 +154,14 @@ public class EntityAINyxRangedAttack extends EntityAIBase
                 f1 = 1.1F;
             }
 
-            this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
             this.rangedAttackTime = MathHelper.floor_float(f * (this.maxRangedAttackTime - this.minRangedAttackTime) + this.minRangedAttackTime);
+            if(reflexDelay)
+            	this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
+            else {
+            	reflexDelay = true;
+            	this.rangedAttackTime /= 2;
+            }
+            
         }
     }
 }

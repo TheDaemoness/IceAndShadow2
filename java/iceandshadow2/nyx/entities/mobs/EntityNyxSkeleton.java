@@ -362,7 +362,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
         var3 += dif==3?1:0;
-        var4 += longe?1:0;
         
         var2.setDamage(getAttackStrength(par1EntityLiving));
 
