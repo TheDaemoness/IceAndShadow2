@@ -70,7 +70,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		}
 	}
 
-    protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 20, 35, 24.0F);
+    protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 25, 35, 24.0F);
     protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, this.moveSpeed, 35, 45, 32.0F);
     protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed+0.5, false);
     protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class, this.moveSpeed+0.5, true);
@@ -357,7 +357,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         }
         	//var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 2.4F, 2.0F, slowstr, slowtime);
         else
-        	var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.7F, 5.0F, slowstr, slowtime);
+        	var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.8F, 5.0F, slowstr, slowtime);
         var2.setIsCritical(longe);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
