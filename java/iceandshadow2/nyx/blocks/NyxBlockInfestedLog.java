@@ -30,8 +30,7 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 	
 	
     @Override
-	public void updateTick(World w, int x, int y,
-			int z, Random r) {
+	public void updateTick(World w, int x, int y, int z, Random r) {
     	NyxBlockFunctionsInfested.updateTick(w, x, y, z, r);
 	}
 
