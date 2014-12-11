@@ -9,6 +9,7 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -91,6 +92,10 @@ public class NyxDeathSystem {
 		if (drop_main) {
 			for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
 				if (plai_inv.mainInventory[i] != null) {
+					if(plai_inv.mainInventory[i].getItem() instanceof ItemTool) {
+						if(i < 9)
+							continue;
+					}
 					if(plai_inv.mainInventory[i].getItem() instanceof IIaSKeepOnDeath)
 						continue;
 					if (do_drop)
