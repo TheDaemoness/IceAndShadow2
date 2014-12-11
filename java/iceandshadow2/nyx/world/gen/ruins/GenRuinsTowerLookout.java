@@ -46,12 +46,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 		Sculptor.walls(world, x-1, y-3, z-1, x+1, y-3, z+1, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.cube(world, x-2, y-2, z-2, x+2, y-2, z+2, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.walls(world, x-3, y-1, z-3, x+3, y-1, z+3, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
-		Sculptor.cube(world, x-2, y-1, z-2, x+2, y, z+2, NyxBlocks.brickFrozen, 0);
+		Sculptor.cube(world, x-2, y-1, z-2, x+2, y, z+2, NyxBlocks.brickPale, 0);
 		Sculptor.cube(world, x-4, y, z-4, x+4, y+13, z+4, Blocks.air, 0);
 
-		Sculptor.walls(world, x-2, y, z-2, x+2, y+10, z+2, NyxBlocks.brickFrozen, 0);
-		Sculptor.walls(world, x-3, y+11, z-3, x+3, y+11, z+3, NyxBlocks.brickFrozen, 0);
-		Sculptor.corners(world, x-2, y+10, z-2, x+2, y+10, z+2, NyxBlocks.brickFrozen, 0);
+		Sculptor.walls(world, x-2, y, z-2, x+2, y+10, z+2, NyxBlocks.brickPale, 0);
+		Sculptor.walls(world, x-3, y+11, z-3, x+3, y+11, z+3, NyxBlocks.brickPale, 0);
+		Sculptor.corners(world, x-2, y+10, z-2, x+2, y+10, z+2, NyxBlocks.brickPale, 0);
 	}
 
 	/**
@@ -81,8 +81,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 						|| MathHelper.abs_int(zdim) == 2) {
 					// Swiss cheese pass.
 					for (int ydim = 1; ydim < 10; ++ydim) {
-						if (!var1.isAirBlock(x + xdim, y + ydim, z + zdim) && var2.nextInt(5) == 0)
-							var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
+						if(!var1.isAirBlock(x + xdim, y + ydim, z + zdim)) {
+							if (var2.nextInt(5) == 0)
+								var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
+							else if (var2.nextInt(3) == 0)
+								var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickPaleCracked);
+						}
 					}
 				}
 
@@ -174,11 +178,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 				itemz.addEnchantment(Enchantment.punch, 1);
 				bowflag = false;
 			}
-			
+
 			// Sanctified Bone
 			else if (rewardid < 10)
 				itemz = new ItemStack(NyxItems.boneSanctified);
-			
+
 			// Sword or armor!
 			else if (rewardid < 15) {
 				if(var2.nextInt(3) == 0) {
@@ -213,7 +217,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 			// Devora.
 			else if (rewardid < 40)
-					itemz = new ItemStack(NyxItems.devora, 2 + var2.nextInt(6));
+				itemz = new ItemStack(NyxItems.devora, 2 + var2.nextInt(6));
 
 			// Food.
 			else if (rewardid < 55) {
@@ -230,7 +234,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 					itemz = new ItemStack(NyxItems.poisonFruit,
 							2 + var2.nextInt(4));
 			}
-			
+
 			//Ender pearls
 			else if (rewardid < 70)
 				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(3));
