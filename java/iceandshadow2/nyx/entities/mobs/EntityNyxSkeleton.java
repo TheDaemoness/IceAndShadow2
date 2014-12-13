@@ -493,7 +493,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             this.setCurrentItemOrArmor(4, helm);
             this.equipmentDropChances[4] = 0.0F;
             
-            if(rand.nextBoolean() && this.worldObj.difficultySetting.getDifficultyId() >= 3) {
+            if(this.worldObj.difficultySetting.getDifficultyId() >= 3 && rand.nextBoolean()) {
             	setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
                 this.equipmentDropChances[0] = 0.33F;
             } else {

@@ -130,6 +130,7 @@ public class EntityShadowBall extends EntityThrowable {
 									DamageSource.causeIndirectMagicDamage(
 											elmo,(this.getThrower()==null?this:this.getThrower())),
 											power);
+						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id,69,1));
 					}
 
 				}
