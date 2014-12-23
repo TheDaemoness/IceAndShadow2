@@ -1,11 +1,13 @@
 package iceandshadow2.nyx.items.materials;
 
 import iceandshadow2.api.EnumIaSToolClass;
+import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSEntityHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -41,6 +43,14 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		return "Devora";
 	}
 	
+	
+	
+	@Override
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		user.worldObj.createExplosion(user, target.posX, target.posY+target.getEyeHeight()/2, target.posZ, 0.1F, true);
+		return super.onAttack(is, user, target);
+	}
+
 	@Override
 	public boolean onSwing(ItemStack is, EntityLivingBase user) {
 		if(is.getItem() instanceof IaSItemThrowingKnife)
@@ -51,7 +61,8 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 				return false;
 			if(m.typeOfHit == MovingObjectType.BLOCK) {
 				Vec3 v = IaSBlockHelper.getBlockSideCoords(m.blockX, m.blockY, m.blockZ, ForgeDirection.getOrientation(m.sideHit), user.worldObj.rand, 0.75F);
-				if(((IaSItemTool)is.getItem()).getIaSToolClass() == EnumIaSToolClass.SPADE)
+				EnumIaSToolClass tc = ((IIaSTool)is.getItem()).getIaSToolClass();
+				if(tc == EnumIaSToolClass.SPADE)
 					user.worldObj.createExplosion(user, v.xCoord, v.yCoord, v.zCoord, 0.3F, true);
 				else
 					user.worldObj.createExplosion(user, v.xCoord, v.yCoord, v.zCoord, 0.1F, false);

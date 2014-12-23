@@ -18,9 +18,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSTools {
 		public static IaSItemTool tools[];
+		public static IaSItemWeapon weapons[];
 		public static IaSBaseItem toolsActiveEchir[];
+		public static IaSBaseItem swordsActiveEchir[];
 		public static IaSBaseItem armorActiveEchir[];
-		public static IaSItemTool axe, pickaxe, spade, sword;
+		public static IaSItemTool axe, pickaxe, spade;
+		public static IaSItemWeapon sword;
 		public static IaSItemThrowingKnife knife;
 		
 		public static IaSItemArmor
@@ -28,16 +31,22 @@ public class IaSTools {
 		
 	public static void init() {
 		tools = new IaSItemTool[EnumIaSToolClass.values().length];
+		weapons = new IaSItemWeapon[EnumIaSToolClass.values().length];
 		toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
 		armorActiveEchir = new IaSBaseItem[4];
 		for(EnumIaSToolClass c : EnumIaSToolClass.values()) {
 			if(c == EnumIaSToolClass.KNIFE)
-				tools[c.getClassId()] = new IaSItemThrowingKnife();
+				weapons[c.getClassId()] = new IaSItemThrowingKnife();
+			else if(c.isWeapon())
+				weapons[c.getClassId()] = new IaSItemWeapon(c);
 			else
 				tools[c.getClassId()] = new IaSItemTool(c);
 			toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId());
 			GameRegistry.registerItem(toolsActiveEchir[c.getClassId()], "iasTool"+c.toString()+"EchirActive");
-			GameRegistry.registerItem(tools[c.getClassId()], "ias"+c.toString());
+			if(c.isWeapon())
+				GameRegistry.registerItem(weapons[c.getClassId()], "ias"+c.toString());
+			else
+				GameRegistry.registerItem(tools[c.getClassId()], "ias"+c.toString());
 		}
 		
 		for(int i = 0; i < 4; ++i) {
@@ -48,8 +57,8 @@ public class IaSTools {
 		axe = tools[EnumIaSToolClass.AXE.getClassId()];
 		pickaxe = tools[EnumIaSToolClass.PICKAXE.getClassId()];
 		spade = tools[EnumIaSToolClass.SPADE.getClassId()];
-		sword = tools[EnumIaSToolClass.SWORD.getClassId()];
-		knife = (IaSItemThrowingKnife)tools[EnumIaSToolClass.KNIFE.getClassId()];
+		sword = weapons[EnumIaSToolClass.SWORD.getClassId()];
+		knife = (IaSItemThrowingKnife)weapons[EnumIaSToolClass.KNIFE.getClassId()];
 
 		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
 		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
@@ -57,8 +66,8 @@ public class IaSTools {
 		makeEchirToolRecipe(1, "eee", " s ", " s ", Items.bone);
 		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.stick);
 		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
-		makeEchirToolRecipe(3, " e ", " e ", " s ", Items.stick);
-		makeEchirToolRecipe(3, " e ", " e ", " s ", Items.bone);
+		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
+		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.bone);
 		
 		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
 		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
@@ -114,6 +123,14 @@ public class IaSTools {
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
 		GameRegistry.addSmelting(new ItemStack(tools[slot],1,0), new ItemStack(IaSTools.toolsActiveEchir[slot]), 0);
+	}
+	
+	protected static void makeEchirWeaponRecipe(int slot, String a, String b, String c, Item stick) {
+		GameRegistry.addShapedRecipe(new ItemStack(toolsActiveEchir[slot],1),
+				a,b,c,
+				'e', new ItemStack(NyxItems.echirIngot,1,1),
+				's', new ItemStack(stick));
+		GameRegistry.addSmelting(new ItemStack(weapons[slot],1,0), new ItemStack(IaSTools.toolsActiveEchir[slot]), 0);
 	}
 	
 	protected static void makeEchirArmorRecipe(String a, String b, String c, int slot) {

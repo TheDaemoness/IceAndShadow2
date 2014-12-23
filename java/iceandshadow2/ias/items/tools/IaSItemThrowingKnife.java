@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class IaSItemThrowingKnife extends IaSItemTool {
+public class IaSItemThrowingKnife extends IaSItemWeapon {
 
 	public IaSItemThrowingKnife() {
 		super(EnumIaSToolClass.KNIFE);
@@ -86,11 +86,6 @@ public class IaSItemThrowingKnife extends IaSItemTool {
 			Entity player, int par4, boolean par5) {
 		if(par1ItemStack.getItemDamage() > 0)
 			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage()-1);
-	}
-	
-	@Override
-	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		return EnumRarity.common;
 	}
 
 	@Override

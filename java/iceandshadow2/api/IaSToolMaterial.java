@@ -1,10 +1,12 @@
 package iceandshadow2.api;
 
+import iceandshadow2.ias.items.tools.IaSItemTool;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
@@ -19,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 
 	@SideOnly(Side.CLIENT)
-	protected IIcon iconTool[], iconBroken[];
+	protected IIcon iconTool[], iconWeapon[], iconTBroken[], iconWBroken[];
 
 	/**
 	 * Called when a tool breaks to determine whether or not a "broken" tool item should be given.
@@ -294,9 +296,10 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 */
 	public IIcon getIcon(ItemStack is) {
 		EnumIaSToolClass t = ((IIaSTool)is.getItem()).getIaSToolClass();
-		if(is.getItem() instanceof IIaSTool)
+		if(t.isWeapon())
+			return iconWeapon[t.getClassId()];
+		else
 			return iconTool[t.getClassId()];
-		return iconBroken[t.getClassId()];
 	}
 
 	/**
@@ -310,12 +313,26 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 * Called to register icons for a certain set of tools.
 	 */
 	public void registerIcons(IIconRegister reg) {
-		iconTool = new IIcon[EnumIaSToolClass.values().length];
-		for(int i = 0; i < iconTool.length; ++i)
-			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
-		iconBroken = new IIcon[EnumIaSToolClass.values().length];
-		for(int i = 0; i < iconTool.length; ++i) {
-			//iconBroken[i] = reg.registerIcon(this.getTextureNamePrefix()+"Broken"+this.getMaterialName()+EnumIaSToolClass.fromId(i).toString());
+		int lTool = 0, lWeapon = 0;
+		for(EnumIaSToolClass cl : EnumIaSToolClass.values()) {
+			if(cl.isWeapon() && cl.getClassId()>=lWeapon)
+				lWeapon = cl.getClassId()+1;
+			else if(!cl.isWeapon() && cl.getClassId()>=lTool)
+				lTool = cl.getClassId()+1;
 		}
+		iconTool = new IIcon[lTool];
+		iconWeapon = new IIcon[lWeapon];
+		for(int i = 0; i < iconTool.length; ++i)
+			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i, false).toString());
+		for(int i = 0; i < iconWeapon.length; ++i)
+			iconWeapon[i] = reg.registerIcon(this.getTextureNamePrefix()+this.getMaterialName()+EnumIaSToolClass.fromId(i, true).toString());
+		
+	}
+
+	/**
+	 * Called to get tool material rarity.
+	 */
+	public EnumRarity getRarity() {
+		return EnumRarity.common;
 	}
 }

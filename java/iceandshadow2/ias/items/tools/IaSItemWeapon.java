@@ -23,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -30,13 +31,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaSGlowing {
+public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, IIaSGlowing {
 
 	private EnumIaSToolClass classe;
 	protected IIcon invisible;
 	
-	public IaSItemTool(EnumIaSToolClass cl) {
-		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
+	public IaSItemWeapon(EnumIaSToolClass cl) {
+		super(ToolMaterial.EMERALD);
 		this.setUnlocalizedName("iasTool");
 		classe = cl;
 	}
@@ -56,32 +57,6 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(stack);
 		return m.onSwing(stack, entityLiving);
-	}
-	
-	@Override
-	public float func_150893_a(ItemStack is, Block block) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		return m.getHarvestSpeed(is, block);
-	}
-
-	@Override
-	public boolean canHarvestBlock(Block bl, ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		Set<String> s = this.getToolClasses(is);
-		if(!s.contains(bl.getHarvestTool(0)))
-			return false;
-		return bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
-	}
-	
-	@Override
-	public Set<String> getToolClasses(ItemStack stack) {
-		return ((IaSItemTool)(stack.getItem())).getIaSToolClass().getToolClassSet();
-    }
-	
-	@Override
-	public int getHarvestLevel(ItemStack is, String toolClass) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		return m.getHarvestLevel(is, toolClass);
 	}
 
 	@Override
@@ -138,11 +113,6 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		if(m == null)
 			return false;
 		return m.isRepairable(is, two);
-	}
-
-	@Override
-	public float getDigSpeed(ItemStack is, Block block, int meta) {
-		return func_150893_a(is, block); //meta sensitivity is pointless ATM, I wish it wasn't.
 	}
 
 	@Override
