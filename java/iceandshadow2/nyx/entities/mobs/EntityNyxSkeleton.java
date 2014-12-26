@@ -54,8 +54,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		BOW_FROST_SHORT(0),
 		MELEE(1),
 		MAGIC_SHADOW(2),
-		BOW_FROST_LONG(3),
-		KNIFE_DEVORA(4);
+		BOW_FROST_LONG(3);
 		
 		public byte id;
 		EnumNyxSkeletonType(int aidee) {
@@ -75,7 +74,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed+0.5, false);
     protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class, this.moveSpeed+0.5, true);
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 35, 45, 12.0F);
-	protected EntityAINyxRangedAttack knifeAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 10, 15, 12.0F);
 
 	protected IaSSetSenses senses;
 	private EntityLivingBase searched;
@@ -428,8 +426,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     		return new ItemStack(NyxItems.boneCursed);
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_LONG)
     		return new ItemStack(NyxItems.frostBowLong,1,255-this.rand.nextInt(16));
-    	if(taipe == EnumNyxSkeletonType.KNIFE_DEVORA)
-    		return new ItemStack(NyxItems.devora);
     	return null;
     }
     
