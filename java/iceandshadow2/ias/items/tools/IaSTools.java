@@ -33,6 +33,7 @@ public class IaSTools {
 		tools = new IaSItemTool[EnumIaSToolClass.values().length];
 		weapons = new IaSItemWeapon[EnumIaSToolClass.values().length];
 		toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
+		swordsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
 		armorActiveEchir = new IaSBaseItem[4];
 		for(EnumIaSToolClass c : EnumIaSToolClass.values()) {
 			if(c == EnumIaSToolClass.KNIFE)
@@ -41,12 +42,16 @@ public class IaSTools {
 				weapons[c.getClassId()] = new IaSItemWeapon(c);
 			else
 				tools[c.getClassId()] = new IaSItemTool(c);
-			toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId());
-			GameRegistry.registerItem(toolsActiveEchir[c.getClassId()], "iasTool"+c.toString()+"EchirActive");
-			if(c.isWeapon())
+			if(c.isWeapon()) {
+				swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId(), true);
+				GameRegistry.registerItem(swordsActiveEchir[c.getClassId()], "iasTool"+c.toString()+"EchirActive");
 				GameRegistry.registerItem(weapons[c.getClassId()], "ias"+c.toString());
-			else
+			}
+			else {
+				toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId(), false);
+				GameRegistry.registerItem(toolsActiveEchir[c.getClassId()], "iasTool"+c.toString()+"EchirActive");
 				GameRegistry.registerItem(tools[c.getClassId()], "ias"+c.toString());
+			}
 		}
 		
 		for(int i = 0; i < 4; ++i) {
@@ -93,6 +98,20 @@ public class IaSTools {
 		makeEchirArmorInfusionRecipe(NyxItems.cortraDust, armorCortra);
 	}
 	
+	public static ItemStack setToolMaterial(Item it, String mat) {
+		ItemStack is = new ItemStack(it);
+		is.stackTagCompound = new NBTTagCompound();
+		is.stackTagCompound.setString("iasMaterial", mat);
+		return is;
+	}
+	
+	public static ItemStack setToolMaterial(ItemStack is, String mat) {
+		if(!is.hasTagCompound())
+			is.stackTagCompound = new NBTTagCompound();
+		is.stackTagCompound.setString("iasMaterial", mat);
+		return is;
+	}
+	
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if(tier == 0)
 			return new ItemStack(armorCortra[slot],0);
@@ -130,7 +149,7 @@ public class IaSTools {
 				a,b,c,
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
-		GameRegistry.addSmelting(new ItemStack(weapons[slot],1,0), new ItemStack(IaSTools.toolsActiveEchir[slot]), 0);
+		GameRegistry.addSmelting(new ItemStack(weapons[slot],1,0), new ItemStack(IaSTools.swordsActiveEchir[slot]), 0);
 	}
 	
 	protected static void makeEchirArmorRecipe(String a, String b, String c, int slot) {
