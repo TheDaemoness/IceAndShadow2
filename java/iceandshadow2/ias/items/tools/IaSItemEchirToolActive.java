@@ -14,10 +14,12 @@ import net.minecraft.world.World;
 public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 
 	protected int slot;
+	protected boolean wep;
 	
-	public IaSItemEchirToolActive(String texName, int tab) {
+	public IaSItemEchirToolActive(String texName, int tab, boolean isWeapon) {
 		super(EnumIaSModule.IAS, texName);
 		slot = tab; //FtM sex change, wot?
+		wep = isWeapon;
 		this.setMaxStackSize(1);
 		this.setFull3D();
 	}
@@ -38,8 +40,12 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w,
 			EntityPlayer ninja) {
-		if(ninja.isSneaking()) //Do NOT remove this if statement, it actually isn't redundant.
-			par1 = new ItemStack(IaSTools.tools[slot],1,par1.getItemDamage());
+		if(ninja.isSneaking()) { //Do NOT remove this if statement, it actually isn't redundant.
+			if(wep)
+				par1 = new ItemStack(IaSTools.weapons[slot],1,par1.getItemDamage());
+			else
+				par1 = new ItemStack(IaSTools.tools[slot],1,par1.getItemDamage());
+		}
 		return par1;
 	}
 
