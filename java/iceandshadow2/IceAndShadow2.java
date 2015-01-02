@@ -6,6 +6,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
+import iceandshadow2.nyx.forge.NyxEventHandlerCold;
 import iceandshadow2.nyx.forge.NyxFuelHandler;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
@@ -65,6 +66,7 @@ public class IceAndShadow2 {
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		
 		NyxBiomes.registerBiomes();
+		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
 		GameRegistry.registerFuelHandler(new NyxFuelHandler());
 		
 		//Be nice, Thaumcraft.

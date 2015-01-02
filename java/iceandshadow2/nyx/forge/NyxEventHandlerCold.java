@@ -54,7 +54,7 @@ public class NyxEventHandlerCold {
 				e.setCanceled(true);
 				if(id != Blocks.torch)
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"It's far too cold to start an open fire that way in Nyx.");
+							"It's far too cold to start a fire that way in Nyx.");
 				else
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 							"It's far too cold to light a torch in Nyx.");
