@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -51,6 +52,19 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSKee
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
 		empty = reg.registerIcon(this.getTexName()+"Empty");
+	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		// TODO Auto-generated method stub
+		return super.getRarity(p_77613_1_);
+	}
+
+	@Override
+	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
+		if((item.getItemDamage() & 1) == 1)
+			item.setItemDamage(item.getItemDamage()-1);
+		return true;
 	}
 
 	@Override
