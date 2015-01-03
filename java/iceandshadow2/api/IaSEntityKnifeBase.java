@@ -20,4 +20,7 @@ public abstract class IaSEntityKnifeBase extends Entity implements IProjectile {
 	 * Gets an ItemStack representation of this throwing knife.
 	 */
 	public abstract ItemStack getItemStack();
+
+	public abstract void doDrop(IaSToolMaterial mat);
+	public abstract void setSource(ItemStack stack);
 }

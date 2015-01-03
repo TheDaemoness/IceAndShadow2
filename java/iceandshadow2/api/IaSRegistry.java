@@ -51,9 +51,11 @@ public final class IaSRegistry {
 	}
 	
 	public static IaSToolMaterial getToolMaterial(String key) {
+		if(key == null)
+			return getDefaultMaterial();
 		if(toolMaterials.containsKey(key))
 			return toolMaterials.get(key);
-		return null; //In case I decide to switch to TreeMap later for some reason.
+		return getDefaultMaterial();
 	}
 	
 	public static Collection<IaSToolMaterial> getToolMaterials() {
