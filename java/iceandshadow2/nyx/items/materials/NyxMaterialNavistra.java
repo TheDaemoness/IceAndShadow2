@@ -5,6 +5,7 @@ import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -55,6 +56,13 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 		return 16;
 	}
 	
+	@Override
+	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
+			Entity thrower) {
+		DamageSource ds = super.getKnifeDamageSource(knife, thrower).setDamageBypassesArmor();
+		return ds;
+	}
+
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
