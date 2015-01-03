@@ -6,6 +6,7 @@ import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -32,9 +33,11 @@ public class NyxEntities {
 		
 		//Set up Shadow Balls
 		EntityRegistry.registerModEntity(EntityShadowBall.class,
-				"nyxProjectileShadowBall", 14, owner, 80, 2, true);
+				"nyxProjectileShadowBall", 4, owner, 80, 2, true);
 		
-		
+		//Set up Throwing Knives
+		EntityRegistry.registerModEntity(EntityThrowingKnife.class,
+				"nyxProjectileThrowingKnife", 5, owner, 80, 2, true);
 	}
 	
 	public static int getUniqueEntityId() {

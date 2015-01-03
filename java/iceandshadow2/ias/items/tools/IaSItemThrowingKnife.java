@@ -4,7 +4,10 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +26,7 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		this.setMaxStackSize(32);
 	}
 	
-	/*
+	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
 		if(par1ItemStack.getItemDamage() > 0)
@@ -32,46 +35,24 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		int var10 = EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.knockback.effectId, par1ItemStack);
 		EntityThrowingKnife var8 = new EntityThrowingKnife(par2World,
-				par3EntityPlayer, 
-				par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeWarped.itemID?1.25F:1.0F, 
+				par3EntityPlayer, 1.0F, 
 				par1ItemStack);
-
-		if(par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeEchir.itemID)
-			var8.setType(0);
-		else if(par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeNavistra.itemID)
-			var8.setType(1);
-		else if (par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeDevora.itemID) {
-			var8.setIsCritical(true);
-			var8.setType(2);
-		}
-		else if(par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeCortra.itemID)
-			var8.setType(3);
-		else if(par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeWarped.itemID)
-			var8.setType(4);
-
-		var8.setDamage(((IaSItemThrowingKnife) par1ItemStack.getItem())
-				.func_82803_g() + 4.0F);
-
-		if (var10 > 0) {
-			var8.setKnockbackStrength(var10);
-		}
-
+		
 		if (!par3EntityPlayer.capabilities.isCreativeMode)
 			par1ItemStack.stackSize -= 1;
+		
+		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(par1ItemStack);
+		mat.onKnifeThrow(par1ItemStack, par3EntityPlayer, var8);
 
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
 
 		if (!par2World.isRemote)
 			par2World.spawnEntityInWorld(var8);
 		
-		if(par1ItemStack.getItem().itemID == IaSTools.nyxThrowingKnifeWarped.itemID)
-			par1ItemStack.setItemDamage(8);
-		else
-			par1ItemStack.setItemDamage(12);
+		par1ItemStack.setItemDamage(IaSToolMaterial.extractMaterial(par1ItemStack).getKnifeCooldown(par1ItemStack, par2World, par3EntityPlayer));
 
 		return par1ItemStack;
     }
-    */
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,

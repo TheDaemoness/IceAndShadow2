@@ -7,10 +7,12 @@ import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import iceandshadow2.render.entity.mobs.RenderNyxSkeleton;
 import iceandshadow2.render.entity.mobs.RenderNyxSpider;
 import iceandshadow2.render.entity.projectiles.RenderIceArrow;
 import iceandshadow2.render.entity.projectiles.RenderNot;
+import iceandshadow2.render.entity.projectiles.RenderThrowingKnife;
 import iceandshadow2.render.item.RenderItemBow;
 import iceandshadow2.render.item.RenderItemVanillaGlowing;
 
@@ -37,6 +39,8 @@ public class IaSRenderers {
 				new RenderIceArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBall.class,
 				new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrowingKnife.class,
+				new RenderThrowingKnife());
 		
 		//Items
 		for(Field f : NyxItems.class.getFields()) {
@@ -54,6 +58,10 @@ public class IaSRenderers {
 		for(Item item : IaSTools.tools)
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for(Item item : IaSTools.toolsActiveEchir)
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		for(Item item : IaSTools.weapons)
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		for(Item item : IaSTools.swordsActiveEchir)
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for(Item item : IaSTools.armorActiveEchir)
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());

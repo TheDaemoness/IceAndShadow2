@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items.materials;
 
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSTool;
+import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSItemTool;
@@ -10,7 +11,9 @@ import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -18,6 +21,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxMaterialDevora extends IaSToolMaterial {
 
+	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_devora.png");
+	
 	@Override
 	public int getXpValue(World world, ItemStack is) {
 		return 0;
@@ -42,8 +47,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	public String getMaterialName() {
 		return "Devora";
 	}
-	
-	
 	
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
@@ -90,4 +93,24 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		return 384;
 	}
 
+	@Override
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
+			Entity target) {
+		if(!knife.worldObj.isRemote)
+			knife.worldObj.createExplosion(user, knife.posX, knife.posY, knife.posZ, 0.3F, true);
+		return false;
+	}
+
+	@Override
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
+			ChunkCoordinates block) {
+		if(!knife.worldObj.isRemote)
+			knife.worldObj.createExplosion(user, knife.posX, knife.posY, knife.posZ, 0.3F, true);
+		return false;
+	}
+
+	@Override
+	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
+		return knife_tex;
+	}
 }

@@ -43,7 +43,10 @@ public class IaSTools {
 			else
 				tools[c.getClassId()] = new IaSItemTool(c);
 			if(c.isWeapon()) {
-				swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId(), true);
+				if(c == EnumIaSToolClass.KNIFE)
+					swordsActiveEchir[c.getClassId()] = new IaSItemEchirKnifeActive("ToolEchir"+c.toString()+"Active",c.getClassId());
+				else
+					swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive("ToolEchir"+c.toString()+"Active",c.getClassId(), true);
 				GameRegistry.registerItem(swordsActiveEchir[c.getClassId()], "iasTool"+c.toString()+"EchirActive");
 				GameRegistry.registerItem(weapons[c.getClassId()], "ias"+c.toString());
 			}
@@ -73,8 +76,8 @@ public class IaSTools {
 		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
 		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
 		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.bone);
-		//makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
-		//makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
+		makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
+		makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
 		
 		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
 		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
@@ -147,7 +150,7 @@ public class IaSTools {
 	}
 	
 	protected static void makeEchirWeaponRecipe(int slot, String a, String b, String c, Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(toolsActiveEchir[slot],1),
+		GameRegistry.addShapedRecipe(new ItemStack(swordsActiveEchir[slot],1),
 				a,b,c,
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
@@ -155,7 +158,7 @@ public class IaSTools {
 	}
 	
 	protected static void makeEchirWeaponRecipe(int slot, String a, String b, Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(toolsActiveEchir[slot],1),
+		GameRegistry.addShapedRecipe(new ItemStack(swordsActiveEchir[slot],1),
 				a,b,
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				's', new ItemStack(stick));
