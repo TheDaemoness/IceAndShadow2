@@ -8,9 +8,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -137,6 +139,20 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 			EntityPlayer par3EntityPlayer) {
 		return 12;
 	}
+	
+	/**
+	 * Called to get the damage source for a throwing knife.
+	 * Useful for doing things like making a throwing knife's damage pierce armor.
+	 * @param knife The throwing knife entity
+	 * @param thrower The thrower, or null if there was no throwing entity.
+	 * @return A damage source.
+	 */
+	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife, Entity thrower) {
+		if(thrower == null)
+			return DamageSource.causeThrownDamage(knife, knife);
+		else
+			return DamageSource.causeThrownDamage(knife, thrower);
+	}
 
 	/**
 	 * Gets a thrown throwing knife's damage bonus against certain entities.
@@ -151,15 +167,22 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 
 	/**
-	 * Called when a throwing knife collides with an entity or block and onThrowingKnifeHit returns true.
+	 * Called when a throwing knife collides with an entity or block and onKnifeHit returns true.
 	 * Used to determine the item stack that the knife should drop.
 	 * @param user The thrower.
 	 * @param knife The throwing knife entity.
 	 * @return The item stack to drop when the knife hits something, or null if no drop.
 	 */
-	public ItemStack getKnifeDrop(EntityLivingBase user, IaSEntityKnifeBase knife, MovingObjectPosition target) {
+	public ItemStack getKnifeDrop(EntityLivingBase user, IaSEntityKnifeBase knife) {
 		return knife.getItemStack();
 	}
+	
+	/**
+	 * Gets the base texture for the throwing knife entity.
+	 * @param knife The throwing knife entity.
+	 * @return The resource location for a texture to render the throwing knife with.
+	 */
+	public abstract ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife);
 
 	/**
 	 * Gets the material name associated with a tool, for the purposes of unlocalized names and texture names.
@@ -258,13 +281,25 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	}
 
 	/**
-	 * Called when a throwing knife collides with an entity or block.
+	 * Called when a throwing knife collides with an entity.
 	 * @param user The thrower.
 	 * @param knife The throwing knife entity.
-	 * @param target The block or entity hit.
+	 * @param target The entity hit.
+	 * @return If the knife should drop as an item or not.
 	 */
-	public void onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, MovingObjectPosition target) {
-		return;
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
+		return true;
+	}
+	
+	/**
+	 * Called when a throwing knife collides with a block.
+	 * @param user The thrower.
+	 * @param knife The throwing knife entity.
+	 * @param block The block hit.
+	 * @return If the knife should drop as an item or not.
+	 */
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
+		return true;
 	}
 
 	/**
