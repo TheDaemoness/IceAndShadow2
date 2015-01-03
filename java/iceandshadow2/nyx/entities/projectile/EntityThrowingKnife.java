@@ -442,7 +442,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this.motionZ);
 			}
 
-			var22 = 0.8F;
+			var22 = 0.65F;
 		}
 
 		this.motionX *= var22;
