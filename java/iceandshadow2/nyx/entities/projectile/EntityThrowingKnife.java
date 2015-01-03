@@ -12,9 +12,12 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -43,7 +46,6 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 	private int zTile = -1;
 	private Block inTile;
 	private int inData = 0;
-	private int knockbackStrength;
 
 	/** Seems to be some sort of timer for animating an arrow. */
 	public int arrowShake = 0;
@@ -51,11 +53,12 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 	/** The owner of this arrow. */
 	private int ticksInAir = 0;
 	private EntityLivingBase shootingEntity;
-	
+
 	private ItemStack origin;
-	
+
 	public EntityThrowingKnife(World w) {
 		super(w);
+		this.origin = new ItemStack(IaSTools.knife);
 		this.renderDistanceWeight = 10.0D;
 		this.setSize(0.5F, 0.5F);
 		this.yOffset = 0.0F;
@@ -307,40 +310,63 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 								: var4.hitVec.lengthVector() / 5.0F),
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-				
+
 				IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
 
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
 						* this.motionZ);
-				int var23 = MathHelper.ceiling_double_int(var20
-						* mat.getKnifeDamage(this, this.shootingEntity, var4.entityHit));
 
+				float basedmg = mat.getKnifeDamage(this, this.shootingEntity, var4.entityHit);
+				if(this.origin != null) {
+					int enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, this.origin);
+					basedmg += 1.25*enchant;
+					if(var4.entityHit instanceof EntityLivingBase) {
+						EntityLivingBase elb = (EntityLivingBase)var4.entityHit;
+						EnumCreatureAttribute ca = elb.getCreatureAttribute();
+						if(ca == EnumCreatureAttribute.ARTHROPOD) {
+							enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.baneOfArthropods.effectId, this.origin);
+							basedmg += 2.5*enchant;
+						} else if(ca == EnumCreatureAttribute.UNDEAD) {
+							enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, this.origin);
+							basedmg += 2.5*enchant;
+						}
+					}
+				}	
+
+				int var23 = MathHelper.ceiling_double_int(var20
+						* basedmg);
 
 				DamageSource var21 = mat.getKnifeDamageSource(this, this.shootingEntity);
 				boolean drop = mat.onKnifeHit(this.shootingEntity, this, var4.entityHit);
 
 				if (var4.entityHit.attackEntityFrom(var21, var23)) {
+					if(this.origin != null) {
+						int enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, this.origin);
+						if(enchant >= 1)
+							var4.entityHit.setFire(enchant*4-1);
+					}	
 					if (var4.entityHit instanceof EntityLiving) {
+						int knockbackStrength = 0;
+						if(this.origin != null)
+							knockbackStrength += EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, this.origin);
+						
+						var26 = MathHelper.sqrt_double(this.motionX
+								* this.motionX + this.motionZ
+								* this.motionZ);
 
-						if (this.knockbackStrength > 0) {
-							var26 = MathHelper.sqrt_double(this.motionX
-									* this.motionX + this.motionZ
-									* this.motionZ);
-
-							if (var26 > 0.0F) {
-								var4.entityHit
-								.addVelocity(
-										this.motionX
-										* this.knockbackStrength
-										* 0.6000000238418579D
-										/ var26,
-										0.1D * this.knockbackStrength,
-										this.motionZ
-										* this.knockbackStrength
-										* 0.6000000238418579D
-										/ var26);
-							}
+						if (var26 > 0.0F) {
+							var4.entityHit
+							.addVelocity(
+									this.motionX
+									* knockbackStrength
+									* 0.6000000238418579D
+									/ var26,
+									0.1D * knockbackStrength,
+									this.motionZ
+									* knockbackStrength
+									* 0.6000000238418579D
+									/ var26);
 						}
 
 						if (this.shootingEntity != null
@@ -351,7 +377,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 							sendPacket(new S2BPacketChangeGameState(6, 0.0F));
 						}
 					}
-					
+
 					if (!(var4.entityHit instanceof EntityEnderman)) {
 						if(drop)
 							doDrop(mat);
@@ -367,35 +393,35 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this.zTile);
 				this.inData = this.worldObj.getBlockMetadata(this.xTile,
 						this.yTile, this.zTile);
-				
+
 				this.motionX = (double) ((float) (var4.hitVec.xCoord - this.posX));
 				this.motionY = (double) ((float) (var4.hitVec.yCoord - this.posY));
 				this.motionZ = (double) ((float) (var4.hitVec.zCoord - this.posZ));
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
-				 * this.motionZ);
+						* this.motionZ);
 				this.posX -= this.motionX / (double) var20
-				 * 0.05000000074505806D;
+						* 0.05000000074505806D;
 				this.posY -= this.motionY / (double) var20
-				 * 0.05000000074505806D;
+						* 0.05000000074505806D;
 				this.posZ -= this.motionZ / (double) var20
-				 * 0.05000000074505806D;
+						* 0.05000000074505806D;
 
 				if (this.inTile != null) {
 					this.inTile.onEntityCollidedWithBlock(
 							this.worldObj, this.xTile, this.yTile, this.zTile,
 							this);
 
-						this.worldObj.playSoundAtEntity(this, "random.anvil_land",
-								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-										: var4.hitVec.lengthVector() / 5.0F),
-										1.6F / (this.rand.nextFloat() * 0.2F + 0.9F));
+					this.worldObj.playSoundAtEntity(this, "random.anvil_land",
+							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+									: var4.hitVec.lengthVector() / 5.0F),
+									1.6F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
-						IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
-						if(mat.onKnifeHit(this.shootingEntity, this, new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
-							doDrop(mat);
-						
-						this.setDead();
+					IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
+					if(mat.onKnifeHit(this.shootingEntity, this, new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
+						doDrop(mat);
+
+					this.setDead();
 				}
 			}
 		}
@@ -459,6 +485,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this.zTile = nbt.getShort("zTile");
 		this.inData = nbt.getByte("inData") & 255;
 		this.arrowShake = nbt.getByte("shake") & 255;
+		if(nbt.hasKey("iasSourceStack"))
+			this.origin.readFromNBT(nbt.getCompoundTag("iasSourceStack"));
 	}
 
 	@Override
@@ -469,6 +497,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		nbt.setByte("inData", (byte) this.inData);
 		nbt.setByte("shake", (byte) this.arrowShake);
 		NBTTagCompound n = nbt.getCompoundTag("iasSourceStack");
+		this.origin.writeToNBT(n);
+		nbt.setTag("iasSourceStack", n);
 	}
 
 	@Override
@@ -493,7 +523,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		nis.stackSize = 1;
 		return nis;
 	}
-	
+
 	@Override
 	public void doDrop(IaSToolMaterial mat) {
 		if(!this.worldObj.isRemote) {
