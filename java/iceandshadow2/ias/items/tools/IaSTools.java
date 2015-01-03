@@ -86,6 +86,10 @@ public class IaSTools {
 		makeEchirToolInfusionRecipe(NyxItems.devora, "Devora");
 		makeEchirToolInfusionRecipe(NyxItems.navistraShard, "Navistra");
 		makeEchirToolInfusionRecipe(NyxItems.cortraDust, "Cortra");
+
+		makeEchirKnifeInfusionRecipe(NyxItems.devora, "Devora");
+		makeEchirKnifeInfusionRecipe(NyxItems.navistraShard, "Navistra");
+		makeEchirKnifeInfusionRecipe(NyxItems.cortraDust, "Cortra");
 		
 		armorEchir = new IaSItemArmor[4];
 		initArmor(armorEchir, IaSItemArmor.MATERIAL_ECHIR, "IceAndShadow2:textures/armor/echir");
@@ -180,7 +184,11 @@ public class IaSTools {
 	protected static void makeEchirToolInfusionRecipe(Item reagent, String result) {
 		ItemStack reag = new ItemStack(reagent);
 		for(EnumIaSToolClass tool : EnumIaSToolClass.values()) {
-			ItemStack tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);
+			ItemStack tule;
+			if(tool.isWeapon() && tool != tool.KNIFE)
+				tule = new ItemStack(swordsActiveEchir[tool.getClassId()]);
+			else
+				tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);
 			ItemStack rslt = new ItemStack(tools[tool.getClassId()]);
 			rslt.setTagCompound(new NBTTagCompound());
 			rslt.getTagCompound().setString("iasMaterial", result);
@@ -193,5 +201,22 @@ public class IaSTools {
 		GameRegistry.addShapelessRecipe(new ItemStack(armors[1]), r, r, r, r, r, r, r, r, new ItemStack(armorActiveEchir[1]));
 		GameRegistry.addShapelessRecipe(new ItemStack(armors[2]), r, r, r, r, r, r, r, new ItemStack(armorActiveEchir[2]));
 		GameRegistry.addShapelessRecipe(new ItemStack(armors[3]), r, r, r, r, new ItemStack(armorActiveEchir[3]));
+	}
+	protected static void makeEchirKnifeInfusionRecipe(Item reagent, String result) {
+		ItemStack rslt = new ItemStack(IaSTools.knife);
+		rslt.setTagCompound(new NBTTagCompound());
+		rslt.getTagCompound().setString("iasMaterial", result);
+		ItemStack k = new ItemStack(swordsActiveEchir[1]);
+		ItemStack reag = new ItemStack(reagent);
+		GameRegistry.addShapelessRecipe(rslt, reag, k);
+		rslt = rslt.copy();
+		rslt.stackSize = 2;
+		GameRegistry.addShapelessRecipe(rslt, reag, k, k);
+		rslt = rslt.copy();
+		rslt.stackSize = 3;
+		GameRegistry.addShapelessRecipe(rslt, reag, k, k, k); //No relation.
+		rslt = rslt.copy();
+		rslt.stackSize = 4;
+		GameRegistry.addShapelessRecipe(rslt, reag, k, k, k, k);
 	}
 }
