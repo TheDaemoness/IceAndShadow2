@@ -230,8 +230,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this,
 						"random.anvil_land",
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
-								.lengthVector() / 5.0F), 1.2F / (this.rand
-										.nextFloat() * 0.1F + 0.9F));
+								.lengthVector() / 5.0F), 1.6F / (this.rand
+										.nextFloat() * 0.2F + 0.9F));
 				IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
 				if(mat.onKnifeHit(this.shootingEntity, this, new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
 					doDrop(mat);
@@ -389,7 +389,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this.worldObj.playSoundAtEntity(this, "random.anvil_land",
 								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 										: var4.hitVec.lengthVector() / 5.0F),
-										1.2F / (this.rand.nextFloat() * 0.1F + 0.9F));
+										1.6F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 						IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
 						if(mat.onKnifeHit(this.shootingEntity, this, new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
