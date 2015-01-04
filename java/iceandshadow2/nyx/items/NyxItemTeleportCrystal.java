@@ -75,10 +75,13 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSKee
 		if((pile.getItemDamage() & 2) == 0 && tree.dimension == IaSFlags.dim_nyx_id) {
 			if(tree instanceof EntityPlayer) {
 				EntityPlayer ep = (EntityPlayer)tree;
-				if(!ep.capabilities.isCreativeMode)
+				if(!ep.capabilities.isCreativeMode) {
 					pile.setItemDamage(pile.getItemDamage()|2);
-				if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
-					IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
+					if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
+						IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
+					else
+						IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and into your backpack.");
+				}
 			} else
 				pile.setItemDamage(pile.getItemDamage()|2);
 		}
