@@ -1,5 +1,7 @@
 package iceandshadow2.api;
 
+import java.util.Random;
+
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -373,5 +375,10 @@ public abstract class IaSToolMaterial implements IIaSXpAltarSacrifice {
 	 */
 	public boolean shouldEnemiesUse(ItemStack is, EntityLivingBase user) {
 		return false;
+	}
+
+	@Override
+	public int getXpValue(ItemStack is, Random rand) {
+		return 0;
 	}
 }

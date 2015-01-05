@@ -24,11 +24,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_devora.png");
 	
 	@Override
-	public int getXpValue(World world, ItemStack is) {
-		return 0;
-	}
-	
-	@Override
 	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
 		return false;
 	}

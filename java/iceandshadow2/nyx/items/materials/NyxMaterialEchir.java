@@ -11,11 +11,6 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_echir.png");
 
 	@Override
-	public int getXpValue(World world, ItemStack is) {
-		return 0;
-	}
-
-	@Override
 	public boolean rejectWhenZero() {
 		return false;
 	}

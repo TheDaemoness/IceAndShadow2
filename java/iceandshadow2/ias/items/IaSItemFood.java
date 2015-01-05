@@ -1,5 +1,7 @@
 package iceandshadow2.ias.items;
 
+import java.util.Random;
+
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
@@ -38,11 +40,6 @@ public class IaSItemFood extends ItemFood implements IIaSXpAltarSacrifice, IIaSM
 	}
 
 	@Override
-	public int getXpValue(World world, ItemStack is) {
-		return xpAltarValue;
-	}
-
-	@Override
 	public boolean rejectWhenZero() {
 		return false;
 	}
@@ -65,6 +62,11 @@ public class IaSItemFood extends ItemFood implements IIaSXpAltarSacrifice, IIaSM
 	@Override
 	public EnumIaSModule getIaSModule() {
 		return MODULE;
+	}
+
+	@Override
+	public int getXpValue(ItemStack is, Random rand) {
+		return xpAltarValue;
 	}
 
 }

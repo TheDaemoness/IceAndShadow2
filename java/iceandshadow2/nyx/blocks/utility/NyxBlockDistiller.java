@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSDistillable;
+import iceandshadow2.api.IIaSApiDistillable;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 
 import java.util.List;
@@ -64,8 +64,8 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 			Object it = stq.getItem();
 			if(it instanceof ItemBlock)
 				it = ((ItemBlock)it).field_150939_a;
-			if(it instanceof IIaSDistillable) {
-				IIaSDistillable dist = (IIaSDistillable)it;
+			if(it instanceof IIaSApiDistillable) {
+				IIaSApiDistillable dist = (IIaSApiDistillable)it;
 				int rate = dist.getBaseRate(stq);
 				if(rate <= 0)
 					return null;

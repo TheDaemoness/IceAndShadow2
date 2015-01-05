@@ -12,11 +12,6 @@ import net.minecraft.world.World;
 public class NyxMaterialNavistra extends IaSToolMaterial {
 
 	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_navistra.png");
-	
-	@Override
-	public int getXpValue(World world, ItemStack is) {
-		return 0;
-	}
 
 	@Override
 	public boolean rejectWhenZero() {
