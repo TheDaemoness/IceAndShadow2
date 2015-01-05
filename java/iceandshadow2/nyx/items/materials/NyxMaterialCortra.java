@@ -13,11 +13,6 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_cortra.png");
 
 	@Override
-	public boolean rejectWhenZero() {
-		return false;
-	}
-
-	@Override
 	public String getMaterialName() {
 		return "Cortra";
 	}

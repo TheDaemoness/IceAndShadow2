@@ -5,13 +5,13 @@ import java.util.Random;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSXpAltarSacrifice;
+import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class IaSItemFood extends ItemFood implements IIaSXpAltarSacrifice, IIaSModName {
+public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;
@@ -37,11 +37,6 @@ public class IaSItemFood extends ItemFood implements IIaSXpAltarSacrifice, IIaSM
 	public IaSItemFood setXpAltarMinimumValue(int val) {
 		xpAltarValue = val;
 		return this;
-	}
-
-	@Override
-	public boolean rejectWhenZero() {
-		return false;
 	}
 	
 	public final IaSItemFood register() {

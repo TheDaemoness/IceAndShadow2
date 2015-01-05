@@ -34,11 +34,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	}
 
 	@Override
-	public boolean rejectWhenZero() {
-		return false;
-	}
-
-	@Override
 	public String getMaterialName() {
 		return "Devora";
 	}

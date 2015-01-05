@@ -20,6 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * This can either be implemented by Item or Block derivatives, or implemented by a handler and registered with IaSRegistry.
  * If an Item or Block has a handler, it will always be run before any in IaSRegistry.
  * Multiple handlers may be called for one examination if the block or item doesn't implement this interface.
+ * Should certain changed knowledge conflict, the first change is the one that will be recorded.
  */
 public interface IIaSApiExaminable {
 	/**
