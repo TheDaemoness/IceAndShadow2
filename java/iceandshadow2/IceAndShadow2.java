@@ -54,7 +54,7 @@ public class IceAndShadow2 {
     	InitNyx.init(this);
     	IaSDamageSources.init();
     	IaSTools.init();
-    	IaSRegistry.postInit();
+    	IaSRegistry.init();
     	
     	if(event.getSide() == Side.CLIENT)
     		IaSRenderers.init();

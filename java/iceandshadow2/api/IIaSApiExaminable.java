@@ -18,7 +18,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * An interface for handlers of IaS's examination system.
  * This can either be implemented by Item or Block derivatives, or implemented by a handler and registered with IaSRegistry.
- * If an Item or Block has a handler, it will always be run instead of any in IaSRegistry.
+ * If an Item or Block has a handler, it will always be run before any in IaSRegistry.
+ * Multiple handlers may be called for one examination if the block or item doesn't implement this interface.
  */
 public interface IIaSApiExaminable {
 	/**
