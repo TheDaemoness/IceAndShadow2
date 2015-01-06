@@ -12,6 +12,7 @@ import java.util.Map;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -31,6 +32,16 @@ public interface IIaSApiExaminable {
 	 */
 	public List<String> getExamineMessages(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
 	
+
+	/**
+	 * Gets information about this item to put into a book.
+	 * If multiple handlers have book information, the first one registered is the only one called.
+	 * @param toExam The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the examination table.
+	 * @return An NBTTagCompound to be applied to a book, or null otherwise.
+	 */
+	public NBTTagCompound getBookInfo(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	
 	/**
 	 * Returns a list of any knowledge that should be changed after examining the item.
 	 * @param toExam The item stack being examined.
@@ -38,4 +49,13 @@ public interface IIaSApiExaminable {
 	 * @return A list of any CHANGED knowledge, including new knowledge. Null is acceptable if no new knowledge was learned.
 	 */
 	public List<AssocPair<String, Integer>> getChangedKnowledge(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	
+	/**
+	 * Determines if the changed knowledge should only be changed if a book was written.
+	 * Used for implementing lore documents.
+	 * @param toExam The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the examination table.
+	 * @return True if a book needs to be written for the knowledge in the table to change, false if the item merely needs to be examined.
+	 */
+	public boolean requiresBookForKnowledgeChange(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
 }
