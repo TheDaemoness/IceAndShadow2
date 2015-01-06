@@ -2,6 +2,7 @@ package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiDistillable;
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 
 import java.util.List;
@@ -9,11 +10,13 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockHopper;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.world.World;
 
 public class NyxBlockDistiller extends IaSBaseBlockSingle {
@@ -35,23 +38,36 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 			if(b instanceof BlockChest) {
 				TileEntityChest tent = (TileEntityChest)w.getTileEntity(x, y+1, z);
 				TileEntityChest tent2 = null;
-				tent.getSizeInventory();
-				for(int xit = -1; xit <= 1 && tent2 == null; ++xit) {
-					for(int zit = -1; zit <= 1; ++zit) {
-						if(xit != 0 && zit != 0)
-							continue;
-						if(w.getBlock(x+xit, y+1, z+zit) == Blocks.chest) {
-							tent2 = (TileEntityChest)w.getTileEntity(x+xit, y+1, z+zit);
-							break;
+				if(b == Blocks.chest) {
+					for(int xit = -1; xit <= 1 && tent2 == null; xit += 2) {
+						for(int zit = -1; zit <= 1; zit += 2) {
+							if(xit != 0 && zit != 0)
+								continue;
+							if(w.getBlock(x+xit, y+1, z+zit) == Blocks.chest) {
+								tent2 = (TileEntityChest)w.getTileEntity(x+xit, y+1, z+zit);
+								break;
+							}
 						}
 					}
 				}
 				int stacksize = tent.getSizeInventory();
 				for(int i = 0; i < stacksize; ++i) {
 					ItemStack stq = tent.getStackInSlot(i);
+					if(stq == null && tent2 != null && i < tent2.getSizeInventory())
+						stq = tent2.getStackInSlot(i);
 					List<ItemStack> lst = processStack(stq);
 					if(lst != null) {
-						depositStacks(lst);
+						depositStacks(lst, w, x, y-1, z);
+						break;
+					}
+				}
+			}
+			if(b instanceof BlockHopper) {
+				TileEntityHopper hop = (TileEntityHopper)w.getTileEntity(x, y+1, z);
+				for(int i = 0; i < hop.getSizeInventory(); ++i) {
+					List<ItemStack> lst = processStack(hop.getStackInSlot(i));
+					if(lst != null) {
+						depositStacks(lst, w, x, y-1, z);
 						break;
 					}
 				}
@@ -61,24 +77,12 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 
 	protected List<ItemStack> processStack(ItemStack stq) {
 		if(stq != null && stq.getItem() != null) {
-			Object it = stq.getItem();
-			if(it instanceof ItemBlock)
-				it = ((ItemBlock)it).field_150939_a;
-			if(it instanceof IIaSApiDistillable) {
-				IIaSApiDistillable dist = (IIaSApiDistillable)it;
-				int rate = dist.getBaseRate(stq);
-				if(rate <= 0)
-					return null;
-				int quant = Math.min(stq.stackSize, rate);
-				List<ItemStack> retval = dist.getDistillationYield(stq);
-				stq.stackSize -= quant;
-				return retval;
-			}
+			IIaSApiDistillable dist = IaSRegistry.getHandlerDistillation(stq);
 		}
 		return null;
 	}
 
-	protected void depositStacks(List<ItemStack> lst) {
-		
+	protected void depositStacks(List<ItemStack> lst, World w, int x, int y, int z) {
+
 	}
 }
