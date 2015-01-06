@@ -48,6 +48,9 @@ public class IaSTools {
 	armorEchir[], armorNavistra[], armorCortra[], armorCorpseskin[], armorSpiderSilk[];
 
 	public static void init() {
+		iconery = new IaSMaterialIconGetter();
+		GameRegistry.registerItem(iconery, "thisItemDoesNotExist");
+		
 		tools = new IaSItemTool[EnumIaSToolClass.values().length];
 		weapons = new IaSItemWeapon[EnumIaSToolClass.values().length];
 		toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
@@ -123,9 +126,6 @@ public class IaSTools {
 
 		makeEchirArmorInfusionRecipe(NyxItems.navistraShard, armorNavistra);
 		makeEchirArmorInfusionRecipe(NyxItems.cortraDust, armorCortra);
-
-		iconery = new IaSMaterialIconGetter();
-		GameRegistry.registerItem(iconery, "thisItemDoesNotExist");
 		axe.setCreativeTab(IaSCreativeTabs.tools);
 		pickaxe.setCreativeTab(IaSCreativeTabs.tools);
 		spade.setCreativeTab(IaSCreativeTabs.tools);
