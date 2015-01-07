@@ -149,7 +149,7 @@ public class NyxBiome extends BiomeGenBase {
 			boolean makestone = true;
 			for(int xit = -32; xit <= 32 && makestone; ++xit) {
 				for(int zit = -32; zit <= 32 && makestone; ++zit) {
-					for(int yit = 230; yit <= 250 && makestone; ++yit) {
+					for(int yit = 230; yit <= 255 && makestone; ++yit) {
 						if(par1World.getBlock(x+xit, yit, z+zit) == NyxBlocks.crystalBloodstone)
 							makestone = false;
 					}
