@@ -126,7 +126,6 @@ public class EntityNyxSpider extends EntitySpider {
     @Override
 	public boolean attackEntityAsMob(Entity par1Entity)
     {
-		
 		this.setInvisible(false);
 		
 		float dmg = IaSWorldHelper.getDifficulty(this.worldObj) + (IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0);
@@ -137,14 +136,14 @@ public class EntityNyxSpider extends EntitySpider {
 		
 		if (flag) {
             if (par1Entity instanceof EntityLivingBase) {
-				int var2 = (this.worldObj.difficultySetting.getDifficultyId());
+				int var2 = (this.worldObj.difficultySetting.getDifficultyId()-1);
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(Potion.poison.id,
-									var2 * 105 - 1, 0));
+									var2 * 80 + 139, 0));
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(
-									Potion.moveSlowdown.id, var2 * 105 - 1,
-									(var2 - 1)));
+									Potion.moveSlowdown.id, var2 * 60 + 199,
+									var2));
 			}
 			return true;
 		} else {
