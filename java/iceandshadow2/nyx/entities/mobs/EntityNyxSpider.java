@@ -2,6 +2,7 @@ package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSWorldHelper;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -136,14 +137,15 @@ public class EntityNyxSpider extends EntitySpider {
 		
 		if (flag) {
             if (par1Entity instanceof EntityLivingBase) {
-				int var2 = (this.worldObj.difficultySetting.getDifficultyId()-1);
+				int lvl = (this.worldObj.difficultySetting.getDifficultyId()-1);
+				int mod = IaSWorldHelper.getDifficulty(this.worldObj)>=3?125:150;
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(Potion.poison.id,
-									var2 * 100 + 139, 0));
+									lvl * mod + 160, 0));
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(
-									Potion.moveSlowdown.id, var2 * 100 + 149,
-									var2));
+									Potion.moveSlowdown.id, lvl * mod + 190,
+									lvl));
 			}
 			return true;
 		} else {
@@ -165,7 +167,7 @@ public class EntityNyxSpider extends EntitySpider {
     }
 	
 	protected void doUncloakSound() {
-		this.playSound("random.breath",
+		this.playSound("IceAndShadow2:mob_nyxwisp_materialize",
 				1.0F - this.worldObj.difficultySetting.getDifficultyId() * 0.10F,
 				this.rand.nextFloat() * 0.2F + 0.9F);
 	}
@@ -189,13 +191,11 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-
 		double range = (this.isPotionActive(Potion.blindness.id)?2.0D:12.0D);
 		EntityPlayer plai = this.worldObj.getClosestVulnerablePlayerToEntity(
 				this, range);
 		
 		if(plai != null && !plai.isInvisible()) {
-			
 			if (this.isInvisible()) {
 				doUncloakSound();
 				this.setInvisible(false);
@@ -215,15 +215,12 @@ public class EntityNyxSpider extends EntitySpider {
 	protected String getLivingSound() {
 		return null;
 	}
-
-	protected void playStepSound(int par1, int par2, int par3, int par4) {
-		return;
-	}
-
-	protected void playJumpSound(int par1, int par2, int par3, int par4) {
+	
+	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
+    {
 		if(!this.isInvisible())
 			this.playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    }
 	
     @Override
 	public float getBlockPathWeight(int i, int j, int k)

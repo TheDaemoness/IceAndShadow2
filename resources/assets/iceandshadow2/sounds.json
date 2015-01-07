@@ -1,3 +1,4 @@
 {
-   "portal_travel": {"category":"master" ,"sounds":["portal_travel"]}
-   }
+   "portal_travel": {"category":"master" ,"sounds":["portal_travel"]},
+   "mob_nyxwisp_materialize": {"category":"hostile" ,"sounds":["mob_nyxwisp_materialize"]}
+}
