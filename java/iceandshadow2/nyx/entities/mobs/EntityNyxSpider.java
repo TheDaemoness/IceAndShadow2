@@ -139,7 +139,7 @@ public class EntityNyxSpider extends EntitySpider {
 				int var2 = (this.worldObj.difficultySetting.getDifficultyId()-1);
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(Potion.poison.id,
-									var2 * 80 + 139, 0));
+									var2 * 100 + 119, 0));
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(
 									Potion.moveSlowdown.id, var2 * 60 + 199,
