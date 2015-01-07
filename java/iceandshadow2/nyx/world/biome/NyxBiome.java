@@ -96,14 +96,14 @@ public class NyxBiome extends BiomeGenBase {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
-		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 10,
+		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 12,
 				NyxBlocks.stone);
-		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 5,
+		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 6,
 				NyxBlocks.stone);
 		genCortra = new WorldGenMinable(NyxBlocks.oreCortra, 10,
 				NyxBlocks.stone);
 		genDraconium = new WorldGenMinable(NyxBlocks.oreDraconium,
-				6, NyxBlocks.stone);
+				8, NyxBlocks.stone);
 		genGemstone = new WorldGenMinable(NyxBlocks.oreGemstone,
 				4, NyxBlocks.stone);
 
@@ -125,12 +125,12 @@ public class NyxBiome extends BiomeGenBase {
 			GenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
 					20);
 
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 192, 255, 4);
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 255, 6);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 160, 255, 4);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 128, 255, 6);
 		GenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
 		GenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 8);
 		GenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 225, 255, 3);
-		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 12);
+		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 
 		if (doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
