@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,6 +16,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class IaSRegistry {
@@ -138,5 +141,7 @@ public final class IaSRegistry {
 				sum = 0;
 		}
 		return 0;
+	}
+	public static void handleExamination(EntityPlayer checker, World w, int x, int y, int z) {
 	}
 }
