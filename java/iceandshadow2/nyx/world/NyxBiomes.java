@@ -42,7 +42,7 @@ public class NyxBiomes {
 		nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false).
 				setBiomeName("NyxMesaForest");
 
-		nyxRugged = new NyxBiomeRugged(IaSFlags.biome_id_nyxRugged, true, 1.8F, 2.2F, false).
+		nyxRugged = new NyxBiomeRugged(IaSFlags.biome_id_nyxRugged, true, 1.0F, 1.2F, false).
 				setBiomeName("NyxRugged");
 		nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.5F, 0.1F, false).
 				setBiomeName("NyxInfested");
