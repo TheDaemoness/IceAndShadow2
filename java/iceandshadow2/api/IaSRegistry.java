@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -142,6 +143,9 @@ public final class IaSRegistry {
 		}
 		return 0;
 	}
-	public static void handleExamination(EntityPlayer checker, World w, int x, int y, int z) {
+	public static List<AssocPair<String,Integer>> handleExamination(EntityPlayer checker, List<AssocPair<String,Integer>> knowledge) {
+		return null;
+	}
+	public static void handleExaminationBook(EntityPlayer checker, List<AssocPair<String,Integer>> knowledge) {
 	}
 }
