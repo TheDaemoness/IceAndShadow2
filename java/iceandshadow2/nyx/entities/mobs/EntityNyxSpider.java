@@ -142,7 +142,7 @@ public class EntityNyxSpider extends EntitySpider {
 									var2 * 100 + 139, 0));
 					((EntityLivingBase) par1Entity)
 							.addPotionEffect(new PotionEffect(
-									Potion.moveSlowdown.id, var2 * 60 + 199,
+									Potion.moveSlowdown.id, var2 * 100 + 149,
 									var2));
 			}
 			return true;
