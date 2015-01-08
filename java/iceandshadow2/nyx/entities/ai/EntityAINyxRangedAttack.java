@@ -4,14 +4,13 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 
 public class EntityAINyxRangedAttack extends EntityAIBase
 {
     /** The entity the AI instance has been applied to */
     private final EntityLiving entityHost;
+    private boolean reflexDelay;
 
     /**
      * The entity (as a RangedAttackMob) the AI instance has been applied to.
@@ -70,7 +69,8 @@ public class EntityAINyxRangedAttack extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
+    @Override
+	public boolean shouldExecute()
     {
         EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
 
@@ -88,7 +88,8 @@ public class EntityAINyxRangedAttack extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
+    @Override
+	public boolean continueExecuting()
     {
         return this.shouldExecute() || !this.entityHost.getNavigator().noPath();
     }
@@ -96,17 +97,20 @@ public class EntityAINyxRangedAttack extends EntityAIBase
     /**
      * Resets the task
      */
-    public void resetTask()
+    @Override
+	public void resetTask()
     {
         this.attackTarget = null;
         this.stopMovingDelay = 0;
         this.rangedAttackTime = -1;
+        this.reflexDelay = false;
     }
 
     /**
      * Updates the task
      */
-    public void updateTask()
+    @Override
+	public void updateTask()
     {
         double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.boundingBox.minY, this.attackTarget.posZ);
         boolean flag = !reqLOS || this.entityHost.getEntitySenses().canSee(this.attackTarget);
@@ -118,7 +122,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase
         else
             this.stopMovingDelay = 0;
 
-        if (d0 > (double)this.rangeSq || this.stopMovingDelay < 10)
+        if (d0 > this.rangeSq || this.stopMovingDelay < 10)
         {
         	this.entityHost.getNavigator().tryMoveToEntityLiving(this.attackTarget, this.entityMoveSpeed);
         }
@@ -132,7 +136,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase
 
         if (--this.rangedAttackTime <= 0)
         {
-            if (d0 > (double)this.rangeSq || !flag)
+            if (d0 > this.rangeSq || !flag)
             {
                 return;
             }
@@ -150,8 +154,14 @@ public class EntityAINyxRangedAttack extends EntityAIBase
                 f1 = 1.1F;
             }
 
-            this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
-            this.rangedAttackTime = MathHelper.floor_float(f * (float)(this.maxRangedAttackTime - this.minRangedAttackTime) + (float)this.minRangedAttackTime);
+            this.rangedAttackTime = MathHelper.floor_float(f * (this.maxRangedAttackTime - this.minRangedAttackTime) + this.minRangedAttackTime);
+            if(reflexDelay)
+            	this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
+            else {
+            	reflexDelay = true;
+            	this.rangedAttackTime /= 2;
+            }
+            
         }
     }
 }

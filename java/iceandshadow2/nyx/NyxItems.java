@@ -1,19 +1,39 @@
 package iceandshadow2.nyx;
 
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
-import iceandshadow2.nyx.items.*;
+import iceandshadow2.nyx.items.NyxItemBloodstone;
+import iceandshadow2.nyx.items.NyxItemBoneCursed;
+import iceandshadow2.nyx.items.NyxItemBoneSanctified;
+import iceandshadow2.nyx.items.NyxItemCortraDust;
+import iceandshadow2.nyx.items.NyxItemDevora;
+import iceandshadow2.nyx.items.NyxItemExousium;
+import iceandshadow2.nyx.items.NyxItemFoodBread;
+import iceandshadow2.nyx.items.NyxItemFoodCookie;
+import iceandshadow2.nyx.items.NyxItemFrostLongBow;
+import iceandshadow2.nyx.items.NyxItemFrostShortBow;
+import iceandshadow2.nyx.items.NyxItemIcicle;
+import iceandshadow2.nyx.items.NyxItemIngotEchir;
+import iceandshadow2.nyx.items.NyxItemLorePage;
+import iceandshadow2.nyx.items.NyxItemNavistraShard;
+import iceandshadow2.nyx.items.NyxItemNifelhiumPowder;
+import iceandshadow2.nyx.items.NyxItemPlumPoison;
+import iceandshadow2.nyx.items.NyxItemPlumPoisonFertile;
+import iceandshadow2.nyx.items.NyxItemSeedObsidian;
+import iceandshadow2.nyx.items.NyxItemSilkBerries;
+import iceandshadow2.nyx.items.NyxItemTeleportCrystal;
+import iceandshadow2.nyx.items.NyxItemVineBundle;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
-		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
-		exousicIceShard, poisonFruit, silkBerries, frostBowShort, frostBowLong, cursedBone,
-		vineBundle, bread, cookie, echirShears;
+		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
+		poisonFruit, poisonFruitFertile, silkBerries, 
+		frostBowShort, frostBowLong, boneCursed, boneSanctified,
+		vineBundle, bread, cookie, echirShears, icicle, page;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -38,13 +58,17 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
 				register().setCreativeTab(IaSCreativeTabs.resources);
+		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile").
+				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		frostBowShort = new NyxItemFrostShortBow("FrostShortBow").
 				register().setCreativeTab(IaSCreativeTabs.combat);
 		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").
 				register().setCreativeTab(IaSCreativeTabs.combat);
-		cursedBone = new NyxItemCursedBone("CursedBone").
+		boneCursed = new NyxItemBoneCursed("CursedBone").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		boneSanctified = new NyxItemBoneSanctified("SanctifiedBone").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		vineBundle = new NyxItemVineBundle("VineBundle").
 				register().setCreativeTab(IaSCreativeTabs.resources);
@@ -54,5 +78,9 @@ public class NyxItems {
 				register().setCreativeTab(CreativeTabs.tabFood);
 		echirShears = new IaSItemShears(EnumIaSModule.NYX,"EchirShears").
 				register().setCreativeTab(IaSCreativeTabs.tools);
+		icicle = new NyxItemIcicle("Icicle").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		page = new NyxItemLorePage("Page").
+				register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 }

@@ -1,42 +1,34 @@
 package iceandshadow2.ias.items.tools;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.Multimap;
-
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaSGlowing {
 
@@ -112,6 +104,11 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		is.damageItem(m.onAttack(is, user, target), user);
 		return true;
+	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack is) {
+		return IaSToolMaterial.extractMaterial(is).getRarity();
 	}
 
 	@Override

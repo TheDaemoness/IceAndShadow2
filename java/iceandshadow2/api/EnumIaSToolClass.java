@@ -1,24 +1,26 @@
 package iceandshadow2.api;
 
-import java.util.HashSet;
 import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
 
 public enum EnumIaSToolClass {
-	AXE(0, 3.0F, ImmutableSet.of("axe")),
-	PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe")),
-	SPADE(2, 1.0F, ImmutableSet.of("spade")),
-	SWORD(3, 4.0F, ImmutableSet.of("sword")),
-	KNIFE(4, 2.0F, ImmutableSet.of());
+	AXE(0, 3.0F, ImmutableSet.of("axe"), false),
+	PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe"), false),
+	SPADE(2, 1.0F, ImmutableSet.of("spade"), false),
+	SWORD(0, 4.0F, ImmutableSet.of("sword"), true),
+	KNIFE(1, 2.0F, ImmutableSet.of(), true);
 	
 	private int id;
 	private float attackDmg;
 	private final Set<String> classes;
+	private final boolean isSword;
 	
-	EnumIaSToolClass(int id, float dmg, Set cls) {
+	EnumIaSToolClass(int id, float dmg, Set cls, boolean isSword) {
 		this.id = id;
 		this.attackDmg = dmg;
 		classes = cls;
+		this.isSword = isSword;
 	}
 	
 	@Override
@@ -41,11 +43,15 @@ public enum EnumIaSToolClass {
 		return classes;
 	}
 
-	public static EnumIaSToolClass fromId(int itemDamage) {
+	public static EnumIaSToolClass fromId(int itemDamage, boolean isSword) {
 		for(EnumIaSToolClass cl : values()) {
-			if(cl.id == itemDamage)
+			if(cl.id == itemDamage && cl.isSword == isSword)
 				return cl;
 		}
 		return null;
+	}
+
+	public boolean isWeapon() {
+		return isSword;
 	}
 }

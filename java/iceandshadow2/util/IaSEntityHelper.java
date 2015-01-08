@@ -3,7 +3,6 @@ package iceandshadow2.util;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -108,9 +107,9 @@ public class IaSEntityHelper {
 		float f = 1.0F;
         float f1 = ent.prevRotationPitch + (ent.rotationPitch - ent.prevRotationPitch) * f;
         float f2 = ent.prevRotationYaw + (ent.rotationYaw - ent.prevRotationYaw) * f;
-        double d0 = ent.prevPosX + (ent.posX - ent.prevPosX) * (double)f;
-        double d1 = ent.prevPosY + (ent.posY - ent.prevPosY) * (double)f + (double)(world.isRemote ? ent.getEyeHeight() - 0.12F : ent.getEyeHeight()); // isRemote check to revert changes to ray trace position due to adding the eye height clientside and player yOffset differences
-        double d2 = ent.prevPosZ + (ent.posZ - ent.prevPosZ) * (double)f;
+        double d0 = ent.prevPosX + (ent.posX - ent.prevPosX) * f;
+        double d1 = ent.prevPosY + (ent.posY - ent.prevPosY) * f + (world.isRemote ? ent.getEyeHeight() - 0.12F : ent.getEyeHeight()); // isRemote check to revert changes to ray trace position due to adding the eye height clientside and player yOffset differences
+        double d2 = ent.prevPosZ + (ent.posZ - ent.prevPosZ) * f;
         Vec3 vec3 = Vec3.createVectorHelper(d0, d1, d2);
         float f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
         float f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
@@ -123,7 +122,7 @@ public class IaSEntityHelper {
         {
             d3 = ((EntityPlayerMP)ent).theItemInWorldManager.getBlockReachDistance();
         }
-        Vec3 vec31 = vec3.addVector((double)f7 * d3, (double)f6 * d3, (double)f8 * d3);
+        Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
         return world.func_147447_a(vec3, vec31, flag, !flag, false);
 	}
 }

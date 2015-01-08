@@ -1,14 +1,14 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.blocks.IaSBlockAltar;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.blocks.IaSBlockAltar;
-import iceandshadow2.ias.IaSDamageSources;
 
 public class NyxBlockAltarSacrifice extends IaSBlockAltar {
 

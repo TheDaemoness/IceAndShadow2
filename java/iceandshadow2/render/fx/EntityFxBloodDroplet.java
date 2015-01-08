@@ -2,12 +2,9 @@ package iceandshadow2.render.fx;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EntityDropParticleFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.BlockFluidClassic;
 
 /*
  * This was mostly liberally copied and pasted from the EntityDropParticle effect.
@@ -40,13 +37,14 @@ public class EntityFxBloodDroplet extends EntityFX {
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        this.motionY -= (double)this.particleGravity;
+        this.motionY -= this.particleGravity;
 
         if (this.bobTimer-- > 0)
         {
@@ -81,7 +79,7 @@ public class EntityFxBloodDroplet extends EntityFX {
 
         if (material.isLiquid() || material.isSolid())
         {
-            double d0 = (double)((float)(MathHelper.floor_double(this.posY) + 1) - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))));
+            double d0 = MathHelper.floor_double(this.posY) + 1 - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
 
             if (this.posY < d0)
             {

@@ -1,21 +1,23 @@
 package iceandshadow2.nyx.forge;
 
-import java.util.HashMap;
-
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
+import iceandshadow2.nyx.items.NyxItemBoneSanctified;
+
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.GameRules;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 public class NyxDeathSystem {
 
@@ -72,7 +74,7 @@ public class NyxDeathSystem {
 			if(!e.original.isDead)
 				return;
 			if(death_inv.get(e.original.getEntityId()) != null)
-				e.entityPlayer.inventory.copyInventory((InventoryPlayer)death_inv
+				e.entityPlayer.inventory.copyInventory(death_inv
 					.get(e.original.getEntityId()));
 			//Raise madness.
 		}
@@ -84,15 +86,20 @@ public class NyxDeathSystem {
 		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
 			if (plai_inv.mainInventory[i] != null) {
 				ItemStack is = plai_inv.mainInventory[i];
-				/*if (is.getItem() == NyxItems.charm;
+				if (is.getItem() instanceof NyxItemBoneSanctified
 						&& is.isItemDamaged())
-					drop_main = false;*/
+					drop_main = false;
 			}
 		}
 		if (drop_main) {
 			for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
 				if (plai_inv.mainInventory[i] != null) {
-					if(plai_inv.mainInventory[i].getItem() instanceof IIaSKeepOnDeath)
+					Item it = plai_inv.mainInventory[i].getItem();
+					if(it instanceof ItemTool || it instanceof ItemSword) {
+						if(i < 9)
+							continue;
+					}
+					if(it instanceof IIaSKeepOnDeath)
 						continue;
 					if (do_drop)
 						plai_inv.player.dropPlayerItemWithRandomChoice(

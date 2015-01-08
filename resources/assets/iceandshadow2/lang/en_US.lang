@@ -13,14 +13,18 @@ item.nyxDevora0.name=Devora Chunk
 item.nyxDevora1.name=Small Devora Chunk
 item.nyxExousicIceShard.name=Exousic Ice Shard
 item.nyxPoisonFruit.name=Poisonwood Plum
+item.nyxPoisonFruitFertile.name=Fertile Poisonwood Plum
 item.nyxSilkBerries.name=Silk Berries
 item.nyxSilkBerriesMature.name=Mature Silk Berries
 item.nyxFrostShortBow.name=Frost Shortbow
 item.nyxFrostLongBow.name=Frost Longbow
 item.nyxCursedBone.name=Cursed Bone
-item.nyxBread=Sweet Bread
-item.nyxCookie=Silk Cookie
-item.nyxVineBundle=Thorny Vine Bundle
+item.nyxSanctifiedBone.name=Sanctified Bone
+item.nyxBread.name=Sweet Bread
+item.nyxCookie.name=Silk Cookie
+item.nyxVineBundle.name=Thorny Vine Bundle
+item.nyxIcicle.name=Shimmering Icicle
+item.nyxPage0.name=Torn Page
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
@@ -79,7 +83,13 @@ tile.nyxPoisonwoodLog.name=Poisonwood Log
 tile.nyxInfestedLeaves.name=Infested Leaves
 tile.nyxInfestedLog.name=Infested Log
 tile.nyxSilkBerryPod.name=Silk Berry Pod
+tile.nyxFrozenBrick.name=Winterworn Brick
+tile.nyxPlanks0.name=Poisonwood Planks
+tile.nyxPlanks1.name=Infested Planks
+tile.nyxPaleBrick.name=Pale Brick
+tile.nyxPaleBrickCracked.name=Cracked Pale Brick
 
+tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore
 tile.nyxOreDevora.name=Devora Ore
 tile.nyxOreCortra.name=Cortra Ore
@@ -87,6 +97,10 @@ tile.nyxOreNavistra.name=Navistra Ore
 tile.nyxOreExousium.name=Exousium Ore
 tile.nyxOreNifelhium.name=Nifelhium Ore
 tile.nyxOreDraconium.name=Draconium Ore
+
+tile.nyxGatestone0.name=Active Gatestone
+tile.nyxGatestone1.name=Inactive Gatestone
+tile.nyxGatestone2.name=Inactive Gatestone
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized

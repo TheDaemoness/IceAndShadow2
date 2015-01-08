@@ -29,6 +29,7 @@ public class IaSSenseVision extends IaSSense {
 		return false;
 	}
 
+	@Override
 	public boolean canSense(Entity ent) {
 		
 		if(!this.isInRange(ent))

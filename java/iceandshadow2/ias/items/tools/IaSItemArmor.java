@@ -1,11 +1,10 @@
 package iceandshadow2.ias.items.tools;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class IaSItemArmor extends ItemArmor implements IIaSModName {

@@ -3,17 +3,16 @@ package iceandshadow2.nyx.world.biome;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.world.gen.NyxGenOre;
+import iceandshadow2.nyx.world.gen.GenOre;
+import iceandshadow2.nyx.world.gen.ruins.GenRuins;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
+import iceandshadow2.util.gen.Sculptor;
 
-import java.util.List;
 import java.util.Random; //Fuck you, Scala.
 
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -22,7 +21,7 @@ public class NyxBiome extends BiomeGenBase {
 
 	private boolean rare;
 
-	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genUnstableIce;
+	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
@@ -47,7 +46,7 @@ public class NyxBiome extends BiomeGenBase {
 		doGenUnstableIce = true;
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 50, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 50, 2, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 50, 2, 3));
 
 		this.setBiomeName("Nyx");
@@ -63,18 +62,49 @@ public class NyxBiome extends BiomeGenBase {
 	}
 
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
+		// Gatestone generation.
+		if ((xchunk) % 128 == 0 && (zchunk) % 128 == 0) {
+			int x = xchunk + 8;
+			int z = zchunk + 8;
+			int y = par1World.getTopSolidOrLiquidBlock(x, z);
+			for (int xit = -1; xit <= 1; ++xit) {
+				for (int zit = -1; zit <= 1; ++zit) {
+					par1World.setBlock(x + xit, y-1, z + zit,
+							Blocks.obsidian);
+					for (int yit = y+3; yit > y; --yit)
+						par1World.setBlockToAir(x + xit, yit, z + zit);
+
+				}
+			}
+			Sculptor.terrainFlatten(par1World, x-1, y-2, z-1, x+1, 4, z+1);
+			par1World.setBlock(x, y, z, NyxBlocks.gatestone,
+					1 + par1World.rand.nextInt(2), 0x2);
+		} else {
+			int x = xchunk + 8;
+			int z = zchunk + 8;
+			int y = par1World.getTopSolidOrLiquidBlock(x, z);
+			GenRuins gengen = null;
+			if(par2Random.nextInt(16) == 0)
+				gengen = new GenRuinsTowerLookout();
+			if(gengen != null)
+				gengen.generate(par1World, par2Random, x, y, z);
+		}
+	}
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
-		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 10,
+		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 12,
 				NyxBlocks.stone);
-		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 5,
+		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 6,
 				NyxBlocks.stone);
 		genCortra = new WorldGenMinable(NyxBlocks.oreCortra, 10,
 				NyxBlocks.stone);
 		genDraconium = new WorldGenMinable(NyxBlocks.oreDraconium,
+				8, NyxBlocks.stone);
+		genGemstone = new WorldGenMinable(NyxBlocks.oreGemstone,
 				4, NyxBlocks.stone);
 
 		if (doGenDevora)
@@ -86,30 +116,32 @@ public class NyxBiome extends BiomeGenBase {
 			genUnstableIce = new WorldGenMinable(
 					NyxBlocks.unstableIce, 36,
 					NyxBlocks.stone);
-			NyxGenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
+			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
 					128, 10);
 		}
 
 
 		if (doGenDevora)
-			NyxGenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
+			GenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255,
 					20);
 
-		NyxGenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 192, 255, 4);
-		NyxGenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 255, 4);
-		NyxGenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
-		NyxGenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 10);
-		NyxGenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 192, 255, 3);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 160, 255, 4);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 128, 255, 6);
+		GenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
+		GenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 8);
+		GenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 225, 255, 3);
+		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 
 		if (doGenNifelhium)
-			NyxGenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
+			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
 					zchunk);
 
-		NyxGenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
+		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
 				1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
-		
+		genFoliage(par1World, par2Random, xchunk, zchunk);
+
 		int x = xchunk + par1World.rand.nextInt(16);
 		int z = zchunk + par1World.rand.nextInt(16);
 		int y = par1World.getPrecipitationHeight(x, z);
@@ -117,7 +149,7 @@ public class NyxBiome extends BiomeGenBase {
 			boolean makestone = true;
 			for(int xit = -32; xit <= 32 && makestone; ++xit) {
 				for(int zit = -32; zit <= 32 && makestone; ++zit) {
-					for(int yit = 230; yit <= 250 && makestone; ++yit) {
+					for(int yit = 230; yit <= 255 && makestone; ++yit) {
 						if(par1World.getBlock(x+xit, yit, z+zit) == NyxBlocks.crystalBloodstone)
 							makestone = false;
 					}

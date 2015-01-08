@@ -1,24 +1,17 @@
 package iceandshadow2.nyx.items.materials;
 
-import net.minecraft.block.Block;
+import iceandshadow2.api.IaSEntityKnifeBase;
+import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import iceandshadow2.api.IIaSThrowingKnife;
-import iceandshadow2.api.IaSToolMaterial;
 
 public class NyxMaterialNavistra extends IaSToolMaterial {
 
-	@Override
-	public int getXpValue(World world, ItemStack is) {
-		return 0;
-	}
-
-	@Override
-	public boolean rejectWhenZero() {
-		return false;
-	}
+	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_navistra.png");
 
 	@Override
 	public String getMaterialName() {
@@ -51,6 +44,18 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	@Override
 	public int getDurability(ItemStack is) {
 		return 16;
+	}
+	
+	@Override
+	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
+			Entity thrower) {
+		DamageSource ds = super.getKnifeDamageSource(knife, thrower).setDamageBypassesArmor();
+		return ds;
+	}
+
+	@Override
+	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
+		return knife_tex;
 	}
 
 }

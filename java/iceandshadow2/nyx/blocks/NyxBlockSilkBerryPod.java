@@ -10,18 +10,16 @@ import iceandshadow2.util.IaSRegistration;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
-import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 
@@ -96,7 +94,8 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
-    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+    @Override
+	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         int l = getDirection(par1World.getBlockMetadata(par2, par3, par4));
         par2 += Direction.offsetX[l];

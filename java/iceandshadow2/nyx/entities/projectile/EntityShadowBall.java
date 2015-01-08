@@ -1,7 +1,5 @@
 package iceandshadow2.nyx.entities.projectile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.Iterator;
@@ -10,15 +8,16 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityShadowBall extends EntityThrowable {
 	/**
@@ -58,14 +57,17 @@ public class EntityShadowBall extends EntityThrowable {
 	/**
 	 * Gets the amount of gravity to apply to the thrown entity with each tick.
 	 */
+	@Override
 	protected float getGravityVelocity() {
 		return 0.05F;
 	}
 
+	@Override
 	protected float func_70182_d() {
 		return 0.5F;
 	}
 
+	@Override
 	protected float func_70183_g() {
 		return -20.0F;
 	}
@@ -76,7 +78,7 @@ public class EntityShadowBall extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 
-		if(par1MovingObjectPosition.typeOfHit == par1MovingObjectPosition.typeOfHit.ENTITY) {
+		if(par1MovingObjectPosition.typeOfHit == MovingObjectType.ENTITY) {
 			/*
 			if(this.worldObj.isRemote)
 				return;
@@ -109,7 +111,7 @@ public class EntityShadowBall extends EntityThrowable {
 					float d0 = (float)this.getDistanceSqToEntity(elmo);
 
 					if (d0 < 16.0D) {
-						float d1 =  1.0F - (float)(d0*d0) / 256.0F;
+						float d1 =  1.0F - d0*d0 / 256.0F;
 
 						float power = basepower*d1 + basepower;
 
@@ -128,6 +130,7 @@ public class EntityShadowBall extends EntityThrowable {
 									DamageSource.causeIndirectMagicDamage(
 											elmo,(this.getThrower()==null?this:this.getThrower())),
 											power);
+						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id,69,1));
 					}
 
 				}
@@ -151,6 +154,7 @@ public class EntityShadowBall extends EntityThrowable {
 		this.setDead();
 	}
 
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		/*
@@ -165,6 +169,7 @@ public class EntityShadowBall extends EntityThrowable {
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readEntityFromNBT(par1NBTTagCompound);
 	}
@@ -172,6 +177,7 @@ public class EntityShadowBall extends EntityThrowable {
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
 	}

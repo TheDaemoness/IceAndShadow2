@@ -1,8 +1,6 @@
 package iceandshadow2.render.fx;
 
 import iceandshadow2.IaSFlags;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
@@ -11,11 +9,9 @@ import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.particle.EntitySpellParticleFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class IaSFxManager {
 	
@@ -54,7 +50,9 @@ public class IaSFxManager {
 			double x, double y, double z,
 			double velX, double velY, double velZ, boolean unbounded, boolean isDecorative) {
 		
-		if(!Minecraft.getMinecraft().getMinecraft().isFancyGraphicsEnabled() || IaSFlags.flag_low_particles) {
+		Minecraft.getMinecraft();
+				Minecraft.getMinecraft();
+		if(!Minecraft.isFancyGraphicsEnabled() || IaSFlags.flag_low_particles) {
 			if(isDecorative)
 				return;
 			unbounded = false;
@@ -77,7 +75,9 @@ public class IaSFxManager {
 		
 		EntityFX efx = null;
 		
-		if(Minecraft.getMinecraft().getMinecraft().isFancyGraphicsEnabled()) {
+		Minecraft.getMinecraft();
+		Minecraft.getMinecraft();
+		if(Minecraft.isFancyGraphicsEnabled()) {
 			if(name == "dripPoison")
 				efx = new EntityFxPoisonDroplet(woild, x, y, z);
 			else if(name == "dripBlood")

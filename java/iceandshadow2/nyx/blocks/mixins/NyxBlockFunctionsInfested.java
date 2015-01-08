@@ -2,13 +2,10 @@ package iceandshadow2.nyx.blocks.mixins;
 
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.blocks.NyxBlockPoisonLeaves;
-import iceandshadow2.nyx.blocks.NyxBlockPoisonLog;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
@@ -47,7 +44,7 @@ public class NyxBlockFunctionsInfested {
 	
 	public static AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         float var5 = 0.05F;
-        return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3 + var5), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
+        return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4 + var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
     }
     
     public static void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {

@@ -5,6 +5,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -57,6 +58,12 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 				((EntityLivingBase) par5Entity).addPotionEffect(new PotionEffect(
 						Potion.resistance.id, 59, 3));
 		}
+	}
+    
+    @Override
+	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
+			int x, int y, int z) {
+		return type != EnumCreatureType.monster;
 	}
 
     @Override

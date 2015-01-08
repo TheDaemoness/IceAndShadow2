@@ -1,14 +1,13 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.world.gen.NyxGenInfestedTrees;
+import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeInfested extends NyxBiome {
@@ -21,9 +20,10 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.setColor(64 << 16 | 255 << 8 | 192);
 		
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 60, 2, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 70, 3, 5));
 	}
 
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {
 		super.decorate(par1World, par2Random, par3, par4);
 		
@@ -32,7 +32,7 @@ public class NyxBiomeInfested extends NyxBiome {
 			int x = par3 + par2Random.nextInt(16) + 8;
 			int z = par4 + par2Random.nextInt(16) + 8;
 			int y = 255;
-			for (y = 255; y > 0; --y) {
+			for (y = 255; y > 64; --y) {
 				Block bid = par1World.getBlock(x, y, z);
 				if (bid == Blocks.snow) {
 					++y;
@@ -56,7 +56,7 @@ public class NyxBiomeInfested extends NyxBiome {
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
-		return new NyxGenInfestedTrees();
+		return new GenInfestedTrees();
 	}
 
 }

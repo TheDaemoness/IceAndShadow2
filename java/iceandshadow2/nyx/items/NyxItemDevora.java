@@ -1,14 +1,15 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.IaSBaseItemMulti;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItemMulti;
 
 public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 

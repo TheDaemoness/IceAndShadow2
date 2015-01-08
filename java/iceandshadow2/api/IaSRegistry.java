@@ -1,54 +1,25 @@
 package iceandshadow2.api;
 
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.IaSFakeItem;
-import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
-class IaSMaterialIconGetter extends Item {
-	@Override
-	public void registerIcons(IIconRegister i) {
-		for(IaSToolMaterial m : IaSRegistry.getToolMaterials())
-			m.registerIcons(i);
-		IaSRegistry.getDefaultMaterial().registerIcons(i);
-	}
-	
-	@Override
-	public boolean getHasSubtypes() {
-		return true;
-	}
-}
 
 public final class IaSRegistry {
 	
-	private static IaSToolMaterial defaultMaterial;
+	private static IaSToolMaterial defaultMaterial = new NyxMaterialEchir();
 	private static HashMap<String,IaSToolMaterial> toolMaterials = new HashMap<String,IaSToolMaterial>();
-	private static Item iconery;
-	
-	public static void postInit() {
-		if(iconery != null)
-			return;
-		defaultMaterial = new NyxMaterialEchir();
-		iconery = new IaSMaterialIconGetter();
-		GameRegistry.registerItem(iconery, "thisItemDoesNotExist");
-		IaSTools.axe.setCreativeTab(IaSCreativeTabs.tools);
-		IaSTools.pickaxe.setCreativeTab(IaSCreativeTabs.tools);
-		IaSTools.spade.setCreativeTab(IaSCreativeTabs.tools);
-		IaSTools.sword.setCreativeTab(IaSCreativeTabs.combat);
-		IaSTools.knife.setCreativeTab(IaSCreativeTabs.combat);
-	}
+	private static ArrayList<IIaSApiDistillable> handlersDistillable = new ArrayList<IIaSApiDistillable>();
+	private static ArrayList<IIaSApiExaminable> handlersExaminable = new ArrayList<IIaSApiExaminable>();
+	private static ArrayList<IIaSApiTransmutable> handlersTransmutable = new ArrayList<IIaSApiTransmutable>();
+	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 	
 	public static void addToolMaterial(IaSToolMaterial mat) {
 		if(toolMaterials.containsKey(mat.getMaterialName()))
@@ -57,9 +28,11 @@ public final class IaSRegistry {
 	}
 	
 	public static IaSToolMaterial getToolMaterial(String key) {
+		if(key == null)
+			return getDefaultMaterial();
 		if(toolMaterials.containsKey(key))
 			return toolMaterials.get(key);
-		return null; //In case I decide to switch to TreeMap later for some reason.
+		return getDefaultMaterial();
 	}
 	
 	public static Collection<IaSToolMaterial> getToolMaterials() {
@@ -68,5 +41,102 @@ public final class IaSRegistry {
 
 	public static IaSToolMaterial getDefaultMaterial() {
 		return defaultMaterial;
+	}
+	
+	public static void addHandler(IIaSApiDistillable handler) {
+		handlersDistillable.add(handler);
+	}
+	public static void addHandler(IIaSApiExaminable handler) {
+		handlersExaminable.add(handler);
+	}
+	public static void addHandler(IIaSApiTransmutable handler) {
+		handlersTransmutable.add(handler);
+	}
+	public static void addHandler(IIaSApiSacrificeXp handler) {
+		handlersSacrificeXp.add(handler);
+	}
+	
+	public static IIaSApiTransmutable getHandlerTransmutation(ItemStack target, ItemStack catalyst, EntityPlayer pl) {
+		if(target == null || catalyst == null || pl == null)
+			return null;
+		Object obj;
+		IIaSApiTransmutable trans;
+		
+		obj = target.getItem();
+		if(obj instanceof ItemBlock)
+			obj = ((ItemBlock)obj).field_150939_a;
+		if(obj instanceof IIaSApiTransmutable) {
+			trans = (IIaSApiTransmutable)obj;
+			if(trans.canDoTransmutation(target, catalyst, pl))
+				return trans;
+		}
+		
+		obj = catalyst.getItem();
+		if(obj instanceof ItemBlock)
+			obj = ((ItemBlock)obj).field_150939_a;
+		if(obj instanceof IIaSApiTransmutable) {
+			trans = (IIaSApiTransmutable)obj;
+			if(trans.canDoTransmutation(target, catalyst, pl))
+				return trans;
+		}
+		
+		for(int i = 0; i < handlersTransmutable.size(); ++i) {
+			if(handlersTransmutable.get(i).canDoTransmutation(target, catalyst, pl))
+				return handlersTransmutable.get(i);
+		}
+		return null;
+	}
+	
+	public static IIaSApiDistillable getHandlerDistillation(ItemStack target) {
+		if(target == null)
+			return null;
+		Object obj;
+		IIaSApiDistillable dist;
+		
+		obj = target.getItem();
+		if(obj instanceof ItemBlock)
+			obj = ((ItemBlock)obj).field_150939_a;
+		if(obj instanceof IIaSApiDistillable) {
+			dist = (IIaSApiDistillable)obj;
+			if(dist.getBaseRate(target) > 0)
+				return dist;
+		}
+		
+		for(int i = 0; i < handlersDistillable.size(); ++i) {
+			if(handlersDistillable.get(i).getBaseRate(target) > 0)
+				return handlersDistillable.get(i);
+		}
+		return null;
+	}
+	
+	public static int getSacrificeXpYield(ItemStack target) {
+		if(target == null)
+			return 0;
+		Object obj;
+		IIaSApiSacrificeXp sac;
+		Random r = new Random();
+		
+		obj = target.getItem();
+		if(obj instanceof ItemBlock)
+			obj = ((ItemBlock)obj).field_150939_a;
+		if(obj instanceof IIaSApiSacrificeXp) {
+			sac = (IIaSApiSacrificeXp)obj;
+			return Math.max(0,sac.getXpValue(target, r));
+		}
+		
+		int sum = 0;
+		for(IIaSApiSacrificeXp xp : handlersSacrificeXp) {
+			sum = xp.getXpValue(target, r);
+			if(sum > 0)
+				return sum;
+			else if (sum < 0)
+				sum = 0;
+		}
+		return 0;
+	}
+	public static List<AssocPair<String,Integer>> handleExamination(EntityPlayer checker, List<AssocPair<String,Integer>> knowledge) {
+		return null;
+	}
+	public static void handleExaminationBook(EntityPlayer checker, List<AssocPair<String,Integer>> knowledge) {
 	}
 }

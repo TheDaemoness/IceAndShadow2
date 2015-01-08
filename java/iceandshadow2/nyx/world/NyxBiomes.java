@@ -2,12 +2,16 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.world.biome.*;
+import iceandshadow2.nyx.world.biome.NyxBiome;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
+import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
+import iceandshadow2.nyx.world.biome.NyxBiomeMountains;
+import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-
-import static net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class NyxBiomes {
 
@@ -33,12 +37,12 @@ public class NyxBiomes {
 				setBiomeName("NyxHills");
 		nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 2.5F, 1.0F, false).
 				setBiomeName("NyxMesas");
-		nyxHillForest = new NyxBiomeForest(IaSFlags.biome_id_nyxHillForest, true, 0.8F, 1.8F, false).
+		nyxHillForest = new NyxBiomeForestDense(IaSFlags.biome_id_nyxHillForest, true, 0.8F, 1.8F, false).
 				setBiomeName("NyxHillForest");
-		nyxMesaForest = new NyxBiomeFrozen(IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false).
+		nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false).
 				setBiomeName("NyxMesaForest");
 
-		nyxRugged = new NyxBiomeBarren(IaSFlags.biome_id_nyxRugged, true, 1.8F, 2.2F, false).
+		nyxRugged = new NyxBiomeRugged(IaSFlags.biome_id_nyxRugged, true, 1.0F, 1.2F, false).
 				setBiomeName("NyxRugged");
 		nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.5F, 0.1F, false).
 				setBiomeName("NyxInfested");

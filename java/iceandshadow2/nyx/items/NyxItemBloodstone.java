@@ -1,26 +1,34 @@
 package iceandshadow2.nyx.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.IaSItemFood;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSItemFood;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -3, 0.0F, false);
 		this.setAlwaysEdible();
+		this.setMaxStackSize(1);
 	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 16;
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override

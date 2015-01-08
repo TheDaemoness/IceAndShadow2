@@ -4,8 +4,6 @@ import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -27,6 +25,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityIceArrow extends Entity implements IProjectile {
 	private int xTile = -1;
@@ -52,7 +52,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	public EntityIceArrow(World par1World) {
 		super(par1World);
 		this.freezeLevel = 0;
-		this.freezeTime = 0;
+		this.freezeTime = 1;
 		this.renderDistanceWeight = 10.0D;
 		this.setSize(0.5F, 0.5F);
 	}
@@ -68,6 +68,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.yOffset = 0.0F;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBrightnessForRender(float par1) {
 		return 15728880;
@@ -83,6 +84,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.setDead();
 	}
 
+	@Override
 	public float getBrightness(float par1) {
 		return 1.0F;
 	}
@@ -96,14 +98,14 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.renderDistanceWeight = 10.0D;
 		this.shootingEntity = par2EntityLiving;
 		this.posY = par2EntityLiving.posY
-				+ (double) par2EntityLiving.getEyeHeight()
+				+ par2EntityLiving.getEyeHeight()
 				- 0.10000000149011612D;
 		double var6 = par3EntityLiving.posX - par2EntityLiving.posX;
 		double var8 = par3EntityLiving.posY
-				+ (double) par3EntityLiving.getEyeHeight() - 0.699999988079071D
+				+ par3EntityLiving.getEyeHeight() - 0.699999988079071D
 				- this.posY;
 		double var10 = par3EntityLiving.posZ - par2EntityLiving.posZ;
-		double var12 = (double) MathHelper.sqrt_double(var6 * var6 + var10
+		double var12 = MathHelper.sqrt_double(var6 * var6 + var10
 				* var10);
 
 		if (var12 >= 1.0E-7D) {
@@ -115,7 +117,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					par2EntityLiving.posZ + var18, var14, var15);
 			this.yOffset = 0.0F;
 			float var20 = (float) var12 * 0.2F;
-			this.setThrowableHeading(var6, var8 + (double) var20, var10, par4,
+			this.setThrowableHeading(var6, var8 + var20, var10, par4,
 					par5);
 		}
 	}
@@ -130,28 +132,29 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 		this.setSize(0.5F, 0.5F);
 		this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY
-				+ (double) par2EntityLiving.getEyeHeight(),
+				+ par2EntityLiving.getEyeHeight(),
 				par2EntityLiving.posZ, par2EntityLiving.rotationYaw,
 				par2EntityLiving.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F
-				* (float) Math.PI) * 0.16F);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F
+				* (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F
-				* (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F
+				* (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F
 				* (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F
-						* (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F
+						* (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F
 				* (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F
-						* (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F
+						* (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F
 				* (float) Math.PI));
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ,
 				par3 * 1.5F, 1.0F);
 	}
 
+	@Override
 	public void entityInit() {
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
@@ -160,22 +163,23 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z
 	 * direction.
 	 */
+	@Override
 	public void setThrowableHeading(double par1, double par3, double par5,
 			float par7, float par8) {
 		float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5
 				* par5);
-		par1 /= (double) var9;
-		par3 /= (double) var9;
-		par5 /= (double) var9;
+		par1 /= var9;
+		par3 /= var9;
+		par5 /= var9;
 		par1 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
+				* par8;
 		par3 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
+				* par8;
 		par5 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
-		par1 *= (double) par7;
-		par3 *= (double) par7;
-		par5 *= (double) par7;
+				* par8;
+		par1 *= par7;
+		par3 *= par7;
+		par5 *= par7;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
@@ -183,9 +187,10 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1,
 				par5) * 180.0D / Math.PI);
 		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3,
-				(double) var10) * 180.0D / Math.PI);
+				var10) * 180.0D / Math.PI);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
@@ -197,6 +202,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.setRotation(par7, par8);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Sets the velocity to the args. Args: x, y, z
@@ -211,7 +217,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1,
 					par5) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(
-					par3, (double) var7) * 180.0D / Math.PI);
+					par3, var7) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ,
@@ -222,8 +228,13 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
+
+		// Ice arrows tend to melt.
+		if (this.isBurning())
+			this.setDead();
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
 			float var1 = MathHelper.sqrt_double(this.motionX * this.motionX
@@ -231,7 +242,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(
 					this.motionX, this.motionZ) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(
-					this.motionY, (double) var1) * 180.0D / Math.PI);
+					this.motionY, var1) * 180.0D / Math.PI);
 		}
 
 		Block var16 = this.worldObj
@@ -244,6 +255,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile,
 							this.yTile, this.zTile);
 
+
 			if (var2 != null
 					&& var2.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
 
@@ -252,7 +264,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 				this.worldObj.playSoundAtEntity(
 						this,
-						"random.glass",
+						"dig.glass",
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
 								.lengthVector() / 5.0F), 1.2F / (this.rand
 										.nextFloat() * 0.2F + 0.9F));
@@ -299,8 +311,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			if (var10.canBeCollidedWith()
 					&& (var10 != this.shootingEntity || this.ticksInAir >= 5)) {
 				var11 = 0.3F;
-				AxisAlignedBB var12 = var10.boundingBox.expand((double) var11,
-						(double) var11, (double) var11);
+				AxisAlignedBB var12 = var10.boundingBox.expand(var11,
+						var11, var11);
 				MovingObjectPosition var13 = var12.calculateIntercept(var17,
 						var3);
 
@@ -324,7 +336,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 		if (var4 != null) {
 			if (var4.entityHit != null) {
-				this.worldObj.playSoundAtEntity(this, "random.glass",
+				this.worldObj.playSoundAtEntity(this, "dig.glass",
 						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 								: var4.hitVec.lengthVector() / 5.0F),
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -332,7 +344,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
 						* this.motionZ);
-				int var23 = MathHelper.ceiling_double_int((double) var20
+				int var23 = MathHelper.ceiling_double_int(var20
 						* this.damage);
 
 				if (this.getIsCritical())
@@ -361,10 +373,6 @@ public class EntityIceArrow extends Entity implements IProjectile {
 							Potion.moveSlowdown.id, this.freezeTime,
 							this.freezeLevel));
 
-				// Ice arrows tend to melt.
-				if (this.isBurning())
-					this.setDead();
-
 				if (var4.entityHit.attackEntityFrom(var21, var23)) {
 					if (var4.entityHit instanceof EntityLiving) {
 
@@ -377,14 +385,14 @@ public class EntityIceArrow extends Entity implements IProjectile {
 								var4.entityHit
 								.addVelocity(
 										this.motionX
-										* (double) this.knockbackStrength
+										* this.knockbackStrength
 										* 0.6000000238418579D
-										/ (double) var26,
+										/ var26,
 										0.1D * this.knockbackStrength,
 										this.motionZ
-										* (double) this.knockbackStrength
+										* this.knockbackStrength
 										* 0.6000000238418579D
-										/ (double) var26);
+										/ var26);
 							}
 						}
 
@@ -413,8 +421,6 @@ public class EntityIceArrow extends Entity implements IProjectile {
 				this.inData = this.worldObj.getBlockMetadata(this.xTile,
 						this.yTile, this.zTile);
 
-				this.setIsCritical(false);
-
 				//Bounce code from normal arrows.
 				/*
 					this.motionX = (double) ((float) (var4.hitVec.xCoord - this.posX));
@@ -436,14 +442,25 @@ public class EntityIceArrow extends Entity implements IProjectile {
 							this.worldObj, this.xTile, this.yTile, this.zTile,
 							this);
 
-					this.worldObj.playSoundAtEntity(this, "random.glass",
-							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-									: var4.hitVec.lengthVector() / 5.0F),
-									1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-					for (int i = 0; i < 8; ++i)
-						this.worldObj.spawnParticle("snowballpoof", this.posX,
-								this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-					this.setDead();
+					boolean die = true;
+					if(this.inTile.getMaterial() == Material.glass) {
+						die = !this.getIsCritical();
+						this.setIsCritical(false);
+						this.worldObj.func_147480_a(this.xTile, this.yTile, this.zTile, false);
+					}
+					if(this.inTile.getMaterial() == Material.ice)
+						this.worldObj.func_147480_a(this.xTile, this.yTile, this.zTile, true);
+
+					if(die) {
+						this.worldObj.playSoundAtEntity(this, "dig.glass",
+								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+										: var4.hitVec.lengthVector() / 5.0F),
+										1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						for (int i = 0; i < 8; ++i)
+							this.worldObj.spawnParticle("snowballpoof", this.posX,
+									this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+						this.setDead();
+					}
 				}
 			}
 		}
@@ -456,7 +473,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
 		for (this.rotationPitch = (float) (Math.atan2(this.motionY,
-				(double) var20) * 180.0D / Math.PI); this.rotationPitch
+				var20) * 180.0D / Math.PI); this.rotationPitch
 				- this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
 			;
 		}
@@ -484,9 +501,9 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			for (int var25 = 0; var25 < (this.getIsCritical() ? 6 : 4); ++var25) {
 				var26 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX
-						* (double) var26, this.posY - this.motionY
-						* (double) var26, this.posZ - this.motionZ
-						* (double) var26, this.motionX, this.motionY,
+						* var26, this.posY - this.motionY
+						* var26, this.posZ - this.motionZ
+						* var26, this.motionX, this.motionY,
 						this.motionZ);
 			}
 
@@ -494,17 +511,17 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		} else {
 			for (var9 = 0; var9 < (this.getIsCritical()?5:3); ++var9) {
 				IaSFxManager.spawnParticle(this.worldObj, (this.getIsCritical()?"cloud":"cloudSmall"), this.posX + this.motionX
-						* (double) var9 / 4.0D, this.posY + this.motionY
-						* (double) var9 / 4.0D, this.posZ + this.motionZ
-						* (double) var9 / 4.0D, 0.0D, 0.05D, 0.0D,
+						* var9 / 4.0D, this.posY + this.motionY
+						* var9 / 4.0D, this.posZ + this.motionZ
+						* var9 / 4.0D, 0.0D, 0.05D, 0.0D,
 						true, !this.getIsCritical());
 			}
 		}
 
-		this.motionX *= (double) var22;
-		this.motionY *= (double) var22;
-		this.motionZ *= (double) var22;
-		this.motionY -= (double) var11;
+		this.motionX *= var22;
+		this.motionY *= var22;
+		this.motionZ *= var22;
+		this.motionY -= var11;
 		this.setPosition(this.posX, this.posY, this.posZ);
 	}
 
@@ -543,10 +560,12 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they
 	 * walk on. used for spiders and wolves to prevent them from trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking() {
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize() {
 		return 0.0F;
@@ -570,6 +589,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	/**
 	 * If returns false, the item will not inflict any damage against entities.
 	 */
+	@Override
 	public boolean canAttackWithItem() {
 		return false;
 	}

@@ -1,10 +1,10 @@
 package iceandshadow2.nyx.items;
 
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.items.IaSItemFood;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.items.IaSItemFood;
 
 public class NyxItemFoodCookie extends IaSItemFood {
 

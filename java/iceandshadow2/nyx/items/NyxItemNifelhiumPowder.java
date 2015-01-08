@@ -9,5 +9,4 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow {
 		super(EnumIaSModule.NYX, texName);
 		// TODO Auto-generated constructor stub
 	}
-
 }

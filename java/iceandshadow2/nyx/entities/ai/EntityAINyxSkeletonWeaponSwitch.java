@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.entities.ai;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.potion.Potion;
@@ -44,7 +43,8 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
+    @Override
+	public void startExecuting()
     {
         EntityLivingBase entityliving = this.skel.getAttackTarget();
         if(entityliving != null) {
@@ -66,7 +66,8 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
     /**
      * Resets the task
      */
-    public void resetTask()
+    @Override
+	public void resetTask()
     {
     }
 }

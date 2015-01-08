@@ -1,14 +1,21 @@
 package iceandshadow2.nyx.items;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
 
@@ -23,7 +30,7 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,2), 
 				new ItemStack(this,1,1), new ItemStack(this,1,1), 
 				new ItemStack(this,1,1), new ItemStack(this,1,1));
-		GameRegistry.addShapelessRecipe(new ItemStack(this,4,1), new ItemStack(this,1,2));
+		GameRegistry.addShapelessRecipe(new ItemStack(this,16,0), new ItemStack(this,1,2));
 		GameRegistry.addShapelessRecipe(new ItemStack(this,4,0), new ItemStack(this,1,1));
 	}
 	
@@ -37,6 +44,21 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
 		if(pass == 0)
 			return dustIconGlow;
 		return this.itemIcon;
+	}
+	
+	
+
+	@Override
+	public void onUpdate(ItemStack is, World w,
+			Entity ent, int time, boolean holding) {
+		if(ent instanceof EntityLivingBase) {
+			EntityLivingBase el = (EntityLivingBase)ent;
+			if(el.getEquipmentInSlot(0).getItem() != this) {}
+			else if(el.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {}
+			else if(!el.isPotionActive(Potion.wither.id))
+				el.addPotionEffect(new PotionEffect(Potion.wither.id,39,is.getItemDamage()));
+		}
+		super.onUpdate(is, w, ent, time, holding);
 	}
 
 	@SideOnly(Side.CLIENT)

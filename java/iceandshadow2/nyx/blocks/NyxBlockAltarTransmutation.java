@@ -1,17 +1,12 @@
 package iceandshadow2.nyx.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockAltar;
 import iceandshadow2.ias.interfaces.IIaSHasTileEntity;
-import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.tileentities.NyxTeSingleItemStorage;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class NyxBlockAltarTransmutation extends IaSBlockAltar implements IIaSHasTileEntity {
 

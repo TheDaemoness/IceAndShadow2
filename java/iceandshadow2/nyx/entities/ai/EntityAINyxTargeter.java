@@ -3,23 +3,14 @@ package iceandshadow2.nyx.entities.ai;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
-import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.MathHelper;
 
 public class EntityAINyxTargeter extends EntityAITarget {
 
@@ -39,6 +30,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
+	@Override
 	public boolean continueExecuting() {
 		EntityLivingBase elb = this.taskOwner.getAttackTarget();
 		
@@ -68,7 +60,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	public boolean shouldExecute() {
 		double d0 = ((IIaSSensate)this.taskOwner).getSense().getRange();
 		List<Entity> list = this.taskOwner.worldObj
-				.getEntitiesWithinAABBExcludingEntity((Entity) this.taskOwner,
+				.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
 						this.taskOwner.boundingBox.expand(d0, d0 / 2.0, d0));
 
 		if (list.isEmpty())
@@ -106,7 +98,8 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		return false;
 	}
 	
-    public void startExecuting()
+    @Override
+	public void startExecuting()
     {
     	lastSeen = 0;
         this.taskOwner.setAttackTarget(this.targetEntity);

@@ -1,12 +1,14 @@
 package iceandshadow2.nyx.blocks.ore;
 
+import iceandshadow2.nyx.NyxItems;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import iceandshadow2.nyx.NyxItems;
 
 public class NyxBlockOreDevora extends NyxBlockOre {
 
@@ -14,10 +16,9 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setHardness(4.0F);
-		this.setLuminescence(0.3F);
+		this.setLuminescence(0.4F);
 		this.setLightColor(1.0F, 1.0F, 0.75F);
 		this.setResistance(1.0F);
-		this.setTickRandomly(true);
 	}
 	
 	@Override
@@ -45,4 +46,27 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
 		return 1;
 	}
+
+	@Override
+	public void randomDisplayTick(World par1World, int par2,
+			int par3, int par4, Random par5Random) {
+		if(par5Random.nextBoolean())
+			return;
+		double var9 = par3 + par5Random.nextFloat();
+		double var13 = 0.0D;
+		double var15 = 0.0D;
+		double var17 = 0.0D;
+		int var19 = par5Random.nextInt(2) * 2 - 1;
+		int var20 = par5Random.nextInt(2) * 2 - 1;
+		var13 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var15 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var17 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		double var11 = par4 + 0.5D + 0.25D * var20;
+		var17 = par5Random.nextFloat() * 1.0F * var20;
+		double var7 = par2 + 0.5D + 0.25D * var19;
+		var13 = par5Random.nextFloat() * 1.0F * var19;
+		par1World.spawnParticle("lava", var7, var9, var11, var13, var15, var17);
+	}
+	
+	
 }

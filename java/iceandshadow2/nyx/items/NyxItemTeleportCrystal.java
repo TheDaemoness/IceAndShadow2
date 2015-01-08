@@ -1,29 +1,31 @@
 package iceandshadow2.nyx.items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
+public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSKeepOnDeath {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon empty;
@@ -51,6 +53,19 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 		super.registerIcons(reg);
 		empty = reg.registerIcon(this.getTexName()+"Empty");
 	}
+	
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		// TODO Auto-generated method stub
+		return super.getRarity(p_77613_1_);
+	}
+
+	@Override
+	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
+		if((item.getItemDamage() & 1) == 1)
+			item.setItemDamage(item.getItemDamage()-1);
+		return true;
+	}
 
 	@Override
 	public void onUpdate(ItemStack pile, World earth,
@@ -60,10 +75,13 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 		if((pile.getItemDamage() & 2) == 0 && tree.dimension == IaSFlags.dim_nyx_id) {
 			if(tree instanceof EntityPlayer) {
 				EntityPlayer ep = (EntityPlayer)tree;
-				if(!ep.capabilities.isCreativeMode)
+				if(!ep.capabilities.isCreativeMode) {
 					pile.setItemDamage(pile.getItemDamage()|2);
-				if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
-					IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
+					if(!IaSPlayerHelper.giveItem(ep, new ItemStack(NyxItems.seedObsidian,1)))
+						IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and fell on the ground.");
+					else
+						IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and into your backpack.");
+				}
 			} else
 				pile.setItemDamage(pile.getItemDamage()|2);
 		}
@@ -148,7 +166,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
 		if((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
-			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from etherium cores made from merged etherium dust...");
+			IaSPlayerHelper.messagePlayer(pwai, "You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
 			pwai.setItemInUse(heap,72000);
 			return heap;
 		}

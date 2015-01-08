@@ -9,5 +9,4 @@ public class NyxItemNavistraShard extends IaSBaseItemSingle {
 		super(EnumIaSModule.NYX, texName);
 		// TODO Auto-generated constructor stub
 	}
-
 }

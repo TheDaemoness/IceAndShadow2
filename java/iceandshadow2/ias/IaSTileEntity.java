@@ -1,8 +1,5 @@
 package iceandshadow2.ias;
 
-import java.lang.reflect.Field;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
