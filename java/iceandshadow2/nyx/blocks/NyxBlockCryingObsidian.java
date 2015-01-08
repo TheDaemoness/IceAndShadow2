@@ -49,14 +49,13 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 			int par4, Entity par5Entity) {
 		if (par5Entity instanceof EntityLivingBase
 				&& !(par5Entity instanceof EntityMob)) {
-			if (!(((EntityLivingBase) par5Entity)
-					.isPotionActive(Potion.regeneration)))
-				((EntityLivingBase) par5Entity).addPotionEffect(new PotionEffect(
-						Potion.regeneration.id, 59, 1));
-			if (!(((EntityLivingBase) par5Entity)
-					.isPotionActive(Potion.resistance)))
-				((EntityLivingBase) par5Entity).addPotionEffect(new PotionEffect(
-						Potion.resistance.id, 59, 3));
+			EntityLivingBase elb = ((EntityLivingBase) par5Entity);
+			if (!elb.isPotionActive(Potion.resistance)) {
+				elb.addPotionEffect(new PotionEffect(
+						23, 1, 0));
+				elb.addPotionEffect(new PotionEffect(
+						Potion.resistance.id, 39, 3));
+			}
 		}
 	}
     
