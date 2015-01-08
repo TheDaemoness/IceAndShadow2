@@ -1,7 +1,6 @@
 package iceandshadow2.render.entity.mobs;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderBiped;

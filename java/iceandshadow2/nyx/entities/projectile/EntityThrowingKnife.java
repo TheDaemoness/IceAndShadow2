@@ -2,34 +2,26 @@ package iceandshadow2.nyx.entities.projectile;
 
 import java.util.List;
 
-import cpw.mods.fml.common.network.internal.FMLMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSTools;
-import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
@@ -80,14 +72,14 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this(w, is);
 		this.shootingEntity = shooter;
 		this.posY = shooter.posY
-				+ (double) shooter.getEyeHeight()
+				+ shooter.getEyeHeight()
 				- 0.10000000149011612D;
 		double var6 = target.posX - shooter.posX;
 		double var8 = target.posY
-				+ (double) target.getEyeHeight() - 0.699999988079071D
+				+ target.getEyeHeight() - 0.699999988079071D
 				- this.posY;
 		double var10 = target.posZ - shooter.posZ;
-		double var12 = (double) MathHelper.sqrt_double(var6 * var6 + var10
+		double var12 = MathHelper.sqrt_double(var6 * var6 + var10
 				* var10);
 
 		if (var12 >= 1.0E-7D) {
@@ -98,7 +90,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			this.setLocationAndAngles(shooter.posX + var16, this.posY,
 					shooter.posZ + var18, var14, var15);
 			float var20 = (float) var12 * 0.2F;
-			this.setThrowableHeading(var6, var8 + (double) var20, var10, vel,
+			this.setThrowableHeading(var6, var8 + var20, var10, vel,
 					acc);
 		}
 	}
@@ -108,22 +100,22 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this(w, is);
 		this.shootingEntity = shooter;
 		this.setLocationAndAngles(shooter.posX, shooter.posY
-				+ (double) shooter.getEyeHeight(),
+				+ shooter.getEyeHeight(),
 				shooter.posZ, shooter.rotationYaw,
 				shooter.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F
-				* (float) Math.PI) * 0.16F);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F
+				* (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F
-				* (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F
+				* (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F
 				* (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F
-						* (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F
+						* (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F
 				* (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F
-						* (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F
+						* (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F
 				* (float) Math.PI));
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ,
 				vel * 1.5F, 1.0F);
@@ -140,18 +132,18 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			float par7, float par8) {
 		float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5
 				* par5);
-		par1 /= (double) var9;
-		par3 /= (double) var9;
-		par5 /= (double) var9;
+		par1 /= var9;
+		par3 /= var9;
+		par5 /= var9;
 		par1 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
+				* par8;
 		par3 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
+				* par8;
 		par5 += this.rand.nextGaussian() * 0.007499999832361937D
-				* (double) par8;
-		par1 *= (double) par7;
-		par3 *= (double) par7;
-		par5 *= (double) par7;
+				* par8;
+		par1 *= par7;
+		par3 *= par7;
+		par5 *= par7;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
@@ -159,13 +151,14 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1,
 				par5) * 180.0D / Math.PI);
 		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3,
-				(double) var10) * 180.0D / Math.PI);
+				var10) * 180.0D / Math.PI);
 	}
 
 	/**
 	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
 	 * posY, posZ, yaw, pitch
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double par1, double par3, double par5,
 			float par7, float par8, int par9) {
@@ -176,6 +169,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 	/**
 	 * Sets the velocity to the args. Args: x, y, z
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setVelocity(double par1, double par3, double par5) {
 		this.motionX = par1;
@@ -187,7 +181,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1,
 					par5) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(
-					par3, (double) var7) * 180.0D / Math.PI);
+					par3, var7) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ,
@@ -394,17 +388,17 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				this.inData = this.worldObj.getBlockMetadata(this.xTile,
 						this.yTile, this.zTile);
 
-				this.motionX = (double) ((float) (var4.hitVec.xCoord - this.posX));
-				this.motionY = (double) ((float) (var4.hitVec.yCoord - this.posY));
-				this.motionZ = (double) ((float) (var4.hitVec.zCoord - this.posZ));
+				this.motionX = ((float) (var4.hitVec.xCoord - this.posX));
+				this.motionY = ((float) (var4.hitVec.yCoord - this.posY));
+				this.motionZ = ((float) (var4.hitVec.zCoord - this.posZ));
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
 						* this.motionZ);
-				this.posX -= this.motionX / (double) var20
+				this.posX -= this.motionX / var20
 						* 0.05000000074505806D;
-				this.posY -= this.motionY / (double) var20
+				this.posY -= this.motionY / var20
 						* 0.05000000074505806D;
-				this.posZ -= this.motionZ / (double) var20
+				this.posZ -= this.motionZ / var20
 						* 0.05000000074505806D;
 
 				if (this.inTile != null) {

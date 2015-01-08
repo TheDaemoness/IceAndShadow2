@@ -1,7 +1,5 @@
 package iceandshadow2.api;
 
-import org.objectweb.asm.tree.analysis.Value;
-
 /**
  * A pair class designed to associate an object (the key) with a certain value.
  * The pair is designed so that the value is mutable, but the key is not.

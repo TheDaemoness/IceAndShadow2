@@ -1,25 +1,16 @@
 package iceandshadow2.api;
 
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class IaSRegistry {
 	

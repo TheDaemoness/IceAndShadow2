@@ -13,7 +13,6 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityHopper;

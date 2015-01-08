@@ -211,7 +211,7 @@ public class IaSTools {
 		ItemStack reag = new ItemStack(reagent);
 		for(EnumIaSToolClass tool : EnumIaSToolClass.values()) {
 			ItemStack tule;
-			if(tool.isWeapon() && tool != tool.KNIFE)
+			if(tool.isWeapon() && tool != EnumIaSToolClass.KNIFE)
 				tule = new ItemStack(swordsActiveEchir[tool.getClassId()]);
 			else
 				tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);

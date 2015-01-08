@@ -4,9 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import iceandshadow2.ias.IaSTileEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagString;
 
 public class NyxTeExaminationTable extends IaSTileEntity {
 	public Map<String,Integer> knowledge;

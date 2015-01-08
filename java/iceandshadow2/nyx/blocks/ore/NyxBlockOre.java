@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.nyx.blocks.NyxBlockStone;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.world.IBlockAccess;
 
 public abstract class NyxBlockOre extends NyxBlockStone {

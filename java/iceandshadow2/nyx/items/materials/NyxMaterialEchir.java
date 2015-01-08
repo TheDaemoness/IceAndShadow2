@@ -4,7 +4,6 @@ import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class NyxMaterialEchir extends IaSToolMaterial {
 	

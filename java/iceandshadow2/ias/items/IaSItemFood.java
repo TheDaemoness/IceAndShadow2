@@ -9,7 +9,6 @@ import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName {
 

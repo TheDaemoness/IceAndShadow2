@@ -1,12 +1,9 @@
 package iceandshadow2.nyx.items.materials;
 
-import java.util.Random;
-
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class NyxMaterialCortra extends IaSToolMaterial {
 

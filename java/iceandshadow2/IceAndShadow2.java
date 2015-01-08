@@ -1,6 +1,5 @@
 package iceandshadow2;
 
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;

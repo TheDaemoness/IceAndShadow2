@@ -1,7 +1,6 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
 import java.util.List;

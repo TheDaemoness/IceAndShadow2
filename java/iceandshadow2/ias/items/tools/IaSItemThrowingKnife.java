@@ -11,9 +11,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class IaSItemThrowingKnife extends IaSItemWeapon {
@@ -26,6 +24,7 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		this.setMaxStackSize(32);
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
 		if(par1ItemStack.getItemDamage() > 0)

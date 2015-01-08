@@ -15,7 +15,6 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.potion.Potion;

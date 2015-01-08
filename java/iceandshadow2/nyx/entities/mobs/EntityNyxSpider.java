@@ -216,6 +216,7 @@ public class EntityNyxSpider extends EntitySpider {
 		return null;
 	}
 	
+	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
     {
 		if(!this.isInvisible())

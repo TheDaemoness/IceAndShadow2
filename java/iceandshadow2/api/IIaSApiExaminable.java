@@ -1,20 +1,8 @@
 package iceandshadow2.api;
 
-import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.ias.items.tools.IaSTools;
-import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
-
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * An interface for handlers of IaS's examination system.

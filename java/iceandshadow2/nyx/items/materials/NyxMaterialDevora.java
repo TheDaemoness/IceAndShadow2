@@ -5,7 +5,6 @@ import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
-import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
@@ -16,7 +15,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxMaterialDevora extends IaSToolMaterial {

@@ -4,17 +4,13 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;

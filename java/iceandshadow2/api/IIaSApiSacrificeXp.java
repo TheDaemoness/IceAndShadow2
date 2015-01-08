@@ -3,7 +3,6 @@ package iceandshadow2.api;
 import java.util.Random;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 /**
  * An interface for handlers of IaS's experience altar sacrifice system.
