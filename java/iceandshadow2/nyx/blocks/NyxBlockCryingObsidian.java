@@ -2,14 +2,18 @@ package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -22,13 +26,13 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 		this.setResistance(2000.0F);
 	}
 
-    @Override
-    public int damageDropped(int par1) {
-        return 0;
-    }
+	@Override
+	public int damageDropped(int par1) {
+		return 0;
+	}
 
-    @Override
-    public int getMobilityFlag() {
+	@Override
+	public int getMobilityFlag() {
 		return 2;
 	}
 
@@ -44,9 +48,9 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 				par4 + 1 - var5);
 	}
 
-    @Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
-			int par4, Entity par5Entity) {
+	@Override
+	public void onEntityCollidedWithBlock(World par1World, int x, int y,
+			int z, Entity par5Entity) {
 		if (par5Entity instanceof EntityLivingBase
 				&& !(par5Entity instanceof EntityMob)) {
 			EntityLivingBase elb = ((EntityLivingBase) par5Entity);
@@ -56,25 +60,45 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 				elb.addPotionEffect(new PotionEffect(
 						Potion.resistance.id, 39, 3));
 			}
+			if(elb.isSneaking()) {
+				if(elb.isPotionActive(Potion.confusion))
+					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,2,0));
+				else {
+					if(elb instanceof EntityPlayer) {
+						EntityPlayer playuh = (EntityPlayer)elb;
+						for(int xit = -1; xit <= 1; ++xit) {
+							for(int zit = -1; zit <= 1; ++zit) {
+								if(par1World.getBlock(x+xit, y, z+zit) != this)
+									return;
+							}
+						}
+						IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian....");
+						playuh.setSpawnChunk(new ChunkCoordinates(x, y+1, z), true);
+						if(playuh.getHealth() > 2.0F)
+							playuh.attackEntityFrom(DamageSource.magic, 1);
+						elb.addPotionEffect(new PotionEffect(Potion.confusion.id,2,0));
+					}
+				}
+			}
 		}
 	}
-    
-    @Override
+
+	@Override
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
 			int x, int y, int z) {
 		return type != EnumCreatureType.monster;
 	}
 
-    @Override
-    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-    	return false;
-    }
+	@Override
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		return false;
+	}
 
-    /*
+	/*
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if(par1World.getBlockMetadata(par2, par3, par4) == 0)
 			return;
-		
+
 		double var9 = (double) ((float) par3 + par5Random.nextFloat());
 		double var13 = 0.0D;
 		double var15 = 0.0D;
@@ -91,7 +115,7 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 		IaSFxManager.spawnParticle(par1World, "portal", var7, var9, var11, var13, var15,
 				var17, false, true);
 	}
-	*/
+	 */
 
-    
+
 }
