@@ -1,5 +1,7 @@
 package iceandshadow2.render.item;
 
+import iceandshadow2.api.IIaSTool;
+import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -84,9 +86,14 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 
         if (icon == null)
         {
-        	System.out.println("Missingno");
-    		GL11.glPopMatrix();
-            return;
+        	if(item.getItem() instanceof IIaSTool) {
+        		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(item);
+        		icon = mat.getIcon(item);
+        	}
+        	if(icon == null) {
+        		GL11.glPopMatrix();
+        		return;
+        	}
         }
         
         if(doGlowTransforms) {

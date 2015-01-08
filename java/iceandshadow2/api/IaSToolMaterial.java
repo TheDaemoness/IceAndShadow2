@@ -3,6 +3,7 @@ package iceandshadow2.api;
 import java.util.Random;
 
 import iceandshadow2.ias.items.tools.IaSItemTool;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -134,11 +135,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * Called to determine the cooldown time of the throwing knife.
 	 * @param par1ItemStack
 	 * @param par2World
-	 * @param par3EntityPlayer
+	 * @param entityNyxSkeleton
 	 * @return
 	 */
 	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
+			EntityLivingBase elb) {
 		return 12;
 	}
 	

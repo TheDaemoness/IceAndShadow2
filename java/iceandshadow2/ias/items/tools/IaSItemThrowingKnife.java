@@ -26,7 +26,6 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		this.setMaxStackSize(32);
 	}
 	
-	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
 		if(par1ItemStack.getItemDamage() > 0)
@@ -86,21 +85,5 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			Block p_150894_3_, int p_150894_4_, int p_150894_5_,
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
-	}
-	
-	@Override
-	public IIcon getIconIndex(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return null;
-		return m.getIcon(is);
-	}
-	
-	@Override
-	public String getUnlocalizedName(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return null;
-		return m.getUnlocalizedName(is);
 	}
 }

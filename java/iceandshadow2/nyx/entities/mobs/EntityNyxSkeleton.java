@@ -1,6 +1,10 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import java.util.Random;
+
+import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSItemTool;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
@@ -16,6 +20,7 @@ import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
 import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import iceandshadow2.nyx.items.NyxItemFrostLongBow;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.enchantment.Enchantment;
@@ -52,7 +57,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	
 	public enum EnumNyxSkeletonType {
 		BOW_FROST_SHORT(0),
-		MELEE(1),
+		KNIFE(1),
 		MAGIC_SHADOW(2),
 		BOW_FROST_LONG(3);
 		
@@ -86,6 +91,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     protected EnumNyxSkeletonType typpe;
     protected boolean altWeaponFlag;
     protected ItemStack reserveWeapon;
+    protected int throwDelay;
 
 	protected static double moveSpeed = 0.5;
 	
@@ -105,6 +111,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         this.setSkeletonType(0);
         this.experienceValue = 7;
         this.regenDelay = 0;
+        this.throwDelay = 0;
         
         this.tasks.taskEntries.clear();
         this.targetTasks.taskEntries.clear();
@@ -277,12 +284,12 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	ItemStack var2 = this.getHeldItem();
     	int var3;
     	if(this.worldObj != null)
-    		var3 = (IaSWorldHelper.getDifficulty(this.worldObj) > 2?7:8);
+    		var3 = (IaSWorldHelper.getDifficulty(this.worldObj) >= 3?7:8);
     	else
     		var3 = 8;
 
 	    if (var2 != null) {
-	    	if(var2.getItem() instanceof IaSItemTool)
+	    	if(var2.getItem() instanceof IIaSTool)
 	    		var3 += MathHelper.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity));
 	    }
         return var3;
@@ -296,13 +303,13 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     {
         if (this.isEntityInvulnerable() || par1DamageSource == DamageSource.drown)
             return false;
-        if (par1DamageSource.isFireDamage())
-        	return super.attackEntityFrom(par1DamageSource, par2*3);
         if(this.getEquipmentInSlot(2) != null && 
         		!par1DamageSource.isUnblockable() &&
-        		!par1DamageSource.isDamageAbsolute() &&
         		this.getEquipmentInSlot(2).getItem() == IaSTools.armorNavistra[2])
         	return false;
+        this.addPotionEffect(new PotionEffect(Potion.hunger.id, 179, 0));
+        if (par1DamageSource.isFireDamage())
+        	return super.attackEntityFrom(par1DamageSource, par2*3);
         return super.attackEntityFrom(par1DamageSource, par2);
     }
     
@@ -319,7 +326,39 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	}
     }
     
-    public void doShadowAttack(EntityLivingBase par1EntityLiving, float par2) {
+    @Override
+	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		if(this.worldObj.isRemote)
+			return;
+		if(!this.isPotionActive(Potion.hunger)) {
+			if(--regenDelay <= 0) {
+				this.heal(1);
+				this.regenDelay = 30;
+			}
+		}
+		if(this.getEquipmentInSlot(0) != null) {
+			ItemStack is = this.getEquipmentInSlot(0);
+			if(is.getItem() instanceof IaSItemThrowingKnife && this.getAttackTarget() != null) {
+				if(throwDelay <= 0) {
+					double dist = this.getDistanceSqToEntity(this.getAttackTarget());
+					if(dist < 4 || dist > 100)
+						return;
+					if(!this.getEntitySenses().canSee(this.getAttackTarget()))
+						return;
+					EntityThrowingKnife etn = new EntityThrowingKnife(this.worldObj, this, this.getAttackTarget(), 1.1F, 2.0F, is);
+					this.worldObj.playSoundAtEntity(this, "random.bow", 0.5F, 0.75F);
+					IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
+					mat.onKnifeThrow(is, this, etn);
+					this.worldObj.spawnEntityInWorld(etn);
+					this.throwDelay = mat.getKnifeCooldown(is, this.worldObj, this)*2;
+				} else
+					--throwDelay;
+			}
+		}
+	}
+
+	public void doShadowAttack(EntityLivingBase par1EntityLiving, float par2) {
 		boolean harm_undead = par1EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 		EntityThrowable entityball = new EntityShadowBall(this.worldObj, this, harm_undead, false);
 
@@ -353,7 +392,6 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
         	double ydelta = par1EntityLiving.posY-this.posY;
         	var2.setThrowableHeading(par1EntityLiving.posX-this.posX, ydelta+(dif==3?1:1.25F), par1EntityLiving.posZ-this.posZ, 3.2F, 2.0F);
         }
-        	//var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 2.4F, 2.0F, slowstr, slowtime);
         else
         	var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.8F, 5.0F, slowstr, slowtime);
         var2.setIsCritical(longe);
@@ -411,13 +449,14 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     }
     
     public ItemStack getDefaultWeapon(EnumNyxSkeletonType taipe) {
-    	if(taipe == EnumNyxSkeletonType.MELEE) {
-    		ItemStack ait = new ItemStack(Items.stone_sword);
+    	if(taipe == EnumNyxSkeletonType.KNIFE) {
+    		ItemStack ait = IaSTools.setToolMaterial(IaSTools.knife, "Devora");
+    		ait.stackSize = new Random().nextInt(8)+4;
 
     		if(IaSWorldHelper.getDifficulty(this.worldObj) >= 2)
-    			ait.addEnchantment(Enchantment.sharpness, 0);
+    			ait.addEnchantment(Enchantment.sharpness, 1);
     		if(IaSWorldHelper.getDifficulty(this.worldObj) == 3)
-    			ait.addEnchantment(Enchantment.knockback, 0);
+    			ait.addEnchantment(Enchantment.knockback, 1);
     		return ait;
     	}
     	if(taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
@@ -430,8 +469,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     }
     
     public ItemStack getDefaultAlternateWeapon(EnumNyxSkeletonType taipe) {
-    	if(taipe == EnumNyxSkeletonType.MELEE)
-    		return new ItemStack(Items.wooden_sword);
+    	if(taipe == EnumNyxSkeletonType.KNIFE)
+    		return new ItemStack(IaSTools.sword);
     	else
     		return new ItemStack(Items.stone_sword);
     }
@@ -477,9 +516,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     	this.altWeaponFlag = false;
     	int dif = IaSWorldHelper.getDifficulty(worldObj);
     	
-    	//Sword skeleton.
+    	//Knife skeleton.
     	if (this.rand.nextInt(4) == 0) {
-    		setNyxSkeletonCombatType(EnumNyxSkeletonType.MELEE);
+    		setNyxSkeletonCombatType(EnumNyxSkeletonType.KNIFE);
     	}
     	
     	//Special skeleton.

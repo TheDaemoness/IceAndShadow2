@@ -135,15 +135,15 @@ public class IaSTools {
 
 	public static ItemStack setToolMaterial(Item it, String mat) {
 		ItemStack is = new ItemStack(it);
-		is.stackTagCompound = new NBTTagCompound();
-		is.stackTagCompound.setString("iasMaterial", mat);
+		is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setString("iasMaterial", mat);
 		return is;
 	}
 
 	public static ItemStack setToolMaterial(ItemStack is, String mat) {
 		if(!is.hasTagCompound())
-			is.stackTagCompound = new NBTTagCompound();
-		is.stackTagCompound.setString("iasMaterial", mat);
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setString("iasMaterial", mat);
 		return is;
 	}
 
