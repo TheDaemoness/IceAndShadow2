@@ -167,7 +167,7 @@ public class EntityNyxSpider extends EntitySpider {
     }
 	
 	protected void doUncloakSound() {
-		this.playSound("IceAndShadow2:mob_nyxwisp_materialize",
+		this.worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwisp_materialize",
 				1.0F - this.worldObj.difficultySetting.getDifficultyId() * 0.10F,
 				this.rand.nextFloat() * 0.2F + 0.9F);
 	}
