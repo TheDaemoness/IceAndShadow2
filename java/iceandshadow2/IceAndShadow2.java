@@ -29,7 +29,7 @@ public class IceAndShadow2 {
     public static final String MODID = "IceAndShadow2";
     public static final String VERSION = "Pre-Alpha 4";
     public static final int CONFIG_MAJ = 2;
-    public static final int CONFIG_MIN = 0;
+    public static final int CONFIG_MIN = 1;
     
     private static IaSConfigManager cfg;
     private static Logger logger;

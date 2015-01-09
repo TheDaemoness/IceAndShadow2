@@ -155,6 +155,8 @@ public class IaSConfigManager {
 			return;
 		}
 		ecris.println("version " + exp_maj + ' ' + exp_min);
+		ecris.println("#https://github.com/TheRabbitologist/IceAndShadow2/wiki/Configuration-File-Settings");
+		ecris.println();
 		for(Field f : IaSFlags.class.getFields()) {
 			Object data;
 			try {

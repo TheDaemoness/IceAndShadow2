@@ -5,15 +5,12 @@ import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class IaSFlags {
-	public static boolean flag_pvp = false;
 	public static boolean flag_death_system = true;
-	public static boolean flag_portal_sounds = true;
 	public static boolean flag_low_particles = false;
 	public static boolean flag_report_ruins_gen = false;
 
 	//YOU LIED.
 	public static int dim_nyx_id = -2;
-	public static int dim_abyss_id = -3;
 	
 	//YOU LIED MORE.
 	public static short 
@@ -31,5 +28,4 @@ public class IaSFlags {
 	
 	//Mod plugin flags.
 	public static boolean flag_mod_thaumcraft = false;
-	public static boolean flag_mod_tconstruct = false;
 }
