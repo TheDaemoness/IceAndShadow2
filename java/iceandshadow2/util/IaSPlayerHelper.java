@@ -22,6 +22,17 @@ public class IaSPlayerHelper {
 			dochat = true;
 	}
 	
+	public static void alertPlayer(EntityPlayer plai, String str) {
+		if(dochat && plai.worldObj.isRemote) {
+			ChatComponentText txt = new ChatComponentText(str);
+			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
+			plai.addChatMessage(txt);
+			dochat = false;
+		}
+		else
+			dochat = true;
+	}
+	
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
 		boolean added = plai.inventory.addItemStackToInventory(is);
 		if(!added)
