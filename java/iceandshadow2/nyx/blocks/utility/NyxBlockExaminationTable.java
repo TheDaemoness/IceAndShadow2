@@ -24,8 +24,10 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 
 	public NyxBlockExaminationTable(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.rock);
-        this.setBlockBounds(0.05F, 0.0F, 0.05F, 0.95F, 0.75F, 0.95F);
-        this.setLightOpacity(7);
+		this.setResistance(10.0F);
+		this.setHardness(5.0F);
+		this.setBlockBounds(0.05F, 0.0F, 0.05F, 0.95F, 0.75F, 0.95F);
+		this.setLightOpacity(7);
 	}
 
 	@Override
@@ -34,9 +36,8 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, 
-			int x, int y, int z, EntityPlayer pl,
-			int meta, float a, float b, float c) {
+	public boolean onBlockActivated(World w, int x, int y, int z, 
+			EntityPlayer pl, int meta, float a, float b, float c) {
 		TileEntity ent = w.getTileEntity(x, y, z);
 		if(ent instanceof NyxTeExaminationTable) {
 			NyxTeExaminationTable nteet = (NyxTeExaminationTable)ent;
@@ -57,28 +58,24 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 		}
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = 
-				reg.registerIcon("IceAndShadow:"+this.getModName()+"Top");
+		this.blockIcon = 
+				reg.registerIcon("IceAndShadow2:"+this.getModName()+"Top");
 		this.iconSide = 
-				reg.registerIcon("IceAndShadow:"+this.getModName()+"Side");
-		this.iconBottom = 
-				reg.registerIcon("IceAndShadow:"+this.getModName()+"Bottom");
-		this.blockIcon = iconSide;
+				reg.registerIcon("IceAndShadow2:"+this.getModName()+"Side");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public IIcon getIcon(int par1, int par2)
-    {
-        return par1 == 0 ? this.iconBottom : (par1 == 1 ? this.iconTop : this.blockIcon);
-    }
-	
+	public IIcon getIcon(int par1, int par2) {
+		return (par1 == 0 || par1 == 1 ? this.blockIcon : this.iconSide);
+	}
+
 	@Override
 	public boolean isOpaqueCube() {
-        return false;
-    }
+		return false;
+	}
 }
