@@ -1,9 +1,5 @@
 package iceandshadow2;
 
-import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
-import iceandshadow2.nyx.world.biome.NyxBiomeRugged;
-import net.minecraft.world.biome.BiomeGenBase;
-
 public class IaSFlags {
 	public static boolean flag_death_system = true;
 	public static boolean flag_low_particles = false;

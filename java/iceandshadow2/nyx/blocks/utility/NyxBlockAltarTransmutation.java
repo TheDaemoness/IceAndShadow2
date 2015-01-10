@@ -2,8 +2,6 @@ package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
-import iceandshadow2.ias.blocks.IaSBlockAltar;
-import iceandshadow2.ias.interfaces.IIaSHasTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

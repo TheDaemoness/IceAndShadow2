@@ -4,6 +4,7 @@ import iceandshadow2.ias.IaSTileEntity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public ItemStack target;
@@ -35,6 +36,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 			return catalyst;
 		}
 		return null;
+	}
+	
+	public void startTransmute(World w, int x, int y, int z) {
+		if(catalyst == null || target == null)
+			return;
 	}
 
 	@Override
