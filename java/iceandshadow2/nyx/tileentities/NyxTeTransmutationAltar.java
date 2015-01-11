@@ -25,12 +25,12 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	
 	public void scheduleUpdate(World w, int x, int y, int z, int time) {
 		w.scheduleBlockUpdate(x, y, z, w.getBlock(x, y, x), time);
-		finishOn = w.getWorldTime()+time;
+		finishOn = w.getTotalWorldTime()+time;
 	}
 	
 	//Sanity check to avoid interrupted transmutations messing with new transmutations.
 	public boolean isTransmutationDone(World w) {
-		return catalyst != null && target != null && w.getWorldTime() == finishOn;
+		return catalyst != null && target != null && w.getTotalWorldTime() == finishOn;
 	}
 	
 	public ItemStack handleRemove() {
