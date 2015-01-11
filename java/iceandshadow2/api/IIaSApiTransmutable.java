@@ -1,5 +1,7 @@
 package iceandshadow2.api;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -14,32 +16,23 @@ import net.minecraft.item.ItemStack;
 public interface IIaSApiTransmutable {
 	
 	/**
-	 * Called to check if this handler can perform a transmutation.
+	 * Gets the time to perform a transmuation, in ticks (1/20 of a second).
+	 * Also called to check if this handler can perform a transmutation.
+	 * This handler should not change the item stacks in any way.
 	 * @param target The item stack being transmuted (on the altar).
 	 * @param catalyst The item stack being used for transmutation (held in the player's hand)
 	 * @param player The player doing the transmutation.
-	 * @return True if this handler has a yield for a transmutation, false otherwise.
+	 * @return A number of ticks it should take to do the transmuation, or some number <= 0 if this handler cannot.
 	 */
-	public boolean canDoTransmutation(ItemStack target, ItemStack catalyst, EntityPlayer pl);
+	public int getTransmutationTime(ItemStack target, ItemStack catalyst, EntityPlayer pl);
 	
 	/**
 	 * Used to handle a transmutation in a transmutation altar on Nyx.
+	 * This function is responsible for reducing the sizes of the item stacks.
 	 * @param target The item stack being transmuted (on the altar).
 	 * @param catalyst The item stack being used for transmutation (held in the player's hand)
 	 * @param player The player doing the transmutation.
 	 * @return The item stack yielded from doing the transmutation, or null if the transmutation should destroy the target.
 	 */
-	public ItemStack getTransmutationYield(ItemStack target, ItemStack catalyst, EntityPlayer pl);
-	
-	/**
-	 * Gets the number of catalyst item that will be consumed by a certain transmutation.
-	 * If this number exceeds the amount of held catalyst, the transmutation will not happen.
-	 * @param target The item stack being transmuted (on the altar).
-	 * @param catalyst The item stack being used for transmutation (held in the player's hand)
-	 * @param player The player doing the transmutation.
-	 * @return The number of catalyst items that should be consumed.
-	 * Zero is valid and means that the catalyst shouldn't be consumed.
-	 * Negative numbers will be treated as zero.
-	 */
-	public int getCatalystCost(ItemStack target, ItemStack catalyst, EntityPlayer pl);
+	public List<ItemStack> getTransmutationYield(ItemStack target, ItemStack catalyst, EntityPlayer pl);
 }

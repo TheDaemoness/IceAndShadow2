@@ -73,7 +73,7 @@ public final class IaSRegistry {
 			obj = ((ItemBlock)obj).field_150939_a;
 		if(obj instanceof IIaSApiTransmutable) {
 			trans = (IIaSApiTransmutable)obj;
-			if(trans.canDoTransmutation(target, catalyst, pl))
+			if(trans.getTransmutationTime(target, catalyst, pl) > 0)
 				return trans;
 		}
 		
@@ -82,12 +82,12 @@ public final class IaSRegistry {
 			obj = ((ItemBlock)obj).field_150939_a;
 		if(obj instanceof IIaSApiTransmutable) {
 			trans = (IIaSApiTransmutable)obj;
-			if(trans.canDoTransmutation(target, catalyst, pl))
+			if(trans.getTransmutationTime(target, catalyst, pl) > 0)
 				return trans;
 		}
 		
 		for(int i = 0; i < handlersTransmutable.size(); ++i) {
-			if(handlersTransmutable.get(i).canDoTransmutation(target, catalyst, pl))
+			if(handlersTransmutable.get(i).getTransmutationTime(target, catalyst, pl) > 0)
 				return handlersTransmutable.get(i);
 		}
 		return null;
