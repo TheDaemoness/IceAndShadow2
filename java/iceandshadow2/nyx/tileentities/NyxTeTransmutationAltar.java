@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public ItemStack target;
 	public ItemStack catalyst;
-	public int transmutesLeft;
+	public long finishOn;
 	
 	public boolean handlePlace(ItemStack is) {
 		if(catalyst == null) {
@@ -23,9 +23,20 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		return false;
 	}
 	
+	public void scheduleUpdate(World w, int x, int y, int z, int time) {
+		w.scheduleBlockUpdate(x, y, z, w.getBlock(x, y, x), time);
+		finishOn = w.getWorldTime()+time;
+	}
+	
+	//Sanity check to avoid interrupted transmutations messing with new transmutations.
+	public boolean isTransmutationDone(World w) {
+		return catalyst != null && target != null && w.getWorldTime() == finishOn;
+	}
+	
 	public ItemStack handleRemove() {
 		ItemStack temp;
 		if(target != null) {
+			finishOn = 0;
 			temp = target;
 			target = null;
 			return temp;
@@ -54,7 +65,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		catalyst.writeToNBT(eyetemme);
 		par1.setTag("nyxItemCatalyst", eyetemme);
 		
-		par1.setInteger("nyxTransmutes", transmutesLeft);
+		par1.setLong("nyxTransmuteTime", finishOn);
 	}
 
 	@Override
@@ -73,7 +84,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		else
 			catalyst = null;
 		
-		if(par1.hasKey("nyxTransmutes"))
-			transmutesLeft = par1.getInteger("nyxTransmutes");
+		if(par1.hasKey("nyxTransmuteTime"))
+			finishOn = par1.getLong("nyxTransmuteTime");
 	}
 }
