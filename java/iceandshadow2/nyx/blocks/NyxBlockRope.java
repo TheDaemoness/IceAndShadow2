@@ -22,6 +22,10 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle {
 	public NyxBlockRope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.cloth);
 		this.setStepSound(soundTypeCloth);
+		this.setHardness(5.0F);
+		this.setLightLevel(0.1F);
+		this.setLightOpacity(0);
+		this.setResistance(100.0F);
 	}
 
 	@Override
@@ -92,10 +96,9 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public void onFallenUpon(World w, int x,
+	public abstract void onFallenUpon(World w, int x,
 			int y, int z, Entity tree,
-			float dist) {
-	}
+			float dist);
 
 	@Override
 	public abstract void onNeighborBlockChange(World w, int x,
