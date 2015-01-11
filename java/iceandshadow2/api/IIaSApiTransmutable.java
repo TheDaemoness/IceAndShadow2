@@ -24,7 +24,7 @@ public interface IIaSApiTransmutable {
 	 * @param player The player doing the transmutation.
 	 * @return A number of ticks it should take to do the transmuation, or some number <= 0 if this handler cannot.
 	 */
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst, EntityPlayer pl);
+	public int getTransmutationTime(ItemStack target, ItemStack catalyst);
 	
 	/**
 	 * Used to handle a transmutation in a transmutation altar on Nyx.
@@ -34,5 +34,5 @@ public interface IIaSApiTransmutable {
 	 * @param player The player doing the transmutation.
 	 * @return The item stack yielded from doing the transmutation, or null if the transmutation should destroy the target.
 	 */
-	public List<ItemStack> getTransmutationYield(ItemStack target, ItemStack catalyst, EntityPlayer pl);
+	public List<ItemStack> getTransmutationYield(ItemStack target, ItemStack catalyst);
 }

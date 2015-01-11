@@ -62,8 +62,8 @@ public final class IaSRegistry {
 		handlersSacrificeXp.add(handler);
 	}
 	
-	public static IIaSApiTransmutable getHandlerTransmutation(ItemStack target, ItemStack catalyst, EntityPlayer pl) {
-		if(target == null || catalyst == null || pl == null)
+	public static IIaSApiTransmutable getHandlerTransmutation(ItemStack target, ItemStack catalyst) {
+		if(target == null || catalyst == null)
 			return null;
 		Object obj;
 		IIaSApiTransmutable trans;
@@ -73,7 +73,7 @@ public final class IaSRegistry {
 			obj = ((ItemBlock)obj).field_150939_a;
 		if(obj instanceof IIaSApiTransmutable) {
 			trans = (IIaSApiTransmutable)obj;
-			if(trans.getTransmutationTime(target, catalyst, pl) > 0)
+			if(trans.getTransmutationTime(target, catalyst) > 0)
 				return trans;
 		}
 		
@@ -82,12 +82,12 @@ public final class IaSRegistry {
 			obj = ((ItemBlock)obj).field_150939_a;
 		if(obj instanceof IIaSApiTransmutable) {
 			trans = (IIaSApiTransmutable)obj;
-			if(trans.getTransmutationTime(target, catalyst, pl) > 0)
+			if(trans.getTransmutationTime(target, catalyst) > 0)
 				return trans;
 		}
 		
 		for(int i = 0; i < handlersTransmutable.size(); ++i) {
-			if(handlersTransmutable.get(i).getTransmutationTime(target, catalyst, pl) > 0)
+			if(handlersTransmutable.get(i).getTransmutationTime(target, catalyst) > 0)
 				return handlersTransmutable.get(i);
 		}
 		return null;
