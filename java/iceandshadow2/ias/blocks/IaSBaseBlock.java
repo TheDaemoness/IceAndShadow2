@@ -3,6 +3,7 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +17,7 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
 		MODULE = mod;
-		if(mod == EnumIaSModule.NYX)
+		if(mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock))
 			this.setCreativeTab(IaSCreativeTabs.blocks);
 	}
 	
