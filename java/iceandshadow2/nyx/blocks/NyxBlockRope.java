@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -16,16 +17,29 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSPlayerHelper;
 
-public abstract class NyxBlockRope extends IaSBaseBlockSingle {
+public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTechnicalBlock {
 
 	public NyxBlockRope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.cloth);
 		this.setStepSound(soundTypeCloth);
-		this.setHardness(5.0F);
+		this.setBlockUnbreakable();
 		this.setLightLevel(0.1F);
 		this.setLightOpacity(0);
-		this.setResistance(100.0F);
+		this.setResistance(9001F);
+	}
+
+	@Override
+	public void onBlockClicked(World w, int x, int y, int z, EntityPlayer pl) {
+		if(!pl.isSneaking())
+			return;
+		if(!w.isRemote) {
+			IaSPlayerHelper.giveItem(pl, new ItemStack(NyxItems.rope));
+			w.func_147480_a(x, y, z, false);
+		}
 	}
 
 	@Override
@@ -54,8 +68,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle {
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world,
 			int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return super.getPickBlock(target, world, x, y, z);
+		return new ItemStack(NyxItems.rope);
 	}
 
 	@Override
@@ -94,11 +107,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle {
 			ForgeDirection side) {
 		return false;
 	}
-
-	@Override
-	public abstract void onFallenUpon(World w, int x,
-			int y, int z, Entity tree,
-			float dist);
 
 	@Override
 	public abstract void onNeighborBlockChange(World w, int x,

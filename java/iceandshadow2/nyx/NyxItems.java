@@ -33,7 +33,7 @@ public class NyxItems {
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
 		poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
-		vineBundle, bread, cookie, echirShears, icicle, page;
+		vineBundle, bread, cookie, echirShears, icicle, page, rope;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").

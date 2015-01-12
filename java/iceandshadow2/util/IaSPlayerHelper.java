@@ -1,5 +1,7 @@
 package iceandshadow2.util;
 
+import iceandshadow2.nyx.NyxItems;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -33,8 +35,10 @@ public class IaSPlayerHelper {
 	
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
 		boolean added = plai.inventory.addItemStackToInventory(is);
-		if(!added)
-			plai.dropPlayerItemWithRandomChoice(is, false);
+		if(!added && !plai.worldObj.isRemote) {
+			EntityItem item = new EntityItem(plai.worldObj, plai.posX, plai.posY + plai.getEyeHeight()/2.0, plai.posZ, is);
+			plai.worldObj.spawnEntityInWorld(item);
+		}
 		return added;
 	}
 }
