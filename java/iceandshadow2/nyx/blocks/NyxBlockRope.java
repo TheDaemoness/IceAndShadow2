@@ -16,6 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxItems;
@@ -30,6 +31,11 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 		this.setLightLevel(0.1F);
 		this.setLightOpacity(0);
 		this.setResistance(9001F);
+	}	
+
+	@Override
+	public String getTexName() {
+		return IceAndShadow2.MODID+':'+this.getIaSModule().prefix+"Rope";
 	}
 
 	@Override
@@ -126,9 +132,9 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 	public int quantityDroppedWithBonus(int p_149679_1_, Random p_149679_2_) {
 		return 0;
 	}
-
+	
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon("IceAndShadow2:nyxGossamerRope");
+		this.blockIcon = reg.registerIcon(this.getTexName());
 	}
 }
