@@ -9,6 +9,7 @@ import iceandshadow2.nyx.items.NyxItemBoneCursed;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import iceandshadow2.nyx.items.NyxItemCortraDust;
 import iceandshadow2.nyx.items.NyxItemDevora;
+import iceandshadow2.nyx.items.NyxItemDraconium;
 import iceandshadow2.nyx.items.NyxItemExousium;
 import iceandshadow2.nyx.items.NyxItemFoodBread;
 import iceandshadow2.nyx.items.NyxItemFoodCookie;
@@ -31,7 +32,7 @@ import net.minecraft.item.Item;
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
-		poisonFruit, poisonFruitFertile, silkBerries, 
+		draconium, poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
 		vineBundle, bread, cookie, echirShears, icicle, page, rope;
 	
@@ -55,6 +56,8 @@ public class NyxItems {
 		devora = new NyxItemDevora("Devora").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		draconium = new NyxItemDraconium("Draconium").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
 				register().setCreativeTab(IaSCreativeTabs.resources);
