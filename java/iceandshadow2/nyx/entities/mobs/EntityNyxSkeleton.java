@@ -73,10 +73,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		}
 	}
 
-    protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 25, 35, 24.0F);
+    protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(this, this.moveSpeed, 25, 35, 24.0F);
     protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, this.moveSpeed, 35, 45, 32.0F);
-    protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed+0.5, false);
-    protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class, this.moveSpeed+0.5, true);
+    protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed+0.25, false);
+    protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class, this.moveSpeed+0.25, true);
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this, this.moveSpeed+0.25, 35, 45, 12.0F);
 
 	protected IaSSetSenses senses;
@@ -336,7 +336,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 				this.regenDelay = 30;
 			}
 		}
-		if(this.getEquipmentInSlot(0) != null) {
+		if(this.getEquipmentInSlot(0) != null && !this.worldObj.isRemote) {
 			ItemStack is = this.getEquipmentInSlot(0);
 			if(is.getItem() instanceof IaSItemThrowingKnife && this.getAttackTarget() != null) {
 				if(throwDelay <= 0) {
