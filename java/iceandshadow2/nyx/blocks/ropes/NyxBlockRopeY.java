@@ -1,11 +1,8 @@
 package iceandshadow2.nyx.blocks.ropes;
 
-import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -43,7 +40,7 @@ public class NyxBlockRopeY extends NyxBlockRope {
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         float var5 = 0.375F;
-        return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)((float)par3), (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1)), (double)((float)(par4 + 1) - var5));
+        return AxisAlignedBB.getBoundingBox(par2 + var5, (par3), par4 + var5, par2 + 1 - var5, (par3 + 1), par4 + 1 - var5);
     }
 
 }

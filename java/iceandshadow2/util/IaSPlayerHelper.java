@@ -1,6 +1,5 @@
 package iceandshadow2.util;
 
-import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

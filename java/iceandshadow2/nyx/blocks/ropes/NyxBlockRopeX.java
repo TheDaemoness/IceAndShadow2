@@ -1,11 +1,6 @@
 package iceandshadow2.nyx.blocks.ropes;
 
-import iceandshadow2.nyx.NyxItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class NyxBlockRopeX extends NyxBlockRope {

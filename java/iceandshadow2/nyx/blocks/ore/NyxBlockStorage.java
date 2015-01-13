@@ -1,12 +1,9 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.nyx.blocks.NyxBlockStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
 
 public abstract class NyxBlockStorage extends IaSBaseBlockSingle {
 	
