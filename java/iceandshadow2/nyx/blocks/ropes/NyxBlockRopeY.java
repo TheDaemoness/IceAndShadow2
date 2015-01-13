@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks;
+package iceandshadow2.nyx.blocks.ropes;
 
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxItems;

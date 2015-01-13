@@ -2,6 +2,7 @@ package iceandshadow2.nyx;
 
 import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.nyx.blocks.ore.*;
+import iceandshadow2.nyx.blocks.ropes.*;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
@@ -11,7 +12,7 @@ public class NyxBlocks {
 	exousicIce, exousicWater, crystalBloodstone, thornyVines, silkBerryPod,
 	infestLog, infestLeaves, poisonLeaves, poisonLog, brickFrozen, planks,
 	gatestone, brickPale, brickPaleCracked,
-	hookClimbing, hookTightropeX, hookTightropeZl, ropeX, ropeY, ropeZ;
+	hookClimbing, hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -53,6 +54,10 @@ public class NyxBlocks {
 		gatestone = new NyxBlockGatestone("Gatestone").register();
 		
 		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
+		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX").register();
+		hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ").register();
 		ropeY = new NyxBlockRopeY("RopeY").register();
+		ropeX = new NyxBlockRopeX("RopeX").register();
+		ropeZ = new NyxBlockRopeZ("RopeZ").register();
 	}
 }

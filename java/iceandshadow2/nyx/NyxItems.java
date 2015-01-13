@@ -10,10 +10,10 @@ import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
-		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
-		draconium, poisonFruit, poisonFruitFertile, silkBerries, 
+		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, 
+		exousicIceShard, draconium, poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
-		vineBundle, bread, cookie, echirShears, icicle, page, rope;
+		vineBundle, bread, cookie, echirShears, icicle, page, rope, kitTightrope;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -65,6 +65,8 @@ public class NyxItems {
 		page = new NyxItemLorePage("Page").
 				register().setCreativeTab(IaSCreativeTabs.misc);
 		rope = new NyxItemRope("Rope").
+				register().setCreativeTab(IaSCreativeTabs.tools);
+		kitTightrope = new NyxItemKitTightrope("KitTightrope").
 				register().setCreativeTab(IaSCreativeTabs.tools);
 	}
 }

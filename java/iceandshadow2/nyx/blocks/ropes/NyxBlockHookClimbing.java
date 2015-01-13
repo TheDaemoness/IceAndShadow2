@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks;
+package iceandshadow2.nyx.blocks.ropes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;

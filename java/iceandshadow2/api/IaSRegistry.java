@@ -135,8 +135,6 @@ public final class IaSRegistry {
 			sum = xp.getXpValue(target, r);
 			if(sum > 0)
 				return sum;
-			else if (sum < 0)
-				sum = 0;
 		}
 		return 0;
 	}
