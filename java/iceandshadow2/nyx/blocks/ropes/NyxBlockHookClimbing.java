@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.blocks.ropes;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
@@ -48,6 +50,17 @@ public class NyxBlockHookClimbing extends BlockFence {
 		return side != 1;
 	}
 	
+	
+	
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
+			int metadata, int fortune) {
+		ArrayList<ItemStack> is = super.getDrops(world, x, y, z, metadata, fortune);
+		if(world.getBlock(x, y-1, z) == NyxBlocks.ropeY)
+			is.add(new ItemStack(NyxItems.rope));
+		return is;
+	}
+
 	@Override
 	public boolean onBlockActivated(World w, int x,
 			int y, int z, EntityPlayer pl,
