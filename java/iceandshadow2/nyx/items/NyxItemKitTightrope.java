@@ -42,14 +42,8 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 		int ilen = 1;
 		int xc = x, yc = y, zc = z;
 		for(int i = 1; i < LENGTH_MAX; ++i) {
-			if(dir == ForgeDirection.EAST)
-				++xc;
-			if(dir == ForgeDirection.WEST)
-				--xc;
-			if(dir == ForgeDirection.SOUTH)
-				++zc;
-			if(dir == ForgeDirection.NORTH)
-				--zc;
+			xc += dir.offsetX;
+			zc += dir.offsetZ;
 			Block bl = w.getBlock(xc, yc, zc);
 			if(bl.getMaterial() == Material.air)
 				++ilen;
@@ -74,44 +68,25 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 		}
 		w.playSoundAtEntity(pl, "random.bow", 1.0F,
 				1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
-		if(dir == ForgeDirection.EAST)
-			w.setBlock(x+1, y, z, NyxBlocks.hookTightropeX);
-		if(dir == ForgeDirection.WEST)
-			w.setBlock(x-1, y, z, NyxBlocks.hookTightropeX);
-		if(dir == ForgeDirection.SOUTH)
-			w.setBlock(x, y, z+1, NyxBlocks.hookTightropeZ);
-		if(dir == ForgeDirection.NORTH)
-			w.setBlock(x, y, z-1, NyxBlocks.hookTightropeZ);
+		
+		if(dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+			w.setBlock(x+dir.offsetX, y, z, NyxBlocks.hookTightropeX);
+		else if(dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+			w.setBlock(x, y, z+dir.offsetZ, NyxBlocks.hookTightropeZ);
+		
 		for(int i = 2; i < ilen; ++i) {
-			if(dir == ForgeDirection.EAST)
-				w.setBlock(x+i, y, z, NyxBlocks.ropeX);
-			if(dir == ForgeDirection.WEST)
-				w.setBlock(x-i, y, z, NyxBlocks.ropeX);
-			if(dir == ForgeDirection.SOUTH)
-				w.setBlock(x, y, z+i, NyxBlocks.ropeZ);
-			if(dir == ForgeDirection.NORTH)
-				w.setBlock(x, y, z-i, NyxBlocks.ropeZ);
+			if(dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+				w.setBlock(x+i*dir.offsetX, y, z, NyxBlocks.ropeX);
+			else if(dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+				w.setBlock(x, y, z+i*dir.offsetZ, NyxBlocks.ropeZ);
 		}
-		if(dir == ForgeDirection.EAST) {
-			w.setBlock(x+ilen-1, y, z, NyxBlocks.hookTightropeX);
-			w.playSoundEffect(x+ilen-1+0.5, y+0.5, z+0.5, "dig.stone", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
-		}
-		if(dir == ForgeDirection.WEST) {
-			w.setBlock(x-ilen+1, y, z, NyxBlocks.hookTightropeX);
-			w.playSoundEffect(x-ilen+1+0.5, y+0.5, z+0.5, "dig.stone", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
-		}
-		if(dir == ForgeDirection.SOUTH) {
-			w.setBlock(x, y, z+ilen-1, NyxBlocks.hookTightropeZ);
-			w.playSoundEffect(x+0.5, y+0.5, z+ilen-1+0.5, "dig.stone", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
-		}
-		if(dir == ForgeDirection.NORTH) {
-			w.setBlock(x, y, z-ilen+1, NyxBlocks.hookTightropeZ);
-			w.playSoundEffect(x+0.5, y+0.5, z-ilen+1+0.5, "dig.stone", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
-		}
+		if(dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+			w.setBlock(x+(ilen-1)*dir.offsetX, y, z, NyxBlocks.hookTightropeX);
+		else if(dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+			w.setBlock(x, y, z+(ilen-1)*dir.offsetZ, NyxBlocks.hookTightropeZ);
+		w.playSoundEffect(x+(ilen-1)*dir.offsetX+0.5, y+0.5, z+(ilen-1)*dir.offsetZ+0.5, 
+				"dig.stone", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+		
 		is.stackSize -= 1;
 		return true;
 	}
@@ -163,14 +138,8 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			if(!w.isSideSolid(xc, yc, zc, dir))
 				return;
 			for(int i = 0; i < LENGTH_MAX; ++i) {
-				if(dir == ForgeDirection.EAST)
-					++xc;
-				if(dir == ForgeDirection.WEST)
-					--xc;
-				if(dir == ForgeDirection.SOUTH)
-					++zc;
-				if(dir == ForgeDirection.NORTH)
-					--zc;
+				xc += dir.offsetX;
+				zc += dir.offsetZ;
 				if(i == 0)
 					continue;
 				Block bl = w.getBlock(xc, yc, zc);
@@ -190,14 +159,10 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			if(ilen == LENGTH_MAX)
 				return;
 			for(int i = 1; i < ilen; ++i) {
-				if(dir == ForgeDirection.EAST)
-					spawnParticlesX(w, mop.blockX+i, mop.blockY, mop.blockZ);
-				if(dir == ForgeDirection.WEST)
-					spawnParticlesX(w, mop.blockX-i, mop.blockY, mop.blockZ);
-				if(dir == ForgeDirection.SOUTH)
-					spawnParticlesZ(w, mop.blockX, mop.blockY, mop.blockZ+i);
-				if(dir == ForgeDirection.NORTH)
-					spawnParticlesZ(w, mop.blockX, mop.blockY, mop.blockZ-i);
+				if(dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+					spawnParticlesX(w, mop.blockX+dir.offsetX*i, mop.blockY, mop.blockZ+dir.offsetZ*i);
+				if(dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+					spawnParticlesZ(w, mop.blockX+dir.offsetX*i, mop.blockY, mop.blockZ+dir.offsetZ*i);
 			}
 		}
 		
