@@ -68,73 +68,70 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		return false;
 	}
 
-	@Override
-	public void updateTick(World w, int x, int y, int z, Random r) {
+	public void doTransmutation(World w, int x, int y, int z, Random r) {
 		TileEntity te = w.getTileEntity(x, y, z);
 		if(!(te instanceof NyxTeTransmutationAltar))
 			return;
 		NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar)te;
-		if(tte.isTransmutationDone()) {
-			if(tte.handler == null)
-				tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
-			List<ItemStack> l_ist = tte.handler.getTransmutationYield(tte.target, tte.catalyst);
-			if(!w.isRemote && l_ist != null) {
-				TileEntityHopper teh = null;
-				if(w.getTileEntity(x, y-1, z) instanceof TileEntityHopper)
-					teh = (TileEntityHopper)w.getTileEntity(x, y-1, z);
-				for(ItemStack is : l_ist) {
-					if(teh != null) {
-						int i;
-						for(i = 0; i < teh.getSizeInventory(); ++i) {
-							if(teh.isItemValidForSlot(i, is))
-								break;
-						}
-						if(i != teh.getSizeInventory()) {
-							teh.setInventorySlotContents(i, is);
-							continue;
-						}
+		if(tte.handler == null)
+			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
+		if(tte.handler == null)
+			return;
+		List<ItemStack> l_ist = tte.handler.getTransmutationYield(tte.target, tte.catalyst);
+		if(tte.target.stackSize <= 0)
+			tte.target = null;
+		if(tte.catalyst.stackSize <= 0)
+			tte.catalyst = null;
+		if(!w.isRemote && l_ist != null) {
+			TileEntityHopper teh = null;
+			if(w.getTileEntity(x, y-1, z) instanceof TileEntityHopper)
+				teh = (TileEntityHopper)w.getTileEntity(x, y-1, z);
+			for(ItemStack is : l_ist) {
+				if(teh != null) {
+					int i;
+					for(i = 0; i < teh.getSizeInventory(); ++i) {
+						if(teh.isItemValidForSlot(i, is))
+							break;
 					}
-					EntityItem ei = new EntityItem(w, x+0.5, y+0.8, z+0.5, is);
-					ei.lifespan = Integer.MAX_VALUE;
-					w.spawnEntityInWorld(ei);
+					if(i != teh.getSizeInventory()) {
+						teh.setInventorySlotContents(i, is);
+						continue;
+					}
 				}
-				if(teh != null)
-					w.setTileEntity(x, y-1, z, teh);
+				EntityItem ei = new EntityItem(w, x+0.5, y+0.8, z+0.5, is);
+				ei.lifespan = Integer.MAX_VALUE;
+				w.spawnEntityInWorld(ei);
 			}
+			if(teh != null)
+				w.setTileEntity(x, y-1, z, teh);
+		}
+		if(tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 			if(tte.handler == null) {
-				tte.finishOn = 0;
 				w.setTileEntity(x, y, z, tte);
 				return;
 			}
 			tte.scheduleUpdate(x, y, z, tte.handler.getTransmutationTime(tte.target, tte.catalyst));
-			w.setTileEntity(x, y, z, tte);
 		}
-
+		w.setTileEntity(x, y, z, tte);
 	}
-
+	
 	@Override
-	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
+	public void breakBlockPre(World w, int x, int y, int z, Block bl, int meta) {
 		TileEntity te = w.getTileEntity(x, y, z);
 		if(!(te instanceof NyxTeTransmutationAltar))
 			return;
 		NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar)te;
-		if(tte.finishOn <= 0)
-			return;
-		for(int i = 0; i < 4; ++i) {
-			double xposMod = 0.33+w.rand.nextDouble()/3, zposMod = 0.33+w.rand.nextDouble()/3;
-			IaSFxManager.spawnItemParticle(w, tte.catalyst, x+xposMod, y+1.25F+w.rand.nextDouble()/2, z+zposMod, 
-				(0.5-xposMod)/10, -0.05-w.rand.nextDouble()*0.1, (0.5-zposMod)/10, false, false);
-		}
+		tte.dropItems();
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new NyxTeTransmutationAltar();
 	}
-	
-    @Override
-    public boolean isOpaqueCube(){
-        return false;
-    }
+
+	@Override
+	public boolean isOpaqueCube(){
+		return false;
+	}
 }

@@ -2,11 +2,9 @@ package iceandshadow2.nyx;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
-import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
-import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
+import iceandshadow2.nyx.entities.mobs.*;
+import iceandshadow2.nyx.entities.projectile.*;
+import iceandshadow2.nyx.entities.util.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -38,6 +36,10 @@ public class NyxEntities {
 		//Set up Throwing Knives
 		EntityRegistry.registerModEntity(EntityThrowingKnife.class,
 				"nyxProjectileThrowingKnife", 5, owner, 80, 2, true);
+		
+		//Set up the technical EntityTransmutationCountdown entity.
+		EntityRegistry.registerModEntity(EntityTransmutationCountdown.class,
+				"nyxTechnicalTransmutationCountdown", 6, owner, 160, 1, false);
 	}
 	
 	public static int getUniqueEntityId() {

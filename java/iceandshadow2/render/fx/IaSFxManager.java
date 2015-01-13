@@ -132,6 +132,8 @@ public class IaSFxManager {
 			efx.setRBGColorF(0.0F, 0.0F, 0.005F);
 		}
 		else if(name == "breakingItem") {
+			if(extra == null)
+				return null;
 			efx = new EntityBreakingFX(woild, x, y, z, velX, velY, velZ, 
 					((ItemStack)extra).getItem(), ((ItemStack)extra).getItemDamage());
 		}

@@ -28,8 +28,10 @@ public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmuta
 	@Override
 	public List<ItemStack> getTransmutationYield(ItemStack target,
 			ItemStack catalyst) {
-		catalyst.stackSize -= 1;
-		target.setItemDamage(Math.min(0,target.getItemDamage()-1));
+		if(catalyst != null)
+			catalyst.stackSize -= 1;
+		if(target != null)
+			target.setItemDamage(Math.max(0,target.getItemDamage()-1));
 		return null;
 	}
 }

@@ -5,6 +5,7 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.*;
 import iceandshadow2.nyx.entities.projectile.*;
+import iceandshadow2.nyx.entities.util.*;
 import iceandshadow2.nyx.tileentities.*;
 import iceandshadow2.render.entity.mobs.*;
 import iceandshadow2.render.entity.projectiles.*;
@@ -37,6 +38,9 @@ public class IaSRenderers {
 				new RenderNot());
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrowingKnife.class,
 				new RenderThrowingKnife());
+		
+		//Technical entities.
+		RenderingRegistry.registerEntityRenderingHandler(EntityTransmutationCountdown.class, new RenderNot());
 		
 		//Items
 		for(Field f : NyxItems.class.getFields()) {
