@@ -3,7 +3,7 @@ package iceandshadow2;
 public enum EnumIaSModule {
 	IAS("ias"),
 	NYX("nyx"),
-	MAGIC("magic"),
+	VITAE("vitae"),
 	ABYSS("abyss");
 	
 	public final String prefix;

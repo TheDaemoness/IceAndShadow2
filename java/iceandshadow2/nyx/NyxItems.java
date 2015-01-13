@@ -4,36 +4,16 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
-import iceandshadow2.nyx.items.NyxItemBloodstone;
-import iceandshadow2.nyx.items.NyxItemBoneCursed;
-import iceandshadow2.nyx.items.NyxItemBoneSanctified;
-import iceandshadow2.nyx.items.NyxItemCortraDust;
-import iceandshadow2.nyx.items.NyxItemDevora;
-import iceandshadow2.nyx.items.NyxItemExousium;
-import iceandshadow2.nyx.items.NyxItemFoodBread;
-import iceandshadow2.nyx.items.NyxItemFoodCookie;
-import iceandshadow2.nyx.items.NyxItemFrostLongBow;
-import iceandshadow2.nyx.items.NyxItemFrostShortBow;
-import iceandshadow2.nyx.items.NyxItemIcicle;
-import iceandshadow2.nyx.items.NyxItemIngotEchir;
-import iceandshadow2.nyx.items.NyxItemLorePage;
-import iceandshadow2.nyx.items.NyxItemNavistraShard;
-import iceandshadow2.nyx.items.NyxItemNifelhiumPowder;
-import iceandshadow2.nyx.items.NyxItemPlumPoison;
-import iceandshadow2.nyx.items.NyxItemPlumPoisonFertile;
-import iceandshadow2.nyx.items.NyxItemSeedObsidian;
-import iceandshadow2.nyx.items.NyxItemSilkBerries;
-import iceandshadow2.nyx.items.NyxItemTeleportCrystal;
-import iceandshadow2.nyx.items.NyxItemVineBundle;
+import iceandshadow2.nyx.items.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
-		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, exousicIceShard, 
-		poisonFruit, poisonFruitFertile, silkBerries, 
+		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, draconium,
+		exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
-		vineBundle, bread, cookie, echirShears, icicle, page;
+		vineBundle, bread, cookie, echirShears, icicle, page, rope, kitTightrope;
 	
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").
@@ -56,9 +36,13 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,"ExousicIceShard").
 				register().setCreativeTab(IaSCreativeTabs.resources);
+		draconium = new NyxItemDraconium("Draconium").
+				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX,"ToughGossamer").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
@@ -82,5 +66,9 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		page = new NyxItemLorePage("Page").
 				register().setCreativeTab(IaSCreativeTabs.misc);
+		rope = new NyxItemRope("Rope").
+				register().setCreativeTab(IaSCreativeTabs.tools);
+		kitTightrope = new NyxItemKitTightrope("KitTightrope").
+				register().setCreativeTab(IaSCreativeTabs.tools);
 	}
 }

@@ -70,8 +70,6 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSKee
 	@Override
 	public void onUpdate(ItemStack pile, World earth,
 			Entity tree, int time, boolean boule) {
-		if(tree.worldObj.isRemote)
-			return;
 		if((pile.getItemDamage() & 2) == 0 && tree.dimension == IaSFlags.dim_nyx_id) {
 			if(tree instanceof EntityPlayer) {
 				EntityPlayer ep = (EntityPlayer)tree;
@@ -82,9 +80,11 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSKee
 					else
 						IaSPlayerHelper.messagePlayer(ep, "Something flew out of the crystal and into your backpack.");
 				}
-			} else
+			} else if(!tree.worldObj.isRemote)
 				pile.setItemDamage(pile.getItemDamage()|2);
 		}
+		if(tree.worldObj.isRemote)
+			return;
 		boolean active = true;
 		if(tree.dimension != IaSFlags.dim_nyx_id) {
 			active &= IaSEntityHelper.getTemperatureFloat(tree) <= 0.15;

@@ -5,7 +5,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-
 /**
  * A list of functions a throwing knife entity is guaranteed to have.
  * This is NOT existent on the throwing knife item itself.

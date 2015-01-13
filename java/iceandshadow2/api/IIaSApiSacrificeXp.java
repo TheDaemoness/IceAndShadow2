@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
  * An interface for handlers of IaS's experience altar sacrifice system.
  * This can either be implemented by Item or Block derivatives, or implemented by a handler and registered with IaSRegistry.
  * If an Item or Block has a handler, it will always be run instead of any in IaSRegistry.
- * If multiple handlers return experience for the same item, the first one registered is the one that will be used.
+ * If multiple handlers would return experience for the same item, the first one registered is the one that will be used.
  */
 public interface IIaSApiSacrificeXp {
 	/**

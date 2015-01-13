@@ -109,6 +109,18 @@ public class IaSServerCommand implements ICommand {
 	@Override
 	public List addTabCompletionOptions(ICommandSender snd,
 			String[] str) {
+		ArrayList<String> tc = new ArrayList<String>();
+		if(str.length == 1) {
+			tc.add("goto");
+			return tc;
+		}
+		if(str.length == 2) {
+			if(str[0].contentEquals("goto")) {
+				tc.add("nyx");
+				tc.add("overworld");
+			}
+			return tc;
+		}
 		return null;
 	}
 

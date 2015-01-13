@@ -5,7 +5,9 @@ import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
@@ -22,8 +24,8 @@ public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 	public NyxItemIngotEchir(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setHasSubtypes(true);
-		GameRegistry.addSmelting(this, new ItemStack(this,1,1), 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
+		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -48,6 +50,13 @@ public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 					EnumChatFormatting.ITALIC.toString()+
 					"This needs to be heated up...");
 		}
+	}
+
+	@Override
+	public void getSubItems(Item i, CreativeTabs t,
+			List l) {
+		super.getSubItems(i,t,l);
+		l.add(new ItemStack(this,1,1));
 	}
 
 	@SideOnly(Side.CLIENT)

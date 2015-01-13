@@ -9,7 +9,7 @@ public class IaSBaseBlockSingle extends IaSBaseBlock {
 	public IaSBaseBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
 		this.setBlockName(mod.prefix+texName);
-		this.setBlockTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
+		this.setBlockTextureName(getTexName());
 	}
 	
 	@Override

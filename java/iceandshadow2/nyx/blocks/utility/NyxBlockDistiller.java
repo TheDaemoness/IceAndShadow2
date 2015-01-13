@@ -25,8 +25,9 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 		this.setLuminescence(0.3F);
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
-		this.setBlockBounds(0.3F, 0.7F, 0.05F, 0.95F, 0.3F, 0.7F);
+		this.setBlockBounds(0.4F, 0.05F, 0.4F, 0.6F, 0.95F, 0.6F);
 		this.setTickRandomly(true);
+        this.setLightOpacity(3);
 	}
 
 	@Override

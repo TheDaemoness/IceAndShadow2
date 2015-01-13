@@ -1,6 +1,8 @@
 package iceandshadow2.api;
 
 import java.util.List;
+import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -18,7 +20,7 @@ public interface IIaSApiExaminable {
 	 * @param knowledge The knowledge currently recorded in the examination table.
 	 * @return A list of messages to tell the player. Null is acceptable.
 	 */
-	public List<String> getExamineMessages(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	public List<String> getExamineMessages(ItemStack toExam, Map<String,Integer> knowledge);
 	
 
 	/**
@@ -28,7 +30,7 @@ public interface IIaSApiExaminable {
 	 * @param knowledge The knowledge currently recorded in the examination table.
 	 * @return An NBTTagCompound to be applied to a book, or null otherwise.
 	 */
-	public NBTTagCompound getBookInfo(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	public NBTTagCompound getBookInfo(ItemStack toExam, Map<String,Integer> knowledge);
 	
 	/**
 	 * Returns a list of any knowledge that should be changed after examining the item.
@@ -36,14 +38,15 @@ public interface IIaSApiExaminable {
 	 * @param knowledge The knowledge currently recorded in the examination table.
 	 * @return A list of any CHANGED knowledge, including new knowledge. Null is acceptable if no new knowledge was learned.
 	 */
-	public List<AssocPair<String, Integer>> getChangedKnowledge(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	public Map<String,Integer> getChangedKnowledge(ItemStack toExam, Map<String,Integer> knowledge);
 	
 	/**
-	 * Determines if the changed knowledge should only be changed if a book was written.
+	 * Returns a list of any knowledge that should be changed after writing a book on the item.
 	 * Used for implementing lore documents.
+	 * Applied after the normal examination changed knowledge, overriding it.
 	 * @param toExam The item stack being examined.
 	 * @param knowledge The knowledge currently recorded in the examination table.
 	 * @return True if a book needs to be written for the knowledge in the table to change, false if the item merely needs to be examined.
 	 */
-	public boolean requiresBookForKnowledgeChange(ItemStack toExam, List<AssocPair<String, Integer>> knowledge);
+	public Map<String,Integer> getChangedKnowledgeOnBook(ItemStack toExam, Map<String,Integer> knowledge);
 }

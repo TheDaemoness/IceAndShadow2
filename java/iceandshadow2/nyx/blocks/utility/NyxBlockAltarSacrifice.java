@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks;
+package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
@@ -16,6 +16,7 @@ public class NyxBlockAltarSacrifice extends IaSBlockAltar {
 		super(mod, id);
 		this.setLightLevel(0.5F);
 		this.setResistance(9001.0F);
+		this.setBlockUnbreakable();
 		this.setStepSound(Block.soundTypeStone);
 	}
 

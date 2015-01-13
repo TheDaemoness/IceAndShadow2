@@ -153,9 +153,6 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					}
 				}
 			}
-		} 
-		else if (theEntity.dimension == IaSFlags.dim_abyss_id) {
-			
 		}
 	}
 
