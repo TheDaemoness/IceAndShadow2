@@ -1,8 +1,11 @@
 package iceandshadow2.nyx;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.nyx.blocks.ore.*;
 import iceandshadow2.nyx.blocks.ropes.*;
+import iceandshadow2.nyx.blocks.utility.*;
+import iceandshadow2.nyx.tileentities.*;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
@@ -12,7 +15,8 @@ public class NyxBlocks {
 	exousicIce, exousicWater, crystalBloodstone, thornyVines, silkBerryPod,
 	infestLog, infestLeaves, poisonLeaves, poisonLog, brickFrozen, planks,
 	gatestone, brickPale, brickPaleCracked,
-	hookClimbing, hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ;
+	hookClimbing, hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ,
+	transmutationAltar, examinationTable, distiller;
 	
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, 
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -41,17 +45,19 @@ public class NyxBlocks {
 		oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
 		oreExousium = new NyxBlockOreExousium("OreExousium").register();
 		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
+		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
 		
 		fluidExousia = new Fluid("nyxFluidExousicWater");
 		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10).setViscosity(500);
 		IaSRegistration.register(fluidExousia);
 		exousicWater = new NyxBlockWater("ExousicWater",fluidExousia).register();
-		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
 		
 		brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
 		brickPale = new NyxBlockBrickPale("PaleBrick").register();
 		brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked").register();
 		gatestone = new NyxBlockGatestone("Gatestone").register();
+		
+		transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
 		
 		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX").register();
@@ -59,5 +65,7 @@ public class NyxBlocks {
 		ropeY = new NyxBlockRopeY("RopeY").register();
 		ropeX = new NyxBlockRopeX("RopeX").register();
 		ropeZ = new NyxBlockRopeZ("RopeZ").register();
+		
+		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class, "nyxTeTransmutationAltar");
 	}
 }

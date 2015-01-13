@@ -2,6 +2,7 @@ package iceandshadow2.render.fx;
 
 import iceandshadow2.IaSFlags;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityLavaFX;
@@ -9,6 +10,7 @@ import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,13 +44,21 @@ public class IaSFxManager {
 			double velX, double velY, double velZ, boolean unbounded, boolean isDecorative) {
 		
 		if(woild.isRemote)
-			doParticleSpawn(woild, name, x, y, z, velX, velY, velZ, unbounded, isDecorative);
+			doParticleSpawn(woild, name, x, y, z, velX, velY, velZ, null, unbounded, isDecorative);
+	}
+	
+	public static void spawnItemParticle(World woild, ItemStack is,
+			double x, double y, double z,
+			double velX, double velY, double velZ, boolean unbounded, boolean isDecorative) {
+		
+		if(woild.isRemote)
+			doParticleSpawn(woild, "breakingItem", x, y, z, velX, velY, velZ, is, unbounded, isDecorative);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	protected static void doParticleSpawn(World woild, String name,
 			double x, double y, double z,
-			double velX, double velY, double velZ, boolean unbounded, boolean isDecorative) {
+			double velX, double velY, double velZ, Object extra, boolean unbounded, boolean isDecorative) {
 		
 		Minecraft.getMinecraft();
 				Minecraft.getMinecraft();
@@ -62,7 +72,7 @@ public class IaSFxManager {
 			return;
 		
 		EntityFX effex = getParticleInstanceByName(
-				woild, name, x, y, z, velX, velY, velZ);
+				woild, name, x, y, z, velX, velY, velZ, extra);
 		
 		if(effex != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(effex);
@@ -71,7 +81,7 @@ public class IaSFxManager {
 	@SideOnly(Side.CLIENT)
 	protected static EntityFX getParticleInstanceByName(World woild, String name,
 			double x, double y, double z,
-			double velX, double velY, double velZ) {
+			double velX, double velY, double velZ, Object extra) {
 		
 		EntityFX efx = null;
 		
@@ -120,6 +130,10 @@ public class IaSFxManager {
 		else if(name == "shadowSmokeLarge") {
 			efx = new EntityReddustFX(woild, x, y, z, 4.0F, 0.0F , 0.0F, 0.005F);
 			efx.setRBGColorF(0.0F, 0.0F, 0.005F);
+		}
+		else if(name == "breakingItem") {
+			efx = new EntityBreakingFX(woild, x, y, z, velX, velY, velZ, 
+					((ItemStack)extra).getItem(), ((ItemStack)extra).getItemDamage());
 		}
 		
 		return efx;
