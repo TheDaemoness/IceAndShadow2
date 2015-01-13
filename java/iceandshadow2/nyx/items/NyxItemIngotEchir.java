@@ -22,7 +22,7 @@ public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 	public NyxItemIngotEchir(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setHasSubtypes(true);
-		GameRegistry.addSmelting(this, new ItemStack(this,1,1), 0);
+		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
 	}
 

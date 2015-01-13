@@ -46,5 +46,16 @@ public class NyxRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale), new ItemStack(NyxBlocks.brickPaleCracked),
 				new ItemStack(NyxItems.exousicIceShard));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.string,4), new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addRecipe(new ItemStack(NyxItems.rope), "g", "g", "g", 'g', new ItemStack(NyxItems.toughGossamer));
+		
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.hookClimbing,2), 
+				"ee", "ee", "e ", 'e', new ItemStack(NyxItems.echirIngot,1,1));
+		GameRegistry.addRecipe(new ItemStack(NyxItems.kitTightrope), 
+				" e ", "hrh", 
+				'h', new ItemStack(NyxBlocks.hookClimbing),
+				'e', new ItemStack(NyxItems.echirIngot,1,1),
+				'r', new ItemStack(NyxItems.rope));
 	}
 }
