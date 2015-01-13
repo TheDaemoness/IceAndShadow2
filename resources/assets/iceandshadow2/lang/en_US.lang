@@ -26,6 +26,9 @@ item.nyxCookie.name=Silk Cookie
 item.nyxVineBundle.name=Thorny Vine Bundle
 item.nyxIcicle.name=Shimmering Icicle
 item.nyxPage0.name=Torn Page
+item.nyxToughGossamer.name=Tough Gossamer Bundle
+item.nyxRope.name=Gossamer Rope
+item.nyxKitTightrope.name=Tightrope Kit
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
@@ -89,6 +92,12 @@ tile.nyxPlanks0.name=Poisonwood Planks
 tile.nyxPlanks1.name=Infested Planks
 tile.nyxPaleBrick.name=Pale Brick
 tile.nyxPaleBrickCracked.name=Cracked Pale Brick
+tile.nyxClimbingHook.name=Climbing Anchor
+tile.nyxHookTightropeX.name=Tightrope Anchor
+tile.nyxHookTightropeZ.name=Tightrope Anchor
+tile.nyxRopeX.name=Gossamer Tightrope
+tile.nyxRopeY.name=Gossamer Climbing Rope
+tile.nyxRopeZ.name=Gossamer Tightrope
 
 tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore

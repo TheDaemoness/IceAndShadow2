@@ -113,14 +113,15 @@ public class EntityNyxSpider extends EntitySpider {
 		if (this.isInvisible())
 			this.dropItem(Items.experience_bottle, 1+this.rand.nextInt(2+par2));
 
-		/*
-		int baite = this.rand.nextInt(16)-par2;
+		
+		int baite = this.rand.nextInt(6+par2)-par2;
 		if (baite <= 0)
-			this.dropItem(IaSItems.nyxToughGossamer.itemID, 1);
-
+			this.dropItem(NyxItems.toughGossamer, 1);
+		
+		/*
         if(this.rand.nextInt(4-this.worldObj.difficultySetting) == 0)
 			this.dropItem(IaSItems.nyxPhantomResin.itemID, 1+this.rand.nextInt(1+par2));
-			*/
+		*/
 	}
 
 

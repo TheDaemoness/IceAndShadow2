@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
-		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, 
-		exousicIceShard, draconium, poisonFruit, poisonFruitFertile, silkBerries, 
+		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, draconium,
+		exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, 
 		frostBowShort, frostBowLong, boneCursed, boneSanctified,
 		vineBundle, bread, cookie, echirShears, icicle, page, rope, kitTightrope;
 	
@@ -41,6 +41,8 @@ public class NyxItems {
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile").
+				register().setCreativeTab(IaSCreativeTabs.resources);
+		toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX,"ToughGossamer").
 				register().setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").
 				register().setCreativeTab(IaSCreativeTabs.resources);
