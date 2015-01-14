@@ -63,5 +63,9 @@ public class NyxRecipes {
 				'd', new ItemStack(NyxItems.draconium),
 				'c', new ItemStack(NyxItems.cortraDust),
 				'o', new ItemStack(Blocks.obsidian));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat,4,2), new ItemStack(NyxItems.heat,1,3));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat,4,1), new ItemStack(NyxItems.heat,1,2));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat,4,0), new ItemStack(NyxItems.heat,1,1));
 	}
 }
