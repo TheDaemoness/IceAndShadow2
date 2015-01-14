@@ -12,7 +12,7 @@ public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone,
 		echirIngot, nifelhiumPowder, navistraShard, devora, cortraDust, exousium, draconium,
 		exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, 
-		frostBowShort, frostBowLong, boneCursed, boneSanctified,
+		frostBowShort, frostBowLong, boneCursed, boneSanctified, heat,
 		vineBundle, bread, cookie, echirShears, icicle, page, rope, kitTightrope;
 	
 	public static void init() {
@@ -70,5 +70,7 @@ public class NyxItems {
 				register().setCreativeTab(IaSCreativeTabs.tools);
 		kitTightrope = new NyxItemKitTightrope("KitTightrope").
 				register().setCreativeTab(IaSCreativeTabs.tools);
+		heat = new NyxItemHeat("Heat").
+				register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 }
