@@ -49,6 +49,22 @@ public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSAp
 	public boolean usesDefaultGlowRenderer() {
 		return true;
 	}
+	
+	
+
+	@Override
+	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
+		if(meta < this.icons.length)
+			return this.icons[meta];
+		return this.icons[1];
+	}
+
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		this.icons = new IIcon[4];
+		for(int i = 0; i < this.icons.length; ++i)
+			this.icons[i] = reg.registerIcon(this.getTexName()+i);
+	}
 
 	@Override
 	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
