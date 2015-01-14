@@ -3,6 +3,8 @@ package iceandshadow2.nyx.blocks.utility;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.api.IaSRegistry;
@@ -12,17 +14,23 @@ import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 //See, this is why we need some form of MI in Java, be it mixins or traits.
 public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 
+	@SideOnly(Side.CLIENT)
+	protected IIcon side, bot;
+	
 	public NyxBlockAltarTransmutation(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		this.setLightLevel(0.4F);
@@ -34,6 +42,25 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		this.setTickRandomly(false);
 	}
 	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_,
+			int p_149673_3_, int p_149673_4_, int side) {
+		if(side == 0)
+			return bot;
+		if(side == 1)
+			return this.blockIcon;
+		return this.side;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+		this.blockIcon = reg.registerIcon(this.getTexName()+"Top");
+		this.side = reg.registerIcon(this.getTexName()+"Side");
+		this.bot = reg.registerIcon(this.getTexName()+"Bottom");
+	}
+
 	@Override
 	public void onNeighborBlockChange(World w, int x,
 			int y, int z, Block bl) {

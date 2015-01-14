@@ -57,5 +57,11 @@ public class NyxRecipes {
 				'h', new ItemStack(NyxBlocks.hookClimbing),
 				'e', new ItemStack(NyxItems.echirIngot,1,1),
 				'r', new ItemStack(NyxItems.rope));
+		
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar),
+				" d ", "coc",
+				'd', new ItemStack(NyxItems.draconium),
+				'c', new ItemStack(NyxItems.cortraDust),
+				'o', new ItemStack(Blocks.obsidian));
 	}
 }

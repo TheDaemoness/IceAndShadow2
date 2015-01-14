@@ -29,6 +29,10 @@ item.nyxPage0.name=Torn Page
 item.nyxToughGossamer.name=Tough Gossamer Bundle
 item.nyxRope.name=Gossamer Rope
 item.nyxKitTightrope.name=Tightrope Kit
+item.nyxHeat0.name=Tiny Crystal Flame
+item.nyxHeat1.name=Small Crystal Flame
+item.nyxHeat2.name=Medium Crystal Flame
+item.nyxHeat3.name=Large Crystal Flame
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
@@ -111,6 +115,8 @@ tile.nyxOreDraconium.name=Draconium Ore
 tile.nyxGatestone0.name=Active Gatestone
 tile.nyxGatestone1.name=Inactive Gatestone
 tile.nyxGatestone2.name=Inactive Gatestone
+
+tile.nyxTransmutationAltar.name=Transmutation Altar
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
