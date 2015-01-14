@@ -2,6 +2,7 @@ package iceandshadow2.api;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
  * The first one registered that can process the stack is the one used.
  */
 public interface IIaSApiItemStackIO {
+	public void isIntendedBlock(World w, Block b, int x, int y, int z);
 	public void canHandleInput(World w, int x, int y, int z);
 	public void canHandleOutput(World w, int x, int y, int z);
 	public ItemStack handleInput(World w, int x, int y, int z);

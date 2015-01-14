@@ -13,9 +13,9 @@ public interface IIaSApiDistillable {
 	/**
 	 * Used to represent an item or block that can be distilled.
 	 * @param target The item stack being distilled.
-	 * @return The item stacks yielded from doing the distillation. Return null if the object should be destroyed.
+	 * @return The item stack yielded from doing the distillation. Return null if the object should be destroyed.
 	 */
-	public List<ItemStack> getDistillationYield(ItemStack target);
+	public ItemStack getDistillationYield(ItemStack target);
 	
 	/**
 	 * Used to represent how many of this type of object can be processed at once.
