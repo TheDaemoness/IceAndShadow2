@@ -83,10 +83,12 @@ public class EntityTransmutationCountdown extends Entity {
 			return;
 		}
 		++age;
-		if(age >= this.dataWatcher.getWatchableObjectInt(16)) {
+		if(age >= this.dataWatcher.getWatchableObjectInt(16) && !this.worldObj.isRemote) {
 			if(this.worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
 				NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation)this.worldObj.getBlock(x, y, z);
 				bl.doTransmutation(this.worldObj, x, y, z, this.worldObj.rand);
+				this.worldObj.markBlockForUpdate(x, y, z);
+				this.worldObj.markTileEntityChunkModified(x, y, z, tte);
 				this.setDead();
 				return;
 			}
