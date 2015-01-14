@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.tileentities;
 
 import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
 import net.minecraft.entity.Entity;
@@ -82,6 +83,9 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 			catalyst.readFromNBT(par1.getCompoundTag("nyxItemCatalyst"));
 		else
 			catalyst = null;
+		
+		if(this.canAttemptTransmutation())
+			this.handler = IaSRegistry.getHandlerTransmutation(target, catalyst);
 	}
 
 	@Override
@@ -103,11 +107,17 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	}
 
 	public void dropItems() {
-		if(this.worldObj.isRemote)
-			return;
-		EntityItem cat = new EntityItem(this.worldObj, this.xCoord, this.yCoord+0.5F, this.zCoord, this.catalyst);
-		EntityItem tar = new EntityItem(this.worldObj, this.xCoord, this.yCoord+0.5F, this.zCoord, this.target);
-		this.worldObj.spawnEntityInWorld(cat);
-		this.worldObj.spawnEntityInWorld(tar);
+		if(!this.worldObj.isRemote) {
+			if(this.catalyst != null) {
+				EntityItem cat = new EntityItem(this.worldObj, this.xCoord+0.5F, this.yCoord+0.80F, this.zCoord+0.5F, this.catalyst);
+				this.worldObj.spawnEntityInWorld(cat);
+			}
+			if(this.target != null) {
+				EntityItem tar = new EntityItem(this.worldObj, this.xCoord+0.5F, this.yCoord+0.80F, this.zCoord+0.5F, this.target);
+				this.worldObj.spawnEntityInWorld(tar);
+			}
+		}
+		this.target = null;
+		this.catalyst = null;
 	}
 }

@@ -2,7 +2,10 @@ package iceandshadow2.nyx.items;
 
 import java.util.List;
 
+import scala.util.Random;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
@@ -27,11 +30,18 @@ public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmuta
 
 	@Override
 	public List<ItemStack> getTransmutationYield(ItemStack target,
-			ItemStack catalyst) {
-		if(catalyst != null)
-			catalyst.stackSize -= 1;
-		if(target != null)
+			ItemStack catalyst, World w) {
+		catalyst.stackSize -= 1;
+		if(target.getItem() == NyxItems.frostBowLong)
 			target.setItemDamage(Math.max(0,target.getItemDamage()-1));
+		if(target.getItem() == NyxItems.frostBowShort)
+			target.setItemDamage(Math.max(0,target.getItemDamage()-1-w.rand.nextInt(2)));
 		return null;
+	}
+
+	@Override
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity pos) {
+		return false;
 	}
 }

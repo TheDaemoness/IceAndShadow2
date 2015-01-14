@@ -33,11 +33,32 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		this.setStepSound(Block.soundTypeStone);
 		this.setTickRandomly(false);
 	}
+	
+	@Override
+	public void onNeighborBlockChange(World w, int x,
+			int y, int z, Block bl) {
+		Block check = w.getBlock(x, y+1, z);
+		if(check != null && check.getMaterial() != Material.air) {
+			TileEntity te = w.getTileEntity(x, y, z);
+			if(!(te instanceof NyxTeTransmutationAltar))
+				return;
+			NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar)te;
+			tte.dropItems();
+			w.setTileEntity(x, y, z, tte);
+			w.setBlockToAir(x, y, z);
+			w.setBlock(x, y, z, this);
+		}
+	}
 
 	@Override
 	public boolean onBlockActivated(World w, int x, int y,
 			int z, EntityPlayer ep, int side, float xl,
 			float yl, float zl) {
+		Block check = w.getBlock(x, y+1, z);
+		if(check != null && check.getMaterial() != Material.air) {
+			IaSPlayerHelper.messagePlayer(ep, "That altar needs an empty space above it to work.");
+			return true;
+		}
 		TileEntity te = w.getTileEntity(x, y, z);
 		if(!(te instanceof NyxTeTransmutationAltar))
 			return false;
@@ -73,16 +94,18 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if(!(te instanceof NyxTeTransmutationAltar))
 			return;
 		NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar)te;
+		if(!tte.canAttemptTransmutation())
+			return;
 		if(tte.handler == null)
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 		if(tte.handler == null)
 			return;
-		List<ItemStack> l_ist = tte.handler.getTransmutationYield(tte.target, tte.catalyst);
+		List<ItemStack> l_ist = tte.handler.getTransmutationYield(tte.target, tte.catalyst, w);
 		if(tte.target.stackSize <= 0)
 			tte.target = null;
 		if(tte.catalyst.stackSize <= 0)
 			tte.catalyst = null;
-		if(!w.isRemote && l_ist != null) {
+		if(l_ist != null) {
 			TileEntityHopper teh = null;
 			if(w.getTileEntity(x, y-1, z) instanceof TileEntityHopper)
 				teh = (TileEntityHopper)w.getTileEntity(x, y-1, z);
@@ -98,9 +121,11 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 						continue;
 					}
 				}
-				EntityItem ei = new EntityItem(w, x+0.5, y+0.8, z+0.5, is);
-				ei.lifespan = Integer.MAX_VALUE;
-				w.spawnEntityInWorld(ei);
+				if(!w.isRemote) {
+					EntityItem ei = new EntityItem(w, x+0.5, y+0.8, z+0.5, is);
+					ei.lifespan = Integer.MAX_VALUE-1;
+					w.spawnEntityInWorld(ei);
+				}
 			}
 			if(teh != null)
 				w.setTileEntity(x, y-1, z, teh);
@@ -134,4 +159,16 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	public boolean isOpaqueCube(){
 		return false;
 	}
+
+	@Override
+	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
+		TileEntity te = w.getTileEntity(x, y, z);
+		if(!(te instanceof NyxTeTransmutationAltar))
+			return;
+		NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar)te;
+		if(tte.handler != null && tte.canAttemptTransmutation())
+			Blocks.ender_chest.randomDisplayTick(w, x, y, z, r);
+	}
+	
+	
 }

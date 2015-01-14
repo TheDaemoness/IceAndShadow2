@@ -2,7 +2,9 @@ package iceandshadow2.api;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * An interface for handlers of IaS's transmutation system.
@@ -30,8 +32,20 @@ public interface IIaSApiTransmutable {
 	 * This function is responsible for reducing the sizes of the item stacks.
 	 * @param target The item stack being transmuted (on the altar).
 	 * @param catalyst The item stack being used for transmutation (held in the player's hand)
-	 * @param player The player doing the transmutation.
+	 * @param world A world object, for convenience and its RNG.
 	 * @return The item stack yielded from doing the transmutation, or null if the transmutation should destroy the target.
 	 */
-	public List<ItemStack> getTransmutationYield(ItemStack target, ItemStack catalyst);
+	public List<ItemStack> getTransmutationYield(ItemStack target, ItemStack catalyst, World world);
+	
+	/**
+	 * Used to handle particle spawning while transmutation is happening.
+	 * The altar already spawns "item-breaking particles". This is for additional particles.
+	 * Please do not fully disable the particles. They are the primary indication of transmutation happening.
+	 * @param target The item stack being transmuted (on the altar).
+	 * @param catalyst The item stack being used for transmutation (held in the player's hand)
+	 * @param world The world in which the particles will be spawned.
+	 * @param ent The invisible entity above the altar at which the particles will be spawned.
+	 * @return True if item breaking particles should NOT be spawned, false if they should.
+	 */
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst, World world, Entity ent);
 }
