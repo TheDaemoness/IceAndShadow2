@@ -50,8 +50,6 @@ public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSAp
 		return true;
 	}
 	
-	
-
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
 		if(meta < this.icons.length)
@@ -82,9 +80,11 @@ public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSAp
 			time = 0;
 		else
 			time = catalyst.getItemDamage();
-		for(int i = 0; i < (int)Math.min(Math.pow(4, time),target.stackSize); ++i)
-			li.add(FurnaceRecipes.smelting().getSmeltingResult(target).copy());
-		target.stackSize -= (int)Math.min(Math.pow(4, time),target.stackSize);
+		ItemStack ret = FurnaceRecipes.smelting().getSmeltingResult(target).copy();
+		ret.stackSize = (int)Math.min(Math.pow(4, time),target.stackSize);
+		ret.stackSize = Math.min(ret.getMaxStackSize(),ret.stackSize);
+		li.add(ret);
+		target.stackSize -= ret.stackSize;
 		--catalyst.stackSize;
 		return li;
 	}
