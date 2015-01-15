@@ -58,6 +58,7 @@ public class NyxBlocks {
 		gatestone = new NyxBlockGatestone("Gatestone").register();
 		
 		transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
+		distiller = new NyxBlockDistiller("Distiller").register();
 		
 		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX").register();
