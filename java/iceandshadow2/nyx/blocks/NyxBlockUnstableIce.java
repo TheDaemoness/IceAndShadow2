@@ -26,46 +26,46 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 		this.slipperiness = 1.08F;
 		this.setHarvestLevel("spade", 0);
 	}
-	
-	@SideOnly(Side.CLIENT)
-    @Override
-	public boolean shouldSideBeRendered(IBlockAccess w,
-			int x, int y, int z, int s) {
-		if(w.getBlock(x, y, z) == this)
-			return false;
-		return super.shouldSideBeRendered(w, x, y, z, s);
-	}
-	
+
 	@Override
 	public int getMobilityFlag() {
 		return 0;
 	}
-	
+
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		super.updateTick(par1World, par2, par3, par4, par5Random);
-        if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
-        {
-            if (par1World.provider.isHellWorld)
-                par1World.setBlockToAir(par2, par3, par4);
-            else
-            	par1World.setBlock(par2, par3, par4, Blocks.water);
-        }
-    }
-	
+	public int getRenderBlockPass() {
+		return 1;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z,
 			ForgeDirection side) {
 		return false;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean isOpaqueCube() {
-        return false;
-    }
-	
+	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z,
+			int s) {
+		if (w.getBlock(x, y, z) == this)
+			return false;
+		return super.shouldSideBeRendered(w, x, y, z, s);
+	}
+
 	@Override
-	public int getRenderBlockPass() {
-		return 1;
+	public void updateTick(World par1World, int par2, int par3, int par4,
+			Random par5Random) {
+		super.updateTick(par1World, par2, par3, par4, par5Random);
+		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11) {
+			if (par1World.provider.isHellWorld)
+				par1World.setBlockToAir(par2, par3, par4);
+			else
+				par1World.setBlock(par2, par3, par4, Blocks.water);
+		}
 	}
 }

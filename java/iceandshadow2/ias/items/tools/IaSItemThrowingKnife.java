@@ -23,48 +23,15 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		this.setUnlocalizedName("iasThrowingKnife");
 		this.setMaxStackSize(32);
 	}
-	
+
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-		if(par1ItemStack.getItemDamage() > 0)
-			return par1ItemStack;
-		
-		int var10 = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.knockback.effectId, par1ItemStack);
-		EntityThrowingKnife var8 = new EntityThrowingKnife(par2World,
-				par3EntityPlayer, 1.0F, 
-				par1ItemStack);
-		
-		if (!par3EntityPlayer.capabilities.isCreativeMode)
-			par1ItemStack.stackSize -= 1;
-		
-		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(par1ItemStack);
-		mat.onKnifeThrow(par1ItemStack, par3EntityPlayer, var8);
-
-		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
-
-		if (!par2World.isRemote)
-			par2World.spawnEntityInWorld(var8);
-		
-		par1ItemStack.setItemDamage(IaSToolMaterial.extractMaterial(par1ItemStack).getKnifeCooldown(par1ItemStack, par2World, par3EntityPlayer));
-
-		return par1ItemStack;
-    }
-	
-	@Override
-	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
-			Entity target) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		m.onAttack(is, user, target);
-		return true;
+	public boolean canRepair() {
+		return false;
 	}
 
 	@Override
-	public void onUpdate(ItemStack par1ItemStack, World world,
-			Entity player, int par4, boolean par5) {
-		if(par1ItemStack.getItemDamage() > 0)
-			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage()-1);
+	public int getMaxDamage(ItemStack is) {
+		return 0;
 	}
 
 	@Override
@@ -73,11 +40,6 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			EntityLivingBase par3EntityLivingBase) {
 		return true;
 	}
-	
-	@Override
-	public int getMaxDamage(ItemStack is) {
-		return 0;
-	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_,
@@ -85,9 +47,50 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
 	}
-	
+
 	@Override
-	public boolean canRepair() {
-		return false;
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+		if (par1ItemStack.getItemDamage() > 0)
+			return par1ItemStack;
+
+		final int var10 = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.knockback.effectId, par1ItemStack);
+		final EntityThrowingKnife var8 = new EntityThrowingKnife(par2World,
+				par3EntityPlayer, 1.0F, par1ItemStack);
+
+		if (!par3EntityPlayer.capabilities.isCreativeMode)
+			par1ItemStack.stackSize -= 1;
+
+		final IaSToolMaterial mat = IaSToolMaterial
+				.extractMaterial(par1ItemStack);
+		mat.onKnifeThrow(par1ItemStack, par3EntityPlayer, var8);
+
+		par2World
+				.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
+
+		if (!par2World.isRemote)
+			par2World.spawnEntityInWorld(var8);
+
+		par1ItemStack.setItemDamage(IaSToolMaterial.extractMaterial(
+				par1ItemStack).getKnifeCooldown(par1ItemStack, par2World,
+				par3EntityPlayer));
+
+		return par1ItemStack;
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		m.onAttack(is, user, target);
+		return true;
+	}
+
+	@Override
+	public void onUpdate(ItemStack par1ItemStack, World world, Entity player,
+			int par4, boolean par5) {
+		if (par1ItemStack.getItemDamage() > 0)
+			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() - 1);
 	}
 }

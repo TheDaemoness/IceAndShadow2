@@ -21,7 +21,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 			"iceandshadow2:textures/mob/winterskeleton.png");
 	private static ResourceLocation necromancerskin = new ResourceLocation(
 			"iceandshadow2:textures/mob/wickednecromancer.png");
-	
+
 	private static ResourceLocation winterskeleton_eyes = new ResourceLocation(
 			"iceandshadow2:textures/mob/winterskeleton_eyes.png");
 	private static ResourceLocation wickednecromancer_eyes = new ResourceLocation(
@@ -32,59 +32,8 @@ public class RenderNyxSkeleton extends RenderBiped {
 		this.renderPassModel = new ModelSkeleton();
 	}
 
-	protected void func_82438_a(EntitySkeleton par1EntitySkeleton, float par2) {
-		if (par1EntitySkeleton.getSkeletonType() == 1) {
-			GL11.glScalef(1.2F, 1.2F, 1.2F);
-		}
-	}
-	
-    /**
-     * Queries whether should render the specified pass or not.
-     */ 
-    @Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
-    {
-    	this.setSkeletonEyeBrightness((EntityNyxSkeleton)par1EntityLivingBase, par2, par3);
-    	return super.shouldRenderPass(par1EntityLivingBase, par2, par3);
-    }
-    
-	/**
-	 * Sets the skeleton's glowing eyes
-	 */
-	protected void setSkeletonEyeBrightness(EntityNyxSkeleton par1Entity,
-			int par2, float par3) {
-		if (par2 > 1 || par1Entity.isInvisible() || 
-				par1Entity.hurtTime > 0 || par1Entity.getHealth() <= 0.0F)
-			return;
-		else {
-			float f1 = 1.0F;
-
-			if(par1Entity.getSkeletonType() == 1)
-				this.bindTexture(wickednecromancer_eyes);
-			else
-				this.bindTexture(winterskeleton_eyes);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDepthMask(true);
-
-            char c0 = 61680;
-            int j = c0 % 65536;
-            int k = c0 / 65536;
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
-            this.modelBipedMain.bipedHead.renderWithRotation(par3);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-		}
-	}
-
-	@Override
-	protected void func_82422_c() {
-		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving) {
+		return this.func_110860_a((EntityNyxSkeleton) par1EntityLiving);
 	}
 
 	protected ResourceLocation func_110860_a(
@@ -93,8 +42,20 @@ public class RenderNyxSkeleton extends RenderBiped {
 				: winterskeletonskin;
 	}
 
-	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving) {
-		return this.func_110860_a((EntityNyxSkeleton) par1EntityLiving);
+	@Override
+	protected void func_82422_c() {
+		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+	}
+
+	protected void func_82438_a(EntitySkeleton par1EntitySkeleton, float par2) {
+		if (par1EntitySkeleton.getSkeletonType() == 1) {
+			GL11.glScalef(1.2F, 1.2F, 1.2F);
+		}
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+		return this.func_110860_a((EntityNyxSkeleton) par1Entity);
 	}
 
 	/**
@@ -107,8 +68,49 @@ public class RenderNyxSkeleton extends RenderBiped {
 		this.func_82438_a((EntitySkeleton) par1EntityLivingBase, par2);
 	}
 
+	/**
+	 * Sets the skeleton's glowing eyes
+	 */
+	protected void setSkeletonEyeBrightness(EntityNyxSkeleton par1Entity,
+			int par2, float par3) {
+		if (par2 > 1 || par1Entity.isInvisible() || par1Entity.hurtTime > 0
+				|| par1Entity.getHealth() <= 0.0F)
+			return;
+		else {
+			final float f1 = 1.0F;
+
+			if (par1Entity.getSkeletonType() == 1)
+				this.bindTexture(wickednecromancer_eyes);
+			else
+				this.bindTexture(winterskeleton_eyes);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDepthMask(true);
+
+			final char c0 = 61680;
+			final int j = c0 % 65536;
+			final int k = c0 / 65536;
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
+					j / 1.0F, k / 1.0F);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
+			this.modelBipedMain.bipedHead.renderWithRotation(par3);
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
+		}
+	}
+
+	/**
+	 * Queries whether should render the specified pass or not.
+	 */
 	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.func_110860_a((EntityNyxSkeleton) par1Entity);
+	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase,
+			int par2, float par3) {
+		this.setSkeletonEyeBrightness((EntityNyxSkeleton) par1EntityLivingBase,
+				par2, par3);
+		return super.shouldRenderPass(par1EntityLivingBase, par2, par3);
 	}
 }

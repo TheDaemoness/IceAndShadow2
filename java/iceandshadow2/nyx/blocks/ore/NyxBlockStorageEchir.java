@@ -14,6 +14,5 @@ public class NyxBlockStorageEchir extends IaSBaseBlockMulti {
 		this.setLightColor(0.75F, 1.0F, 0.75F);
 		this.setResistance(20.0F);
 	}
-	
-	
+
 }

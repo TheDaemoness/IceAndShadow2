@@ -18,11 +18,11 @@ public class NyxBlockOreDraconium extends NyxBlockOre {
 		this.setLightColor(0.5F, 0.0F, 0.0F);
 		this.setResistance(7.5F);
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		is.add(new ItemStack(NyxItems.draconium));
 		return is;
 	}

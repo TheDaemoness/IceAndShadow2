@@ -18,31 +18,23 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 
 	@SideOnly(Side.CLIENT)
 	private IIcon glow;
-	
+
 	public NyxItemBoneCursed(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(16);
 		this.setFull3D();
-	}	
+	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		glow = reg.registerIcon(this.getTexName()+"Glow");
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
-	
+
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass) {
-		if(pass == 1)
+		if (pass == 1)
 			return glow;
 		return this.itemIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
 	}
 
 	@Override
@@ -52,20 +44,30 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
+	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
+			EntityPlayer player) {
+		if (!par2World.isRemote)
+			par2World.spawnEntityInWorld(new EntityShadowBall(par2World,
+					player, true, true));
+		if (!player.capabilities.isCreativeMode) {
+			par1Stack.stackSize -= 1;
+			player.attackEntityFrom(DamageSource.magic,
+					player.worldObj.difficultySetting.getDifficultyId());
+		}
+		return par1Stack;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
-			EntityPlayer player) {
-		if(!par2World.isRemote)
-			par2World.spawnEntityInWorld(new EntityShadowBall(par2World, player, true, true));
-		if(!player.capabilities.isCreativeMode) {
-			par1Stack.stackSize -= 1;
-			player.attackEntityFrom(DamageSource.magic, player.worldObj.difficultySetting.getDifficultyId());
-		}
-		return par1Stack;
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(this.getTexName());
+		glow = reg.registerIcon(this.getTexName() + "Glow");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 
 	@Override

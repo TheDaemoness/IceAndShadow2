@@ -3,7 +3,6 @@ package iceandshadow2.ias.items.tools;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
@@ -31,11 +30,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaSGlowing {
+public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool,
+		IIaSGlowing {
 
-	private EnumIaSToolClass classe;
+	private final EnumIaSToolClass classe;
 	protected IIcon invisible;
-	
+
 	public IaSItemTool(EnumIaSToolClass cl) {
 		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
 		this.setUnlocalizedName("iasTool");
@@ -43,9 +43,41 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	}
 
 	@Override
-	public void registerIcons(IIconRegister reg) {
-		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
-		//See IaSRegistry.
+	public boolean canHarvestBlock(Block bl, ItemStack is) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		final Set<String> s = this.getToolClasses(is);
+		if (!s.contains(bl.getHarvestTool(0)))
+			return false;
+		return bl.getHarvestLevel(0) <= m.getHarvestLevel(is,
+				bl.getHarvestTool(0));
+	}
+
+	@Override
+	public boolean canRepair() {
+		return true;
+	}
+
+	@Override
+	public float func_150893_a(ItemStack is, Block block) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getHarvestSpeed(is, block);
+	}
+
+	@Override
+	public float getDigSpeed(ItemStack is, Block block, int meta) {
+		return func_150893_a(is, block); // meta sensitivity is pointless ATM, I
+											// wish it wasn't.
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
+	public int getHarvestLevel(ItemStack is, String toolClass) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getHarvestLevel(is, toolClass);
 	}
 
 	@Override
@@ -54,73 +86,44 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	}
 
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(stack);
-		return m.onSwing(stack, entityLiving);
-	}
-	
-	@Override
-	public float func_150893_a(ItemStack is, Block block) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		return m.getHarvestSpeed(is, block);
+	public EnumIaSModule getIaSModule() {
+		return EnumIaSModule.IAS;
 	}
 
 	@Override
-	public boolean canHarvestBlock(Block bl, ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		Set<String> s = this.getToolClasses(is);
-		if(!s.contains(bl.getHarvestTool(0)))
+	public EnumIaSToolClass getIaSToolClass() {
+		return classe;
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack is, int renderPass) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (renderPass == 1 && !m.glows(this.getIaSToolClass()))
+			return invisible;
+		return m.getIcon(is);
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
+			ItemStack usingItem, int useRemaining) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (renderPass == 1 && !m.glows(this.getIaSToolClass()))
+			return invisible;
+		return m.getIcon(is);
+	}
+
+	@Override
+	public IIcon getIconIndex(ItemStack is) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		return m.getIcon(is);
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack is, ItemStack two) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
 			return false;
-		return bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
-	}
-	
-	@Override
-	public Set<String> getToolClasses(ItemStack stack) {
-		return ((IaSItemTool)(stack.getItem())).getIaSToolClass().getToolClassSet();
-    }
-	
-	@Override
-	public int getHarvestLevel(ItemStack is, String toolClass) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		return m.getHarvestLevel(is, toolClass);
-	}
-
-	@Override
-	public void getSubItems(Item it, CreativeTabs ct,
-			List l) {
-		Collection<IaSToolMaterial> mats = IaSRegistry.getToolMaterials();
-		l.add(new ItemStack(this));
-		for(IaSToolMaterial m : mats) {
-			ItemStack is;
-			is = new ItemStack(this);
-			is.setTagCompound(new NBTTagCompound());
-			is.getTagCompound().setString("iasMaterial", m.getMaterialName());
-			l.add(is.copy());
-		}
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
-			Entity target) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		is.damageItem(m.onAttack(is, user, target), user);
-		return true;
-	}
-	
-	@Override
-	public EnumRarity getRarity(ItemStack is) {
-		return IaSToolMaterial.extractMaterial(is).getRarity();
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack is, World w,
-			Block bl, int x, int y,
-			int z, EntityLivingBase user) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return false;
-		is.damageItem(m.onHarvest(is, user, w, x, y, z), user);
-		return true;
+		return m.isRepairable(is, two);
 	}
 
 	@Override
@@ -129,21 +132,11 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	}
 
 	@Override
-	public String getToolMaterialName() {
-		return "Wabbagoogies";
-	}
-
-	@Override
-	public boolean getIsRepairable(ItemStack is, ItemStack two) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return false;
-		return m.isRepairable(is, two);
-	}
-
-	@Override
-	public float getDigSpeed(ItemStack is, Block block, int meta) {
-		return func_150893_a(is, block); //meta sensitivity is pointless ATM, I wish it wasn't.
+	public int getMaxDamage(ItemStack is) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return 0;
+		return m.getDurability(is);
 	}
 
 	@Override
@@ -152,63 +145,8 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	}
 
 	@Override
-	@Deprecated
-	public String getTexName() {
-		return null;
-	}
-
-	@Override
-	public IIcon getIconIndex(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		return m.getIcon(is);
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return null;
-		return m.getUnlocalizedName(is);
-	}
-
-	@Override
-	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
-			ItemStack usingItem, int useRemaining) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(renderPass == 1 && !m.glows(this.getIaSToolClass()))
-			return invisible;
-		return m.getIcon(is);
-	}
-	
-	@Override
-	public IIcon getIcon(ItemStack is, int renderPass) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(renderPass == 1 && !m.glows(this.getIaSToolClass()))
-			return invisible;
-		return m.getIcon(is);
-	}
-
-	@Override
-	public int getMaxDamage(ItemStack is) {
-		IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if(m == null)
-			return 0;
-		return m.getDurability(is);
-	}
-
-	@Override
-	public EnumIaSModule getIaSModule() {
-		return EnumIaSModule.IAS;
-	}
-	
-	@Override
-	public EnumIaSToolClass getIaSToolClass() {
-		return classe;
-	}
-	
-	@Override
-	public boolean requiresMultipleRenderPasses() {
-		return true;
+	public EnumRarity getRarity(ItemStack is) {
+		return IaSToolMaterial.extractMaterial(is).getRarity();
 	}
 
 	@Override
@@ -218,17 +156,80 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
+	public void getSubItems(Item it, CreativeTabs ct, List l) {
+		final Collection<IaSToolMaterial> mats = IaSRegistry.getToolMaterials();
+		l.add(new ItemStack(this));
+		for (final IaSToolMaterial m : mats) {
+			ItemStack is;
+			is = new ItemStack(this);
+			is.setTagCompound(new NBTTagCompound());
+			is.getTagCompound().setString("iasMaterial", m.getMaterialName());
+			l.add(is.copy());
+		}
 	}
 
 	@Override
-	public boolean usesDefaultGlowRenderer() {
+	@Deprecated
+	public String getTexName() {
+		return null;
+	}
+
+	@Override
+	public Set<String> getToolClasses(ItemStack stack) {
+		return ((IaSItemTool) stack.getItem()).getIaSToolClass()
+				.getToolClassSet();
+	}
+
+	@Override
+	public String getToolMaterialName() {
+		return "Wabbagoogies";
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack is) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return null;
+		return m.getUnlocalizedName(is);
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x,
+			int y, int z, EntityLivingBase user) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return false;
+		is.damageItem(m.onHarvest(is, user, w, x, y, z), user);
 		return true;
 	}
 
 	@Override
-	public boolean canRepair() {
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(stack);
+		return m.onSwing(stack, entityLiving);
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
+			Entity target) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		is.damageItem(m.onAttack(is, user, target), user);
+		return true;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		// See IaSRegistry.
+	}
+
+	@Override
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
 		return true;
 	}
 

@@ -18,7 +18,8 @@ public class NyxItemPlumPoison extends IaSItemFood {
 	@Override
 	public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_,
 			EntityPlayer pwai) {
-		pwai.addPotionEffect(new PotionEffect(Potion.poison.id,69,1)); //Lol, 69.
+		pwai.addPotionEffect(new PotionEffect(Potion.poison.id, 69, 1)); // Lol,
+																			// 69.
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
 	}
 }

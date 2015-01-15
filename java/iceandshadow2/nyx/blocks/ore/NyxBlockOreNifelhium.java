@@ -18,12 +18,13 @@ public class NyxBlockOreNifelhium extends NyxBlockOre {
 		this.setLightColor(0.9F, 0.9F, 0.9F);
 		this.setResistance(15.0F);
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.nifelhiumPowder,1+(world.rand.nextInt(1+fortune)>=2?1:0)));
+		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
+		is.add(new ItemStack(NyxItems.nifelhiumPowder, 1 + (world.rand
+				.nextInt(1 + fortune) >= 2 ? 1 : 0)));
 		return is;
 	}
 

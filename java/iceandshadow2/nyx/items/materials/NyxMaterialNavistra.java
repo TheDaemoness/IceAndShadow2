@@ -13,11 +13,18 @@ import net.minecraft.world.World;
 
 public class NyxMaterialNavistra extends IaSToolMaterial {
 
-	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_navistra.png");
+	private static ResourceLocation knife_tex = new ResourceLocation(
+			"iceandshadow2:textures/entity/nyxknife_navistra.png");
 
 	@Override
-	public String getMaterialName() {
-		return "Navistra";
+	public int damageToolOnAttack(ItemStack is, EntityLivingBase user,
+			Entity target) {
+		return 0;
+	}
+
+	@Override
+	public int getBaseLevel() {
+		return 4;
 	}
 
 	@Override
@@ -26,32 +33,15 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int getBaseLevel() {
-		return 4;
-	}
-	
-	@Override
-	public int damageToolOnAttack(ItemStack is, EntityLivingBase user,
-			Entity target) {
-		return 0;
-	}
-
-	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
-			int y, int z) {
-		super.onHarvest(is, user, w, x, y, z);
-		return 0;
-	}
-
-	@Override
 	public int getDurability(ItemStack is) {
 		return 16;
 	}
-	
+
 	@Override
 	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
 			Entity thrower) {
-		DamageSource ds = super.getKnifeDamageSource(knife, thrower).setDamageBypassesArmor();
+		final DamageSource ds = super.getKnifeDamageSource(knife, thrower)
+				.setDamageBypassesArmor();
 		return ds;
 	}
 
@@ -59,15 +49,27 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
 	}
-	
+
+	@Override
+	protected Item getMaterialItem() {
+		return NyxItems.navistraShard;
+	}
+
+	@Override
+	public String getMaterialName() {
+		return "Navistra";
+	}
+
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.navistraShard;
 	}
-	
+
 	@Override
-	protected Item getMaterialItem() {
-		return NyxItems.navistraShard;
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
+			int y, int z) {
+		super.onHarvest(is, user, w, x, y, z);
+		return 0;
 	}
 
 }

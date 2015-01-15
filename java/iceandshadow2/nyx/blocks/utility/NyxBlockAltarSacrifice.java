@@ -20,28 +20,29 @@ public class NyxBlockAltarSacrifice extends IaSBlockAltar {
 		this.setStepSound(Block.soundTypeStone);
 	}
 
-	@Override
-	public void onEntityCollidedWithBlock(World par1World, int x, int y, int z,
-			Entity theEnt) {
-		if (theEnt instanceof EntityItem && !par1World.isRemote) {
-			ItemStack staque = ((EntityItem) theEnt).getEntityItem();
-			burnItem(par1World, x, y, z, staque);
-			theEnt.setDead();
-		} else
-			theEnt.attackEntityFrom(IaSDamageSources.dmgXpAltar, 1);
+	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {
+		return true;
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World par1World, int x, int y,
-			int z, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		boolean f = burnItem(par1World, x, y, z, par5EntityPlayer.getCurrentEquippedItem());
-		if(f)
+	public boolean onBlockActivated(World par1World, int x, int y, int z,
+			EntityPlayer par5EntityPlayer, int par6, float par7, float par8,
+			float par9) {
+		final boolean f = burnItem(par1World, x, y, z,
+				par5EntityPlayer.getCurrentEquippedItem());
+		if (f)
 			par5EntityPlayer.setCurrentItemOrArmor(0, null);
 		return f;
 	}
 
-	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {
-		return true;
+	@Override
+	public void onEntityCollidedWithBlock(World par1World, int x, int y, int z,
+			Entity theEnt) {
+		if (theEnt instanceof EntityItem && !par1World.isRemote) {
+			final ItemStack staque = ((EntityItem) theEnt).getEntityItem();
+			burnItem(par1World, x, y, z, staque);
+			theEnt.setDead();
+		} else
+			theEnt.attackEntityFrom(IaSDamageSources.dmgXpAltar, 1);
 	}
 }

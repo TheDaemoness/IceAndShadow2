@@ -18,11 +18,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlowing {
+public class NyxItemFrostLongBow extends ItemBow implements IIaSModName,
+		IIaSGlowing {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[][] iconArray;
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon glow;
 
@@ -30,31 +31,86 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlo
 
 	public NyxItemFrostLongBow(String par1) {
 		super();
-		this.setUnlocalizedName("nyx"+par1);
+		this.setUnlocalizedName("nyx" + par1);
 		this.setMaxDamage(256);
 		this.bFull3D = false;
 		inuse = false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.glow = reg.registerIcon(getTexName()+"Glow");
-		this.iconArray = new IIcon[3][2];
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
 
-		for (int i = 0; i < this.iconArray.length; ++i) {
-			this.iconArray[i][0] = reg.registerIcon(getTexName()+"Anim"
-					+ (i + 1));
-			this.iconArray[i][1] = reg.registerIcon(getTexName()+"GlowAnim"
-					+ (i + 1));
+	@Override
+	public EnumIaSModule getIaSModule() {
+		return EnumIaSModule.NYX;
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
+			ItemStack usingItem, int useRemaining) {
+
+		if (usingItem != stack)
+			this.inuse = false;
+
+		if (!((NyxItemFrostLongBow) stack.getItem()).inuse)
+			return renderPass > 0 ? this.glow : this.itemIcon;
+
+		final int j = getMaxItemUseDuration(stack) - useRemaining;
+
+		if (j >= 30)
+			return this.iconArray[2][renderPass];
+		if (j >= 14)
+			return this.iconArray[1][renderPass];
+		return this.iconArray[0][renderPass];
+
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+		return 72000;
+	}
+
+	@Override
+	public String getModName() {
+		return this.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	public String getTexName() {
+		return "IceAndShadow2:" + this.getModName();
+	}
+
+	@Override
+	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer plai) {
+		((NyxItemFrostLongBow) item.getItem()).inuse = false;
+		return true;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+
+		if (this.getDamage(par1ItemStack) < this.getMaxDamage() - 1) {
+			this.inuse = true;
+			par3EntityPlayer.setItemInUse(par1ItemStack,
+					this.getMaxItemUseDuration(par1ItemStack));
 		}
+
+		return par1ItemStack;
 	}
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
+		final int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
 		inuse = false;
 
 		float var7 = var6 / 35.0F;
@@ -67,31 +123,31 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlo
 		if (var7 > 0.95F) {
 			var7 = 1.0F;
 		}
-		
-		var7 = var7*var7;
 
-		int var9 = EnchantmentHelper.getEnchantmentLevel(
+		var7 = var7 * var7;
+
+		final int var9 = EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.power.effectId, par1ItemStack);
-		int var10 = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.punch.effectId, par1ItemStack)+1;
-		EntityIceArrow var8 = new EntityIceArrow(par2World,
+		final int var10 = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.punch.effectId, par1ItemStack) + 1;
+		final EntityIceArrow var8 = new EntityIceArrow(par2World,
 				par3EntityPlayer, var7 * 3.5F, var10 + 3, var9 * 30 + 70);
 
-		if(var7 > 0.95F) {
+		if (var7 > 0.95F) {
 			var8.setIsCritical(true);
 		}
-		
+
 		if (var9 > 0) {
 			var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
 		}
 
 		var8.setKnockbackStrength(var10);
 
-		if(!par3EntityPlayer.capabilities.isCreativeMode)
-			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage()+1);
+		if (!par3EntityPlayer.capabilities.isCreativeMode)
+			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);
 
-		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-				1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
+		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F
+				/ (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
 		if (!par2World.isRemote) {
 			par2World.spawnEntityInWorld(var8);
@@ -100,90 +156,35 @@ public class NyxItemFrostLongBow extends ItemBow implements IIaSModName, IIaSGlo
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 72000;
-	}
-
-	@Override
-	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer plai) {
-		((NyxItemFrostLongBow)item.getItem()).inuse = false;
-		return true;
-	}
-
-	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World,
 			Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
 	}
 
-	@Override
-	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player,
-			ItemStack usingItem, int useRemaining) {
-
-		if(usingItem != stack)
-			this.inuse = false;
-
-		if (!(((NyxItemFrostLongBow)stack.getItem()).inuse))
-			return renderPass>0?this.glow:this.itemIcon;
-
-		int j = getMaxItemUseDuration(stack) - useRemaining;
-
-		if (j >= 30)
-			return this.iconArray[2][renderPass];
-		if (j >= 14)
-			return this.iconArray[1][renderPass];
-		return this.iconArray[0][renderPass];
-
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
-
-		if (this.getDamage(par1ItemStack) < this.getMaxDamage()-1) {
-			this.inuse = true;
-			par3EntityPlayer.setItemInUse(par1ItemStack,
-					this.getMaxItemUseDuration(par1ItemStack));
-		}
-
-		return par1ItemStack;
-	}
-
-	@Override
-	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
-	}
-
-	@Override
-	public String getTexName() {
-		return "IceAndShadow2:"+this.getModName();
-	}
-
-	@Override
-	public EnumIaSModule getIaSModule() {
-		return EnumIaSModule.NYX;
-	}
-	
 	public final Item register() {
 		IaSRegistration.register(this);
 		return this;
 	}
-	
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.glow = reg.registerIcon(getTexName() + "Glow");
+		this.iconArray = new IIcon[3][2];
+
+		for (int i = 0; i < this.iconArray.length; ++i) {
+			this.iconArray[i][0] = reg.registerIcon(getTexName() + "Anim"
+					+ (i + 1));
+			this.iconArray[i][1] = reg.registerIcon(getTexName() + "GlowAnim"
+					+ (i + 1));
+		}
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean requiresMultipleRenderPasses() {
 		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
 	}
 
 	@Override

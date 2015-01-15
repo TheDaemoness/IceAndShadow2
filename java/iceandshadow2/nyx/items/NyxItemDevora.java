@@ -15,31 +15,24 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
-	
+
 	public NyxItemDevora(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		GameRegistry.addShapelessRecipe(new ItemStack(this,8,1), new ItemStack(this,1,0));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 8, 1),
+				new ItemStack(this, 1, 0));
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		if(dmg == 1)
+		if (dmg == 1)
 			return smallIcon;
 		return this.itemIcon;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.smallIcon = reg.registerIcon(this.getTexName()+"Small");
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
 	}
 
 	@Override
@@ -48,9 +41,17 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 		return 2;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(this.getTexName());
+		this.smallIcon = reg.registerIcon(this.getTexName() + "Small");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 
 	@Override

@@ -19,17 +19,16 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x,
-			int y, int z, Entity ent) {
-		if(ent instanceof EntityLivingBase) {
-			EntityLivingBase el = (EntityLivingBase)ent;
-			if(el.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-				if(!el.isPotionActive(Potion.wither.id))
-					el.addPotionEffect(new PotionEffect(Potion.wither.id,39,1));
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z,
+			Entity ent) {
+		if (ent instanceof EntityLivingBase) {
+			final EntityLivingBase el = (EntityLivingBase) ent;
+			if (el.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
+				if (!el.isPotionActive(Potion.wither.id))
+					el.addPotionEffect(new PotionEffect(Potion.wither.id, 39, 1));
 			}
 		}
-		super.onEntityCollidedWithBlock(world, x, y,
-				z, ent);
+		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
-	
+
 }

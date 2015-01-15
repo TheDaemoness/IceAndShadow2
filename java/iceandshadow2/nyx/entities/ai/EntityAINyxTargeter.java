@@ -15,11 +15,44 @@ import net.minecraft.entity.player.EntityPlayer;
 public class EntityAINyxTargeter extends EntityAITarget {
 
 	protected int lastSeen;
-    protected EntityLivingBase targetEntity;
+	protected EntityLivingBase targetEntity;
 
 	public EntityAINyxTargeter(EntityMob par1EntityCreature) {
 		super(par1EntityCreature, false, false);
 		lastSeen = 0;
+	}
+
+	/**
+	 * Returns whether an in-progress EntityAIBase should continue executing
+	 */
+	@Override
+	public boolean continueExecuting() {
+		final EntityLivingBase elb = this.taskOwner.getAttackTarget();
+
+		if (elb == null) {
+			return false;
+		} else if (!elb.isEntityAlive()) {
+			return false;
+		} else if (!((IIaSSensate) this.taskOwner).getSense().canSense(elb)) {
+			++lastSeen;
+			if (lastSeen > 30) {
+				((IIaSMobGetters) this.taskOwner).setSearchTarget(elb);
+				return false;
+			}
+			return true;
+		} else if (elb instanceof EntityPlayer) {
+			if (((EntityPlayer) elb).capabilities.isCreativeMode)
+				return false;
+		}
+		lastSeen = 0;
+		return true;
+	}
+
+	@Override
+	protected boolean isSuitableTarget(EntityLivingBase candi, boolean par2) {
+		if (!super.isSuitableTarget(candi, par2))
+			return false;
+		return ((IIaSSensate) this.taskOwner).getSense().canSense(candi);
 	}
 
 	@Override
@@ -28,38 +61,12 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	}
 
 	/**
-	 * Returns whether an in-progress EntityAIBase should continue executing
-	 */
-	@Override
-	public boolean continueExecuting() {
-		EntityLivingBase elb = this.taskOwner.getAttackTarget();
-		
-		if (elb == null) {
-			return false;
-		} else if (!elb.isEntityAlive()) {
-			return false;
-		} else if(!((IIaSSensate)this.taskOwner).getSense().canSense(elb)) {
-			++lastSeen;
-			if(lastSeen > 30) {
-				((IIaSMobGetters)this.taskOwner).setSearchTarget(elb);
-				return false;
-			}
-			return true;
-		} else if(elb instanceof EntityPlayer) {
-			if(((EntityPlayer)elb).capabilities.isCreativeMode)
-				return false;
-		}
-		lastSeen = 0;
-		return true;
-	}
-
-	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
 	@Override
 	public boolean shouldExecute() {
-		double d0 = ((IIaSSensate)this.taskOwner).getSense().getRange();
-		List<Entity> list = this.taskOwner.worldObj
+		final double d0 = ((IIaSSensate) this.taskOwner).getSense().getRange();
+		final List<Entity> list = this.taskOwner.worldObj
 				.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
 						this.taskOwner.boundingBox.expand(d0, d0 / 2.0, d0));
 
@@ -69,15 +76,15 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		double nearest = Double.MAX_VALUE;
 		EntityLivingBase targ = null;
 		boolean playerflag = false;
-		for (Entity ent : list) {
-			
-			//Basic checks.
-			if(!(ent instanceof EntityLivingBase))
+		for (final Entity ent : list) {
+
+			// Basic checks.
+			if (!(ent instanceof EntityLivingBase))
 				continue;
-			if(!isSuitableTarget((EntityLivingBase)ent,false))
+			if (!isSuitableTarget((EntityLivingBase) ent, false))
 				continue;
-			
-			//Give priority to players.
+
+			// Give priority to players.
 			if (ent instanceof EntityPlayer) {
 				playerflag = true;
 				if (this.taskOwner.getDistanceSqToEntity(ent) < nearest) {
@@ -97,22 +104,14 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		}
 		return false;
 	}
-	
-    @Override
-	public void startExecuting()
-    {
-    	lastSeen = 0;
-        this.taskOwner.setAttackTarget(this.targetEntity);
-        targetEntity = null;
-		this.taskOwner.getNavigator().clearPathEntity();
-        super.startExecuting();
-    }
 
 	@Override
-	protected boolean isSuitableTarget(EntityLivingBase candi, boolean par2) {
-		if (!super.isSuitableTarget(candi, par2))
-			return false;
-		return ((IIaSSensate)this.taskOwner).getSense().canSense(candi);
+	public void startExecuting() {
+		lastSeen = 0;
+		this.taskOwner.setAttackTarget(this.targetEntity);
+		targetEntity = null;
+		this.taskOwner.getNavigator().clearPathEntity();
+		super.startExecuting();
 	}
 
 }

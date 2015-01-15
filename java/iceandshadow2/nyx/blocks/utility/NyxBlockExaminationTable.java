@@ -35,23 +35,36 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z, 
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int par1, int par2) {
+		return par1 == 0 || par1 == 1 ? this.blockIcon : this.iconSide;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World w, int x, int y, int z,
 			EntityPlayer pl, int meta, float a, float b, float c) {
-		TileEntity ent = w.getTileEntity(x, y, z);
-		if(ent instanceof NyxTeExaminationTable) {
-			NyxTeExaminationTable nteet = (NyxTeExaminationTable)ent;
-			Map<String, Integer> chknow = new TreeMap<String, Integer>();
-			Map<String, Integer> temp = IaSRegistry.handleExamination(pl, nteet.knowledge);
-			if(temp != null) {
-				for(String key : temp.keySet())
+		final TileEntity ent = w.getTileEntity(x, y, z);
+		if (ent instanceof NyxTeExaminationTable) {
+			final NyxTeExaminationTable nteet = (NyxTeExaminationTable) ent;
+			final Map<String, Integer> chknow = new TreeMap<String, Integer>();
+			Map<String, Integer> temp = IaSRegistry.handleExamination(pl,
+					nteet.knowledge);
+			if (temp != null) {
+				for (final String key : temp.keySet())
 					chknow.put(key, temp.get(key));
 			}
-			temp = IaSRegistry.handleExaminationBook(pl, x, y, z, nteet.knowledge);
-			if(temp != null) {
-				for(String key : temp.keySet())
+			temp = IaSRegistry.handleExaminationBook(pl, x, y, z,
+					nteet.knowledge);
+			if (temp != null) {
+				for (final String key : temp.keySet())
 					chknow.put(key, temp.get(key));
 			}
-			for(String key : chknow.keySet())
+			for (final String key : chknow.keySet())
 				nteet.knowledge.put(key, chknow.get(key));
 			return true;
 		}
@@ -61,20 +74,9 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = 
-				reg.registerIcon("IceAndShadow2:"+this.getModName()+"Top");
-		this.iconSide = 
-				reg.registerIcon("IceAndShadow2:"+this.getModName()+"Side");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		return (par1 == 0 || par1 == 1 ? this.blockIcon : this.iconSide);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
+		this.blockIcon = reg.registerIcon("IceAndShadow2:" + this.getModName()
+				+ "Top");
+		this.iconSide = reg.registerIcon("IceAndShadow2:" + this.getModName()
+				+ "Side");
 	}
 }

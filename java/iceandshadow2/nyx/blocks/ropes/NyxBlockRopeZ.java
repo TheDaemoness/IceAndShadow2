@@ -12,13 +12,15 @@ public class NyxBlockRopeZ extends NyxBlockRope {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
-		Block n = w.getBlock(x, y, z+1);
-		if(!(n instanceof NyxBlockRopeZ) && !(n instanceof NyxBlockHookTightropeZ)) {
+		Block n = w.getBlock(x, y, z + 1);
+		if (!(n instanceof NyxBlockRopeZ)
+				&& !(n instanceof NyxBlockHookTightropeZ)) {
 			w.setBlockToAir(x, y, z);
 			return;
 		}
-		n = w.getBlock(x, y, z-1);
-		if(!(n instanceof NyxBlockRopeZ) && !(n instanceof NyxBlockHookTightropeZ))
+		n = w.getBlock(x, y, z - 1);
+		if (!(n instanceof NyxBlockRopeZ)
+				&& !(n instanceof NyxBlockHookTightropeZ))
 			w.setBlockToAir(x, y, z);
 	}
 

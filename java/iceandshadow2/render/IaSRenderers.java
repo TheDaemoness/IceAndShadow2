@@ -24,49 +24,61 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class IaSRenderers {
 	public static void init() {
-		
-		//Mobs.
-		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSkeleton.class,
-				new RenderNyxSkeleton());
+
+		// Mobs.
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityNyxSkeleton.class, new RenderNyxSkeleton());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class,
 				new RenderNyxSpider());
 
-		//Projectiles.
+		// Projectiles.
 		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class,
 				new RenderIceArrow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBall.class,
-				new RenderNot());
-		RenderingRegistry.registerEntityRenderingHandler(EntityThrowingKnife.class,
-				new RenderThrowingKnife());
-		
-		//Technical entities.
-		RenderingRegistry.registerEntityRenderingHandler(EntityTransmutationCountdown.class, new RenderNot());
-		
-		//Items
-		for(Field f : NyxItems.class.getFields()) {
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityShadowBall.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityThrowingKnife.class, new RenderThrowingKnife());
+
+		// Technical entities.
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityTransmutationCountdown.class, new RenderNot());
+
+		// Items
+		for (final Field f : NyxItems.class.getFields()) {
 			try {
-				Object o = f.get(null);
-				if(o instanceof IIaSGlowing && o instanceof Item) {
-					if(((IIaSGlowing)o).usesDefaultGlowRenderer())
-						MinecraftForgeClient.registerItemRenderer((Item)o, new RenderItemVanillaGlowing());
+				final Object o = f.get(null);
+				if (o instanceof IIaSGlowing && o instanceof Item) {
+					if (((IIaSGlowing) o).usesDefaultGlowRenderer())
+						MinecraftForgeClient.registerItemRenderer((Item) o,
+								new RenderItemVanillaGlowing());
 				}
-			} catch (Exception e) {}
+			} catch (final Exception e) {
+			}
 		}
-		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
-		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
-		
-		for(Item item : IaSTools.tools)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for(Item item : IaSTools.toolsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for(Item item : IaSTools.weapons)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for(Item item : IaSTools.swordsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for(Item item : IaSTools.armorActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransmutationAltar.class, new RenderNyxTeTransmutationAltar());
+		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort,
+				new RenderItemBow(false));
+		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong,
+				new RenderItemBow(true));
+
+		for (final Item item : IaSTools.tools)
+			MinecraftForgeClient.registerItemRenderer(item,
+					new RenderItemVanillaGlowing());
+		for (final Item item : IaSTools.toolsActiveEchir)
+			MinecraftForgeClient.registerItemRenderer(item,
+					new RenderItemVanillaGlowing());
+		for (final Item item : IaSTools.weapons)
+			MinecraftForgeClient.registerItemRenderer(item,
+					new RenderItemVanillaGlowing());
+		for (final Item item : IaSTools.swordsActiveEchir)
+			MinecraftForgeClient.registerItemRenderer(item,
+					new RenderItemVanillaGlowing());
+		for (final Item item : IaSTools.armorActiveEchir)
+			MinecraftForgeClient.registerItemRenderer(item,
+					new RenderItemVanillaGlowing());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(
+				NyxTeTransmutationAltar.class,
+				new RenderNyxTeTransmutationAltar());
 	}
 
 }

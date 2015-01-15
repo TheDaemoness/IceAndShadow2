@@ -9,21 +9,17 @@ import net.minecraft.util.ResourceLocation;
 
 public class NyxMaterialCortra extends IaSToolMaterial {
 
-	private static ResourceLocation knife_tex = new ResourceLocation("iceandshadow2:textures/entity/nyxknife_cortra.png");
+	private static ResourceLocation knife_tex = new ResourceLocation(
+			"iceandshadow2:textures/entity/nyxknife_cortra.png");
 
 	@Override
-	public String getMaterialName() {
-		return "Cortra";
+	public int getBaseLevel() {
+		return 8;
 	}
 
 	@Override
 	public float getBaseSpeed() {
 		return 6;
-	}
-
-	@Override
-	public int getBaseLevel() {
-		return 8;
 	}
 
 	@Override
@@ -35,14 +31,19 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
 	}
-	
-	@Override
-	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return (mat.getItem() == NyxItems.echirIngot && mat.isItemDamaged());
-	}
 
 	@Override
 	protected Item getMaterialItem() {
 		return NyxItems.cortraDust;
+	}
+
+	@Override
+	public String getMaterialName() {
+		return "Cortra";
+	}
+
+	@Override
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return mat.getItem() == NyxItems.echirIngot && mat.isItemDamaged();
 	}
 }

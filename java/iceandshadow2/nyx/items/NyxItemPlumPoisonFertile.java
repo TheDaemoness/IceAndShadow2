@@ -17,18 +17,14 @@ public class NyxItemPlumPoisonFertile extends IaSBaseItemSingle {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player,
-			World world, int x, int y, int z,
-			int meta, float watA, float watB,
-			float watC) {
-		GenPoisonTrees nyxPoisonTree = new GenPoisonTrees();
-		Block bl = world.getBlock(x, y, z);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
+			int x, int y, int z, int meta, float watA, float watB, float watC) {
+		final GenPoisonTrees nyxPoisonTree = new GenPoisonTrees();
+		final Block bl = world.getBlock(x, y, z);
 		if (bl == Blocks.snow_layer || bl == NyxBlocks.permafrost) {
-			if (nyxPoisonTree.generate(world, world.rand, x, y+1,
-					z)) {
+			if (nyxPoisonTree.generate(world, world.rand, x, y + 1, z)) {
 				stack.stackSize -= 1;
-				world.playSoundAtEntity(player,
-						"mob.zombie.infect", 0.5F,
+				world.playSoundAtEntity(player, "mob.zombie.infect", 0.5F,
 						world.rand.nextFloat() * 0.1F + 0.9F);
 				return true;
 			}

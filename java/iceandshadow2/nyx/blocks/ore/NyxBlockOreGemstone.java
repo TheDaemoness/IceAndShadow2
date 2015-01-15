@@ -16,14 +16,15 @@ public class NyxBlockOreGemstone extends NyxBlockOre {
 		this.setLuminescence(0.2F);
 		this.setResistance(1.0F);
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(Items.diamond,1+(world.rand.nextInt(fortune+5)>=5?1:0)));
-		if(world.rand.nextInt(fortune+6)>=5)
-			is.add(new ItemStack(Items.emerald,1));
+		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
+		is.add(new ItemStack(Items.diamond, 1 + (world.rand
+				.nextInt(fortune + 5) >= 5 ? 1 : 0)));
+		if (world.rand.nextInt(fortune + 6) >= 5)
+			is.add(new ItemStack(Items.emerald, 1));
 		return is;
 	}
 

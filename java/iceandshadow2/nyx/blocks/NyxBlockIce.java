@@ -27,46 +27,45 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 		this.setStepSound(soundTypeGlass);
 		this.slipperiness = 0.99F;
 	}
-	
-    @Override
+
+	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-    	ArrayList is = new ArrayList<ItemStack>();
-    	int r = 2+world.rand.nextInt(3);
-    	for(int i = 0; i < r; ++i)
-    		is.add(new ItemStack(NyxItems.exousicIceShard,1));
+		final ArrayList is = new ArrayList<ItemStack>();
+		final int r = 2 + world.rand.nextInt(3);
+		for (int i = 0; i < r; ++i)
+			is.add(new ItemStack(NyxItems.exousicIceShard, 1));
 		return is;
 	}
-    
-	@SideOnly(Side.CLIENT)
-    @Override
-	public boolean shouldSideBeRendered(IBlockAccess w,
-			int x, int y, int z, int s) {
-		if(w.getBlock(x, y, z) == this)
-			return false;
-		return super.shouldSideBeRendered(w, x, y, z, s);
-	}
-	
-	@Override
-	public boolean isOpaqueCube() {
-        return false;
-    }
-	
+
 	@Override
 	public int getRenderBlockPass() {
 		return 1;
 	}
 
 	@Override
-	public void updateTick(World w, int x, int y,
-			int z, Random r) {
-		for(int xit = -1; xit <= 1; ++xit) {
-			for(int zit = -1; zit <= 1; ++zit) {
-				if(xit != 0 && zit != 0)
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z,
+			int s) {
+		if (w.getBlock(x, y, z) == this)
+			return false;
+		return super.shouldSideBeRendered(w, x, y, z, s);
+	}
+
+	@Override
+	public void updateTick(World w, int x, int y, int z, Random r) {
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int zit = -1; zit <= 1; ++zit) {
+				if (xit != 0 && zit != 0)
 					continue;
-				if(w.isAirBlock(x+xit, y, z+zit) && r.nextInt(3) != 0) {
-					if(w.getBlock(x+xit, y-1, z+zit) == NyxBlocks.exousicWater) {
-						w.setBlock(x+xit, y, z+zit, this);
+				if (w.isAirBlock(x + xit, y, z + zit) && r.nextInt(3) != 0) {
+					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater) {
+						w.setBlock(x + xit, y, z + zit, this);
 					}
 				}
 			}

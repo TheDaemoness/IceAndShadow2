@@ -24,13 +24,69 @@ public class NyxDeathSystem {
 	public static InventoryPlayer plai_inv;
 	public static HashMap<Integer, InventoryPlayer> death_inv;
 
+	public static InventoryPlayer determineRespawnInventory(
+			InventoryPlayer plai_inv, boolean do_drop) {
+		boolean drop_main = true;
+		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
+			if (plai_inv.mainInventory[i] != null) {
+				final ItemStack is = plai_inv.mainInventory[i];
+				if (is.getItem() instanceof NyxItemBoneSanctified
+						&& is.isItemDamaged())
+					drop_main = false;
+			}
+		}
+		if (drop_main) {
+			for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
+				if (plai_inv.mainInventory[i] != null) {
+					final Item it = plai_inv.mainInventory[i].getItem();
+					if (it instanceof ItemTool || it instanceof ItemSword) {
+						if (i < 9)
+							continue;
+					}
+					if (it instanceof IIaSKeepOnDeath)
+						continue;
+					if (do_drop)
+						plai_inv.player.dropPlayerItemWithRandomChoice(
+								plai_inv.mainInventory[i], true);
+					plai_inv.mainInventory[i] = null;
+				}
+			}
+		}
+		return plai_inv;
+	}
+
 	public NyxDeathSystem() {
 		death_inv = new HashMap<Integer, InventoryPlayer>();
 	}
 
 	@SubscribeEvent
+	public void onDeath(LivingDeathEvent e) {
+		if (e.entity instanceof EntityPlayerMP) {
+			final EntityPlayerMP playNoMore = (EntityPlayerMP) e.entityLiving;
+			plai_inv = new InventoryPlayer(playNoMore);
+			plai_inv.copyInventory(playNoMore.inventory);
+		}
+	}
+
+	@SubscribeEvent
+	public void onDrop(PlayerDropsEvent e) {
+		final boolean gr = e.entityPlayer.worldObj.getGameRules()
+				.getGameRuleBooleanValue("keepInventory");
+		if (!e.entityPlayer.worldObj.isRemote
+				&& e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
+			System.out.println(e.entityPlayer.getEntityId());
+			e.setCanceled(true);
+			final boolean drop_main = true;
+			plai_inv = determineRespawnInventory(plai_inv, true);
+			e.entityPlayer.inventory.copyInventory(plai_inv);
+			death_inv.put(e.entityPlayer.getEntityId(),
+					e.entityPlayer.inventory);
+		}
+	}
+
+	@SubscribeEvent
 	public void onLogin(PlayerLoggedInEvent e) {
-		InventoryPlayer inv = new InventoryPlayer(e.player);
+		final InventoryPlayer inv = new InventoryPlayer(e.player);
 		if (e.player.isDead)
 			inv.copyInventory(determineRespawnInventory(e.player.inventory,
 					false));
@@ -46,68 +102,17 @@ public class NyxDeathSystem {
 	}
 
 	@SubscribeEvent
-	public void onDeath(LivingDeathEvent e) {
-		if (e.entity instanceof EntityPlayerMP) {
-			EntityPlayerMP playNoMore = (EntityPlayerMP)e.entityLiving;
-			plai_inv = new InventoryPlayer(playNoMore);
-			plai_inv.copyInventory(playNoMore.inventory);
-		}
-	}
-
-	@SubscribeEvent
-	public void onDrop(PlayerDropsEvent e) {
-		boolean gr = e.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory");
-		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
-			System.out.println(e.entityPlayer.getEntityId());
-			e.setCanceled(true);
-			boolean drop_main = true;
-			plai_inv = determineRespawnInventory(plai_inv, true);
-			e.entityPlayer.inventory.copyInventory(plai_inv);
-			death_inv.put(e.entityPlayer.getEntityId(), e.entityPlayer.inventory);
-		}
-	}
-
-	@SubscribeEvent
 	public void onRespawn(PlayerEvent.Clone e) {
-		boolean gr = e.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory");
-		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
-			if(!e.original.isDead)
+		final boolean gr = e.entityPlayer.worldObj.getGameRules()
+				.getGameRuleBooleanValue("keepInventory");
+		if (!e.entityPlayer.worldObj.isRemote
+				&& e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
+			if (!e.original.isDead)
 				return;
-			if(death_inv.get(e.original.getEntityId()) != null)
-				e.entityPlayer.inventory.copyInventory(death_inv
-					.get(e.original.getEntityId()));
-			//Raise madness.
+			if (death_inv.get(e.original.getEntityId()) != null)
+				e.entityPlayer.inventory.copyInventory(death_inv.get(e.original
+						.getEntityId()));
+			// Raise madness.
 		}
-	}
-
-	public static InventoryPlayer determineRespawnInventory(
-			InventoryPlayer plai_inv, boolean do_drop) {
-		boolean drop_main = true;
-		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
-			if (plai_inv.mainInventory[i] != null) {
-				ItemStack is = plai_inv.mainInventory[i];
-				if (is.getItem() instanceof NyxItemBoneSanctified
-						&& is.isItemDamaged())
-					drop_main = false;
-			}
-		}
-		if (drop_main) {
-			for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
-				if (plai_inv.mainInventory[i] != null) {
-					Item it = plai_inv.mainInventory[i].getItem();
-					if(it instanceof ItemTool || it instanceof ItemSword) {
-						if(i < 9)
-							continue;
-					}
-					if(it instanceof IIaSKeepOnDeath)
-						continue;
-					if (do_drop)
-						plai_inv.player.dropPlayerItemWithRandomChoice(
-								plai_inv.mainInventory[i], true);
-					plai_inv.mainInventory[i] = null;
-				}
-			}
-		}
-		return plai_inv;
 	}
 }

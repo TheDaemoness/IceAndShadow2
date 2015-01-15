@@ -12,13 +12,20 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {
- 
+
 	protected int slot;
-	
-	public IaSItemEchirArmorActive(String texName, int slut) { //Wat?
+
+	public IaSItemEchirArmorActive(String texName, int slut) { // Wat?
 		super(EnumIaSModule.IAS, texName);
-		slot = slut; //Oh...
+		slot = slut; // Oh...
 		this.setMaxStackSize(1);
+	}
+
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
+		l.add(EnumChatFormatting.GRAY.toString()
+				+ EnumChatFormatting.ITALIC.toString()
+				+ "Sneak and Use Item to finalize.");
 	}
 
 	@Override
@@ -27,20 +34,14 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow {
 	}
 
 	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		l.add(	EnumChatFormatting.GRAY.toString()+
-				EnumChatFormatting.ITALIC.toString()+
-				"Sneak and Use Item to finalize.");
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1, World w,
-			EntityPlayer hulk) {
-		if(hulk.isSneaking()) //Does not always evaluate to false, see that one jumpscare in The Avengers.
-			par1 = new ItemStack(IaSTools.armorEchir[slot],1,par1.getItemDamage());
+	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer hulk) {
+		if (hulk.isSneaking()) // Does not always evaluate to false, see that
+								// one jumpscare in The Avengers.
+			par1 = new ItemStack(IaSTools.armorEchir[slot], 1,
+					par1.getItemDamage());
 		else
-			IaSPlayerHelper.messagePlayer(hulk, "It's probably not safe to wear this while it's primed.");
+			IaSPlayerHelper.messagePlayer(hulk,
+					"It's probably not safe to wear this while it's primed.");
 		return par1;
 	}
 }

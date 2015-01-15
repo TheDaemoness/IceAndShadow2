@@ -19,7 +19,5 @@ public class NyxItemFoodCookie extends IaSItemFood {
 		pwai.heal(1.0F);
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
 	}
-	
-	
 
 }

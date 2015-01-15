@@ -13,11 +13,10 @@ public class NyxItemDraconium extends IaSBaseItemSingle implements IIaSGlowing {
 		super(EnumIaSModule.NYX, texName);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 
 	@Override
@@ -27,8 +26,9 @@ public class NyxItemDraconium extends IaSBaseItemSingle implements IIaSGlowing {
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 
 	@Override
