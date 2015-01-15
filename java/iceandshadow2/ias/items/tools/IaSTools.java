@@ -34,6 +34,8 @@ class IaSMaterialIconGetter extends Item {
 
 public class IaSTools {
 	private static Item iconery;
+	
+	public static final String NBT_ID = "iasMaterial";
 
 	public static IaSItemTool tools[];
 	public static IaSItemWeapon weapons[];
@@ -136,14 +138,14 @@ public class IaSTools {
 	public static ItemStack setToolMaterial(Item it, String mat) {
 		ItemStack is = new ItemStack(it);
 		is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setString("iasMaterial", mat);
+		is.getTagCompound().setString(NBT_ID, mat);
 		return is;
 	}
 
 	public static ItemStack setToolMaterial(ItemStack is, String mat) {
 		if(!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setString("iasMaterial", mat);
+		is.getTagCompound().setString(NBT_ID, mat);
 		return is;
 	}
 
@@ -217,7 +219,7 @@ public class IaSTools {
 				tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);
 			ItemStack rslt = new ItemStack(tools[tool.getClassId()]);
 			rslt.setTagCompound(new NBTTagCompound());
-			rslt.getTagCompound().setString("iasMaterial", result);
+			rslt.getTagCompound().setString(NBT_ID, result);
 			GameRegistry.addShapelessRecipe(rslt, reag, reag, reag, tule);
 		}
 	}
@@ -231,7 +233,7 @@ public class IaSTools {
 	protected static void makeEchirKnifeInfusionRecipe(Item reagent, String result) {
 		ItemStack rslt = new ItemStack(IaSTools.knife);
 		rslt.setTagCompound(new NBTTagCompound());
-		rslt.getTagCompound().setString("iasMaterial", result);
+		rslt.getTagCompound().setString(NBT_ID, result);
 		ItemStack k = new ItemStack(swordsActiveEchir[1]);
 		ItemStack reag = new ItemStack(reagent);
 		GameRegistry.addShapelessRecipe(rslt, reag, k);
