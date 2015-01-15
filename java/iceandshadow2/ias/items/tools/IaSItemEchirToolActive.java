@@ -56,7 +56,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 
 	@Override
 	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != this)
+		if(target.getItem() != this || target.isItemDamaged())
 			return 0;
 		if(IaSRegistry.getTransmutationMaterial(catalyst) != null && catalyst.stackSize >= 3)
 			return 300;
@@ -68,13 +68,15 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 			ItemStack catalyst, World world) {
 		IaSToolMaterial mat = IaSRegistry.getTransmutationMaterial(catalyst);
 		catalyst.stackSize -= 3;
-		ArrayList<ItemStack> ar = new ArrayList<ItemStack>();
 		if(wep)
-			ar.add(IaSTools.setToolMaterial(IaSTools.weapons[slot], mat.getMaterialName()));
+			target.func_150996_a(IaSTools.weapons[slot]);
 		else
-			ar.add(IaSTools.setToolMaterial(IaSTools.tools[slot], mat.getMaterialName()));
-		target.stackSize -= 1;
-		return ar;
+			target.func_150996_a(IaSTools.tools[slot]);
+		if(target.stackTagCompound == null)
+			target.setTagCompound(new NBTTagCompound());
+		NBTTagCompound nbt = target.stackTagCompound;
+		nbt.setString(IaSTools.NBT_ID, mat.getMaterialName());
+		return null;
 	}
 
 	@Override
