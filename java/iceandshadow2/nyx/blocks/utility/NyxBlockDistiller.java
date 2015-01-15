@@ -179,7 +179,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 							break;
 						}
 					}
-					else if(tent2 != null && i < tent2.getSizeInventory()) {
+					if(tent2 != null && i < tent2.getSizeInventory()) {
 						if(tent2.isItemValidForSlot(i, is)) {
 							if(tent.getStackInSlot(i) != null) {
 								ItemStack iis = tent2.getStackInSlot(i);
@@ -205,7 +205,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 			}
 		}
 		EntityItem it = new EntityItem(w,x+0.5,y+1,z+0.5,is);
-		it.setVelocity(0.0F, 0.1F, 0.0F);
+		it.setVelocity(0.0F, -0.1F, 0.0F);
 		it.lifespan = Integer.MAX_VALUE-1;
 		w.spawnEntityInWorld(it);
 	}
