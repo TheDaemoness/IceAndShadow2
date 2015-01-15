@@ -28,13 +28,21 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
         
         if(cat == null && alt.catalyst != null)
         	cat = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.catalyst);
-        else if(cat != null && alt.catalyst == null)
-        	cat = null;
+        else if(cat != null) {
+        	if(alt.catalyst == null)
+        		cat = null;
+        	else if(alt.catalyst.getItem() != cat.getEntityItem().getItem())
+            	cat.setEntityItemStack(alt.catalyst);
+        }
         
         if(tar == null && alt.target != null)
         	tar = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.target);
-        else if(tar != null && alt.target == null)
-        	tar = null;
+        else if(tar != null) {
+        	if(alt.target == null)
+        		tar = null;
+        	else if(alt.target.getItem() != tar.getEntityItem().getItem())
+            	tar.setEntityItemStack(alt.target);
+        }
         
         if(cat != null) {
             this.cat.hoverStart = 0.0F;
