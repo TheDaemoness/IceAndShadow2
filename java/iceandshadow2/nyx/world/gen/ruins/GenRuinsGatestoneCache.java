@@ -30,8 +30,8 @@ public class GenRuinsGatestoneCache extends GenRuins {
 	public void buildPass(World var1, Random var2, int x, int y, int z) {
 		var1.setBlock(x, y, z, NyxBlocks.gatestone);
 		Sculptor.cube(var1, x-1, y-1, z-2, x+2, y-1, z+2, Blocks.bedrock, 0);
-		Sculptor.walls(var1, x-2, y, z-3, x+3, y+2, z+3, Blocks.bedrock, 0);
-		Sculptor.corners(var1, x-1, y+2, z-2, x+1, y+2, z+1, Blocks.bedrock, 0);
+		Sculptor.walls(var1, x-3, y, z-3, x+3, y+2, z+3, Blocks.bedrock, 0);
+		Sculptor.corners(var1, x-1, y+2, z-1, x+1, y+2, z+1, Blocks.bedrock, 0);
 		Sculptor.walls(var1, x-1, y+2, z-1, x+1, y+3, z+1, Blocks.bedrock, 0);
 		var1.setBlock(x, y+3, z, Blocks.glowstone);
 		var1.setBlock(x, y+4, z, Blocks.bedrock);

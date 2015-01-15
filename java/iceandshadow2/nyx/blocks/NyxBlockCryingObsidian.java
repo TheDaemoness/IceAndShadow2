@@ -72,6 +72,8 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 									return;
 							}
 						}
+						if(par1World.getBlock(x, y+1, z).getMaterial() != Material.air)
+							return;
 						IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian....");
 						playuh.setSpawnChunk(new ChunkCoordinates(x, y+1, z), true);
 						if(playuh.getHealth() > 2.0F)
