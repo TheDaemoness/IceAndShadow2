@@ -16,7 +16,7 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setHardness(4.0F);
-		this.setLuminescence(0.4F);
+		this.setLuminescence(0.3F);
 		this.setLightColor(1.0F, 1.0F, 0.75F);
 		this.setResistance(1.0F);
 	}
