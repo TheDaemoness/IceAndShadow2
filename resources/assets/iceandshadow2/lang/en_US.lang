@@ -117,6 +117,7 @@ tile.nyxGatestone1.name=Inactive Gatestone
 tile.nyxGatestone2.name=Inactive Gatestone
 
 tile.nyxTransmutationAltar.name=Transmutation Altar
+tile.nyxDistiller.name=Exousic Distiller
 
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
