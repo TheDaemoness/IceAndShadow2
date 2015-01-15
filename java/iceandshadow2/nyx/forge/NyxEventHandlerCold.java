@@ -2,7 +2,6 @@ package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.util.IaSPlayerHelper;
-
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.projectile.EntityFireball;
@@ -13,6 +12,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -39,60 +40,60 @@ public class NyxEventHandlerCold {
 	public void onPlayerTriesToPlaceBucket(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
-		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
-				&& !e.entityPlayer.capabilities.isCreativeMode) {
-			if (e.entityPlayer.getEquipmentInSlot(0) == null)
+		if (e.entityPlayer.dimension != IaSFlags.dim_nyx_id
+				|| !e.entityPlayer.capabilities.isCreativeMode)
+			return;
+		if (e.entityPlayer.getEquipmentInSlot(0) == null)
+			return;
+		final Item itid = e.entityPlayer.getEquipmentInSlot(0).getItem();
+		if (itid == Items.lava_bucket || itid == Items.water_bucket) {
+			e.getResult();
+			e.useItem = Result.DENY;
+			if (e.action != Action.RIGHT_CLICK_BLOCK)
 				return;
-			final Item itid = e.entityPlayer.getEquipmentInSlot(0).getItem();
-			if (itid == Items.lava_bucket || itid == Items.water_bucket) {
-				e.getResult();
-				e.useItem = Result.DENY;
-				if (e.action != Action.RIGHT_CLICK_BLOCK)
-					return;
-				int x = e.x;
-				int y = e.y;
-				int z = e.z;
-				switch (e.face) {
-				case 0:
-					--y;
-					break;
-				case 1:
-					++y;
-					break;
-				case 2:
-					--z;
-					break;
-				case 3:
-					++z;
-					break;
-				case 4:
-					--x;
-					break;
-				case 5:
-					++x;
-					break;
-				default:
-					break;
-				}
-				e.entityPlayer.setCurrentItemOrArmor(0, new ItemStack(
-						Items.bucket));
-				if (itid == Items.lava_bucket) {
-					e.entityPlayer.worldObj
-							.playSoundEffect(
-									x + 0.5F,
-									y + 0.5F,
-									z + 0.5F,
-									"random.fizz",
-									0.5F,
-									2.6F + (e.entityPlayer.worldObj.rand
-											.nextFloat() - e.entityPlayer.worldObj.rand
-											.nextFloat()) * 0.8F);
-					e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.obsidian,
-							0, 0x2);
-				} else if (itid == Items.water_bucket)
-					e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0,
-							0x2);
+			int x = e.x;
+			int y = e.y;
+			int z = e.z;
+			switch (e.face) {
+			case 0:
+				--y;
+				break;
+			case 1:
+				++y;
+				break;
+			case 2:
+				--z;
+				break;
+			case 3:
+				++z;
+				break;
+			case 4:
+				--x;
+				break;
+			case 5:
+				++x;
+				break;
+			default:
+				break;
 			}
+			e.entityPlayer.setCurrentItemOrArmor(0, new ItemStack(
+					Items.bucket));
+			if (itid == Items.lava_bucket) {
+				e.entityPlayer.worldObj
+				.playSoundEffect(
+						x + 0.5F,
+						y + 0.5F,
+						z + 0.5F,
+						"random.fizz",
+						0.5F,
+						2.6F + (e.entityPlayer.worldObj.rand
+								.nextFloat() - e.entityPlayer.worldObj.rand
+								.nextFloat()) * 0.8F);
+				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.obsidian,
+						0, 0x2);
+			} else if (itid == Items.water_bucket)
+				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0,
+						0x2);
 		}
 	}
 
@@ -102,6 +103,7 @@ public class NyxEventHandlerCold {
 			return;
 		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
 				&& !e.entityPlayer.capabilities.isCreativeMode) {
+				
 			boolean flaque = false;
 			if (e.entityPlayer.getEquipmentInSlot(0) == null)
 				return;
@@ -117,18 +119,25 @@ public class NyxEventHandlerCold {
 					flaque = true;
 				else if (id == Blocks.torch)
 					flaque = true;
+				else if (id == Blocks.furnace)
+					flaque = true;
 			}
 
 			// DO NOT SIMPLIFY!
 			if (flaque && !e.isCanceled()) {
 				e.setCanceled(true);
-				if (id != Blocks.torch)
-					IaSPlayerHelper
-							.messagePlayer(e.entityPlayer,
-									"It's far too cold to start a fire that way in Nyx.");
-				else
+				if (id == Blocks.torch)
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 							"It's far too cold to light a torch in Nyx.");
+				else if (id == Blocks.furnace) {
+					IaSPlayerHelper.messagePlayer(e.entityPlayer,
+						"There's no point in placing that. It's too cold to use it here.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer,
+						"There might be another way to smelt items in Nyx.");
+				} else
+					IaSPlayerHelper
+					.messagePlayer(e.entityPlayer,
+							"It's far too cold to start a fire that way in Nyx.");
 			}
 		}
 
@@ -155,8 +164,8 @@ public class NyxEventHandlerCold {
 			if (isplant && !e.isCanceled()) {
 				e.setCanceled(true);
 				IaSPlayerHelper
-						.messagePlayer(e.entityPlayer,
-								"There's no way that this will grow in this frigid climate.");
+				.messagePlayer(e.entityPlayer,
+						"There's no way that this will grow in this frigid climate.");
 			}
 		}
 	}
@@ -175,8 +184,8 @@ public class NyxEventHandlerCold {
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
 					IaSPlayerHelper
-							.messagePlayer(e.entityPlayer,
-									"The contents of the bottle have become thoroughly frozen.");
+					.messagePlayer(e.entityPlayer,
+							"The contents of the bottle have become thoroughly frozen.");
 				}
 			} else if (ite.getItem() == Items.milk_bucket) {
 				if (!e.isCanceled()) {
