@@ -2,6 +2,7 @@ package iceandshadow2.nyx.entities.mobs;
 
 import java.util.Random;
 
+import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
@@ -129,6 +130,12 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
             this.setCombatTask();
         
         this.typpe = EnumNyxSkeletonType.BOW_FROST_SHORT;
+	}
+	
+	@Override
+	public void setFire(int time) {
+		if(this.dimension != IaSFlags.dim_nyx_id)
+			super.setFire(time);
 	}
     
 	@Override

@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
@@ -24,10 +25,14 @@ public class EntityNyxSpider extends EntitySpider {
 		super(par1World);
 		this.setSize(0.7F, 0.5F);
 		this.experienceValue = 4;
-		
 		this.setInvisible(true);
 	}
 	
+	@Override
+	public void setFire(int time) {
+		return;
+	}
+
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.UNDEAD;
@@ -96,8 +101,8 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		if (this.isInvisible())
-			this.dropItem(NyxItems.bloodstone,1);
+		if(this.rand.nextBoolean())
+			this.dropItem(NyxItems.exousium,1);
 	}
 
 	/**
@@ -227,6 +232,8 @@ public class EntityNyxSpider extends EntitySpider {
     @Override
 	public float getBlockPathWeight(int i, int j, int k)
     {
+    	if(this.getAttackTarget() != null)
+    		return 1;
     	int lightb = worldObj.getBlockLightValue(i, j, k);
     	return (lightb>7?0:1);
     }
