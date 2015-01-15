@@ -54,6 +54,15 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public int damageToolOnAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		return 1;
 	}
+	
+	/**
+	 * Gets the item required in the transmutation altar to transmute a tool/weapon to this.
+	 * @return The item, or null if transmutation to this material should be disabled.
+	 * A separate handler can still be put in place for transmutation under more special circumstances;
+	 */
+	public ItemStack getTransmutationCatalyst() {
+		return new ItemStack(getMaterialItem());
+	}
 
 	/**
 	 * Gets the item's base attack damage.

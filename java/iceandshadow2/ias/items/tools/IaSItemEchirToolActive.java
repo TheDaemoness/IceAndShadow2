@@ -1,17 +1,22 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.api.IaSRegistry;
+import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
+public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIaSApiTransmutable {
 
 	protected int slot;
 	protected boolean wep;
@@ -47,6 +52,35 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow {
 				par1 = new ItemStack(IaSTools.tools[slot],1,par1.getItemDamage());
 		}
 		return par1;
+	}
+
+	@Override
+	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+		if(target.getItem() != this)
+			return 0;
+		if(IaSRegistry.getTransmutationMaterial(catalyst) != null && catalyst.stackSize >= 3)
+			return 300;
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmutationYield(ItemStack target,
+			ItemStack catalyst, World world) {
+		IaSToolMaterial mat = IaSRegistry.getTransmutationMaterial(catalyst);
+		catalyst.stackSize -= 3;
+		ArrayList<ItemStack> ar = new ArrayList<ItemStack>();
+		if(wep)
+			ar.add(IaSTools.setToolMaterial(IaSTools.weapons[slot], mat.getMaterialName()));
+		else
+			ar.add(IaSTools.setToolMaterial(IaSTools.tools[slot], mat.getMaterialName()));
+		target.stackSize -= 1;
+		return null;
+	}
+
+	@Override
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity ent) {
+		return false;
 	}
 
 }

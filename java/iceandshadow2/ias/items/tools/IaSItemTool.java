@@ -3,6 +3,7 @@ package iceandshadow2.ias.items.tools;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.api.EnumIaSToolClass;
+import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;

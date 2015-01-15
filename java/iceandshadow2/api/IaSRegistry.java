@@ -216,4 +216,12 @@ public final class IaSRegistry {
 		}
 		return null;
 	}
+
+	public static IaSToolMaterial getTransmutationMaterial(ItemStack catalyst) {
+		for(IaSToolMaterial mat : toolMaterials.values()) {
+			if(mat.getTransmutationCatalyst().isItemEqual(catalyst))
+				return mat;
+		}
+		return null;
+	}
 }
