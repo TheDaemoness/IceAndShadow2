@@ -140,7 +140,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				if(teh != null) {
 					int i;
 					for(i = 0; i < teh.getSizeInventory(); ++i) {
-						if(teh.isItemValidForSlot(i, is))
+						if(teh.getStackInSlot(i) == null)
 							break;
 					}
 					if(i != teh.getSizeInventory()) {
