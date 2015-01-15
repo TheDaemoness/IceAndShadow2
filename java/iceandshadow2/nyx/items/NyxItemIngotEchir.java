@@ -28,6 +28,13 @@ public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
 	}
 
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		if(stack.getItemDamage() == 1)
+			return 16;
+		return 64;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
