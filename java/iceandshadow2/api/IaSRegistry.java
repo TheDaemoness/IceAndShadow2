@@ -104,12 +104,12 @@ public final class IaSRegistry {
 			obj = ((ItemBlock)obj).field_150939_a;
 		if(obj instanceof IIaSApiDistillable) {
 			dist = (IIaSApiDistillable)obj;
-			if(dist.getBaseRate(target) > 0)
+			if(dist.getDistillationRate(target) > 0)
 				return dist;
 		}
 		
 		for(int i = 0; i < handlersDistillable.size(); ++i) {
-			if(handlersDistillable.get(i).getBaseRate(target) > 0)
+			if(handlersDistillable.get(i).getDistillationRate(target) > 0) 
 				return handlersDistillable.get(i);
 		}
 		return null;

@@ -1,7 +1,9 @@
 package iceandshadow2;
 
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.handlers.IaSHandlerDistillationHeat;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.nyx.forge.NyxDeathSystem;
@@ -70,6 +72,7 @@ public class IceAndShadow2 {
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    	IaSRegistry.addHandler(new IaSHandlerDistillationHeat());
     }
     
     @EventHandler
