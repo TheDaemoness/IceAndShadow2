@@ -80,11 +80,14 @@ public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSAp
 			time = 0;
 		else
 			time = catalyst.getItemDamage();
-		ItemStack ret = FurnaceRecipes.smelting().getSmeltingResult(target).copy();
-		ret.stackSize = (int)Math.min(Math.pow(4, time),target.stackSize);
-		ret.stackSize = Math.min(ret.getMaxStackSize(),ret.stackSize);
-		li.add(ret);
-		target.stackSize -= ret.stackSize;
+		int finalSize = (int)Math.max(0, target.stackSize - Math.pow(4, time));
+		while(target.stackSize > finalSize) {
+			ItemStack ret = FurnaceRecipes.smelting().getSmeltingResult(target).copy();
+			ret.stackSize = (int)Math.min(Math.pow(4, time),target.stackSize);
+			ret.stackSize = Math.min(ret.getMaxStackSize(),ret.stackSize);
+			li.add(ret);
+			target.stackSize -= ret.stackSize;
+		}
 		--catalyst.stackSize;
 		return li;
 	}
