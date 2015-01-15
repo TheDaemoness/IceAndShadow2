@@ -16,6 +16,21 @@ import net.minecraft.nbt.NBTTagCompound;
  * recorded.
  */
 public interface IIaSApiExaminable {
+
+	/**
+	 * Returns a list of messages to be printed to the player after examining an
+	 * item.
+	 * 
+	 * @param toExam
+	 *            The item stack being examined.
+	 * @param knowledge
+	 *            The knowledge currently recorded in the examination table.
+	 * @return A list of messages to tell the player. Null is acceptable.
+	 */
+	public List<String> getExamineMessages(ItemStack toExam,
+			Map<String, Integer> knowledge);
+	
+
 	/**
 	 * Gets information about this item to put into a book. If multiple handlers
 	 * have book information, the first one registered is the only one called.
@@ -56,18 +71,5 @@ public interface IIaSApiExaminable {
 	 *         to change, false if the item merely needs to be examined.
 	 */
 	public Map<String, Integer> getChangedKnowledgeOnBook(ItemStack toExam,
-			Map<String, Integer> knowledge);
-
-	/**
-	 * Returns a list of messages to be printed to the player after examining an
-	 * item.
-	 * 
-	 * @param toExam
-	 *            The item stack being examined.
-	 * @param knowledge
-	 *            The knowledge currently recorded in the examination table.
-	 * @return A list of messages to tell the player. Null is acceptable.
-	 */
-	public List<String> getExamineMessages(ItemStack toExam,
 			Map<String, Integer> knowledge);
 }

@@ -14,6 +14,9 @@ import net.minecraft.world.World;
  * The first one registered that can process the stack is the one used.
  */
 public interface IIaSApiItemStackIO {
+
+	public void isIntendedBlock(World w, Block b, int x, int y, int z);
+	
 	public void canHandleInput(World w, int x, int y, int z);
 
 	public void canHandleOutput(World w, int x, int y, int z);
@@ -22,6 +25,4 @@ public interface IIaSApiItemStackIO {
 
 	public void handleOutput(World w, int x, int y, int z,
 			List<ItemStack> output);
-
-	public void isIntendedBlock(World w, Block b, int x, int y, int z);
 }

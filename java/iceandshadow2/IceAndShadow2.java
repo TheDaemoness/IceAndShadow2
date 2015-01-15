@@ -45,26 +45,6 @@ public class IceAndShadow2 {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		if (IaSFlags.flag_death_system)
-			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
-
-		NyxBiomes.registerBiomes();
-		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
-		GameRegistry.registerFuelHandler(new NyxFuelHandler());
-
-		// Be nice, Thaumcraft.
-		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""
-				+ IaSFlags.dim_nyx_id + ":0");
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		IaSRegistry.addHandler(new IaSHandlerTransmutationRepair());
-		IaSRegistry.addHandler(new IaSHandlerDistillationHeat());
-	}
-
-	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		event.getModLog().info("Ice and Shadow 2, version " + VERSION + ".");
 		logger = event.getModLog();
@@ -82,6 +62,26 @@ public class IceAndShadow2 {
 
 		if (event.getSide() == Side.CLIENT)
 			IaSRenderers.init();
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		if (IaSFlags.flag_death_system)
+			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
+
+		NyxBiomes.registerBiomes();
+		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
+		GameRegistry.registerFuelHandler(new NyxFuelHandler());
+
+		// Be nice, Thaumcraft.
+		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""
+				+ IaSFlags.dim_nyx_id + ":0");
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		IaSRegistry.addHandler(new IaSHandlerTransmutationRepair());
+		IaSRegistry.addHandler(new IaSHandlerDistillationHeat());
 	}
 
 	@EventHandler

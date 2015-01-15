@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
  * always be run instead of any in IaSRegistry.
  */
 public interface IIaSApiDistillable {
+	
 	/**
 	 * Gets how many items will be removed from an item stack during processing.
 	 * Also used to check if a distillation is possible.
