@@ -4,6 +4,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenOre;
+import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
 import iceandshadow2.util.gen.Sculptor;
@@ -15,13 +16,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class NyxBiome extends BiomeGenBase {
 
 	private boolean rare;
 
-	WorldGenMinable genNavistra, genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
+	WorldGenNyxOre genNavistra, genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
@@ -96,26 +96,19 @@ public class NyxBiome extends BiomeGenBase {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
-		genEchir = new WorldGenMinable(NyxBlocks.oreEchir, 12,
-				NyxBlocks.stone);
-		genNavistra = new WorldGenMinable(NyxBlocks.oreNavistra, 6,
-				NyxBlocks.stone);
-		genCortra = new WorldGenMinable(NyxBlocks.oreCortra, 10,
-				NyxBlocks.stone);
-		genDraconium = new WorldGenMinable(NyxBlocks.oreDraconium,
-				8, NyxBlocks.stone);
-		genGemstone = new WorldGenMinable(NyxBlocks.oreGemstone,
-				4, NyxBlocks.stone);
+		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
+		genNavistra = new WorldGenNyxOre(NyxBlocks.oreNavistra, 6);
+		genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
+		genDraconium = new WorldGenNyxOre(NyxBlocks.oreDraconium, 8);
+		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
 
 		if (doGenDevora)
-			genDevora = new WorldGenMinable(NyxBlocks.oreDevora, 8,
-					NyxBlocks.stone);
+			genDevora = new WorldGenNyxOre(NyxBlocks.oreDevora, 8);
 
 		// Unstable ice.
 		if (doGenUnstableIce) {
-			genUnstableIce = new WorldGenMinable(
-					NyxBlocks.unstableIce, 36,
-					NyxBlocks.stone);
+			genUnstableIce = new WorldGenNyxOre(
+					NyxBlocks.unstableIce, 36);
 			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
 					128, 10);
 		}
