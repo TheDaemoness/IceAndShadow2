@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,6 +53,12 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
         }
     }
 	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z,
+			ForgeDirection side) {
+		return false;
+	}
+
 	@Override
 	public boolean isOpaqueCube() {
         return false;
