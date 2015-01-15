@@ -188,6 +188,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
     @Override
     public float getBlockPathWeight(int i, int j, int k)
     {
+    	if(this.getAttackTarget() != null || this.getSearchTarget() != null)
+    		return 1;
     	int lightb = worldObj.getBlockLightValue(i, j, k);
     	return (lightb>7?(lightb/2):0);
     }
