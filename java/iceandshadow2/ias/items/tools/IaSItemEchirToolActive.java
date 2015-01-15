@@ -74,7 +74,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 		else
 			ar.add(IaSTools.setToolMaterial(IaSTools.tools[slot], mat.getMaterialName()));
 		target.stackSize -= 1;
-		return null;
+		return ar;
 	}
 
 	@Override
