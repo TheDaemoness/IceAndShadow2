@@ -5,10 +5,12 @@ import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MovingObjectPosition;
@@ -100,5 +102,15 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
+	}
+	
+	@Override
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return (mat.getItem() == NyxItems.echirIngot && mat.isItemDamaged());
+	}
+	
+	@Override
+	protected Item getMaterialItem() {
+		return NyxItems.devora;
 	}
 }

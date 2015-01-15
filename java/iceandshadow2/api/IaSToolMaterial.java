@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
@@ -37,6 +38,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon iconTool[], iconWeapon[], iconTBroken[], iconWBroken[];
+
+	/**
+	 * Gets an item associated with this material (ex Echir Ingot with Echir, Cortra with Cortra).
+	 */
+	protected abstract Item getMaterialItem();
 
 	/**
 	 * Called by the default implementation of onAttack to determine how much damage a tool takes from attacking.

@@ -2,6 +2,7 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,13 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	
 	public static ArmorMaterial MATERIAL_SPIDERSILK = EnumHelper.addArmorMaterial("NyxSpiderSilk", 22,
 			new int[] { 2, 6, 4, 1 }, 12);
+	
+	static {
+		MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
+		MATERIAL_NAVISTRA.customCraftingMaterial = NyxItems.navistraShard;
+		MATERIAL_CORTRA.customCraftingMaterial = NyxItems.echirIngot;
+		MATERIAL_SPIDERSILK.customCraftingMaterial = NyxItems.toughGossamer;
+	}
 
 	protected String armorTexString;
 	

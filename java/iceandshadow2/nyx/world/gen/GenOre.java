@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class GenOre {
 	
@@ -68,13 +69,13 @@ public class GenOre {
 	/**
 	 * Standard ore generation helper.
 	 */
-	public static void genOreStandard(WorldGenNyxOre genUnstableIce, World par1World, int x,
+	public static void genOreStandard(WorldGenerator wgen, World par1World, int x,
 			int z, int lower, int upper, int rarity) {
 		for (int var5 = 0; var5 < rarity; ++var5) {
 			int var6 = x + par1World.rand.nextInt(16);
 			int var7 = par1World.rand.nextInt(upper - lower) + lower;
 			int var8 = z + par1World.rand.nextInt(16);
-			genUnstableIce.generate(par1World, par1World.rand, var6, var7, var8);
+			wgen.generate(par1World, par1World.rand, var6, var7, var8);
 			par1World.updateLightByType(EnumSkyBlock.Block, var6, var7, var8);
 			par1World.updateLightByType(EnumSkyBlock.Sky, var6, var7, var8);
 		}

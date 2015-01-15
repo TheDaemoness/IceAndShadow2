@@ -40,7 +40,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		this.setUnlocalizedName("iasTool");
 		classe = cl;
 	}
-	
+
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
@@ -223,6 +223,11 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 
 	@Override
 	public boolean usesDefaultGlowRenderer() {
+		return true;
+	}
+
+	@Override
+	public boolean canRepair() {
 		return true;
 	}
 

@@ -2,8 +2,10 @@ package iceandshadow2.nyx.items.materials;
 
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -56,6 +58,16 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
+	}
+	
+	@Override
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return mat.getItem() == NyxItems.navistraShard;
+	}
+	
+	@Override
+	protected Item getMaterialItem() {
+		return NyxItems.navistraShard;
 	}
 
 }

@@ -85,4 +85,9 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
 	}
+	
+	@Override
+	public boolean canRepair() {
+		return false;
+	}
 }

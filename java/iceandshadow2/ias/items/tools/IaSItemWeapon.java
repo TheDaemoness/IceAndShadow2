@@ -10,6 +10,7 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 
 import java.util.Collection;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -188,6 +189,11 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 
 	@Override
 	public boolean usesDefaultGlowRenderer() {
+		return true;
+	}
+
+	@Override
+	public boolean canRepair() {
 		return true;
 	}
 
