@@ -1,9 +1,10 @@
 package iceandshadow2.nyx;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.nyx.blocks.ore.*;
-import iceandshadow2.nyx.blocks.ropes.*;
+import iceandshadow2.nyx.blocks.technical.*;
 import iceandshadow2.nyx.blocks.utility.*;
 import iceandshadow2.nyx.tileentities.*;
 import iceandshadow2.util.IaSRegistration;
@@ -15,11 +16,13 @@ public class NyxBlocks {
 			exousicIce, exousicWater, crystalBloodstone, thornyVines,
 			silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 			brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-			hookClimbing, hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ,
+			hookClimbing,
 			transmutationAltar, examinationTable, distiller;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 			oreNifelhium, oreExousium, oreDraconium, oreGemstone;
+	
+	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace;
 
 	public static Fluid fluidExousia;
 

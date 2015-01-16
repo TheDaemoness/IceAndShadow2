@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import java.util.Random;
 
@@ -16,12 +16,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public abstract class NyxBlockRope extends IaSBaseBlockSingle implements
-		IIaSTechnicalBlock {
+public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	public NyxBlockRope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.cloth);

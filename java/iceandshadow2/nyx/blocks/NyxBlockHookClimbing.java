@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks;
 
 import java.util.ArrayList;
 

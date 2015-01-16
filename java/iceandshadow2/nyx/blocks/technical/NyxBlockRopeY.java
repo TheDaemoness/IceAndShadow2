@@ -1,6 +1,7 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.NyxBlockHookClimbing;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

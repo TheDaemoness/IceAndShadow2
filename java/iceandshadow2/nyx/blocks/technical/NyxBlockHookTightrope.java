@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import java.util.ArrayList;
 
@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxBlocks;
 
-public class NyxBlockHookTightrope extends IaSBaseBlockSingle implements
-		IIaSTechnicalBlock {
+public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {
 
 	public NyxBlockHookTightrope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.iron);

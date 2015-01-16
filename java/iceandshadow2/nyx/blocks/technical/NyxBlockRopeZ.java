@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
