@@ -177,22 +177,24 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 		// Add more random loot.
 		final int chestcontentamount = 4 + var2.nextInt(4);
-		boolean bowflag = true;
+		boolean rareflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
 			ItemStack itemz = new ItemStack(NyxItems.icicle,
 					1 + var2.nextInt(3));
 
 			// Bloodstone.
-			if (rewardid == 0)
+			if (rewardid == 0 && rareflag) {
 				itemz = new ItemStack(NyxItems.bloodstone);
+				rareflag = false;
+			}
 
 			// Long bow
-			else if (rewardid < 3 && bowflag) {
+			else if (rewardid < 3 && rareflag) {
 				itemz = new ItemStack(NyxItems.frostBowLong, 1,
 						32 + var2.nextInt(64));
 				itemz.addEnchantment(Enchantment.punch, 1);
-				bowflag = false;
+				rareflag = false;
 			}
 
 			// Sanctified Bone
@@ -268,7 +270,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}
 
-		if (var2.nextBoolean())
+		if (var2.nextInt(3) == 0)
 			chestent.setInventorySlotContents(
 					1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.draconium));
