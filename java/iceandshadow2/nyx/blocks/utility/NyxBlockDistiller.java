@@ -109,6 +109,11 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 			return this.blockIcon;
 		return NyxBlocks.brickPale.getIcon(side, 0);
 	}
+	
+	@Override
+	public int getMobilityFlag() {
+		return 2;
+	}
 
 	protected int getStackDecr(ItemStack stq) {
 		if (stq != null && stq.getItem() != null) {
@@ -139,7 +144,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 	@Override
 	public int onBlockPlaced(World w, int x, int y, int z, int meta, float lx,
 			float ly, float lz, int wut) {
-		w.scheduleBlockUpdate(x, y, z, this, 400);
+		w.scheduleBlockUpdate(x, y, z, this, 1000+w.rand.nextInt(400));
 		return 0;
 	}
 
@@ -157,7 +162,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (w.isRemote)
 			return;
-		w.scheduleBlockUpdate(x, y, z, this, 400);
+		w.scheduleBlockUpdate(x, y, z, this, 1000+w.rand.nextInt(400));
 		final Block b = w.getBlock(x, y + 1, z);
 		if (b.hasTileEntity(w.getBlockMetadata(x, y + 1, z))) {
 			if (b instanceof BlockChest) {
