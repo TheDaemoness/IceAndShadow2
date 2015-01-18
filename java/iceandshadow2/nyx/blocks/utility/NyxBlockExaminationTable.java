@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
+import iceandshadow2.nyx.blocks.NyxBlockStone;
 import iceandshadow2.nyx.tileentities.NyxTeExaminationTable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,8 +24,8 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 
 	public NyxBlockExaminationTable(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.rock);
-		this.setResistance(10.0F);
-		this.setHardness(5.0F);
+		this.setResistance(NyxBlockStone.RESISTANCE);
+		this.setHardness(NyxBlockStone.HARDNESS);
 		this.setBlockBounds(0.05F, 0.0F, 0.05F, 0.95F, 0.75F, 0.95F);
 		this.setLightOpacity(7);
 	}

@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NyxBlockStone extends IaSBaseBlockSingle {
+	public static final float HARDNESS = 2.0F;
+	public static final float RESISTANCE = 9.0F;
+	
 	public static void doDamage(World theWorld, int x, int y, int z,
 			Entity theEntity, int dmg) {
 		if (!(theEntity instanceof EntityMob)) {
@@ -40,8 +43,8 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 
 	public NyxBlockStone(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(9.0F);
-		this.setHardness(2.0F);
+		this.setResistance(HARDNESS);
+		this.setHardness(RESISTANCE);
 		this.setHarvestLevel("pickaxe", 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone),
 				new ItemStack(this));

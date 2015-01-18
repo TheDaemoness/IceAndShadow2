@@ -32,8 +32,8 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	public NyxBlockAltarTransmutation(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		this.setLightLevel(0.4F);
-		this.setResistance(10.0F);
-		this.setHardness(5.0F);
+		this.setResistance(Blocks.obsidian.getExplosionResistance(null));
+		this.setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0));
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
 		this.setLightOpacity(7);
 		this.setStepSound(Block.soundTypeStone);

@@ -5,6 +5,7 @@ import iceandshadow2.api.IIaSApiDistillable;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.blocks.NyxBlockStone;
 
 import java.util.Random;
 
@@ -28,8 +29,8 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 		super(EnumIaSModule.NYX, texName, Material.rock);
 		this.setBlockBounds(0.3F, 0.05F, 0.3F, 0.7F, 0.95F, 0.7F);
 		this.setLuminescence(0.3F);
-		this.setHardness(2.0F);
-		this.setResistance(5.0F);
+		this.setHardness(NyxBlockStone.HARDNESS);
+		this.setResistance(NyxBlockStone.RESISTANCE);
 		this.setLightOpacity(5);
 	}
 
