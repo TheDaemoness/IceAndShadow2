@@ -1,5 +1,6 @@
 package iceandshadow2.api;
 
+import iceandshadow2.IceAndShadow2;
 import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
 import iceandshadow2.util.IaSPlayerHelper;
 
@@ -27,23 +28,53 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiTransmutable> handlersTransmutable = new ArrayList<IIaSApiTransmutable>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 
-	public static void addHandler(IIaSApiDistillable handler) {
+	public static void preInit() {
+		for(Object o : IceAndShadow2.instance.getPreRegistrationHandlers()) {
+			doAdd(o);
+		}
+	}
+	
+	public static void postInit() {
+		for(Object o : IceAndShadow2.instance.getPostRegistrationHandlers()) {
+			doAdd(o);
+		}
+	}
+	
+	public static void add(Object o) {
+		if(IceAndShadow2.isRegistrationPublic())
+			doAdd(o);
+	}
+	
+	private static void doAdd(Object o) {
+		if(o instanceof IIaSApiDistillable)
+			addHandler((IIaSApiDistillable)o);
+		if(o instanceof IIaSApiExaminable)
+			addHandler((IIaSApiExaminable)o);
+		if(o instanceof IIaSApiSacrificeXp)
+			addHandler((IIaSApiSacrificeXp)o);
+		if(o instanceof IIaSApiTransmutable)
+			addHandler((IIaSApiTransmutable)o);
+		if(o instanceof IaSToolMaterial)
+			addToolMaterial((IaSToolMaterial)o);
+	}
+	
+	private static void addHandler(IIaSApiDistillable handler) {
 		handlersDistillable.add(handler);
 	}
 
-	public static void addHandler(IIaSApiExaminable handler) {
+	private static void addHandler(IIaSApiExaminable handler) {
 		handlersExaminable.add(handler);
 	}
 
-	public static void addHandler(IIaSApiSacrificeXp handler) {
+	private static void addHandler(IIaSApiSacrificeXp handler) {
 		handlersSacrificeXp.add(handler);
 	}
 
-	public static void addHandler(IIaSApiTransmutable handler) {
+	private static void addHandler(IIaSApiTransmutable handler) {
 		handlersTransmutable.add(handler);
 	}
 
-	public static void addToolMaterial(IaSToolMaterial mat) {
+	protected static void addToolMaterial(IaSToolMaterial mat) {
 		if (toolMaterials.containsKey(mat.getMaterialName()))
 			throw new IllegalArgumentException("Material '"
 					+ mat.getMaterialName() + "' already exists!");

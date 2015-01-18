@@ -130,10 +130,6 @@ public class IaSTools {
 		makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
 		makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
 
-		IaSRegistry.addToolMaterial(new NyxMaterialDevora());
-		IaSRegistry.addToolMaterial(new NyxMaterialCortra());
-		IaSRegistry.addToolMaterial(new NyxMaterialNavistra());
-
 		makeEchirToolInfusionRecipe(NyxItems.devora, "Devora");
 		makeEchirToolInfusionRecipe(NyxItems.navistraShard, "Navistra");
 		makeEchirToolInfusionRecipe(NyxItems.cortraDust, "Cortra");
