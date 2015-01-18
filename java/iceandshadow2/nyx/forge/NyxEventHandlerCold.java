@@ -4,6 +4,8 @@ import iceandshadow2.IaSFlags;
 import iceandshadow2.util.IaSPlayerHelper;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -119,8 +121,13 @@ public class NyxEventHandlerCold {
 					flaque = true;
 				else if (id == Blocks.torch)
 					flaque = true;
-				else if (id == Blocks.furnace)
+				else if (id instanceof BlockFurnace)
 					flaque = true;
+				else if (id instanceof ITileEntityProvider) {
+					ITileEntityProvider itep = (ITileEntityProvider)id;
+					if(itep.createNewTileEntity(e.world, 0) instanceof TileEntityFurnace)
+						flaque = true;
+				}
 			}
 
 			// DO NOT SIMPLIFY!
@@ -132,8 +139,6 @@ public class NyxEventHandlerCold {
 				else if (id == Blocks.furnace) {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 						"There's no point in placing that. It's too cold to use it here.");
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-						"There might be another way to smelt items in Nyx.");
 				} else
 					IaSPlayerHelper
 					.messagePlayer(e.entityPlayer,
