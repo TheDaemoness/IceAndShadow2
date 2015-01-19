@@ -62,7 +62,6 @@ public class IceAndShadow2 {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		toPreRegister = new ArrayList<Object>();
 		event.getModLog().info("Ice and Shadow 2, version " + VERSION + ".");
 		logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
@@ -75,10 +74,9 @@ public class IceAndShadow2 {
 
 		InitNyx.init(this);
 		IaSDamageSources.init();
-		
-		toPreRegister.add(new NyxMaterialDevora());
-		toPreRegister.add(new NyxMaterialCortra());
-		toPreRegister.add(new NyxMaterialNavistra());
+
+		toPreRegister = new ArrayList<Object>();
+		addToolMaterials();
 		IaSRegistry.preInit();
 		toPreRegister.clear();
 		IaSTools.init();
@@ -90,7 +88,6 @@ public class IceAndShadow2 {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		toPostRegister = new ArrayList<Object>();
 		if (IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 
@@ -101,21 +98,33 @@ public class IceAndShadow2 {
 		// Be nice, Thaumcraft.
 		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""
 				+ IaSFlags.dim_nyx_id + ":0");
-		acceptRegistration = false;
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		toPostRegister.add(new IaSHandlerTransmutationRepair());
-		toPostRegister.add(new IaSHandlerDistillationHeat());
+		acceptRegistration = false;
+		toPostRegister = new ArrayList<Object>();
+		addPostInitHandlers();
 		IaSRegistry.postInit();
 		toPostRegister.clear();
+	}
+	
+	private void addToolMaterials() {
+		toPreRegister.add(new NyxMaterialDevora());
+		toPreRegister.add(new NyxMaterialCortra());
+		toPreRegister.add(new NyxMaterialNavistra());
+	}
+	
+	private void addPostInitHandlers() {
+		toPostRegister.add(new IaSHandlerTransmutationRepair());
+		toPostRegister.add(new IaSHandlerDistillationHeat());
 	}
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new IaSServerCommand());
 	}
+	
 	public static boolean isRegistrationPublic() {
 		return acceptRegistration;
 	}
