@@ -38,8 +38,6 @@ public class GenRuinsGatestoneCache extends GenRuins {
 
 	@Override
 	public void damagePass(World var1, Random var2, int x, int y, int z) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
