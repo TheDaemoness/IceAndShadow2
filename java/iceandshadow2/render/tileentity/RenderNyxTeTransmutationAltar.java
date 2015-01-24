@@ -62,7 +62,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			if (alt.target.getItem() instanceof ItemBlock)
 				GL11.glTranslatef(0.0F, 0.8F, -0.175F);
 			else
-				GL11.glTranslatef(0.0F, 0.8F, -0.35F);
+				GL11.glTranslatef(0.0F, 0.8F, -0.225F);
 			GL11.glRotatef(180, 0, 1, 1);
 			RenderManager.instance.renderEntityWithPosYaw(this.tar, 0.0D, 0.0D,
 					0.0D, 0.0F, 0.0F);
