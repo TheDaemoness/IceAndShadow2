@@ -76,8 +76,15 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			TileEntityHopper teh = null;
 			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper)
 				teh = (TileEntityHopper) w.getTileEntity(x, y - 1, z);
+			if(l_ist.size() == 1 && tte.target == null) {
+				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y-1, z))
+					if(l_ist.size() == 1 && tte.target == null) {
+						tte.target = l_ist.get(0);
+						l_ist.clear();
+					}
+			}
 			for (final ItemStack is : l_ist) {
-				if (teh != null) {
+				if (teh != null && !w.isBlockIndirectlyGettingPowered(x, y-1, z)) {
 					int i;
 					for (i = 0; i < teh.getSizeInventory(); ++i) {
 						if (teh.getStackInSlot(i) == null)
