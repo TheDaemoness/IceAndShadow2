@@ -106,14 +106,14 @@ public class EntityShadowBall extends EntityThrowable {
 				final Iterator iterator = list1.iterator();
 
 				while (iterator.hasNext()) {
-					final EntityLivingBase elmo = (EntityLivingBase) iterator
+					EntityLivingBase elmo = (EntityLivingBase) iterator
 							.next();
-					final float d0 = (float) this.getDistanceSqToEntity(elmo);
+					float d0 = (float) this.getDistanceSqToEntity(elmo);
 
 					if (d0 < 16.0D) {
-						final float d1 = 1.0F - d0 * d0 / 256.0F;
+						float d1 = 1.0F - d0 * d0 / 512.0F;
 
-						final float power = basepower * d1 + basepower;
+						float power = basepower * d1 + basepower;
 
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 39, 0));
@@ -132,9 +132,11 @@ public class EntityShadowBall extends EntityThrowable {
 							elmo.attackEntityFrom(DamageSource
 									.causeIndirectMagicDamage(elmo,
 											this.getThrower() == null ? this
-													: this.getThrower()), power);
+													: this.getThrower()), 
+													power*(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD?1.5F:1.0F));
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 69, 1));
+						this.getThrower().heal(power/3);
 					}
 
 				}
