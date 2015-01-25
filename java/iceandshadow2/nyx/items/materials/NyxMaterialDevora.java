@@ -60,12 +60,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getKnifeDamage(IaSEntityKnifeBase knife,
-			EntityLivingBase user, Entity target) {
-		return 1;
-	}
-
-	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return knife_tex;
 	}
@@ -101,7 +95,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 						target.posX-2.5F, target.posY-3.0F, target.posZ-2.5F, 
 						target.posX+2.5F, target.posY+2.0F, target.posZ+2.5F));
 		for(Object o : ents) {
-			if(o instanceof EntityLivingBase) {
+			if(o != target && o instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase)o;
 				if(o instanceof EntityPlayer && !(target instanceof EntityPlayer))
 					continue;
@@ -134,7 +128,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				if(o instanceof EntityMob && user instanceof EntityMob)
 					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage()+2);
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
 			}
 		}
 		knife.setDead();
@@ -153,13 +147,13 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 						target.posX-1.5F, target.posY-2.0F, target.posZ-1.5F, 
 						target.posX+1.5F, target.posY+1.0F, target.posZ+1.5F));
 		for(Object o : ents) {
-			if(o instanceof EntityLivingBase) {
+			if(o != target && o instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase)o;
 				if(o instanceof EntityPlayer && !(target instanceof EntityPlayer))
 					continue;
 				if(o instanceof EntityMob && user instanceof EntityMob)
 					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage()+2);
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
 			}
 		}
 		knife.setDead();
