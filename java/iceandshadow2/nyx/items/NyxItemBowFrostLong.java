@@ -42,13 +42,11 @@ public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName,
 		float var7 = var6 / (35.0F-this.getSpeedModifier(par1ItemStack)*2);
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
-		if (var7 < 0.4D) {
+		if (var7 < 0.6F)
 			return;
-		}
 
-		if (var7 > 0.95F) {
+		if (var7 > 0.95F)
 			var7 = 1.0F;
-		}
 
 		var7 = var7 * var7;
 
@@ -91,7 +89,7 @@ public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName,
 
 	@Override
 	public int getUpgradeCost() {
-		return 7;
+		return 9;
 	}
 }
 

@@ -89,6 +89,6 @@ public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName,
 	
 	@Override
 	public int getUpgradeCost() {
-		return 5;
+		return 7;
 	}
 }
