@@ -17,7 +17,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -76,8 +78,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		if (par1World.getBlockMetadata(x, y, z) > 0) {
 			if (par5EntityPlayer.getEquipmentInSlot(0) == null) {
 				IaSPlayerHelper
-						.messagePlayer(par5EntityPlayer,
-								"It's missing something. That center stone looks like bloodstone...");
+				.messagePlayer(par5EntityPlayer,
+						"It's missing something. That center stone looks like bloodstone...");
 				return false;
 			}
 			if (par5EntityPlayer.getEquipmentInSlot(0).getItem() == NyxItems.bloodstone) {
@@ -102,48 +104,52 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		return false;
 	}
 
+
+
 	@Override
 	public void onEntityWalking(World theWorld, int x, int y, int z,
 			Entity theEntity) {
 		if (theWorld.getBlockMetadata(x, y, z) != 0)
 			return;
-		if (theEntity.dimension == IaSFlags.dim_nyx_id) {
-			if (!(theEntity instanceof EntityMob)) {
-				if (theEntity instanceof EntityLivingBase) {
-					final EntityLivingBase elb = (EntityLivingBase) theEntity;
-					if (elb.isSprinting()) {
-						final int fac = MathHelper
-								.floor_double(elb.rotationYaw * 90.0F + 0.5D) & 3;
-						int posXMod = 0;
-						int posZMod = 0;
-						if (fac == 0)
-							posZMod = 128;
-						else if (fac == 1)
-							posXMod = -128;
-						else if (fac == 2)
-							posZMod = -128;
-						else if (fac == 3)
-							posXMod = 128;
-						int posYNew = theWorld.getTopSolidOrLiquidBlock(x
-								+ posXMod, z + posZMod) + 1;
-						for (int gateY = posYNew; gateY >= 0; --gateY) {
-							if (theWorld.getBlock(x + posXMod, gateY, z
-									+ posZMod) == this) {
-								posYNew = gateY;
-								break;
-							}
-						}
-						final double ppX = elb.posX, ppY = elb.posY, ppZ = elb.posZ;
-						doTPFX(theWorld, ppX, ppY, ppZ, posXMod, posZMod);
-						if (!theWorld.isRemote)
-							elb.setPositionAndUpdate(elb.posX + posXMod,
-									posYNew, elb.posZ + posZMod);
-						elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
-								5.0F);
-						doTPFX(theWorld, ppX + posXMod, posYNew, ppZ + posZMod,
-								posXMod, posZMod);
+		if (theEntity.dimension != IaSFlags.dim_nyx_id)
+			return;
+		if (!(theEntity instanceof EntityMob)) {
+			if (theEntity instanceof EntityLivingBase) {
+				final EntityLivingBase elb = (EntityLivingBase) theEntity;
+				if(!elb.isSprinting())
+					return;
+				ForgeDirection dir;
+				final Vec3 v = elb.getLookVec();
+				if (Math.abs(v.xCoord) > Math.abs(v.zCoord)) {
+					if (v.xCoord > 0)
+						dir = ForgeDirection.EAST;
+					else
+						dir = ForgeDirection.WEST;
+				} else {
+					if (v.zCoord > 0)
+						dir = ForgeDirection.SOUTH;
+					else
+						dir = ForgeDirection.NORTH;
+				}
+				int posXMod = (int) (128*dir.offsetX);
+				int posZMod = (int) (128*dir.offsetZ);
+				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
+						+ posXMod, z + posZMod) + 1;
+				for (int gateY = posYNew; gateY >= 0; --gateY) {
+					if (theWorld.getBlock(x + posXMod, gateY, z
+							+ posZMod) == this) {
+						posYNew = gateY;
+						break;
 					}
 				}
+				doTPFX(theWorld, elb.posX, elb.posY, elb.posZ, posXMod, posZMod);
+				if (!theWorld.isRemote)
+					elb.setPositionAndUpdate(x + 0.5 + posXMod,
+							posYNew, x + 0.5 + posZMod);
+				elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
+						5.0F);
+				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod,
+						posXMod, posZMod);
 			}
 		}
 	}

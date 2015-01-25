@@ -14,6 +14,8 @@ public class IaSConfigManager {
 
 	public IaSConfigManager(File cfgFile, int maj, int min) {
 		config = cfgFile;
+		exp_maj = maj;
+		exp_min = min;
 		needs_write = !cfgFile.exists();
 		if (!needs_write)
 			needs_write = read();
@@ -70,6 +72,8 @@ public class IaSConfigManager {
 								+ orig);
 				continue;
 			}
+			if(data[0].length() == 0)
+				continue;
 			if (data[0].charAt(0) == '#')
 				continue;
 			if (data.length < 2) {

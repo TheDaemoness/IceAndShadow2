@@ -65,9 +65,9 @@ public class EntityTransmutationCountdown extends Entity {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		final int x = (int) (this.posX - 0.5) - (this.posX < 0 ? 1 : 0);
+		final int x = (int) (this.posX - 0.5);
 		final int y = (int) (this.posY - 0.5);
-		final int z = (int) (this.posZ - 0.5) - (this.posZ < 0 ? 1 : 0);
+		final int z = (int) (this.posZ - 0.5);
 		final TileEntity te = this.worldObj.getTileEntity(x, y, z);
 		if (!(te instanceof NyxTeTransmutationAltar)) {
 			this.setDead();
