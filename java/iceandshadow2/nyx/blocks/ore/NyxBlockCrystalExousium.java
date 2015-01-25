@@ -25,6 +25,7 @@ public class NyxBlockCrystalExousium extends IaSBlockDeco {
 		this.setLuminescence(0.2F);
 		this.setLightColor(0.0F, 0.5F, 0.4F);
 		this.setResistance(1.5F);
+		this.setStepSound(soundTypeGlass);
 	}
 
 	@Override
