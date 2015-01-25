@@ -79,11 +79,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(
 			this, this.moveSpeed, 35, 45, 32.0F);
 	protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(
-			this, EntityPlayer.class, this.moveSpeed + 0.25, false);
+			this, EntityPlayer.class, this.moveSpeed + 0.3, false);
 	protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(
-			this, EntityAgeable.class, this.moveSpeed + 0.25, true);
+			this, EntityAgeable.class, this.moveSpeed + 0.3, true);
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(
-			this, this.moveSpeed + 0.25, 35, 45, 12.0F);
+			this, this.moveSpeed + 0.2, 35, 45, 12.0F);
 
 	protected IaSSetSenses senses;
 	private EntityLivingBase searched;
