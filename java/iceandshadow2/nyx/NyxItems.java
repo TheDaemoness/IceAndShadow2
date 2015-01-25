@@ -35,8 +35,7 @@ public class NyxItems {
 				IaSCreativeTabs.resources);
 		devora = new NyxItemDevora("Devora").register().setCreativeTab(
 				IaSCreativeTabs.resources);
-		exousicIceShard = new IaSBaseItemSingle(EnumIaSModule.NYX,
-				"ExousicIceShard").register().setCreativeTab(
+		exousicIceShard = new NyxItemExousicIce("ExousicIceShard").register().setCreativeTab(
 				IaSCreativeTabs.resources);
 		draconium = new NyxItemDraconium("Draconium").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
