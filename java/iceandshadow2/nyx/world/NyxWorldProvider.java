@@ -16,32 +16,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxWorldProvider extends WorldProvider {
 
-	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0, 0.05F);
-	
+	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0,
+			0.05F);
+
 	public NyxWorldProvider() {
 		this.isHellWorld = false;
 		this.hasNoSky = true;
 		registerWorldChunkManager();
 	}
-	
-	@Override
-	public void calculateInitialWeather() {
-		this.worldObj.getWorldInfo().setRaining(false);
-		this.worldObj.getWorldInfo().setThundering(false);
-	}
-	
-	@Override
-	public void updateWeather() {
-	}
-	
-	@Override
-	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
-		return worldChunkMgr.getBiomeGenAt(x, z);
-	}
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.5F;
+	}
+
+	@Override
+	public void calculateInitialWeather() {
+		this.worldObj.getWorldInfo().setRaining(false);
+		this.worldObj.getWorldInfo().setThundering(false);
 	}
 
 	@Override
@@ -65,6 +57,11 @@ public class NyxWorldProvider extends WorldProvider {
 	}
 
 	@Override
+	public IChunkProvider createChunkGenerator() {
+		return new NyxChunkProvider(worldObj, worldObj.getSeed(), true);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int par1, int par2) {
 		return true;
@@ -72,17 +69,33 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	protected void generateLightBrightnessTable() {
-		float f = 0.005F;
-        for (int i = 0; i <= 15; ++i) {
-            float var3 = 1.0F - (i) / 15.0F;
-            this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F) * (1.0F - f) + f;
-        }
+		final float f = 0.005F;
+		for (int i = 0; i <= 15; ++i) {
+			final float var3 = 1.0F - i / 15.0F;
+			this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F)
+					* (1.0F - f) + f;
+		}
+	}
+
+	@Override
+	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
+		return worldChunkMgr.getBiomeGenAt(x, z);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getCloudHeight() {
 		return 192;
+	}
+
+	@Override
+	public String getDepartMessage() {
+		return "Escaping Nyx...";
+	}
+
+	@Override
+	public String getDimensionName() {
+		return "Nyx";
 	}
 
 	@Override
@@ -124,11 +137,6 @@ public class NyxWorldProvider extends WorldProvider {
 	}
 
 	@Override
-	public String getDepartMessage() {
-		return "Escaping Nyx...";
-	}
-
-	@Override
 	public boolean isDaytime() {
 		return false;
 	}
@@ -139,35 +147,24 @@ public class NyxWorldProvider extends WorldProvider {
 	}
 
 	@Override
-	public String getDimensionName() {
-		return "Nyx";
+	public void registerWorldChunkManager() {
+		final BiomeGenBase[] nyxBiomes = { NyxBiomes.nyxHighMountains,
+				NyxBiomes.nyxLowMountains, NyxBiomes.nyxMesas,
+				NyxBiomes.nyxHills, NyxBiomes.nyxMesaForest,
+				NyxBiomes.nyxHillForest, NyxBiomes.nyxRugged,
+				NyxBiomes.nyxInfested };
+		GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
+		biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
+		GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
+		biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
+
+		this.worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer,
+				biomesIndexLayer, this.worldObj);
+		this.dimensionId = IaSFlags.dim_nyx_id;
+		this.hasNoSky = true;
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
-		return new NyxChunkProvider(worldObj, worldObj.getSeed(), true);
-	}
-	
-	@Override
-	public void registerWorldChunkManager()
-	{
-		BiomeGenBase[] nyxBiomes = {
-				NyxBiomes.nyxHighMountains,
-				NyxBiomes.nyxLowMountains,
-				NyxBiomes.nyxMesas,
-				NyxBiomes.nyxHills, 
-				NyxBiomes.nyxMesaForest,
-				NyxBiomes.nyxHillForest,
-				NyxBiomes.nyxRugged,
-				NyxBiomes.nyxInfested
-				};
-        GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
-        biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
-        GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
-        biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
-        
-		this.worldChunkMgr = new NyxChunkManager(nyxBiomes,biomesGenLayer,biomesIndexLayer,this.worldObj);
-		this.dimensionId = IaSFlags.dim_nyx_id;
-		this.hasNoSky = true;
+	public void updateWeather() {
 	}
 }

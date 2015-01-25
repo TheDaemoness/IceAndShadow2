@@ -8,17 +8,17 @@ public class NyxTeSingleItemStorage extends IaSTileEntity {
 	public ItemStack item;
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1) {
-		super.writeToNBT(par1);
-		NBTTagCompound eyetemme = par1.getCompoundTag("nyxItem");
-		item.writeToNBT(eyetemme);
-		par1.setTag("nyxItem", eyetemme);
+	public void readFromNBT(NBTTagCompound par1) {
+		super.readFromNBT(par1);
+		if (par1.hasKey("nyxItem"))
+			item.readFromNBT(par1.getCompoundTag("nyxItem"));
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1) {
-		super.readFromNBT(par1);
-		if(par1.hasKey("nyxItem"))
-			item.readFromNBT(par1.getCompoundTag("nyxItem"));
+	public void writeToNBT(NBTTagCompound par1) {
+		super.writeToNBT(par1);
+		final NBTTagCompound eyetemme = par1.getCompoundTag("nyxItem");
+		item.writeToNBT(eyetemme);
+		par1.setTag("nyxItem", eyetemme);
 	}
 }

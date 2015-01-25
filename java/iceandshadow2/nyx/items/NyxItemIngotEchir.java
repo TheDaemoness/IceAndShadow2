@@ -1,4 +1,5 @@
 package iceandshadow2.nyx.items;
+
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
@@ -24,61 +25,68 @@ public class NyxItemIngotEchir extends IaSBaseItemSingleGlow {
 	public NyxItemIngotEchir(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setHasSubtypes(true);
-		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
-		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
+				new ItemStack(this, 1, 1));
+		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this,
+				1, 1), 0);
+	}
+
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
+		if (s.getItemDamage() == 1) {
+			l.add(EnumChatFormatting.GRAY.toString()
+					+ EnumChatFormatting.ITALIC.toString()
+					+ "Sneak and Use Item to finalize.");
+		} else {
+			l.add(EnumChatFormatting.GRAY.toString()
+					+ EnumChatFormatting.ITALIC.toString()
+					+ "This needs to be heated up...");
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
-		if(dmg > 0)
+		if (dmg > 0)
 			return active;
-		if(pass == 1)
+		if (pass == 1)
 			return invisible;
 		return this.itemIcon;
 	}
 
 	@Override
-	public void addInformation(ItemStack s, EntityPlayer p,
-			List l, boolean b) {
-		if(s.getItemDamage() == 1) {
-			l.add(	EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"Sneak and Use Item to finalize.");
-		} else {
-			l.add(	EnumChatFormatting.GRAY.toString()+
-					EnumChatFormatting.ITALIC.toString()+
-					"This needs to be heated up...");
-		}
+	public int getItemStackLimit(ItemStack stack) {
+		if (stack.getItemDamage() == 1)
+			return 16;
+		return 64;
 	}
 
 	@Override
-	public void getSubItems(Item i, CreativeTabs t,
-			List l) {
-		super.getSubItems(i,t,l);
-		l.add(new ItemStack(this,1,1));
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		super.registerIcons(reg);
-		active = reg.registerIcon(this.getTexName()+"Active");
-		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+	public void getSubItems(Item i, CreativeTabs t, List l) {
+		super.getSubItems(i, t, l);
+		l.add(new ItemStack(this, 1, 1));
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		if(stack.getItemDamage() == 1)
-			return super.getUnlocalizedName()+"Active";
+		if (stack.getItemDamage() == 1)
+			return super.getUnlocalizedName() + "Active";
 		return super.getUnlocalizedName();
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
-		if(pwai.isSneaking())
+		if (pwai.isSneaking())
 			heap.setItemDamage(0);
 		return heap;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		active = reg.registerIcon(this.getTexName() + "Active");
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 	}
 }

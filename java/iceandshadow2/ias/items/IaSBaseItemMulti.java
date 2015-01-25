@@ -10,28 +10,29 @@ import net.minecraft.item.ItemStack;
 
 public class IaSBaseItemMulti extends IaSBaseItemSingle {
 
-	private int subtypeCount;
-	
+	private final int subtypeCount;
+
 	public IaSBaseItemMulti(EnumIaSModule mod, String id, int subtypes) {
 		super(mod, id);
 		this.setHasSubtypes(true);
 		subtypeCount = subtypes;
 	}
-	
-	@Override
-	public String getUnlocalizedName(ItemStack par1ItemStack) {
-		return this.getUnlocalizedName()+par1ItemStack.getItemDamage();
-	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        for (int meta = 0; meta < getSubtypeCount(); ++meta) {
-            par3List.add(new ItemStack(par1, 1, meta));
-        }
-    }
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
+			List par3List) {
+		for (int meta = 0; meta < getSubtypeCount(); ++meta) {
+			par3List.add(new ItemStack(par1, 1, meta));
+		}
+	}
 
 	public int getSubtypeCount() {
 		return subtypeCount;
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		return this.getUnlocalizedName() + par1ItemStack.getItemDamage();
 	}
 }

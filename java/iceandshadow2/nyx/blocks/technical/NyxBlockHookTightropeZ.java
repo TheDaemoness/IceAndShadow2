@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
@@ -16,24 +16,24 @@ public class NyxBlockHookTightropeZ extends NyxBlockHookTightrope {
 		super(texName);
 		this.setBlockBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 1.0F);
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		ArrayList<ItemStack> is = super.getDrops(world, x, y, z, metadata, fortune);
-		if(world.getBlock(x, y, z+1) == NyxBlocks.ropeZ)
+		final ArrayList<ItemStack> is = super.getDrops(world, x, y, z, metadata,
+				fortune);
+		if (world.getBlock(x, y, z + 1) == NyxBlocks.ropeZ)
 			is.add(new ItemStack(NyxItems.rope));
-		if(world.getBlock(x, y, z-1) == NyxBlocks.ropeZ)
+		if (world.getBlock(x, y, z - 1) == NyxBlocks.ropeZ)
 			is.add(new ItemStack(NyxItems.rope));
 		return is;
 	}
-	
+
 	@Override
-	public void onNeighborBlockChange(World w, int x,
-			int y, int z, Block cock) {
-		if(w.isSideSolid(x, y, z-1, ForgeDirection.SOUTH))
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block cock) {
+		if (w.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH))
 			return;
-		if(w.isSideSolid(x, y, z+1, ForgeDirection.NORTH))
+		if (w.isSideSolid(x, y, z + 1, ForgeDirection.NORTH))
 			return;
 		w.func_147480_a(x, y, z, true);
 	}

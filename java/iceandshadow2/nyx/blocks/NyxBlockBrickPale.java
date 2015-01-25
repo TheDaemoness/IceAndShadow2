@@ -16,13 +16,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class NyxBlockBrickPale extends IaSBaseBlockSingle {
-	
+
 	public NyxBlockBrickPale(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(9.0F);
-        this.setHardness(2.0F);
-        this.setHarvestLevel("pickaxe", 0);
-        this.setLuminescence(0.3F);
+		this.setResistance(NyxBlockStone.RESISTANCE);
+		this.setHardness(NyxBlockStone.HARDNESS);
+		this.setHarvestLevel("pickaxe", 0);
+		this.setLuminescence(0.3F);
 	}
 
 	@Override
@@ -30,31 +30,34 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 			int x, int y, int z) {
 		return false;
 	}
-	
+
 	@Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-        float var5 = 0.0125F;
-        return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4 + var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
-    }
-	
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x,
-			int y, int z, Entity ent) {
-		if(ent instanceof EntityLivingBase) {
-			EntityLivingBase lb = (EntityLivingBase)ent;
-			if(lb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-				return;
-			if(lb.getEquipmentInSlot(1) != null)
-				return;
-			if(!lb.isPotionActive(Potion.wither.id))
-				lb.addPotionEffect(new PotionEffect(Potion.wither.id,39,0));
-		}
-		super.onEntityCollidedWithBlock(world, x, y, z, ent);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+			int par2, int par3, int par4) {
+		final float var5 = 0.0125F;
+		return AxisAlignedBB.getBoundingBox(
+				par2, par3 + var5, par4, 
+				par2 + 1, par3 + 1 - var5, par4 + 1);
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x,
-			int y, int z, Explosion e) {
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z,
+			Explosion e) {
 		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z,
+			Entity ent) {
+		if (ent instanceof EntityLivingBase) {
+			final EntityLivingBase lb = (EntityLivingBase) ent;
+			if (lb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+				return;
+			if (lb.getEquipmentInSlot(1) != null)
+				return;
+			if (!lb.isPotionActive(Potion.wither.id))
+				lb.addPotionEffect(new PotionEffect(Potion.wither.id, 41, 0));
+		}
+		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
 }

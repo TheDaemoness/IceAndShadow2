@@ -9,37 +9,35 @@ import net.minecraft.util.IIcon;
 public class IaSItemBlockMulti extends ItemBlock {
 
 	IaSBaseBlockMulti theblock;
-	
+
 	public IaSItemBlockMulti(Block bl) throws Exception {
 		super(bl);
-		if(bl instanceof IaSBaseBlockMulti)
-			theblock = (IaSBaseBlockMulti)bl;
+		if (bl instanceof IaSBaseBlockMulti)
+			theblock = (IaSBaseBlockMulti) bl;
 		else
-			throw new Exception("Block with iconString " + this.iconString + " is not an IaS Multiblock!");
+			throw new Exception("Block with iconString " + this.iconString
+					+ " is not an IaS Multiblock!");
 		setHasSubtypes(true);
 	}
-	
+
 	@Override
-	public int getMetadata (int damageValue) {
+	public IIcon getIconFromDamage(int par1) {
+		return theblock.getIcon(0, par1);
+	}
+
+	@Override
+	public int getMetadata(int damageValue) {
 		return damageValue;
 	}
-	
+
 	@Override
 	public String getUnlocalizedName() {
 		return theblock.getUnlocalizedName();
 	}
-	
-    @Override
-	public String getUnlocalizedName(ItemStack par1ItemStack)
-    {
-        return theblock.getUnlocalizedName(par1ItemStack.getItemDamage());
-    }
-    
-    @Override
-	public IIcon getIconFromDamage(int par1)
-    {
-        return theblock.getIcon(0, par1);
-    }
 
+	@Override
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		return theblock.getUnlocalizedName(par1ItemStack.getItemDamage());
+	}
 
 }

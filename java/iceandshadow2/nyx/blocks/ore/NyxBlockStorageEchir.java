@@ -2,9 +2,7 @@ package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
-import iceandshadow2.nyx.blocks.NyxBlockStone;
 import net.minecraft.block.material.Material;
-import net.minecraft.world.IBlockAccess;
 
 public class NyxBlockStorageEchir extends IaSBaseBlockMulti {
 
@@ -16,6 +14,5 @@ public class NyxBlockStorageEchir extends IaSBaseBlockMulti {
 		this.setLightColor(0.75F, 1.0F, 0.75F);
 		this.setResistance(20.0F);
 	}
-	
-	
+
 }

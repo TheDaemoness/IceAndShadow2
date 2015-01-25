@@ -36,7 +36,7 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 		return this;
 	}
 	
-	public final IaSBaseBlock register() {
+	public IaSBaseBlock register() {
 		IaSRegistration.register(this);
 		return this;
 	}

@@ -15,39 +15,44 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
+public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements
+		IIaSNoInfest {
 
 	private static Random r = new Random();
-	
+
 	public NyxBlockPoisonLeaves(String texName) {
 		super(EnumIaSModule.NYX, texName);
-	}
-	
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
-			int x, int y, int z, int fortune) {
-		return super.onSheared(item, world, x, y, z, fortune);
 	}
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int meta, int fortune) {
-		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if (!world.isRemote) {
-            if (world.rand.nextInt(20) == 0)
-                is.add(new ItemStack(NyxItems.poisonFruit));
-        }
+			if (world.rand.nextInt(20) == 0)
+				is.add(new ItemStack(NyxItems.poisonFruit));
+		}
 		return is;
 	}
-	
-	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-		NyxBlockFunctionsPoisonwood.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-    }
 
 	@Override
-    public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-    	NyxBlockFunctionsPoisonwood.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
-    }
+	public void onBlockClicked(World par1World, int par2, int par3, int par4,
+			EntityPlayer par5EntityPlayer) {
+		NyxBlockFunctionsPoisonwood.onBlockClicked(par1World, par2, par3, par4,
+				par5EntityPlayer);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
+			int par4, Entity par5Entity) {
+		NyxBlockFunctionsPoisonwood.onEntityCollidedWithBlock(par1World, par2,
+				par3, par4, par5Entity);
+	}
+
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
+			int x, int y, int z, int fortune) {
+		return super.onSheared(item, world, x, y, z, fortune);
+	}
 
 }

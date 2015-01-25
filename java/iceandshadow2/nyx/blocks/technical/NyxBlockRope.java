@@ -1,13 +1,11 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -18,11 +16,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTechnicalBlock {
+public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	public NyxBlockRope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.cloth);
@@ -31,21 +30,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 		this.setLightLevel(0.1F);
 		this.setLightOpacity(0);
 		this.setResistance(9001F);
-	}	
-
-	@Override
-	public String getTexName() {
-		return IceAndShadow2.MODID+':'+this.getIaSModule().prefix+"Rope";
-	}
-
-	@Override
-	public void onBlockClicked(World w, int x, int y, int z, EntityPlayer pl) {
-		if(!pl.isSneaking())
-			return;
-		if(!w.isRemote) {
-			IaSPlayerHelper.giveItem(pl, new ItemStack(NyxItems.rope));
-			w.func_147480_a(x, y, z, false);
-		}
 	}
 
 	@Override
@@ -65,8 +49,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World w, int x,
-			int y, int z, int m,
+	public void dropBlockAsItemWithChance(World w, int x, int y, int z, int m,
 			float q, int f) {
 		return;
 	}
@@ -75,6 +58,11 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 	public ItemStack getPickBlock(MovingObjectPosition target, World world,
 			int x, int y, int z) {
 		return new ItemStack(NyxItems.rope);
+	}
+
+	@Override
+	public String getTexName() {
+		return IceAndShadow2.MODID + ':' + this.getIaSModule().prefix + "Rope";
 	}
 
 	@Override
@@ -115,8 +103,18 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 	}
 
 	@Override
-	public abstract void onNeighborBlockChange(World w, int x,
-			int y, int z, Block bl);
+	public void onBlockClicked(World w, int x, int y, int z, EntityPlayer pl) {
+		if (!pl.isSneaking())
+			return;
+		if (!w.isRemote) {
+			IaSPlayerHelper.giveItem(pl, new ItemStack(NyxItems.rope));
+			w.func_147480_a(x, y, z, false);
+		}
+	}
+
+	@Override
+	public abstract void onNeighborBlockChange(World w, int x, int y, int z,
+			Block bl);
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
@@ -132,7 +130,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockSingle implements IIaSTec
 	public int quantityDroppedWithBonus(int p_149679_1_, Random p_149679_2_) {
 		return 0;
 	}
-	
+
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		this.blockIcon = reg.registerIcon(this.getTexName());

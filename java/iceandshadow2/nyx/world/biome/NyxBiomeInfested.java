@@ -18,22 +18,23 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.setBlocks(Blocks.snow, Blocks.snow);
 
 		this.setColor(64 << 16 | 255 << 8 | 192);
-		
+
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 70, 3, 5));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
+				70, 3, 5));
 	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {
 		super.decorate(par1World, par2Random, par3, par4);
-		
+
 		int count = 0;
 		for (int i = 0; i < 32 && count < 3; ++i) {
-			int x = par3 + par2Random.nextInt(16) + 8;
-			int z = par4 + par2Random.nextInt(16) + 8;
+			final int x = par3 + par2Random.nextInt(16) + 8;
+			final int z = par4 + par2Random.nextInt(16) + 8;
 			int y = 255;
 			for (y = 255; y > 64; --y) {
-				Block bid = par1World.getBlock(x, y, z);
+				final Block bid = par1World.getBlock(x, y, z);
 				if (bid == Blocks.snow) {
 					++y;
 					break;
@@ -48,8 +49,7 @@ public class NyxBiomeInfested extends NyxBiome {
 			}
 			if (y == 0)
 				continue;
-			WorldGenerator var5 = this
-					.getRandomWorldGenForTrees(par2Random);
+			final WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
 			if (var5.generate(par1World, par2Random, x, y, z))
 				++count;
 		}

@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 
 public class IaSFakeItem extends Item {
 	public IaSFakeItem(EnumIaSModule mod, String texName) {
-		this.setUnlocalizedName("fake"+mod.prefix+texName);
-		this.setTextureName(IceAndShadow2.MODID+':'+mod.prefix+texName);
+		this.setUnlocalizedName("fake" + mod.prefix + texName);
+		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		IaSRegistration.register(this);
 	}
 }

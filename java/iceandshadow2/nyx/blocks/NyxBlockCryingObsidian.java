@@ -27,8 +27,28 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	}
 
 	@Override
+	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
+			int x, int y, int z) {
+		return type != EnumCreatureType.monster;
+	}
+
+	@Override
 	public int damageDropped(int par1) {
 		return 0;
+	}
+
+	@Override
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2,
+			int par3, int par4) {
+		return false;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+			int par2, int par3, int par4) {
+		final float var5 = 0.0125F;
+		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5,
+				par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
 	}
 
 	@Override
@@ -37,85 +57,62 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
-		float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(
-				par2 + var5, par3,
-				par4 + var5,
-				par2 + 1 - var5,
-				par3 + 1 - var5,
-				par4 + 1 - var5);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World par1World, int x, int y,
-			int z, Entity par5Entity) {
+	public void onEntityCollidedWithBlock(World par1World, int x, int y, int z,
+			Entity par5Entity) {
 		if (par5Entity instanceof EntityLivingBase
 				&& !(par5Entity instanceof EntityMob)) {
-			EntityLivingBase elb = ((EntityLivingBase) par5Entity);
+			final EntityLivingBase elb = (EntityLivingBase) par5Entity;
 			if (!elb.isPotionActive(Potion.resistance)) {
-				elb.addPotionEffect(new PotionEffect(
-						23, 1, 0));
-				elb.addPotionEffect(new PotionEffect(
-						Potion.resistance.id, 39, 3));
+				elb.addPotionEffect(new PotionEffect(23, 1, 0));
+				elb.addPotionEffect(new PotionEffect(Potion.resistance.id, 39,
+						3));
 			}
-			if(elb.isSneaking()) {
-				if(elb.isPotionActive(Potion.confusion))
-					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,2,0));
+			if (elb.isSneaking()) {
+				if (elb.isPotionActive(Potion.confusion))
+					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,
+							2, 0));
 				else {
-					if(elb instanceof EntityPlayer) {
-						EntityPlayer playuh = (EntityPlayer)elb;
-						for(int xit = -1; xit <= 1; ++xit) {
-							for(int zit = -1; zit <= 1; ++zit) {
-								if(par1World.getBlock(x+xit, y, z+zit) != this)
+					if (elb instanceof EntityPlayer) {
+						final EntityPlayer playuh = (EntityPlayer) elb;
+						for (int xit = -1; xit <= 1; ++xit) {
+							for (int zit = -1; zit <= 1; ++zit) {
+								if (par1World.getBlock(x + xit, y, z + zit) != this)
 									return;
 							}
 						}
-						IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian....");
-						playuh.setSpawnChunk(new ChunkCoordinates(x, y+1, z), true);
-						if(playuh.getHealth() > 2.0F)
+						if (par1World.getBlock(x, y + 1, z).getMaterial() != Material.air)
+							return;
+						IaSPlayerHelper
+								.messagePlayer(playuh,
+										"You feel something bind your life force to the obsidian....");
+						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z),
+								true);
+						if (playuh.getHealth() > 2.0F)
 							playuh.attackEntityFrom(DamageSource.magic, 1);
-						elb.addPotionEffect(new PotionEffect(Potion.confusion.id,2,0));
+						elb.addPotionEffect(new PotionEffect(
+								Potion.confusion.id, 2, 0));
 					}
 				}
 			}
 		}
 	}
 
-	@Override
-	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
-			int x, int y, int z) {
-		return type != EnumCreatureType.monster;
-	}
-
-	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-		return false;
-	}
-
 	/*
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		if(par1World.getBlockMetadata(par2, par3, par4) == 0)
-			return;
-
-		double var9 = (double) ((float) par3 + par5Random.nextFloat());
-		double var13 = 0.0D;
-		double var15 = 0.0D;
-		double var17 = 0.0D;
-		int var19 = par5Random.nextInt(2) * 2 - 1;
-		int var20 = par5Random.nextInt(2) * 2 - 1;
-		var13 = ((double) par5Random.nextFloat() - 0.5D) * 0.125D;
-		var15 = ((double) par5Random.nextFloat() - 0.5D) * 0.125D;
-		var17 = ((double) par5Random.nextFloat() - 0.5D) * 0.125D;
-		double var11 = (double) par4 + 0.5D + 0.25D * (double) var20;
-		var17 = (double) (par5Random.nextFloat() * 1.0F * (float) var20);
-		double var7 = (double) par2 + 0.5D + 0.25D * (double) var19;
-		var13 = (double) (par5Random.nextFloat() * 1.0F * (float) var19);
-		IaSFxManager.spawnParticle(par1World, "portal", var7, var9, var11, var13, var15,
-				var17, false, true);
-	}
+	 * public void randomDisplayTick(World par1World, int par2, int par3, int
+	 * par4, Random par5Random) { if(par1World.getBlockMetadata(par2, par3,
+	 * par4) == 0) return;
+	 * 
+	 * double var9 = (double) ((float) par3 + par5Random.nextFloat()); double
+	 * var13 = 0.0D; double var15 = 0.0D; double var17 = 0.0D; int var19 =
+	 * par5Random.nextInt(2) * 2 - 1; int var20 = par5Random.nextInt(2) * 2 - 1;
+	 * var13 = ((double) par5Random.nextFloat() - 0.5D) * 0.125D; var15 =
+	 * ((double) par5Random.nextFloat() - 0.5D) * 0.125D; var17 = ((double)
+	 * par5Random.nextFloat() - 0.5D) * 0.125D; double var11 = (double) par4 +
+	 * 0.5D + 0.25D * (double) var20; var17 = (double) (par5Random.nextFloat() *
+	 * 1.0F * (float) var20); double var7 = (double) par2 + 0.5D + 0.25D *
+	 * (double) var19; var13 = (double) (par5Random.nextFloat() * 1.0F * (float)
+	 * var19); IaSFxManager.spawnParticle(par1World, "portal", var7, var9,
+	 * var11, var13, var15, var17, false, true); }
 	 */
-
 
 }

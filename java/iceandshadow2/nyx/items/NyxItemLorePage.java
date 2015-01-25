@@ -9,15 +9,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemLorePage extends IaSBaseItemMulti {
 
-	@SideOnly(Side.CLIENT) IIcon[] pages;
-	
+	@SideOnly(Side.CLIENT)
+	IIcon[] pages;
+
 	public NyxItemLorePage(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		if(dmg >= pages.length)
+		if (dmg >= pages.length)
 			return pages[0];
 		return pages[dmg];
 	}
@@ -25,7 +26,7 @@ public class NyxItemLorePage extends IaSBaseItemMulti {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		pages = new IIcon[this.getSubtypeCount()];
-		for(int i = 0; i < pages.length; ++i)
-			pages[i] = reg.registerIcon(this.getTexName()+i);
+		for (int i = 0; i < pages.length; ++i)
+			pages[i] = reg.registerIcon(this.getTexName() + i);
 	}
 }

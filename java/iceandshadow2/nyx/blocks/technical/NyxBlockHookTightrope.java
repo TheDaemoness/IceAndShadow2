@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks.ropes;
+package iceandshadow2.nyx.blocks.technical;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxBlocks;
 
-public class NyxBlockHookTightrope extends IaSBaseBlockSingle implements IIaSTechnicalBlock {
+public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {
 
 	public NyxBlockHookTightrope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.iron);
@@ -27,16 +28,17 @@ public class NyxBlockHookTightrope extends IaSBaseBlockSingle implements IIaSTec
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
-		ArrayList<ItemStack> lilili = new ArrayList<ItemStack>();
-		lilili.add(new ItemStack(NyxBlocks.hookClimbing));
-		return lilili;
+	public boolean canSilkHarvest(World world, EntityPlayer player, int x,
+			int y, int z, int metadata) {
+		return false;
 	}
 
 	@Override
-	public String getTexName() {
-		return IceAndShadow2.MODID+':'+EnumIaSModule.NYX.prefix+"BlockEchir";
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
+			int metadata, int fortune) {
+		final ArrayList<ItemStack> lilili = new ArrayList<ItemStack>();
+		lilili.add(new ItemStack(NyxBlocks.hookClimbing));
+		return lilili;
 	}
 
 	@Override
@@ -46,9 +48,9 @@ public class NyxBlockHookTightrope extends IaSBaseBlockSingle implements IIaSTec
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x,
-			int y, int z, int metadata) {
-		return false;
+	public String getTexName() {
+		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix
+				+ "BlockEchir";
 	}
 
 	@Override
