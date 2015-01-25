@@ -24,17 +24,17 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmutable {
 				if (catalyst.getItem() == NyxItems.echirIngot
 						&& !catalyst.isItemDamaged())
 					return 0;
-				return 700;
+				return 850;
 			}
 		}
 		if (it instanceof IIaSTool) {
 			if (!IaSToolMaterial.extractMaterial(target).isRepairable(target,
 					catalyst))
-				return ((IIaSTool) it).canRepair() ? 400 : 0;
+				return ((IIaSTool) it).canRepair() ? 450 : 0;
 			return 0;
 		}
 		if (it.getIsRepairable(target, catalyst))
-			return 400;
+			return 450;
 		return 0;
 	}
 
