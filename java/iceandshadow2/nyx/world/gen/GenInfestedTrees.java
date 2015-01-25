@@ -159,8 +159,8 @@ public class GenInfestedTrees extends WorldGenerator {
 		meta |= this.rand.nextInt(3) == 0 ? 0x8 : 0x4;
 		if (this.worldObj.isAirBlock(x, y, z)
 				|| this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
-			// this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta,
-			// 0x2);
+			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta,
+			0x2);
 		}
 	}
 
