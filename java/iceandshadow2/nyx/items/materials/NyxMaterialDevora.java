@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.items.materials;
 
+import java.util.List;
+
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSEntityKnifeBase;
@@ -12,10 +14,14 @@ import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -37,7 +43,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	public float getBaseSpeed() {
 		return 64;
 	}
-	
+
 	@Override
 	public float getBaseDamage() {
 		return 9;
@@ -50,13 +56,13 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 384;
+		return 128;
 	}
 
 	@Override
 	public float getKnifeDamage(IaSEntityKnifeBase knife,
 			EntityLivingBase user, Entity target) {
-		return this.getBaseDamage();
+		return 1;
 	}
 
 	@Override
@@ -86,65 +92,77 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		user.worldObj.createExplosion(user, target.posX,
-				target.posY + target.getEyeHeight() / 2, target.posZ, 0.1F,
-				true);
+		if(!target.worldObj.isRemote)
+			user.worldObj.createExplosion(user, target.posX,
+					target.posY + target.getEyeHeight() / 2, target.posZ, 0.1F,
+					true);
+		List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(user, 
+				AxisAlignedBB.getBoundingBox(
+						target.posX-2.5F, target.posY-3.0F, target.posZ-2.5F, 
+						target.posX+2.5F, target.posY+2.0F, target.posZ+2.5F));
+		for(Object o : ents) {
+			if(o instanceof EntityLivingBase) {
+				EntityLivingBase elb = (EntityLivingBase)o;
+				if(o instanceof EntityPlayer && !(target instanceof EntityPlayer))
+					continue;
+				if(o instanceof EntityMob && user instanceof EntityMob)
+					continue;
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getToolDamage(is, user, target)/elb.getDistanceToEntity(user));
+			}
+		}
 		return super.onAttack(is, user, target);
 	}
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
 			ChunkCoordinates block) {
-		if (!knife.worldObj.isRemote) {
-			Block bl = knife.worldObj.getBlock(block.posX, block.posY, block.posZ);
-			Explosion ex = knife.worldObj.createExplosion(user, knife.posX, knife.posY,
-					knife.posZ, 0.3F, true);
-			if(bl == NyxBlocks.oreDevora)
-				bl.onBlockExploded(knife.worldObj, block.posX, block.posY, block.posZ, ex);
-			
+		if(knife.worldObj.isRemote)
+			return false;
+		Block bl = knife.worldObj.getBlock(block.posX, block.posY, block.posZ);
+		Explosion ex = knife.worldObj.createExplosion(user, knife.posX, knife.posY,
+				knife.posZ, 0.3F, true);
+		if(bl == NyxBlocks.oreDevora)
+			bl.onBlockExploded(knife.worldObj, block.posX, block.posY, block.posZ, ex);
+		List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife, 
+				AxisAlignedBB.getBoundingBox(
+						knife.posX-1.5F, knife.posY-2.0F, knife.posZ-1.5F, 
+						knife.posX+1.5F, knife.posY+1.0F, knife.posZ+1.5F));
+		for(Object o : ents) {
+			if(o instanceof EntityLivingBase) {
+				EntityLivingBase elb = (EntityLivingBase)o;
+				if(o instanceof EntityPlayer && !(user instanceof EntityPlayer))
+					continue;
+				if(o instanceof EntityMob && user instanceof EntityMob)
+					continue;
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
+			}
 		}
-			
+		knife.setDead();
 		return false;
 	}
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
 			Entity target) {
-		if (!knife.worldObj.isRemote)
-			knife.worldObj.createExplosion(user, knife.posX, knife.posY,
-					knife.posZ, 0.3F, true);
-		return false;
-	}
-
-	@Override
-	public boolean onSwing(ItemStack is, EntityLivingBase user) {
-		if (is.getItem() instanceof IaSItemThrowingKnife)
+		if (knife.worldObj.isRemote)
 			return false;
-		if (!user.worldObj.isRemote) {
-			final MovingObjectPosition m = IaSEntityHelper.getObjectPosition(
-					user.worldObj, user, false);
-			if (m == null)
-				return false;
-			if (m.typeOfHit == MovingObjectType.BLOCK) {
-				final Vec3 v = IaSBlockHelper.getBlockSideCoords(m.blockX,
-						m.blockY, m.blockZ,
-						ForgeDirection.getOrientation(m.sideHit),
-						user.worldObj.rand, 0.75F);
-				final EnumIaSToolClass tc = ((IIaSTool) is.getItem())
-						.getIaSToolClass();
-				if (tc == EnumIaSToolClass.SPADE)
-					user.worldObj.createExplosion(user, v.xCoord, v.yCoord,
-							v.zCoord, 0.3F, true);
-				else
-					user.worldObj.createExplosion(user, v.xCoord, v.yCoord,
-							v.zCoord, 0.1F, false);
-			} else if (m.typeOfHit == MovingObjectType.ENTITY) {
-				user.worldObj.createExplosion(user, m.entityHit.posX,
-						m.entityHit.posY, m.entityHit.posZ, 0.1F, true);
-			} else
-				return false;
-			is.damageItem(1, user);
+		knife.worldObj.createExplosion(user, knife.posX, knife.posY,
+				knife.posZ, 0.3F, true);
+		List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(knife, 
+				AxisAlignedBB.getBoundingBox(
+						target.posX-1.5F, target.posY-2.0F, target.posZ-1.5F, 
+						target.posX+1.5F, target.posY+1.0F, target.posZ+1.5F));
+		for(Object o : ents) {
+			if(o instanceof EntityLivingBase) {
+				EntityLivingBase elb = (EntityLivingBase)o;
+				if(o instanceof EntityPlayer && !(target instanceof EntityPlayer))
+					continue;
+				if(o instanceof EntityMob && user instanceof EntityMob)
+					continue;
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
+			}
 		}
+		knife.setDead();
 		return false;
 	}
 }

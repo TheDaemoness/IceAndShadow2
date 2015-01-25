@@ -59,6 +59,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	}
 
 	@Override
+	public boolean isDamageable() {
+		return this.getArmorMaterial() != MATERIAL_NAVISTRA;
+	}
+
+	@Override
 	public EnumIaSModule getIaSModule() {
 		return EnumIaSModule.IAS;
 	}
