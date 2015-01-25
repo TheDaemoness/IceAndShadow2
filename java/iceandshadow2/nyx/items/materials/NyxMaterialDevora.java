@@ -5,18 +5,22 @@ import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSEntityHelper;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxMaterialDevora extends IaSToolMaterial {
@@ -33,6 +37,11 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	public float getBaseSpeed() {
 		return 64;
 	}
+	
+	@Override
+	public float getBaseDamage() {
+		return 9;
+	}
 
 	@Override
 	public boolean getBrokenTool(ItemStack is, EntityLivingBase user) {
@@ -42,6 +51,12 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	@Override
 	public int getDurability(ItemStack is) {
 		return 384;
+	}
+
+	@Override
+	public float getKnifeDamage(IaSEntityKnifeBase knife,
+			EntityLivingBase user, Entity target) {
+		return this.getBaseDamage();
 	}
 
 	@Override
@@ -80,9 +95,15 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
 			ChunkCoordinates block) {
-		if (!knife.worldObj.isRemote)
-			knife.worldObj.createExplosion(user, knife.posX, knife.posY,
+		if (!knife.worldObj.isRemote) {
+			Block bl = knife.worldObj.getBlock(block.posX, block.posY, block.posZ);
+			Explosion ex = knife.worldObj.createExplosion(user, knife.posX, knife.posY,
 					knife.posZ, 0.3F, true);
+			if(bl == NyxBlocks.oreDevora)
+				bl.onBlockExploded(knife.worldObj, block.posX, block.posY, block.posZ, ex);
+			
+		}
+			
 		return false;
 	}
 

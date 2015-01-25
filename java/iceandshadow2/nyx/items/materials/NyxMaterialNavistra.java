@@ -5,6 +5,7 @@ import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -35,6 +36,20 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	@Override
 	public int getDurability(ItemStack is) {
 		return 16;
+	}
+	
+	@Override
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		if (target instanceof EntityLivingBase) {
+			if (user instanceof EntityPlayer)
+				target.attackEntityFrom(
+						DamageSource.causePlayerDamage((EntityPlayer) user).setDamageBypassesArmor(),
+						getToolDamage(is, user, target));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user).setDamageBypassesArmor(),
+						getToolDamage(is, user, target));
+		}
+		return damageToolOnAttack(is, user, target);
 	}
 
 	@Override
