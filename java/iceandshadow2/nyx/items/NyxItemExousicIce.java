@@ -5,24 +5,13 @@ import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmutable;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
-import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTransmutable {
 

@@ -14,7 +14,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -105,7 +104,7 @@ public class NyxEventHandlerCold {
 			return;
 		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
 				&& !e.entityPlayer.capabilities.isCreativeMode) {
-				
+
 			boolean flaque = false;
 			if (e.entityPlayer.getEquipmentInSlot(0) == null)
 				return;
@@ -138,7 +137,7 @@ public class NyxEventHandlerCold {
 							"It's far too cold to light a torch in Nyx.");
 				else if (id == Blocks.furnace) {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-						"There's no point in placing that. It's too cold to use it here.");
+							"There's no point in placing that. It's too cold to use it here.");
 				} else
 					IaSPlayerHelper
 					.messagePlayer(e.entityPlayer,

@@ -33,7 +33,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool,
-		IIaSGlowing {
+IIaSGlowing {
 
 	private final EnumIaSToolClass classe;
 	protected IIcon invisible;
@@ -54,15 +54,15 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool,
 	public boolean canRepair() {
 		return true;
 	}
-	
+
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack)
-    {
-        Multimap mm = HashMultimap.create();
-        IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
-        mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
-        return mm;
-    }
+	{
+		Multimap mm = HashMultimap.create();
+		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
+		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
+		return mm;
+	}
 
 	@Override
 	public int getFirstGlowPass(ItemStack is) {

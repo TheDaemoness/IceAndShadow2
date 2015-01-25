@@ -3,7 +3,6 @@ package iceandshadow2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import iceandshadow2.api.IaSRegistry;
@@ -40,7 +39,7 @@ public class IceAndShadow2 {
 
 	private static IaSConfigManager cfg;
 	private static Logger logger;
-	
+
 	private static boolean acceptRegistration = false;
 
 	@Instance(MODID)
@@ -49,10 +48,10 @@ public class IceAndShadow2 {
 	public static Logger getLogger() {
 		return logger;
 	}
-	
+
 	private static List toPreRegister;
 	private static List toPostRegister;
-	
+
 	public static Collection getPreRegistrationHandlers() {
 		return Collections.unmodifiableList(toPreRegister);
 	}
@@ -66,7 +65,7 @@ public class IceAndShadow2 {
 		logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
 			event.getModLog()
-					.info("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
+			.info("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
 		cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(),
 				CONFIG_MAJ, CONFIG_MIN);
 
@@ -108,13 +107,13 @@ public class IceAndShadow2 {
 		IaSRegistry.postInit();
 		toPostRegister.clear();
 	}
-	
+
 	private void addToolMaterials() {
 		toPreRegister.add(new NyxMaterialDevora());
 		toPreRegister.add(new NyxMaterialCortra());
 		toPreRegister.add(new NyxMaterialNavistra());
 	}
-	
+
 	private void addPostInitHandlers() {
 		toPostRegister.add(new IaSHandlerTransmutationRepair());
 		toPostRegister.add(new IaSHandlerDistillationHeat());
@@ -124,7 +123,7 @@ public class IceAndShadow2 {
 	public void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new IaSServerCommand());
 	}
-	
+
 	public static boolean isRegistrationPublic() {
 		return acceptRegistration;
 	}

@@ -17,9 +17,6 @@ public class NyxBiomeMountains extends NyxBiome {
 	@Override
 	protected void genFoliage(World par1World, Random par2Random, int xchunk,
 			int zchunk) {
-		final int x = xchunk + par2Random.nextInt(16) + 8;
-		final int z = zchunk + par2Random.nextInt(16) + 8;
-
 		/*
 		 * if (par2Random.nextInt(16) == 0) { WorldGenerator aden = new
 		 * WorldGenNyxNecromancerDen(); aden.generate(par1World, par2Random, x,

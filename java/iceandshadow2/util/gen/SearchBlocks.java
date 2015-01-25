@@ -1,15 +1,14 @@
 package iceandshadow2.util.gen;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
 public class SearchBlocks {
-	
+
 	public static BlockTest testAir = new BlockTestAir();
 	public static BlockTest testTEs = new BlockTestTileEntities();
 	public static BlockTest testUnbreakable = new BlockTestUnbreakable();
-	
+
 	public static boolean cube(World world, int xLow, int yLow, int zLow,
 			int xHigh, int yHigh, int zHigh, BlockTest bl) {
 		for (int yit = yLow; yit <= yHigh; ++yit) {

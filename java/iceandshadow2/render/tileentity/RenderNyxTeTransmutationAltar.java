@@ -1,6 +1,5 @@
 package iceandshadow2.render.tileentity;
 
-import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 
 import org.lwjgl.opengl.GL11;

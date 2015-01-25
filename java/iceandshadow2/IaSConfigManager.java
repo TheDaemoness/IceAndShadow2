@@ -10,7 +10,7 @@ public class IaSConfigManager {
 
 	private final File config;
 	private boolean needs_write;
-	private int exp_maj, exp_min;
+	private final int exp_maj, exp_min;
 
 	public IaSConfigManager(File cfgFile, int maj, int min) {
 		config = cfgFile;
@@ -45,15 +45,15 @@ public class IaSConfigManager {
 		final String config_ver[] = lis.nextLine().split("\\s+", 3);
 		if (config_ver.length != 3) {
 			IceAndShadow2
-					.getLogger()
-					.error("Config file doesn't start with verion info (will overwrite)");
+			.getLogger()
+			.error("Config file doesn't start with verion info (will overwrite)");
 			lis.close();
 			return true;
 		}
 		if (!config_ver[0].contentEquals("version")) {
 			IceAndShadow2
-					.getLogger()
-					.error("Config file doesn't start with verion info (will overwrite)");
+			.getLogger()
+			.error("Config file doesn't start with verion info (will overwrite)");
 			lis.close();
 			return true;
 		}

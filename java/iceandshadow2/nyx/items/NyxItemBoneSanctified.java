@@ -34,17 +34,17 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 			EntityPlayer plai) {
 		if (plai.capabilities.isCreativeMode) {
 			IaSPlayerHelper
-					.messagePlayer(
-							plai,
-							"The bone becomes thicker than before, as if resentful of your use of creative mode.");
+			.messagePlayer(
+					plai,
+					"The bone becomes thicker than before, as if resentful of your use of creative mode.");
 			return isk;
 		}
 		if (!isk.isItemDamaged()) {
 			if (plai.dimension != IaSFlags.dim_nyx_id) {
 				IaSPlayerHelper
-						.messagePlayer(
-								plai,
-								"The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.");
+				.messagePlayer(
+						plai,
+						"The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.");
 				return isk;
 			}
 			plai.attackEntityFrom(DamageSource.magic, 0.5F);
@@ -67,7 +67,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 			else if (stack.attemptDamageItem(1, par2World.rand)) {
 				stack.setItemDamage(0);
 				((EntityPlayer) par3Entity).inventory
-						.consumeInventoryItem(this);
+				.consumeInventoryItem(this);
 			}
 		}
 	}

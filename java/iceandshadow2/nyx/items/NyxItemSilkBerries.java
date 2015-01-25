@@ -52,13 +52,13 @@ public class NyxItemSilkBerries extends IaSItemFood {
 						movingobjectposition.sideHit, par1ItemStack)) {
 				} else {
 					final Block i1 = par2World.getBlock(i, j, k);
-					final int j1 = par2World.getBlockMetadata(i, j, k);
+					par2World.getBlockMetadata(i, j, k);
 					if (i1 == NyxBlocks.infestLog) {
 						if (par2World.getBiomeGenForCoords(i, k).biomeID != NyxBiomes.nyxInfested.biomeID
 								&& !par3EntityPlayer.capabilities.isCreativeMode) {
 							IaSPlayerHelper
-									.messagePlayer(par3EntityPlayer,
-											"It doesn't seem like it'll grow outside of an infested forest.");
+							.messagePlayer(par3EntityPlayer,
+									"It doesn't seem like it'll grow outside of an infested forest.");
 							return par1ItemStack;
 						}
 						if (s == 0)

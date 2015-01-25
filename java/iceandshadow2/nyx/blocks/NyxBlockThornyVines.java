@@ -41,10 +41,10 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 		return par1World.isSideSolid(par2 - 1, par3, par4, ForgeDirection.EAST)
 				|| par1World.isSideSolid(par2 + 1, par3, par4,
 						ForgeDirection.WEST, false)
-				|| par1World.isSideSolid(par2, par3, par4 - 1,
-						ForgeDirection.SOUTH, false)
-				|| par1World.isSideSolid(par2, par3, par4 + 1,
-						ForgeDirection.NORTH, false);
+						|| par1World.isSideSolid(par2, par3, par4 - 1,
+								ForgeDirection.SOUTH, false)
+								|| par1World.isSideSolid(par2, par3, par4 + 1,
+										ForgeDirection.NORTH, false);
 	}
 
 	@SideOnly(Side.CLIENT)

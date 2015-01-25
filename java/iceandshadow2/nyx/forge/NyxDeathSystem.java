@@ -76,7 +76,6 @@ public class NyxDeathSystem {
 				&& e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
 			System.out.println(e.entityPlayer.getEntityId());
 			e.setCanceled(true);
-			final boolean drop_main = true;
 			plai_inv = determineRespawnInventory(plai_inv, true);
 			e.entityPlayer.inventory.copyInventory(plai_inv);
 			death_inv.put(e.entityPlayer.getEntityId(),

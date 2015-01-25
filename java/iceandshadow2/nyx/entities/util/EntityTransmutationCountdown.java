@@ -104,9 +104,9 @@ public class EntityTransmutationCountdown extends Entity {
 					this.worldObj, this))
 				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst,
 						this.posX - 0.5 + xposMod, this.posY
-								+ this.worldObj.rand.nextDouble() / 2,
+						+ this.worldObj.rand.nextDouble() / 2,
 						this.posZ - 0.5 + zposMod, (0.5 - xposMod) / 10, -0.05
-								- this.worldObj.rand.nextDouble() * 0.1,
+						- this.worldObj.rand.nextDouble() * 0.1,
 						(0.5 - zposMod) / 10, false, false);
 		}
 	}

@@ -36,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool,
-		IIaSGlowing {
+IIaSGlowing {
 
 	private final EnumIaSToolClass classe;
 	protected IIcon invisible;
@@ -77,17 +77,17 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool,
 	@Override
 	public float getDigSpeed(ItemStack is, Block block, int meta) {
 		return func_150893_a(is, block); // meta sensitivity is pointless ATM, I
-											// wish it wasn't.
+		// wish it wasn't.
 	}
-	
+
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack)
-    {
-        Multimap mm = HashMultimap.create();
-        IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
-        mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
-        return mm;
-    }
+	{
+		Multimap mm = HashMultimap.create();
+		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
+		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
+		return mm;
+	}
 
 	@Override
 	public int getFirstGlowPass(ItemStack is) {

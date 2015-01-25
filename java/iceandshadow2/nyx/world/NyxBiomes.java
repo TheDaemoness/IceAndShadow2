@@ -16,20 +16,20 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 public class NyxBiomes {
 
 	public static BiomeGenBase nyxLowMountains, nyxHighMountains, nyxHills,
-			nyxMesas, nyxHillForest, nyxMesaForest;
+	nyxMesas, nyxHillForest, nyxMesaForest;
 
 	public static BiomeGenBase // Special.
-			nyxRugged,
-			nyxInfested;
+	nyxRugged,
+	nyxInfested;
 
 	public static void init() {
 		nyxLowMountains = new NyxBiomeMountains(
 				IaSFlags.biome_id_nyxLowMountains, true, 1.0F, 2.5F, false)
-				.setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost)
-				.setBiomeName("NyxLowMountains");
+		.setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost)
+		.setBiomeName("NyxLowMountains");
 		nyxHighMountains = new NyxBiome(IaSFlags.biome_id_nyxHighMountains,
 				true, 0.5F, 4.0F, false).setBlocks(Blocks.snow_layer,
-				NyxBlocks.permafrost).setBiomeName("NyxHighMountains");
+						NyxBlocks.permafrost).setBiomeName("NyxHighMountains");
 
 		nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 1.5F, 0.1F,
 				false).setBiomeName("NyxHills");
@@ -37,10 +37,10 @@ public class NyxBiomes {
 				false).setBiomeName("NyxMesas");
 		nyxHillForest = new NyxBiomeForestDense(
 				IaSFlags.biome_id_nyxHillForest, true, 0.8F, 1.8F, false)
-				.setBiomeName("NyxHillForest");
+		.setBiomeName("NyxHillForest");
 		nyxMesaForest = new NyxBiomeForestSparse(
 				IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false)
-				.setBiomeName("NyxMesaForest");
+		.setBiomeName("NyxMesaForest");
 
 		nyxRugged = new NyxBiomeRugged(IaSFlags.biome_id_nyxRugged, true, 1.0F,
 				1.2F, false).setBiomeName("NyxRugged");

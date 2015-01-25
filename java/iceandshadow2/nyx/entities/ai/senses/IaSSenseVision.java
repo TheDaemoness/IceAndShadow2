@@ -60,8 +60,8 @@ public class IaSSenseVision extends IaSSense {
 			ang += 360.0;
 
 		double delta = ang - owner.rotationYawHead; // NOTE: When the skeleton
-													// looks directly at the
-													// player, this will be 90.
+		// looks directly at the
+		// player, this will be 90.
 
 		delta = delta % 360;
 		if (delta > 180)

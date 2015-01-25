@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public abstract class IaSBaseBlockTileEntity extends IaSBaseBlockSingle
-		implements ITileEntityProvider {
+implements ITileEntityProvider {
 
 	public IaSBaseBlockTileEntity(EnumIaSModule mod, String texName,
 			Material mat) {

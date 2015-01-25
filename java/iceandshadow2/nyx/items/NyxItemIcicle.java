@@ -11,7 +11,7 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemIcicle extends IaSBaseItemSingle implements
-		IIaSApiTransmutable {
+IIaSApiTransmutable {
 
 	public NyxItemIcicle(String texName) {
 		super(EnumIaSModule.NYX, texName);

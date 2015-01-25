@@ -29,7 +29,7 @@ public interface IIaSApiExaminable {
 	 */
 	public List<String> getExamineMessages(ItemStack toExam,
 			Map<String, Integer> knowledge);
-	
+
 
 	/**
 	 * Gets information about this item to put into a book. If multiple handlers

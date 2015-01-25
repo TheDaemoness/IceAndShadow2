@@ -117,7 +117,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		}
 		w.setTileEntity(x, y, z, tte);
 	}
-	
+
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0)

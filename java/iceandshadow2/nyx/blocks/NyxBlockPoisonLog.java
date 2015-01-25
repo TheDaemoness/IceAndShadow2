@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockPoisonLog extends IaSBlockDirectional implements
-		IIaSNoInfest {
+IIaSNoInfest {
 	@SideOnly(Side.CLIENT)
 	IIcon ringsIcon, barkIcon;
 
@@ -118,10 +118,10 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements
 			EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null)
 			par5EntityPlayer
-					.addPotionEffect(new PotionEffect(
-							Potion.poison.id,
-							20 * (par1World.difficultySetting.getDifficultyId() + 1),
-							1));
+			.addPotionEffect(new PotionEffect(
+					Potion.poison.id,
+					20 * (par1World.difficultySetting.getDifficultyId() + 1),
+					1));
 	}
 
 	@Override
@@ -134,9 +134,9 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements
 				if (!((EntityLivingBase) par5Entity)
 						.isPotionActive(Potion.poison))
 					((EntityLivingBase) par5Entity)
-							.addPotionEffect(new PotionEffect(Potion.poison.id,
-									35 * (par1World.difficultySetting
-											.getDifficultyId() + 1), 1));
+					.addPotionEffect(new PotionEffect(Potion.poison.id,
+							35 * (par1World.difficultySetting
+									.getDifficultyId() + 1), 1));
 			}
 		}
 	}

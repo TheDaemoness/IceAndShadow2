@@ -39,7 +39,7 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 			int par2, int par3, int par4) {
 		return null;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World w,
 			int x, int y, int z) {

@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements
-		IIaSModName, IShearable {
+IIaSModName, IShearable {
 
 	int[] field_150128_a; // Dammit Mojo.
 
@@ -222,14 +222,14 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements
 									if (block.isLeaves(w, x + l1, y + i2, z
 											+ j2)) {
 										this.field_150128_a[(l1 + k1) * j1
-												+ (i2 + k1) * b1 + j2 + k1] = -2;
+										                    + (i2 + k1) * b1 + j2 + k1] = -2;
 									} else {
 										this.field_150128_a[(l1 + k1) * j1
-												+ (i2 + k1) * b1 + j2 + k1] = -1;
+										                    + (i2 + k1) * b1 + j2 + k1] = -1;
 									}
 								} else {
 									this.field_150128_a[(l1 + k1) * j1
-											+ (i2 + k1) * b1 + j2 + k1] = 0;
+									                    + (i2 + k1) * b1 + j2 + k1] = 0;
 								}
 							}
 						}
@@ -240,47 +240,47 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements
 							for (j2 = -b0; j2 <= b0; ++j2) {
 								for (int k2 = -b0; k2 <= b0; ++k2) {
 									if (this.field_150128_a[(i2 + k1) * j1
-											+ (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
+									                        + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
 										if (this.field_150128_a[(i2 + k1 - 1)
-												* j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
+										                        * j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
 											this.field_150128_a[(i2 + k1 - 1)
-													* j1 + (j2 + k1) * b1 + k2
-													+ k1] = l1;
+											                    * j1 + (j2 + k1) * b1 + k2
+											                    + k1] = l1;
 										}
 
 										if (this.field_150128_a[(i2 + k1 + 1)
-												* j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
+										                        * j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
 											this.field_150128_a[(i2 + k1 + 1)
-													* j1 + (j2 + k1) * b1 + k2
-													+ k1] = l1;
+											                    * j1 + (j2 + k1) * b1 + k2
+											                    + k1] = l1;
 										}
 
 										if (this.field_150128_a[(i2 + k1) * j1
-												+ (j2 + k1 - 1) * b1 + k2 + k1] == -2) {
+										                        + (j2 + k1 - 1) * b1 + k2 + k1] == -2) {
 											this.field_150128_a[(i2 + k1) * j1
-													+ (j2 + k1 - 1) * b1 + k2
-													+ k1] = l1;
+											                    + (j2 + k1 - 1) * b1 + k2
+											                    + k1] = l1;
 										}
 
 										if (this.field_150128_a[(i2 + k1) * j1
-												+ (j2 + k1 + 1) * b1 + k2 + k1] == -2) {
+										                        + (j2 + k1 + 1) * b1 + k2 + k1] == -2) {
 											this.field_150128_a[(i2 + k1) * j1
-													+ (j2 + k1 + 1) * b1 + k2
-													+ k1] = l1;
+											                    + (j2 + k1 + 1) * b1 + k2
+											                    + k1] = l1;
 										}
 
 										if (this.field_150128_a[(i2 + k1) * j1
-												+ (j2 + k1) * b1 + k2 + k1 - 1] == -2) {
+										                        + (j2 + k1) * b1 + k2 + k1 - 1] == -2) {
 											this.field_150128_a[(i2 + k1) * j1
-													+ (j2 + k1) * b1 + k2 + k1
-													- 1] = l1;
+											                    + (j2 + k1) * b1 + k2 + k1
+											                    - 1] = l1;
 										}
 
 										if (this.field_150128_a[(i2 + k1) * j1
-												+ (j2 + k1) * b1 + k2 + k1 + 1] == -2) {
+										                        + (j2 + k1) * b1 + k2 + k1 + 1] == -2) {
 											this.field_150128_a[(i2 + k1) * j1
-													+ (j2 + k1) * b1 + k2 + k1
-													+ 1] = l1;
+											                    + (j2 + k1) * b1 + k2 + k1
+											                    + 1] = l1;
 										}
 									}
 								}

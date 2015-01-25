@@ -11,7 +11,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
 public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp,
-		IIaSModName {
+IIaSModName {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;

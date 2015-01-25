@@ -16,7 +16,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements
-		IIaSApiTransmutable {
+IIaSApiTransmutable {
 
 	protected int slot;
 	protected boolean wep;
@@ -73,7 +73,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements
 	public ItemStack onItemRightClick(ItemStack par1, World w,
 			EntityPlayer ninja) {
 		if (ninja.isSneaking()) { // Do NOT remove this if statement, it
-									// actually isn't redundant.
+			// actually isn't redundant.
 			if (wep)
 				par1 = new ItemStack(IaSTools.weapons[slot], 1,
 						par1.getItemDamage());

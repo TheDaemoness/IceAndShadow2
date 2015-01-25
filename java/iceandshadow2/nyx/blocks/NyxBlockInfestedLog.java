@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class NyxBlockInfestedLog extends IaSBlockDirectional implements
-		IIaSNoInfest {
+IIaSNoInfest {
 
 	public NyxBlockInfestedLog(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.wood);

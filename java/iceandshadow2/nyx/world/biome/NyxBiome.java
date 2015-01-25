@@ -22,7 +22,7 @@ public class NyxBiome extends BiomeGenBase {
 	private final boolean rare;
 
 	WorldGenNyxOre genNavistra, genDevora, genEchir, genCortra, genDraconium,
-			genGemstone, genUnstableIce;
+	genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
@@ -130,7 +130,7 @@ public class NyxBiome extends BiomeGenBase {
 			for (int xit = -1; xit <= 1; ++xit) {
 				for (int zit = -1; zit <= 1; ++zit) {
 					par1World
-							.setBlock(x + xit, y - 1, z + zit, Blocks.obsidian);
+					.setBlock(x + xit, y - 1, z + zit, Blocks.obsidian);
 					for (int yit = y + 3; yit > y; --yit)
 						par1World.setBlockToAir(x + xit, yit, z + zit);
 
@@ -155,7 +155,6 @@ public class NyxBiome extends BiomeGenBase {
 	@Override
 	public void genTerrainBlocks(World world, Random rand, Block[] blocks,
 			byte[] meta, int a, int b, double c) {
-		final boolean flag = true;
 		Block block = this.topBlock;
 		byte b0 = (byte) (this.field_150604_aj & 255);
 		Block block1 = this.fillerBlock;
@@ -175,7 +174,7 @@ public class NyxBiome extends BiomeGenBase {
 				blocks[i2] = NyxBlocks.stone;
 			} else if (l1 == 63
 					&& (blocks[i2] == null
-							|| blocks[i2].getMaterial() == Material.air || blocks[i2] == Blocks.snow_layer)) {
+					|| blocks[i2].getMaterial() == Material.air || blocks[i2] == Blocks.snow_layer)) {
 				blocks[i2] = NyxBlocks.exousicIce;
 				blocks[i2 - 1] = NyxBlocks.exousicWater;
 			} else {
@@ -196,7 +195,7 @@ public class NyxBiome extends BiomeGenBase {
 
 							if (l1 < 63
 									&& (block == null
-											|| block.getMaterial() == Material.air || block == Blocks.snow_layer)) {
+									|| block.getMaterial() == Material.air || block == Blocks.snow_layer)) {
 								block = NyxBlocks.exousicIce;
 								b0 = 0;
 							}

@@ -165,7 +165,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 	public ResourceLocation getTexture() {
 		return IaSRegistry.getToolMaterial(
 				this.dataWatcher.getWatchableObjectString(16)).getKnifeTexture(
-				this);
+						this);
 	}
 
 	@Override
@@ -202,7 +202,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						"random.anvil_land",
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
 								.lengthVector() / 5.0F), 1.6F / (this.rand
-								.nextFloat() * 0.2F + 0.9F));
+										.nextFloat() * 0.2F + 0.9F));
 				final IaSToolMaterial mat = IaSRegistry
 						.getToolMaterial(this.dataWatcher
 								.getWatchableObjectString(16));
@@ -277,8 +277,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				this.worldObj.playSoundAtEntity(this,
 						"game.hostile.hurt.fall.small", (float) (var4.hitVec
 								.lengthVector() / 5.0F > 1.0 ? 1.0F
-								: var4.hitVec.lengthVector() / 5.0F),
-						1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+										: var4.hitVec.lengthVector() / 5.0F),
+										1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 				final IaSToolMaterial mat = IaSRegistry
 						.getToolMaterial(this.dataWatcher
@@ -332,9 +332,9 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						int knockbackStrength = 0;
 						if (this.origin != null)
 							knockbackStrength += EnchantmentHelper
-									.getEnchantmentLevel(
-											Enchantment.knockback.effectId,
-											this.origin);
+							.getEnchantmentLevel(
+									Enchantment.knockback.effectId,
+									this.origin);
 
 						var26 = MathHelper.sqrt_double(this.motionX
 								* this.motionX + this.motionZ * this.motionZ);
@@ -344,7 +344,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 									* knockbackStrength * 0.6000000238418579D
 									/ var26, 0.1D * knockbackStrength,
 									this.motionZ * knockbackStrength
-											* 0.6000000238418579D / var26);
+									* 0.6000000238418579D / var26);
 						}
 
 						if (this.shootingEntity != null
@@ -352,8 +352,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 								&& var4.entityHit instanceof EntityPlayer
 								&& this.shootingEntity instanceof EntityPlayerMP) {
 							((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
-									.sendPacket(new S2BPacketChangeGameState(6,
-											0.0F));
+							.sendPacket(new S2BPacketChangeGameState(6,
+									0.0F));
 						}
 					}
 
@@ -388,11 +388,11 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 							this.xTile, this.yTile, this.zTile, this);
 
 					this.worldObj
-							.playSoundAtEntity(
-									this,
-									"random.anvil_land",
-									(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-											: var4.hitVec.lengthVector() / 5.0F),
+					.playSoundAtEntity(
+							this,
+							"random.anvil_land",
+							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+									: var4.hitVec.lengthVector() / 5.0F),
 									1.6F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 					final IaSToolMaterial mat = IaSRegistry

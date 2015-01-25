@@ -15,10 +15,10 @@ public class NyxBlockFunctionsPoisonwood {
 			int par4, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null)
 			par5EntityPlayer
-					.addPotionEffect(new PotionEffect(
-							Potion.poison.id,
-							20 * (par1World.difficultySetting.getDifficultyId() + 1),
-							0));
+			.addPotionEffect(new PotionEffect(
+					Potion.poison.id,
+					20 * (par1World.difficultySetting.getDifficultyId() + 1),
+					0));
 	}
 
 	public static void onEntityCollidedWithBlock(World par1World, int par2,
@@ -29,9 +29,9 @@ public class NyxBlockFunctionsPoisonwood {
 					IaSDamageSources.dmgPoisonwood, 1);
 			if (!((EntityLivingBase) par5Entity).isPotionActive(Potion.poison))
 				((EntityLivingBase) par5Entity)
-						.addPotionEffect(new PotionEffect(Potion.poison.id,
-								35 * (par1World.difficultySetting
-										.getDifficultyId() + 1), 0));
+				.addPotionEffect(new PotionEffect(Potion.poison.id,
+						35 * (par1World.difficultySetting
+								.getDifficultyId() + 1), 0));
 		}
 	}
 }

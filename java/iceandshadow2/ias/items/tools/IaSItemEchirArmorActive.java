@@ -2,7 +2,6 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmutable;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -40,7 +39,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer hulk) {
 		if (hulk.isSneaking()) // Does not always evaluate to false, see that
-								// one jumpscare in The Avengers.
+			// one jumpscare in The Avengers.
 			par1 = new ItemStack(IaSTools.armorEchir[slot], 1,
 					par1.getItemDamage());
 		else

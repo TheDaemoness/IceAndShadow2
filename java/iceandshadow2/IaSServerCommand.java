@@ -119,11 +119,11 @@ public class IaSServerCommand implements ICommand {
 					return;
 				}
 				plai.mcServer.getConfigurationManager()
-						.transferPlayerToDimension(
-								plai,
-								dim,
-								new NyxTeleporter(plai.mcServer
-										.worldServerForDimension(dim)));
+				.transferPlayerToDimension(
+						plai,
+						dim,
+						new NyxTeleporter(plai.mcServer
+								.worldServerForDimension(dim)));
 			} else {
 				send(snder,
 						"Insufficient arguments, expected 'goto <overworld|nyx>'");

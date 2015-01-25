@@ -42,7 +42,7 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	public int getDurability(ItemStack is) {
 		return 16;
 	}
-	
+
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {

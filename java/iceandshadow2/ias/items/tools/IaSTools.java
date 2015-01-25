@@ -6,9 +6,6 @@ import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.materials.NyxMaterialCortra;
-import iceandshadow2.nyx.items.materials.NyxMaterialDevora;
-import iceandshadow2.nyx.items.materials.NyxMaterialNavistra;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
@@ -47,7 +44,7 @@ public class IaSTools {
 	public static IaSItemThrowingKnife knife;
 
 	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[],
-			armorCorpseskin[], armorSpiderSilk[];
+	armorCorpseskin[], armorSpiderSilk[];
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
@@ -117,7 +114,7 @@ public class IaSTools {
 		spade = tools[EnumIaSToolClass.SPADE.getClassId()];
 		sword = weapons[EnumIaSToolClass.SWORD.getClassId()];
 		knife = (IaSItemThrowingKnife) weapons[EnumIaSToolClass.KNIFE
-				.getClassId()];
+		                                       .getClassId()];
 
 		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
 		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
@@ -144,7 +141,7 @@ public class IaSTools {
 		makeEchirArmorRecipe("e e", "eee", "eee", 1);
 		makeEchirArmorRecipe("eee", "e e", "e e", 2);
 		makeEchirArmorRecipe("e e", "e e", 3);
-		
+
 		axe.setCreativeTab(IaSCreativeTabs.tools);
 		pickaxe.setCreativeTab(IaSCreativeTabs.tools);
 		spade.setCreativeTab(IaSCreativeTabs.tools);

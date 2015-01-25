@@ -54,7 +54,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
-		IIaSMobGetters {
+IIaSMobGetters {
 
 	public enum EnumNyxSkeletonType {
 		BOW_FROST_SHORT(0), KNIFE(1), MAGIC_SHADOW(2), BOW_FROST_LONG(3);
@@ -92,7 +92,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 
 	/** Probability to get armor */
 	protected static float[] nyxSkeletonArmorProbability = new float[] { 0.0F,
-			0.01F, 0.03F, 0.09F };
+		0.01F, 0.03F, 0.09F };
 
 	protected EnumNyxSkeletonType typpe;
 	protected boolean altWeaponFlag;
@@ -139,7 +139,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 	@Override
 	protected void addRandomArmor() {
 		if (this.rand.nextFloat() < nyxSkeletonArmorProbability[IaSWorldHelper
-				.getDifficulty(this.worldObj)]) {
+		                                                        .getDifficulty(this.worldObj)]) {
 			int i = this.rand.nextInt(2 + (IaSWorldHelper
 					.getDifficulty(this.worldObj) == 3 ? 1 : 0));
 			final float f = IaSWorldHelper.getDifficulty(this.worldObj) == 3 ? 0.1F
@@ -168,13 +168,13 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(getScaledMaxHealth());
+		.setBaseValue(getScaledMaxHealth());
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-				.setBaseValue(0.33D);
+		.setBaseValue(0.33D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(EntityNyxSkeleton.moveSpeed);
+		.setBaseValue(EntityNyxSkeleton.moveSpeed);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange)
-				.setBaseValue(24.0);
+		.setBaseValue(24.0);
 	}
 
 	@Override
@@ -198,10 +198,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 						-MathHelper.sin(this.rotationYaw * (float) Math.PI
 								/ 180.0F)
 								* i * 0.5F,
-						0.1D,
-						MathHelper.cos(this.rotationYaw * (float) Math.PI
-								/ 180.0F)
-								* i * 0.5F);
+								0.1D,
+								MathHelper.cos(this.rotationYaw * (float) Math.PI
+										/ 180.0F)
+										* i * 0.5F);
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -215,9 +215,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 				final int weakentime = this.worldObj.difficultySetting
 						.getDifficultyId() * 7;
 				((EntityLivingBase) par1Entity)
-						.addPotionEffect(new PotionEffect(Potion.weakness.id,
-								weakentime * 20, IaSWorldHelper
-										.getDifficulty(this.worldObj) - 1));
+				.addPotionEffect(new PotionEffect(Potion.weakness.id,
+						weakentime * 20, IaSWorldHelper
+						.getDifficulty(this.worldObj) - 1));
 			}
 		}
 
@@ -372,8 +372,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 		int var3;
 		if (this.worldObj != null)
 			var3 = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 7 : 8;
-		else
-			var3 = 8;
+			else
+				var3 = 8;
 
 		if (var2 != null) {
 			if (var2.getItem() instanceof IIaSTool)

@@ -223,7 +223,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 						"dig.glass",
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
 								.lengthVector() / 5.0F), 1.2F / (this.rand
-								.nextFloat() * 0.2F + 0.9F));
+										.nextFloat() * 0.2F + 0.9F));
 				this.setDead();
 			}
 		}
@@ -290,7 +290,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 				this.worldObj.playSoundAtEntity(this, "dig.glass",
 						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 								: var4.hitVec.lengthVector() / 5.0F),
-						1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
@@ -319,9 +319,9 @@ public class EntityIceArrow extends Entity implements IProjectile {
 				if (var4.entityHit instanceof EntityLivingBase
 						&& this.freezeTime > 0)
 					((EntityLivingBase) var4.entityHit)
-							.addPotionEffect(new PotionEffect(
-									Potion.moveSlowdown.id, this.freezeTime,
-									this.freezeLevel));
+					.addPotionEffect(new PotionEffect(
+							Potion.moveSlowdown.id, this.freezeTime,
+							this.freezeLevel));
 
 				if (var4.entityHit.attackEntityFrom(var21, var23)) {
 					if (var4.entityHit instanceof EntityLiving) {
@@ -337,7 +337,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 										* 0.6000000238418579D / var26,
 										0.1D * this.knockbackStrength,
 										this.motionZ * this.knockbackStrength
-												* 0.6000000238418579D / var26);
+										* 0.6000000238418579D / var26);
 							}
 						}
 
@@ -346,8 +346,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 								&& var4.entityHit instanceof EntityPlayer
 								&& this.shootingEntity instanceof EntityPlayerMP) {
 							((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
-									.sendPacket(new S2BPacketChangeGameState(6,
-											0.0F));
+							.sendPacket(new S2BPacketChangeGameState(6,
+									0.0F));
 						}
 					}
 
@@ -398,11 +398,11 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 					if (die) {
 						this.worldObj
-								.playSoundAtEntity(
-										this,
-										"dig.glass",
-										(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-												: var4.hitVec.lengthVector() / 5.0F),
+						.playSoundAtEntity(
+								this,
+								"dig.glass",
+								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+										: var4.hitVec.lengthVector() / 5.0F),
 										1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 						for (int i = 0; i < 8; ++i)
 							this.worldObj.spawnParticle("snowballpoof",
@@ -459,10 +459,10 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			for (var9 = 0; var9 < (this.getIsCritical() ? 5 : 3); ++var9) {
 				IaSFxManager.spawnParticle(this.worldObj,
 						this.getIsCritical() ? "cloud" : "cloudSmall",
-						this.posX + this.motionX * var9 / 4.0D, this.posY
+								this.posX + this.motionX * var9 / 4.0D, this.posY
 								+ this.motionY * var9 / 4.0D, this.posZ
 								+ this.motionZ * var9 / 4.0D, 0.0D, 0.05D,
-						0.0D, true, !this.getIsCritical());
+								0.0D, true, !this.getIsCritical());
 			}
 		}
 
