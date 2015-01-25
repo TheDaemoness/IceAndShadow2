@@ -145,7 +145,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 	@Override
 	public int onBlockPlaced(World w, int x, int y, int z, int meta, float lx,
 			float ly, float lz, int wut) {
-		w.scheduleBlockUpdate(x, y, z, this, 1000+w.rand.nextInt(400));
+		w.scheduleBlockUpdate(x, y, z, this, 1400);
 		return 0;
 	}
 
@@ -164,10 +164,10 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 		if (w.isRemote)
 			return;
 		w.scheduleBlockUpdate(x, y, z, this, 1000+w.rand.nextInt(400));
-		final Block b = w.getBlock(x, y + 1, z);
+		Block b = w.getBlock(x, y + 1, z);
 		if (b.hasTileEntity(w.getBlockMetadata(x, y + 1, z))) {
 			if (b instanceof BlockChest) {
-				final TileEntityChest tent = (TileEntityChest) w.getTileEntity(
+				TileEntityChest tent = (TileEntityChest) w.getTileEntity(
 						x, y + 1, z);
 				TileEntityChest tent2 = null;
 				int mov = 1;
@@ -191,14 +191,13 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 						stq = tent2.getStackInSlot(i);
 						took2 = true;
 					}
-					final ItemStack lst = processStack(stq);
+					ItemStack lst = processStack(stq);
 					if (lst != null) {
 						if (took2)
 							tent2.decrStackSize(i, getStackDecr(stq));
 						else
 							tent.decrStackSize(i, getStackDecr(stq));
 						depositStack(lst, w, x, y - 1, z);
-						break;
 					}
 				}
 				w.markTileEntityChunkModified(x, y + 1, z, tent);

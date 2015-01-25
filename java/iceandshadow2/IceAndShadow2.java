@@ -57,7 +57,7 @@ public class IceAndShadow2 {
 		return Collections.unmodifiableList(toPreRegister);
 	}
 	public static Collection getPostRegistrationHandlers() {
-		return Collections.unmodifiableList(toPreRegister);
+		return Collections.unmodifiableList(toPostRegister);
 	}
 
 	@EventHandler
