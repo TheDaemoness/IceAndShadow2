@@ -54,7 +54,7 @@ public class NyxBiomeRugged extends NyxBiome {
 			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
 			final Block bl = par1World.getBlock(x, y-1, z);
 			if(par1World.getBiomeGenForCoords(x, z) instanceof NyxBiomeRugged) {
-				if (bl != Blocks.obsidian && bl != NyxBlocks.gatestone) {
+				if (bl != Blocks.obsidian && bl != NyxBlocks.gatestone && bl != NyxBlocks.exousicIce) {
 					par1World.setBlock(x, y, z, NyxBlocks.crystalExousium);
 					par1World.updateLightByType(EnumSkyBlock.Sky, x, y, z);
 					break;
