@@ -130,14 +130,6 @@ public class IaSTools {
 		makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
 		makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
 
-		makeEchirToolInfusionRecipe(NyxItems.devora, "Devora");
-		makeEchirToolInfusionRecipe(NyxItems.navistraShard, "Navistra");
-		makeEchirToolInfusionRecipe(NyxItems.cortraDust, "Cortra");
-
-		makeEchirKnifeInfusionRecipe(NyxItems.devora, "Devora");
-		makeEchirKnifeInfusionRecipe(NyxItems.navistraShard, "Navistra");
-		makeEchirKnifeInfusionRecipe(NyxItems.cortraDust, "Cortra");
-
 		armorEchir = new IaSItemArmor[4];
 		initArmor(armorEchir, IaSItemArmor.MATERIAL_ECHIR,
 				"IceAndShadow2:textures/armor/echir");
@@ -152,9 +144,7 @@ public class IaSTools {
 		makeEchirArmorRecipe("e e", "eee", "eee", 1);
 		makeEchirArmorRecipe("eee", "e e", "e e", 2);
 		makeEchirArmorRecipe("e e", "e e", 3);
-
-		makeEchirArmorInfusionRecipe(NyxItems.navistraShard, armorNavistra);
-		makeEchirArmorInfusionRecipe(NyxItems.cortraDust, armorCortra);
+		
 		axe.setCreativeTab(IaSCreativeTabs.tools);
 		pickaxe.setCreativeTab(IaSCreativeTabs.tools);
 		spade.setCreativeTab(IaSCreativeTabs.tools);
@@ -171,19 +161,6 @@ public class IaSTools {
 		}
 	}
 
-	protected static void makeEchirArmorInfusionRecipe(Item reagent,
-			IaSItemArmor[] armors) {
-		final ItemStack r = new ItemStack(reagent);
-		GameRegistry.addShapelessRecipe(new ItemStack(armors[0]), r, r, r, r,
-				r, new ItemStack(armorActiveEchir[0]));
-		GameRegistry.addShapelessRecipe(new ItemStack(armors[1]), r, r, r, r,
-				r, r, r, r, new ItemStack(armorActiveEchir[1]));
-		GameRegistry.addShapelessRecipe(new ItemStack(armors[2]), r, r, r, r,
-				r, r, r, new ItemStack(armorActiveEchir[2]));
-		GameRegistry.addShapelessRecipe(new ItemStack(armors[3]), r, r, r, r,
-				new ItemStack(armorActiveEchir[3]));
-	}
-
 	protected static void makeEchirArmorRecipe(String a, String b, int slot) {
 		GameRegistry.addShapedRecipe(new ItemStack(armorActiveEchir[slot], 1),
 				a, b, 'e', new ItemStack(NyxItems.echirIngot, 1, 1));
@@ -197,41 +174,6 @@ public class IaSTools {
 				a, b, c, 'e', new ItemStack(NyxItems.echirIngot, 1, 1));
 		GameRegistry.addSmelting(new ItemStack(armorEchir[slot], 1, 0),
 				new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
-	}
-
-	protected static void makeEchirKnifeInfusionRecipe(Item reagent,
-			String result) {
-		ItemStack rslt = new ItemStack(IaSTools.knife);
-		rslt.setTagCompound(new NBTTagCompound());
-		rslt.getTagCompound().setString(NBT_ID, result);
-		final ItemStack k = new ItemStack(swordsActiveEchir[1]);
-		final ItemStack reag = new ItemStack(reagent);
-		GameRegistry.addShapelessRecipe(rslt, reag, k);
-		rslt = rslt.copy();
-		rslt.stackSize = 2;
-		GameRegistry.addShapelessRecipe(rslt, reag, k, k);
-		rslt = rslt.copy();
-		rslt.stackSize = 3;
-		GameRegistry.addShapelessRecipe(rslt, reag, k, k, k); // No relation.
-		rslt = rslt.copy();
-		rslt.stackSize = 4;
-		GameRegistry.addShapelessRecipe(rslt, reag, k, k, k, k);
-	}
-
-	protected static void makeEchirToolInfusionRecipe(Item reagent,
-			String result) {
-		final ItemStack reag = new ItemStack(reagent);
-		for (final EnumIaSToolClass tool : EnumIaSToolClass.values()) {
-			ItemStack tule;
-			if (tool.isWeapon() && tool != EnumIaSToolClass.KNIFE)
-				tule = new ItemStack(swordsActiveEchir[tool.getClassId()]);
-			else
-				tule = new ItemStack(toolsActiveEchir[tool.getClassId()]);
-			final ItemStack rslt = new ItemStack(tools[tool.getClassId()]);
-			rslt.setTagCompound(new NBTTagCompound());
-			rslt.getTagCompound().setString(NBT_ID, result);
-			GameRegistry.addShapelessRecipe(rslt, reag, reag, reag, tule);
-		}
 	}
 
 	protected static void makeEchirToolRecipe(int slot, String a, String b,
