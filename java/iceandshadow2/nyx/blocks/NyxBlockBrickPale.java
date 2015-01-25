@@ -35,8 +35,9 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
 			int par2, int par3, int par4) {
 		final float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4
-				+ var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
+		return AxisAlignedBB.getBoundingBox(
+				par2, par3 + var5, par4, 
+				par2 + 1, par3 + 1 - var5, par4 + 1);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 			if (lb.getEquipmentInSlot(1) != null)
 				return;
 			if (!lb.isPotionActive(Potion.wither.id))
-				lb.addPotionEffect(new PotionEffect(Potion.wither.id, 39, 0));
+				lb.addPotionEffect(new PotionEffect(Potion.wither.id, 41, 0));
 		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}

@@ -2,6 +2,7 @@ package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,16 +36,21 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 			int y, int z, int metadata) {
 		return false;
 	}
+	
+	
+
+	@Override
+	public void onBlockHarvested(World w, int x,
+			int y, int z, int fortune,
+			EntityPlayer pwai) {
+		if(w.rand.nextInt(3+fortune) != 0)
+			IaSPlayerHelper.giveItem(pwai, new ItemStack(NyxItems.exousium,1,0));
+	}
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		if (metadata != 0)
-			is.add(new ItemStack(NyxBlocks.stone, 1));
-		else if (world.rand.nextInt(3 + fortune) != 0)
-			is.add(new ItemStack(NyxItems.exousium, 1, 0));
-		return is;
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override
