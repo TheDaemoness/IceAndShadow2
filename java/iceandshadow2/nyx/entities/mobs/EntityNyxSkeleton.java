@@ -21,7 +21,7 @@ import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
-import iceandshadow2.nyx.items.NyxItemFrostLongBow;
+import iceandshadow2.nyx.items.NyxItemBowFrostLong;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -248,7 +248,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 		final ItemStack wielding = this.getHeldItem();
 		if (wielding.getItem() instanceof ItemBow) {
 			doBowAttack(par1EntityLiving, par2,
-					wielding.getItem() instanceof NyxItemFrostLongBow);
+					wielding.getItem() instanceof NyxItemBowFrostLong);
 		} else {
 			doShadowAttack(par1EntityLiving, par2);
 			if (typpe != EnumNyxSkeletonType.MAGIC_SHADOW)
