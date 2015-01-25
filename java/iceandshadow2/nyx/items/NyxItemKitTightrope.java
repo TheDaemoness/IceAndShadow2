@@ -42,6 +42,11 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			final Block bl = w.getBlock(xc, yc, zc);
 			if (bl.getMaterial() == Material.air)
 				++ilen;
+			else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava) {
+				IaSPlayerHelper.messagePlayer(pl,
+						"The rope cannot travel through liquids.");
+				return false;
+			}
 			else if (bl.isReplaceable(w, xc, yc, zc))
 				++ilen;
 			else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
@@ -148,6 +153,10 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				final Block bl = w.getBlock(xc, yc, zc);
 				if (bl.getMaterial() == Material.air)
 					++ilen;
+				if (bl.getMaterial() == Material.water)
+					return;
+				if (bl.getMaterial() == Material.lava)
+					return;
 				else if (bl.isReplaceable(w, xc, yc, zc))
 					++ilen;
 				else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
