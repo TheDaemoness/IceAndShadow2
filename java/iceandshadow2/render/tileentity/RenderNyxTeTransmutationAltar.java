@@ -1,5 +1,6 @@
 package iceandshadow2.render.tileentity;
 
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 
 import org.lwjgl.opengl.GL11;
@@ -59,11 +60,13 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			this.tar.hoverStart = 0.0F;
 			RenderItem.renderInFrame = true;
 			GL11.glPushMatrix();
-			if (alt.target.getItem() instanceof ItemBlock)
-				GL11.glTranslatef(0.0F, 0.8F, -0.175F);
-			else
+			if (alt.target.getItem() instanceof ItemBlock) {
+				GL11.glRotatef(180.F, 0, 0, 1);
+				GL11.glTranslatef(0.0F, -1.0F, 0.0F);
+			} else {
 				GL11.glTranslatef(0.0F, 0.8F, -0.225F);
-			GL11.glRotatef(180, 0, 1, 1);
+				GL11.glRotatef(180.F, 0, 1, 1);
+			}
 			RenderManager.instance.renderEntityWithPosYaw(this.tar, 0.0D, 0.0D,
 					0.0D, 0.0F, 0.0F);
 			GL11.glPopMatrix();
