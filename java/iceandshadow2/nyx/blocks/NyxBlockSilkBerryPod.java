@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -68,9 +69,8 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int p_149690_5_, int fortune) {
-		final ArrayList<ItemStack> dropped = super.getDrops(world, x, y, z,
-				p_149690_5_, fortune);
-		final int j1 = func_149987_c(p_149690_5_);
+		ArrayList<ItemStack> dropped = new ArrayList<ItemStack>();
+		int j1 = func_149987_c(p_149690_5_);
 		byte b0 = 1;
 
 		if (j1 >= 2)

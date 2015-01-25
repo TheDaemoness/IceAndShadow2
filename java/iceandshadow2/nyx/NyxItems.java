@@ -49,9 +49,9 @@ public class NyxItems {
 				IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		frostBowShort = new NyxItemFrostShortBow("FrostShortBow").register()
+		frostBowShort = new NyxItemBowFrostShort("FrostShortBow").register()
 				.setCreativeTab(IaSCreativeTabs.combat);
-		frostBowLong = new NyxItemFrostLongBow("FrostLongBow").register()
+		frostBowLong = new NyxItemBowFrostLong("FrostLongBow").register()
 				.setCreativeTab(IaSCreativeTabs.combat);
 		boneCursed = new NyxItemBoneCursed("CursedBone").register()
 				.setCreativeTab(IaSCreativeTabs.resources);

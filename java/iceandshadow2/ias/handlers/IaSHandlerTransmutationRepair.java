@@ -22,7 +22,7 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmutable {
 		if (it instanceof ItemArmor) {
 			if (catalyst.getItem() == ((ItemArmor) it).getArmorMaterial().customCraftingMaterial) {
 				if (catalyst.getItem() == NyxItems.echirIngot
-						&& !catalyst.isItemDamaged())
+						&& catalyst.getItemDamage() <= 0)
 					return 0;
 				return 850;
 			}
