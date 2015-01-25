@@ -136,9 +136,8 @@ public class EntityShadowBall extends EntityThrowable {
 													power*(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD?1.5F:1.0F));
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 69, 1));
-						this.getThrower().heal(power/3);
+						this.getThrower().heal(power/Math.min(1+list1.size(), 4));
 					}
-
 				}
 			}
 		}
