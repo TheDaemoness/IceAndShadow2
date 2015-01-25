@@ -11,11 +11,16 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -40,9 +45,24 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool,
 	}
 
 	@Override
+	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_,
+			List li, boolean p_77624_4_) {
+		return;
+	}
+
+	@Override
 	public boolean canRepair() {
 		return true;
 	}
+	
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack)
+    {
+        Multimap mm = HashMultimap.create();
+        IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
+        mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
+        return mm;
+    }
 
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
