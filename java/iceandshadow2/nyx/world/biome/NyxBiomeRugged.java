@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class NyxBiomeRugged extends NyxBiome {
@@ -40,10 +41,23 @@ public class NyxBiomeRugged extends NyxBiome {
 						final Block bl = par1World.getBlock(x, y - yit, z);
 						if (bl == Blocks.obsidian)
 							continue;
-						if (bl == NyxBlocks.cryingObsidian)
+						if (bl == NyxBlocks.gatestone)
 							continue;
 						par1World.setBlockToAir(x, y - yit, z);
 					}
+				}
+			}
+		}
+		while(par2Random.nextBoolean()) {
+			final int x = xchunk + par2Random.nextInt(16) + 8;
+			final int z = zchunk + par2Random.nextInt(16) + 8;
+			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
+			final Block bl = par1World.getBlock(x, y-1, z);
+			if(par1World.getBiomeGenForCoords(x, z) instanceof NyxBiomeRugged) {
+				if (bl != Blocks.obsidian && bl != NyxBlocks.gatestone) {
+					par1World.setBlock(x, y, z, NyxBlocks.crystalExousium);
+					par1World.updateLightByType(EnumSkyBlock.Sky, x, y, z);
+					break;
 				}
 			}
 		}

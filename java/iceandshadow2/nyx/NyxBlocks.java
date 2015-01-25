@@ -13,11 +13,10 @@ import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost,
-			exousicIce, exousicWater, crystalBloodstone, thornyVines,
-			silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
+			exousicIce, exousicWater, crystalBloodstone, crystalExousium,
+			thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 			brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-			hookClimbing,
-			transmutationAltar, examinationTable, distiller;
+			hookClimbing, transmutationAltar, examinationTable, distiller;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 			oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -50,6 +49,8 @@ public class NyxBlocks {
 		oreExousium = new NyxBlockOreExousium("OreExousium").register();
 		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
 		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
+				.register();
+		crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
 				.register();
 
 		fluidExousia = new Fluid("nyxFluidExousicWater");

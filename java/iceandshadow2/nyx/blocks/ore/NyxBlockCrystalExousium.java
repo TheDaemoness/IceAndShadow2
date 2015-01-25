@@ -7,18 +7,23 @@ import iceandshadow2.nyx.NyxItems;
 import java.util.ArrayList;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
+public class NyxBlockCrystalExousium extends IaSBlockDeco {
 
-	public NyxBlockCrystalBloodstone(String texName) {
-		super(EnumIaSModule.NYX, texName, Material.dragonEgg);
+	public NyxBlockCrystalExousium(String texName) {
+		super(EnumIaSModule.NYX, texName, Material.glass);
 		this.setLuminescence(0.2F);
-		this.setLightColor(0.5F, 0.0F, 0.0F);
+		this.setLightColor(0.0F, 0.5F, 0.4F);
 		this.setResistance(1.5F);
 	}
 
@@ -47,15 +52,22 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 	}
 
 	@Override
+	public void onEntityCollidedWithBlock(World w, int x,
+			int y, int z, Entity ent) {
+		if(ent instanceof EntityLivingBase && !(ent instanceof EntityMob))
+			((EntityLivingBase)ent).addPotionEffect(new PotionEffect(Potion.wither.id,41,2));
+	}
+
+	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.bloodstone, 1, 0));
+		is.add(new ItemStack(NyxItems.exousium, 3+2*world.rand.nextInt(3)+world.rand.nextInt(3), 0));
 		return is;
 	}
 
 	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
-		return 9;
+		return 2;
 	}
 }
