@@ -46,7 +46,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 9;
+		return 6;
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				if(o instanceof EntityMob && user instanceof EntityMob)
 					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage()+2);
 			}
 		}
 		knife.setDead();
@@ -159,7 +159,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				if(o instanceof EntityMob && user instanceof EntityMob)
 					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage());
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), this.getBaseDamage()+2);
 			}
 		}
 		knife.setDead();

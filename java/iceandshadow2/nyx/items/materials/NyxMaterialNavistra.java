@@ -34,6 +34,11 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	}
 
 	@Override
+	public float getBaseDamage() {
+		return 4;
+	}
+
+	@Override
 	public int getDurability(ItemStack is) {
 		return 16;
 	}
