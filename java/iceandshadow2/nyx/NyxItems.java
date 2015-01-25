@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 
 public class NyxItems {
 	public static Item teleportCrystal, seedObsidian, bloodstone, echirIngot,
-	nifelhiumPowder, navistraShard, devora, cortraDust, exousium,
+	nifelhiumPowder, navistraShard, devora, cortra, exousium,
 	draconium, exousicIceShard, toughGossamer, poisonFruit,
 	poisonFruitFertile, silkBerries, frostBowShort, frostBowLong,
 	boneCursed, boneSanctified, heat, vineBundle, bread, cookie,
@@ -29,7 +29,7 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		navistraShard = new NyxItemNavistraShard("NavistraShard").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		cortraDust = new NyxItemCortraDust("CortraDust").register()
+		cortra = new NyxItemCortra("Cortra").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		exousium = new NyxItemExousium("Exousium").register().setCreativeTab(
 				IaSCreativeTabs.resources);

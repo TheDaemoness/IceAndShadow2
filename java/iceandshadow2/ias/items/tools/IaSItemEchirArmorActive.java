@@ -52,7 +52,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
-		if (catalyst.getItem() == NyxItems.cortraDust || catalyst.getItem() == NyxItems.navistraShard) {
+		if (catalyst.getItem() == NyxItems.cortra || catalyst.getItem() == NyxItems.navistraShard) {
 			switch(slot) {
 			case 0: return catalyst.stackSize>=5?375:0;
 			case 1: return catalyst.stackSize>=8?600:0;
@@ -66,7 +66,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public List<ItemStack> getTransmutationYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		if(catalyst.getItem() == NyxItems.cortraDust)
+		if(catalyst.getItem() == NyxItems.cortra)
 			target.func_150996_a(IaSTools.armorCortra[slot]);
 		if(catalyst.getItem() == NyxItems.navistraShard)
 			target.func_150996_a(IaSTools.armorNavistra[slot]);

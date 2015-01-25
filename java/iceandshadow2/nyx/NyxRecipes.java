@@ -71,7 +71,7 @@ public class NyxRecipes {
 
 		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar),
 				" d ", "coc", 'd', new ItemStack(NyxItems.draconium), 'c',
-				new ItemStack(NyxItems.cortraDust), 'o', new ItemStack(
+				new ItemStack(NyxItems.cortra), 'o', new ItemStack(
 						Blocks.obsidian));
 		GameRegistry.addRecipe(new ItemStack(NyxBlocks.distiller), "e", "o",
 				"d", 'd', new ItemStack(NyxItems.draconium), 'e',
