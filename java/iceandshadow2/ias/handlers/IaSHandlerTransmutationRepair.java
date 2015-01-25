@@ -28,9 +28,10 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmutable {
 			}
 		}
 		if (it instanceof IIaSTool) {
-			if (!IaSToolMaterial.extractMaterial(target).isRepairable(target,
-					catalyst))
-				return ((IIaSTool) it).canRepair() ? 450 : 0;
+			if (((IIaSTool)it).canRepair()) {
+				if (IaSToolMaterial.extractMaterial(target).isRepairable(target,catalyst))
+					return 450;
+			}
 			return 0;
 		}
 		if (it.getIsRepairable(target, catalyst))

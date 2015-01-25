@@ -44,7 +44,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.echirIngot && mat.isItemDamaged();
+		return mat.getItem() == NyxItems.echirIngot && mat.getItemDamage() > 0;
 	}
 
 }
