@@ -55,9 +55,9 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmutab
 	public List<ItemStack> getTransmutationYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		List<ItemStack> it = new ArrayList<ItemStack>();
-		target.stackSize -= 1;
 		catalyst.stackSize -= 1;
-		it.add(new ItemStack(NyxItems.cortraIngot,1,1));
+		it.add(new ItemStack(NyxItems.cortraIngot,Math.min(2, target.stackSize),1));
+		target.stackSize -= Math.min(2, target.stackSize);
 		return it;
 	}
 

@@ -44,6 +44,6 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.echirIngot && mat.getItemDamage() > 0;
+		return mat.getItem() == NyxItems.cortraIngot && mat.getItemDamage() == 1;
 	}
 }

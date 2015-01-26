@@ -82,8 +82,8 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 			ItemStack catalyst, World world) {
 		List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
-		it.add(new ItemStack(NyxItems.draconiumIngot,Math.min(2, target.stackSize),1));
-		target.stackSize -= Math.min(2, target.stackSize);
+		target.stackSize -= 1;
+		it.add(new ItemStack(NyxItems.draconiumIngot,1,1));
 		return it;
 	}
 

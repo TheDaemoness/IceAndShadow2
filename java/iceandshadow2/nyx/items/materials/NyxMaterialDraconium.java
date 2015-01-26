@@ -11,6 +11,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class NyxMaterialDraconium extends IaSToolMaterial {
 
+	@Override
+	public ItemStack getTransmutationCatalyst() {
+		return new ItemStack(NyxItems.draconium,1,1);
+	}
+
 	private static ResourceLocation knife_tex = new ResourceLocation(
 			"iceandshadow2:textures/entity/nyxknife_draconium.png");
 
@@ -51,7 +56,7 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.draconium;
+		return mat.getItem() == NyxItems.draconiumIngot && mat.getItemDamage() == 1;
 	}
 
 }

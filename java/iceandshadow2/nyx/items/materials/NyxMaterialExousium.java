@@ -59,7 +59,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 1;
+		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
 	}
 
 }
