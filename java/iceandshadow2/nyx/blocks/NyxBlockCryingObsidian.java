@@ -67,6 +67,8 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 				elb.addPotionEffect(new PotionEffect(Potion.resistance.id, 39,
 						3));
 			}
+			if(!elb.isPotionActive(Potion.regeneration))
+				elb.addPotionEffect(new PotionEffect(Potion.regeneration.id,51,0));
 			if (elb.isSneaking()) {
 				if (elb.isPotionActive(Potion.confusion))
 					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,
