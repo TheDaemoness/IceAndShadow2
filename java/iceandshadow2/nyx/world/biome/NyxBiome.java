@@ -45,9 +45,9 @@ public class NyxBiome extends BiomeGenBase {
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				50, 2, 4));
+				40, 2, 3));
 		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 50, 2, 3));
+				EntityNyxSkeleton.class, 40, 1, 2));
 
 		this.setBiomeName("Nyx");
 		rare = isRare;
