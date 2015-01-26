@@ -387,18 +387,22 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 					boolean die = true;
 					if (this.inTile.getMaterial() == Material.glass) {
-						die = false;
+						die = !this.getIsCritical();
 						this.setIsCritical(false);
 						if(!this.worldObj.isRemote)
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, false);
 					}
-					if (this.inTile.getMaterial() == Material.ice) {
-						die = !this.getIsCritical();
-						this.setIsCritical(false);
+					else if (this.inTile.getMaterial() == Material.ice) {
 						if(!this.worldObj.isRemote)
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, true);
+					}
+					else if (this.inTile.getMaterial() == Material.cloth) {
+						die = false;
+					}
+					if (this.inTile.getMaterial() == Material.leaves) {
+						die = !this.getIsCritical() && this.rand.nextInt(8) == 0;
 					}
 
 					if (die) {
