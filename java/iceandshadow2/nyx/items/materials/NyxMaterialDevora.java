@@ -3,31 +3,22 @@ package iceandshadow2.nyx.items.materials;
 import java.util.List;
 
 import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxMaterialDevora extends IaSToolMaterial {
 

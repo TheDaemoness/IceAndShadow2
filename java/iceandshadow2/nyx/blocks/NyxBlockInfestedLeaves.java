@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements
-		IIaSNoInfest {
+IIaSNoInfest {
 
 	private static Random r = new Random();
 

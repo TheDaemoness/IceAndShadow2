@@ -58,7 +58,7 @@ public class NyxBlockFunctionsInfested {
 						w.setBlockToAir(x + xit, y + yit, z + zit);
 					} else if (b.getMaterial() == Material.wood) {
 						w.setBlockToAir(x + xit, y + yit, z + zit); // TODO:
-																	// Fix.
+						// Fix.
 					}
 				}
 			}

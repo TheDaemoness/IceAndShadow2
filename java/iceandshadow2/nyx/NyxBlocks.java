@@ -13,15 +13,14 @@ import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost,
-			exousicIce, exousicWater, crystalBloodstone, thornyVines,
-			silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
-			brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-			hookClimbing,
-			transmutationAltar, examinationTable, distiller;
+	exousicIce, exousicWater, crystalBloodstone, crystalExousium,
+	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
+	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
+	hookClimbing, transmutationAltar, examinationTable, distiller;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
-			oreNifelhium, oreExousium, oreDraconium, oreGemstone;
-	
+	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
+
 	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace;
 
 	public static Fluid fluidExousia;
@@ -31,7 +30,7 @@ public class NyxBlocks {
 		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		permafrost = new NyxBlockPermafrost("Permafrost").register();
 		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian")
-				.register();
+		.register();
 		thornyVines = new NyxBlockThornyVines("ThornyVines").register();
 		exousicIce = new NyxBlockIce("ExousicIce").register();
 		poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
@@ -50,19 +49,21 @@ public class NyxBlocks {
 		oreExousium = new NyxBlockOreExousium("OreExousium").register();
 		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
 		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
-				.register();
+		.register();
+		crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
+		.register();
 
 		fluidExousia = new Fluid("nyxFluidExousicWater");
 		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10)
-				.setViscosity(500);
+		.setViscosity(500);
 		IaSRegistration.register(fluidExousia);
 		exousicWater = new NyxBlockWater("ExousicWater", fluidExousia)
-				.register();
+		.register();
 
 		brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
 		brickPale = new NyxBlockBrickPale("PaleBrick").register();
 		brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked")
-				.register();
+		.register();
 		gatestone = new NyxBlockGatestone("Gatestone").register();
 
 		transmutationAltar = new NyxBlockAltarTransmutation(
@@ -71,9 +72,9 @@ public class NyxBlocks {
 
 		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")
-				.register();
+		.register();
 		hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ")
-				.register();
+		.register();
 		ropeY = new NyxBlockRopeY("RopeY").register();
 		ropeX = new NyxBlockRopeX("RopeX").register();
 		ropeZ = new NyxBlockRopeZ("RopeZ").register();

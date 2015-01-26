@@ -15,7 +15,7 @@ import net.minecraft.world.World;
  * Mainly here to add support for pipes and new types of item storage.
  */
 public interface IIaSApiItemStackIO {
-	
+
 	/**
 	 * Indicates whether this handler can handle extracting items from the given block.
 	 * @param x X coordinate of the block from which items will be extracted.
@@ -29,7 +29,7 @@ public interface IIaSApiItemStackIO {
 	 * @param tx X coordinate of the block items will be extracted from.
 	 */
 	public boolean canHandleOutput(World w, int x, int y, int z, Block bl, int tx, int ty, int tz);
-	
+
 	/**
 	 * For input handlers, indicates whether or not this handler is for a block that actively inserts items.
 	 * For example, a hopper or BuildCraft pipe actively inserts items into other blocks, but a chest does not.
@@ -37,7 +37,7 @@ public interface IIaSApiItemStackIO {
 	 * @param tx X coordinate of the block items will be inserted into.
 	 */
 	public boolean doesInsertItems(World w, int x, int y, int z, Block bl, int tx, int ty, int tz);
-	
+
 	/**
 	 * For output handlers, indicates whether or not this handler is for a block that actively extracts items.
 	 * For example, a hopper or powered wooden BuildCraft pipe actively extracts items, but a chest does not.

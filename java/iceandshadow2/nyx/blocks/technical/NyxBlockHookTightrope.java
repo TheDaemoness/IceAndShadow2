@@ -11,9 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
-import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.nyx.NyxBlocks;
 
 public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {

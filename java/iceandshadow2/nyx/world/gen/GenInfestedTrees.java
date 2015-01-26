@@ -16,7 +16,7 @@ public class GenInfestedTrees extends WorldGenerator {
 	 * a given 'major' index - 1 and 2 for 0, 0 and 2 for 1, and 0 and 1 for 2.
 	 */
 	static final byte[] otherCoordPairs = new byte[] { (byte) 2, (byte) 0,
-			(byte) 0, (byte) 1, (byte) 2, (byte) 1 };
+		(byte) 0, (byte) 1, (byte) 2, (byte) 1 };
 
 	/** random seed for GenBigTree */
 	Random rand = new Random();
@@ -106,7 +106,7 @@ public class GenInfestedTrees extends WorldGenerator {
 						&& !block.isAir(worldObj, aint3[0], aint3[1], aint3[2])
 						&& !block.isLeaves(worldObj, aint3[0], aint3[1],
 								aint3[2]) && !(block != Blocks.snow)
-						&& !(block != Blocks.snow_layer)) {
+								&& !(block != Blocks.snow_layer)) {
 					break;
 				}
 			}
@@ -160,7 +160,7 @@ public class GenInfestedTrees extends WorldGenerator {
 		if (this.worldObj.isAirBlock(x, y, z)
 				|| this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
 			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta,
-			0x2);
+					0x2);
 		}
 	}
 
@@ -352,8 +352,8 @@ public class GenInfestedTrees extends WorldGenerator {
 					if (block != null
 							&& !block.isAir(worldObj, aint1[0], aint1[1],
 									aint1[2])
-							&& !block.isLeaves(worldObj, aint1[0], aint1[1],
-									aint1[2])) {
+									&& !block.isLeaves(worldObj, aint1[0], aint1[1],
+											aint1[2])) {
 						++k1;
 					} else {
 						this.worldObj.setBlock(aint1[0], aint1[1], aint1[2],

@@ -79,9 +79,9 @@ public class GenPoisonTrees extends WorldGenerator {
 								if ((Math.abs(var18) != var21
 										|| Math.abs(var20) != var21 || var21 <= 0)
 										&& (block == null || block
-												.canBeReplacedByLeaves(
-														par1World, var17,
-														var16, var19))) {
+										.canBeReplacedByLeaves(
+												par1World, var17,
+												var16, var19))) {
 									par1World.setBlock(var17, var16, var19,
 											NyxBlocks.poisonLeaves);
 								}

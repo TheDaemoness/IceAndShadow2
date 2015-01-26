@@ -10,17 +10,17 @@ import net.minecraft.block.material.Material;
 
 public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	public final EnumIaSModule MODULE;
-	
+
 	private float lum;
 	private float lightRed, lightGreen, lightBlue;
-	
+
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
 		MODULE = mod;
 		if(mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock))
 			this.setCreativeTab(IaSCreativeTabs.blocks);
 	}
-	
+
 	public IaSBaseBlock setLuminescence(float lum) {
 		this.lum = lum;
 		if(this.getLightOpacity() == 15)
@@ -28,24 +28,24 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 		this.setLightLevel(lum);
 		return this;
 	}
-	
+
 	public IaSBaseBlock setLightColor(float r, float g, float b) {
 		this.lightRed = r;
 		this.lightGreen = g;
 		this.lightBlue = b;
 		return this;
 	}
-	
+
 	public IaSBaseBlock register() {
 		IaSRegistration.register(this);
 		return this;
 	}
-	
+
 	@Override
 	public int getMobilityFlag() {
 		return 1;
 	}
-	
+
 	@Override
 	public EnumIaSModule getIaSModule() {return MODULE;}
 }

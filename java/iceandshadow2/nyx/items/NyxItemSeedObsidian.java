@@ -14,7 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class NyxItemSeedObsidian extends IaSBaseItemSingle implements
-		IIaSKeepOnDeath {
+IIaSKeepOnDeath {
 
 	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -58,15 +58,15 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle implements
 			if (playuh.getHealth() > 2.0F)
 				playuh.attackEntityFrom(DamageSource.magic, 1);
 			IaSPlayerHelper
-					.messagePlayer(
-							playuh,
-							"You may be able to rebind it to other platforms, simply by crouching on the center block.");
+			.messagePlayer(
+					playuh,
+					"You may be able to rebind it to other platforms, simply by crouching on the center block.");
 			return true;
 		} else
 			IaSPlayerHelper
-					.messagePlayer(
-							playuh,
-							"That seed needs a larger flat area of Nyxian stone to avoid being wasteful. How do I know that...?");
+			.messagePlayer(
+					playuh,
+					"That seed needs a larger flat area of Nyxian stone to avoid being wasteful. How do I know that...?");
 		return false;
 	}
 }

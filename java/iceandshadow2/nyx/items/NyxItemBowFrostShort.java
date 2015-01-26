@@ -1,26 +1,16 @@
 package iceandshadow2.nyx.items;
 
-import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
-import iceandshadow2.util.IaSRegistration;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName,
-		IIaSGlowing {
+IIaSGlowing {
 
 	public NyxItemBowFrostShort(String par1) {
 		super(par1);
@@ -65,19 +55,19 @@ public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName,
 			par2World.spawnEntityInWorld(var8);
 		}
 	}
-	
+
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 20-this.getSpeedModifier(par1ItemStack);
 	}
-	
+
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 		this.onPlayerStoppedUsing(par1ItemStack, par2World, par3EntityPlayer, 0);
 		return par1ItemStack;
 	}
-	
+
 	@Override
 	public int getTimeForIcon(int mod, int index) {
 		if(index == 2)
@@ -86,7 +76,7 @@ public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName,
 			return 10-mod;
 		return 0;
 	}
-	
+
 	@Override
 	public int getUpgradeCost() {
 		return 7;

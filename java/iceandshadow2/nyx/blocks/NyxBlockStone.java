@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class NyxBlockStone extends IaSBaseBlockSingle {
 	public static final float HARDNESS = 2.0F;
 	public static final float RESISTANCE = 9.0F;
-	
+
 	public static void doDamage(World theWorld, int x, int y, int z,
 			Entity theEntity, int dmg) {
 		if (!(theEntity instanceof EntityMob)) {
@@ -32,7 +32,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 							theEntity.attackEntityFrom(
 									IaSDamageSources.dmgStone, dmg / 2 + 1);
 						((EntityLivingBase) theEntity).getEquipmentInSlot(1)
-								.damageItem(1, (EntityLivingBase) theEntity);
+						.damageItem(1, (EntityLivingBase) theEntity);
 					}
 					return;
 				}
@@ -60,10 +60,10 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 			EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null
 				&& par5EntityPlayer.worldObj.difficultySetting
-						.getDifficultyId() > 0)
+				.getDifficultyId() > 0)
 			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
 					par5EntityPlayer.worldObj.difficultySetting
-							.getDifficultyId());
+					.getDifficultyId());
 	}
 
 	@Override

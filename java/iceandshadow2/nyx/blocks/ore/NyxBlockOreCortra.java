@@ -29,7 +29,7 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 			if (world.rand.nextBoolean())
 				is.add(new ItemStack(Items.redstone));
 			else
-				is.add(new ItemStack(NyxItems.cortraDust));
+				is.add(new ItemStack(NyxItems.cortra));
 		}
 		return is;
 	}

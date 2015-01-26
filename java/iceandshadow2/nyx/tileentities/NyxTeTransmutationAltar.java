@@ -99,7 +99,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 
 		if (this.canAttemptTransmutation())
 			this.handler = IaSRegistry
-					.getHandlerTransmutation(target, catalyst);
+			.getHandlerTransmutation(target, catalyst);
 	}
 
 	public void scheduleUpdate(int x, int y, int z, int time) {

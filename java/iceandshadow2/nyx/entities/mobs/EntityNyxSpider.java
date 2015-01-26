@@ -39,11 +39,11 @@ public class EntityNyxSpider extends EntitySpider {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(getScaledMaxHealth());
+		.setBaseValue(getScaledMaxHealth());
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-				.setBaseValue(1.0D);
+		.setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(0.75D);
+		.setBaseValue(0.75D);
 	}
 
 	@Override
@@ -64,11 +64,11 @@ public class EntityNyxSpider extends EntitySpider {
 				final int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 125
 						: 150;
 				((EntityLivingBase) par1Entity)
-						.addPotionEffect(new PotionEffect(Potion.poison.id, lvl
-								* mod + 160, 0));
+				.addPotionEffect(new PotionEffect(Potion.poison.id, lvl
+						* mod + 160, 0));
 				((EntityLivingBase) par1Entity)
-						.addPotionEffect(new PotionEffect(
-								Potion.moveSlowdown.id, lvl * mod + 190, lvl));
+				.addPotionEffect(new PotionEffect(
+						Potion.moveSlowdown.id, lvl * mod + 190, lvl));
 			}
 			return true;
 		} else {
@@ -78,11 +78,11 @@ public class EntityNyxSpider extends EntitySpider {
 
 	protected void doUncloakSound() {
 		this.worldObj
-				.playSoundAtEntity(this,
-						"IceAndShadow2:mob_nyxwisp_materialize",
-						1.0F - this.worldObj.difficultySetting
-								.getDifficultyId() * 0.10F, this.rand
-								.nextFloat() * 0.2F + 0.9F);
+		.playSoundAtEntity(this,
+				"IceAndShadow2:mob_nyxwisp_materialize",
+				1.0F - this.worldObj.difficultySetting
+				.getDifficultyId() * 0.10F, this.rand
+				.nextFloat() * 0.2F + 0.9F);
 	}
 
 	/**

@@ -35,6 +35,8 @@ public class NyxItemRope extends IaSBaseItemSingle {
 			for (y -= 3; y > 0; --y) {
 				final Block bl = w.getBlock(x, y, z);
 				if (bl.getMaterial() != Material.air) {
+					if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava)
+						break;
 					if (!bl.isReplaceable(w, x, y, z))
 						break;
 				}

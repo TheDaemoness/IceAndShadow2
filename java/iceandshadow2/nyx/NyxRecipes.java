@@ -31,8 +31,8 @@ public class NyxRecipes {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(
 				NyxItems.poisonFruitFertile), new ItemStack(
-				NyxItems.poisonFruit), new ItemStack(Items.dye, 15),
-				new ItemStack(Items.dye, 15), new ItemStack(Items.dye, 15));
+						NyxItems.poisonFruit), new ItemStack(Items.dye, 15),
+						new ItemStack(Items.dye, 15), new ItemStack(Items.dye, 15));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.planks, 4, 0),
 				new ItemStack(NyxBlocks.poisonLog));
@@ -54,18 +54,8 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.log, 1),
 				new ItemStack(NyxBlocks.infestLog), new ItemStack(
 						NyxItems.exousium, 1, 0), new ItemStack(
-						NyxItems.exousium, 1, 0), new ItemStack(
-						NyxItems.exousium, 1, 0));
-
-		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale, 2),
-				new ItemStack(NyxBlocks.brickFrozen), new ItemStack(
-						NyxItems.exousicIceShard), new ItemStack(
-						NyxItems.exousicIceShard), new ItemStack(
-						NyxItems.exousicIceShard));
-
-		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.brickPale),
-				new ItemStack(NyxBlocks.brickPaleCracked), new ItemStack(
-						NyxItems.exousicIceShard));
+								NyxItems.exousium, 1, 0), new ItemStack(
+										NyxItems.exousium, 1, 0));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.string, 4),
 				new ItemStack(NyxItems.toughGossamer));
@@ -81,7 +71,7 @@ public class NyxRecipes {
 
 		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar),
 				" d ", "coc", 'd', new ItemStack(NyxItems.draconium), 'c',
-				new ItemStack(NyxItems.cortraDust), 'o', new ItemStack(
+				new ItemStack(NyxItems.cortra), 'o', new ItemStack(
 						Blocks.obsidian));
 		GameRegistry.addRecipe(new ItemStack(NyxBlocks.distiller), "e", "o",
 				"d", 'd', new ItemStack(NyxItems.draconium), 'e',

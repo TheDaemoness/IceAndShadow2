@@ -42,6 +42,11 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			final Block bl = w.getBlock(xc, yc, zc);
 			if (bl.getMaterial() == Material.air)
 				++ilen;
+			else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava) {
+				IaSPlayerHelper.messagePlayer(pl,
+						"The rope cannot travel through liquids.");
+				return false;
+			}
 			else if (bl.isReplaceable(w, xc, yc, zc))
 				++ilen;
 			else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
@@ -137,7 +142,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 					return;
 				dir = ForgeDirection.getOrientation(mop.sideHit);
 			}
-			int ilen = 1, xc = mop.blockX;
+			int ilen = 0, xc = mop.blockX;
 			final int yc = mop.blockY;
 			int zc = mop.blockZ;
 			if (!w.isSideSolid(xc, yc, zc, dir))
@@ -145,11 +150,13 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			for (int i = 0; i < LENGTH_MAX; ++i) {
 				xc += dir.offsetX;
 				zc += dir.offsetZ;
-				if (i == 0)
-					continue;
 				final Block bl = w.getBlock(xc, yc, zc);
 				if (bl.getMaterial() == Material.air)
 					++ilen;
+				if (bl.getMaterial() == Material.water)
+					return;
+				if (bl.getMaterial() == Material.lava)
+					return;
 				else if (bl.isReplaceable(w, xc, yc, zc))
 					++ilen;
 				else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
@@ -157,13 +164,13 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				else
 					return;
 			}
-			if (ilen == 1)
+			if (ilen == 0)
 				return;
 			if (ilen < 5)
 				return;
 			if (ilen == LENGTH_MAX)
 				return;
-			for (int i = 1; i < ilen; ++i) {
+			for (int i = 1; i < ilen+1; ++i) {
 				if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
 					spawnParticlesX(w, mop.blockX + dir.offsetX * i,
 							mop.blockY, mop.blockZ + dir.offsetZ * i);

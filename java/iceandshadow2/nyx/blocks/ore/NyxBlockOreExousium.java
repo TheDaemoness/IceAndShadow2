@@ -36,8 +36,6 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 			int y, int z, int metadata) {
 		return false;
 	}
-	
-	
 
 	@Override
 	public void onBlockHarvested(World w, int x,
@@ -90,6 +88,17 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (w.getBlockMetadata(x, y, z) != 0 && r.nextBoolean()) {
+			while(true) {
+				if(w.getBlock(x + 1, y, z) == NyxBlocks.exousicWater)
+					break;
+				if(w.getBlock(x - 1, y, z) == NyxBlocks.exousicWater)
+					break;
+				if(w.getBlock(x, y, z + 1) == NyxBlocks.exousicWater)
+					break;
+				if(w.getBlock(x, y, z - 1) == NyxBlocks.exousicWater)
+					break;
+				return;
+			}
 			w.setBlock(x, y, z, this, 0, 0x2);
 		}
 	}

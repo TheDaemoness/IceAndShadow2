@@ -23,13 +23,13 @@ public class GenThornyVines extends WorldGenerator {
 					if (Blocks.vine.canPlaceBlockOnSide(par1World, par3, par4,
 							par5, j1)) {
 						par1World
-								.setBlock(
-										par3,
-										par4,
-										par5,
-										NyxBlocks.thornyVines,
-										1 << Direction.facingToDirection[Facing.oppositeSide[j1]],
-										2);
+						.setBlock(
+								par3,
+								par4,
+								par5,
+								NyxBlocks.thornyVines,
+								1 << Direction.facingToDirection[Facing.oppositeSide[j1]],
+								2);
 						break;
 					}
 				}

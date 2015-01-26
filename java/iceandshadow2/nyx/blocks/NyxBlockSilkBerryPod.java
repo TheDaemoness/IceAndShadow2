@@ -18,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeEventFactory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -74,7 +73,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 		byte b0 = 1;
 
 		if (j1 >= 2)
-			b0 = 3;
+			b0 = (byte)(3+world.rand.nextInt(2));
 
 		for (int k1 = 0; k1 < b0; ++k1)
 			dropped.add(new ItemStack(NyxItems.silkBerries, 1));

@@ -161,7 +161,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		boolean doGlowTransforms = false;
 		if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 			doGlowTransforms = ((IIaSGlowing) item.getItem())
-					.getFirstGlowPass(item) <= 0;
+			.getFirstGlowPass(item) <= 0;
 
 		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer,
 				doGlowTransforms, type);
@@ -171,15 +171,15 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 					item.getItemDamage()); x++) {
 				if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 					doGlowTransforms = x >= ((IIaSGlowing) item.getItem())
-							.getFirstGlowPass(item);
-				renderItem(entity, item, x,
-						this.mc.entityRenderer.itemRenderer, doGlowTransforms,
-						type);
-				if (doGlowTransforms
-						&& x == item.getItem().getRenderPasses(
-								item.getItemDamage()) - 1)
-					;
-				GL11.glDisable(GL11.GL_BLEND);
+					.getFirstGlowPass(item);
+					renderItem(entity, item, x,
+							this.mc.entityRenderer.itemRenderer, doGlowTransforms,
+							type);
+					if (doGlowTransforms
+							&& x == item.getItem().getRenderPasses(
+									item.getItemDamage()) - 1)
+						;
+					GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 

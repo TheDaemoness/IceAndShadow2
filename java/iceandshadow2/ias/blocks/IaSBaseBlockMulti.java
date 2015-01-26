@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements
-		IIaSModName {
+IIaSModName {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;

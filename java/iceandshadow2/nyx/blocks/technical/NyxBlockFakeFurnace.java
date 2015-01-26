@@ -2,8 +2,6 @@ package iceandshadow2.nyx.blocks.technical;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -11,22 +9,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
-import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxBlockFakeFurnace extends IaSBaseBlockTechnical {
-	
+
 	public NyxBlockFakeFurnace() {
 		super(EnumIaSModule.IAS, "FakeFurnace", Material.rock);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setHardness(Blocks.furnace.getBlockHardness(null, 0, 0, 0));
 		this.setResistance(Blocks.furnace.getExplosionResistance(null));
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onBlockAdded(World p_149726_1_, int p_149726_2_,
 			int p_149726_3_, int p_149726_4_) {

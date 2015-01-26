@@ -1,26 +1,18 @@
 package iceandshadow2.nyx.items;
 
-import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
-import iceandshadow2.util.IaSRegistration;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName,
-		IIaSGlowing {
+IIaSGlowing {
 
 	public NyxItemBowFrostLong(String par1) {
 		super(par1);

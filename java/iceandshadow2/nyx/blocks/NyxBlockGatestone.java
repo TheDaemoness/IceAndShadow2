@@ -16,7 +16,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -131,8 +130,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					else
 						dir = ForgeDirection.NORTH;
 				}
-				int posXMod = (int) (128*dir.offsetX);
-				int posZMod = (int) (128*dir.offsetZ);
+				int posXMod = 128*dir.offsetX;
+				int posZMod = 128*dir.offsetZ;
 				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
 						+ posXMod, z + posZMod) + 1;
 				for (int gateY = posYNew; gateY >= 0; --gateY) {

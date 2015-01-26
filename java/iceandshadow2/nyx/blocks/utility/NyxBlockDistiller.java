@@ -110,7 +110,7 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 			return this.blockIcon;
 		return NyxBlocks.brickPale.getIcon(side, 0);
 	}
-	
+
 	@Override
 	public int getMobilityFlag() {
 		return 2;

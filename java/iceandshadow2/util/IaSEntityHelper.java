@@ -62,7 +62,7 @@ public class IaSEntityHelper {
 		final int x = (int) (ent.posX + offsetX);
 		final int y = (int) (ent.posY + offsetY);
 		final int z = (int) (ent.posZ + offsetZ);
-		final int[] c = splitCoords(x, z);
+		splitCoords(x, z);
 		return ent.worldObj.getBlockLightValue(x, y, z);
 	}
 
@@ -79,9 +79,9 @@ public class IaSEntityHelper {
 				* f
 				+ (world.isRemote ? ent.getEyeHeight() - 0.12F : ent
 						.getEyeHeight()); // isRemote check to revert changes to
-											// ray trace position due to adding
-											// the eye height clientside and
-											// player yOffset differences
+		// ray trace position due to adding
+		// the eye height clientside and
+		// player yOffset differences
 		final double d2 = ent.prevPosZ + (ent.posZ - ent.prevPosZ) * f;
 		final Vec3 vec3 = Vec3.createVectorHelper(d0, d1, d2);
 		final float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);

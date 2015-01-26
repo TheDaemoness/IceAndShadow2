@@ -34,7 +34,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	protected Item getMaterialItem() {
-		return NyxItems.cortraDust;
+		return NyxItems.cortra;
 	}
 
 	@Override

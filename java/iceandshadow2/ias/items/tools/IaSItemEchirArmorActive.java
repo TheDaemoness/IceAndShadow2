@@ -2,7 +2,6 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmutable;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -40,7 +39,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer hulk) {
 		if (hulk.isSneaking()) // Does not always evaluate to false, see that
-								// one jumpscare in The Avengers.
+			// one jumpscare in The Avengers.
 			par1 = new ItemStack(IaSTools.armorEchir[slot], 1,
 					par1.getItemDamage());
 		else
@@ -53,7 +52,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
-		if (catalyst.getItem() == NyxItems.cortraDust || catalyst.getItem() == NyxItems.navistraShard) {
+		if (catalyst.getItem() == NyxItems.cortra || catalyst.getItem() == NyxItems.navistraShard) {
 			switch(slot) {
 			case 0: return catalyst.stackSize>=5?375:0;
 			case 1: return catalyst.stackSize>=8?600:0;
@@ -67,7 +66,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public List<ItemStack> getTransmutationYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		if(catalyst.getItem() == NyxItems.cortraDust)
+		if(catalyst.getItem() == NyxItems.cortra)
 			target.func_150996_a(IaSTools.armorCortra[slot]);
 		if(catalyst.getItem() == NyxItems.navistraShard)
 			target.func_150996_a(IaSTools.armorNavistra[slot]);

@@ -17,7 +17,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	public NyxItemSilkBerries(String id) {
 		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(32);
 		this.setEatTime(16);
 		this.setXpAltarMinimumValue(2);
 	}
@@ -25,7 +25,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@Override
 	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		par3EntityPlayer.heal(5.0F);
+		par3EntityPlayer.heal(3.0F+par2World.rand.nextInt(2));
 	}
 
 	/**
@@ -52,13 +52,13 @@ public class NyxItemSilkBerries extends IaSItemFood {
 						movingobjectposition.sideHit, par1ItemStack)) {
 				} else {
 					final Block i1 = par2World.getBlock(i, j, k);
-					final int j1 = par2World.getBlockMetadata(i, j, k);
+					par2World.getBlockMetadata(i, j, k);
 					if (i1 == NyxBlocks.infestLog) {
 						if (par2World.getBiomeGenForCoords(i, k).biomeID != NyxBiomes.nyxInfested.biomeID
 								&& !par3EntityPlayer.capabilities.isCreativeMode) {
 							IaSPlayerHelper
-									.messagePlayer(par3EntityPlayer,
-											"It doesn't seem like it'll grow outside of an infested forest.");
+							.messagePlayer(par3EntityPlayer,
+									"It doesn't seem like it'll grow outside of an infested forest.");
 							return par1ItemStack;
 						}
 						if (s == 0)

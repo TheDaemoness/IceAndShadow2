@@ -62,9 +62,9 @@ public class NyxBlockPlanks extends IaSBaseBlockMulti implements IIaSNoInfest {
 					IaSDamageSources.dmgPoisonwood, 1);
 			if (!((EntityLivingBase) par5Entity).isPotionActive(Potion.poison))
 				((EntityLivingBase) par5Entity)
-						.addPotionEffect(new PotionEffect(Potion.poison.id,
-								35 * (par1World.difficultySetting
-										.getDifficultyId() + 1), 1));
+				.addPotionEffect(new PotionEffect(Potion.poison.id,
+						35 * (par1World.difficultySetting
+								.getDifficultyId() + 1), 1));
 		}
 	}
 }

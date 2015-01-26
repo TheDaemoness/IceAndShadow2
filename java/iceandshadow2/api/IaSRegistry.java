@@ -29,22 +29,22 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 
 	public static void preInit() {
-		for(Object o : IceAndShadow2.instance.getPreRegistrationHandlers()) {
+		for(Object o : IceAndShadow2.getPreRegistrationHandlers()) {
 			doAdd(o);
 		}
 	}
-	
+
 	public static void postInit() {
-		for(Object o : IceAndShadow2.instance.getPostRegistrationHandlers()) {
+		for(Object o : IceAndShadow2.getPostRegistrationHandlers()) {
 			doAdd(o);
 		}
 	}
-	
+
 	public static void add(Object o) {
 		if(IceAndShadow2.isRegistrationPublic())
 			doAdd(o);
 	}
-	
+
 	private static void doAdd(Object o) {
 		if(o instanceof IIaSApiDistillable)
 			addHandler((IIaSApiDistillable)o);
@@ -57,7 +57,7 @@ public final class IaSRegistry {
 		if(o instanceof IaSToolMaterial)
 			addToolMaterial((IaSToolMaterial)o);
 	}
-	
+
 	private static void addHandler(IIaSApiDistillable handler) {
 		handlersDistillable.add(handler);
 	}
@@ -241,8 +241,6 @@ public final class IaSRegistry {
 			obj = ((ItemBlock) obj).field_150939_a;
 		IIaSApiExaminable ex = null;
 		NBTTagCompound nbt = null;
-		final Map<String, Integer> changeKno = null;
-
 		if (obj instanceof IIaSApiExaminable) {
 			ex = (IIaSApiExaminable) obj;
 			nbt = ex.getBookInfo(is, knowledge);
@@ -266,8 +264,8 @@ public final class IaSRegistry {
 				return ex.getChangedKnowledgeOnBook(is, knowledge);
 			} else
 				IaSPlayerHelper
-						.alertPlayer(checker,
-								"There's more information, but you'll need a plain book to write it down.");
+				.alertPlayer(checker,
+						"There's more information, but you'll need a plain book to write it down.");
 		}
 		return null;
 	}

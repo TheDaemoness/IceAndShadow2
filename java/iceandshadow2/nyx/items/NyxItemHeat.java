@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing,
-		IIaSApiTransmutable {
+IIaSApiTransmutable {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon icons[];
@@ -99,7 +99,7 @@ public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing,
 		IaSFxManager.spawnParticle(world, "vanilla_flame", pos.posX - 0.1
 				+ world.rand.nextDouble() / 5,
 				pos.posY + world.rand.nextDouble() / 3, pos.posZ - 0.1
-						+ world.rand.nextDouble() / 5,
+				+ world.rand.nextDouble() / 5,
 				-0.05 + world.rand.nextDouble() / 10, -0.1F,
 				-0.05 + world.rand.nextDouble() / 10, false, false);
 		return true;

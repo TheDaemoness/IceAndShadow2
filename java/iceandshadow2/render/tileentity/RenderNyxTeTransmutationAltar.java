@@ -1,6 +1,5 @@
 package iceandshadow2.render.tileentity;
 
-import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 
 import org.lwjgl.opengl.GL11;
@@ -34,6 +33,11 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 				cat = null;
 			else if (alt.catalyst.getItem() != cat.getEntityItem().getItem())
 				cat.setEntityItemStack(alt.catalyst);
+			else if (!alt.catalyst.getItem().isDamageable() && 
+					alt.catalyst.getItemDamage() != cat.getEntityItem().getItemDamage())
+				cat.setEntityItemStack(alt.target);
+			else if (alt.catalyst.stackSize != cat.getEntityItem().stackSize)
+				cat.setEntityItemStack(alt.target);
 		}
 
 		if (tar == null && alt.target != null)
@@ -43,6 +47,11 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			if (alt.target == null)
 				tar = null;
 			else if (alt.target.getItem() != tar.getEntityItem().getItem())
+				tar.setEntityItemStack(alt.target);
+			else if (!alt.target.getItem().isDamageable() && 
+					alt.target.getItemDamage() != tar.getEntityItem().getItemDamage())
+				tar.setEntityItemStack(alt.target);
+			else if (alt.target.stackSize != tar.getEntityItem().stackSize)
 				tar.setEntityItemStack(alt.target);
 		}
 

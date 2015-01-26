@@ -7,16 +7,12 @@ import iceandshadow2.IIaSModName;
 import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -26,10 +22,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class NyxItemBow extends Item implements IIaSModName,
-		IIaSGlowing, IIaSApiTransmutable {
+IIaSGlowing, IIaSApiTransmutable {
 
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon[][] iconArray;
 
@@ -44,8 +40,8 @@ public abstract class NyxItemBow extends Item implements IIaSModName,
 		this.bFull3D = false;
 		inuse = false;
 	}
-	
-	
+
+
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer ep,
@@ -70,7 +66,7 @@ public abstract class NyxItemBow extends Item implements IIaSModName,
 	public EnumIaSModule getIaSModule() {
 		return EnumIaSModule.NYX;
 	}
-	
+
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		this.itemIcon = reg.registerIcon(getTexName());
@@ -83,7 +79,7 @@ public abstract class NyxItemBow extends Item implements IIaSModName,
 					+ (i + 1));
 		}
 	}
-	
+
 	@Override
 	public boolean requiresMultipleRenderPasses() {
 		return true;
@@ -99,18 +95,18 @@ public abstract class NyxItemBow extends Item implements IIaSModName,
 		if (!((NyxItemBow) stack.getItem()).inuse)
 			return renderPass > 0 ? this.glow : this.itemIcon;
 
-		final int j = getMaxItemUseDuration(stack) - useRemaining;
+			final int j = getMaxItemUseDuration(stack) - useRemaining;
 
-		if (j >= getTimeForIcon(this.getSpeedModifier(stack), 2))
-			return this.iconArray[2][renderPass];
-		if (j >= getTimeForIcon(this.getSpeedModifier(stack), 1))
-			return this.iconArray[1][renderPass];
-		return this.iconArray[0][renderPass];
+			if (j >= getTimeForIcon(this.getSpeedModifier(stack), 2))
+				return this.iconArray[2][renderPass];
+			if (j >= getTimeForIcon(this.getSpeedModifier(stack), 1))
+				return this.iconArray[1][renderPass];
+			return this.iconArray[0][renderPass];
 	}
-	
+
 	public abstract int getTimeForIcon(int mod, int index);
 	public abstract int getUpgradeCost();
-	
+
 	public int getSpeedModifier(ItemStack is) {
 		if(!is.hasTagCompound())
 			return 0;
@@ -169,10 +165,11 @@ public abstract class NyxItemBow extends Item implements IIaSModName,
 		IaSRegistration.register(this);
 		return this;
 	}
-	
-    public EnumAction getItemUseAction(ItemStack is) {
-        return EnumAction.bow;
-    }
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack is) {
+		return EnumAction.bow;
+	}
 
 	@Override
 	public boolean usesDefaultGlowRenderer() {

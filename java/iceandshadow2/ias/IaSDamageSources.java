@@ -4,7 +4,7 @@ import net.minecraft.util.DamageSource;
 
 public class IaSDamageSources {
 	public static DamageSource dmgStone, dmgVines, dmgPoisonwood,
-			dmgStalagmite, dmgGatestone, dmgXpAltar, dmgFreezing;
+	dmgStalagmite, dmgGatestone, dmgXpAltar, dmgFreezing;
 
 	public static void init() {
 		dmgStone = new IaSDamageSource("IceAndShadow2.nyxStoneDamage", 0.5F,

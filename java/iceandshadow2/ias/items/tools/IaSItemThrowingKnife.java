@@ -54,7 +54,7 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		if (par1ItemStack.getItemDamage() > 0)
 			return par1ItemStack;
 
-		final int var10 = EnchantmentHelper.getEnchantmentLevel(
+		EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.knockback.effectId, par1ItemStack);
 		final EntityThrowingKnife var8 = new EntityThrowingKnife(par2World,
 				par3EntityPlayer, 1.0F, par1ItemStack);
@@ -67,14 +67,14 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 		mat.onKnifeThrow(par1ItemStack, par3EntityPlayer, var8);
 
 		par2World
-				.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
+		.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
 
 		if (!par2World.isRemote)
 			par2World.spawnEntityInWorld(var8);
 
 		par1ItemStack.setItemDamage(IaSToolMaterial.extractMaterial(
 				par1ItemStack).getKnifeCooldown(par1ItemStack, par2World,
-				par3EntityPlayer));
+						par3EntityPlayer));
 
 		return par1ItemStack;
 	}

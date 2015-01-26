@@ -56,10 +56,10 @@ public class NyxChunkProvider implements IChunkProvider {
 		this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
 		this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 16);
 		this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4); // Do we
-																		// even
-																		// need
-																		// this
-																		// anymore?
+		// even
+		// need
+		// this
+		// anymore?
 		// this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10); //Or
 		// this?
 		this.enigmaArray = new double[825];
@@ -183,10 +183,6 @@ public class NyxChunkProvider implements IChunkProvider {
 	}
 
 	private void initNoiseField(int x, int y, int z) {
-		final double d0 = 684.412D;
-		final double d1 = 684.412D;
-		final double d2 = 512.0D;
-		final double d3 = 512.0D;
 		this.noiseArr4 = this.noiseGen4.generateNoiseOctaves(this.noiseArr4, x,
 				z, 5, 5, 200.0D, 200.0D, 0.5D);
 		this.noiseArr3 = this.noiseGen3.generateNoiseOctaves(this.noiseArr3, x,
@@ -196,12 +192,8 @@ public class NyxChunkProvider implements IChunkProvider {
 				y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		this.noiseArr2 = this.noiseGen2.generateNoiseOctaves(this.noiseArr2, x,
 				y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-		final boolean flag1 = false;
-		final boolean flag = false;
 		int l = 0;
 		int i1 = 0;
-		final double d4 = 8.5D;
-
 		for (int j1 = 0; j1 < 5; ++j1) {
 			for (int k1 = 0; k1 < 5; ++k1) {
 				float f = 0.0F;
@@ -209,12 +201,12 @@ public class NyxChunkProvider implements IChunkProvider {
 				float f2 = 0.0F;
 				final byte b0 = 2;
 				final BiomeGenBase biomegenbase = this.biomesForGeneration[j1
-						+ 2 + (k1 + 2) * 10];
+				                                                           + 2 + (k1 + 2) * 10];
 
 				for (int l1 = -b0; l1 <= b0; ++l1) {
 					for (int i2 = -b0; i2 <= b0; ++i2) {
 						final BiomeGenBase biomegenbase1 = this.biomesForGeneration[j1
-								+ l1 + 2 + (k1 + i2 + 2) * 10];
+						                                                            + l1 + 2 + (k1 + i2 + 2) * 10];
 						final float hBase = biomegenbase1.rootHeight;
 						final float hVari = biomegenbase1.heightVariation;
 
@@ -309,8 +301,6 @@ public class NyxChunkProvider implements IChunkProvider {
 		final long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		final long j1 = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed(par2 * i1 + par3 * j1 ^ this.worldObj.getSeed());
-		final boolean flag = false;
-
 		int xit, zit, yval;
 
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);

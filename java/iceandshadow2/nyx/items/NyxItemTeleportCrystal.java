@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements
-		IIaSKeepOnDeath {
+IIaSKeepOnDeath {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon empty;
@@ -85,24 +85,24 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements
 				final EntityPlayerMP plm = (EntityPlayerMP) pl;
 				if (pl.dimension != IaSFlags.dim_nyx_id) {
 					plm.mcServer
-							.getConfigurationManager()
-							.transferPlayerToDimension(
-									plm,
-									IaSFlags.dim_nyx_id,
-									new NyxTeleporter(
-											plm.mcServer
-													.worldServerForDimension(IaSFlags.dim_nyx_id)));
+					.getConfigurationManager()
+					.transferPlayerToDimension(
+							plm,
+							IaSFlags.dim_nyx_id,
+							new NyxTeleporter(
+									plm.mcServer
+									.worldServerForDimension(IaSFlags.dim_nyx_id)));
 					plm.worldObj.playSoundAtEntity(plm,
 							"IceAndShadow2:portal_travel", 0.7F,
 							plm.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 				} else {
 					is.setItemDamage(is.getItemDamage() | 4);
 					plm.mcServer.getConfigurationManager()
-							.transferPlayerToDimension(
-									plm,
-									0,
-									new NyxTeleporter(plm.mcServer
-											.worldServerForDimension(0)));
+					.transferPlayerToDimension(
+							plm,
+							0,
+							new NyxTeleporter(plm.mcServer
+									.worldServerForDimension(0)));
 				}
 			}
 		}
@@ -115,22 +115,22 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements
 		if ((heap.getItemDamage() & 4) == 4
 				&& pwai.dimension == IaSFlags.dim_nyx_id) {
 			IaSPlayerHelper
-					.messagePlayer(
-							pwai,
-							"You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
+			.messagePlayer(
+					pwai,
+					"You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
 		if ((heap.getItemDamage() & 1) == 0) {
 			if (pwai.dimension == IaSFlags.dim_nyx_id)
 				IaSPlayerHelper
-						.messagePlayer(
-								pwai,
-								"You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
+				.messagePlayer(
+						pwai,
+						"You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
 			else
 				IaSPlayerHelper
-						.messagePlayer(pwai,
-								"The crystal barely responds. It seems to prefer cold and dark places.");
+				.messagePlayer(pwai,
+						"The crystal barely responds. It seems to prefer cold and dark places.");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
@@ -159,12 +159,12 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements
 					if (!IaSPlayerHelper.giveItem(ep, new ItemStack(
 							NyxItems.seedObsidian, 1)))
 						IaSPlayerHelper
-								.messagePlayer(ep,
-										"Something flew out of the crystal and fell on the ground.");
+						.messagePlayer(ep,
+								"Something flew out of the crystal and fell on the ground.");
 					else
 						IaSPlayerHelper
-								.messagePlayer(ep,
-										"Something flew out of the crystal and into your backpack.");
+						.messagePlayer(ep,
+								"Something flew out of the crystal and into your backpack.");
 				}
 			} else if (!tree.worldObj.isRemote)
 				pile.setItemDamage(pile.getItemDamage() | 2);

@@ -28,7 +28,6 @@ public class NyxBlockRopeY extends NyxBlockRope {
 	public void onBlockClicked(World w, int x, int y, int z, EntityPlayer pl) {
 		if (!pl.isSneaking())
 			return;
-		final int origy = y;
 		for (; y < 255; ++y) {
 			if (w.getBlock(x, y, z) instanceof NyxBlockHookClimbing) {
 				IaSPlayerHelper.giveItem(pl, new ItemStack(NyxItems.rope));
