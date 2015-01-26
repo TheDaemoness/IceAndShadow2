@@ -34,6 +34,8 @@ item.nyxHeat0.name=Tiny Crystal Flame
 item.nyxHeat1.name=Small Crystal Flame
 item.nyxHeat2.name=Medium Crystal Flame
 item.nyxHeat3.name=Large Crystal Flame
+item.nyxCrystalVial.name=Crystalline Vial
+item.nyxExtractorPoison.name=Poison Extractor
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe

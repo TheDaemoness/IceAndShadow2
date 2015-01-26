@@ -14,7 +14,8 @@ public class NyxItems {
 	draconium, exousicIceShard, toughGossamer, poisonFruit,
 	poisonFruitFertile, silkBerries, frostBowShort, frostBowLong,
 	boneCursed, boneSanctified, heat, vineBundle, bread, cookie,
-	echirShears, icicle, page, rope, kitTightrope;
+	echirShears, icicle, page, rope, kitTightrope, 
+	crystalVial, extractorPoison;
 
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal")
@@ -74,5 +75,9 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.tools);
 		heat = new NyxItemHeat("Heat").register().setCreativeTab(
 				IaSCreativeTabs.misc);
+		crystalVial = new NyxItemCrystalVial("CrystalVial").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
+		extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
 	}
 }
