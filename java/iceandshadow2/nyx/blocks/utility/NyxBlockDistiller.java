@@ -57,6 +57,8 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 							&& tent.isItemValidForSlot(i, is)) {
 						if (tent.getStackInSlot(i) != null) {
 							final ItemStack iis = tent.getStackInSlot(i);
+							if(iis.getItemDamage() != is.getItemDamage())
+								continue;
 							final int size = Math.min(iis.getMaxStackSize()
 									- iis.stackSize, is.stackSize);
 							if (size <= 0)
@@ -75,6 +77,8 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 						if (tent2.isItemValidForSlot(i, is)) {
 							if (tent.getStackInSlot(i) != null) {
 								final ItemStack iis = tent2.getStackInSlot(i);
+								if(iis.getItemDamage() != is.getItemDamage())
+									continue;
 								final int size = Math.min(iis.getMaxStackSize()
 										- iis.stackSize, is.stackSize);
 								if (size <= 0)
