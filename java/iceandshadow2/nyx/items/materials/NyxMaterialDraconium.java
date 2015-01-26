@@ -9,37 +9,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-public class NyxMaterialExousium extends IaSToolMaterial {
+public class NyxMaterialDraconium extends IaSToolMaterial {
 
 	private static ResourceLocation knife_tex = new ResourceLocation(
-			"iceandshadow2:textures/entity/nyxknife_exousium.png");
+			"iceandshadow2:textures/entity/nyxknife_draconium.png");
 
 	@Override
 	public int getBaseLevel() {
-		return 0;
+		return 3;
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 24;
+		return 12;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 32;
+		return 96;
 	}
 	
 	@Override
 	public float getBaseDamage() {
 		return 4;
-	}
-
-	@Override
-	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
-			Entity thrower) {
-		final DamageSource ds = super.getKnifeDamageSource(knife, thrower)
-				.setDamageBypassesArmor().setDamageIsAbsolute();
-		return ds;
 	}
 
 	@Override
@@ -54,12 +46,12 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public String getMaterialName() {
-		return "Exousium";
+		return "Draconium";
 	}
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 1;
+		return mat.getItem() == NyxItems.draconium;
 	}
 
 }

@@ -1,16 +1,23 @@
 package iceandshadow2.nyx.items;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmutable;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemCortra extends IaSBaseItemMulti {
+public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmutable {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon crystalIcon;
@@ -34,5 +41,29 @@ public class NyxItemCortra extends IaSBaseItemMulti {
 	public void registerIcons(IIconRegister reg) {
 		this.itemIcon = reg.registerIcon(this.getTexName() + "Dust");
 		this.crystalIcon = reg.registerIcon(this.getTexName() + "Crystal");
+	}
+
+	@Override
+	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || 
+				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
+			return 0;
+		return 120;
+	}
+
+	@Override
+	public List<ItemStack> getTransmutationYield(ItemStack target,
+			ItemStack catalyst, World world) {
+		List<ItemStack> it = new ArrayList<ItemStack>();
+		target.stackSize -= 1;
+		catalyst.stackSize -= 1;
+		it.add(new ItemStack(NyxItems.cortraIngot,1,1));
+		return it;
+	}
+
+	@Override
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity ent) {
+		return false;
 	}
 }

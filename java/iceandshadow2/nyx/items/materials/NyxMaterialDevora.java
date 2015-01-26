@@ -32,7 +32,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public float getBaseSpeed() {
-		return 64;
+		return 32;
 	}
 
 	@Override
