@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world.gen.ruins;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.items.NyxItemBow;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -191,9 +193,15 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 			// Long bow
 			else if (rewardid < 3 && rareflag) {
-				itemz = new ItemStack(NyxItems.frostBowLong, 1,
+				NBTTagCompound c = new NBTTagCompound();
+				if(var2.nextInt(3) == 0)
+					itemz = new ItemStack(NyxItems.frostBowShort, 1,
+							48 + var2.nextInt(96));
+				else
+					itemz = new ItemStack(NyxItems.frostBowLong, 1,
 						32 + var2.nextInt(64));
-				itemz.addEnchantment(Enchantment.punch, 1);
+				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3)==0?1:2);
+				itemz.setTagCompound(c);
 				rareflag = false;
 			}
 
@@ -232,18 +240,13 @@ public class GenRuinsTowerLookout extends GenRuins {
 				}
 			}
 
-			// Torches
-			else if (rewardid < 25) {
-				if (var2.nextInt(3) != 0)
-					itemz = new ItemStack(Blocks.glowstone, 2 + var2.nextInt(4));
-				else
-					itemz = new ItemStack(Blocks.redstone_torch,
-							4 + var2.nextInt(8));
-			}
+			// Cortra.
+			else if (rewardid < 25)
+				itemz = new ItemStack(NyxItems.cortra, 2 + var2.nextInt(3));
 
-			// Devora.
+			// Bones.
 			else if (rewardid < 40)
-				itemz = new ItemStack(NyxItems.devora, 2 + var2.nextInt(6));
+				itemz = new ItemStack(NyxItems.boneCursed, 1 + var2.nextInt(2));
 
 			// Food.
 			else if (rewardid < 55) {
@@ -270,10 +273,14 @@ public class GenRuinsTowerLookout extends GenRuins {
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}
 
-		if (var2.nextInt(3) == 0)
+		if (var2.nextBoolean())
 			chestent.setInventorySlotContents(
 					1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.draconium));
+		if (var2.nextInt(4) != 0)
+			chestent.setInventorySlotContents(
+				1 + var2.nextInt(chestent.getSizeInventory() - 1),
+				new ItemStack(NyxItems.boneSanctified));
 		chestent.setInventorySlotContents(0, new ItemStack(NyxItems.page, 1, 0));
 	}
 

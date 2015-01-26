@@ -24,6 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class NyxItemBow extends Item implements IIaSModName,
 IIaSGlowing, IIaSApiTransmutable {
 
+	public static final String nbtTierID = "nyxBowDrawModifier";
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
 
 	@SideOnly(Side.CLIENT)
@@ -110,9 +111,9 @@ IIaSGlowing, IIaSApiTransmutable {
 	public int getSpeedModifier(ItemStack is) {
 		if(!is.hasTagCompound())
 			return 0;
-		if(!is.getTagCompound().hasKey("nyxBowDrawModifier"))
+		if(!is.getTagCompound().hasKey(nbtTierID))
 			return 0;
-		return is.getTagCompound().getInteger("nyxBowDrawModifier");
+		return is.getTagCompound().getInteger(nbtTierID);
 	}
 
 	@Override
@@ -194,9 +195,9 @@ IIaSGlowing, IIaSApiTransmutable {
 			ItemStack catalyst, World world) {
 		if(!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
-			target.getTagCompound().setInteger("nyxBowDrawModifier",1);
+			target.getTagCompound().setInteger(nbtTierID,1);
 		} else
-			target.getTagCompound().setInteger("nyxBowDrawModifier",this.getSpeedModifier(target)+1);
+			target.getTagCompound().setInteger(nbtTierID,this.getSpeedModifier(target)+1);
 		catalyst.stackSize -= this.getUpgradeCost();
 		return null;
 	}
