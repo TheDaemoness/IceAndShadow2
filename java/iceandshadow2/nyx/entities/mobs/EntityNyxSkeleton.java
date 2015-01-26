@@ -12,15 +12,11 @@ import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
-import iceandshadow2.nyx.entities.ai.senses.IaSSense;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseMovement;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseTouch;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
-import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
+import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
+import iceandshadow2.nyx.items.NyxItemBow;
 import iceandshadow2.nyx.items.NyxItemBowFrostLong;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.enchantment.Enchantment;
@@ -246,7 +242,7 @@ IIaSMobGetters {
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving,
 			float par2) {
 		final ItemStack wielding = this.getHeldItem();
-		if (wielding.getItem() instanceof ItemBow) {
+		if (wielding.getItem() instanceof NyxItemBow) {
 			doBowAttack(par1EntityLiving, par2,
 					wielding.getItem() instanceof NyxItemBowFrostLong);
 		} else {
@@ -575,7 +571,7 @@ IIaSMobGetters {
 		this.tasks.removeTask(shadowAttack);
 		final ItemStack var1 = this.getHeldItem();
 
-		if (var1 != null && var1.getItem() instanceof ItemBow) {
+		if (var1 != null && var1.getItem() instanceof NyxItemBow) {
 			if (this.typpe == EnumNyxSkeletonType.BOW_FROST_LONG) {
 				this.tasks.addTask(4, rangedAttackLong);
 			} else {
