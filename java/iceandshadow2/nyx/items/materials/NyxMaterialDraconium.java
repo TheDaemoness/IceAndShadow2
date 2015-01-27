@@ -46,7 +46,7 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 
 	@Override
 	protected Item getMaterialItem() {
-		return NyxItems.exousium;
+		return NyxItems.draconium;
 	}
 
 	@Override
