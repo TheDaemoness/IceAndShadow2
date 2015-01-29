@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements IIaSApiTransmutable {
+public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
 
 	public IaSItemEchirKnifeActive(String texName, int tab) {
 		super(EnumIaSModule.IAS, texName);
@@ -38,7 +38,7 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this)
 			return 0;
 		if (IaSRegistry.getTransmutationMaterial(catalyst) != null)
@@ -47,7 +47,7 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		int mut = Math.min(target.stackSize,4);
 		target.stackSize -= mut;

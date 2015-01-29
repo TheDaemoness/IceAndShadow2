@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items.materials;
+package iceandshadow2.nyx.toolmats;
 
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;

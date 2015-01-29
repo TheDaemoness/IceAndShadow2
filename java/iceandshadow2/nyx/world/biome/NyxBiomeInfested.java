@@ -21,7 +21,7 @@ public class NyxBiomeInfested extends NyxBiome {
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				70, 3, 5));
+				60, 3, 5));
 	}
 
 	@Override

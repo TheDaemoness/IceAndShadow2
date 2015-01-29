@@ -84,5 +84,14 @@ public class NyxRecipes {
 				new ItemStack(NyxItems.heat, 1, 2));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 0),
 				new ItemStack(NyxItems.heat, 1, 1));
+		
+		GameRegistry.addRecipe(new ItemStack(NyxItems.crystalVial,2,0), "c", "c", "e",
+				'c', new ItemStack(NyxItems.cortra,1,1),
+				'e', new ItemStack(NyxItems.echirIngot,1,1));
+		
+		GameRegistry.addRecipe(new ItemStack(NyxItems.extractorPoison), " d ", "fvf", 
+				'd', new ItemStack(NyxItems.draconium), 
+				'f', new ItemStack(NyxItems.poisonFruit),
+				'v', new ItemStack(NyxItems.crystalVial));
 	}
 }

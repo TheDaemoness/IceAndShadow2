@@ -6,19 +6,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemIcicle extends IaSBaseItemSingle implements
-IIaSApiTransmutable {
+IIaSApiTransmute {
 
 	public NyxItemIcicle(String texName) {
 		super(EnumIaSModule.NYX, texName);
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (!target.isItemDamaged())
 			return 0;
 		if (target.getItem() == NyxItems.frostBowLong)
@@ -29,7 +29,7 @@ IIaSApiTransmutable {
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World w) {
 		catalyst.stackSize -= 1;
 		if (target.getItem() == NyxItems.frostBowLong)

@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.tileentities;
 
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
@@ -16,7 +17,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public ItemStack target;
 	public ItemStack catalyst;
-	public IIaSApiTransmutable handler;
+	public IIaSApiTransmute handler;
 
 	public boolean canAttemptTransmutation() {
 		return catalyst != null && target != null;
@@ -50,9 +51,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	}
 
 	public boolean handlePlace(ItemStack is) {
-		if (catalyst == null) {
-			catalyst = is;
-			return true;
+		if(!(is.getItem() instanceof IIaSApiTransmuteLens)) {
+			if (catalyst == null) {
+				catalyst = is;
+				return true;
+			}
 		}
 		if (target == null) {
 			target = is;
@@ -61,9 +64,14 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		return false;
 	}
 
-	public ItemStack handleRemove() {
+	public ItemStack handleRemove(boolean isSneaking) {
+		final boolean lensFlag;
+		if(target != null)
+			lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
+		else
+			lensFlag = false;
 		ItemStack temp;
-		if (target != null) {
+		if (target != null && (!lensFlag || isSneaking)) {
 			temp = target;
 			target = null;
 			return temp;

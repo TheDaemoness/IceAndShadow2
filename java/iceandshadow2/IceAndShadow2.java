@@ -12,7 +12,7 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.ias.handlers.*;
 import iceandshadow2.nyx.forge.*;
-import iceandshadow2.nyx.items.materials.*;
+import iceandshadow2.nyx.toolmats.*;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,7 +33,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies = "required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
 	public static final String MODID = "IceAndShadow2";
-	public static final String VERSION = "Pre-Alpha 6";
+	public static final String VERSION = "Pre-Alpha 7";
 	public static final int CONFIG_MAJ = 2;
 	public static final int CONFIG_MIN = 1;
 

@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
@@ -66,7 +67,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 					tte.catalyst);
 		if (tte.handler == null)
 			return;
-		final List<ItemStack> l_ist = tte.handler.getTransmutationYield(
+		final List<ItemStack> l_ist = tte.handler.getTransmuteYield(
 				tte.target, tte.catalyst, w);
 		if (tte.target.stackSize <= 0)
 			tte.target = null;
@@ -113,7 +114,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return;
 			}
 			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmutationTime(tte.target, tte.catalyst));
+					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
 		w.setTileEntity(x, y, z, tte);
 	}
@@ -129,8 +130,17 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_,
-			int p_149673_3_, int p_149673_4_, int side) {
+	public IIcon getIcon(IBlockAccess w, int x,
+			int y, int z, int side) {
+		TileEntity e = w.getTileEntity(x, y, z);
+		if(e instanceof NyxTeTransmutationAltar) {
+			ItemStack tar = ((NyxTeTransmutationAltar)e).target;
+			if(tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
+				IIcon retval = ((IIaSApiTransmuteLens)tar.getItem()).getAltarTopTexture(tar);
+				if(retval != null)
+					return retval;
+			}
+		}
 		return getIcon(side, 0);
 	}
 
@@ -154,7 +164,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 		final ItemStack is = ep.getEquipmentInSlot(0);
 		if (is == null) {
-			final ItemStack its = tte.handleRemove();
+			final ItemStack its = tte.handleRemove(ep.isSneaking());
 			if (its != null)
 				IaSPlayerHelper.giveItem(ep, its);
 			w.setTileEntity(x, y, z, tte);
@@ -172,7 +182,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return true;
 			}
 			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmutationTime(tte.target, tte.catalyst));
+					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 			w.setTileEntity(x, y, z, tte);
 			return true;
 		}

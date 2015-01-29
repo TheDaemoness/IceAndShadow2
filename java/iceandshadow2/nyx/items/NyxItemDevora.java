@@ -27,18 +27,18 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 		return 1;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
 			return smallIcon;
 		return this.itemIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
 	}
 
 	@SideOnly(Side.CLIENT)

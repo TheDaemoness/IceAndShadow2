@@ -35,9 +35,9 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 				cat.setEntityItemStack(alt.catalyst);
 			else if (!alt.catalyst.getItem().isDamageable() && 
 					alt.catalyst.getItemDamage() != cat.getEntityItem().getItemDamage())
-				cat.setEntityItemStack(alt.target);
+				cat.setEntityItemStack(alt.catalyst);
 			else if (alt.catalyst.stackSize != cat.getEntityItem().stackSize)
-				cat.setEntityItemStack(alt.target);
+				cat.setEntityItemStack(alt.catalyst);
 		}
 
 		if (tar == null && alt.target != null)

@@ -389,13 +389,20 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					if (this.inTile.getMaterial() == Material.glass) {
 						die = !this.getIsCritical();
 						this.setIsCritical(false);
-						this.worldObj.func_147480_a(this.xTile, this.yTile,
+						if(!this.worldObj.isRemote)
+							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, false);
 					}
-					if (this.inTile.getMaterial() == Material.ice)
-						this.worldObj.func_147480_a(this.xTile, this.yTile,
+					else if (this.inTile.getMaterial() == Material.ice) {
+						if(!this.worldObj.isRemote)
+							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, true);
-
+					}
+					else if (this.inTile.getMaterial() == Material.cloth)
+						die = false;
+					else if (this.inTile.getMaterial() == Material.leaves) 
+						die = !this.getIsCritical() && this.rand.nextInt(8) == 0;
+					
 					if (die) {
 						this.worldObj
 						.playSoundAtEntity(

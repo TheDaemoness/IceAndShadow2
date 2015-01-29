@@ -41,8 +41,9 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 	public void onBlockHarvested(World w, int x,
 			int y, int z, int fortune,
 			EntityPlayer pwai) {
-		if(w.rand.nextInt(3+fortune) != 0)
+		if(w.rand.nextInt(3+fortune) <= fortune)
 			IaSPlayerHelper.giveItem(pwai, new ItemStack(NyxItems.exousium,1,0));
+		IaSPlayerHelper.giveItem(pwai, new ItemStack(NyxItems.exousium,1,0));
 	}
 
 	@Override

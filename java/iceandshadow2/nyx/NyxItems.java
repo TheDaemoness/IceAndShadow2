@@ -5,26 +5,33 @@ import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
+import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
+import iceandshadow2.nyx.items.tools.NyxItemBowFrostShort;
+import iceandshadow2.nyx.items.tools.NyxItemCrystalVial;
+import iceandshadow2.nyx.items.tools.NyxItemExtractorPoison;
+import iceandshadow2.nyx.items.tools.NyxItemKitTightrope;
+import iceandshadow2.nyx.items.tools.NyxItemRope;
+import iceandshadow2.nyx.items.tools.NyxItemTeleportCrystal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class NyxItems {
-	public static Item teleportCrystal, seedObsidian, bloodstone, echirIngot,
+	public static Item teleportCrystal, seedObsidian, bloodstone, 
+	echirIngot, cortraIngot, draconiumIngot,
 	nifelhiumPowder, navistraShard, devora, cortra, exousium,
 	draconium, exousicIceShard, toughGossamer, poisonFruit,
 	poisonFruitFertile, silkBerries, frostBowShort, frostBowLong,
 	boneCursed, boneSanctified, heat, vineBundle, bread, cookie,
-	echirShears, icicle, page, rope, kitTightrope;
+	echirShears, icicle, page, rope, kitTightrope, 
+	crystalVial, extractorPoison;
 
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal")
 		.register().setCreativeTab(IaSCreativeTabs.misc);
 		seedObsidian = new NyxItemSeedObsidian("SeedObsidian").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
-		echirIngot = new NyxItemIngotEchir("EchirIngot").register()
-				.setCreativeTab(IaSCreativeTabs.resources);
 		nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder")
-		.register().setCreativeTab(IaSCreativeTabs.resources);
+				.register().setCreativeTab(IaSCreativeTabs.resources);
 		bloodstone = new NyxItemBloodstone("Bloodstone").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		navistraShard = new NyxItemNavistraShard("NavistraShard").register()
@@ -38,6 +45,12 @@ public class NyxItems {
 		exousicIceShard = new NyxItemExousicIce("ExousicIceShard").register().setCreativeTab(
 				IaSCreativeTabs.resources);
 		draconium = new NyxItemDraconium("Draconium").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		echirIngot = new NyxItemIngot("EchirIngot").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		cortraIngot = new NyxItemIngot("CortraIngot").setTransmutation(cortra, 1).register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		draconiumIngot = new NyxItemIngot("DraconiumIngot").setTransmutation(draconium, 2).register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
@@ -74,5 +87,9 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.tools);
 		heat = new NyxItemHeat("Heat").register().setCreativeTab(
 				IaSCreativeTabs.misc);
+		crystalVial = new NyxItemCrystalVial("CrystalVial").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
+		extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
 	}
 }

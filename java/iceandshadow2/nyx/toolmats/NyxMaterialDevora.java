@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items.materials;
+package iceandshadow2.nyx.toolmats;
 
 import java.util.List;
 
@@ -27,12 +27,12 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 64;
+		return 32;
 	}
 
 	@Override

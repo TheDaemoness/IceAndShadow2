@@ -59,6 +59,8 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * Gets the item's base attack damage. This is called by the default
 	 * implementations of getToolDamage() and getKnifeDamage(). Players are not
 	 * forced to override it if it won't be used.
+	 * Cheat sheet: 0 = wood, 1 = stone, 2 =
+	 * iron, 3 = diamond/echir
 	 * 
 	 * @return
 	 */
@@ -307,7 +309,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	}
 
 	@Override
-	public int getXpValue(ItemStack is, Random rand) {
+	public int getXpValue(ItemStack is, Random rand)  {
 		return 0;
 	}
 
@@ -480,22 +482,5 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 					+ this.getMaterialName()
 					+ EnumIaSToolClass.fromId(i, true).toString());
 
-	}
-
-	/**
-	 * Called when an intelligent Nyxian enemy is going to pick up this tool
-	 * (namely, Winter Skeletons). Note that onRightClick() will NOT get called
-	 * while the tool is being used by a intelligent Nyxian enemy. All other
-	 * combat-related callbacks work fine, however.
-	 * 
-	 * @param is
-	 *            The item stack the entity is going to pick up.
-	 * @param user
-	 *            The entity that is going to pick up this tool.
-	 * @return True if the Nyxian enemy should pick up and use this tool, false
-	 *         otherwise.
-	 */
-	public boolean shouldEnemiesUse(ItemStack is, EntityLivingBase user) {
-		return false;
 	}
 }

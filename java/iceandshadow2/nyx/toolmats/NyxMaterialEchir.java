@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items.materials;
+package iceandshadow2.nyx.toolmats;
 
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
@@ -7,24 +7,24 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class NyxMaterialCortra extends IaSToolMaterial {
+public class NyxMaterialEchir extends IaSToolMaterial {
 
 	private static ResourceLocation knife_tex = new ResourceLocation(
-			"iceandshadow2:textures/entity/nyxknife_cortra.png");
+			"iceandshadow2:textures/entity/nyxknife_echir.png");
 
 	@Override
 	public int getBaseLevel() {
-		return 8;
+		return 2;
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 6;
+		return 10;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 256;
+		return 384;
 	}
 
 	@Override
@@ -34,16 +34,17 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	protected Item getMaterialItem() {
-		return NyxItems.cortra;
+		return NyxItems.echirIngot;
 	}
 
 	@Override
 	public String getMaterialName() {
-		return "Cortra";
+		return "Echir";
 	}
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.echirIngot && mat.getItemDamage() > 0;
 	}
+
 }

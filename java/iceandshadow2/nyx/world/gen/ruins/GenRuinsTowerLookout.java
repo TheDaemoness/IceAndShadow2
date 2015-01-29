@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world.gen.ruins;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -10,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -178,10 +180,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 		// Add more random loot.
 		final int chestcontentamount = 4 + var2.nextInt(4);
 		boolean rareflag = true;
+		boolean boneflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
 			ItemStack itemz = new ItemStack(NyxItems.icicle,
-					1 + var2.nextInt(3));
+					1 + var2.nextInt(4));
 
 			// Bloodstone.
 			if (rewardid == 0 && rareflag) {
@@ -190,19 +193,21 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Long bow
-			else if (rewardid < 3 && rareflag) {
-				itemz = new ItemStack(NyxItems.frostBowLong, 1,
+			else if (rewardid < 5 && rareflag) {
+				NBTTagCompound c = new NBTTagCompound();
+				if(var2.nextInt(3) == 0)
+					itemz = new ItemStack(NyxItems.frostBowShort, 1,
+							48 + var2.nextInt(96));
+				else
+					itemz = new ItemStack(NyxItems.frostBowLong, 1,
 						32 + var2.nextInt(64));
-				itemz.addEnchantment(Enchantment.punch, 1);
+				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3)==0?1:2);
+				itemz.setTagCompound(c);
 				rareflag = false;
 			}
 
-			// Sanctified Bone
-			else if (rewardid < 10)
-				itemz = new ItemStack(NyxItems.boneSanctified);
-
 			// Sword or armor!
-			else if (rewardid < 15) {
+			else if (rewardid < 10) {
 				if (var2.nextInt(3) == 0) {
 					itemz = new ItemStack(Items.diamond_sword);
 					itemz.addEnchantment(Enchantment.smite, 1 + var2.nextInt(2));
@@ -232,28 +237,20 @@ public class GenRuinsTowerLookout extends GenRuins {
 				}
 			}
 
-			// Torches
-			else if (rewardid < 25) {
-				if (var2.nextInt(3) != 0)
-					itemz = new ItemStack(Blocks.glowstone, 2 + var2.nextInt(4));
-				else
-					itemz = new ItemStack(Blocks.redstone_torch,
-							4 + var2.nextInt(8));
-			}
+			// Cortra.
+			else if (rewardid < 20)
+				itemz = new ItemStack(NyxItems.cortra, 2 + var2.nextInt(3));
 
-			// Devora.
-			else if (rewardid < 40)
-				itemz = new ItemStack(NyxItems.devora, 2 + var2.nextInt(6));
+			// Bones.
+			else if (rewardid < 35)
+				itemz = new ItemStack(NyxItems.boneCursed, 1 + var2.nextInt(2));
 
 			// Food.
-			else if (rewardid < 55) {
+			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(20);
-				if (foodtype < 5)
+				if (foodtype < 6)
 					itemz = new ItemStack(Items.golden_apple,
 							1 + var2.nextInt(2));
-				else if (foodtype < 9)
-					itemz = new ItemStack(Items.golden_carrot,
-							1 + var2.nextInt(3));
 				else if (foodtype < 12)
 					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
 				else if (foodtype < 16)
@@ -263,6 +260,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 							2 + var2.nextInt(4));
 			}
 
+			// Sanctified Bone
+			else if (rewardid < 55 && boneflag) {
+				itemz = new ItemStack(NyxItems.boneSanctified);
+				boneflag = false;
+			}
+
 			// Ender pearls
 			else if (rewardid < 70)
 				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(3));
@@ -270,7 +273,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}
 
-		if (var2.nextInt(3) == 0)
+		if (var2.nextInt(4) != 0)
+			chestent.setInventorySlotContents(
+				1 + var2.nextInt(chestent.getSizeInventory() - 1),
+				new ItemStack(NyxItems.boneSanctified));
+		if (var2.nextInt(3) != 0)
 			chestent.setInventorySlotContents(
 					1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.draconium));

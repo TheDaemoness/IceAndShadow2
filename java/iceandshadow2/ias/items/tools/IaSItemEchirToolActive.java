@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
@@ -16,7 +16,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements
-IIaSApiTransmutable {
+IIaSApiTransmute {
 
 	protected int slot;
 	protected boolean wep;
@@ -43,7 +43,7 @@ IIaSApiTransmutable {
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
 		if (IaSRegistry.getTransmutationMaterial(catalyst) != null
@@ -53,7 +53,7 @@ IIaSApiTransmutable {
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		final IaSToolMaterial mat = IaSRegistry
 				.getTransmutationMaterial(catalyst);

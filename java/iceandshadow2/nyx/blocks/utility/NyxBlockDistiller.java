@@ -55,36 +55,14 @@ public class NyxBlockDistiller extends IaSBaseBlockSingle {
 				for (int i = 0; i < stacksize; ++i) {
 					if (i < tent.getSizeInventory()
 							&& tent.isItemValidForSlot(i, is)) {
-						if (tent.getStackInSlot(i) != null) {
-							final ItemStack iis = tent.getStackInSlot(i);
-							final int size = Math.min(iis.getMaxStackSize()
-									- iis.stackSize, is.stackSize);
-							if (size <= 0)
-								continue;
-							final ItemStack nis = is.splitStack(size);
-							nis.stackSize += iis.stackSize;
-							tent.setInventorySlotContents(i, nis);
-							if (is.stackSize <= 0)
-								break;
-						} else {
-							tent.setInventorySlotContents(i, is);
+						if (tent.getStackInSlot(i) == null) {
+							tent2.setInventorySlotContents(i, is);
 							break;
 						}
 					}
 					if (tent2 != null && i < tent2.getSizeInventory()) {
 						if (tent2.isItemValidForSlot(i, is)) {
-							if (tent.getStackInSlot(i) != null) {
-								final ItemStack iis = tent2.getStackInSlot(i);
-								final int size = Math.min(iis.getMaxStackSize()
-										- iis.stackSize, is.stackSize);
-								if (size <= 0)
-									continue;
-								final ItemStack nis = is.splitStack(size);
-								nis.stackSize += iis.stackSize;
-								tent2.setInventorySlotContents(i, nis);
-								if (is.stackSize <= 0)
-									break;
-							} else {
+							if (tent.getStackInSlot(i) == null) {
 								tent2.setInventorySlotContents(i, is);
 								break;
 							}

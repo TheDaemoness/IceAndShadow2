@@ -16,7 +16,7 @@ import net.minecraft.world.World;
  * transmutation. IaS guarantees that if multiple handlers in IaSRegistry can do
  * the transmutation, the first one registered will be run.
  */
-public interface IIaSApiTransmutable {
+public interface IIaSApiTransmute {
 
 	/**
 	 * Gets the time to perform a transmuation, in ticks (1/20 of a second).
@@ -33,7 +33,7 @@ public interface IIaSApiTransmutable {
 	 * @return A number of ticks it should take to do the transmuation, or some
 	 *         number <= 0 if this handler cannot.
 	 */
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst);
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst);
 
 	/**
 	 * Used to handle a transmutation in a transmutation altar on Nyx. This
@@ -49,7 +49,7 @@ public interface IIaSApiTransmutable {
 	 * @return The item stack yielded from doing the transmutation, or null if
 	 *         the transmutation should destroy the target.
 	 */
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world);
 
 	/**

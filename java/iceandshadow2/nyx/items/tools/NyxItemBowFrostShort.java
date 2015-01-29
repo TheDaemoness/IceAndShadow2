@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items;
+package iceandshadow2.nyx.items.tools;
 
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
@@ -37,13 +37,12 @@ IIaSGlowing {
 		final int var10 = EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.punch.effectId, par1ItemStack);
 		final EntityIceArrow var8 = new EntityIceArrow(par2World,
-				par3EntityPlayer, var7 * 2.0F, var10 + 1, var9 * 30 + 70);
+				par3EntityPlayer, var7 * (2.0F+0.1F*var9), var10 + 1, var9 * 30 + 70);
 
-		var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
+		var8.setDamage(var8.getDamage() + 0.5D);
 
-		if (var10 > 0) {
+		if (var10 > 0)
 			var8.setKnockbackStrength(var10);
-		}
 
 		if (!par3EntityPlayer.capabilities.isCreativeMode)
 			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);

@@ -1,7 +1,7 @@
 package iceandshadow2.api;
 
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
+import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
 import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public final class IaSRegistry {
 	private static HashMap<String, IaSToolMaterial> toolMaterials = new HashMap<String, IaSToolMaterial>();
 	private static ArrayList<IIaSApiDistillable> handlersDistillable = new ArrayList<IIaSApiDistillable>();
 	private static ArrayList<IIaSApiExaminable> handlersExaminable = new ArrayList<IIaSApiExaminable>();
-	private static ArrayList<IIaSApiTransmutable> handlersTransmutable = new ArrayList<IIaSApiTransmutable>();
+	private static ArrayList<IIaSApiTransmute> handlersTransmutable = new ArrayList<IIaSApiTransmute>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 
 	public static void preInit() {
@@ -52,8 +52,8 @@ public final class IaSRegistry {
 			addHandler((IIaSApiExaminable)o);
 		if(o instanceof IIaSApiSacrificeXp)
 			addHandler((IIaSApiSacrificeXp)o);
-		if(o instanceof IIaSApiTransmutable)
-			addHandler((IIaSApiTransmutable)o);
+		if(o instanceof IIaSApiTransmute)
+			addHandler((IIaSApiTransmute)o);
 		if(o instanceof IaSToolMaterial)
 			addToolMaterial((IaSToolMaterial)o);
 	}
@@ -70,7 +70,7 @@ public final class IaSRegistry {
 		handlersSacrificeXp.add(handler);
 	}
 
-	private static void addHandler(IIaSApiTransmutable handler) {
+	private static void addHandler(IIaSApiTransmute handler) {
 		handlersTransmutable.add(handler);
 	}
 
@@ -107,33 +107,33 @@ public final class IaSRegistry {
 		return null;
 	}
 
-	public static IIaSApiTransmutable getHandlerTransmutation(ItemStack target,
+	public static IIaSApiTransmute getHandlerTransmutation(ItemStack target,
 			ItemStack catalyst) {
 		if (target == null || catalyst == null)
 			return null;
 		Object obj;
-		IIaSApiTransmutable trans;
+		IIaSApiTransmute trans;
 
 		obj = target.getItem();
 		if (obj instanceof ItemBlock)
 			obj = ((ItemBlock) obj).field_150939_a;
-		if (obj instanceof IIaSApiTransmutable) {
-			trans = (IIaSApiTransmutable) obj;
-			if (trans.getTransmutationTime(target, catalyst) > 0)
+		if (obj instanceof IIaSApiTransmute) {
+			trans = (IIaSApiTransmute) obj;
+			if (trans.getTransmuteTime(target, catalyst) > 0)
 				return trans;
 		}
 
 		obj = catalyst.getItem();
 		if (obj instanceof ItemBlock)
 			obj = ((ItemBlock) obj).field_150939_a;
-		if (obj instanceof IIaSApiTransmutable) {
-			trans = (IIaSApiTransmutable) obj;
-			if (trans.getTransmutationTime(target, catalyst) > 0)
+		if (obj instanceof IIaSApiTransmute) {
+			trans = (IIaSApiTransmute) obj;
+			if (trans.getTransmuteTime(target, catalyst) > 0)
 				return trans;
 		}
 
 		for (int i = 0; i < handlersTransmutable.size(); ++i) {
-			if (handlersTransmutable.get(i).getTransmutationTime(target,
+			if (handlersTransmutable.get(i).getTransmuteTime(target,
 					catalyst) > 0)
 				return handlersTransmutable.get(i);
 		}

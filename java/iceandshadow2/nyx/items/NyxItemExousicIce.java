@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
@@ -13,14 +13,14 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTransmutable {
+public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTransmute {
 
 	public NyxItemExousicIce(String texName) {
 		super(EnumIaSModule.NYX, texName);
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(catalyst.getItem() != this)
 			return 0;
 		if(target.getItem() instanceof ItemBlock) {
@@ -34,7 +34,7 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		ArrayList<ItemStack> li = new ArrayList<ItemStack>();
 		int quant = Math.min(target.stackSize,catalyst.stackSize);
