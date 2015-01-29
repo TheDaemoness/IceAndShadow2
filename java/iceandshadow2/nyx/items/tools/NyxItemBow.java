@@ -6,6 +6,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,8 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class NyxItemBow extends Item implements IIaSModName,
-IIaSGlowing, IIaSApiTransmute {
+public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
 
 	public static final String nbtTierID = "nyxBowDrawModifier";
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
@@ -36,13 +36,10 @@ IIaSGlowing, IIaSApiTransmute {
 	public boolean inuse;
 
 	public NyxItemBow(String par1) {
-		super();
-		this.setUnlocalizedName("nyx" + par1);
+		super(EnumIaSModule.NYX,par1);
 		this.bFull3D = false;
 		inuse = false;
 	}
-
-
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer ep,
@@ -56,16 +53,9 @@ IIaSGlowing, IIaSApiTransmute {
 		}
 	}
 
-
-
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
-	}
-
-	@Override
-	public EnumIaSModule getIaSModule() {
-		return EnumIaSModule.NYX;
 	}
 
 	@Override
@@ -122,19 +112,9 @@ IIaSGlowing, IIaSApiTransmute {
 	}
 
 	@Override
-	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderPasses(int metadata) {
 		return 2;
-	}
-
-	@Override
-	public String getTexName() {
-		return "IceAndShadow2:" + this.getModName();
 	}
 
 	@Override
@@ -160,11 +140,6 @@ IIaSGlowing, IIaSApiTransmute {
 	public void onUpdate(ItemStack par1ItemStack, World par2World,
 			Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
-	}
-
-	public final Item register() {
-		IaSRegistration.register(this);
-		return this;
 	}
 
 	@Override

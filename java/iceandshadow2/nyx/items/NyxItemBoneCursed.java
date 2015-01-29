@@ -32,6 +32,11 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass) {
+		return getIconFromDamageForRenderPass(0, pass);
+	}
+	
+	@Override
+	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (pass == 1)
 			return glow;
 		return this.itemIcon;
