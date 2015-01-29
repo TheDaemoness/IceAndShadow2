@@ -180,10 +180,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 		// Add more random loot.
 		final int chestcontentamount = 4 + var2.nextInt(4);
 		boolean rareflag = true;
+		boolean boneflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
 			ItemStack itemz = new ItemStack(NyxItems.icicle,
-					1 + var2.nextInt(3));
+					1 + var2.nextInt(4));
 
 			// Bloodstone.
 			if (rewardid == 0 && rareflag) {
@@ -192,7 +193,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Long bow
-			else if (rewardid < 3 && rareflag) {
+			else if (rewardid < 5 && rareflag) {
 				NBTTagCompound c = new NBTTagCompound();
 				if(var2.nextInt(3) == 0)
 					itemz = new ItemStack(NyxItems.frostBowShort, 1,
@@ -205,12 +206,8 @@ public class GenRuinsTowerLookout extends GenRuins {
 				rareflag = false;
 			}
 
-			// Sanctified Bone
-			else if (rewardid < 10)
-				itemz = new ItemStack(NyxItems.boneSanctified);
-
 			// Sword or armor!
-			else if (rewardid < 15) {
+			else if (rewardid < 10) {
 				if (var2.nextInt(3) == 0) {
 					itemz = new ItemStack(Items.diamond_sword);
 					itemz.addEnchantment(Enchantment.smite, 1 + var2.nextInt(2));
@@ -241,22 +238,19 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Cortra.
-			else if (rewardid < 25)
+			else if (rewardid < 20)
 				itemz = new ItemStack(NyxItems.cortra, 2 + var2.nextInt(3));
 
 			// Bones.
-			else if (rewardid < 40)
+			else if (rewardid < 35)
 				itemz = new ItemStack(NyxItems.boneCursed, 1 + var2.nextInt(2));
 
 			// Food.
-			else if (rewardid < 55) {
+			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(20);
-				if (foodtype < 5)
+				if (foodtype < 6)
 					itemz = new ItemStack(Items.golden_apple,
 							1 + var2.nextInt(2));
-				else if (foodtype < 9)
-					itemz = new ItemStack(Items.golden_carrot,
-							1 + var2.nextInt(3));
 				else if (foodtype < 12)
 					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
 				else if (foodtype < 16)
@@ -264,6 +258,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 				else
 					itemz = new ItemStack(NyxItems.poisonFruit,
 							2 + var2.nextInt(4));
+			}
+
+			// Sanctified Bone
+			else if (rewardid < 55 && boneflag) {
+				itemz = new ItemStack(NyxItems.boneSanctified);
+				boneflag = false;
 			}
 
 			// Ender pearls
