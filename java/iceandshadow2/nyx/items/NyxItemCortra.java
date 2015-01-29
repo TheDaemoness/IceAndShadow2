@@ -12,12 +12,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmutable {
+public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon crystalIcon;
@@ -44,7 +44,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmutab
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || 
 				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
 			return 0;
@@ -52,7 +52,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmutab
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;

@@ -66,7 +66,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 					tte.catalyst);
 		if (tte.handler == null)
 			return;
-		final List<ItemStack> l_ist = tte.handler.getTransmutationYield(
+		final List<ItemStack> l_ist = tte.handler.getTransmuteYield(
 				tte.target, tte.catalyst, w);
 		if (tte.target.stackSize <= 0)
 			tte.target = null;
@@ -113,7 +113,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return;
 			}
 			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmutationTime(tte.target, tte.catalyst));
+					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
 		w.setTileEntity(x, y, z, tte);
 	}
@@ -172,7 +172,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return true;
 			}
 			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmutationTime(tte.target, tte.catalyst));
+					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 			w.setTileEntity(x, y, z, tte);
 			return true;
 		}

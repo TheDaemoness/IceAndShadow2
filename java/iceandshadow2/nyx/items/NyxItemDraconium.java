@@ -12,13 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmutable {
+public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
@@ -70,7 +70,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || 
 				catalyst.getItem() != this || catalyst.getItemDamage() != 1)
 			return 0;
@@ -78,7 +78,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;

@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.tileentities;
 
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
@@ -16,7 +16,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public ItemStack target;
 	public ItemStack catalyst;
-	public IIaSApiTransmutable handler;
+	public IIaSApiTransmute handler;
 
 	public boolean canAttemptTransmutation() {
 		return catalyst != null && target != null;

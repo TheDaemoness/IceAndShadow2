@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.render.fx.IaSFxManager;
@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing,
-IIaSApiTransmutable {
+IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon icons[];
@@ -49,14 +49,14 @@ IIaSApiTransmutable {
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (FurnaceRecipes.smelting().getSmeltingResult(target) != null)
 			return 160 * (catalyst.getItemDamage() + 1);
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		final List<ItemStack> li = new ArrayList<ItemStack>();
 		int time;

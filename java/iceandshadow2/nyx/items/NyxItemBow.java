@@ -4,7 +4,7 @@ import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSRegistration;
@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class NyxItemBow extends Item implements IIaSModName,
-IIaSGlowing, IIaSApiTransmutable {
+IIaSGlowing, IIaSApiTransmute {
 
 	public static final String nbtTierID = "nyxBowDrawModifier";
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
@@ -178,7 +178,7 @@ IIaSGlowing, IIaSApiTransmutable {
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != this)
 			return 0;
 		if(this.getSpeedModifier(target) >= 5)
@@ -191,7 +191,7 @@ IIaSGlowing, IIaSApiTransmutable {
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		if(!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());

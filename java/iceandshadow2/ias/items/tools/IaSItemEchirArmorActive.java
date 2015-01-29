@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements IIaSApiTransmutable {
+public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
 
 	protected int slot;
 
@@ -49,7 +49,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
 		if (catalyst.getItem() == NyxItems.cortra || catalyst.getItem() == NyxItems.navistraShard) {
@@ -64,7 +64,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		if(catalyst.getItem() == NyxItems.cortra)
 			target.func_150996_a(IaSTools.armorCortra[slot]);

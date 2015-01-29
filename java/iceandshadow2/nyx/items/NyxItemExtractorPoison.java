@@ -16,14 +16,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSApiTransmutable;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApiTransmutable {
+public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon fillIcons[];
@@ -76,14 +76,14 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	}
 
 	@Override
-	public int getTransmutationTime(ItemStack target, ItemStack catalyst) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(catalyst.getItem() != this || target.getItem() != NyxItems.draconium)
 			return 0;
 		return 35;
 	}
 
 	@Override
-	public List<ItemStack> getTransmutationYield(ItemStack target,
+	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		catalyst.setItemDamage(0);
 		catalyst.func_150996_a(NyxItems.crystalVial);
