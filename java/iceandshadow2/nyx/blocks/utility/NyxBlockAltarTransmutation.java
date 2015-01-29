@@ -135,7 +135,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		TileEntity e = w.getTileEntity(x, y, z);
 		if(e instanceof NyxTeTransmutationAltar) {
 			ItemStack tar = ((NyxTeTransmutationAltar)e).target;
-			if(tar.getItem() instanceof IIaSApiTransmuteLens) {
+			if(tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
 				IIcon retval = ((IIaSApiTransmuteLens)tar.getItem()).getAltarTopTexture(tar);
 				if(retval != null)
 					return retval;

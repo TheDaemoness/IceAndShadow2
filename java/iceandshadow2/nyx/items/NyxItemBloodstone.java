@@ -49,7 +49,6 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 				0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
 		par3EntityPlayer.clearActivePotions();
 		par3EntityPlayer.attackEntityFrom(DamageSource.outOfWorld, par3EntityPlayer.getHealth()*2);
-		++par1ItemStack.stackSize;
 	}
 
 	@Override

@@ -65,7 +65,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	}
 
 	public ItemStack handleRemove(boolean isSneaking) {
-		final boolean lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
+		final boolean lensFlag;
+		if(target != null)
+			lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
+		else
+			lensFlag = false;
 		ItemStack temp;
 		if (target != null && (!lensFlag || isSneaking)) {
 			temp = target;
