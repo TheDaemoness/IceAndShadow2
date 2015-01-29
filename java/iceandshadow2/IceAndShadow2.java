@@ -12,7 +12,7 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.ias.handlers.*;
 import iceandshadow2.nyx.forge.*;
-import iceandshadow2.nyx.items.materials.*;
+import iceandshadow2.nyx.toolmats.*;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
 import net.minecraftforge.common.MinecraftForge;

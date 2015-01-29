@@ -1,42 +1,30 @@
-package iceandshadow2.nyx.items.materials;
+package iceandshadow2.nyx.toolmats;
 
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-public class NyxMaterialDraconium extends IaSToolMaterial {
-
-	@Override
-	public ItemStack getTransmutationCatalyst() {
-		return new ItemStack(NyxItems.draconium,1,1);
-	}
+public class NyxMaterialEchir extends IaSToolMaterial {
 
 	private static ResourceLocation knife_tex = new ResourceLocation(
-			"iceandshadow2:textures/entity/nyxknife_draconium.png");
+			"iceandshadow2:textures/entity/nyxknife_echir.png");
 
 	@Override
 	public int getBaseLevel() {
-		return 3;
+		return 2;
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 12;
+		return 10;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 96;
-	}
-	
-	@Override
-	public float getBaseDamage() {
-		return 4;
+		return 384;
 	}
 
 	@Override
@@ -46,17 +34,17 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 
 	@Override
 	protected Item getMaterialItem() {
-		return NyxItems.draconium;
+		return NyxItems.echirIngot;
 	}
 
 	@Override
 	public String getMaterialName() {
-		return "Draconium";
+		return "Echir";
 	}
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.draconiumIngot && mat.getItemDamage() == 1;
+		return mat.getItem() == NyxItems.echirIngot && mat.getItemDamage() > 0;
 	}
 
 }

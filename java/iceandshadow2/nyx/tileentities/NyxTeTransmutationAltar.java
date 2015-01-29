@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.tileentities;
 
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
@@ -50,9 +51,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	}
 
 	public boolean handlePlace(ItemStack is) {
-		if (catalyst == null) {
-			catalyst = is;
-			return true;
+		if(!(is.getItem() instanceof IIaSApiTransmuteLens)) {
+			if (catalyst == null) {
+				catalyst = is;
+				return true;
+			}
 		}
 		if (target == null) {
 			target = is;
@@ -61,9 +64,10 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		return false;
 	}
 
-	public ItemStack handleRemove() {
+	public ItemStack handleRemove(boolean isSneaking) {
+		final boolean lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
 		ItemStack temp;
-		if (target != null) {
+		if (target != null && (!lensFlag || isSneaking)) {
 			temp = target;
 			target = null;
 			return temp;

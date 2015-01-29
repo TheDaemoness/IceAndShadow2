@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items.lenses;
+package iceandshadow2.nyx.items.tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ public abstract class NyxItemLens extends IaSBaseItemMulti implements IIaSApiTra
 	}
 
 	@Override
-	public int getTransmuteRate(EnumIaSLenses lenstype, ItemStack lens,
+	public int getTransmuteLensRate(EnumIaSLenses lenstype, ItemStack lens,
 			ItemStack target) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack lens, ItemStack target) {
+	public List<ItemStack> getTransmuteLensYield(ItemStack lens, ItemStack target) {
 		// TODO Auto-generated method stub
 		return null;
 	}

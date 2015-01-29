@@ -1,7 +1,7 @@
 package iceandshadow2.api;
 
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.nyx.items.materials.NyxMaterialEchir;
+import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
 import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;

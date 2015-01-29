@@ -2,7 +2,7 @@ package iceandshadow2.nyx.world.gen.ruins;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.NyxItemBow;
+import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;

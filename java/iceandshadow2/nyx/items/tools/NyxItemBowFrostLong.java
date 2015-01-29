@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items;
+package iceandshadow2.nyx.items.tools;
 
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.interfaces.IIaSGlowing;

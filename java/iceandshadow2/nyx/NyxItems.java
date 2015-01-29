@@ -5,6 +5,13 @@ import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
+import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
+import iceandshadow2.nyx.items.tools.NyxItemBowFrostShort;
+import iceandshadow2.nyx.items.tools.NyxItemCrystalVial;
+import iceandshadow2.nyx.items.tools.NyxItemExtractorPoison;
+import iceandshadow2.nyx.items.tools.NyxItemKitTightrope;
+import iceandshadow2.nyx.items.tools.NyxItemRope;
+import iceandshadow2.nyx.items.tools.NyxItemTeleportCrystal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 

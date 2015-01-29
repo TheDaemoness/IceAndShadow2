@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items.materials;
+package iceandshadow2.nyx.toolmats;
 
 import java.util.List;
 

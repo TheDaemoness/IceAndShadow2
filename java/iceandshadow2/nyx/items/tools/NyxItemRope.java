@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items;
+package iceandshadow2.nyx.items.tools;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
