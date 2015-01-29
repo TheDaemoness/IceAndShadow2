@@ -3,12 +3,12 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,7 +18,7 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -3, 0.0F, false);
 		this.setAlwaysEdible();
-		this.setMaxStackSize(1);
+		this.setMaxStackSize(4);
 	}
 
 	@Override
@@ -48,10 +48,8 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 		par2World.playSoundAtEntity(par3EntityPlayer, "mob.zombie.unfect",
 				0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
 		par3EntityPlayer.clearActivePotions();
-		par3EntityPlayer.addPotionEffect(new PotionEffect(
-				Potion.regeneration.id, 159, 5));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id,
-				159, 0));
+		par3EntityPlayer.attackEntityFrom(DamageSource.outOfWorld, par3EntityPlayer.getHealth()*2);
+		++par1ItemStack.stackSize;
 	}
 
 	@Override
