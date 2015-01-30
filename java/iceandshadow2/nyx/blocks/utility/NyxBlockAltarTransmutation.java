@@ -104,7 +104,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				}
 			}
 			if (teh != null)
-				w.setTileEntity(x, y - 1, z, teh);
+				w.markTileEntityChunkModified(x, y - 1, z, teh);
 		}
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
@@ -199,7 +199,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return;
 			final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 			tte.dropItems();
-			w.setTileEntity(x, y, z, tte);
+			w.markTileEntityChunkModified(x, y, z, tte);
 			w.setBlockToAir(x, y, z);
 			w.setBlock(x, y, z, this);
 		}
