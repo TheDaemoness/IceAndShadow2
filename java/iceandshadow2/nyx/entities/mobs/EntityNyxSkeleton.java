@@ -406,8 +406,6 @@ IIaSMobGetters {
 					"Devora");
 			ait.stackSize = new Random().nextInt(8) + 4;
 
-			if (IaSWorldHelper.getDifficulty(this.worldObj) >= 2)
-				ait.addEnchantment(Enchantment.sharpness, 1);
 			if (IaSWorldHelper.getDifficulty(this.worldObj) == 3)
 				ait.addEnchantment(Enchantment.knockback, 1);
 			return ait;
@@ -491,13 +489,14 @@ IIaSMobGetters {
 						return;
 					if (!this.getEntitySenses().canSee(this.getAttackTarget()))
 						return;
+					final ItemStack projkni = is.copy();
+					projkni.addEnchantment(Enchantment.sharpness, 1+this.worldObj.difficultySetting.getDifficultyId());
 					final EntityThrowingKnife etn = new EntityThrowingKnife(
 							this.worldObj, this, this.getAttackTarget(), 1.1F,
-							2.0F, is);
+							2.0F, projkni);
 					this.worldObj.playSoundAtEntity(this, "random.bow", 0.5F,
 							0.75F);
-					final IaSToolMaterial mat = IaSToolMaterial
-							.extractMaterial(is);
+					final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
 					mat.onKnifeThrow(is, this, etn);
 					this.worldObj.spawnEntityInWorld(etn);
 					this.throwDelay = mat.getKnifeCooldown(is, this.worldObj,
