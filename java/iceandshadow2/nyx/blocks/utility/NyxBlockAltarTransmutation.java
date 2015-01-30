@@ -110,13 +110,13 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
 					tte.catalyst);
 			if (tte.handler == null) {
-				w.setTileEntity(x, y, z, tte);
+				w.markTileEntityChunkModified(x, y, z, tte);
 				return;
 			}
 			tte.scheduleUpdate(x, y, z,
 					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
-		w.setTileEntity(x, y, z, tte);
+		w.markTileEntityChunkModified(x, y, z, tte);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			final ItemStack its = tte.handleRemove(ep.isSneaking());
 			if (its != null)
 				IaSPlayerHelper.giveItem(ep, its);
-			w.setTileEntity(x, y, z, tte);
+			w.markTileEntityChunkModified(x, y, z, tte);
 			return true;
 		}
 		if (!tte.handlePlace(is.copy()))
@@ -178,15 +178,15 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
 					tte.catalyst);
 			if (tte.handler == null) {
-				w.setTileEntity(x, y, z, tte);
+				w.markTileEntityChunkModified(x, y, z, tte);
 				return true;
 			}
 			tte.scheduleUpdate(x, y, z,
 					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
-			w.setTileEntity(x, y, z, tte);
+			w.markTileEntityChunkModified(x, y, z, tte);
 			return true;
 		}
-		w.setTileEntity(x, y, z, tte);
+		w.markTileEntityChunkModified(x, y, z, tte);
 		return false;
 	}
 
