@@ -36,8 +36,7 @@ IIaSNoInfest {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int meta, int fortune) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override

@@ -142,24 +142,22 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 					return;
 				dir = ForgeDirection.getOrientation(mop.sideHit);
 			}
-			int ilen = 0, xc = mop.blockX;
-			final int yc = mop.blockY;
+			int ilen = 0;
+			int xc = mop.blockX;
 			int zc = mop.blockZ;
-			if (!w.isSideSolid(xc, yc, zc, dir))
+			if (!w.isSideSolid(xc, mop.blockY, zc, dir))
 				return;
 			for (int i = 0; i < LENGTH_MAX; ++i) {
 				xc += dir.offsetX;
 				zc += dir.offsetZ;
-				final Block bl = w.getBlock(xc, yc, zc);
+				final Block bl = w.getBlock(xc, mop.blockY, zc);
 				if (bl.getMaterial() == Material.air)
 					++ilen;
-				if (bl.getMaterial() == Material.water)
+				else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava)
 					return;
-				if (bl.getMaterial() == Material.lava)
-					return;
-				else if (bl.isReplaceable(w, xc, yc, zc))
+				else if (bl.isReplaceable(w, xc, mop.blockY, zc))
 					++ilen;
-				else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
+				else if (w.isSideSolid(xc, mop.blockY, zc, dir.getOpposite()))
 					break;
 				else
 					return;
@@ -168,7 +166,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				return;
 			if (ilen < 5)
 				return;
-			if (ilen == LENGTH_MAX)
+			if (ilen >= LENGTH_MAX)
 				return;
 			for (int i = 1; i < ilen+1; ++i) {
 				if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)

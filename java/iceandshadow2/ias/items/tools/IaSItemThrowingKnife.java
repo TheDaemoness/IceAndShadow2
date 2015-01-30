@@ -16,6 +16,8 @@ import net.minecraft.world.World;
 
 public class IaSItemThrowingKnife extends IaSItemWeapon {
 
+	public static final String PLAYER_NBT_ID = "iasThrowingKnifeDelay";
+	
 	public IaSItemThrowingKnife() {
 		super(EnumIaSToolClass.KNIFE);
 		this.setNoRepair();
@@ -49,34 +51,32 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
-		if (par1ItemStack.getItemDamage() > 0)
-			return par1ItemStack;
+	public ItemStack onItemRightClick(ItemStack is, World aroundThe,
+			EntityPlayer plai) {
+		int delai = plai.getEntityData().getInteger(PLAYER_NBT_ID);
+		if (delai > 0)
+			return is;
 
 		EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.knockback.effectId, par1ItemStack);
-		final EntityThrowingKnife var8 = new EntityThrowingKnife(par2World,
-				par3EntityPlayer, 1.0F, par1ItemStack);
-
-		if (!par3EntityPlayer.capabilities.isCreativeMode)
-			par1ItemStack.stackSize -= 1;
+				Enchantment.knockback.effectId, is);
+		final EntityThrowingKnife var8 = new EntityThrowingKnife(aroundThe,
+				plai, 1.0F, is);
 
 		final IaSToolMaterial mat = IaSToolMaterial
-				.extractMaterial(par1ItemStack);
-		mat.onKnifeThrow(par1ItemStack, par3EntityPlayer, var8);
+				.extractMaterial(is);
+		mat.onKnifeThrow(is, plai, var8);
 
-		par2World
-		.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.75F);
+		aroundThe.playSoundAtEntity(plai, "random.bow", 0.5F, 0.75F);
 
-		if (!par2World.isRemote)
-			par2World.spawnEntityInWorld(var8);
+		if (!plai.capabilities.isCreativeMode)
+			is.stackSize -= 1;
 
-		par1ItemStack.setItemDamage(IaSToolMaterial.extractMaterial(
-				par1ItemStack).getKnifeCooldown(par1ItemStack, par2World,
-						par3EntityPlayer));
+		if (!aroundThe.isRemote) {
+			plai.getEntityData().setInteger(PLAYER_NBT_ID, mat.getKnifeCooldown(is, aroundThe, plai));
+			aroundThe.spawnEntityInWorld(var8);
+		}
 
-		return par1ItemStack;
+		return is;
 	}
 
 	@Override
@@ -90,7 +90,8 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World world, Entity player,
 			int par4, boolean par5) {
-		if (par1ItemStack.getItemDamage() > 0)
-			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() - 1);
+		int tom = player.getEntityData().getInteger(PLAYER_NBT_ID); //Political joke, pay no attention.
+		if (par5 && tom > 0 && !world.isRemote)
+			player.getEntityData().setInteger(PLAYER_NBT_ID, tom-1);
 	}
 }

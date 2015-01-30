@@ -83,14 +83,6 @@ IIaSModName, IShearable {
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World p_149690_1_, int p_149690_2_,
-			int p_149690_3_, int p_149690_4_, int p_149690_5_,
-			float p_149690_6_, int p_149690_7_) {
-		super.dropBlockAsItemWithChance(p_149690_1_, p_149690_2_, p_149690_3_,
-				p_149690_4_, p_149690_5_, 1.0f, p_149690_7_);
-	}
-
-	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
 			int par2, int par3, int par4) {
 		final float var5 = 0.0125F;
