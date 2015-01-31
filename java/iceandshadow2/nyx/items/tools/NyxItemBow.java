@@ -96,7 +96,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	}
 
 	public abstract int getTimeForIcon(int mod, int index);
-	public abstract int getUpgradeCost();
+	public abstract int getUpgradeCost(int mod);
 
 	public int getSpeedModifier(ItemStack is) {
 		if(!is.hasTagCompound())
@@ -158,7 +158,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 			return 0;
 		if(this.getSpeedModifier(target) >= 5)
 			return 0;
-		if(catalyst.stackSize < this.getUpgradeCost())
+		if(catalyst.stackSize < this.getUpgradeCost(this.getSpeedModifier(target)))
 			return 0;
 		if(catalyst.getItem() == NyxItems.nifelhiumPowder)
 			return 160;
@@ -173,7 +173,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 			target.getTagCompound().setInteger(nbtTierID,1);
 		} else
 			target.getTagCompound().setInteger(nbtTierID,this.getSpeedModifier(target)+1);
-		catalyst.stackSize -= this.getUpgradeCost();
+		catalyst.stackSize -= this.getUpgradeCost(this.getSpeedModifier(target));
 		return null;
 	}
 
