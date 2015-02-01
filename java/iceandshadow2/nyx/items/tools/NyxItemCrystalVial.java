@@ -46,7 +46,7 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 		if(target.getItem() != this)
 			return 0;
 		if(target.getItemDamage() == 1) {
-			if(catalyst.getItem() == NyxItems.poisonFruit && catalyst.stackSize > 2)
+			if(catalyst.getItem() == NyxItems.poisonFruit && catalyst.stackSize >= 2)
 				return 160;
 		}
 		return 0;

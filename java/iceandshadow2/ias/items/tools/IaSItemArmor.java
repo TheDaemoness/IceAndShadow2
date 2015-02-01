@@ -28,7 +28,7 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	static {
 		MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
 		MATERIAL_NAVISTRA.customCraftingMaterial = NyxItems.navistraShard;
-		MATERIAL_CORTRA.customCraftingMaterial = NyxItems.echirIngot;
+		MATERIAL_CORTRA.customCraftingMaterial = NyxItems.cortraIngot;
 		MATERIAL_SPIDERSILK.customCraftingMaterial = NyxItems.toughGossamer;
 	}
 

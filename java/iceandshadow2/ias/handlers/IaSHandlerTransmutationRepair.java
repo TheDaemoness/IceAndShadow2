@@ -11,6 +11,7 @@ import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.items.NyxItemIngot;
 
 public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 
@@ -21,8 +22,8 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 		final Item it = target.getItem();
 		if (it instanceof ItemArmor) {
 			if (catalyst.getItem() == ((ItemArmor) it).getArmorMaterial().customCraftingMaterial) {
-				if (catalyst.getItem() == NyxItems.echirIngot
-						&& catalyst.getItemDamage() <= 0)
+				if (catalyst.getItem() instanceof NyxItemIngot
+						&& catalyst.getItemDamage() == 0)
 					return 0;
 				return 850;
 			}
@@ -43,9 +44,11 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
 		final Item it = target.getItem();
-		target.setItemDamage(Math.max(0,
-				target.getItemDamage() - it.getMaxDamage(target) / 5));
-		--catalyst.stackSize;
+		do {
+			final int repair = Math.max(0, target.getItemDamage()-it.getMaxDamage(target)/5);
+			target.setItemDamage(repair);
+			--catalyst.stackSize;
+		} while(target.isItemDamaged() && catalyst.stackSize > 0);
 		return null;
 	}
 
