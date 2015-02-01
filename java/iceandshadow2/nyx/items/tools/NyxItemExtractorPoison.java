@@ -77,17 +77,12 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(catalyst.getItem() != this || target.getItem() != NyxItems.draconium)
-			return 0;
-		return 35;
+		return 0;
 	}
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		catalyst.setItemDamage(0);
-		catalyst.func_150996_a(NyxItems.crystalVial);
-		target.stackSize += 1;
 		return null;
 	}
 
