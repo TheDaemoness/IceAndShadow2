@@ -119,6 +119,14 @@ public class NyxBiome extends BiomeGenBase {
 			int zchunk) {
 
 	}
+	
+	protected boolean hasTowers() {
+		return true;
+	}
+	
+	protected GenRuins supplyRuins() {
+		return null;
+	}
 
 	protected void genStructures(World par1World, Random par2Random,
 			int xchunk, int zchunk) {
@@ -145,8 +153,10 @@ public class NyxBiome extends BiomeGenBase {
 			final int z = zchunk + 8;
 			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
 			GenRuins gengen = null;
-			if (par2Random.nextInt(16) == 0)
+			if (hasTowers() && par2Random.nextInt(16) == 0)
 				gengen = new GenRuinsTowerLookout();
+			if (gengen == null)
+				gengen = supplyRuins();
 			if (gengen != null)
 				gengen.generate(par1World, par2Random, x, y, z);
 		}
