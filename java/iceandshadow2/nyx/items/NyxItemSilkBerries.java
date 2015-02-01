@@ -1,25 +1,65 @@
 package iceandshadow2.nyx.items;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
 public class NyxItemSilkBerries extends IaSItemFood {
 
+	@SideOnly(Side.CLIENT)
+	protected IIcon matureIcon;
+	
 	public NyxItemSilkBerries(String id) {
 		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
 		this.setMaxStackSize(32);
 		this.setEatTime(16);
 		this.setXpAltarMinimumValue(2);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
+			List par3List) {
+		for (int meta = 0; meta <= 1; ++meta) {
+			par3List.add(new ItemStack(par1, 1, meta));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIconFromDamage(int dmg) {
+		if (dmg == 1)
+			return matureIcon;
+		return this.itemIcon;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(this.getTexName());
+		this.matureIcon = reg.registerIcon(this.getTexName() + "Mature");
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack is) {
+		return this.getUnlocalizedName() + (is.getItemDamage()==1?"Mature":"");
 	}
 
 	@Override
@@ -41,7 +81,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 						true);
 
 		if (movingobjectposition != null) {
-			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
+			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK && par1ItemStack.getItemDamage() == 1) {
 				int i = movingobjectposition.blockX;
 				final int j = movingobjectposition.blockY;
 				int k = movingobjectposition.blockZ;
@@ -89,10 +129,9 @@ public class NyxItemSilkBerries extends IaSItemFood {
 				}
 			}
 		}
-		if (par3EntityPlayer.canEat(true)) {
+		if (par3EntityPlayer.canEat(true))
 			par3EntityPlayer.setItemInUse(par1ItemStack,
 					this.getMaxItemUseDuration(par1ItemStack));
-		}
 
 		return par1ItemStack;
 	}

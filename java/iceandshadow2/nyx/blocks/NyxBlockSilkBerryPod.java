@@ -70,11 +70,15 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 			int p_149690_5_, int fortune) {
 		ArrayList<ItemStack> dropped = new ArrayList<ItemStack>();
 		int j1 = func_149987_c(p_149690_5_);
-		byte b0 = 1;
+		byte b0 = 0;
 
-		if (j1 >= 2)
-			b0 = (byte)(3+world.rand.nextInt(2));
+		if (j1 >= 2) {
+			b0 = (byte)(2+world.rand.nextInt(2));
+			if((world.rand.nextInt() & 3) == 0)
+				dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
+		}
 
+		dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
 		for (int k1 = 0; k1 < b0; ++k1)
 			dropped.add(new ItemStack(NyxItems.silkBerries, 1));
 		return dropped;
