@@ -4,6 +4,8 @@ import iceandshadow2.nyx.NyxItems;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -17,14 +19,14 @@ public class NyxBlockOreNifelhium extends NyxBlockOre {
 		this.setLuminescence(0.3F);
 		this.setLightColor(0.9F, 0.9F, 0.9F);
 		this.setResistance(15.0F);
+		GameRegistry.addSmelting(this, new ItemStack(NyxItems.nifelhiumPowder,1), 2);
 	}
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.nifelhiumPowder, 1 + (world.rand
-				.nextInt(1 + fortune) >= 2 ? 1 : 0)));
+		is.add(new ItemStack(NyxItems.nifelhiumPowder, world.rand.nextInt(1+fortune)>=2?2:1));
 		return is;
 	}
 

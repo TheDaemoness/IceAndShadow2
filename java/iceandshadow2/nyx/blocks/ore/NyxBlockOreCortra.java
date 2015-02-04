@@ -4,6 +4,7 @@ import iceandshadow2.nyx.NyxItems;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +19,7 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 		this.setLuminescence(0.2F);
 		this.setLightColor(0.0F, 0.75F, 1.0F);
 		this.setResistance(10.0F);
+		GameRegistry.addSmelting(this, new ItemStack(NyxItems.cortra, 4), 4);
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		final int e = world.rand.nextInt(3 + fortune) + 2;
 		for (int i = 0; i < e; ++i) {
-			if (world.rand.nextInt(4) == 0)
+			if (world.rand.nextInt(3) == 0)
 				is.add(new ItemStack(Items.redstone, 2));
 			else
 				is.add(new ItemStack(NyxItems.cortra));
