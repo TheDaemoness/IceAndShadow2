@@ -177,15 +177,14 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
 					tte.catalyst);
-			if (tte.handler == null) {
-				w.markBlockForUpdate(x, y, z);
-				return true;
+			if (tte.handler != null) {
+				tte.scheduleUpdate(x, y, z,
+						tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 			}
-			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 			w.markBlockForUpdate(x, y, z);
 			return true;
 		}
+		w.markBlockForUpdate(x, y, z);
 		return false;
 	}
 
