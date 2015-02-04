@@ -80,8 +80,8 @@ IIaSGlowing {
 	}
 
 	@Override
-	public int getUpgradeCost() {
-		return 9;
+	public int getUpgradeCost(int mod) {
+		return 8+(mod+1)/2;
 	}
 }
 

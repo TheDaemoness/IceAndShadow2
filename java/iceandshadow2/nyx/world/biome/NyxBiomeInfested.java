@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
+import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 
 import java.util.Random;
 
@@ -22,6 +23,16 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
 				60, 3, 5));
+	}
+	
+	@Override
+	protected boolean hasTowers() {
+		return false;
+	}
+	
+	@Override
+	protected GenRuins supplyRuins() {
+		return null;
 	}
 
 	@Override

@@ -25,10 +25,10 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		final int e = 1 + world.rand.nextInt(4 + fortune);
+		final int e = 1 + world.rand.nextInt(2 + fortune);
 		for (int i = 0; i < e; ++i)
 			is.add(new ItemStack(NyxItems.devora, 1, 1));
-		if (e < 3 + fortune || world.rand.nextBoolean())
+		if (e < 2 + fortune || world.rand.nextBoolean())
 			is.add(new ItemStack(NyxItems.devora, 1));
 		else
 			is.add(new ItemStack(NyxItems.devora, 2, 1));

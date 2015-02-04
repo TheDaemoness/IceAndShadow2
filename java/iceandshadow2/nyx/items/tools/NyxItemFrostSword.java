@@ -8,8 +8,11 @@ import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -22,9 +25,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
+public class NyxItemFrostSword extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
 
-	public static final String nbtTierID = "nyxBowDrawModifier";
+	public static final String nbtTierID = "nyxSwordChargeModifier";
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
 
 	@SideOnly(Side.CLIENT)
@@ -35,8 +38,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	public boolean inuse;
 
-	public NyxItemBow(String par1) {
+	public NyxItemFrostSword(String par1) {
 		super(EnumIaSModule.NYX,par1);
+		this.setMaxDamage(512);
 		this.bFull3D = false;
 		inuse = false;
 	}
@@ -83,7 +87,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 		if (usingItem != stack)
 			this.inuse = false;
 
-		if (!((NyxItemBow) stack.getItem()).inuse)
+		if (!((NyxItemFrostSword) stack.getItem()).inuse)
 			return renderPass > 0 ? this.glow : this.itemIcon;
 
 			final int j = getMaxItemUseDuration(stack) - useRemaining;
@@ -94,9 +98,6 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 				return this.iconArray[1][renderPass];
 			return this.iconArray[0][renderPass];
 	}
-
-	public abstract int getTimeForIcon(int mod, int index);
-	public abstract int getUpgradeCost(int mod);
 
 	public int getSpeedModifier(ItemStack is) {
 		if(!is.hasTagCompound())
@@ -119,7 +120,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	@Override
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer plai) {
-		((NyxItemBow) item.getItem()).inuse = false;
+		((NyxItemFrostSword) item.getItem()).inuse = false;
 		return true;
 	}
 
@@ -132,8 +133,23 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 			par3EntityPlayer.setItemInUse(par1ItemStack,
 					this.getMaxItemUseDuration(par1ItemStack));
 		}
-
 		return par1ItemStack;
+	}
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer, int par4) {
+		final int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
+		inuse = false;
+
+		float var7 = var6 / (25.0F-this.getSpeedModifier(par1ItemStack)*2);
+		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
+
+		if (var7 < 0.3F)
+			return;
+
+		if (var7 > 0.95F)
+			var7 = 1.0F;
 	}
 
 	@Override
@@ -144,7 +160,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack is) {
-		return EnumAction.bow;
+		return EnumAction.block;
 	}
 
 	@Override
@@ -156,12 +172,20 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != this)
 			return 0;
-		if(this.getSpeedModifier(target) >= 5)
+		if(this.getSpeedModifier(target) >= 3)
 			return 0;
-		if(catalyst.stackSize < this.getUpgradeCost(this.getSpeedModifier(target)))
+		if(catalyst.stackSize < 11)
 			return 0;
 		if(catalyst.getItem() == NyxItems.nifelhiumPowder)
-			return 160;
+			return 180;
+		return 0;
+	}
+
+	public int getTimeForIcon(int mod, int index) {
+		if(index == 2)
+			return 25-mod*2;
+		if(index == 1)
+			return 15-mod*2;
 		return 0;
 	}
 
@@ -173,7 +197,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 			target.getTagCompound().setInteger(nbtTierID,1);
 		} else
 			target.getTagCompound().setInteger(nbtTierID,this.getSpeedModifier(target)+1);
-		catalyst.stackSize -= this.getUpgradeCost(this.getSpeedModifier(target));
+		catalyst.stackSize -= 11;
 		return null;
 	}
 

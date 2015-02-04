@@ -1,7 +1,8 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
+import iceandshadow2.api.IIaSOnDeathDestroy;
+import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 
 import java.util.HashMap;
@@ -43,9 +44,9 @@ public class NyxDeathSystem {
 						if (i < 9)
 							continue;
 					}
-					if (it instanceof IIaSKeepOnDeath)
+					if (it instanceof IIaSOnDeathKeep)
 						continue;
-					if (do_drop)
+					if (do_drop && !(it instanceof IIaSOnDeathDestroy))
 						plai_inv.player.dropPlayerItemWithRandomChoice(
 								plai_inv.mainInventory[i], true);
 					plai_inv.mainInventory[i] = null;

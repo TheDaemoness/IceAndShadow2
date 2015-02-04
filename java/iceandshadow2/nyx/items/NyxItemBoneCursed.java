@@ -57,7 +57,7 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 		if (!player.capabilities.isCreativeMode) {
 			par1Stack.stackSize -= 1;
 			player.attackEntityFrom(DamageSource.magic,
-					player.worldObj.difficultySetting.getDifficultyId());
+					Math.min(0, player.worldObj.difficultySetting.getDifficultyId()-1));
 		}
 		return par1Stack;
 	}

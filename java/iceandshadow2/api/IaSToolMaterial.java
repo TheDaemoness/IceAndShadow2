@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -278,16 +279,19 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public float getToolDamage(ItemStack is, EntityLivingBase user,
 			Entity target) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
+		float baseDmg = getBaseDamage();
+		if(target instanceof EntityLivingBase)
+			baseDmg += EnchantmentHelper.getEnchantmentModifierLiving(user, (EntityLivingBase)target);
 		if (t == EnumIaSToolClass.AXE)
-			return getBaseDamage() + 3;
+			return baseDmg + 3;
 		if (t == EnumIaSToolClass.PICKAXE)
-			return getBaseDamage() + 2;
+			return baseDmg + 2;
 		if (t == EnumIaSToolClass.SPADE)
-			return getBaseDamage() + 1;
+			return baseDmg + 1;
 		if (t == EnumIaSToolClass.KNIFE)
-			return getBaseDamage() + 2;
+			return baseDmg + 2;
 		if (t == EnumIaSToolClass.SWORD)
-			return getBaseDamage() + 4;
+			return baseDmg + 4;
 		return getBaseDamage();
 	}
 

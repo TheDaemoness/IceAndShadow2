@@ -77,7 +77,7 @@ IIaSGlowing {
 	}
 
 	@Override
-	public int getUpgradeCost() {
-		return 7;
+	public int getUpgradeCost(int mod) {
+		return 7+(mod+1)/2;
 	}
 }

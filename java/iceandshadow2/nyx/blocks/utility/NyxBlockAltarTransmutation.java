@@ -104,19 +104,19 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				}
 			}
 			if (teh != null)
-				w.markTileEntityChunkModified(x, y - 1, z, teh);
+				w.markBlockForUpdate(x, y - 1, z);
 		}
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
 					tte.catalyst);
 			if (tte.handler == null) {
-				w.markTileEntityChunkModified(x, y, z, tte);
+				w.markBlockForUpdate(x, y, z);
 				return;
 			}
 			tte.scheduleUpdate(x, y, z,
 					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
-		w.markTileEntityChunkModified(x, y, z, tte);
+		w.markBlockForUpdate(x, y, z);
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (check != null && check.getMaterial() != Material.air) {
 			IaSPlayerHelper.messagePlayer(ep,
 					"That altar needs an empty space above it to work.");
-			return true;
+			return false;
 		}
 		final TileEntity te = w.getTileEntity(x, y, z);
 		if (!(te instanceof NyxTeTransmutationAltar))
@@ -167,7 +167,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			final ItemStack its = tte.handleRemove(ep.isSneaking());
 			if (its != null)
 				IaSPlayerHelper.giveItem(ep, its);
-			w.markTileEntityChunkModified(x, y, z, tte);
+			w.markBlockForUpdate(x, y, z);
 			return true;
 		}
 		if (!tte.handlePlace(is.copy()))
@@ -178,15 +178,14 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
 					tte.catalyst);
 			if (tte.handler == null) {
-				w.markTileEntityChunkModified(x, y, z, tte);
+				w.markBlockForUpdate(x, y, z);
 				return true;
 			}
 			tte.scheduleUpdate(x, y, z,
 					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
-			w.markTileEntityChunkModified(x, y, z, tte);
+			w.markBlockForUpdate(x, y, z);
 			return true;
 		}
-		w.markTileEntityChunkModified(x, y, z, tte);
 		return false;
 	}
 
@@ -199,7 +198,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				return;
 			final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 			tte.dropItems();
-			w.markTileEntityChunkModified(x, y, z, tte);
+			w.markBlockForUpdate(x, y, z);
 			w.setBlockToAir(x, y, z);
 			w.setBlock(x, y, z, this);
 		}

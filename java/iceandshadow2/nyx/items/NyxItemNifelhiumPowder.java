@@ -1,12 +1,55 @@
 package iceandshadow2.nyx.items;
 
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import java.util.ArrayList;
+import java.util.List;
 
-public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.nyx.NyxItems;
+
+public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
 
 	public NyxItemNifelhiumPowder(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		// TODO Auto-generated constructor stub
+		this.setMaxStackSize(16);
+	}
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if(catalyst.getItem() != this)
+			return 0;
+		if(target.getItem() == NyxItems.icicle)
+			return 160;
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target,
+			ItemStack catalyst, World world) {
+		--catalyst.stackSize;
+		--target.stackSize;
+		if(target.getItem() == NyxItems.icicle) {
+			List<ItemStack> li = new ArrayList<ItemStack>();
+			li.add(new ItemStack(NyxItems.icicle, 64));
+			li.add(new ItemStack(NyxItems.icicle, 64));
+			return li;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity ent) {	
+		return false;
 	}
 }

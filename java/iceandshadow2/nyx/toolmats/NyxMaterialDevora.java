@@ -19,6 +19,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
 
 public class NyxMaterialDevora extends IaSToolMaterial {
 
@@ -73,6 +74,33 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.echirIngot && mat.getItemDamage() > 0;
+	}
+	
+	@Override
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
+			int y, int z) {
+		if(!(user instanceof EntityPlayer))
+			return super.onHarvest(is, user, w, x, y, z);
+		Block origin = w.getBlock(x, y, z);
+		float hardness = origin.getBlockHardness(w, x, y, z);
+		for(int i = 1; i < 9; i+=2) {
+			final int xit = i%3-1;
+			final int zit = i/3-1;
+			explodeMine((EntityPlayer)user, w, x+xit, y, z+zit, hardness);
+		}
+		explodeMine((EntityPlayer)user, w, x, y+1, z, hardness);
+		explodeMine((EntityPlayer)user, w, x, y-1, z, hardness);
+		w.createExplosion(user, x+0.5, y+0.5, z+0.5, 0.5F, false);
+		return 2*super.onHarvest(is, user, w, x, y, z);
+	}
+	
+	protected void explodeMine(EntityPlayer user, World w, int x, int y, int z, float hard) {
+		Block bl = w.getBlock(x, y, z);
+		if(!bl.canHarvestBlock(user, w.getBlockMetadata(x, y, z)))
+			return;
+		if(bl.getBlockHardness(w, x, y, z) < hard)
+			return;
+		w.func_147480_a(x, y, z, true);
 	}
 
 	@Override

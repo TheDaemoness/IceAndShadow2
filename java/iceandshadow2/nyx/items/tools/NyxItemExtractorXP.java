@@ -17,39 +17,46 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApiTransmute {
+public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing {
 
+	//TODO: RENDER PASSES AND ICONS!
+	
 	@SideOnly(Side.CLIENT)
 	protected IIcon fillIcons[];
 	
-	public NyxItemExtractorPoison(String texName) {
+	public NyxItemExtractorXP(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(14);
 	}
-
+	
 	@Override
-	public IIcon getIconFromDamage(int dmg) {
-		if(dmg == 0)
-			return this.itemIcon;
-		if(dmg >= 13)
-			return fillIcons[6];
-		return fillIcons[(dmg-1)/2];
+	public IIcon getIcon(ItemStack stack, int pass) {
+		return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
+	}
+	
+	@Override
+	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
+		if (pass >= 1)
+			return fillIcons[Math.max(6, dmg)];
+		return this.itemIcon;
 	}
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(this.getTexName()+"0");
+		this.itemIcon = r.registerIcon(this.getTexName());
 		fillIcons = new IIcon[7];
-		for(int i = 1; i <= 7; ++i)
-			fillIcons[i-1] = r.registerIcon(this.getTexName()+i);
+		for(int i = 0; i < 7; ++i)
+			fillIcons[i] = r.registerIcon(this.getTexName()+i);
 	}
+	
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.block;
@@ -57,38 +64,43 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
-		return 16;
+		return 32;
 	}
 	
 	@Override
 	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
-		pl.removePotionEffect(Potion.poison.id);
-		is.setItemDamage(is.getItemDamage()+1);
+		pl.addExperienceLevel(-5);
+		is.setItemDamage(is.getItemDamage()-1);
 		return is;
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
-		if(pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage()-1)
+		if(pwai.experienceLevel >= 5 && heap.getItemDamage() > 0)
 			pwai.setItemInUse(heap, this.getMaxItemUseDuration(heap));
 		return heap;
 	}
 
 	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		return 0;
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		return null;
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 
 	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
-		return false;
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 3;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 2;
 	}
 }
