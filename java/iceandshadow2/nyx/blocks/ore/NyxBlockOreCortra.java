@@ -24,10 +24,10 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		final int e = world.rand.nextInt(2 + fortune) + 2;
+		final int e = world.rand.nextInt(3 + fortune) + 2;
 		for (int i = 0; i < e; ++i) {
-			if (world.rand.nextBoolean())
-				is.add(new ItemStack(Items.redstone));
+			if (world.rand.nextInt(4) == 0)
+				is.add(new ItemStack(Items.redstone, 2));
 			else
 				is.add(new ItemStack(NyxItems.cortra));
 		}
