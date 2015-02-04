@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.ias.interfaces.IIaSKeepOnDeath;
+import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class NyxDeathSystem {
 						if (i < 9)
 							continue;
 					}
-					if (it instanceof IIaSKeepOnDeath)
+					if (it instanceof IIaSOnDeathKeep)
 						continue;
 					if (do_drop)
 						plai_inv.player.dropPlayerItemWithRandomChoice(
