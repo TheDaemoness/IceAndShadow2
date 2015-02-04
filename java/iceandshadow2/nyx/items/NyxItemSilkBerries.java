@@ -28,6 +28,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	public NyxItemSilkBerries(String id) {
 		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
+		this.setHasSubtypes(true);
 		this.setMaxStackSize(32);
 		this.setEatTime(16);
 		this.setXpAltarMinimumValue(2);
@@ -65,7 +66,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@Override
 	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		par3EntityPlayer.heal(3.0F+par2World.rand.nextInt(2));
+		par3EntityPlayer.heal(3.0F*(2*par1ItemStack.getItemDamage()+1)+par2World.rand.nextInt(2));
 	}
 
 	/**

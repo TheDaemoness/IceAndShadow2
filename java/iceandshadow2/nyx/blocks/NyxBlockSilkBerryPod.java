@@ -74,7 +74,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 
 		if (j1 >= 2) {
 			b0 = (byte)(2+world.rand.nextInt(2));
-			if((world.rand.nextInt() & 3) == 0)
+			if(world.rand.nextInt(4) == 0)
 				dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
 		}
 
