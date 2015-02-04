@@ -4,8 +4,8 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.IaSPlayerHelper;
-
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -47,7 +47,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 						"The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.");
 				return isk;
 			}
-			plai.attackEntityFrom(DamageSource.magic, 0.5F);
+			plai.attackEntityFrom(DamageSource.magic, Math.min(0, plai.worldObj.difficultySetting.getDifficultyId()-1));
 			isk.setItemDamage(1);
 		}
 		return isk;
@@ -64,12 +64,16 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 		if (stack.isItemDamaged()) {
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
-			else if (stack.attemptDamageItem(1, par2World.rand)) {
-				stack.setItemDamage(0);
-				((EntityPlayer) par3Entity).inventory
-				.consumeInventoryItem(this);
-			}
+			else
+				stack.setItemDamage(stack.getItemDamage()+1);
 		}
+	}
+
+	@Override
+	public boolean onEntityItemUpdate(EntityItem entityItem) {
+		if (entityItem.getEntityItem().isItemDamaged())
+			entityItem.setDead();
+		return false;
 	}
 
 	@Override
