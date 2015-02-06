@@ -61,12 +61,14 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 			final int smlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, is);
 			if(!user.worldObj.isRemote) {
 				if(elb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+					nu.put(Enchantment.sharpness.effectId, shlvl);
 					if(smlvl < 5 && user.worldObj.rand.nextInt(64+smlvl*12)==0)
 						nu.put(Enchantment.smite.effectId, smlvl+1);
 					else if(smlvl > 0)
 						nu.put(Enchantment.smite.effectId, smlvl);
 				}
 				else {
+					nu.put(Enchantment.smite.effectId, smlvl);
 					if(shlvl < 5 && user.worldObj.rand.nextInt(48+shlvl*8)==0)
 						nu.put(Enchantment.sharpness.effectId, shlvl+1);
 					else if(shlvl > 0)
