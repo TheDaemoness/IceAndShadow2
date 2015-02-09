@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSOnDeathDestroy;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemFood;
@@ -24,7 +25,7 @@ import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.IaSPlayerHelper;
 
-public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing {
+public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathDestroy {
 
 	//TODO: RENDER PASSES AND ICONS!
 	
