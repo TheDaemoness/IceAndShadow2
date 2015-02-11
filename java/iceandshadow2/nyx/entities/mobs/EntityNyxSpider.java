@@ -59,16 +59,16 @@ public class EntityNyxSpider extends EntitySpider {
 
 		if (flag) {
 			if (par1Entity instanceof EntityLivingBase) {
-				final int lvl = this.worldObj.difficultySetting
-						.getDifficultyId() - 1;
-				final int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 125
+				final int lvl = IaSWorldHelper.getDifficulty(this.worldObj) - 1;
+				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 125
 						: 150;
-				((EntityLivingBase) par1Entity)
-				.addPotionEffect(new PotionEffect(Potion.poison.id, lvl
-						* mod + 160, 0));
-				((EntityLivingBase) par1Entity)
-				.addPotionEffect(new PotionEffect(
-						Potion.moveSlowdown.id, lvl * mod + 190, lvl));
+				EntityLivingBase elb = (EntityLivingBase) par1Entity;
+				if(!elb.isPotionActive(Potion.poison))
+					mod /= 2;
+				elb.addPotionEffect(new PotionEffect(
+						Potion.poison.id, lvl * mod + 160, 0));
+				elb.addPotionEffect(new PotionEffect(
+						Potion.weakness.id, lvl * mod + 190, lvl));
 			}
 			return true;
 		} else {
@@ -80,9 +80,8 @@ public class EntityNyxSpider extends EntitySpider {
 		this.worldObj
 		.playSoundAtEntity(this,
 				"IceAndShadow2:mob_nyxwisp_materialize",
-				1.0F - this.worldObj.difficultySetting
-				.getDifficultyId() * 0.10F, this.rand
-				.nextFloat() * 0.2F + 0.9F);
+				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F, 
+				this.rand.nextFloat() * 0.2F + 0.9F);
 	}
 
 	/**

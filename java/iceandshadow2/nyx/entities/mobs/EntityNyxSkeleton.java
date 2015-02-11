@@ -211,7 +211,7 @@ IIaSMobGetters {
 				final int weakentime = this.worldObj.difficultySetting
 						.getDifficultyId() * 7;
 				((EntityLivingBase) par1Entity)
-				.addPotionEffect(new PotionEffect(Potion.weakness.id,
+				.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
 						weakentime * 20, IaSWorldHelper
 						.getDifficulty(this.worldObj) - 1));
 			}
