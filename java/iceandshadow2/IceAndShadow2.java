@@ -116,7 +116,7 @@ public class IceAndShadow2 {
 
 	private void addPostInitHandlers() {
 		toPostRegister.add(new IaSHandlerTransmutationRepair());
-		toPostRegister.add(new IaSHandlerDistillationHeat());
+		toPostRegister.add(new IaSHandlerTransmutationHeat());
 	}
 
 	@EventHandler
