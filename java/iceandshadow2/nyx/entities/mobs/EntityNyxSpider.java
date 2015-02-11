@@ -103,11 +103,8 @@ public class EntityNyxSpider extends EntitySpider {
 		if (baite <= 0)
 			this.dropItem(NyxItems.toughGossamer, 1);
 
-		/*
-		 * if(this.rand.nextInt(4-this.worldObj.difficultySetting) == 0)
-		 * this.dropItem(IaSItems.nyxPhantomResin.itemID,
-		 * 1+this.rand.nextInt(1+par2));
-		 */
+		 if(this.rand.nextInt(5) < 2+this.worldObj.difficultySetting.getDifficultyId())
+			 this.dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
 	}
 
 	@Override
