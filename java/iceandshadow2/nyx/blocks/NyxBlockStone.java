@@ -31,8 +31,8 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 								.getDamageReductionAmount(3) == 1)
 							theEntity.attackEntityFrom(
 									IaSDamageSources.dmgStone, dmg / 2 + 1);
-						((EntityLivingBase) theEntity).getEquipmentInSlot(1)
-						.damageItem(1, (EntityLivingBase) theEntity);
+						if(((EntityLivingBase) theEntity).getEquipmentInSlot(1).attemptDamageItem(1, theWorld.rand))
+							((EntityLivingBase) theEntity).setCurrentItemOrArmor(1, null);
 					}
 					return;
 				}

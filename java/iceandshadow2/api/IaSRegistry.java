@@ -23,7 +23,6 @@ public final class IaSRegistry {
 
 	private static IaSToolMaterial defaultMaterial = new NyxMaterialEchir();
 	private static HashMap<String, IaSToolMaterial> toolMaterials = new HashMap<String, IaSToolMaterial>();
-	private static ArrayList<IIaSApiDistillable> handlersDistillable = new ArrayList<IIaSApiDistillable>();
 	private static ArrayList<IIaSApiExaminable> handlersExaminable = new ArrayList<IIaSApiExaminable>();
 	private static ArrayList<IIaSApiTransmute> handlersTransmutable = new ArrayList<IIaSApiTransmute>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
@@ -46,8 +45,6 @@ public final class IaSRegistry {
 	}
 
 	private static void doAdd(Object o) {
-		if(o instanceof IIaSApiDistillable)
-			addHandler((IIaSApiDistillable)o);
 		if(o instanceof IIaSApiExaminable)
 			addHandler((IIaSApiExaminable)o);
 		if(o instanceof IIaSApiSacrificeXp)
@@ -56,10 +53,6 @@ public final class IaSRegistry {
 			addHandler((IIaSApiTransmute)o);
 		if(o instanceof IaSToolMaterial)
 			addToolMaterial((IaSToolMaterial)o);
-	}
-
-	private static void addHandler(IIaSApiDistillable handler) {
-		handlersDistillable.add(handler);
 	}
 
 	private static void addHandler(IIaSApiExaminable handler) {
@@ -83,28 +76,6 @@ public final class IaSRegistry {
 
 	public static IaSToolMaterial getDefaultMaterial() {
 		return defaultMaterial;
-	}
-
-	public static IIaSApiDistillable getHandlerDistillation(ItemStack target) {
-		if (target == null)
-			return null;
-		Object obj;
-		IIaSApiDistillable dist;
-
-		obj = target.getItem();
-		if (obj instanceof ItemBlock)
-			obj = ((ItemBlock) obj).field_150939_a;
-		if (obj instanceof IIaSApiDistillable) {
-			dist = (IIaSApiDistillable) obj;
-			if (dist.getDistillationRate(target) > 0)
-				return dist;
-		}
-
-		for (int i = 0; i < handlersDistillable.size(); ++i) {
-			if (handlersDistillable.get(i).getDistillationRate(target) > 0)
-				return handlersDistillable.get(i);
-		}
-		return null;
 	}
 
 	public static IIaSApiTransmute getHandlerTransmutation(ItemStack target,

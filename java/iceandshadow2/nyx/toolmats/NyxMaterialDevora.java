@@ -8,6 +8,7 @@ import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTNT;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -134,7 +135,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		Block bl = knife.worldObj.getBlock(block.posX, block.posY, block.posZ);
 		Explosion ex = knife.worldObj.createExplosion(user, knife.posX, knife.posY,
 				knife.posZ, 0.3F, true);
-		if(bl == NyxBlocks.oreDevora)
+		if(bl == NyxBlocks.oreDevora || bl instanceof BlockTNT)
 			bl.onBlockExploded(knife.worldObj, block.posX, block.posY, block.posZ, ex);
 		List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife, 
 				AxisAlignedBB.getBoundingBox(

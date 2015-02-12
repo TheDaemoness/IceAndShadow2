@@ -16,7 +16,7 @@ public class NyxBlocks {
 	exousicIce, exousicWater, crystalBloodstone, crystalExousium,
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-	hookClimbing, transmutationAltar, examinationTable, distiller;
+	hookClimbing, transmutationAltar, examinationTable;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -68,7 +68,6 @@ public class NyxBlocks {
 
 		transmutationAltar = new NyxBlockAltarTransmutation(
 				"TransmutationAltar").register();
-		distiller = new NyxBlockDistiller("Distiller").register();
 
 		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")
