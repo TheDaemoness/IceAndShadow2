@@ -34,7 +34,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public float getBaseSpeed() {
-		return 36;
+		return 48;
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 48;
+		return 32;
 	}
 	
 	@Override
