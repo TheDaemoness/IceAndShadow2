@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.toolmats;
 
+import java.util.Set;
+
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
@@ -7,6 +9,7 @@ import iceandshadow2.nyx.NyxItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
@@ -36,6 +39,9 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	
 	@Override
 	public float getHarvestSpeed(ItemStack is, Block target) {
+		final Set<String> s = is.getItem().getToolClasses(is);
+		if (!s.contains(target.getHarvestTool(0)))
+			return getBaseSpeed()/4;
 		return getBaseSpeed();
 	}
 
@@ -71,10 +77,27 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public String getMaterialName() {
 		return "Exousium";
 	}
+	
+	@Override
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		if (target instanceof EntityLivingBase) {
+			if (user instanceof EntityPlayer)
+				target.attackEntityFrom(
+						DamageSource.causePlayerDamage((EntityPlayer) user).
+						setDamageBypassesArmor().setDamageIsAbsolute(),
+						getToolDamage(is, user, target));
+			else
+				target.attackEntityFrom(DamageSource.causeMobDamage(user).
+						setDamageBypassesArmor().setDamageIsAbsolute(),
+						getToolDamage(is, user, target));
+		}
+		return damageToolOnAttack(is, user, target);
+	}
+
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 1;
+		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
 	}
 	
 	@Override
@@ -92,7 +115,13 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	@Override
 	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
 			int y, int z) {
-		int durab = Math.max(0,w.getBlock(x, y, z).getHarvestLevel(w.getBlockMetadata(x,y,z)));
+		if(w.isRemote)
+			return 0;
+		Block bl = w.getBlock(x, y, z);
+		int hl = bl.getHarvestLevel(w.getBlockMetadata(x,y,z));
+		int durab = Math.max(0,hl);
+		if (!is.getItem().getToolClasses(is).contains(bl.getHarvestTool(0)))
+			durab += Math.max(0,hl+1);
 		w.setBlockToAir(x, y, z);
 		return durab;
 	}
