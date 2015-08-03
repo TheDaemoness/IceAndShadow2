@@ -64,6 +64,12 @@ item.iasToolNavistraPickaxe.name=Navistra Pickaxe
 item.iasToolNavistraSpade.name=Navistra Spade
 item.iasToolNavistraSword.name=Navistra Sword
 item.iasToolNavistraKnife.name=Navistra Throwing Knife
+item.iasToolNavistraAxe.name=Navistra Axe
+item.iasToolExousiumPickaxe.name=Exousic Pickaxe
+item.iasToolExousiumSpade.name=Exousic Spade
+item.iasToolExousiumSword.name=Exousic Sword
+item.iasToolExousiumKnife.name=Exousic Throwing Knife
+item.iasToolExousiumAxe.name=Exousic Axe
 
 item.iasArmorEchir0.name=Echir Helmet
 item.iasArmorEchir1.name=Echir Chestplate

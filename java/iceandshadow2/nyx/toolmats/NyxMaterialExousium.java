@@ -1,13 +1,18 @@
 package iceandshadow2.nyx.toolmats;
 
+import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class NyxMaterialExousium extends IaSToolMaterial {
 
@@ -16,22 +21,32 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 0;
+		return -1;
+	}
+	
+	@Override
+	public int getHarvestLevel(ItemStack is, String toolClass) {
+		return getBaseLevel();
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 24;
+		return 36;
+	}
+	
+	@Override
+	public float getHarvestSpeed(ItemStack is, Block target) {
+		return getBaseSpeed();
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 32;
+		return 48;
 	}
 	
 	@Override
 	public float getBaseDamage() {
-		return 4;
+		return 7;
 	}
 
 	@Override
@@ -59,7 +74,26 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
+		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 1;
+	}
+	
+	@Override
+	public boolean glows(EnumIaSToolClass mat) {
+		return true;
 	}
 
+	@Override
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
+			ChunkCoordinates block) {
+		super.onKnifeHit(user, knife, block);
+		return false;
+	}
+
+	@Override
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
+			int y, int z) {
+		int durab = Math.max(0,w.getBlock(x, y, z).getHarvestLevel(w.getBlockMetadata(x,y,z)));
+		w.setBlockToAir(x, y, z);
+		return durab;
+	}
 }
