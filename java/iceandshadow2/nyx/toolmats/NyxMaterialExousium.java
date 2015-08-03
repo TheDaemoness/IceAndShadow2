@@ -96,4 +96,9 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 		w.setBlockToAir(x, y, z);
 		return durab;
 	}
+	
+	@Override
+	public ItemStack getTransmutationCatalyst() {
+		return new ItemStack(NyxItems.exousium,1,1);
+	}
 }
