@@ -47,6 +47,11 @@ public class NyxEntities {
 		// Set up the technical EntityTransmutationCountdown entity.
 		EntityRegistry.registerModEntity(EntityTransmutationCountdown.class,
 				"nyxTechnicalTransmutationCountdown", 6, owner, 160, 1, false);
+		
+		// Set up Throwing Knives
+		EntityRegistry.registerModEntity(EntityNyxGhoul.class,
+				"nyxMobWhiteGhoul", 7, owner, 60, 1, true);
+		registerEntityEgg(EntityNyxGhoul.class, 0xccccdd, 0x220011);
 	}
 
 	@SuppressWarnings("unchecked")

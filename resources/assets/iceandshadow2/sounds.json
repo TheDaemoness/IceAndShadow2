@@ -1,4 +1,7 @@
 {
    "portal_travel": {"category":"master" ,"sounds":["portal_travel"]},
+   "mob_nyxghoul_idle": {"category":"hostile" ,"sounds":["mob_nyxghoul_idle1","mob_nyxghoul_idle2","mob_nyxghoul_idle3"]},
+   "mob_nyxghoul_hurt": {"category":"hostile" ,"sounds":["mob_nyxghoul_hurt1","mob_nyxghoul_hurt2","mob_nyxghoul_hurt3"]},
+   "mob_nyxghoul_death": {"category":"hostile" ,"sounds":["mob_nyxghoul_death"]},
    "mob_nyxwisp_materialize": {"category":"hostile" ,"sounds":["mob_nyxwisp_materialize"]}
 }

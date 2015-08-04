@@ -151,5 +151,6 @@ death.attack.IceAndShadow2.nyxFreezingDamage=%1$s froze to death
 
 entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
 entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
+entity.IceAndShadow2.nyxMobWhiteGhoul.name=White Ghoul
 entity.IceAndShadow2.nyxProjectileIceArrow.name=Ice Arrow
 entity.IceAndShadow2.nyxProjectileShadowBall.name=Shadow Ball

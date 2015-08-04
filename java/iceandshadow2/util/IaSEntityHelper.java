@@ -3,7 +3,9 @@ package iceandshadow2.util;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -13,6 +15,22 @@ import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 
 public class IaSEntityHelper {
 
+	public static EntityItem dropItem(Entity ent, ItemStack par1ItemStack) {
+		if (par1ItemStack.stackSize == 0) {
+			return null;
+		} else {
+			final EntityItem entityitem = new EntityItem(ent.worldObj,
+					ent.posX+ent.width/2, ent.posY, ent.posZ+ent.width/2, par1ItemStack);
+			entityitem.delayBeforeCanPickup = 10;
+			if (ent.captureDrops) {
+				ent.capturedDrops.add(entityitem);
+			} else {
+				ent.worldObj.spawnEntityInWorld(entityitem);
+			}
+			return entityitem;
+		}
+	}
+	
 	public static BiomeGenBase getBiome(Entity ent) {
 		return getBiome(ent, 0, 0);
 	}
