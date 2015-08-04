@@ -219,7 +219,9 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	 */
 	@Override
 	protected String getLivingSound() {
-		return "IceAndShadow2:mob_nyxghoul_idle";
+		if(this.getAttackTarget() != null)
+			return "IceAndShadow2:mob_nyxghoul_idle";
+		return null;
 	}
 
 	@Override
