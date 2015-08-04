@@ -44,6 +44,12 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 			return getBaseSpeed()/4;
 		return getBaseSpeed();
 	}
+	
+	@Override
+	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World,
+			EntityLivingBase elb) {
+		return 16;
+	}
 
 	@Override
 	public int getDurability(ItemStack is) {
