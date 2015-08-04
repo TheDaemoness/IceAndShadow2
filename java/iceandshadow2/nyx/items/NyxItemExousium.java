@@ -1,13 +1,18 @@
 package iceandshadow2.nyx.items;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
-
+import iceandshadow2.nyx.NyxItems;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -17,7 +22,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
+public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon dustIconGlow, rockIcon[], crystalIcon[];
@@ -102,6 +107,30 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing {
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 0 || 
+				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
+			return 0;
+		return 120;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target,
+			ItemStack catalyst, World world) {
+		List<ItemStack> it = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		it.add(new ItemStack(Items.iron_ingot,Math.min(2, target.stackSize),1));
+		target.stackSize -= Math.min(2, target.stackSize);
+		return it;
+	}
+
+	@Override
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity ent) {
+		return false;
 	}
 
 }

@@ -56,7 +56,7 @@ public class NyxItems {
 		poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile")
-		.register().setCreativeTab(IaSCreativeTabs.resources);
+				.register().setCreativeTab(IaSCreativeTabs.resources);
 		toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX,
 				"ToughGossamer").register().setCreativeTab(
 						IaSCreativeTabs.resources);
@@ -77,7 +77,7 @@ public class NyxItems {
 		cookie = new NyxItemFoodCookie("Cookie").register().setCreativeTab(
 				CreativeTabs.tabFood);
 		echirShears = new IaSItemShears(EnumIaSModule.NYX, "EchirShears")
-		.register().setCreativeTab(IaSCreativeTabs.tools);
+				.register().setCreativeTab(IaSCreativeTabs.tools);
 		icicle = new NyxItemIcicle("Icicle").register().setCreativeTab(
 				IaSCreativeTabs.resources);
 		page = new NyxItemLorePage("Page").register().setCreativeTab(
