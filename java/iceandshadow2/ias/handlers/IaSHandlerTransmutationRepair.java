@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.NyxItemIngot;
 
 public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {

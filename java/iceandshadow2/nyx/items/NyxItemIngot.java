@@ -1,17 +1,12 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.nyx.NyxItems;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

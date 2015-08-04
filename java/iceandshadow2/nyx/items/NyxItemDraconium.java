@@ -15,7 +15,6 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {

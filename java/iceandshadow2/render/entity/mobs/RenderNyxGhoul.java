@@ -2,9 +2,6 @@ package iceandshadow2.render.entity.mobs;
 
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderNyxGhoul extends RenderZombie {

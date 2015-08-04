@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.items.tools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
@@ -13,7 +12,6 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSLenses;
 import iceandshadow2.api.IIaSApiTransmuteLens;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 
@@ -45,9 +43,11 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 		return this.itemIcon;
 	}
 
+	@Override
 	public abstract int getTransmuteLensRate(EnumIaSLenses lenstype, ItemStack lens,
 			ItemStack target);
 
+	@Override
 	public abstract List<ItemStack> getTransmuteLensYield(ItemStack lens, ItemStack target);
 
 	@Override

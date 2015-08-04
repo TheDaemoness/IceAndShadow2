@@ -1,29 +1,17 @@
 package iceandshadow2.nyx.items.tools;
 
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSOnDeathDestroy;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
-import iceandshadow2.ias.items.IaSItemFood;
-import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.world.NyxTeleporter;
-import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathDestroy {
 

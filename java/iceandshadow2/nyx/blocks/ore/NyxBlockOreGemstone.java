@@ -1,7 +1,5 @@
 package iceandshadow2.nyx.blocks.ore;
 
-import iceandshadow2.nyx.NyxItems;
-
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.GameRegistry;

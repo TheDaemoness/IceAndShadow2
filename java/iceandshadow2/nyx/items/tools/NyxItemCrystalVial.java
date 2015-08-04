@@ -8,13 +8,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTransmute {

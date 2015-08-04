@@ -3,10 +3,8 @@ package iceandshadow2.nyx.toolmats;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
 public class NyxMaterialDraconium extends IaSToolMaterial {
