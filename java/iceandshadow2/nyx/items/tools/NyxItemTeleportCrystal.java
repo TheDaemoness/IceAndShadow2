@@ -59,8 +59,7 @@ IIaSOnDeathKeep {
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		// TODO Auto-generated method stub
-		return super.getRarity(p_77613_1_);
+		return EnumRarity.uncommon;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -25,6 +25,8 @@ IIaSApiTransmute {
 			return 12;
 		if (target.getItem() == NyxItems.frostBowShort)
 			return 8;
+		if (target.getItem() == NyxItems.frostSword)
+			return 12;
 		return 0;
 	}
 
@@ -35,6 +37,8 @@ IIaSApiTransmute {
 		if (target.getItem() == NyxItems.frostBowLong)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 1));
 		if (target.getItem() == NyxItems.frostBowShort)
+			target.setItemDamage(Math.max(0, target.getItemDamage() - 2));
+		if (target.getItem() == NyxItems.frostSword)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 2));
 		return null;
 	}

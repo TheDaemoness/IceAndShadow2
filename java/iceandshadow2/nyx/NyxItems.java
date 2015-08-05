@@ -5,13 +5,7 @@ import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
-import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
-import iceandshadow2.nyx.items.tools.NyxItemBowFrostShort;
-import iceandshadow2.nyx.items.tools.NyxItemCrystalVial;
-import iceandshadow2.nyx.items.tools.NyxItemExtractorPoison;
-import iceandshadow2.nyx.items.tools.NyxItemKitTightrope;
-import iceandshadow2.nyx.items.tools.NyxItemRope;
-import iceandshadow2.nyx.items.tools.NyxItemTeleportCrystal;
+import iceandshadow2.nyx.items.tools.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -21,10 +15,10 @@ public class NyxItems {
 	nifelhiumPowder, navistraShard, devora, cortra, exousium,
 	draconium, exousicIceShard, toughGossamer, poisonFruit,
 	poisonFruitFertile, silkBerries, resin,
-	frostBowShort, frostBowLong, boneCursed, boneSanctified, 
-	heat, vineBundle, bread, cookie,
-	echirShears, icicle, page, rope, kitTightrope, 
-	crystalVial, extractorPoison;
+	frostBowShort, frostBowLong, frostSword, 
+	boneCursed, boneSanctified, heat,
+	vineBundle, bread, cookie, icicle, page, rope, 
+	kitTightrope, echirShears, crystalVial, extractorPoison;
 
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal")
@@ -65,6 +59,8 @@ public class NyxItems {
 		frostBowShort = new NyxItemBowFrostShort("FrostShortBow").register()
 				.setCreativeTab(IaSCreativeTabs.combat);
 		frostBowLong = new NyxItemBowFrostLong("FrostLongBow").register()
+				.setCreativeTab(IaSCreativeTabs.combat);
+		frostSword = new NyxItemSwordFrost("FrostSword").register()
 				.setCreativeTab(IaSCreativeTabs.combat);
 		boneCursed = new NyxItemBoneCursed("CursedBone").register()
 				.setCreativeTab(IaSCreativeTabs.resources);

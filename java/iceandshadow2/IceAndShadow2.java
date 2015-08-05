@@ -92,6 +92,7 @@ public class IceAndShadow2 {
 
 		NyxBiomes.registerBiomes();
 		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
+		MinecraftForge.EVENT_BUS.register(new NyxFrostSwordHandler());
 		GameRegistry.registerFuelHandler(new NyxFuelHandler());
 
 		// Be nice, Thaumcraft.
