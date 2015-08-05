@@ -207,12 +207,10 @@ IIaSMobGetters {
 				par1Entity.setFire(j * 4);
 
 			if (par1Entity instanceof EntityLivingBase) {
-				final int weakentime = this.worldObj.difficultySetting
-						.getDifficultyId() * 7;
-				((EntityLivingBase) par1Entity)
-				.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
-						weakentime * 20, IaSWorldHelper
-						.getDifficulty(this.worldObj) - 1));
+				if(this.getEquipmentInSlot(0).getItem() == NyxItems.frostSword)
+					((EntityLivingBase) par1Entity)
+						.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
+						5+5*IaSWorldHelper.getDifficulty(this.worldObj), 4));
 			}
 		}
 
@@ -396,7 +394,7 @@ IIaSMobGetters {
 		if (taipe == EnumNyxSkeletonType.KNIFE)
 			return new ItemStack(IaSTools.sword);
 		else
-			return new ItemStack(Items.stone_sword);
+			return new ItemStack(NyxItems.frostSword,1,475+this.rand.nextInt(25));
 	}
 
 	public ItemStack getDefaultWeapon(EnumNyxSkeletonType taipe) {
