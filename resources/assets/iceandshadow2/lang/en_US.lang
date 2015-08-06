@@ -44,7 +44,8 @@ item.nyxCrystalVial0.name=Crystalline Vial
 item.nyxCrystalVial1.name=Blank Extractor
 item.nyxExtractorPoison.name=Poison Extractor
 item.nyxPhantomResin.name=Phantom Resin
-item.nyxAlabaster.name=Ethereal Alabaster
+item.nyxAlabaster0.name=Ethereal Alabaster
+item.nyxAlabaster1.name=Scorched Alabaster
 
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
