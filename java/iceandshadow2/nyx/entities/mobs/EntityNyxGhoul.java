@@ -59,7 +59,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityNyxSkeleton.class, 1.0D, true));
 		this.tasks.addTask(5, new EntityAIFleeSun(this,
 				EntityNyxGhoul.moveSpeed + 0.5));
-        this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        //this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this,
 				EntityNyxGhoul.moveSpeed));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this,
@@ -180,6 +180,10 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		
 		if(this.rand.nextInt(4-(IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0)) == 0)
 			this.dropItem(NyxItems.boneSanctified, 1);
+		else if(IaSWorldHelper.getDifficulty(this.worldObj)<3)
+			this.dropItem(NyxItems.alabaster, 1);
+		if(IaSWorldHelper.getDifficulty(this.worldObj)>=3)
+			this.dropItem(NyxItems.alabaster, 1);
 	}
 
 	@Override

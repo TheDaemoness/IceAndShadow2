@@ -16,7 +16,7 @@ public class NyxItems {
 	draconium, exousicIceShard, toughGossamer, poisonFruit,
 	poisonFruitFertile, silkBerries, resin,
 	frostBowShort, frostBowLong, frostSword, 
-	boneCursed, boneSanctified, heat,
+	boneCursed, boneSanctified, heat, alabaster,
 	vineBundle, bread, cookie, icicle, page, rope, 
 	kitTightrope, echirShears, crystalVial, extractorPoison;
 
@@ -89,6 +89,8 @@ public class NyxItems {
 		extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
 		resin = new NyxItemPhantomResin("PhantomResin").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		alabaster = new NyxItemAlabaster("Alabaster").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 	}
 }
