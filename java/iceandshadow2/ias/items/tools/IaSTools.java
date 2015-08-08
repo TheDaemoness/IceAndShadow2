@@ -44,7 +44,7 @@ public class IaSTools {
 	public static IaSItemThrowingKnife knife;
 
 	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[],
-	armorCorpseskin[], armorSpiderSilk[];
+	armorSpiderSilk[];
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
@@ -136,11 +136,23 @@ public class IaSTools {
 		armorNavistra = new IaSItemArmor[4];
 		initArmor(armorNavistra, IaSItemArmor.MATERIAL_NAVISTRA,
 				"IceAndShadow2:textures/armor/navistra");
+		armorSpiderSilk = new IaSItemArmor[4];
+		initArmor(armorSpiderSilk, IaSItemArmor.MATERIAL_SPIDERSILK,
+				"IceAndShadow2:textures/armor/spidersilk");
 
 		makeEchirArmorRecipe("eee", "e e", 0);
 		makeEchirArmorRecipe("e e", "eee", "eee", 1);
 		makeEchirArmorRecipe("eee", "e e", "e e", 2);
 		makeEchirArmorRecipe("e e", "e e", 3);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[0]),
+				"eee", "e e",        'e', new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[1]),
+				"e e", "eee", "eee", 'e', new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[2]),
+				"eee", "e e", "e e", 'e', new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[3]),
+				"e e", "e e",        'e', new ItemStack(NyxItems.toughGossamer));
 
 		axe.setCreativeTab(IaSCreativeTabs.tools);
 		pickaxe.setCreativeTab(IaSCreativeTabs.tools);

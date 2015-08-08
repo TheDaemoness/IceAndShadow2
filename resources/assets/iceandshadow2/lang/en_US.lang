@@ -87,6 +87,10 @@ item.iasArmorCortra0.name=Cortra Helmet
 item.iasArmorCortra1.name=Cortra Chestplate
 item.iasArmorCortra2.name=Cortra Greaves
 item.iasArmorCortra3.name=Cortra Boots
+item.iasArmorNyxSpiderSilk0.name=Nyxian Spider Silk Cap
+item.iasArmorNyxSpiderSilk1.name=Nyxian Spider Silk Tunic
+item.iasArmorNyxSpiderSilk2.name=Nyxian Spider Silk Leggings
+item.iasArmorNyxSpiderSilk3.name=Nyxian Spider Silk Boots
 
 item.iasToolEchirAxeActive.name=Primed Echir Axe
 item.iasToolEchirPickaxeActive.name=Primed Echir Pickaxe

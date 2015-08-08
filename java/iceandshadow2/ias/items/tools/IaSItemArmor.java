@@ -19,11 +19,8 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	public static ArmorMaterial MATERIAL_CORTRA = EnumHelper
 			.addArmorMaterial("Cortra", 33, new int[] { 3, 7, 5, 3 }, 24);
 
-	public static ArmorMaterial MATERIAL_CORPSESKIN = EnumHelper
-			.addArmorMaterial("Corpseskin", 22, new int[] { 2, 7, 5, 2 }, 12);
-
 	public static ArmorMaterial MATERIAL_SPIDERSILK = EnumHelper
-			.addArmorMaterial("NyxSpiderSilk", 22, new int[] { 2, 6, 4, 1 }, 16);
+			.addArmorMaterial("NyxSpiderSilk", 22, new int[] { 2, 7, 5, 2 }, 16);
 
 	static {
 		MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
