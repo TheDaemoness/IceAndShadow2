@@ -9,27 +9,20 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
 public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
@@ -116,9 +109,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		if(catalyst.getItemDamage() == 1) {
 			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block));
 			return 240;
-		} else {
-			if(target.getItem() == NyxItems.cortraIngot && target.getItemDamage() == 1)
-				return 240;
 		}
 		return 0;
 	}
@@ -133,12 +123,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxItems.devora,27));
 			}
-		} else {
-			if(target.getItem() == NyxItems.cortraIngot) {
-				target.stackSize -= 1;
-				retval.add(new ItemStack(NyxItems.magicRepo));
-			}
-				
 		}
 		return retval;
 	}

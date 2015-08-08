@@ -6,7 +6,6 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.nyx.items.tools.*;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -53,9 +52,8 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile")
 				.register().setCreativeTab(IaSCreativeTabs.resources);
-		toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX,
-				"ToughGossamer").register().setCreativeTab(
-						IaSCreativeTabs.resources);
+		toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX, "ToughGossamer").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 		silkBerries = new NyxItemSilkBerries("SilkBerries").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		frostBowShort = new NyxItemBowFrostShort("FrostShortBow").register()
@@ -70,10 +68,10 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		vineBundle = new NyxItemVineBundle("VineBundle").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		bread = new NyxItemFoodBread("Bread").register().setCreativeTab(
-				CreativeTabs.tabFood);
-		cookie = new NyxItemFoodCookie("Cookie").register().setCreativeTab(
-				CreativeTabs.tabFood);
+		bread = new NyxItemFoodBread("Bread").register()
+				.setCreativeTab(CreativeTabs.tabFood);
+		cookie = new NyxItemFoodCookie("Cookie").register()
+				.setCreativeTab(CreativeTabs.tabFood);
 		echirShears = new IaSItemShears(EnumIaSModule.NYX, "EchirShears")
 				.register().setCreativeTab(IaSCreativeTabs.tools);
 		icicle = new NyxItemIcicle("Icicle").register().setCreativeTab(

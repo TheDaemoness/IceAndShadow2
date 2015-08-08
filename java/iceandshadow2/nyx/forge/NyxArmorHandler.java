@@ -33,6 +33,7 @@ public class NyxArmorHandler {
 			if(elb.getEquipmentInSlot(4) != null &&
 					elb.getEquipmentInSlot(4).getItem() == IaSTools.armorSpiderSilk[0]) {
 				e.ammount -= 1;
+				//Boots deliberately do not get damaged.
 			}
 			e.ammount = Math.max(1, e.ammount);
 		}

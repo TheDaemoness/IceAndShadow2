@@ -1,34 +1,17 @@
 package iceandshadow2.nyx.forge;
 
-import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSOnDeathDestroy;
-import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
-
-import java.util.HashMap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public class NyxFrostSwordHandler {
 
