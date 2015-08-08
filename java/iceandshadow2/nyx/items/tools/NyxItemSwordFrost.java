@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
 
-	public static final String nbtTierID = "nyxSwordUpgradeModifier";
+	public static final String nbtTierID = "nyxTierNifelhium";
 	private static final String[] numerals = {"II", "III", "IV", "V", "VI"};
 
 	@SideOnly(Side.CLIENT)
