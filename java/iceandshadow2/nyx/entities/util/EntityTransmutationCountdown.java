@@ -100,7 +100,7 @@ public class EntityTransmutationCountdown extends Entity {
 		if (age % 3 == 0)
 			return;
 		if (this.worldObj.isRemote && tte.handler != null) {
-			if (!tte.handler.spawnParticles(tte.target, tte.catalyst,
+			if (!tte.handler.spawnTransmuteParticles(tte.target, tte.catalyst,
 					this.worldObj, this))
 				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst,
 						this.posX - 0.5 + xposMod, this.posY

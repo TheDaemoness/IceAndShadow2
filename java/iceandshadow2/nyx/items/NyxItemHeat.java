@@ -94,7 +94,7 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity pos) {
 		IaSFxManager.spawnParticle(world, "vanilla_flame", pos.posX - 0.1
 				+ world.rand.nextDouble() / 5,

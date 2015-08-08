@@ -148,7 +148,7 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	}
 
 	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity ent) {
 		return false;
 	}

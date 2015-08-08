@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
@@ -13,6 +14,9 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -20,17 +24,19 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
-public class NyxItemAlabaster extends IaSBaseItemMultiGlow {
+public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon burned;
-	
+
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		this.setMaxStackSize(16);
@@ -41,10 +47,10 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow {
 		if (s.getItemDamage() == 0) {
 			l.add(EnumChatFormatting.DARK_RED.toString()
 					+ EnumChatFormatting.ITALIC.toString()
-					+ "Run.");
+					+ "They are coming.");
 		}
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
 			Entity e) {
@@ -102,7 +108,47 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow {
 		}
 		super.onUpdate(is, w, e, i, isHeld);
 	}
-	
-	
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if(catalyst.getItem() != this)
+			return 0;
+		if(catalyst.getItemDamage() == 1) {
+			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block));
+			return 240;
+		} else {
+			if(target.getItem() == NyxItems.cortraIngot && target.getItemDamage() == 1)
+				return 240;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target,
+			ItemStack catalyst, World world) {
+		ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		if(catalyst.getItemDamage() == 1) {
+			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxItems.devora,27));
+			}
+		} else {
+			if(target.getItem() == NyxItems.cortraIngot) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxItems.magicRepo));
+			}
+				
+		}
+		return retval;
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
+			World world, Entity ent) {
+		return false;
+	}
+
+
 
 }

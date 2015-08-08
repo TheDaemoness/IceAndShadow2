@@ -61,7 +61,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	}
 
 	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity ent) {
 		return false;
 	}

@@ -6,6 +6,7 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.nyx.items.tools.*;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -18,7 +19,8 @@ public class NyxItems {
 	frostBowShort, frostBowLong, frostSword, 
 	boneCursed, boneSanctified, heat, alabaster,
 	vineBundle, bread, cookie, icicle, page, rope, 
-	kitTightrope, echirShears, crystalVial, extractorPoison;
+	kitTightrope, echirShears, crystalVial, extractorPoison,
+	magicRepo;
 
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal")
@@ -92,5 +94,6 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		alabaster = new NyxItemAlabaster("Alabaster").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
+		magicRepo = new NyxItemMagicRepo("MagicRepo").register();
 	}
 }

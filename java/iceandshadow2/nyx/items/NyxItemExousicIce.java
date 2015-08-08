@@ -54,7 +54,7 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	}
 
 	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity ent) {
 		// TODO Auto-generated method stub
 		return false;
