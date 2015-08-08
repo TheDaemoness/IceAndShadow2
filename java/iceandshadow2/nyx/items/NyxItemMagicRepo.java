@@ -3,21 +3,19 @@ package iceandshadow2.nyx.items;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransmute {
@@ -36,9 +34,18 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() == this && target.getItemDamage() == 0 && catalyst.getEnchantmentTagList() != null)
-			return 120;
-		if(catalyst.getItem() == this && catalyst.getItemDamage() == 1 && target.isItemEnchantable())
+		if(target.getItem() == this && target.getItemDamage() == 0 && catalyst.hasTagCompound()) {
+			Object mat = IaSToolMaterial.extractMaterial(catalyst);
+			NBTTagCompound tg = catalyst.getTagCompound();
+			if(tg.hasKey("ench") && mat != IaSRegistry.getToolMaterial("Cortra")) {
+				for(int i = 0; i < 4; ++i) {
+					if(catalyst.getItem() == IaSTools.armorCortra[i])
+						return 0;
+				}
+				return 120;
+			}
+		}
+		else if(catalyst.getItem() == this && catalyst.getItemDamage() == 1 && target.isItemEnchantable())
 			return 120;
 		return 0;
 	}
@@ -48,16 +55,18 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 			ItemStack catalyst, World world) {
 		if(target.getItem() == this && target.getItemDamage() == 0) {
 			target.setItemDamage(1);
-			Map<Integer,Integer> ench = (Map<Integer,Integer>)EnchantmentHelper.getEnchantments(catalyst);
+			Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
 			ench = new HashMap<Integer,Integer>(ench); //Dodge concurrent access issues.
 			for(Integer i : ench.keySet()) {
-				if(ench.get(i).intValue() == 1)
+				if(ench.get(i).intValue() <= 1)
 					ench.remove(i);
 				else
 					ench.put(i, ench.get(i)-1);
 			}
 			EnchantmentHelper.setEnchantments(ench, target);
 			EnchantmentHelper.setEnchantments(ench, catalyst);
+			if(ench.isEmpty())
+				target.setItemDamage(0);
 		} else if(catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
 			Map<Integer,Integer> ench = new HashMap<Integer,Integer>(EnchantmentHelper.getEnchantments(catalyst));
 			EnchantmentHelper.setEnchantments(ench, target);
