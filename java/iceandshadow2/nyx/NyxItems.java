@@ -94,6 +94,7 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		alabaster = new NyxItemAlabaster("Alabaster").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		magicRepo = new NyxItemMagicRepo("MagicRepo").register();
+		magicRepo = new NyxItemMagicRepo("MagicRepo").register()
+				.setCreativeTab(IaSCreativeTabs.misc);
 	}
 }
