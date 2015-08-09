@@ -186,7 +186,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			ItemStack itemz = new ItemStack(NyxItems.icicle,
 					1 + var2.nextInt(4));
 
-			// Bloodstone.
+			// Magic repository.
 			if (rewardid == 0 && rareflag) {
 				itemz = new ItemStack(NyxItems.magicRepo);
 				rareflag = false;
