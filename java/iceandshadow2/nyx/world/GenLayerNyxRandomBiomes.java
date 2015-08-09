@@ -20,17 +20,23 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 	 * based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4) {
-		final int[] var6 = IntCache.getIntCache(par3 * par4);
+	public int[] getInts(int x, int z, int xlim, int zlim) {
+		final int[] var6 = IntCache.getIntCache(xlim * zlim);
 
-		for (int var7 = 0; var7 < par4; ++var7) {
-			for (int var8 = 0; var8 < par3; ++var8) {
-				this.initChunkSeed(var8 + par1, var7 + par2);
+		for (int zit = 0; zit < zlim; ++zit) {
+			for (int xit = 0; xit < xlim; ++xit) {
+				int xc = xit + x;
+				int zc = zit + z;
+				this.initChunkSeed(xc, zc);
 				int nb = this.nextInt(this.allowedBiomes.length);
 				if (this.allowedBiomes[nb] instanceof NyxBiome
-						&& ((NyxBiome) this.allowedBiomes[nb]).isRare())
-					nb = this.nextInt(this.allowedBiomes.length);
-				var6[var8 + var7 * par3] = this.allowedBiomes[nb].biomeID;
+						&& ((NyxBiome) this.allowedBiomes[nb]).isRare()) {
+					if(Math.sqrt(xc*xc + zc*zc) < 96)
+						nb = this.allowedBiomes[0].biomeID;
+					else
+						nb = this.nextInt(this.allowedBiomes.length);
+				}
+				var6[xit + zit * xlim] = this.allowedBiomes[nb].biomeID;
 			}
 		}
 

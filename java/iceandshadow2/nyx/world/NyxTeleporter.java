@@ -21,10 +21,10 @@ public class NyxTeleporter extends Teleporter {
 	}
 
 	private void placeInNyx(Entity par1Entity, int x, int z) {
-		int y = 255;
-		y = world.getPrecipitationHeight(x, z);
-
-		par1Entity.setLocationAndAngles(x + 0.5, y, z + 0.5,
+		for(int i = 0; i <= 3; ++i)
+			world.getChunkProvider().loadChunk(-(i>>1), -(i&1));
+		int y = world.getPrecipitationHeight(x, z);
+		par1Entity.setLocationAndAngles(0.5, y, 0.5,
 				this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
 
@@ -47,8 +47,6 @@ public class NyxTeleporter extends Teleporter {
 			world.setBlock(x, y - 1, z, Blocks.cobblestone);
 		else if (world.getBlock(x, y - 1, z) == Blocks.cactus)
 			world.setBlock(x, y - 1, z, Blocks.sandstone);
-		else if (world.getBlock(x, y - 1, z) == Blocks.end_portal)
-			world.setBlock(x, y - 1, z, Blocks.end_stone);
 		else if (world.getBlock(x, y - 1, z) == Blocks.fire)
 			world.setBlock(x, y - 1, z, Blocks.air);
 

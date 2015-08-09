@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -23,6 +24,11 @@ public class NyxWorldProvider extends WorldProvider {
 		this.isHellWorld = false;
 		this.hasNoSky = true;
 		registerWorldChunkManager();
+	}
+
+	@Override
+	public ChunkCoordinates getSpawnPoint() {
+		return new ChunkCoordinates(0,this.worldObj.getPrecipitationHeight(0, 0),0);
 	}
 
 	@Override

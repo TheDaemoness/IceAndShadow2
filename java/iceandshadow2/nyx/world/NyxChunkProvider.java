@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
 import java.util.List;
 import java.util.Random;
@@ -291,17 +292,21 @@ public class NyxChunkProvider implements IChunkProvider {
 	 * Populates chunk with ores etc etc
 	 */
 	@Override
-	public void populate(IChunkProvider cp, int par2, int par3) {
+	public void populate(IChunkProvider cp, int xchunk, int zchunk) {
 		BlockFalling.fallInstantly = true;
-		int k = par2 * 16;
-		int l = par3 * 16;
+		int k = xchunk * 16;
+		int l = zchunk * 16;
 		final BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(
 				k + 16, l + 16);
 		this.rand.setSeed(this.worldObj.getSeed());
 		final long i1 = this.rand.nextLong() / 2L * 2L + 1L;
 		final long j1 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed(par2 * i1 + par3 * j1 ^ this.worldObj.getSeed());
+		this.rand.setSeed(xchunk * i1 + zchunk * j1 ^ this.worldObj.getSeed());
 		int xit, zit, yval;
+		
+		if(xchunk == 0 && zchunk == 0) {
+			new GenRuinsCentral().generate(this.worldObj, this.rand, 0, 0, 0);
+		}
 
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
 		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase,
@@ -352,8 +357,7 @@ public class NyxChunkProvider implements IChunkProvider {
 	}
 
 	@Override
-	public void recreateStructures(int var1, int var2) {
-		return;
+	public void recreateStructures(int xchunk, int zchunk) {
 	}
 
 	public void replaceBlocksForBiome(int x, int z, Block[] blockArr,
