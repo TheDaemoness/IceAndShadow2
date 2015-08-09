@@ -31,9 +31,10 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 				int nb = this.nextInt(this.allowedBiomes.length);
 				if (this.allowedBiomes[nb] instanceof NyxBiome
 						&& ((NyxBiome) this.allowedBiomes[nb]).isRare()) {
-					if(Math.sqrt(xc*xc + zc*zc) < 96)
+					double dist = Math.sqrt(xc*xc + zc*zc);
+					if(dist < 96)
 						nb = this.allowedBiomes[0].biomeID;
-					else
+					else if(dist < 512)
 						nb = this.nextInt(this.allowedBiomes.length);
 				}
 				var6[xit + zit * xlim] = this.allowedBiomes[nb].biomeID;
