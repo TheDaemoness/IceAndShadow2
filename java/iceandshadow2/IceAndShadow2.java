@@ -8,6 +8,7 @@ import java.util.List;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.items.IaSItemStarterKit;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
 import iceandshadow2.ias.handlers.*;
@@ -33,7 +34,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies = "required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
 	public static final String MODID = "IceAndShadow2";
-	public static final String VERSION = "Pre-Alpha 10";
+	public static final String VERSION = "Pre-Alpha 11";
 	public static final int CONFIG_MAJ = 2;
 	public static final int CONFIG_MIN = 1;
 
@@ -70,6 +71,7 @@ public class IceAndShadow2 {
 				CONFIG_MAJ, CONFIG_MIN);
 
 		IaSCreativeTabs.init();
+		IaSItemStarterKit.init();
 
 		InitNyx.init(this);
 		IaSDamageSources.init();
