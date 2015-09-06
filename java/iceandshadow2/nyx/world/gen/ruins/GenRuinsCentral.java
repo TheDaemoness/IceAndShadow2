@@ -6,6 +6,7 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.util.IaSWorldHelper;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -36,12 +37,31 @@ public class GenRuinsCentral extends GenRuins {
 		Sculptor.sphere(w, x, y, z, 16, NyxBlocks.permafrost, 0);
 		Sculptor.cylinder(w, x, y, z, 16, 256-y, Blocks.air, 0);
 		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickPale, 0);
+		
+		//Walkwayss
 		Sculptor.cube(w, x-7, y+4, z-1, x+7, y+4, z+1, Blocks.obsidian, 0);
 		Sculptor.cube(w, x-1, y+4, z-7, x+1, y+4, z+7, Blocks.obsidian, 0);
+		
+		//Platform
 		Sculptor.cube(w, x-2, y+4, z-2, x+2, y+4, z+2, Blocks.obsidian, 0);
 		Sculptor.cube(w, x-1, y+4, z-1, x+1, y+4, z+1, NyxBlocks.cryingObsidian, 1);
+		
+		//Walls
 		Sculptor.walls(w, x-7, y, z-7, x+7, y+9, z+7, Blocks.obsidian, 0);
 		Sculptor.walls(w, x-6, y+10, z-6, x+6, y+10, z+6, Blocks.obsidian, 0);
+		
+		//Outer Steps
+		Sculptor.corners(w, x-8, y+2, z-1, x+8, y+3, z+1, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-1, y+2, z-8, x+1, y+3, z+8, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-9, y+2, z-1, x+9, y+2, z+1, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-1, y+2, z-9, x+1, y+2, z+9, Blocks.obsidian, 0);
+		
+		//Inner Steps
+		Sculptor.corners(w, x-6, y+2, z-2, x+6, y+3, z+2, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-2, y+2, z-6, x+2, y+3, z+6, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-6, y+2, z-3, x+6, y+2, z+3, Blocks.obsidian, 0);
+		Sculptor.corners(w, x-3, y+2, z-6, x+3, y+2, z+6, Blocks.obsidian, 0);
+		
 		Sculptor.cube(w, x-7, y+5, z, x+7, y+6, z, Blocks.air, 0);
 		Sculptor.cube(w, x, y+5, z-7, x, y+6, z+7, Blocks.air, 0);
 		for(int i = 0; i < 3; ++i) {
@@ -63,6 +83,7 @@ public class GenRuinsCentral extends GenRuins {
 					y+5+r.nextInt(4), 
 					z+8-r.nextInt(3), 2+r.nextInt(maxradi));
 		}
+		//Podiums
 		for(int xit=-4; xit<=4; xit += 8) {
 			for(int zit=-4; zit<=4; zit += 8)
 				Sculptor.cube(w, x+xit, y, z+zit, x+xit, y+4, z+zit, Blocks.obsidian, 0);
@@ -79,6 +100,7 @@ public class GenRuinsCentral extends GenRuins {
 		
 		int ropechest = r.nextInt(4);
 		int hookchest = r.nextInt(4);
+		int rarechest = r.nextInt(4);
 		int bootchest = r.nextInt(4);
 		int tightropeA = r.nextInt(6); //Deliberate, may not spawn.
 		int tightropeB = r.nextInt(6); //Deliberate, may not spawn.
@@ -175,10 +197,10 @@ public class GenRuinsCentral extends GenRuins {
 						1 + r.nextInt(chestent.getSizeInventory() - 1), 
 						new ItemStack(NyxItems.kitTightrope));
 			}
-			if(chestpos == lorepages) {
+			if(chestpos == rarechest && r.nextInt(20) == 0) {
 				chestent.setInventorySlotContents(
-						1 + r.nextInt(chestent.getSizeInventory() - 1), 
-						new ItemStack(NyxItems.page));
+					1 + r.nextInt(chestent.getSizeInventory() - 1), 
+					new ItemStack(NyxItems.bloodstone));
 			}
 			if(chestpos == hookchest) {
 				chestent.setInventorySlotContents(
@@ -189,6 +211,11 @@ public class GenRuinsCentral extends GenRuins {
 				chestent.setInventorySlotContents(
 						1 + r.nextInt(chestent.getSizeInventory() - 1), 
 						new ItemStack(NyxItems.rope));
+			}
+			if(chestpos == lorepages) {
+				chestent.setInventorySlotContents(
+						1 + r.nextInt(chestent.getSizeInventory() - 1), 
+						new ItemStack(NyxItems.page));
 			}
 			if(chestpos == bootchest) {
 				ItemStack is = new ItemStack(Items.diamond_boots);

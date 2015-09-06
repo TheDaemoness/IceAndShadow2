@@ -58,7 +58,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 						return false;
 				}
 		}
-		return true;
+		return Math.abs(x) > 16 || Math.abs(z) > 16;
 	}
 
 	/**
