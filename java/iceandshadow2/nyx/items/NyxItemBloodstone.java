@@ -21,15 +21,6 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing {
 		this.setAlwaysEdible();
 		this.setMaxStackSize(4);
 	}
-	
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 0) {
-			l.add(EnumChatFormatting.GRAY.toString()
-					+ EnumChatFormatting.ITALIC.toString()
-					+ "Suicide?");
-		}
-	}
 
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
