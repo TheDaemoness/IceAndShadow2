@@ -22,6 +22,19 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class GenRuinsCentral extends GenRuins {
 
+	public static int getGenHeight(World w, int x, int z) {
+		int y = 156;
+		for(int xit = -1; xit <= 1; ++xit) {
+			for(int zit = -4; zit <= 4; ++zit)
+				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
+		}
+		for(int xit = -4; xit <= 4; ++xit) {
+			for(int zit = -1; zit <= 1; ++zit)
+				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
+		}
+		return y;
+	}
+	
 	@Override
 	public boolean canGenerateHere(World var1, Random r, int x, int y, int z) {
 		return true;
@@ -29,18 +42,29 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void buildPass(World w, Random r, int x, int y, int z) {
-		y = 156;
-		for(int xit = -6; xit <= 6; xit += 2) {
-			for(int zit = -6; zit <= 6; zit += 2)
+		y = getGenHeight(w,x,z);
+		for(int xit = -1; xit <= 1; ++xit) {
+			for(int zit = -3; zit <= 3; ++zit)
 				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
 		}
-		Sculptor.sphere(w, x, y, z, 16, NyxBlocks.permafrost, 0);
-		Sculptor.cylinder(w, x, y, z, 16, 256-y, Blocks.air, 0);
+		for(int xit = -3; xit <= 3; ++xit) {
+			for(int zit = -1; zit <= 1; ++zit)
+				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
+		}
+		Sculptor.cylinder(w, x, y, z, 16, 1, Blocks.snow, 0);
+		Sculptor.cylinder(w, x, y-1, z, 16, 1, NyxBlocks.permafrost, 0);
+		Sculptor.cylinder(w, x, y-2, z, 15, 1, NyxBlocks.permafrost, 0);
+		for(int i = 3; i <= 30; ++i)
+			Sculptor.cylinder(w, x, Math.max(0, y-i), z, 16-i/2, 1, NyxBlocks.stone, 0);
+		Sculptor.cylinder(w, x, y+1, z, 16, 256-y, Blocks.air, 0);
 		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickPale, 0);
 		
-		//Walkwayss
+		//Walkways
 		Sculptor.cube(w, x-7, y+4, z-1, x+7, y+4, z+1, Blocks.obsidian, 0);
 		Sculptor.cube(w, x-1, y+4, z-7, x+1, y+4, z+7, Blocks.obsidian, 0);
+
+		//Condom
+		Sculptor.cube(w, x-1, y+1, z-1, x+1, y+1, z+1, Blocks.obsidian, 0);
 		
 		//Platform
 		Sculptor.cube(w, x-2, y+4, z-2, x+2, y+4, z+2, Blocks.obsidian, 0);

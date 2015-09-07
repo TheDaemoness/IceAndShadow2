@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
 import java.util.Random;
 
@@ -23,7 +24,7 @@ public class NyxTeleporter extends Teleporter {
 	private void placeInNyx(Entity par1Entity, int x, int z) {
 		for(int i = 0; i <= 3; ++i)
 			world.getChunkProvider().loadChunk(-(i>>1), -(i&1));
-		int y = world.getPrecipitationHeight(x, z);
+		int y = GenRuinsCentral.getGenHeight(world,0,0)+3;
 		par1Entity.setLocationAndAngles(0.5, y, 0.5,
 				this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
@@ -49,7 +50,6 @@ public class NyxTeleporter extends Teleporter {
 			world.setBlock(x, y - 1, z, Blocks.sandstone);
 		else if (world.getBlock(x, y - 1, z) == Blocks.fire)
 			world.setBlock(x, y - 1, z, Blocks.air);
-
 		par1Entity.setLocationAndAngles(x + 0.5, y + 1.0, z + 0.5,
 				this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
@@ -60,8 +60,11 @@ public class NyxTeleporter extends Teleporter {
 
 		if (this.world.provider.dimensionId == 0)
 			this.placeInOverworld(par1Entity, (int) x, (int) z);
-		else if (!placeOnExistingPlatform(par1Entity, (int) x, (int) y, (int) z))
-			placeInNyx(par1Entity, (int) x, (int) z);
+		else if (!placeOnExistingPlatform(par1Entity, (int) x, (int) y, (int) z)) {
+			if(!placeOnExistingPlatform(
+					par1Entity, 0, world.getPrecipitationHeight((int) x, (int) z), 0))
+				placeInNyx(par1Entity, (int) x, (int) z);
+		}
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	}
 
