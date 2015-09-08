@@ -5,6 +5,7 @@ import iceandshadow2.render.fx.IaSFxManager;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -385,23 +386,29 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					this.inTile.onEntityCollidedWithBlock(this.worldObj,
 							this.xTile, this.yTile, this.zTile, this);
 
-					boolean die = true;
+					boolean die = this.inTile.isCollidable();
 					if (this.inTile.getMaterial() == Material.glass) {
-						die = !this.getIsCritical();
-						this.setIsCritical(false);
+						die &= !(this.getIsCritical() || !(this.inTile.renderAsNormalBlock() || (this.inTile instanceof BlockGlass)));
 						if(!this.worldObj.isRemote)
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, false);
 					}
 					else if (this.inTile.getMaterial() == Material.ice) {
-						if(!this.worldObj.isRemote)
+						die &= !this.getIsCritical();
+						this.setIsCritical(false);
+						if(!this.worldObj.isRemote) {
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, true);
+						}
 					}
 					else if (this.inTile.getMaterial() == Material.cloth)
 						die = false;
 					else if (this.inTile.getMaterial() == Material.leaves) 
-						die = !this.getIsCritical() && this.rand.nextInt(8) == 0;
+						die &= !(this.getIsCritical() || this.rand.nextInt(4) == 0);
+					else if (this.inTile.getMaterial() == Material.sand) { 
+						die &= !this.getIsCritical();
+						this.setIsCritical(false);
+					}
 					
 					if (die) {
 						this.worldObj
