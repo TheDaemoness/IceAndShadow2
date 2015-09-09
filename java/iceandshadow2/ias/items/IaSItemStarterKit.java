@@ -16,6 +16,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -27,6 +28,11 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 	
 	public static void init() {
 		instance = new IaSItemStarterKit("StarterKit");
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 	
 	public IaSItemStarterKit(String texName) {
@@ -41,7 +47,7 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 			List l, boolean p_77624_4_) {
 		l.add(EnumChatFormatting.GRAY.toString()
 				+ EnumChatFormatting.ITALIC.toString()
-				+ "Creative Only");
+				+ "Creative only, breaks on death.");
 	}
 
 	@Override

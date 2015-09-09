@@ -7,6 +7,7 @@ import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.util.IaSRegistration;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
@@ -23,6 +24,11 @@ IIaSModName {
 		this.setUnlocalizedName(mod.prefix + texName);
 		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		MODULE = mod;
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	@Override

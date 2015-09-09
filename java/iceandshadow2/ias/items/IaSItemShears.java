@@ -4,8 +4,10 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.util.IaSRegistration;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemStack;
 
 public class IaSItemShears extends ItemShears implements IIaSModName {
 	public final EnumIaSModule MODULE;
@@ -15,6 +17,11 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 		this.setUnlocalizedName(mod.prefix + texName);
 		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		MODULE = mod;
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	@Override

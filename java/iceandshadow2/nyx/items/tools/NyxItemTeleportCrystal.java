@@ -59,7 +59,7 @@ IIaSOnDeathKeep {
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
+		return EnumRarity.rare;
 	}
 
 	@SideOnly(Side.CLIENT)

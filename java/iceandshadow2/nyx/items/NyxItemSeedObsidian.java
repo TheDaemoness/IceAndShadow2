@@ -8,6 +8,7 @@ import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
@@ -21,6 +22,11 @@ IIaSOnDeathKeep {
 		this.setMaxStackSize(16);
 	}
 
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.rare;
+	}
+	
 	@Override
 	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld,
 			int ehx, int uay, int zee, int metuh, float pex, float pay,

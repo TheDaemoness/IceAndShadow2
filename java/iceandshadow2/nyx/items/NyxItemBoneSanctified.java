@@ -9,6 +9,7 @@ import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -29,6 +30,11 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
 		return par1ItemStack.getItemDamage() > 0;
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override

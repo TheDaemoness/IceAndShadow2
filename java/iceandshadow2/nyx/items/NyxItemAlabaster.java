@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -34,6 +35,11 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		this.setMaxStackSize(16);
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override

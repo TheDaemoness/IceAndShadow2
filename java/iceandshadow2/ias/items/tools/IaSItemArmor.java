@@ -4,6 +4,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
@@ -37,6 +38,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		this.setUnlocalizedName("iasArmor" + arm.name() + this.armorType);
 		this.setTextureName("IceAndShadow2:armor/iasArmor" + arm.name()
 				+ this.armorType);
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	@Override
