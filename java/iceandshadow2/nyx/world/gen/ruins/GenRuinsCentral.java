@@ -1,12 +1,7 @@
 package iceandshadow2.nyx.world.gen.ruins;
 
-import iceandshadow2.IaSFlags;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.tools.NyxItemBow;
-import iceandshadow2.util.IaSWorldHelper;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -15,10 +10,8 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class GenRuinsCentral extends GenRuins {
 

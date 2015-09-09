@@ -3,7 +3,6 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSOnDeathDrop;
-import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;

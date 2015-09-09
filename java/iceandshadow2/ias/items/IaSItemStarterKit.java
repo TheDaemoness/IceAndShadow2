@@ -1,23 +1,16 @@
 package iceandshadow2.ias.items;
 
 import java.util.List;
-import java.util.Random;
-
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IIaSModName;
-import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
-import iceandshadow2.util.IaSRegistration;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;

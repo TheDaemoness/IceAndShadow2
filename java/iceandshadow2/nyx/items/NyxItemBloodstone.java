@@ -1,7 +1,5 @@
 package iceandshadow2.nyx.items;
 
-import java.util.List;
-
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
@@ -10,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

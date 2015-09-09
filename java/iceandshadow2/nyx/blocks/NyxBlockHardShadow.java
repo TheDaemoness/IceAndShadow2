@@ -3,13 +3,11 @@ package iceandshadow2.nyx.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -20,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
-import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.items.NyxItemExousium;
 import iceandshadow2.render.fx.IaSFxManager;
@@ -196,6 +192,10 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public int getMobilityFlag() {
+		return 1;
+	}
 	
 }

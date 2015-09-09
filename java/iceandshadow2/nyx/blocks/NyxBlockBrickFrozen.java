@@ -11,5 +11,6 @@ public class NyxBlockBrickFrozen extends IaSBaseBlockSingle {
 		this.setHardness(NyxBlockStone.HARDNESS);
 		this.setHarvestLevel("pickaxe", 0);
 		this.setLuminescence(0.15F);
+		this.setLightOpacity(15);
 	}
 }

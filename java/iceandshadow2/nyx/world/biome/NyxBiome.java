@@ -6,7 +6,6 @@ import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
-import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
 import iceandshadow2.util.gen.Sculptor;
 
