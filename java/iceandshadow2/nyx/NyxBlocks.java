@@ -16,7 +16,8 @@ public class NyxBlocks {
 	exousicIce, exousicWater, crystalBloodstone, crystalExousium,
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-	hookClimbing, transmutationAltar, examinationTable;
+	hookClimbing, transmutationAltar, examinationTable,
+	hardShadow;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -77,6 +78,8 @@ public class NyxBlocks {
 		ropeY = new NyxBlockRopeY("RopeY").register();
 		ropeX = new NyxBlockRopeX("RopeX").register();
 		ropeZ = new NyxBlockRopeZ("RopeZ").register();
+		
+		hardShadow = new NyxBlockHardShadow("HardShadow").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,
 				"nyxTeTransmutationAltar");
