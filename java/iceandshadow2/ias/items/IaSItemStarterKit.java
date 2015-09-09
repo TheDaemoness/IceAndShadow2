@@ -7,7 +7,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.IIaSApiSacrificeXp;
-import iceandshadow2.api.IIaSOnDeathDestroy;
+import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathDestroy {
+public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathRuin {
 
 	public static IaSItemStarterKit instance;
 	

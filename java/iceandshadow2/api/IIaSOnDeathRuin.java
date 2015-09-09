@@ -7,5 +7,5 @@ package iceandshadow2.api;
  * However, it will not be transferred over to the player's new inventory either.
  * Useful when IIaSApiDeathHook provides too much functionality.
  */
-public interface IIaSOnDeathDestroy {
+public interface IIaSOnDeathRuin {
 }

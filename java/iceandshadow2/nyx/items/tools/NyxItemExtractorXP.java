@@ -9,11 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSOnDeathDestroy;
+import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 
-public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathDestroy {
+public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathRuin {
 
 	//TODO: RENDER PASSES AND ICONS!
 	

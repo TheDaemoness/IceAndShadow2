@@ -21,11 +21,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
-public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
+public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSOnDeathDrop {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon burned;

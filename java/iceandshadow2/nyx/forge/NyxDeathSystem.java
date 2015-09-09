@@ -1,7 +1,8 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSOnDeathDestroy;
+import iceandshadow2.api.IIaSOnDeathDrop;
+import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 
@@ -36,21 +37,27 @@ public class NyxDeathSystem {
 					drop_main = false;
 			}
 		}
-		if (drop_main) {
-			for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
-				if (plai_inv.mainInventory[i] != null) {
-					final Item it = plai_inv.mainInventory[i].getItem();
-					if (it instanceof ItemTool || it instanceof ItemSword) {
-						if (i < 9)
-							continue;
-					}
-					if (it instanceof IIaSOnDeathKeep)
-						continue;
-					if (do_drop && !(it instanceof IIaSOnDeathDestroy))
-						plai_inv.player.dropPlayerItemWithRandomChoice(
-								plai_inv.mainInventory[i], true);
+		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
+			if (plai_inv.mainInventory[i] != null) {
+				final Item it = plai_inv.mainInventory[i].getItem();
+				if(do_drop && it instanceof IIaSOnDeathDrop) {
+					plai_inv.player.dropPlayerItemWithRandomChoice(
+							plai_inv.mainInventory[i], true);
 					plai_inv.mainInventory[i] = null;
+					continue;
 				}
+				if (!drop_main)
+					continue;
+				if (it instanceof ItemTool || it instanceof ItemSword) {
+					if (i < 9)
+						continue;
+				}
+				if (it instanceof IIaSOnDeathKeep)
+					continue;
+				if (do_drop && !(it instanceof IIaSOnDeathRuin))
+					plai_inv.player.dropPlayerItemWithRandomChoice(
+							plai_inv.mainInventory[i], true);
+				plai_inv.mainInventory[i] = null;
 			}
 		}
 		return plai_inv;

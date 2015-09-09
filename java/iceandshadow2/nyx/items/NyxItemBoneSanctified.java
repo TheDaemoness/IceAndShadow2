@@ -2,6 +2,8 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.api.IIaSOnDeathDrop;
+import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
@@ -13,7 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
+public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaSOnDeathDrop {
 
 	public NyxItemBoneSanctified(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -61,11 +63,14 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 			stack.stackSize = 0;
 			return;
 		}
+		int dmg = stack.getItemDamage();
 		if (stack.isItemDamaged()) {
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
+			else if(dmg < 300 && dmg > 0)
+				stack.setItemDamage(dmg+1);
 			else
-				stack.setItemDamage(stack.getItemDamage()+1);
+				stack.stackSize = 0;
 		}
 	}
 
