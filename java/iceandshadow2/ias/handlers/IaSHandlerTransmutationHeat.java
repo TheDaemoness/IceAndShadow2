@@ -18,8 +18,8 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 			return 2400;
 		if (target.getItem() == Items.blaze_powder)
 			return 800;
-		if (target.getItem() == Items.coal)
-			return 1600;
+		if (target.getItem() == Items.magma_cream)
+			return 800;
 		if (target.getItem() == Items.fire_charge)
 			return 400;
 		if (target.getItem() == Items.lava_bucket)
