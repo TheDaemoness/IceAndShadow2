@@ -509,20 +509,19 @@ IIaSMobGetters {
 		this.equipmentDropChances[0] = 0.0F;
 		this.altWeaponFlag = false;
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
-
+		final int reg = IaSWorldHelper.getRegionLevel(this)+(dif>=3?1:0);
+		
 		// Knife skeleton.
-		if (this.rand.nextInt(4) == 0) {
+		if (dif >= 2 && reg >= 4 && this.rand.nextInt(4) == 0)
 			setNyxSkeletonCombatType(EnumNyxSkeletonType.KNIFE);
-		}
 
 		// Special skeleton.
-		else if (dif >= 2 && this.rand.nextInt(dif == 3 ? 8 : 12) == 0) {
+		else if (dif >= 2 && reg >= 1 && this.rand.nextInt(dif == 3 ? 8 : 12) == 0) {
 			final ItemStack helm = new ItemStack(Items.leather_helmet);
 			((ItemArmor) helm.getItem()).func_82813_b(helm, 0x773333);
 			this.setCurrentItemOrArmor(4, helm);
 			this.equipmentDropChances[4] = 0.0F;
-
-			if (this.worldObj.difficultySetting.getDifficultyId() >= 3
+			if (reg >= 5
 					&& rand.nextBoolean()) {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
 				this.equipmentDropChances[0] = 0.33F;

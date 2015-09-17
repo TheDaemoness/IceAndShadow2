@@ -46,7 +46,10 @@ public class NyxBiomes {
 				1.2F, false).setBiomeName("NyxRugged");
 		nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true,
 				1.5F, 0.1F, false).setBiomeName("NyxInfested");
-
+	}
+	
+	public static boolean isRare(BiomeGenBase b) {
+		return b.biomeID == nyxRugged.biomeID || b.biomeID == nyxInfested.biomeID;
 	}
 
 	public static void registerBiomes() {

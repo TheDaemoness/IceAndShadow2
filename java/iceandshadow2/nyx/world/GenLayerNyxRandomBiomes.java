@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.world.biome.NyxBiome;
+import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
@@ -22,22 +23,25 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 	@Override
 	public int[] getInts(int x, int z, int xlim, int zlim) {
 		final int[] var6 = IntCache.getIntCache(xlim * zlim);
-
+		int rl = IaSWorldHelper.getRegionLevel(null, x*16, -1, z*16);
 		for (int zit = 0; zit < zlim; ++zit) {
 			for (int xit = 0; xit < xlim; ++xit) {
-				int xc = xit + x;
-				int zc = zit + z;
-				this.initChunkSeed(xc, zc);
+				this.initChunkSeed(xit + x, zit + z);
 				int nb = this.nextInt(this.allowedBiomes.length);
-				if (this.allowedBiomes[nb] instanceof NyxBiome
-						&& ((NyxBiome) this.allowedBiomes[nb]).isRare()) {
-					double dist = Math.sqrt(xc*xc + zc*zc);
-					if(dist < 96)
-						nb = this.allowedBiomes[0].biomeID;
-					else if(dist < 512)
+				if (NyxBiomes.isRare(this.allowedBiomes[nb])) {
+					if(rl < 1)
+						nb = NyxBiomes.nyxHillForest.biomeID;
+					else if(rl < 2)
+						nb = NyxBiomes.nyxHighMountains.biomeID;
+					else if(rl < 3) {
 						nb = this.nextInt(this.allowedBiomes.length);
-				}
-				var6[xit + zit * xlim] = this.allowedBiomes[nb].biomeID;
+						nb = this.allowedBiomes[nb].biomeID;
+					} else {
+						nb = this.allowedBiomes[nb].biomeID;
+					}
+				} else
+					nb = this.allowedBiomes[nb].biomeID;
+				var6[xit + zit * xlim] = nb;
 			}
 		}
 

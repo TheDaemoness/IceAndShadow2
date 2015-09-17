@@ -173,6 +173,9 @@ public class EntityNyxSpider extends EntitySpider {
 				}
 			}
 		}
+		int wl = IaSWorldHelper.getRegionLevel(this)+(IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0);
+		if(wl < 1)
+			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
 

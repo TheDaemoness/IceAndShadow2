@@ -154,17 +154,17 @@ public class NyxChunkManager extends WorldChunkManager {
 	 */
 	@Override
 	public BiomeGenBase[] getBiomesForGeneration(
-			BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3,
-			int par4, int par5) {
+			BiomeGenBase[] par1ArrayOfBiomeGenBase, int x, int z,
+			int xlim, int zlim) {
 		IntCache.resetIntCache();
 
 		if (par1ArrayOfBiomeGenBase == null
-				|| par1ArrayOfBiomeGenBase.length < par4 * par5)
-			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
+				|| par1ArrayOfBiomeGenBase.length < xlim * zlim)
+			par1ArrayOfBiomeGenBase = new BiomeGenBase[xlim * zlim];
 
-		final int[] var6 = this.genBiomes.getInts(par2, par3, par4, par5);
+		final int[] var6 = this.genBiomes.getInts(x, z, xlim, zlim);
 
-		for (int var7 = 0; var7 < par4 * par5; ++var7)
+		for (int var7 = 0; var7 < xlim * zlim; ++var7)
 			par1ArrayOfBiomeGenBase[var7] = this.biomeGenList[var6[var7]];
 
 		return par1ArrayOfBiomeGenBase;
