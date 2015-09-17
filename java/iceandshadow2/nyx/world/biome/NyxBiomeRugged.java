@@ -23,7 +23,7 @@ public class NyxBiomeRugged extends NyxBiome {
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 60, 2, 3));
+				EntityNyxSkeleton.class, 60, 3, 4));
 	}
 
 	@Override
