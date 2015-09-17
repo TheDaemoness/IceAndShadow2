@@ -103,8 +103,6 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		return false;
 	}
 
-
-
 	@Override
 	public void onEntityWalking(World theWorld, int x, int y, int z,
 			Entity theEntity) {
@@ -130,8 +128,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					else
 						dir = ForgeDirection.NORTH;
 				}
-				int posXMod = 128*dir.offsetX;
-				int posZMod = 128*dir.offsetZ;
+				int posXMod = 512*dir.offsetX;
+				int posZMod = 512*dir.offsetZ;
 				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
 						+ posXMod, z + posZMod) + 1;
 				for (int gateY = posYNew; gateY >= 0; --gateY) {
