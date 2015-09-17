@@ -7,6 +7,7 @@ import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
+import iceandshadow2.util.IaSWorldHelper;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random; //Fuck you, Scala.
@@ -100,7 +101,7 @@ public class NyxBiome extends BiomeGenBase {
 		final int x = xchunk + par1World.rand.nextInt(16);
 		final int z = zchunk + par1World.rand.nextInt(16);
 		final int y = par1World.getPrecipitationHeight(x, z);
-		if (y >= 230) {
+		if (y >= 230 && IaSWorldHelper.getRegionLevel(par1World, x, y, z) > 0) {
 			boolean makestone = true;
 			for (int xit = -32; xit <= 32 && makestone; ++xit) {
 				for (int zit = -32; zit <= 32 && makestone; ++zit) {
