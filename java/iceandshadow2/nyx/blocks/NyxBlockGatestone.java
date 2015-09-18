@@ -7,6 +7,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -146,7 +147,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					elb.setPositionAndUpdate(x + 0.5 + posXMod,
 							posYNew, x + 0.5 + posZMod);
 				elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
-						5.0F);
+						3.0F + 2.0F*IaSWorldHelper.getDifficulty(theWorld));
 				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod,
 						posXMod, posZMod);
 			}
