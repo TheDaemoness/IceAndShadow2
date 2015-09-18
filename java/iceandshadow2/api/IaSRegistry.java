@@ -157,87 +157,12 @@ public final class IaSRegistry {
 
 	public static Map<String, Integer> handleExamination(EntityPlayer checker,
 			Map<String, Integer> knowledge) {
-		if (checker.getEquipmentInSlot(0) == null)
-			return null;
-
-		final ItemStack is = checker.getEquipmentInSlot(0);
-		Object obj = is.getItem();
-		if (obj instanceof ItemBlock)
-			obj = ((ItemBlock) obj).field_150939_a;
-		Map<String, Integer> tempKno = null;
-		final Map<String, Integer> changeKno = new TreeMap<String, Integer>();
-		List<String> strs;
-
-		if (obj instanceof IIaSApiExaminable) {
-			final IIaSApiExaminable ex = (IIaSApiExaminable) obj;
-			strs = ex.getExamineMessages(is, knowledge);
-			tempKno = ex.getChangedKnowledge(is, knowledge);
-			if (strs != null) {
-				for (final String str : strs)
-					IaSPlayerHelper.messagePlayer(checker, str);
-			}
-			if (tempKno != null) {
-				for (final String key : tempKno.keySet())
-					changeKno.put(key, tempKno.get(key));
-			}
-		}
-
-		for (int i = 0; i < handlersExaminable.size(); ++i) {
-			strs = handlersExaminable.get(i).getExamineMessages(is, knowledge);
-			tempKno = handlersExaminable.get(i).getChangedKnowledge(is,
-					knowledge);
-			if (strs != null) {
-				for (final String str : strs)
-					IaSPlayerHelper.messagePlayer(checker, str);
-			}
-			if (tempKno != null) {
-				for (final String key : tempKno.keySet()) {
-					if (!changeKno.containsKey(key))
-						changeKno.put(key, tempKno.get(key));
-				}
-			}
-		}
-		return changeKno;
+		return null;
 	}
 
 	public static Map<String, Integer> handleExaminationBook(
 			EntityPlayer checker, int x, int y, int z,
 			Map<String, Integer> knowledge) {
-		if (checker.getEquipmentInSlot(0) == null)
-			return null;
-
-		final ItemStack is = checker.getEquipmentInSlot(0);
-		Object obj = is.getItem();
-		if (obj instanceof ItemBlock)
-			obj = ((ItemBlock) obj).field_150939_a;
-		IIaSApiExaminable ex = null;
-		NBTTagCompound nbt = null;
-		if (obj instanceof IIaSApiExaminable) {
-			ex = (IIaSApiExaminable) obj;
-			nbt = ex.getBookInfo(is, knowledge);
-		}
-
-		for (int i = 0; (nbt == null || nbt.hasNoTags())
-				&& i < handlersExaminable.size(); ++i) {
-			ex = handlersExaminable.get(i);
-			nbt = ex.getBookInfo(is, knowledge);
-		}
-
-		if (nbt != null && !nbt.hasNoTags()) {
-			if (checker.inventory.consumeInventoryItem(Items.book)) {
-				final ItemStack booq = new ItemStack(Items.written_book);
-				booq.setTagCompound(nbt);
-				if (!checker.worldObj.isRemote) {
-					final EntityItem ite = new EntityItem(checker.worldObj,
-							0.5 + x, 1.2 + y, 0.5 + z, booq);
-					checker.worldObj.spawnEntityInWorld(ite);
-				}
-				return ex.getChangedKnowledgeOnBook(is, knowledge);
-			} else
-				IaSPlayerHelper
-				.alertPlayer(checker,
-						"There's more information, but you'll need a plain book to write it down.");
-		}
 		return null;
 	}
 }
