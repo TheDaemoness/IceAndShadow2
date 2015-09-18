@@ -59,8 +59,10 @@ public class NyxRecipes {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.string, 4),
 				new ItemStack(NyxItems.toughGossamer));
-		GameRegistry.addRecipe(new ItemStack(NyxItems.rope), "g", "g", "g",
-				'g', new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.rope),
+				new ItemStack(NyxItems.toughGossamer),
+				new ItemStack(NyxItems.toughGossamer),
+				new ItemStack(NyxItems.toughGossamer));
 
 		GameRegistry.addRecipe(new ItemStack(NyxBlocks.hookClimbing, 2), "ee",
 				"ee", "e ", 'e', new ItemStack(NyxItems.echirIngot, 1, 1));
@@ -91,7 +93,7 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,1,1),
 				new ItemStack(NyxItems.extractorPoison,1,13));
 		
-		GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), "aca", "c c", "aca",
+		GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ", "cac", " c ",
 				'a', new ItemStack(NyxItems.alabaster),
 				'c', new ItemStack(NyxItems.cortraIngot,1,1));
 	}
