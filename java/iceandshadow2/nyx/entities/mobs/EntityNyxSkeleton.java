@@ -509,7 +509,7 @@ IIaSMobGetters {
 		this.equipmentDropChances[0] = 0.0F;
 		this.altWeaponFlag = false;
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
-		final int reg = IaSWorldHelper.getRegionLevel(this)+(dif>=3?1:0);
+		final int reg = IaSWorldHelper.getRegionLevel(this);
 		
 		// Knife skeleton.
 		if (dif >= 2 && reg >= 4 && this.rand.nextInt(4) == 0)

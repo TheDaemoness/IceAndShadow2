@@ -1,5 +1,6 @@
 package iceandshadow2.util;
 
+import iceandshadow2.IaSFlags;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -10,6 +11,8 @@ public class IaSWorldHelper {
 	}
 	
 	public static int getRegionHealthBoostMod(Entity ent) {
+		if(ent.dimension != IaSFlags.dim_nyx_id)
+			return 0;
 		return (int)((ent.posX+ent.posZ)/1000);
 	}
 	
@@ -43,6 +46,9 @@ public class IaSWorldHelper {
 	}
 	
 	public static int getRegionLevel(Entity ent) {
-		return getRegionLevel(ent.worldObj, (int)ent.posX, (int)ent.posY, (int)ent.posZ);
+		if(ent.dimension != IaSFlags.dim_nyx_id)
+			return 0;
+		final int lvl = getRegionLevel(ent.worldObj, (int)ent.posX, (int)ent.posY, (int)ent.posZ);
+		return lvl+(IaSWorldHelper.getDifficulty(ent.worldObj)>=3?1:0);
 	}
 }
