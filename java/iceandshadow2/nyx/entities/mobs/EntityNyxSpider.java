@@ -213,7 +213,7 @@ public class EntityNyxSpider extends EntitySpider {
 		if (this.worldObj == null)
 			return 20.0;
 		double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(this.worldObj);
-		return hp + hp*IaSWorldHelper.getRegionHealthBoostMod(this)/5.0;
+		return hp + hp*IaSWorldHelper.getRegionHealthBoostMod(this)/10.0;
 	}
 
 	@Override

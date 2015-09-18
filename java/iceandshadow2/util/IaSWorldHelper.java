@@ -13,7 +13,7 @@ public class IaSWorldHelper {
 	public static int getRegionHealthBoostMod(Entity ent) {
 		if(ent.dimension != IaSFlags.dim_nyx_id)
 			return 0;
-		return (int)((ent.posX+ent.posZ)/1000);
+		return (int)((ent.posX+ent.posZ)/500);
 	}
 	
 	public static int getRegionLevel(World w, int x, int y, int z) {

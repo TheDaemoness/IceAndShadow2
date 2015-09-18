@@ -441,7 +441,7 @@ IIaSMobGetters {
 
 	@Override
 	public double getScaledMaxHealth() {
-		return 30.0+6*IaSWorldHelper.getRegionHealthBoostMod(this);
+		return 30.0+3*IaSWorldHelper.getRegionHealthBoostMod(this);
 	}
 
 	@Override
