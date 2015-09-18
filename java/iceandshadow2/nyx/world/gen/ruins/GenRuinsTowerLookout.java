@@ -54,7 +54,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		for (int xdelta = -36; xdelta <= 36; ++xdelta) {
 			for (int zdelta = -36; zdelta <= 36; ++zdelta)
 				for (int ydelta = -4; ydelta <= 8; ++ydelta) {
-					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == Blocks.ladder)
+					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickPale)
 						return false;
 				}
 		}
