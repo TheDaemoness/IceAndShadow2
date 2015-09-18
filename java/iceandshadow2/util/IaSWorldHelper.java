@@ -9,6 +9,10 @@ public class IaSWorldHelper {
 		return w.difficultySetting.getDifficultyId();
 	}
 	
+	public static int getRegionHealthBoostMod(Entity ent) {
+		return (int)((ent.posX+ent.posZ)/1000);
+	}
+	
 	public static int getRegionLevel(World w, int x, int y, int z) {
 		int dist = (int)Math.sqrt(x*x+z*z);
 		if(dist >= 196608)

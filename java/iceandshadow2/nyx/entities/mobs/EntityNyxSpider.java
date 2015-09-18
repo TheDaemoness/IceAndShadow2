@@ -212,7 +212,8 @@ public class EntityNyxSpider extends EntitySpider {
 	public double getScaledMaxHealth() {
 		if (this.worldObj == null)
 			return 20.0;
-		return 12.0 + 4.0 * this.worldObj.difficultySetting.getDifficultyId();
+		double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(this.worldObj);
+		return hp + hp*IaSWorldHelper.getRegionHealthBoostMod(this)/5.0;
 	}
 
 	@Override

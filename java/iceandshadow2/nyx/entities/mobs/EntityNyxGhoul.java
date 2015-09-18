@@ -256,7 +256,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public double getScaledMaxHealth() {
-		return 50.0D;
+		return 50.0D+10*IaSWorldHelper.getRegionHealthBoostMod(this);
 	}
 
 	@Override
