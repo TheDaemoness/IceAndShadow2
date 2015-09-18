@@ -24,6 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockGatestone extends IaSBaseBlockMulti {
 
+	public static final int RANGE = 384;
+	
 	protected IIcon[] iconTop;
 
 	public NyxBlockGatestone(String par1) {
@@ -43,8 +45,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		if (theWorld.isRemote)
 			theWorld.spawnParticle("portal", posX,
 					posY + theWorld.rand.nextDouble() * 2.0D, posZ,
-					theWorld.rand.nextGaussian() * (modX / 128), 0.0D,
-					theWorld.rand.nextGaussian() * (modZ / 128));
+					theWorld.rand.nextGaussian() * (modX / RANGE), 0.0D,
+					theWorld.rand.nextGaussian() * (modZ / RANGE));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -128,8 +130,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					else
 						dir = ForgeDirection.NORTH;
 				}
-				int posXMod = 512*dir.offsetX;
-				int posZMod = 512*dir.offsetZ;
+				int posXMod = RANGE*dir.offsetX;
+				int posZMod = RANGE*dir.offsetZ;
 				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
 						+ posXMod, z + posZMod) + 1;
 				for (int gateY = posYNew; gateY >= 0; --gateY) {
