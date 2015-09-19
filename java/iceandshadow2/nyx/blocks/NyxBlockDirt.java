@@ -3,12 +3,18 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
@@ -38,8 +44,17 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		int meta = w.getBlockMetadata(x,y,z);
-		if(meta == 1 || !(w.getWorldChunkManager() instanceof NyxChunkManager))
+		if(meta == 1)
 			return;
+		if(!(w.getWorldChunkManager() instanceof NyxChunkManager)) {
+			w.setBlock(x, y, z, Blocks.dirt, 1, 0x3);
+			return;
+		}
+		Block bl = w.getBlock(x, y+1, z);
+		if(bl instanceof IGrowable)
+			((IGrowable)bl).func_149853_b(w, r, x, y+1, z);
+		else
+			MinecraftForge.EVENT_BUS.post(new BonemealEvent(null, w, bl, x,y+1,z));
 		boolean foundThermal = false;
 		for(int xit = -1; xit<=1; ++xit) {
 			for(int yit = -1; yit<=1; ++yit) {
@@ -55,7 +70,9 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 
 	@Override
 	public Block onThaw(World w, int x, int y, int z) {
-		return this;
+		if(w.getBlockMetadata(x, y, z) != 0)
+			return this;
+		return null;
 	}
 
 }
