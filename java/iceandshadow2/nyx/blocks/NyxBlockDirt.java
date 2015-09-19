@@ -13,6 +13,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.world.NyxChunkManager;
 
 public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable {
 	
@@ -37,13 +38,13 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		int meta = w.getBlockMetadata(x,y,z);
-		if(meta == 1)
+		if(meta == 1 || !(w.getWorldChunkManager() instanceof NyxChunkManager))
 			return;
 		boolean foundThermal = false;
 		for(int xit = -1; xit<=1; ++xit) {
 			for(int yit = -1; yit<=1; ++yit) {
 				for(int zit = -1; zit<=1; ++zit) {
-					if(w.getBlock(x+xit, y+yit, z+zit) == NyxBlocks.thermalAir)
+					if(w.getBlock(x+xit, y+yit, z+zit).getMaterial() != Material.fire)
 						foundThermal = true;
 				}
 			}
