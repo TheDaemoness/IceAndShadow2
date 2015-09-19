@@ -6,6 +6,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class NyxBlockStone extends IaSBaseBlockSingle {
+public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawable {
 	public static final float HARDNESS = 2.0F;
 	public static final float RESISTANCE = 9.0F;
 
@@ -85,5 +86,10 @@ public class NyxBlockStone extends IaSBaseBlockSingle {
 		if (dmg == 0)
 			dmg = 1;
 		doDamage(woild, x, y, z, theEntity, dmg);
+	}
+
+	@Override
+	public Block onThaw(World w, int x, int y, int z) {
+		return Blocks.stone;
 	}
 }

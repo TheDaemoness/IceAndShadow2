@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -134,7 +135,8 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 		Block bl = w.getBlock(x, y, y);
 		return (bl.getMaterial() == Material.air || 
 				bl.getMaterial() == Material.snow  || 
-				bl.getMaterial() == Material.craftedSnow);
+				bl.getMaterial() == Material.craftedSnow ||
+				bl instanceof BlockLeavesBase);
 	}
 
 	@Override
