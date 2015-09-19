@@ -12,12 +12,12 @@ import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce, permafrost,
+	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt,
 	exousicIce, exousicWater, crystalBloodstone, crystalExousium,
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
 	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow;
+	hardShadow, thermalCore, thermalAir;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -30,6 +30,7 @@ public class NyxBlocks {
 		stone = new NyxBlockStone("Stone").register();
 		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		permafrost = new NyxBlockPermafrost("Permafrost").register();
+		dirt = new NyxBlockDirt("Dirt").register();
 		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian")
 		.register();
 		thornyVines = new NyxBlockThornyVines("ThornyVines").register();
@@ -80,6 +81,8 @@ public class NyxBlocks {
 		ropeZ = new NyxBlockRopeZ("RopeZ").register();
 		
 		hardShadow = new NyxBlockHardShadow("HardShadow").register();
+		thermalCore = new NyxBlockThermalCore("ThermalCore").register();
+		thermalAir = new NyxBlockThermalAir("ThermalAir").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,
 				"nyxTeTransmutationAltar");
