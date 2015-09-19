@@ -1,11 +1,14 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSPlayerHelper;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -16,6 +19,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
@@ -41,6 +45,8 @@ public class NyxEventHandlerCold {
 	public void onPlayerTriesToPlaceBucket(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
+		if(e.entityPlayer.isInsideOfMaterial(Material.fire))
+			return;
 		if (e.entityPlayer.dimension != IaSFlags.dim_nyx_id
 				|| !e.entityPlayer.capabilities.isCreativeMode)
 			return;
@@ -49,7 +55,6 @@ public class NyxEventHandlerCold {
 		final Item itid = e.entityPlayer.getEquipmentInSlot(0).getItem();
 		if (itid == Items.lava_bucket || itid == Items.water_bucket) {
 			e.getResult();
-			e.useItem = Result.DENY;
 			if (e.action != Action.RIGHT_CLICK_BLOCK)
 				return;
 			int x = e.x;
@@ -77,6 +82,7 @@ public class NyxEventHandlerCold {
 			default:
 				break;
 			}
+			e.useItem = Result.DENY;
 			e.entityPlayer.setCurrentItemOrArmor(0, new ItemStack(
 					Items.bucket));
 			if (itid == Items.lava_bucket) {
@@ -95,6 +101,22 @@ public class NyxEventHandlerCold {
 			} else if (itid == Items.water_bucket)
 				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0,
 						0x2);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerTriesToUseFurnace(PlayerInteractEvent e) {
+		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+			return;
+		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
+				&& !e.entityPlayer.capabilities.isCreativeMode) {
+			Block bl = e.world.getBlock(e.x, e.y, e.z);
+			if(bl instanceof BlockFurnace || e.world.getTileEntity(e.x, e.y, e.x) instanceof TileEntityFurnace) {
+				e.setCanceled(true);
+				IaSPlayerHelper
+				.messagePlayer(e.entityPlayer,
+						"It's too cold to light that furnace here. Find another way to smelt.");
+			}
 		}
 	}
 
@@ -120,13 +142,6 @@ public class NyxEventHandlerCold {
 					flaque = true;
 				else if (id == Blocks.torch)
 					flaque = true;
-				else if (id instanceof BlockFurnace)
-					flaque = true;
-				else if (id instanceof ITileEntityProvider) {
-					ITileEntityProvider itep = (ITileEntityProvider)id;
-					if(itep.createNewTileEntity(e.world, 0) instanceof TileEntityFurnace)
-						flaque = true;
-				}
 			}
 
 			// DO NOT SIMPLIFY!
@@ -135,10 +150,7 @@ public class NyxEventHandlerCold {
 				if (id == Blocks.torch)
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 							"It's far too cold to light a torch in Nyx.");
-				else if (id == Blocks.furnace) {
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"There's no point in placing that. It's too cold to use it here.");
-				} else
+				else
 					IaSPlayerHelper
 					.messagePlayer(e.entityPlayer,
 							"It's far too cold to start a fire that way in Nyx.");
@@ -166,10 +178,18 @@ public class NyxEventHandlerCold {
 
 			// DO NOT SIMPLIFY!
 			if (isplant && !e.isCanceled()) {
-				e.setCanceled(true);
-				IaSPlayerHelper
-				.messagePlayer(e.entityPlayer,
-						"There's no way that this will grow in this frigid climate.");
+				boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
+				ForgeDirection face = ForgeDirection.getOrientation(e.face);
+				boolean coolair = e.world.getBlock(e.x+face.offsetX, e.y+face.offsetY, e.z+face.offsetZ) != NyxBlocks.thermalAir;
+				e.setCanceled(!dirt || !coolair);
+				if(!dirt)
+					IaSPlayerHelper
+					.messagePlayer(e.entityPlayer,
+						"There's no way that this will grow off of warm native soil in this realm.");
+				else if(!coolair)
+					IaSPlayerHelper
+					.messagePlayer(e.entityPlayer,
+						"Better, but now the firey energies in the air make it prohibitive for new life to take root. Maybe heat the soil from beneath?");
 			}
 		}
 	}
@@ -178,6 +198,8 @@ public class NyxEventHandlerCold {
 	public void onTryToPotion(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR
 				&& e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+			return;
+		if(e.entityPlayer.isInsideOfMaterial(Material.fire))
 			return;
 		if (e.entity.dimension == IaSFlags.dim_nyx_id
 				&& !e.entityPlayer.capabilities.isCreativeMode) {
