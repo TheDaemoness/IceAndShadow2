@@ -72,7 +72,7 @@ IIaSMobGetters {
 	protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(
 			this, this.moveSpeed, 25, 35, 24.0F);
 	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(
-			this, this.moveSpeed, 35, 45, 32.0F);
+			this, this.moveSpeed, 45, 55, 32.0F);
 	protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(
 			this, EntityPlayer.class, this.moveSpeed + 0.3, false);
 	protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(
@@ -260,9 +260,8 @@ IIaSMobGetters {
 		if (longe) {
 			var2 = new EntityIceArrow(this.worldObj, this, 2.4F, slowstr,
 					slowtime);
-			final double ydelta = par1EntityLiving.posY - this.posY;
-			var2.setThrowableHeading(par1EntityLiving.posX - this.posX, ydelta
-					+ (dif == 3 ? 1 : 1.25F),
+			final double ydelta = par1EntityLiving.posY - this.posY + par1EntityLiving.getEyeHeight() - this.getEyeHeight();
+			var2.setThrowableHeading(par1EntityLiving.posX - this.posX, ydelta,
 					par1EntityLiving.posZ - this.posZ, 3.2F, 2.0F);
 		} else
 			var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving,
@@ -512,8 +511,10 @@ IIaSMobGetters {
 		final int reg = IaSWorldHelper.getRegionLevel(this);
 		
 		// Knife skeleton.
-		if (dif >= 2 && reg >= 3 && this.rand.nextInt(4) == 0)
+		if (dif >= 2 && reg >= 3 && this.rand.nextInt(4) == 0) {
 			setNyxSkeletonCombatType(EnumNyxSkeletonType.KNIFE);
+			this.equipmentDropChances[0] = 0.33F;
+		}
 
 		// Special skeleton.
 		else if (dif >= 2 && reg >= 1 && this.rand.nextInt(dif == 3 ? 8 : 12) == 0) {
@@ -527,7 +528,7 @@ IIaSMobGetters {
 				this.equipmentDropChances[0] = 0.33F;
 			} else {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-				this.equipmentDropChances[0] = 1.0F;
+				this.equipmentDropChances[0] = 0.33F;
 			}
 		}
 
