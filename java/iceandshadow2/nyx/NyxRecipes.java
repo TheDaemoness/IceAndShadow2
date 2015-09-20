@@ -99,5 +99,8 @@ public class NyxRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.thermalCore),
 				new ItemStack(NyxItems.alabaster, 1, 1));;
+				
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
+		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt,1,1), new ItemStack(NyxBlocks.dirt), 0);
 	}
 }

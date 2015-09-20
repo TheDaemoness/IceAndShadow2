@@ -55,7 +55,7 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 		for(int xit = -1; xit<=1; ++xit) {
 			for(int yit = -1; yit<=1; ++yit) {
 				for(int zit = -1; zit<=1; ++zit) {
-					if(w.getBlock(x+xit, y+yit, z+zit).getMaterial() != Material.fire)
+					if(w.getBlock(x+xit, y+yit, z+zit).getMaterial() == Material.fire)
 						foundThermal = true;
 				}
 			}
