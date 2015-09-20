@@ -96,5 +96,8 @@ public class NyxRecipes {
 		GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ", "cac", " c ",
 				'a', new ItemStack(NyxItems.alabaster),
 				'c', new ItemStack(NyxItems.cortraIngot,1,1));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.thermalCore),
+				new ItemStack(NyxItems.alabaster, 1, 1));;
 	}
 }

@@ -128,6 +128,11 @@ public class IaSFxManager {
 	}
 
 	public static void spawnParticle(World woild, String name, double x,
+			double y, double z, boolean unbounded, boolean isDecorative) {
+		spawnParticle(woild, name, x, y, z, 0.0, 0.0, 0.0, unbounded, isDecorative);
+	}
+
+	public static void spawnParticle(World woild, String name, double x,
 			double y, double z, double velX, double velY, double velZ) {
 		spawnParticle(woild, name, x, y, z, velX, velY, velZ, false, false);
 	}

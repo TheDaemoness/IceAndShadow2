@@ -131,7 +131,8 @@ tile.nyxRopeZ.name=Gossamer Tightrope
 tile.nyxHardShadow.name=Hard Shadow
 tile.nyxDirt0.name=Nyxian Soil
 tile.nyxDirt1.name=Icy Dirt
-tile.nyxThermalCore.name=Thermal Core
+tile.nyxThermalCore0.name=Thermal Core
+tile.nyxThermalCore1.name=Cracked Thermal Core
 
 tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore
