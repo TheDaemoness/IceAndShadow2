@@ -166,12 +166,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		}
 		return flag;
 	}
-
-	/**
-	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity
-	 * has recently been hit by a player. @param par2 - Level of Looting used to
-	 * kill this mob.
-	 */
+	
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1 || this.worldObj.isRemote)
@@ -256,7 +251,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public double getScaledMaxHealth() {
-		return 50.0D+5*IaSWorldHelper.getRegionHealthBoostMod(this);
+		return 50.0D;
 	}
 
 	@Override
@@ -296,8 +291,14 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	}
 
 	@Override
+	public int getTotalArmorValue() {
+		return super.getTotalArmorValue()+IaSWorldHelper.getRegionHealthBoostMod(this);
+	}
+
+	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
 		this.equipmentDropChances[0] = 0.0F;
+		
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
 		return dat;
 	}
