@@ -106,7 +106,7 @@ public class EntityShadowBall extends EntityThrowable {
 		boolean strong = isStrong();
 
 		if (!this.worldObj.isRemote) {
-			final float basepower = strong ? 6.0F : 3.0F;
+			final float basepower = strong ? 6.0F : 4.0F;
 
 			final AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D,
 					2.0D, 4.0D);
