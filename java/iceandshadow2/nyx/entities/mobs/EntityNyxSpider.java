@@ -1,6 +1,8 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.world.NyxBiomes;
+import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -60,15 +62,18 @@ public class EntityNyxSpider extends EntitySpider {
 		if (flag) {
 			if (par1Entity instanceof EntityLivingBase) {
 				final int lvl = IaSWorldHelper.getDifficulty(this.worldObj) - 1;
-				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 125
-						: 150;
+				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 225
+						: 275;
 				EntityLivingBase elb = (EntityLivingBase) par1Entity;
+				final boolean hometurf = IaSEntityHelper.getBiome(elb) == NyxBiomes.nyxInfested;
 				if(!elb.isPotionActive(Potion.poison))
 					mod /= 2;
+				if(hometurf)
+					mod /= 2;
 				elb.addPotionEffect(new PotionEffect(
-						Potion.poison.id, lvl * mod + 160, 0));
+						Potion.poison.id, lvl * mod + 60, hometurf?1:0));
 				elb.addPotionEffect(new PotionEffect(
-						Potion.weakness.id, lvl * mod + 190, lvl));
+						Potion.weakness.id, lvl * mod + 90, lvl+(hometurf?1:0)));
 			}
 			return true;
 		} else {
