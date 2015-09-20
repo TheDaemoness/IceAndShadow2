@@ -1,12 +1,13 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
@@ -14,15 +15,20 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing {
+public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathDrop {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon glow;
 
 	public NyxItemBoneCursed(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(1);
 		this.setFull3D();
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override
