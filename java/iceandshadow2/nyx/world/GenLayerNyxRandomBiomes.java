@@ -32,7 +32,7 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 						nb = NyxBiomes.nyxHillForest.biomeID;
 					else if(rl < 2)
 						nb = NyxBiomes.nyxHighMountains.biomeID;
-					else if(rl < 3) {
+					else if(rl < 4) {
 						nb = this.nextInt(this.allowedBiomes.length);
 						nb = this.allowedBiomes[nb].biomeID;
 					} else {

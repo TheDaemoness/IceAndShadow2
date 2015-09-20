@@ -512,7 +512,7 @@ IIaSMobGetters {
 		final int reg = IaSWorldHelper.getRegionLevel(this);
 		
 		// Knife skeleton.
-		if (dif >= 2 && reg >= 4 && this.rand.nextInt(4) == 0)
+		if (dif >= 2 && reg >= 3 && this.rand.nextInt(4) == 0)
 			setNyxSkeletonCombatType(EnumNyxSkeletonType.KNIFE);
 
 		// Special skeleton.

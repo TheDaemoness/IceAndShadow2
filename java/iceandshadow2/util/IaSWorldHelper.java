@@ -34,9 +34,9 @@ public class IaSWorldHelper {
 			return 6;
 		if(dist >= 1536) //Sniper skeletons.
 			return 5;
-		if(dist >= 768) //Knife skeletons.
+		if(dist >= 768) //Rare biomes stop being rerolled.
 			return 4;
-		if(dist >= 384) //Bloodstone spawns.
+		if(dist >= 384) //Knife skeletons.
 			return 3;
 		if(dist >= 192) //Rare biomes spawn.
 			return 2;
