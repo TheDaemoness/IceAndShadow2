@@ -50,8 +50,8 @@ public class EntityNyxSpider extends EntitySpider {
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		this.setInvisible(false);
 
-		final float dmg = IaSWorldHelper.getDifficulty(this.worldObj)
-				+ (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 1 : 0);
+		final float dmg = (IaSWorldHelper.getDifficulty(worldObj)>=3?2:1)
+				+ IaSWorldHelper.getRegionArmorMod(this);
 
 		final DamageSource dmgsrc = DamageSource.causeMobDamage(this);
 		dmgsrc.setMagicDamage();
@@ -173,7 +173,7 @@ public class EntityNyxSpider extends EntitySpider {
 				}
 			}
 		}
-		int wl = IaSWorldHelper.getRegionLevel(this)+(IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0);
+		int wl = IaSWorldHelper.getRegionLevel(this);
 		if(wl < 1)
 			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
@@ -211,9 +211,9 @@ public class EntityNyxSpider extends EntitySpider {
 
 	public double getScaledMaxHealth() {
 		if (this.worldObj == null)
-			return 20.0;
-		double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(this.worldObj);
-		return hp + hp*IaSWorldHelper.getRegionHealthBoostMod(this)/10.0;
+			return 16.0;
+		final double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(this.worldObj);
+		return hp;
 	}
 
 	@Override
