@@ -402,8 +402,10 @@ IIaSMobGetters {
 					"Devora");
 			ait.stackSize = new Random().nextInt(8) + 4;
 
-			if (IaSWorldHelper.getDifficulty(this.worldObj) == 3)
+			if (IaSWorldHelper.getRegionLevel(this) >= 6) {
 				ait.addEnchantment(Enchantment.knockback, 1);
+				ait.addEnchantment(Enchantment.fireAspect, 1);
+			}
 			return ait;
 		}
 		if (taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
@@ -440,7 +442,7 @@ IIaSMobGetters {
 
 	@Override
 	public double getScaledMaxHealth() {
-		return 30.0+3*IaSWorldHelper.getRegionHealthBoostMod(this);
+		return 30.0;
 	}
 
 	@Override
@@ -455,6 +457,11 @@ IIaSMobGetters {
 
 	public boolean isUsingAlternateWeapon() {
 		return altWeaponFlag;
+	}
+
+	@Override
+	public int getTotalArmorValue() {
+		return super.getTotalArmorValue()+IaSWorldHelper.getRegionHealthBoostMod(this);
 	}
 
 	@Override
@@ -507,6 +514,7 @@ IIaSMobGetters {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
 		this.equipmentDropChances[0] = 0.0F;
 		this.altWeaponFlag = false;
+		
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
 		final int reg = IaSWorldHelper.getRegionLevel(this);
 		
