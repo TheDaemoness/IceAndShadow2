@@ -91,17 +91,14 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 					else if(bl instanceof IIaSBlockThawable) {
 						Block nb = ((IIaSBlockThawable)bl).onThaw(w, x+xit, y+yit, z+zit);
 						if(nb == null || r.nextInt(4) == 0)
-							continue;
-						if(nb == bl)
+							{}
+						else if(nb == bl)
 							w.setBlockMetadataWithNotify(x+xit, y+yit, z+zit, 0, 0x3);
 						else
 							w.setBlock(x+xit, y+yit, z+zit, nb);
 					}
-					else if(lvl > 1) {
-						if(canReplace(w, x+xit, y+yit, z+zit)) {
-							w.setBlock(x+xit, y+yit, z+zit, this, lvl-1, 0x2);
-						}
-					}
+					else if(lvl > 1 && canReplace(w, x+xit, y+yit, z+zit))
+						w.setBlock(x+xit, y+yit, z+zit, this, lvl-1, 0x2);
 				}
 			}
 		}
@@ -132,11 +129,12 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	}
 	
 	public static boolean canReplace(World w, int x, int y, int z) {
-		Block bl = w.getBlock(x, y, y);
+		Block bl = w.getBlock(x, y, z);
 		return (bl.getMaterial() == Material.air || 
 				bl.getMaterial() == Material.snow  || 
 				bl.getMaterial() == Material.craftedSnow ||
-				bl instanceof BlockLeavesBase);
+				bl.getMaterial() == Material.leaves ||
+				bl.getMaterial() == Material.plants);
 	}
 
 	@Override
