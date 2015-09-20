@@ -8,11 +8,16 @@ import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -34,9 +39,29 @@ public class EntityNyxSkeletonNecro extends EntityNyxSkeleton {
 	}
 
 	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+			.setBaseValue(getScaledMaxHealth());
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
+			.setBaseValue(0.5);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+			.setBaseValue(EntityNyxSkeleton.moveSpeed-0.2);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange)
+			.setBaseValue(24.0);
+	}
+
+	@Override
+	public double getScaledMaxHealth() {
+		return 70.0;
+	}
+
+	@Override
 	protected void addRandomArmor() {
 		return;
 	}
+	
+	
 	
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
@@ -79,4 +104,12 @@ public class EntityNyxSkeletonNecro extends EntityNyxSkeleton {
 		this.worldObj.spawnEntityInWorld(entityball);
 	}
 
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
+		final ItemStack helm = new ItemStack(Items.leather_helmet);
+		((ItemArmor) helm.getItem()).func_82813_b(helm, 0x773333);
+		this.setCurrentItemOrArmor(4, helm);
+		this.equipmentDropChances[4] = 0.0F;
+		return dat;
+	}
 }

@@ -20,12 +20,12 @@ public class RenderNyxSkeleton extends RenderBiped {
 	private static ResourceLocation winterskeletonskin = new ResourceLocation(
 			"iceandshadow2:textures/mob/winterskeleton.png");
 	private static ResourceLocation necromancerskin = new ResourceLocation(
-			"iceandshadow2:textures/mob/wickednecromancer.png");
+			"iceandshadow2:textures/mob/witherednecromancer.png");
 
 	private static ResourceLocation winterskeleton_eyes = new ResourceLocation(
 			"iceandshadow2:textures/mob/winterskeleton_eyes.png");
 	private static ResourceLocation wickednecromancer_eyes = new ResourceLocation(
-			"iceandshadow2:textures/mob/wickednecromancer_eyes.png");
+			"iceandshadow2:textures/mob/witherednecromancer_eyes.png");
 
 	public RenderNyxSkeleton() {
 		super(new ModelSkeleton(), 0.5F);

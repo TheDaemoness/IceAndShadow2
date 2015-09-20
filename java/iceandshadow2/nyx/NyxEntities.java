@@ -48,10 +48,15 @@ public class NyxEntities {
 		EntityRegistry.registerModEntity(EntityTransmutationCountdown.class,
 				"nyxTechnicalTransmutationCountdown", 6, owner, 160, 1, false);
 		
-		// Set up Throwing Knives
+		// Set up White Ghouls
 		EntityRegistry.registerModEntity(EntityNyxGhoul.class,
 				"nyxMobWhiteGhoul", 7, owner, 60, 1, true);
 		registerEntityEgg(EntityNyxGhoul.class, 0xccccdd, 0x220011);
+		
+		// Set up Withered Necromancers
+		EntityRegistry.registerModEntity(EntityNyxSkeletonNecro.class,
+				"nyxMobWitheredNecromancer", 8, owner, 60, 1, true);
+		registerEntityEgg(EntityNyxSkeletonNecro.class, 0x331111, 0xffcccc);
 	}
 
 	@SuppressWarnings("unchecked")
