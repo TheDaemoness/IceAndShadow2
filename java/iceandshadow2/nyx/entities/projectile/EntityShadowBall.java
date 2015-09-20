@@ -20,13 +20,24 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityShadowBall extends EntityThrowable {
-	/**
-	 * The damage value of the thrown potion that this EntityPotion represents.
-	 */
-	protected boolean harmUndead, strong;
+	
+	public boolean isStrong() {
+		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
+	}
+	public boolean isUndeadHarming() {
+		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
+	}
+	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
+		this.getDataWatcher().updateObject(16, (byte)((strong?0x1:0x0) | (harmUndead?0x2:0x0)));
+		return this;
+	}
+	private void initFlags(boolean strong, boolean harmUndead) {
+		this.getDataWatcher().addObject(16, (byte)((strong?0x1:0x0) | (harmUndead?0x2:0x0)));
+	}
 
 	public EntityShadowBall(World par1World) {
 		super(par1World);
+		this.getDataWatcher().addObject(16, (byte)(0));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -38,8 +49,7 @@ public class EntityShadowBall extends EntityThrowable {
 	public EntityShadowBall(World par1World, double par2, double par4,
 			double par6, boolean hundead, boolean power) {
 		super(par1World, par2, par4, par6);
-		this.harmUndead = hundead;
-		this.strong = power;
+		initFlags(power, hundead);
 	}
 
 	public EntityShadowBall(World par1World,
@@ -51,8 +61,7 @@ public class EntityShadowBall extends EntityThrowable {
 			EntityLivingBase par2EntityLivingBase, boolean hundead,
 			boolean power) {
 		super(par1World, par2EntityLivingBase);
-		harmUndead = hundead;
-		this.strong = power;
+		initFlags(power, hundead);
 	}
 
 	@Override
@@ -81,18 +90,20 @@ public class EntityShadowBall extends EntityThrowable {
 
 		if (par1MovingObjectPosition.typeOfHit == MovingObjectType.ENTITY) {
 			/*
-			 * if(this.worldObj.isRemote) return;
-			 * if(par1MovingObjectPosition.entityHit instanceof
-			 * EntityNyxNecromancer && this.getThrower() instanceof
-			 * EntityNyxNecromancer) {
-			 * par1MovingObjectPosition.entityHit.attackEntityFrom(
-			 * DamageSource.causeIndirectMagicDamage(
-			 * par1MovingObjectPosition.entityHit,
-			 * (this.getThrower()==null?this:this.getThrower())), basepower +
-			 * basepower*this.rand.nextFloat()); this.setDead(); }
+			 if(this.worldObj.isRemote) return;
+			 if(par1MovingObjectPosition.entityHit instanceof
+			 EntityNyxSkeletonNecro && this.getThrower() instanceof
+			 EntityNyxSkeletonNecro) {
+			 par1MovingObjectPosition.entityHit.attackEntityFrom(
+			 DamageSource.causeIndirectMagicDamage(
+			 par1MovingObjectPosition.entityHit,
+			 (this.getThrower()==null?this:this.getThrower())), basepower +
+			 basepower*this.rand.nextFloat()); this.setDead(); }
 			 */
 			return;
 		}
+		
+		boolean strong = isStrong();
 
 		if (!this.worldObj.isRemote) {
 			final float basepower = strong ? 6.0F : 3.0F;
@@ -118,7 +129,7 @@ public class EntityShadowBall extends EntityThrowable {
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 39, 0));
 
-						if (!harmUndead
+						if (!isUndeadHarming()
 								&& elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							elmo.heal(power);
 						else if (elmo.getEntityId() == this.getThrower()
@@ -133,7 +144,7 @@ public class EntityShadowBall extends EntityThrowable {
 									.causeIndirectMagicDamage(elmo,
 											this.getThrower() == null ? this
 													: this.getThrower()), 
-													power*(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD?1.5F:1.0F));
+													power*(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD?3.0F:1.0F));
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 69, 1));
 						this.getThrower().heal(power/Math.min(1+list1.size(), 4));
@@ -160,28 +171,11 @@ public class EntityShadowBall extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		/*
-		 * String id = (strong?"shadowSmokeLarge":"shadowSmokeSmall");
-		 * IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
-		 * this.posZ, true); IaSFxManager.spawnParticle(this.worldObj, id,
-		 * this.posX+this.motionX, this.posY+this.motionY,
-		 * this.posZ+this.motionZ, true);
-		 */
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
-	}
-
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeEntityToNBT(par1NBTTagCompound);
+		String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
+				this.posZ, true);
+		IaSFxManager.spawnParticle(this.worldObj, id,
+						this.posX+this.motionX, this.posY+this.motionY,
+						this.posZ+this.motionZ, true);
 	}
 }
