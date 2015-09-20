@@ -1,6 +1,5 @@
 package iceandshadow2.api;
 
-import java.util.List;
 import java.util.Set;
 
 import net.minecraft.item.ItemStack;

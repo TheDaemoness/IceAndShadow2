@@ -1,7 +1,10 @@
 package iceandshadow2.nyx.blocks;
 
+import java.util.Random;
+
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -68,7 +71,7 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 						3));
 			}
 			if(!elb.isPotionActive(Potion.regeneration))
-				elb.addPotionEffect(new PotionEffect(Potion.regeneration.id,51,0));
+				elb.addPotionEffect(new PotionEffect(Potion.regeneration.id,51,1));
 			if (elb.isSneaking()) {
 				if (elb.isPotionActive(Potion.confusion))
 					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,
@@ -99,22 +102,28 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 		}
 	}
 
-	/*
-	 * public void randomDisplayTick(World par1World, int par2, int par3, int
-	 * par4, Random par5Random) { if(par1World.getBlockMetadata(par2, par3,
-	 * par4) == 0) return;
-	 * 
-	 * double var9 = (double) ((float) par3 + par5Random.nextFloat()); double
-	 * var13 = 0.0D; double var15 = 0.0D; double var17 = 0.0D; int var19 =
-	 * par5Random.nextInt(2) * 2 - 1; int var20 = par5Random.nextInt(2) * 2 - 1;
-	 * var13 = ((double) par5Random.nextFloat() - 0.5D) * 0.125D; var15 =
-	 * ((double) par5Random.nextFloat() - 0.5D) * 0.125D; var17 = ((double)
-	 * par5Random.nextFloat() - 0.5D) * 0.125D; double var11 = (double) par4 +
-	 * 0.5D + 0.25D * (double) var20; var17 = (double) (par5Random.nextFloat() *
-	 * 1.0F * (float) var20); double var7 = (double) par2 + 0.5D + 0.25D *
-	 * (double) var19; var13 = (double) (par5Random.nextFloat() * 1.0F * (float)
-	 * var19); IaSFxManager.spawnParticle(par1World, "portal", var7, var9,
-	 * var11, var13, var15, var17, false, true); }
-	 */
+	
+	@Override
+	public void randomDisplayTick(World par1World, int par2, int par3,
+			int par4, Random par5Random) {
+		if (par1World.getBlockMetadata(par2, par3, par4) == 0)
+			return;
+
+		double var9 = par3 + par5Random.nextFloat();
+		double var13 = 0.0D;
+		double var15 = 0.0D;
+		double var17 = 0.0D;
+		int var19 = par5Random.nextInt(2) * 2 - 1;
+		int var20 = par5Random.nextInt(2) * 2 - 1;
+		var13 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var15 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var17 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		double var11 = par4 + 0.5D + 0.25D * var20;
+		var17 = par5Random.nextFloat() * 1.0F * var20;
+		double var7 = par2 + 0.5D + 0.25D * var19;
+		var13 = par5Random.nextFloat() * 1.0F * var19;
+		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11,
+				var13, var15, var17, false, true);
+	}
 
 }

@@ -3,9 +3,6 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -18,7 +15,6 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxChunkManager;
 
 public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable {

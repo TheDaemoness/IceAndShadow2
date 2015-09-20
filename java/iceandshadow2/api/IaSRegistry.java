@@ -2,22 +2,14 @@ package iceandshadow2.api;
 
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
-import iceandshadow2.util.IaSPlayerHelper;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
-
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public final class IaSRegistry {
 

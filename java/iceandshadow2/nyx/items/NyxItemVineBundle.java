@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxBlocks;
 

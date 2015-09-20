@@ -3,18 +3,14 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -22,11 +18,9 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.IIaSBlockThawable;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 

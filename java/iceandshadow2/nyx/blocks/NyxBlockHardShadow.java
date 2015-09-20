@@ -195,7 +195,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 
 	@Override
 	public int getMobilityFlag() {
-		return 1;
+		return 0;
 	}
 	
 }
