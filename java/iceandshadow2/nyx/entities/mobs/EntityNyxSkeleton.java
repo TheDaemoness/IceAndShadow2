@@ -221,7 +221,7 @@ IIaSMobGetters {
 	 * Called when the entity is attacked.
 	 */
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
 		if (this.isEntityInvulnerable()
 				|| par1DamageSource == DamageSource.drown)
 			return false;
@@ -231,8 +231,10 @@ IIaSMobGetters {
 			return false;
 		this.addPotionEffect(new PotionEffect(Potion.hunger.id, 179, 0));
 		if (par1DamageSource.isFireDamage())
-			return super.attackEntityFrom(par1DamageSource, par2 * 3);
-		return super.attackEntityFrom(par1DamageSource, par2);
+			return super.attackEntityFrom(par1DamageSource, dmg * 3);
+		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
+			return super.attackEntityFrom(par1DamageSource, Math.max(1,dmg-IaSWorldHelper.getRegionArmorMod(this)));
+		return super.attackEntityFrom(par1DamageSource, dmg);
 	}
 
 	@Override
@@ -461,7 +463,7 @@ IIaSMobGetters {
 
 	@Override
 	public int getTotalArmorValue() {
-		return super.getTotalArmorValue()+IaSWorldHelper.getRegionHealthBoostMod(this);
+		return super.getTotalArmorValue()+IaSWorldHelper.getRegionArmorMod(this);
 	}
 
 	@Override

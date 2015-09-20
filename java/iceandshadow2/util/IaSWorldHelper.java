@@ -10,7 +10,7 @@ public class IaSWorldHelper {
 		return w.difficultySetting.getDifficultyId();
 	}
 	
-	public static int getRegionHealthBoostMod(Entity ent) {
+	public static int getRegionArmorMod(Entity ent) {
 		if(ent.dimension != IaSFlags.dim_nyx_id)
 			return 0;
 		return (int)((Math.abs(ent.posX)+Math.abs(ent.posZ))/500);

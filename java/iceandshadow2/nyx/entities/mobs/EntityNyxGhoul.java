@@ -155,6 +155,8 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				|| par1DamageSource == DamageSource.drown)
 			return false;
 		boolean flag;
+		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
+			par2 -= IaSWorldHelper.getRegionArmorMod(this);
 		if(par1DamageSource.isDamageAbsolute() && !this.isInvisible())
 			flag = super.attackEntityFrom(par1DamageSource, par2);
 		else
@@ -292,7 +294,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public int getTotalArmorValue() {
-		return super.getTotalArmorValue()+IaSWorldHelper.getRegionHealthBoostMod(this);
+		return super.getTotalArmorValue()+IaSWorldHelper.getRegionArmorMod(this);
 	}
 
 	@Override
