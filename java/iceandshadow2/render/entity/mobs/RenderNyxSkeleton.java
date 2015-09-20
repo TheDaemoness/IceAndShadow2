@@ -49,7 +49,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 
 	protected void func_82438_a(EntitySkeleton par1EntitySkeleton, float par2) {
 		if (par1EntitySkeleton.getSkeletonType() == 1) {
-			GL11.glScalef(1.2F, 1.2F, 1.2F);
+			GL11.glScalef(1.1F, 1.2F, 1.1F);
 		}
 	}
 
