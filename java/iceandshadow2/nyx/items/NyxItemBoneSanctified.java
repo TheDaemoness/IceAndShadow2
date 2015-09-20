@@ -54,7 +54,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 						"The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.");
 				return isk;
 			}
-			plai.attackEntityFrom(DamageSource.magic, Math.min(0, plai.worldObj.difficultySetting.getDifficultyId()-1));
+			plai.attackEntityFrom(DamageSource.magic, Math.max(0, plai.worldObj.difficultySetting.getDifficultyId()-1));
 			isk.setItemDamage(1);
 		}
 		return isk;
