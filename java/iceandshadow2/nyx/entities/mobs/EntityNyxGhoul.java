@@ -161,7 +161,10 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 			flag = super.attackEntityFrom(par1DamageSource, par2);
 		else
 			flag = super.attackEntityFrom(par1DamageSource, par2/2);
-		if(par1DamageSource instanceof EntityDamageSource && !par1DamageSource.isProjectile()) {
+		if(par1DamageSource instanceof EntityDamageSource && !par1DamageSource.isProjectile()
+				&& !par1DamageSource.isMagicDamage()
+				&& !par1DamageSource.isExplosion()
+				&& !par1DamageSource.isFireDamage()) {
 			Entity ent = ((EntityDamageSource)par1DamageSource).getEntity();
 			if(ent instanceof EntityPlayer)
 				((EntityPlayer)ent).dropOneItem(false);
