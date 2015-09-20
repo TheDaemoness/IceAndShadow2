@@ -48,15 +48,16 @@ public class IaSTools {
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
-			return new ItemStack(armorCortra[slot], 0);
+			return new ItemStack(armorSpiderSilk[slot], 0);
 		if (tier == 1)
 			return new ItemStack(armorEchir[slot], 0);
 		if (tier == 2) {
 			final ItemStack is = new ItemStack(armorCortra[slot], 0);
 			if (slot == 4)
 				is.addEnchantment(Enchantment.featherFalling, 3);
-			is.addEnchantment(Enchantment.projectileProtection, 2);
-			is.addEnchantment(Enchantment.thorns, 3);
+			else if(slot == 2)
+				is.addEnchantment(Enchantment.thorns, 3);
+			is.addEnchantment(Enchantment.projectileProtection, 3);
 			return is;
 		}
 		return new ItemStack(armorNavistra[slot], 0);
