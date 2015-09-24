@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.entities.projectile;
 
+import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.Iterator;
@@ -20,24 +22,29 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityShadowBall extends EntityThrowable {
-	
+
 	public boolean isStrong() {
 		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
 	}
+
 	public boolean isUndeadHarming() {
 		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
 	}
+
 	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().updateObject(16, (byte)((strong?0x1:0x0) | (harmUndead?0x2:0x0)));
+		this.getDataWatcher().updateObject(16,
+				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 		return this;
 	}
+
 	private void initFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().addObject(16, (byte)((strong?0x1:0x0) | (harmUndead?0x2:0x0)));
+		this.getDataWatcher().addObject(16,
+				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 	}
 
 	public EntityShadowBall(World par1World) {
 		super(par1World);
-		this.getDataWatcher().addObject(16, (byte)(0));
+		this.getDataWatcher().addObject(16, (byte) (0));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -88,26 +95,23 @@ public class EntityShadowBall extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 
+		final boolean strong = isStrong();
+		final float basepower = strong ? 6.0F : 4.0F;
+
 		if (par1MovingObjectPosition.typeOfHit == MovingObjectType.ENTITY) {
-			/*
-			 if(this.worldObj.isRemote) return;
-			 if(par1MovingObjectPosition.entityHit instanceof
-			 EntityNyxSkeletonNecro && this.getThrower() instanceof
-			 EntityNyxSkeletonNecro) {
-			 par1MovingObjectPosition.entityHit.attackEntityFrom(
-			 DamageSource.causeIndirectMagicDamage(
-			 par1MovingObjectPosition.entityHit,
-			 (this.getThrower()==null?this:this.getThrower())), basepower +
-			 basepower*this.rand.nextFloat()); this.setDead(); }
-			 */
-			return;
+			if (this.worldObj.isRemote)
+				return;
+			if (par1MovingObjectPosition.entityHit instanceof EntityNyxSkeleton
+					&& this.getThrower() instanceof EntityNyxNecromancer) {
+				if(isUndeadHarming() && !this.getThrower().isDead && getThrower().getHealth() >= 1)
+					par1MovingObjectPosition.entityHit.attackEntityFrom(
+						DamageSource.causeIndirectMagicDamage(
+								par1MovingObjectPosition.entityHit, getThrower()), 666);
+				return;
+			}
 		}
-		
-		boolean strong = isStrong();
 
 		if (!this.worldObj.isRemote) {
-			final float basepower = strong ? 6.0F : 4.0F;
-
 			final AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D,
 					2.0D, 4.0D);
 			final List list1 = this.worldObj.getEntitiesWithinAABB(
@@ -117,8 +121,7 @@ public class EntityShadowBall extends EntityThrowable {
 				final Iterator iterator = list1.iterator();
 
 				while (iterator.hasNext()) {
-					EntityLivingBase elmo = (EntityLivingBase) iterator
-							.next();
+					EntityLivingBase elmo = (EntityLivingBase) iterator.next();
 					float d0 = (float) this.getDistanceSqToEntity(elmo);
 
 					if (d0 < 16.0D) {
@@ -132,22 +135,25 @@ public class EntityShadowBall extends EntityThrowable {
 						if (!isUndeadHarming()
 								&& elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							elmo.heal(power);
-						else if (elmo.getEntityId() == this.getThrower()
-								.getEntityId()) {
+						else if (this.getThrower() != null && elmo.getEntityId() == this.getThrower().getEntityId()) {
 							if (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 								elmo.heal(power);
 							else
 								elmo.attackEntityFrom(DamageSource.magic,
 										power / 2);
 						} else
-							elmo.attackEntityFrom(DamageSource
-									.causeIndirectMagicDamage(elmo,
+							elmo.attackEntityFrom(
+									DamageSource.causeIndirectMagicDamage(elmo,
 											this.getThrower() == null ? this
-													: this.getThrower()), 
-													power*(elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD?3.0F:1.0F));
+													: this.getThrower()),
+									power
+											* (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? 3.0F
+													: 1.0F));
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 69, 1));
-						this.getThrower().heal(power/Math.min(1+list1.size(), 4));
+						if(this.getThrower() != null)
+							this.getThrower().heal(
+								power / Math.min(1 + list1.size(), 4));
 					}
 				}
 			}
@@ -174,8 +180,7 @@ public class EntityShadowBall extends EntityThrowable {
 		String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
 				this.posZ, true);
-		IaSFxManager.spawnParticle(this.worldObj, id,
-						this.posX+this.motionX, this.posY+this.motionY,
-						this.posZ+this.motionZ, true);
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX,
+				this.posY + this.motionY, this.posZ + this.motionZ, true);
 	}
 }

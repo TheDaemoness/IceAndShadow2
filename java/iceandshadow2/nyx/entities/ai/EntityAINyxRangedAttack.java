@@ -92,7 +92,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 		final EntityLivingBase entitylivingbase = this.entityHost
 				.getAttackTarget();
 
-		if (entitylivingbase == null) {
+		if (entitylivingbase == null || entitylivingbase.isDead) {
 			return false;
 		} else {
 			this.attackTarget = entitylivingbase;

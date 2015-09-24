@@ -3,6 +3,7 @@ package iceandshadow2.render;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.cosmetic.*;
 import iceandshadow2.nyx.entities.mobs.*;
 import iceandshadow2.nyx.entities.projectile.*;
 import iceandshadow2.nyx.entities.util.*;
@@ -40,6 +41,8 @@ public class IaSRenderers {
 				EntityShadowBall.class, new RenderNot());
 		RenderingRegistry.registerEntityRenderingHandler(
 				EntityThrowingKnife.class, new RenderThrowingKnife());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityCosmeticShadowRiser.class, new RenderNot());
 
 		// Technical entities.
 		RenderingRegistry.registerEntityRenderingHandler(

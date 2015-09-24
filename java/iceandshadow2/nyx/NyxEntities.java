@@ -2,6 +2,7 @@ package iceandshadow2.nyx;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.nyx.entities.cosmetic.*;
 import iceandshadow2.nyx.entities.mobs.*;
 import iceandshadow2.nyx.entities.projectile.*;
 import iceandshadow2.nyx.entities.util.*;
@@ -54,9 +55,12 @@ public class NyxEntities {
 		registerEntityEgg(EntityNyxGhoul.class, 0xccccdd, 0x220011);
 		
 		// Set up Withered Necromancers
-		EntityRegistry.registerModEntity(EntityNyxSkeletonNecro.class,
+		EntityRegistry.registerModEntity(EntityNyxNecromancer.class,
 				"nyxMobWitheredNecromancer", 8, owner, 60, 1, true);
-		registerEntityEgg(EntityNyxSkeletonNecro.class, 0x331111, 0xffcccc);
+		registerEntityEgg(EntityNyxNecromancer.class, 0x331111, 0xffcccc);
+		
+		EntityRegistry.registerModEntity(EntityCosmeticShadowRiser.class,
+				"nyxCosmeticShadowRiser", 9, owner, 40, 1, true);
 	}
 
 	@SuppressWarnings("unchecked")
