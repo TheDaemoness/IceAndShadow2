@@ -52,7 +52,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
 IIaSMobGetters {
 
 	public enum EnumNyxSkeletonType {
-		BOW_FROST_SHORT(0), KNIFE(1), MAGIC_SHADOW(2), BOW_FROST_LONG(3);
+		RANDOM(-1), BOW_FROST_SHORT(0), KNIFE(1), MAGIC_SHADOW(2), BOW_FROST_LONG(3), RAPIER(4);
 
 		public static EnumNyxSkeletonType fromId(int id) {
 			for (final EnumNyxSkeletonType t : values()) {
@@ -97,6 +97,10 @@ IIaSMobGetters {
 	protected static double moveSpeed = 0.5;
 
 	public EntityNyxSkeleton(World par1World) {
+		this(par1World, EnumNyxSkeletonType.RANDOM);
+	}
+	
+	public EntityNyxSkeleton(World par1World, EnumNyxSkeletonType type) {
 		super(par1World);
 
 		senses = new IaSSetSenses(this);
@@ -128,7 +132,10 @@ IIaSMobGetters {
 		if (par1World != null && !par1World.isRemote)
 			this.setCombatTask();
 
-		this.typpe = EnumNyxSkeletonType.BOW_FROST_SHORT;
+		if(type != EnumNyxSkeletonType.RANDOM) 
+			setNyxSkeletonCombatType(type);
+		else
+			this.typpe = type;
 	}
 
 	@Override
@@ -207,6 +214,8 @@ IIaSMobGetters {
 				par1Entity.setFire(j * 4);
 
 			if (par1Entity instanceof EntityLivingBase) {
+				if(this.getEquipmentInSlot(0) == null)
+					return flag;
 				if(this.getEquipmentInSlot(0).getItem() == NyxItems.frostSword)
 					((EntityLivingBase) par1Entity)
 						.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
@@ -217,9 +226,6 @@ IIaSMobGetters {
 		return flag;
 	}
 
-	/**
-	 * Called when the entity is attacked.
-	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
 		if (this.isEntityInvulnerable()
@@ -241,7 +247,7 @@ IIaSMobGetters {
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving,
 			float par2) {
 		final ItemStack wielding = this.getHeldItem();
-		if (wielding.getItem() instanceof NyxItemBow) {
+		if (wielding != null && wielding.getItem() instanceof NyxItemBow) {
 			doBowAttack(par1EntityLiving, par2,
 					wielding.getItem() instanceof NyxItemBowFrostLong);
 		} else {
@@ -293,7 +299,7 @@ IIaSMobGetters {
 	public void doShadowAttack(EntityLivingBase par1EntityLiving, float par2) {
 		final boolean harm_undead = par1EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 		final EntityThrowable entityball = new EntityShadowBall(this.worldObj,
-				this, harm_undead, false);
+				this, harm_undead, IaSWorldHelper.getRegionLevel(par1EntityLiving)>=6);
 
 		final double d0 = par1EntityLiving.posX + par1EntityLiving.motionX
 				- this.posX;
@@ -392,8 +398,8 @@ IIaSMobGetters {
 	}
 
 	public ItemStack getDefaultAlternateWeapon(EnumNyxSkeletonType taipe) {
-		if (taipe == EnumNyxSkeletonType.KNIFE)
-			return new ItemStack(IaSTools.sword);
+		if (taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
+			return new ItemStack(Items.bone);
 		else
 			return new ItemStack(NyxItems.frostSword,1,475+this.rand.nextInt(25));
 	}
@@ -404,7 +410,8 @@ IIaSMobGetters {
 					"Devora");
 			ait.stackSize = new Random().nextInt(8) + 4;
 
-			if (IaSWorldHelper.getRegionLevel(this) >= 6) {
+			final int lvl = IaSWorldHelper.getRegionLevel(this);
+			if (lvl >= 6) {
 				ait.addEnchantment(Enchantment.knockback, 1);
 				ait.addEnchantment(Enchantment.fireAspect, 1);
 			}
@@ -412,12 +419,14 @@ IIaSMobGetters {
 		}
 		if (taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
 			return new ItemStack(NyxItems.frostBowShort, 1,
-					385 - this.rand.nextInt(16));
+					383 - this.rand.nextInt(16));
 		if (taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
 			return new ItemStack(NyxItems.boneCursed);
 		if (taipe == EnumNyxSkeletonType.BOW_FROST_LONG)
 			return new ItemStack(NyxItems.frostBowLong, 1,
-					255 - this.rand.nextInt(16));
+					254 - this.rand.nextInt(16));
+		if (taipe == EnumNyxSkeletonType.RAPIER)
+			return new ItemStack(NyxItems.frostSword, 1, 45+this.rand.nextInt(50));
 		return null;
 	}
 
@@ -517,6 +526,9 @@ IIaSMobGetters {
 		this.equipmentDropChances[0] = 0.0F;
 		this.altWeaponFlag = false;
 		
+		if(this.getSkeletonType() == 1 || this.typpe != EnumNyxSkeletonType.RANDOM)
+			return dat;
+		
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
 		final int reg = IaSWorldHelper.getRegionLevel(this);
 		
@@ -538,7 +550,6 @@ IIaSMobGetters {
 				this.equipmentDropChances[0] = 0.33F;
 			} else {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-				this.equipmentDropChances[0] = 0.33F;
 			}
 		}
 
