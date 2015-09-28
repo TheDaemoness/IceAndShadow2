@@ -56,7 +56,9 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 		if(target.getItem() == this && target.getItemDamage() == 0) {
 			target.setItemDamage(1);
 			Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
-			ench = new HashMap<Integer,Integer>(ench); //Dodge concurrent access issues.
+			synchronized(ench) {
+				ench = new HashMap<Integer,Integer>(ench); //Dodge concurrent access issues?
+			}
 			for(Integer i : ench.keySet()) {
 				if(ench.get(i).intValue() <= 1)
 					ench.remove(i);
