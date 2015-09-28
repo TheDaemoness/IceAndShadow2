@@ -71,9 +71,9 @@ public class EntityNyxSpider extends EntitySpider {
 				if(hometurf)
 					mod /= 2;
 				elb.addPotionEffect(new PotionEffect(
-						Potion.poison.id, lvl * mod + 60, hometurf?1:0));
+						Potion.poison.id, mod + 60, hometurf?1:0));
 				elb.addPotionEffect(new PotionEffect(
-						Potion.weakness.id, lvl * mod + 90, lvl+(hometurf?1:0)));
+						Potion.weakness.id, mod + 90, lvl+(hometurf?1:0)));
 			}
 			return true;
 		} else {
