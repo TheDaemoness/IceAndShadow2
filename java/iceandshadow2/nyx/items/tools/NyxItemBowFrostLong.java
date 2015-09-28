@@ -1,10 +1,16 @@
 package iceandshadow2.nyx.items.tools;
 
 import iceandshadow2.IIaSModName;
+import iceandshadow2.api.IIaSEntityWeaponRanged;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
+import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -12,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName,
-IIaSGlowing {
+IIaSGlowing, IIaSEntityWeaponRanged {
 
 	public NyxItemBowFrostLong(String par1) {
 		super(par1);
@@ -82,6 +88,38 @@ IIaSGlowing {
 	@Override
 	public int getUpgradeCost(int mod) {
 		return 8+(mod+1)/2;
+	}
+	
+	@Override
+	public EntityAIBase getEntityUseTask(EntityLivingBase user) {
+		return new EntityAINyxRangedAttack(
+				(IRangedAttackMob)user, user.getAIMoveSpeed(), 25, 35, 24.0F);
+	}
+
+	@Override
+	public void doRangedAttack(EntityLivingBase user, EntityLivingBase target) {
+		final int slowtime = IaSWorldHelper.getDifficulty(user.worldObj) * 75;
+		final int slowstr = IaSWorldHelper.getDifficulty(user.worldObj) + 1;
+		final int dif = IaSWorldHelper.getDifficulty(user.worldObj);
+		EntityIceArrow arrow = new EntityIceArrow(user.worldObj, user, target,
+					1.8F, 5.0F, slowstr, slowtime);
+		int power = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.power.effectId, user.getHeldItem());
+		final int punch = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.punch.effectId, user.getHeldItem());
+		power += dif == 3 ? 1 : 0;
+
+		final int damage = dif>=3?8:7;
+		arrow.setDamage(damage);
+
+		if (power > 0)
+			arrow.setDamage(arrow.getDamage() + power * 0.5D + 0.5D);
+		if (punch > 0)
+			arrow.setKnockbackStrength(punch);
+
+		user.playSound("random.bow", 1.0F,
+				1.0F / (user.getRNG().nextFloat() * 0.3F + 0.6F));
+		user.worldObj.spawnEntityInWorld(arrow);
 	}
 }
 

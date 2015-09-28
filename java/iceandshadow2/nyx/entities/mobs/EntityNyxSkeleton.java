@@ -69,7 +69,7 @@ IIaSMobGetters {
 		}
 	}
 
-	protected EntityAINyxRangedAttack rangedAttackShort = new EntityAINyxRangedAttack(
+	protected EntityAINyxRangedAttack rangedAttackDefault = new EntityAINyxRangedAttack(
 			this, this.moveSpeed, 25, 35, 24.0F);
 	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(
 			this, this.moveSpeed, 45, 55, 32.0F);
@@ -581,7 +581,7 @@ IIaSMobGetters {
 
 	@Override
 	public void setCombatTask() {
-		this.tasks.removeTask(rangedAttackShort);
+		this.tasks.removeTask(rangedAttackDefault);
 		this.tasks.removeTask(rangedAttackLong);
 		this.tasks.removeTask(meleeAttackPlayer);
 		this.tasks.removeTask(meleeAttackPassive);
@@ -592,7 +592,7 @@ IIaSMobGetters {
 			if (this.typpe == EnumNyxSkeletonType.BOW_FROST_LONG) {
 				this.tasks.addTask(4, rangedAttackLong);
 			} else {
-				this.tasks.addTask(4, rangedAttackShort);
+				this.tasks.addTask(4, rangedAttackDefault);
 			}
 		} else if (this.typpe == EnumNyxSkeletonType.MAGIC_SHADOW) {
 			this.tasks.addTask(4, shadowAttack);
