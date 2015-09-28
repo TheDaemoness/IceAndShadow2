@@ -27,17 +27,22 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 			for (int xit = 0; xit < xlim; ++xit) {
 				this.initChunkSeed(xit + x, zit + z);
 				int nb = this.nextInt(this.allowedBiomes.length);
-				if (NyxBiomes.isRare(this.allowedBiomes[nb])) {
+				if (this.allowedBiomes[nb] == NyxBiomes.nyxInfested) {
 					if(rl < 1)
 						nb = NyxBiomes.nyxHillForest.biomeID;
+					else if(rl < 3)
+						nb = NyxBiomes.nyxMesaForest.biomeID;
+					else 
+						nb = this.allowedBiomes[nb].biomeID;
+				} else if (this.allowedBiomes[nb] == NyxBiomes.nyxRugged) {
+					if(rl < 1)
+						nb = NyxBiomes.nyxHills.biomeID;
 					else if(rl < 2)
 						nb = NyxBiomes.nyxHighMountains.biomeID;
-					else if(rl < 4) {
-						nb = this.nextInt(this.allowedBiomes.length);
+					else if(rl < 5)
+						nb = NyxBiomes.nyxMesas.biomeID;
+					else
 						nb = this.allowedBiomes[nb].biomeID;
-					} else {
-						nb = this.allowedBiomes[nb].biomeID;
-					}
 				} else
 					nb = this.allowedBiomes[nb].biomeID;
 				var6[xit + zit * xlim] = nb;
