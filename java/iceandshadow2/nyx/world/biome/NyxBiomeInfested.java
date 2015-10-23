@@ -19,13 +19,13 @@ public class NyxBiomeInfested extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 		this.setBlocks(Blocks.snow, Blocks.snow);
 
-		this.setColor(64 << 16 | 255 << 8 | 192);
-
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
 				60, 3, 5));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class,
 				10, 1, 1));
+
+		this.setColor(64 << 16 | 255 << 8 | 192);
 	}
 	
 	@Override
