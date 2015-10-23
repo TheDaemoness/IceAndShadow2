@@ -160,7 +160,7 @@ public class NyxWorldProvider extends WorldProvider {
 				NyxBiomes.nyxHillForest, NyxBiomes.nyxRugged,
 				NyxBiomes.nyxInfested };
 		GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
-		biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
+		biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 3);
 		GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
 		biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
 
