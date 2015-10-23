@@ -149,25 +149,6 @@ IIaSOnDeathKeep {
 	@Override
 	public void onUpdate(ItemStack pile, World earth, Entity tree, int time,
 			boolean boule) {
-		if ((pile.getItemDamage() & 2) == 0
-				&& tree.dimension == IaSFlags.dim_nyx_id) {
-			if (tree instanceof EntityPlayer) {
-				final EntityPlayer ep = (EntityPlayer) tree;
-				if (!ep.capabilities.isCreativeMode) {
-					pile.setItemDamage(pile.getItemDamage() | 2);
-					if (!IaSPlayerHelper.giveItem(ep, new ItemStack(
-							NyxItems.seedObsidian, 1)))
-						IaSPlayerHelper
-						.messagePlayer(ep,
-								"Something flew out of the crystal and fell on the ground.");
-					else
-						IaSPlayerHelper
-						.messagePlayer(ep,
-								"Something flew out of the crystal and into your backpack.");
-				}
-			} else if (!tree.worldObj.isRemote)
-				pile.setItemDamage(pile.getItemDamage() | 2);
-		}
 		if (tree.worldObj.isRemote)
 			return;
 		boolean active = true;
