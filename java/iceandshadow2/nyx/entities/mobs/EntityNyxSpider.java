@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.util.IaSEntityHelper;
@@ -171,13 +172,6 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		for (int x = -15; x < 16; ++x) {
-			for (int y = -15; y < 16; ++y) {
-				for (int z = -15; z < 16; ++z) {
-					// TODO: Wisp repellant check.
-				}
-			}
-		}
 		int wl = IaSWorldHelper.getRegionLevel(this);
 		if(wl < 1)
 			return false;

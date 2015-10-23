@@ -7,6 +7,7 @@ import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSTools;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
@@ -392,8 +393,12 @@ IIaSMobGetters {
 		return lightb > 7 ? lightb / 2 : 0;
 	}
 
+
+
 	@Override
 	public boolean getCanSpawnHere() {
+		if(posX*posX+posZ*posZ < 1024)
+			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
 
