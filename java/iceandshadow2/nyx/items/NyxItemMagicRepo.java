@@ -56,23 +56,24 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 		if(target.getItem() == this && target.getItemDamage() == 0) {
 			target.setItemDamage(1);
 			Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
-			synchronized(ench) {
-				ench = new HashMap<Integer,Integer>(ench); //Dodge concurrent access issues?
-			}
-			for(Integer i : ench.keySet()) {
-				if(ench.get(i).intValue() <= 1)
-					ench.remove(i);
-				else
-					ench.put(i, ench.get(i)-1);
-			}
-			EnchantmentHelper.setEnchantments(ench, target);
-			EnchantmentHelper.setEnchantments(ench, catalyst);
-			if(ench.isEmpty())
+			synchronized(ench) { //Dodge concurrent access issues?
+				for(Integer i : ench.keySet()) {
+					if(ench.get(i).intValue() <= 1)
+						ench.remove(i);
+					else
+						ench.put(i, ench.get(i)-1);
+				}
+				EnchantmentHelper.setEnchantments(ench, target);
+				EnchantmentHelper.setEnchantments(ench, catalyst);
+				if(ench.isEmpty())
 				target.setItemDamage(0);
+			}
 		} else if(catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
 			Map<Integer,Integer> ench = new HashMap<Integer,Integer>(EnchantmentHelper.getEnchantments(catalyst));
-			EnchantmentHelper.setEnchantments(ench, target);
-			catalyst.stackSize = 0;
+			synchronized(ench) { //Dodge concurrent access issues?
+				EnchantmentHelper.setEnchantments(ench, target);
+				catalyst.stackSize = 0;
+			}
 		}
 		return null;
 	}
