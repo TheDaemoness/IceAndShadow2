@@ -16,6 +16,7 @@ public class NyxBiomeForestDense extends NyxBiome {
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		this.setBlocks(Blocks.snow, Blocks.snow);
+		this.spawnableMonsterList.clear();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 
 import java.util.Random;
@@ -23,7 +24,9 @@ public class NyxBiomeRugged extends NyxBiome {
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 60, 3, 4));
+				EntityNyxSkeleton.class, 60, 2, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(
+				EntityNyxNecromancer.class, 10, 1, 1));
 	}
 
 	@Override
