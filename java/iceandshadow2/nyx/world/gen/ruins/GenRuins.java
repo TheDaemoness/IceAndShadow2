@@ -32,11 +32,11 @@ public abstract class GenRuins extends WorldGenerator {
 	@Override
 	public boolean generate(World var1, Random var2, int x, int y, int z) {
 		if (canGenerateHere(var1, var2, x, y, z)) {
-			buildPass(var1, var2, x, y, z);
 			if (IaSFlags.flag_report_ruins_gen)
 				IceAndShadow2.getLogger().info(
 						"[DEV] Generating " + this.getLowercaseName() + " @ ("
 								+ x + "," + y + "," + z + ").");
+			buildPass(var1, var2, x, y, z);
 			damagePass(var1, var2, x, y, z);
 			rewardPass(var1, var2, x, y, z);
 			return true;

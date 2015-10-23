@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.world.gen.ruins;
 
+import iceandshadow2.IaSFlags;
+import iceandshadow2.IceAndShadow2;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.gen.Sculptor;
@@ -27,6 +29,22 @@ public class GenRuinsCentral extends GenRuins {
 		}
 		return y;
 	}
+
+	@Override
+	public boolean generate(World var1, Random var2, int x, int y, int z) {
+		if (canGenerateHere(var1, var2, x, y, z)) {
+			y = getGenHeight(var1, x,z);
+			if (IaSFlags.flag_report_ruins_gen)
+				IceAndShadow2.getLogger().info(
+						"[DEV] Generating " + this.getLowercaseName() + " @ ("
+								+ x + "," + y + "," + z + ").");
+			buildPass(var1, var2, x, y, z);
+			damagePass(var1, var2, x, y, z);
+			rewardPass(var1, var2, x, y, z);
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	public boolean canGenerateHere(World var1, Random r, int x, int y, int z) {
@@ -35,21 +53,12 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void buildPass(World w, Random r, int x, int y, int z) {
-		y = getGenHeight(w,x,z);
-		for(int xit = -1; xit <= 1; ++xit) {
-			for(int zit = -3; zit <= 3; ++zit)
-				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
-		}
-		for(int xit = -3; xit <= 3; ++xit) {
-			for(int zit = -1; zit <= 1; ++zit)
-				y = Math.min(w.getPrecipitationHeight(x+xit, z+zit), y);
-		}
 		Sculptor.cylinder(w, x, y, z, 16, 1, Blocks.snow, 0);
 		Sculptor.cylinder(w, x, y-1, z, 16, 1, NyxBlocks.permafrost, 0);
 		Sculptor.cylinder(w, x, y-2, z, 15, 1, NyxBlocks.permafrost, 0);
 		for(int i = 3; i <= 30; ++i)
 			Sculptor.cylinder(w, x, Math.max(0, y-i), z, 16-i/2, 1, NyxBlocks.stone, 0);
-		Sculptor.cylinder(w, x, y+1, z, 16, 256-y, Blocks.air, 0);
+		Sculptor.dome(w, x, y+1, z, 16, Blocks.air, 0);
 		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickPale, 0);
 		
 		//Walkways
@@ -58,6 +67,9 @@ public class GenRuinsCentral extends GenRuins {
 
 		//Condom
 		Sculptor.cube(w, x-1, y+1, z-1, x+1, y+1, z+1, Blocks.obsidian, 0);
+		
+		//Condom Lubricant
+		w.setBlock(x, y+1, z, Blocks.crafting_table);
 		
 		//Platform
 		Sculptor.cube(w, x-2, y+4, z-2, x+2, y+4, z+2, Blocks.obsidian, 0);
@@ -114,7 +126,6 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void rewardPass(World w, Random r, int x, int y, int z) {
-		
 		int ropechest = r.nextInt(4);
 		int hookchest = r.nextInt(4);
 		int rarechest = r.nextInt(4);
@@ -122,7 +133,7 @@ public class GenRuinsCentral extends GenRuins {
 		int tightropeA = r.nextInt(6); //Deliberate, may not spawn.
 		int tightropeB = r.nextInt(6); //Deliberate, may not spawn.
 		int lorepages = r.nextInt(4);
-		y = w.getPrecipitationHeight(x, z);
+		y += 5;
 		for(int chestpos = 0; chestpos <= 3; ++chestpos) {
 			// Create a chest.
 			int xloc = x, zloc = z, chestf = 0;
@@ -154,12 +165,12 @@ public class GenRuinsCentral extends GenRuins {
 				int rewardid = r.nextInt(100);
 
 				// Sword or armor!
-				if (rewardid < 10) {
-					if (r.nextInt(3) == 0) {
+				if (rewardid < 20) {
+					if (r.nextInt(4) == 0) {
 						itemz = new ItemStack(Items.diamond_sword);
 						itemz.addEnchantment(Enchantment.smite, 1 + r.nextInt(2));
 					} else {
-						switch (r.nextInt(6)) {
+						switch (r.nextInt(5)) {
 						case 0:
 						case 1:
 							itemz = new ItemStack(Items.diamond_chestplate);
@@ -169,28 +180,24 @@ public class GenRuinsCentral extends GenRuins {
 							itemz = new ItemStack(Items.diamond_leggings);
 							break;
 						case 4:
-							itemz = new ItemStack(Items.diamond_helmet);
-							itemz.addEnchantment(Enchantment.thorns,
-									1 + r.nextInt(2));
-							break;
-						case 5:
 							itemz = new ItemStack(Items.diamond_boots);
-							itemz.addEnchantment(Enchantment.featherFalling,
-									1 + r.nextInt(2));
 							break;
 						}
-						itemz.addEnchantment(Enchantment.protection,
-								1 + r.nextInt(2));
+						itemz.addEnchantment(Enchantment.unbreaking,
+								1);
+						if(r.nextBoolean())
+							itemz.addEnchantment(Enchantment.protection,
+								1);
 					}
 				}
 				
 				// Echir Ingots
-				else if (rewardid < 25) {
+				else if (rewardid < 35) {
 					itemz = new ItemStack(NyxItems.echirIngot, 3+r.nextInt(5));
 				}
 
 				// Sanctified Bone
-				else if (rewardid < 45) {
+				else if (rewardid < 55) {
 					itemz = new ItemStack(NyxItems.boneSanctified);
 				}
 
