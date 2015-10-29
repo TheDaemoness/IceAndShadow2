@@ -10,7 +10,9 @@ import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
@@ -49,6 +51,10 @@ public class NyxDeathSystem {
 				if (!drop_main)
 					continue;
 				if (it instanceof ItemTool || it instanceof ItemSword) {
+					if (i < 9)
+						continue;
+				}
+				if (it == Items.bow) {
 					if (i < 9)
 						continue;
 				}
