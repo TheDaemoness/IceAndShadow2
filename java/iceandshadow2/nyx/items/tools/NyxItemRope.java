@@ -8,8 +8,11 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.util.IaSBlockHelper;
 
 public class NyxItemRope extends IaSBaseItemSingle {
+
+	public static final int LENGTH_MAX = 64;
 
 	public NyxItemRope(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -32,10 +35,11 @@ public class NyxItemRope extends IaSBaseItemSingle {
 			w.setBlock(x, y - 1, z, NyxBlocks.ropeY);
 			w.func_147480_a(x, y - 2, z, true);
 			w.setBlock(x, y - 2, z, NyxBlocks.ropeY);
-			for (y -= 3; y > 0; --y) {
+			y -= 3;
+			for (final int e = Math.max(0, y-LENGTH_MAX); y > e; --y) {
 				final Block bl = w.getBlock(x, y, z);
-				if (bl.getMaterial() != Material.air) {
-					if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava)
+				if (!IaSBlockHelper.isAir(bl)) {
+					if (IaSBlockHelper.isFluid(bl))
 						break;
 					if (!bl.isReplaceable(w, x, y, z))
 						break;

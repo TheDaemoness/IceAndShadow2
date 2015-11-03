@@ -13,11 +13,12 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.render.fx.IaSFxManager;
+import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxItemKitTightrope extends IaSBaseItemSingle {
 
-	public static final int LENGTH_MAX = 48;
+	public static final int LENGTH_MAX = 36;
 
 	public NyxItemKitTightrope(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -40,9 +41,9 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			xc += dir.offsetX;
 			zc += dir.offsetZ;
 			final Block bl = w.getBlock(xc, yc, zc);
-			if (bl.getMaterial() == Material.air)
+			if (IaSBlockHelper.isAir(bl))
 				++ilen;
-			else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava) {
+			else if (IaSBlockHelper.isFluid(bl)) {
 				IaSPlayerHelper.messagePlayer(pl,
 						"The rope cannot travel through liquids.");
 				return false;
