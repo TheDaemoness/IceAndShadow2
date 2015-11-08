@@ -13,6 +13,7 @@ import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
+import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
 import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
@@ -105,7 +106,7 @@ IIaSMobGetters {
 		super(par1World);
 
 		senses = new IaSSetSenses(this);
-		senses.add(new IaSSenseMovement(this, 8.0));
+		senses.add(new IaSSenseMovement(this, 12.0));
 		senses.add(new IaSSenseTouch(this));
 		senses.add(new IaSSenseVision(this, 32.0F));
 
@@ -124,7 +125,7 @@ IIaSMobGetters {
 		this.tasks.addTask(4, new EntityAINyxSearch(this));
 		this.tasks.addTask(5, new EntityAIWander(this,
 				EntityNyxSkeleton.moveSpeed));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this,
+		this.tasks.addTask(6, new EntityAINyxWatchClosest(this,
 				EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));

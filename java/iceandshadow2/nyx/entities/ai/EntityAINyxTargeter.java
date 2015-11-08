@@ -68,7 +68,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		final double d0 = ((IIaSSensate) this.taskOwner).getSense().getRange();
 		final List<Entity> list = this.taskOwner.worldObj
 				.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
-						this.taskOwner.boundingBox.expand(d0, d0 / 2.0, d0));
+						this.taskOwner.boundingBox.expand(d0, d0, d0));
 
 		if (list.isEmpty())
 			return false;

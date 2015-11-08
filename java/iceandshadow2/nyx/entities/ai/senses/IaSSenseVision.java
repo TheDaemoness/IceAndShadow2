@@ -44,16 +44,19 @@ public class IaSSenseVision extends IaSSense {
 				owner.canEntityBeSeen(ent);
 		}
 
-		double xdif = ent.posX - owner.posX;
+		final double xdif = ent.posX - owner.posX;
 		final double zdif = ent.posZ - owner.posZ;
+		double ratio;
+		
+		if(2*Math.sqrt(xdif*xdif+zdif*zdif) < (ent.posY-owner.posY))
+			return false;
 
 		if (xdif == 0.0)
-			xdif += 0.0001;
+			ratio = zdif/xdif;
+		else
+			ratio = 0;
 
-		double ang = Math.atan(zdif / xdif);
-
-		ang *= 180.0 / Math.PI;
-
+		double ang = Math.atan(ratio) * 180.0 / Math.PI;
 		if (xdif < 0)
 			ang += 180.0;
 		else if (zdif < 0)
@@ -63,7 +66,7 @@ public class IaSSenseVision extends IaSSense {
 		// looks directly at the
 		// player, this will be 90.
 
-		delta = delta % 360;
+		delta %= 360;
 		if (delta > 180)
 			return false;
 

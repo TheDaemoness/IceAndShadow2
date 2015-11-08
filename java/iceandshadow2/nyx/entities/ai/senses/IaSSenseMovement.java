@@ -11,16 +11,8 @@ public class IaSSenseMovement extends IaSSense {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		if (ent.isAirBorne || ent.isSneaking() || ent.posX == ent.prevPosX
-				&& ent.posZ == ent.prevPosZ && !ent.isInWater())
-			return false;
-		return this.isInRange(ent);
-	}
-
-	@Override
-	public boolean isInRange(Entity ent) {
-		double range = this.getRange();
-		range *= ent.isSprinting() ? 2.0 : 1.0;
-		return owner.getDistanceSqToEntity(ent) < range * range;
+		if(ent.isSprinting() || ent.fallDistance > 3.25F)
+			return this.isInRange(ent);
+		return false;
 	}
 }

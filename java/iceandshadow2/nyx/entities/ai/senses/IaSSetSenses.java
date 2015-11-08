@@ -15,7 +15,6 @@ public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 	public IaSSetSenses(EntityLivingBase elb) {
 		super(elb, 0.0);
 		senses = new ArrayList<IaSSense>();
-		this.dist = 0.0;
 	}
 
 	@Override
