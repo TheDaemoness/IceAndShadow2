@@ -53,8 +53,8 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		this.targetTasks.taskEntries.clear();
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityNyxSkeleton.class, 1.0D, true));
 		this.tasks.addTask(5, new EntityAIFleeSun(this,
 				EntityNyxGhoul.moveSpeed + 0.5));
