@@ -61,6 +61,13 @@ public class NyxEntities {
 		
 		EntityRegistry.registerModEntity(EntityCosmeticShadowRiser.class,
 				"nyxCosmeticShadowRiser", 9, owner, 40, 1, true);
+		
+		EntityRegistry.registerModEntity(EntityWightTeleport.class,
+				"nyxProjectileWightTeleport", 10, owner, 80, 2, true);
+		
+		EntityRegistry.registerModEntity(EntityNyxWightToxic.class,
+				"nyxMobWightToxic", 11, owner, 60, 1, true);
+		registerEntityEgg(EntityNyxWightToxic.class, 0x004400, 0xaaffaa);
 	}
 
 	@SuppressWarnings("unchecked")

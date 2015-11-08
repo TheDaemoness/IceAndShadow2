@@ -19,7 +19,7 @@ public class NyxItems {
 	boneCursed, boneSanctified, heat, alabaster,
 	vineBundle, bread, cookie, icicle, page, rope, 
 	kitTightrope, echirShears, crystalVial, extractorPoison,
-	magicRepo;
+	magicRepo, toxicCore;
 
 	public static void init() {
 		teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal")
@@ -94,5 +94,7 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
+		toxicCore = new NyxItemToxicCore("ToxicCore").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 	}
 }
