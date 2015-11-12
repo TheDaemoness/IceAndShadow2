@@ -56,7 +56,7 @@ public class EntityWightTeleport extends EntityThrowable {
 	 */
 	@Override
 	protected float getGravityVelocity() {
-		return 0.01F;
+		return 0.02F;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EntityWightTeleport extends EntityThrowable {
 			this.setDead();
 		} else if (pom.typeOfHit == MovingObjectType.ENTITY) {
 			this.motionX *= 0.1;
-			this.motionY = -0.2;
+			this.motionY = -0.3;
 			this.motionZ *= 0.1;
 		}
 	}

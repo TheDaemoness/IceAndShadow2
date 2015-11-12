@@ -68,6 +68,9 @@ public class NyxEntities {
 		EntityRegistry.registerModEntity(EntityNyxWightToxic.class,
 				"nyxMobWightToxic", 11, owner, 60, 1, true);
 		registerEntityEgg(EntityNyxWightToxic.class, 0x004400, 0xaaffaa);
+		
+		EntityRegistry.registerModEntity(EntityPoisonBall.class,
+				"nyxProjectilePoisonBall", 12, owner, 40, 2, true);
 	}
 
 	@SuppressWarnings("unchecked")

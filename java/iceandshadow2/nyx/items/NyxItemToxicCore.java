@@ -6,6 +6,7 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -81,7 +82,7 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
 			EntityPlayer player) {
 		if (!par2World.isRemote)
-			par2World.spawnEntityInWorld(new EntityWightTeleport(par2World,
+			par2World.spawnEntityInWorld(new EntityPoisonBall(par2World,
 					player));
 		if (!player.capabilities.isCreativeMode) {
 			par1Stack.stackSize -= 1;

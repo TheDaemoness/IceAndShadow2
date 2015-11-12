@@ -33,6 +33,8 @@ public class IaSRenderers {
 				new RenderNyxSpider());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxGhoul.class,
 				new RenderNyxGhoul());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class,
+				new RenderNyxWightToxic());
 
 		// Projectiles.
 		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class,
@@ -43,10 +45,14 @@ public class IaSRenderers {
 				EntityThrowingKnife.class, new RenderThrowingKnife());
 		RenderingRegistry.registerEntityRenderingHandler(
 				EntityCosmeticShadowRiser.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityPoisonBall.class, new RenderNot());
 
 		// Technical entities.
 		RenderingRegistry.registerEntityRenderingHandler(
 				EntityTransmutationCountdown.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityWightTeleport.class, new RenderNot());
 
 		// Items
 		for (final Field f : NyxItems.class.getFields()) {
