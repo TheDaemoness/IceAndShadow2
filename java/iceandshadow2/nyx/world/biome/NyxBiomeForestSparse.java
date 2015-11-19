@@ -3,11 +3,13 @@ package iceandshadow2.nyx.world.biome;
 import java.util.Random;
 
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestSparse extends NyxBiome {
@@ -16,6 +18,9 @@ public class NyxBiomeForestSparse extends NyxBiome {
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		this.setBlocks(Blocks.snow, NyxBlocks.permafrost);
+		
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class,
+				40, 1,1));
 	}
 
 	@Override

@@ -45,8 +45,6 @@ public class NyxBiome extends BiomeGenBase {
 		doGenUnstableIce = true;
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				40, 2, 3));
 		this.spawnableMonsterList.add(new SpawnListEntry(
 				EntityNyxSkeleton.class, 40, 1, 2));
 
