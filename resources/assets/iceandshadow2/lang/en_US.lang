@@ -103,6 +103,8 @@ item.iasArmorEchir0Active.name=Primed Echir Helmet
 item.iasArmorEchir1Active.name=Primed Echir Chestplate
 item.iasArmorEchir2Active.name=Primed Echir Greaves
 item.iasArmorEchir3Active.name=Primed Echir Boots
+item.nyxToxicCore0.name=Toxic Core
+item.nyxToxicCore1.name=Toxic Drop
 
 tile.nyxStone.name=Nyxian Stone
 tile.nyxCryingObsidian.name=Crying Obsidian
@@ -170,3 +172,4 @@ entity.IceAndShadow2.nyxMobWhiteGhoul.name=White Ghoul
 entity.IceAndShadow2.nyxProjectileIceArrow.name=Ice Arrow
 entity.IceAndShadow2.nyxProjectileShadowBall.name=Shadow Ball
 entity.IceAndShadow2.nyxMobWitheredNecromancer.name=Withered Necromancer
+entity.IceAndShadow2.nyxMobWightToxic.name=Toxic Wight
