@@ -164,14 +164,14 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 		final int baite = this.rand.nextInt(6 + par2) - par2;
 		if (baite <= 0)
-			this.dropItem(Items.ender_pearl, 1);
+			this.dropItem(NyxItems.toxicCore, 1);
 
-		 this.dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
+		this.dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
 	}
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		this.dropItem(NyxItems.toxicCore,1);
+		this.dropItem(Items.ender_pearl,2+this.rand.nextInt(2));
 	}
 
 	@Override
@@ -244,7 +244,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		this.motionY = Math.max(-0.2, this.motionY);
+		this.motionY = Math.max(-0.3, this.motionY);
 		boolean attacking = this.getAttackTarget() != null;
 		if (--regenDelay <= 0) {
 			if(IaSWorldHelper.getDifficulty(this.worldObj) <= 1) {

@@ -29,11 +29,12 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 		super(EnumIaSModule.NYX, texName, 2);
 		this.setMaxStackSize(16);
 		this.setFull3D();
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 9, 1),
 				new ItemStack(this, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
+				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
 	}
 
 	@Override
@@ -81,13 +82,10 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
 			EntityPlayer player) {
-		if (!par2World.isRemote)
+		if (!par2World.isRemote && par1Stack.getItemDamage() == 1) {
 			par2World.spawnEntityInWorld(new EntityPoisonBall(par2World,
 					player));
-		if (!player.capabilities.isCreativeMode) {
 			par1Stack.stackSize -= 1;
-			player.attackEntityFrom(DamageSource.magic,
-					Math.max(0, player.worldObj.difficultySetting.getDifficultyId()-1));
 		}
 		return par1Stack;
 	}

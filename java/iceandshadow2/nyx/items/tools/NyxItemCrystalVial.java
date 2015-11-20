@@ -44,7 +44,7 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 		if(target.getItem() != this)
 			return 0;
 		if(target.getItemDamage() == 1) {
-			if(catalyst.getItem() == NyxItems.poisonFruit && catalyst.stackSize >= 2)
+			if(catalyst.getItem() == NyxItems.toxicCore && catalyst.getItemDamage() == 0)
 				return 160;
 		}
 		return 0;
@@ -55,9 +55,9 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 			ItemStack catalyst, World world) {
 		List<ItemStack> li = null;
 		--target.stackSize;
-		if(catalyst.getItem() == NyxItems.poisonFruit) {
+		if(catalyst.getItem() == NyxItems.toxicCore) {
 			li = new ArrayList<ItemStack>();
-			catalyst.stackSize -= 2;
+			catalyst.stackSize -= 1;
 			li.add(new ItemStack(NyxItems.extractorPoison));
 		}
 		return li;
