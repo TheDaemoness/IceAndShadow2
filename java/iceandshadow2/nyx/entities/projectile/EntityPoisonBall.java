@@ -2,6 +2,7 @@ package iceandshadow2.nyx.entities.projectile;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSWorldHelper;
 
@@ -78,18 +79,25 @@ public class EntityPoisonBall extends EntityThrowable {
 			}
 			if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase) {
 				EntityLivingBase victim = (EntityLivingBase)(par1MovingObjectPosition.entityHit);
-				if(this.getThrower() != null)
-					victim.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.getThrower(), victim), 1);
-				else
-					victim.attackEntityFrom(DamageSource.magic, 1);
-				if(victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && this.getThrower() instanceof EntityPlayer)
+				if(victim instanceof EntityNyxSpider) {
+					victim.attackEntityFrom(DamageSource.wither, 11);
+					victim.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,165,3));
 					victim.addPotionEffect(new PotionEffect(Potion.wither.id,
-						165,1));
-				else
-					victim.addPotionEffect(new PotionEffect(Potion.poison.id,
-						75+IaSWorldHelper.getDifficulty(worldObj)*30,0));
+							165,1));
+				} else {
+					if(this.getThrower() != null)
+						victim.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.getThrower(), victim), 1);
+					else
+						victim.attackEntityFrom(DamageSource.magic, 1);
+					if(victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+						victim.addPotionEffect(new PotionEffect(Potion.wither.id,
+								165,1));
+					else
+						victim.addPotionEffect(new PotionEffect(Potion.poison.id,
+								75+IaSWorldHelper.getDifficulty(worldObj)*30,0));
+				}
 			}
-		
+
 		}
 		this.setDead();
 	}

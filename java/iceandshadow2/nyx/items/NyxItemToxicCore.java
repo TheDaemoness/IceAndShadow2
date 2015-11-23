@@ -27,14 +27,13 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 	
 	public NyxItemToxicCore(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(4);
 		this.setFull3D();
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 9, 1),
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
 				new ItemStack(this, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
 				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
+				new ItemStack(this, 1, 1));
 	}
 
 	@Override
