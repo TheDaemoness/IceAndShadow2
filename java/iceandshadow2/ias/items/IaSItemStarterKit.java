@@ -18,23 +18,23 @@ import net.minecraft.world.World;
 public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathRuin {
 
 	public static IaSItemStarterKit instance;
-	
+
 	public static void init() {
-		instance = new IaSItemStarterKit("StarterKit");
+		IaSItemStarterKit.instance = new IaSItemStarterKit("StarterKit");
 	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
 		return EnumRarity.uncommon;
 	}
-	
+
 	public IaSItemStarterKit(String texName) {
 		super(EnumIaSModule.IAS, texName);
-		this.setMaxStackSize(1);
-		this.register();
-		this.setCreativeTab(IaSCreativeTabs.misc);
+		setMaxStackSize(1);
+		register();
+		setCreativeTab(IaSCreativeTabs.misc);
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_,
 			List l, boolean p_77624_4_) {
@@ -79,6 +79,6 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 		return is;
 	}
 
-	
+
 
 }

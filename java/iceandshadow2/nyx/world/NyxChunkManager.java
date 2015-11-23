@@ -27,10 +27,10 @@ public class NyxChunkManager extends WorldChunkManager {
 
 	public NyxChunkManager(BiomeGenBase[] biomesToGen, GenLayer genBiomes,
 			GenLayer biomeIndexLayer, World par1World) {
-		biomeGenList = new BiomeGenBase[256];
+		this.biomeGenList = new BiomeGenBase[256];
 
 		for (int i = 0; i < biomesToGen.length; ++i)
-			biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
+			this.biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
 
 		this.genBiomes = genBiomes;
 		this.biomeIndexLayer = biomeIndexLayer;
@@ -197,7 +197,7 @@ public class NyxChunkManager extends WorldChunkManager {
 		final int[] var6 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7) {
-			float var8 = biomeGenList[var6[var7]].getIntRainfall() / 65536.0F;
+			float var8 = this.biomeGenList[var6[var7]].getIntRainfall() / 65536.0F;
 
 			if (var8 > 1.0F) {
 				var8 = 1.0F;

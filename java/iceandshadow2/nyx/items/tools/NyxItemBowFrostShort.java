@@ -12,24 +12,25 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName,
 IIaSGlowing, IIaSEntityWeaponRanged {
-	
+
 	public NyxItemBowFrostShort(String par1) {
 		super(par1);
-		this.setMaxDamage(384);
+		setMaxDamage(384);
 	}
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		final int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
-		inuse = false;
+		final int var6 = getMaxItemUseDuration(par1ItemStack) - par4;
+		this.inuse = false;
 
-		float var7 = var6 / (20.0F-this.getSpeedModifier(par1ItemStack));
+		float var7 = var6 / (20.0F-getSpeedModifier(par1ItemStack));
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
 		if (var7 < 0.6D)
@@ -54,7 +55,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);
 
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F
-				/ (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
+				/ (Item.itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
 		if (!par2World.isRemote) {
 			par2World.spawnEntityInWorld(var8);
@@ -63,13 +64,13 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 20-this.getSpeedModifier(par1ItemStack);
+		return 20-getSpeedModifier(par1ItemStack);
 	}
 
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		this.onPlayerStoppedUsing(par1ItemStack, par2World, par3EntityPlayer, 0);
+		onPlayerStoppedUsing(par1ItemStack, par2World, par3EntityPlayer, 0);
 		return par1ItemStack;
 	}
 
@@ -98,7 +99,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 		final int slowtime = IaSWorldHelper.getDifficulty(user.worldObj) * 15;
 		final int slowstr = IaSWorldHelper.getDifficulty(user.worldObj) - 1;
 		final int dif = IaSWorldHelper.getDifficulty(user.worldObj);
-		EntityIceArrow arrow = new EntityIceArrow(user.worldObj, user, target,
+		final EntityIceArrow arrow = new EntityIceArrow(user.worldObj, user, target,
 					1.8F, 5.0F, slowstr, slowtime);
 		int power = EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.power.effectId, user.getHeldItem());

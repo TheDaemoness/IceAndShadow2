@@ -37,15 +37,15 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return smallIcon;
+			return this.smallIcon;
 		return this.itemIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.smallIcon = reg.registerIcon(this.getTexName() + "Small");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.smallIcon = reg.registerIcon(getTexName() + "Small");
 	}
 
 	@Override

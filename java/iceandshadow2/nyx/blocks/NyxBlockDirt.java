@@ -18,19 +18,19 @@ import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.world.NyxChunkManager;
 
 public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable {
-	
+
 	public static float HARDNESS = 0.5F;
 	public static float RESISTANCE = 1.0F;
 
 	public NyxBlockDirt(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.ground, 2);
-		this.setHardness(HARDNESS);
-		this.setResistance(RESISTANCE);
+		setHardness(NyxBlockDirt.HARDNESS);
+		setResistance(NyxBlockDirt.RESISTANCE);
 		this.setHarvestLevel("spade", 0);
-		this.setStepSound(soundTypeGravel);
-		this.setTickRandomly(true);
+		setStepSound(Block.soundTypeGravel);
+		setTickRandomly(true);
 	}
-	
+
 	@Override
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z,
 			ForgeDirection direction, IPlantable plantable) {
@@ -39,14 +39,14 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		int meta = w.getBlockMetadata(x,y,z);
+		final int meta = w.getBlockMetadata(x,y,z);
 		if(meta == 1)
 			return;
 		if(!(w.getWorldChunkManager() instanceof NyxChunkManager)) {
 			w.setBlock(x, y, z, Blocks.dirt, 1, 0x3);
 			return;
 		}
-		Block bl = w.getBlock(x, y+1, z);
+		final Block bl = w.getBlock(x, y+1, z);
 		if(bl instanceof IGrowable)
 			((IGrowable)bl).func_149853_b(w, r, x, y+1, z);
 		else

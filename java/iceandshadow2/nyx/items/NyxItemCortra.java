@@ -20,7 +20,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon crystalIcon;
-	
+
 	public NyxItemCortra(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
@@ -31,20 +31,20 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return crystalIcon;
+			return this.crystalIcon;
 		return this.itemIcon;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName() + "Dust");
-		this.crystalIcon = reg.registerIcon(this.getTexName() + "Crystal");
+		this.itemIcon = reg.registerIcon(getTexName() + "Dust");
+		this.crystalIcon = reg.registerIcon(getTexName() + "Crystal");
 	}
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || 
+		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 ||
 				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
 			return 0;
 		return 120;
@@ -53,7 +53,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		List<ItemStack> it = new ArrayList<ItemStack>();
+		final List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
 		it.add(new ItemStack(NyxItems.cortraIngot,Math.min(2, target.stackSize),1));
 		target.stackSize -= Math.min(2, target.stackSize);

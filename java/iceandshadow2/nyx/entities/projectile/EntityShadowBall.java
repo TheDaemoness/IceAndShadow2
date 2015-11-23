@@ -10,7 +10,6 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,27 +23,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityShadowBall extends EntityThrowable {
 
 	public boolean isStrong() {
-		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
 	}
 
 	public boolean isUndeadHarming() {
-		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
 	}
 
 	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().updateObject(16,
+		getDataWatcher().updateObject(16,
 				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 		return this;
 	}
 
 	private void initFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().addObject(16,
+		getDataWatcher().addObject(16,
 				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 	}
 
 	public EntityShadowBall(World par1World) {
 		super(par1World);
-		this.getDataWatcher().addObject(16, (byte) (0));
+		getDataWatcher().addObject(16, (byte) (0));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -102,8 +101,8 @@ public class EntityShadowBall extends EntityThrowable {
 			if (this.worldObj.isRemote)
 				return;
 			if (par1MovingObjectPosition.entityHit instanceof EntityNyxSkeleton
-					&& this.getThrower() instanceof EntityNyxNecromancer) {
-				if(isUndeadHarming() && !this.getThrower().isDead && getThrower().getHealth() >= 1)
+					&& getThrower() instanceof EntityNyxNecromancer) {
+				if(isUndeadHarming() && !getThrower().isDead && getThrower().getHealth() >= 1)
 					par1MovingObjectPosition.entityHit.attackEntityFrom(
 						DamageSource.causeIndirectMagicDamage(
 								par1MovingObjectPosition.entityHit, getThrower()), 666);
@@ -121,13 +120,13 @@ public class EntityShadowBall extends EntityThrowable {
 				final Iterator iterator = list1.iterator();
 
 				while (iterator.hasNext()) {
-					EntityLivingBase elmo = (EntityLivingBase) iterator.next();
-					float d0 = (float) this.getDistanceSqToEntity(elmo);
+					final EntityLivingBase elmo = (EntityLivingBase) iterator.next();
+					final float d0 = (float) getDistanceSqToEntity(elmo);
 
 					if (d0 < 16.0D) {
-						float d1 = 1.0F - d0 * d0 / 512.0F;
+						final float d1 = 1.0F - d0 * d0 / 512.0F;
 
-						float power = basepower * d1 + basepower;
+						final float power = basepower * d1 + basepower;
 
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 39, 0));
@@ -135,7 +134,7 @@ public class EntityShadowBall extends EntityThrowable {
 						if (!isUndeadHarming()
 								&& elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							elmo.heal(power);
-						else if (this.getThrower() != null && elmo.getEntityId() == this.getThrower().getEntityId()) {
+						else if (getThrower() != null && elmo.getEntityId() == getThrower().getEntityId()) {
 							if (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 								elmo.heal(power);
 							else
@@ -144,15 +143,15 @@ public class EntityShadowBall extends EntityThrowable {
 						} else
 							elmo.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(elmo,
-											this.getThrower() == null ? this
-													: this.getThrower()),
+											getThrower() == null ? this
+													: getThrower()),
 									power
 											* (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? 3.0F
 													: 1.0F));
 						elmo.addPotionEffect(new PotionEffect(
 								Potion.blindness.id, 69, 1));
-						if(this.getThrower() != null)
-							this.getThrower().heal(
+						if(getThrower() != null)
+							getThrower().heal(
 								power / Math.min(1 + list1.size(), 4));
 					}
 				}
@@ -171,13 +170,13 @@ public class EntityShadowBall extends EntityThrowable {
 					* this.rand.nextDouble(), 0.0, -0.01, 0.0, false, false);
 		}
 
-		this.setDead();
+		setDead();
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
+		final String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
 				this.posZ, true);
 		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX,

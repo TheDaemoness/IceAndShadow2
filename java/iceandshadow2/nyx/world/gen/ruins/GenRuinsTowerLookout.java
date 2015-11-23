@@ -194,7 +194,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 			// Long bow
 			else if (rewardid < 5 && rareflag) {
-				NBTTagCompound c = new NBTTagCompound();
+				final NBTTagCompound c = new NBTTagCompound();
 				if(var2.nextInt(3) == 0)
 					itemz = new ItemStack(NyxItems.frostBowShort, 1,
 							48 + var2.nextInt(96));

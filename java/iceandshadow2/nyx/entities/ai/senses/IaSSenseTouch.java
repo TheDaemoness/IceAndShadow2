@@ -11,7 +11,7 @@ public class IaSSenseTouch extends IaSSense {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		return this.isInRange(ent);
+		return isInRange(ent);
 	}
 
 }

@@ -19,10 +19,10 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 
 	public NyxBlockBrickPale(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(NyxBlockStone.RESISTANCE);
-		this.setHardness(NyxBlockStone.HARDNESS);
+		setResistance(NyxBlockStone.RESISTANCE);
+		setHardness(NyxBlockStone.HARDNESS);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLuminescence(0.3F);
+		setLuminescence(0.3F);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 			int par2, int par3, int par4) {
 		final float var5 = 0.0125F;
 		return AxisAlignedBB.getBoundingBox(
-				par2, par3 + var5, par4, 
+				par2, par3 + var5, par4,
 				par2 + 1, par3 + 1 - var5, par4 + 1);
 	}
 

@@ -52,14 +52,14 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		super(w);
 		this.origin = new ItemStack(IaSTools.knife);
 		this.renderDistanceWeight = 10.0D;
-		this.setSize(0.5F, 0.5F);
+		setSize(0.5F, 0.5F);
 		this.yOffset = 0.0F;
 	}
 
 	public EntityThrowingKnife(World w, double x, double y, double z,
 			ItemStack is) {
 		this(w, is);
-		this.setPosition(x, y, z);
+		setPosition(x, y, z);
 	}
 
 	public EntityThrowingKnife(World w, EntityLivingBase shooter,
@@ -80,10 +80,10 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			final float var15 = (float) -(Math.atan2(var8, var12) * 180.0D / Math.PI);
 			final double var16 = var6 / var12;
 			final double var18 = var10 / var12;
-			this.setLocationAndAngles(shooter.posX + var16, this.posY,
+			setLocationAndAngles(shooter.posX + var16, this.posY,
 					shooter.posZ + var18, var14, var15);
 			final float var20 = (float) var12 * 0.2F;
-			this.setThrowableHeading(var6, var8 + var20, var10, vel, acc);
+			setThrowableHeading(var6, var8 + var20, var10, vel, acc);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			ItemStack is) {
 		this(w, is);
 		this.shootingEntity = shooter;
-		this.setLocationAndAngles(shooter.posX,
+		setLocationAndAngles(shooter.posX,
 				shooter.posY + shooter.getEyeHeight(), shooter.posZ,
 				shooter.rotationYaw, shooter.rotationPitch);
 		this.posX -= MathHelper
@@ -99,7 +99,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= MathHelper
 				.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
-		this.setPosition(this.posX, this.posY, this.posZ);
+		setPosition(this.posX, this.posY, this.posZ);
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F
 				* (float) Math.PI)
 				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
@@ -108,7 +108,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F
 				* (float) Math.PI);
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ,
+		setThrowableHeading(this.motionX, this.motionY, this.motionZ,
 				vel * 1.5F, 1.0F);
 	}
 
@@ -151,7 +151,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 
 	@Override
 	public ItemStack getItemStack() {
-		final ItemStack nis = origin.copy();
+		final ItemStack nis = this.origin.copy();
 		nis.stackSize = 1;
 		return nis;
 	}
@@ -211,7 +211,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this,
 						new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
 					doDrop(mat);
-				this.setDead();
+				setDead();
 			}
 		}
 
@@ -360,7 +360,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 					if (!(var4.entityHit instanceof EntityEnderman)) {
 						if (drop)
 							doDrop(mat);
-						this.setDead();
+						setDead();
 					}
 
 				}
@@ -403,7 +403,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 									this.zTile)))
 						doDrop(mat);
 
-					this.setDead();
+					setDead();
 				}
 			}
 		}
@@ -439,7 +439,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		float var22 = 0.99F;
 		var11 = 0.05F;
 
-		if (this.isInWater()) {
+		if (isInWater()) {
 			for (int var25 = 0; var25 < 6; ++var25) {
 				var26 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX
@@ -455,7 +455,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		this.motionY *= var22;
 		this.motionZ *= var22;
 		this.motionY -= var11;
-		this.setPosition(this.posX, this.posY, this.posZ);
+		setPosition(this.posX, this.posY, this.posZ);
 	}
 
 	@Override
@@ -477,15 +477,15 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double par1, double par3, double par5,
 			float par7, float par8, int par9) {
-		this.setPosition(par1, par3, par5);
-		this.setRotation(par7, par8);
+		setPosition(par1, par3, par5);
+		setRotation(par7, par8);
 	}
 
 	@Override
 	public void setSource(ItemStack is) {
 		this.dataWatcher.updateObject(16, IaSToolMaterial.extractMaterial(is)
 				.getMaterialName());
-		origin = is.copy();
+		this.origin = is.copy();
 	}
 
 	@Override
@@ -531,7 +531,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 					par3, var7) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
-			this.setLocationAndAngles(this.posX, this.posY, this.posZ,
+			setLocationAndAngles(this.posX, this.posY, this.posZ,
 					this.rotationYaw, this.rotationPitch);
 		}
 	}

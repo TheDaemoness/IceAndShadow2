@@ -31,7 +31,7 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(catalyst.getItem() != NyxItems.resin)
 			return 0;
-		final int time = getTime(target);
+		final int time = IaSHandlerTransmutationHeat.getTime(target);
 		if(time < 200)
 			return 0;
 		return (int)Math.sqrt(time)*Math.max(4, target.stackSize);
@@ -40,10 +40,10 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		ArrayList<ItemStack> is = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if(target.getItem() == Items.lava_bucket)
 			is.add(new ItemStack(Items.bucket,1));
-		final int timeInit = getTime(target);
+		final int timeInit = IaSHandlerTransmutationHeat.getTime(target);
 		int resinCredit = 0;
 		for(int i = 0; i < 4 && target.stackSize > 0; ++i) {
 			int time = timeInit;

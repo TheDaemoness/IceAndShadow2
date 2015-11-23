@@ -12,6 +12,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,12 +28,12 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 
 	public NyxBlockSilkBerryPod(String par1) {
 		super();
-		this.setLightLevel(0.2F);
-		this.setResistance(0.5F);
-		this.setHardness(0.1F);
-		this.setStepSound(soundTypeCloth);
-		this.setBlockName("nyx" + par1);
-		this.setBlockTextureName(this.getTexName());
+		setLightLevel(0.2F);
+		setResistance(0.5F);
+		setHardness(0.1F);
+		setStepSound(Block.soundTypeCloth);
+		setBlockName("nyx" + par1);
+		setBlockTextureName(getTexName());
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	 */
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
-		final int l = getDirection(par1World.getBlockMetadata(par2, par3, par4));
+		final int l = BlockDirectional.getDirection(par1World.getBlockMetadata(par2, par3, par4));
 		par2 += Direction.offsetX[l];
 		par4 += Direction.offsetZ[l];
 		final Block i1 = par1World.getBlock(par2, par3, par4);
@@ -68,8 +69,8 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int p_149690_5_, int fortune) {
-		ArrayList<ItemStack> dropped = new ArrayList<ItemStack>();
-		int j1 = func_149987_c(p_149690_5_);
+		final ArrayList<ItemStack> dropped = new ArrayList<ItemStack>();
+		final int j1 = BlockCocoa.func_149987_c(p_149690_5_);
 		byte b0 = 0;
 
 		if (j1 >= 2) {
@@ -107,7 +108,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	public void registerBlockIcons(IIconRegister reg) {
 		this.icons = new IIcon[3];
 		for (int i = 0; i < 3; ++i)
-			this.icons[i] = reg.registerIcon(this.getTexName() + (i + 1));
+			this.icons[i] = reg.registerIcon(getTexName() + (i + 1));
 		this.blockIcon = this.icons[2];
 	}
 

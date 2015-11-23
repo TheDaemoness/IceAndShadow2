@@ -16,7 +16,7 @@ public class NyxItemRope extends IaSBaseItemSingle {
 
 	public NyxItemRope(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(4);
+		setMaxStackSize(4);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class NyxItemRope extends IaSBaseItemSingle {
 			w.func_147480_a(x, y - 2, z, true);
 			w.setBlock(x, y - 2, z, NyxBlocks.ropeY);
 			y -= 3;
-			for (final int e = Math.max(0, y-LENGTH_MAX); y > e; --y) {
+			for (final int e = Math.max(0, y-NyxItemRope.LENGTH_MAX); y > e; --y) {
 				final Block bl = w.getBlock(x, y, z);
 				if (!IaSBlockHelper.isAir(bl)) {
 					if (IaSBlockHelper.isFluid(bl))

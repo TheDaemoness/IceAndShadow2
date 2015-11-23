@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.entities.mobs;
 
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.util.IaSEntityHelper;
@@ -25,9 +24,9 @@ public class EntityNyxSpider extends EntitySpider {
 
 	public EntityNyxSpider(World par1World) {
 		super(par1World);
-		this.setSize(0.7F, 0.5F);
+		setSize(0.7F, 0.5F);
 		this.experienceValue = 4;
-		this.setInvisible(true);
+		setInvisible(true);
 	}
 
 	// To protect against reward hijacking with splash potions.
@@ -41,19 +40,19 @@ public class EntityNyxSpider extends EntitySpider {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+		getEntityAttribute(SharedMonsterAttributes.maxHealth)
 		.setBaseValue(getScaledMaxHealth());
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
 		.setBaseValue(1.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 		.setBaseValue(0.75D);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		this.setInvisible(false);
+		setInvisible(false);
 
-		final float dmg = (IaSWorldHelper.getDifficulty(worldObj)>=3?2:1)
+		final float dmg = (IaSWorldHelper.getDifficulty(this.worldObj)>=3?2:1)
 				+ IaSWorldHelper.getRegionArmorMod(this);
 
 		final DamageSource dmgsrc = DamageSource.causeMobDamage(this);
@@ -65,7 +64,7 @@ public class EntityNyxSpider extends EntitySpider {
 				final int lvl = IaSWorldHelper.getDifficulty(this.worldObj) - 1;
 				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 225
 						: 275;
-				EntityLivingBase elb = (EntityLivingBase) par1Entity;
+				final EntityLivingBase elb = (EntityLivingBase) par1Entity;
 				final boolean hometurf = IaSEntityHelper.getBiome(elb) == NyxBiomes.nyxInfested;
 				if(!elb.isPotionActive(Potion.poison))
 					mod /= 2;
@@ -86,7 +85,7 @@ public class EntityNyxSpider extends EntitySpider {
 		this.worldObj
 		.playSoundAtEntity(this,
 				"IceAndShadow2:mob_nyxwisp_materialize",
-				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F, 
+				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F,
 				this.rand.nextFloat() * 0.2F + 0.9F);
 	}
 
@@ -100,22 +99,22 @@ public class EntityNyxSpider extends EntitySpider {
 		if (!par1)
 			return;
 
-		if (this.isInvisible())
-			this.dropItem(Items.experience_bottle,
+		if (isInvisible())
+			dropItem(Items.experience_bottle,
 					1 + this.rand.nextInt(2 + par2));
 
 		final int baite = this.rand.nextInt(6 + par2) - par2;
 		if (baite <= 0)
-			this.dropItem(NyxItems.toughGossamer, 1);
+			dropItem(NyxItems.toughGossamer, 1);
 
 		 if(this.rand.nextInt(5) < 2+this.worldObj.difficultySetting.getDifficultyId())
-			 this.dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
+			 dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
 	}
 
 	@Override
 	protected void dropRareDrop(int par1) {
 		if (this.rand.nextBoolean())
-			this.dropItem(NyxItems.exousium, 1);
+			dropItem(NyxItems.exousium, 1);
 	}
 
 	@Override
@@ -130,21 +129,21 @@ public class EntityNyxSpider extends EntitySpider {
 				.getClosestVulnerablePlayerToEntity(this, range);
 
 		if (plai != null && !plai.isInvisible()) {
-			if (this.isInvisible()) {
+			if (isInvisible()) {
 				doUncloakSound();
-				this.setInvisible(false);
+				setInvisible(false);
 			}
 			return plai;
-		} else if (!this.isInvisible())
-			this.setInvisible(true);
+		} else if (!isInvisible())
+			setInvisible(true);
 		return null;
 	}
 
 	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_,
 			int p_145780_3_, Block p_145780_4_) {
-		if (!this.isInvisible())
-			this.playSound("mob.spider.step", 0.15F, 1.0F);
+		if (!isInvisible())
+			playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	public float getAttackStrength(Entity par1Entity) {
@@ -153,9 +152,9 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	public float getBlockPathWeight(int i, int j, int k) {
-		if (this.getAttackTarget() != null)
+		if (getAttackTarget() != null)
 			return 1;
-		final int lightb = worldObj.getBlockLightValue(i, j, k);
+		final int lightb = this.worldObj.getBlockLightValue(i, j, k);
 		return lightb > 7 ? 0 : 1;
 	}
 
@@ -172,7 +171,7 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		int wl = IaSWorldHelper.getRegionLevel(this);
+		final int wl = IaSWorldHelper.getRegionLevel(this);
 		if(wl < 1)
 			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
@@ -188,7 +187,7 @@ public class EntityNyxSpider extends EntitySpider {
 	 */
 	@Override
 	protected String getDeathSound() {
-		if (this.isInvisible())
+		if (isInvisible())
 			return null;
 		return "mob.spider.death";
 	}
@@ -198,7 +197,7 @@ public class EntityNyxSpider extends EntitySpider {
 	 */
 	@Override
 	protected String getHurtSound() {
-		if (this.isInvisible())
+		if (isInvisible())
 			return null;
 		return "mob.spider.say";
 	}
@@ -242,9 +241,9 @@ public class EntityNyxSpider extends EntitySpider {
 	@Override
 	public void setRevengeTarget(EntityLivingBase elb) {
 		super.setRevengeTarget(elb);
-		if (this.isInvisible()) {
+		if (isInvisible() && getAttackTarget() != null) {
 			doUncloakSound();
-			this.setInvisible(false);
+			setInvisible(false);
 		}
 	}
 }

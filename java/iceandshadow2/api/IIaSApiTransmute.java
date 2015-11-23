@@ -22,7 +22,7 @@ public interface IIaSApiTransmute {
 	 * Gets the time to perform a transmuation, in ticks (1/20 of a second).
 	 * Also called to check if this handler can perform a transmutation. This
 	 * handler should not change the item stacks in any way.
-	 * 
+	 *
 	 * @param target
 	 *            The item stack being transmuted (on the altar).
 	 * @param catalyst
@@ -38,7 +38,7 @@ public interface IIaSApiTransmute {
 	/**
 	 * Used to handle a transmutation in a transmutation altar on Nyx. This
 	 * function is responsible for reducing the sizes of the item stacks.
-	 * 
+	 *
 	 * @param target
 	 *            The item stack being transmuted (on the altar).
 	 * @param catalyst
@@ -57,7 +57,7 @@ public interface IIaSApiTransmute {
 	 * altar already spawns "item-breaking particles". This is for additional
 	 * particles. Please do not fully disable the particles. They are the
 	 * primary indication of transmutation happening.
-	 * 
+	 *
 	 * @param target
 	 *            The item stack being transmuted (on the altar).
 	 * @param catalyst

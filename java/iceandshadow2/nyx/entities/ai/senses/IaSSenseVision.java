@@ -33,22 +33,22 @@ public class IaSSenseVision extends IaSSense {
 	@Override
 	public boolean canSense(Entity ent) {
 
-		if (!this.isInRange(ent))
+		if (!isInRange(ent))
 			return false;
 
-		if (isTargetInvisible(ent))
+		if (IaSSenseVision.isTargetInvisible(ent))
 			return false;
 
-		if (owner instanceof EntityMob) {
-			if (((EntityMob) owner).getAttackTarget() == ent)
-				owner.canEntityBeSeen(ent);
+		if (this.owner instanceof EntityMob) {
+			if (((EntityMob) this.owner).getAttackTarget() == ent)
+				this.owner.canEntityBeSeen(ent);
 		}
 
-		final double xdif = ent.posX - owner.posX;
-		final double zdif = ent.posZ - owner.posZ;
+		final double xdif = ent.posX - this.owner.posX;
+		final double zdif = ent.posZ - this.owner.posZ;
 		double ratio;
-		
-		if(2*Math.sqrt(xdif*xdif+zdif*zdif) < (ent.posY-owner.posY))
+
+		if(2*Math.sqrt(xdif*xdif+zdif*zdif) < (ent.posY-this.owner.posY))
 			return false;
 
 		if (xdif == 0.0)
@@ -62,7 +62,7 @@ public class IaSSenseVision extends IaSSense {
 		else if (zdif < 0)
 			ang += 360.0;
 
-		double delta = ang - owner.rotationYawHead; // NOTE: When the skeleton
+		double delta = ang - this.owner.rotationYawHead; // NOTE: When the skeleton
 		// looks directly at the
 		// player, this will be 90.
 
@@ -70,6 +70,6 @@ public class IaSSenseVision extends IaSSense {
 		if (delta > 180)
 			return false;
 
-		return owner.canEntityBeSeen(ent);
+		return this.owner.canEntityBeSeen(ent);
 	}
 }

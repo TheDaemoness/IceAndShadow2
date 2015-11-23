@@ -48,11 +48,11 @@ public class IaSTools {
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
-			return new ItemStack(armorSpiderSilk[slot], 0);
+			return new ItemStack(IaSTools.armorSpiderSilk[slot], 0);
 		if (tier == 1)
-			return new ItemStack(armorEchir[slot], 0);
+			return new ItemStack(IaSTools.armorEchir[slot], 0);
 		if (tier == 2) {
-			final ItemStack is = new ItemStack(armorCortra[slot], 0);
+			final ItemStack is = new ItemStack(IaSTools.armorCortra[slot], 0);
 			if (slot == 4)
 				is.addEnchantment(Enchantment.featherFalling, 3);
 			else if(slot == 2)
@@ -60,106 +60,106 @@ public class IaSTools {
 			is.addEnchantment(Enchantment.projectileProtection, 3);
 			return is;
 		}
-		return new ItemStack(armorNavistra[slot], 0);
+		return new ItemStack(IaSTools.armorNavistra[slot], 0);
 	}
 
 	public static void init() {
-		iconery = new IaSMaterialIconGetter();
-		GameRegistry.registerItem(iconery, "thisItemDoesNotExist");
+		IaSTools.iconery = new IaSMaterialIconGetter();
+		GameRegistry.registerItem(IaSTools.iconery, "thisItemDoesNotExist");
 
-		tools = new IaSItemTool[EnumIaSToolClass.values().length];
-		weapons = new IaSItemWeapon[EnumIaSToolClass.values().length];
-		toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
-		swordsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
-		armorActiveEchir = new IaSBaseItem[4];
+		IaSTools.tools = new IaSItemTool[EnumIaSToolClass.values().length];
+		IaSTools.weapons = new IaSItemWeapon[EnumIaSToolClass.values().length];
+		IaSTools.toolsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
+		IaSTools.swordsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
+		IaSTools.armorActiveEchir = new IaSBaseItem[4];
 		for (final EnumIaSToolClass c : EnumIaSToolClass.values()) {
 			if (c == EnumIaSToolClass.KNIFE)
-				weapons[c.getClassId()] = new IaSItemThrowingKnife();
+				IaSTools.weapons[c.getClassId()] = new IaSItemThrowingKnife();
 			else if (c.isWeapon())
-				weapons[c.getClassId()] = new IaSItemWeapon(c);
+				IaSTools.weapons[c.getClassId()] = new IaSItemWeapon(c);
 			else
-				tools[c.getClassId()] = new IaSItemTool(c);
+				IaSTools.tools[c.getClassId()] = new IaSItemTool(c);
 			if (c.isWeapon()) {
 				if (c == EnumIaSToolClass.KNIFE)
-					swordsActiveEchir[c.getClassId()] = new IaSItemEchirKnifeActive(
+					IaSTools.swordsActiveEchir[c.getClassId()] = new IaSItemEchirKnifeActive(
 							"ToolEchir" + c.toString() + "Active",
 							c.getClassId());
 				else
-					swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive(
+					IaSTools.swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive(
 							"ToolEchir" + c.toString() + "Active",
 							c.getClassId(), true);
-				GameRegistry.registerItem(swordsActiveEchir[c.getClassId()],
+				GameRegistry.registerItem(IaSTools.swordsActiveEchir[c.getClassId()],
 						"iasTool" + c.toString() + "EchirActive");
-				GameRegistry.registerItem(weapons[c.getClassId()],
+				GameRegistry.registerItem(IaSTools.weapons[c.getClassId()],
 						"ias" + c.toString());
 			} else {
-				toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive(
+				IaSTools.toolsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive(
 						"ToolEchir" + c.toString() + "Active", c.getClassId(),
 						false);
-				GameRegistry.registerItem(toolsActiveEchir[c.getClassId()],
+				GameRegistry.registerItem(IaSTools.toolsActiveEchir[c.getClassId()],
 						"iasTool" + c.toString() + "EchirActive");
-				GameRegistry.registerItem(tools[c.getClassId()],
+				GameRegistry.registerItem(IaSTools.tools[c.getClassId()],
 						"ias" + c.toString());
 			}
 		}
 
 		for (int i = 0; i < 4; ++i) {
-			armorActiveEchir[i] = new IaSItemEchirArmorActive("ArmorEchir" + i
+			IaSTools.armorActiveEchir[i] = new IaSItemEchirArmorActive("ArmorEchir" + i
 					+ "Active", i);
-			GameRegistry.registerItem(armorActiveEchir[i], "iasArmor" + i
+			GameRegistry.registerItem(IaSTools.armorActiveEchir[i], "iasArmor" + i
 					+ "EchirActive");
 		}
 
-		axe = tools[EnumIaSToolClass.AXE.getClassId()];
-		pickaxe = tools[EnumIaSToolClass.PICKAXE.getClassId()];
-		spade = tools[EnumIaSToolClass.SPADE.getClassId()];
-		sword = weapons[EnumIaSToolClass.SWORD.getClassId()];
-		knife = (IaSItemThrowingKnife) weapons[EnumIaSToolClass.KNIFE
+		IaSTools.axe = IaSTools.tools[EnumIaSToolClass.AXE.getClassId()];
+		IaSTools.pickaxe = IaSTools.tools[EnumIaSToolClass.PICKAXE.getClassId()];
+		IaSTools.spade = IaSTools.tools[EnumIaSToolClass.SPADE.getClassId()];
+		IaSTools.sword = IaSTools.weapons[EnumIaSToolClass.SWORD.getClassId()];
+		IaSTools.knife = (IaSItemThrowingKnife) IaSTools.weapons[EnumIaSToolClass.KNIFE
 		                                       .getClassId()];
 
-		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
-		makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
-		makeEchirToolRecipe(1, "eee", " s ", " s ", Items.stick);
-		makeEchirToolRecipe(1, "eee", " s ", " s ", Items.bone);
-		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.stick);
-		makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
-		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
-		makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.bone);
-		makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
-		makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
+		IaSTools.makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
+		IaSTools.makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
+		IaSTools.makeEchirToolRecipe(1, "eee", " s ", " s ", Items.stick);
+		IaSTools.makeEchirToolRecipe(1, "eee", " s ", " s ", Items.bone);
+		IaSTools.makeEchirToolRecipe(2, " e ", " s ", " s ", Items.stick);
+		IaSTools.makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
+		IaSTools.makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
+		IaSTools.makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.bone);
+		IaSTools.makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
+		IaSTools.makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
 
-		armorEchir = new IaSItemArmor[4];
-		initArmor(armorEchir, IaSItemArmor.MATERIAL_ECHIR,
+		IaSTools.armorEchir = new IaSItemArmor[4];
+		IaSTools.initArmor(IaSTools.armorEchir, IaSItemArmor.MATERIAL_ECHIR,
 				"IceAndShadow2:textures/armor/echir");
-		armorCortra = new IaSItemArmor[4];
-		initArmor(armorCortra, IaSItemArmor.MATERIAL_CORTRA,
+		IaSTools.armorCortra = new IaSItemArmor[4];
+		IaSTools.initArmor(IaSTools.armorCortra, IaSItemArmor.MATERIAL_CORTRA,
 				"IceAndShadow2:textures/armor/cortra");
-		armorNavistra = new IaSItemArmor[4];
-		initArmor(armorNavistra, IaSItemArmor.MATERIAL_NAVISTRA,
+		IaSTools.armorNavistra = new IaSItemArmor[4];
+		IaSTools.initArmor(IaSTools.armorNavistra, IaSItemArmor.MATERIAL_NAVISTRA,
 				"IceAndShadow2:textures/armor/navistra");
-		armorSpiderSilk = new IaSItemArmor[4];
-		initArmor(armorSpiderSilk, IaSItemArmor.MATERIAL_SPIDERSILK,
+		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
+		IaSTools.initArmor(IaSTools.armorSpiderSilk, IaSItemArmor.MATERIAL_SPIDERSILK,
 				"IceAndShadow2:textures/armor/spidersilk");
 
-		makeEchirArmorRecipe("eee", "e e", 0);
-		makeEchirArmorRecipe("e e", "eee", "eee", 1);
-		makeEchirArmorRecipe("eee", "e e", "e e", 2);
-		makeEchirArmorRecipe("e e", "e e", 3);
-		
-		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[0]),
+		IaSTools.makeEchirArmorRecipe("eee", "e e", 0);
+		IaSTools.makeEchirArmorRecipe("e e", "eee", "eee", 1);
+		IaSTools.makeEchirArmorRecipe("eee", "e e", "e e", 2);
+		IaSTools.makeEchirArmorRecipe("e e", "e e", 3);
+
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorSpiderSilk[0]),
 				"eee", "e e",        'e', new ItemStack(NyxItems.toughGossamer));
-		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[1]),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorSpiderSilk[1]),
 				"e e", "eee", "eee", 'e', new ItemStack(NyxItems.toughGossamer));
-		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[2]),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorSpiderSilk[2]),
 				"eee", "e e", "e e", 'e', new ItemStack(NyxItems.toughGossamer));
-		GameRegistry.addShapedRecipe(new ItemStack(armorSpiderSilk[3]),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorSpiderSilk[3]),
 				"e e", "e e",        'e', new ItemStack(NyxItems.toughGossamer));
 
-		axe.setCreativeTab(IaSCreativeTabs.tools);
-		pickaxe.setCreativeTab(IaSCreativeTabs.tools);
-		spade.setCreativeTab(IaSCreativeTabs.tools);
-		sword.setCreativeTab(IaSCreativeTabs.combat);
-		knife.setCreativeTab(IaSCreativeTabs.combat);
+		IaSTools.axe.setCreativeTab(IaSCreativeTabs.tools);
+		IaSTools.pickaxe.setCreativeTab(IaSCreativeTabs.tools);
+		IaSTools.spade.setCreativeTab(IaSCreativeTabs.tools);
+		IaSTools.sword.setCreativeTab(IaSCreativeTabs.combat);
+		IaSTools.knife.setCreativeTab(IaSCreativeTabs.combat);
 	}
 
 	protected static void initArmor(IaSItemArmor[] arm,
@@ -172,58 +172,58 @@ public class IaSTools {
 	}
 
 	protected static void makeEchirArmorRecipe(String a, String b, int slot) {
-		GameRegistry.addShapedRecipe(new ItemStack(armorActiveEchir[slot], 1),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorActiveEchir[slot], 1),
 				a, b, 'e', new ItemStack(NyxItems.echirIngot, 1, 1));
-		GameRegistry.addSmelting(new ItemStack(armorEchir[slot], 1, 0),
+		GameRegistry.addSmelting(new ItemStack(IaSTools.armorEchir[slot], 1, 0),
 				new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
 	}
 
 	protected static void makeEchirArmorRecipe(String a, String b, String c,
 			int slot) {
-		GameRegistry.addShapedRecipe(new ItemStack(armorActiveEchir[slot], 1),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.armorActiveEchir[slot], 1),
 				a, b, c, 'e', new ItemStack(NyxItems.echirIngot, 1, 1));
-		GameRegistry.addSmelting(new ItemStack(armorEchir[slot], 1, 0),
+		GameRegistry.addSmelting(new ItemStack(IaSTools.armorEchir[slot], 1, 0),
 				new ItemStack(IaSTools.armorActiveEchir[slot]), 0);
 	}
 
 	protected static void makeEchirToolRecipe(int slot, String a, String b,
 			String c, Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(toolsActiveEchir[slot], 1),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.toolsActiveEchir[slot], 1),
 				a, b, c, 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 's',
 				new ItemStack(stick));
-		GameRegistry.addSmelting(new ItemStack(tools[slot], 1, 0),
+		GameRegistry.addSmelting(new ItemStack(IaSTools.tools[slot], 1, 0),
 				new ItemStack(IaSTools.toolsActiveEchir[slot]), 0);
 	}
 
 	protected static void makeEchirWeaponRecipe(int slot, String a, String b,
 			Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(swordsActiveEchir[slot], 1),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.swordsActiveEchir[slot], 1),
 				a, b, 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 's',
 				new ItemStack(stick));
-		GameRegistry.addSmelting(new ItemStack(weapons[slot], 1, 0),
+		GameRegistry.addSmelting(new ItemStack(IaSTools.weapons[slot], 1, 0),
 				new ItemStack(IaSTools.swordsActiveEchir[slot]), 0);
 	}
 
 	protected static void makeEchirWeaponRecipe(int slot, String a, String b,
 			String c, Item stick) {
-		GameRegistry.addShapedRecipe(new ItemStack(swordsActiveEchir[slot], 1),
+		GameRegistry.addShapedRecipe(new ItemStack(IaSTools.swordsActiveEchir[slot], 1),
 				a, b, c, 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 's',
 				new ItemStack(stick));
-		GameRegistry.addSmelting(new ItemStack(weapons[slot], 1, 0),
+		GameRegistry.addSmelting(new ItemStack(IaSTools.weapons[slot], 1, 0),
 				new ItemStack(IaSTools.swordsActiveEchir[slot]), 0);
 	}
 
 	public static ItemStack setToolMaterial(Item it, String mat) {
 		final ItemStack is = new ItemStack(it);
 		is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setString(NBT_ID, mat);
+		is.getTagCompound().setString(IaSTools.NBT_ID, mat);
 		return is;
 	}
 
 	public static ItemStack setToolMaterial(ItemStack is, String mat) {
 		if (!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setString(NBT_ID, mat);
+		is.getTagCompound().setString(IaSTools.NBT_ID, mat);
 		return is;
 	}
 }

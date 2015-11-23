@@ -20,54 +20,54 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 
 	public static void preInit() {
-		for(Object o : IceAndShadow2.getPreRegistrationHandlers()) {
-			doAdd(o);
+		for(final Object o : IceAndShadow2.getPreRegistrationHandlers()) {
+			IaSRegistry.doAdd(o);
 		}
 	}
 
 	public static void postInit() {
-		for(Object o : IceAndShadow2.getPostRegistrationHandlers()) {
-			doAdd(o);
+		for(final Object o : IceAndShadow2.getPostRegistrationHandlers()) {
+			IaSRegistry.doAdd(o);
 		}
 	}
 
 	public static void add(Object o) {
 		if(IceAndShadow2.isRegistrationPublic())
-			doAdd(o);
+			IaSRegistry.doAdd(o);
 	}
 
 	private static void doAdd(Object o) {
 		if(o instanceof IIaSApiExaminable)
-			addHandler((IIaSApiExaminable)o);
+			IaSRegistry.addHandler((IIaSApiExaminable)o);
 		if(o instanceof IIaSApiSacrificeXp)
-			addHandler((IIaSApiSacrificeXp)o);
+			IaSRegistry.addHandler((IIaSApiSacrificeXp)o);
 		if(o instanceof IIaSApiTransmute)
-			addHandler((IIaSApiTransmute)o);
+			IaSRegistry.addHandler((IIaSApiTransmute)o);
 		if(o instanceof IaSToolMaterial)
-			addToolMaterial((IaSToolMaterial)o);
+			IaSRegistry.addToolMaterial((IaSToolMaterial)o);
 	}
 
 	private static void addHandler(IIaSApiExaminable handler) {
-		handlersExaminable.add(handler);
+		IaSRegistry.handlersExaminable.add(handler);
 	}
 
 	private static void addHandler(IIaSApiSacrificeXp handler) {
-		handlersSacrificeXp.add(handler);
+		IaSRegistry.handlersSacrificeXp.add(handler);
 	}
 
 	private static void addHandler(IIaSApiTransmute handler) {
-		handlersTransmutable.add(handler);
+		IaSRegistry.handlersTransmutable.add(handler);
 	}
 
 	protected static void addToolMaterial(IaSToolMaterial mat) {
-		if (toolMaterials.containsKey(mat.getMaterialName()))
+		if (IaSRegistry.toolMaterials.containsKey(mat.getMaterialName()))
 			throw new IllegalArgumentException("Material '"
 					+ mat.getMaterialName() + "' already exists!");
-		toolMaterials.put(mat.getMaterialName(), mat);
+		IaSRegistry.toolMaterials.put(mat.getMaterialName(), mat);
 	}
 
 	public static IaSToolMaterial getDefaultMaterial() {
-		return defaultMaterial;
+		return IaSRegistry.defaultMaterial;
 	}
 
 	public static IIaSApiTransmute getHandlerTransmutation(ItemStack target,
@@ -95,10 +95,10 @@ public final class IaSRegistry {
 				return trans;
 		}
 
-		for (int i = 0; i < handlersTransmutable.size(); ++i) {
-			if (handlersTransmutable.get(i).getTransmuteTime(target,
+		for (int i = 0; i < IaSRegistry.handlersTransmutable.size(); ++i) {
+			if (IaSRegistry.handlersTransmutable.get(i).getTransmuteTime(target,
 					catalyst) > 0)
-				return handlersTransmutable.get(i);
+				return IaSRegistry.handlersTransmutable.get(i);
 		}
 		return null;
 	}
@@ -119,7 +119,7 @@ public final class IaSRegistry {
 		}
 
 		int sum = 0;
-		for (final IIaSApiSacrificeXp xp : handlersSacrificeXp) {
+		for (final IIaSApiSacrificeXp xp : IaSRegistry.handlersSacrificeXp) {
 			sum = xp.getXpValue(target, r);
 			if (sum > 0)
 				return sum;
@@ -129,18 +129,18 @@ public final class IaSRegistry {
 
 	public static IaSToolMaterial getToolMaterial(String key) {
 		if (key == null)
-			return getDefaultMaterial();
-		if (toolMaterials.containsKey(key))
-			return toolMaterials.get(key);
-		return getDefaultMaterial();
+			return IaSRegistry.getDefaultMaterial();
+		if (IaSRegistry.toolMaterials.containsKey(key))
+			return IaSRegistry.toolMaterials.get(key);
+		return IaSRegistry.getDefaultMaterial();
 	}
 
 	public static Collection<IaSToolMaterial> getToolMaterials() {
-		return toolMaterials.values();
+		return IaSRegistry.toolMaterials.values();
 	}
 
 	public static IaSToolMaterial getTransmutationMaterial(ItemStack catalyst) {
-		for (final IaSToolMaterial mat : toolMaterials.values()) {
+		for (final IaSToolMaterial mat : IaSRegistry.toolMaterials.values()) {
 			if (mat.getTransmutationCatalyst().isItemEqual(catalyst))
 				return mat;
 		}

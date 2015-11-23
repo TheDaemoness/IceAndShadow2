@@ -82,24 +82,24 @@ public class NyxRecipes {
 				new ItemStack(NyxItems.heat, 1, 2));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 0),
 				new ItemStack(NyxItems.heat, 1, 1));
-		
+
 		GameRegistry.addRecipe(new ItemStack(NyxItems.crystalVial,1,0), "c", "c",
 				'c', new ItemStack(NyxItems.cortra,1,1));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,1,1),
 				new ItemStack(NyxItems.crystalVial,1), new ItemStack(NyxItems.draconium),
 				new ItemStack(NyxItems.echirIngot,1,1));
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,1,1),
 				new ItemStack(NyxItems.extractorPoison,1,13));
-		
+
 		GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ", "cac", " c ",
 				'a', new ItemStack(NyxItems.alabaster),
 				'c', new ItemStack(NyxItems.cortraIngot,1,1));
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.thermalCore),
 				new ItemStack(NyxItems.alabaster, 1, 1));;
-				
+
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt,1,1), new ItemStack(NyxBlocks.dirt), 0);
 	}

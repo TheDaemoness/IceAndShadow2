@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 public class NyxBlockBrickFrozen extends IaSBaseBlockSingle {
 	public NyxBlockBrickFrozen(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(NyxBlockStone.RESISTANCE);
-		this.setHardness(NyxBlockStone.HARDNESS);
+		setResistance(NyxBlockStone.RESISTANCE);
+		setHardness(NyxBlockStone.HARDNESS);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLightOpacity(12);
+		setLightOpacity(12);
 	}
 }

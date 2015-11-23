@@ -14,10 +14,10 @@ public class NyxBlockOreDraconium extends NyxBlockOre {
 	public NyxBlockOreDraconium(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 3);
-		this.setHardness(10.0F);
-		this.setLuminescence(0.3F);
-		this.setLightColor(0.5F, 0.0F, 0.0F);
-		this.setResistance(7.5F);
+		setHardness(10.0F);
+		setLuminescence(0.3F);
+		setLightColor(0.5F, 0.0F, 0.0F);
+		setResistance(7.5F);
 		GameRegistry.addSmelting(this, new ItemStack(NyxItems.draconium), 1);
 	}
 

@@ -24,16 +24,16 @@ public class NyxItemSilkBerries extends IaSItemFood {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon matureIcon;
-	
+
 	public NyxItemSilkBerries(String id) {
 		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
-		this.setHasSubtypes(true);
-		this.setMaxStackSize(32);
-		this.setEatTime(16);
-		this.setXpAltarMinimumValue(2);
+		setHasSubtypes(true);
+		setMaxStackSize(32);
+		setEatTime(16);
+		setXpAltarMinimumValue(2);
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
@@ -47,15 +47,15 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return matureIcon;
+			return this.matureIcon;
 		return this.itemIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.matureIcon = reg.registerIcon(this.getTexName() + "Mature");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.matureIcon = reg.registerIcon(getTexName() + "Mature");
 	}
 
 	@Override
@@ -77,8 +77,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 
-		final MovingObjectPosition movingobjectposition = this
-				.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
+		final MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
 						true);
 
 		if (movingobjectposition != null) {
@@ -132,7 +131,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		}
 		if (par3EntityPlayer.canEat(true))
 			par3EntityPlayer.setItemInUse(par1ItemStack,
-					this.getMaxItemUseDuration(par1ItemStack));
+					getMaxItemUseDuration(par1ItemStack));
 
 		return par1ItemStack;
 	}

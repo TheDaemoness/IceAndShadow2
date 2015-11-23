@@ -18,7 +18,7 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 	public NyxItemPhantomResin(String texName) {
 		super(EnumIaSModule.NYX, texName);
 	}
-	
+
 	@Override
 	public boolean requiresMultipleRenderPasses() {
 		return true;
@@ -55,7 +55,7 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 			++ss;
 		}
 		catalyst.stackSize -= 1;
-		List<ItemStack> retval = new ArrayList<ItemStack>(1);
+		final List<ItemStack> retval = new ArrayList<ItemStack>(1);
 		retval.add(new ItemStack(NyxBlocks.hardShadow, ss));
 		return retval;
 	}

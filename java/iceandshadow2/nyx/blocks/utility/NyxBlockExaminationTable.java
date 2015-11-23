@@ -24,10 +24,10 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 
 	public NyxBlockExaminationTable(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.rock);
-		this.setResistance(NyxBlockStone.RESISTANCE);
-		this.setHardness(NyxBlockStone.HARDNESS);
-		this.setBlockBounds(0.05F, 0.0F, 0.05F, 0.95F, 0.75F, 0.95F);
-		this.setLightOpacity(7);
+		setResistance(NyxBlockStone.RESISTANCE);
+		setHardness(NyxBlockStone.HARDNESS);
+		setBlockBounds(0.05F, 0.0F, 0.05F, 0.95F, 0.75F, 0.95F);
+		setLightOpacity(7);
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon("IceAndShadow2:" + this.getModName()
+		this.blockIcon = reg.registerIcon("IceAndShadow2:" + getModName()
 				+ "Top");
-		this.iconSide = reg.registerIcon("IceAndShadow2:" + this.getModName()
+		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName()
 				+ "Side");
 	}
 }

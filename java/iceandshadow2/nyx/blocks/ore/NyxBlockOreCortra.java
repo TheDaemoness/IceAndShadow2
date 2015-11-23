@@ -15,10 +15,10 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 	public NyxBlockOreCortra(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 2);
-		this.setHardness(20.0F);
-		this.setLuminescence(0.2F);
-		this.setLightColor(0.0F, 0.75F, 1.0F);
-		this.setResistance(10.0F);
+		setHardness(20.0F);
+		setLuminescence(0.2F);
+		setLightColor(0.0F, 0.75F, 1.0F);
+		setResistance(10.0F);
 		GameRegistry.addSmelting(this, new ItemStack(NyxItems.cortra, 4), 4);
 	}
 

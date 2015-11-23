@@ -58,7 +58,7 @@ public class IaSServerCommand implements ICommand {
 
 	@Override
 	public List getCommandAliases() {
-		return aliases;
+		return this.aliases;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class IaSServerCommand implements ICommand {
 	@Override
 	public void processCommand(ICommandSender snder, String[] args) {
 		if (args.length == 0) {
-			send(snder, "Insufficient arguments");
+			IaSServerCommand.send(snder, "Insufficient arguments");
 			return;
 		}
 
@@ -90,12 +90,12 @@ public class IaSServerCommand implements ICommand {
 					if (snder instanceof EntityPlayerMP)
 						plai = (EntityPlayerMP) snder;
 					else {
-						send(snder,
+						IaSServerCommand.send(snder,
 								"This command can only be used by an opped player.");
 						return;
 					}
 				} else {
-					send(snder,
+					IaSServerCommand.send(snder,
 							"Excessive arguments, expected 'goto <overworld|nyx>'");
 					return;
 				}
@@ -110,12 +110,12 @@ public class IaSServerCommand implements ICommand {
 				else if (args[1].contentEquals("nyx"))
 					dim = IaSFlags.dim_nyx_id;
 				else {
-					send(snder,
+					IaSServerCommand.send(snder,
 							"Invalid arguments, expected 'goto <overworld|nyx>'");
 					return;
 				}
 				if (dim == plai.dimension) {
-					send(snder, "You're already in that dimension!");
+					IaSServerCommand.send(snder, "You're already in that dimension!");
 					return;
 				}
 				plai.mcServer.getConfigurationManager()
@@ -125,11 +125,11 @@ public class IaSServerCommand implements ICommand {
 						new NyxTeleporter(plai.mcServer
 								.worldServerForDimension(dim)));
 			} else {
-				send(snder,
+				IaSServerCommand.send(snder,
 						"Insufficient arguments, expected 'goto <overworld|nyx>'");
 			}
 		} else {
-			send(snder, "Unknown operation.");
+			IaSServerCommand.send(snder, "Unknown operation.");
 		}
 	}
 

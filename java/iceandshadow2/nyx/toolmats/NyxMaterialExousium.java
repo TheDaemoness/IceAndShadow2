@@ -26,7 +26,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public int getBaseLevel() {
 		return -1;
 	}
-	
+
 	@Override
 	public int getHarvestLevel(ItemStack is, String toolClass) {
 		return getBaseLevel();
@@ -36,7 +36,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public float getBaseSpeed() {
 		return 48;
 	}
-	
+
 	@Override
 	public float getHarvestSpeed(ItemStack is, Block target) {
 		final Set<String> s = is.getItem().getToolClasses(is);
@@ -44,7 +44,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 			return getBaseSpeed()/4;
 		return getBaseSpeed();
 	}
-	
+
 	@Override
 	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World,
 			EntityLivingBase elb) {
@@ -55,7 +55,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public int getDurability(ItemStack is) {
 		return 32;
 	}
-	
+
 	@Override
 	public float getBaseDamage() {
 		return 7;
@@ -71,7 +71,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return knife_tex;
+		return NyxMaterialExousium.knife_tex;
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public String getMaterialName() {
 		return "Exousium";
 	}
-	
+
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {
@@ -105,7 +105,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
 	}
-	
+
 	@Override
 	public boolean glows(EnumIaSToolClass mat) {
 		return true;
@@ -123,15 +123,15 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 			int y, int z) {
 		if(w.isRemote)
 			return 0;
-		Block bl = w.getBlock(x, y, z);
-		int hl = bl.getHarvestLevel(w.getBlockMetadata(x,y,z));
+		final Block bl = w.getBlock(x, y, z);
+		final int hl = bl.getHarvestLevel(w.getBlockMetadata(x,y,z));
 		int durab = Math.max(0,hl);
 		if (!is.getItem().getToolClasses(is).contains(bl.getHarvestTool(0)))
 			durab += Math.max(0,hl+1);
 		w.setBlockToAir(x, y, z);
 		return durab;
 	}
-	
+
 	@Override
 	public ItemStack getTransmutationCatalyst() {
 		return new ItemStack(NyxItems.exousium,1,1);

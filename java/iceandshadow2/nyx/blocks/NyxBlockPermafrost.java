@@ -27,16 +27,16 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0 || side == 1)
-			return iconTop;
+			return this.iconTop;
 		else
-			return iconSide;
+			return this.iconSide;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = reg.registerIcon(this.getTexName() + "Top");
-		this.iconSide = reg.registerIcon(this.getTexName() + "Side");
+		this.iconTop = reg.registerIcon(getTexName() + "Top");
+		this.iconSide = reg.registerIcon(getTexName() + "Side");
 	}
 
 	@Override

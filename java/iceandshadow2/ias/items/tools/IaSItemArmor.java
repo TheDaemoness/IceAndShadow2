@@ -24,19 +24,19 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 			.addArmorMaterial("NyxSpiderSilk", 22, new int[] { 2, 7, 5, 2 }, 16);
 
 	static {
-		MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
-		MATERIAL_NAVISTRA.customCraftingMaterial = NyxItems.navistraShard;
-		MATERIAL_CORTRA.customCraftingMaterial = NyxItems.cortraIngot;
-		MATERIAL_SPIDERSILK.customCraftingMaterial = NyxItems.toughGossamer;
+		IaSItemArmor.MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
+		IaSItemArmor.MATERIAL_NAVISTRA.customCraftingMaterial = NyxItems.navistraShard;
+		IaSItemArmor.MATERIAL_CORTRA.customCraftingMaterial = NyxItems.cortraIngot;
+		IaSItemArmor.MATERIAL_SPIDERSILK.customCraftingMaterial = NyxItems.toughGossamer;
 	}
 
 	protected String armorTexString;
 
 	public IaSItemArmor(ArmorMaterial arm, int leg, int head, String body) {
 		super(arm, leg, head);
-		armorTexString = body;
-		this.setUnlocalizedName("iasArmor" + arm.name() + this.armorType);
-		this.setTextureName("IceAndShadow2:armor/iasArmor" + arm.name()
+		this.armorTexString = body;
+		setUnlocalizedName("iasArmor" + arm.name() + this.armorType);
+		setTextureName("IceAndShadow2:armor/iasArmor" + arm.name()
 				+ this.armorType);
 	}
 
@@ -51,19 +51,19 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		if (entity.isInvisible())
 			return "IceAndShadow2:textures/armor/the_invisible_man.png";
 		if (slot == 2)
-			return armorTexString + "_2.png";
-		return armorTexString + "_1.png";
+			return this.armorTexString + "_2.png";
+		return this.armorTexString + "_1.png";
 	}
 
 	@Override
 	public int getDamage(ItemStack stack) {
-		return ((IaSItemArmor) stack.getItem()).getArmorMaterial() == MATERIAL_NAVISTRA ? 0
+		return ((IaSItemArmor) stack.getItem()).getArmorMaterial() == IaSItemArmor.MATERIAL_NAVISTRA ? 0
 				: super.getDamage(stack);
 	}
 
 	@Override
 	public boolean isDamageable() {
-		return this.getArmorMaterial() != MATERIAL_NAVISTRA;
+		return getArmorMaterial() != IaSItemArmor.MATERIAL_NAVISTRA;
 	}
 
 	@Override
@@ -79,12 +79,12 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	@Override
 	@Deprecated
 	public String getTexName() {
-		return "IceAndShadow2:armor/" + this.getModName();
+		return "IceAndShadow2:armor/" + getModName();
 	}
 
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return ((IaSItemArmor) stack.getItem()).getArmorMaterial() == MATERIAL_NAVISTRA ? false
+		return ((IaSItemArmor) stack.getItem()).getArmorMaterial() == IaSItemArmor.MATERIAL_NAVISTRA ? false
 				: super.isDamaged(stack);
 	}
 }

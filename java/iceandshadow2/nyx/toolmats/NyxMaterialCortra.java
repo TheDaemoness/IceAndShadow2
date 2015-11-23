@@ -38,7 +38,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return knife_tex;
+		return NyxMaterialCortra.knife_tex;
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	public String getMaterialName() {
 		return "Cortra";
 	}
-	
+
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if(target instanceof EntityLivingBase) {
-			EntityLivingBase elb = (EntityLivingBase)target;
-			Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
+			final EntityLivingBase elb = (EntityLivingBase)target;
+			final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
 			final int shlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, is);
 			final int smlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, is);
 			if(!user.worldObj.isRemote) {
@@ -84,7 +84,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 			int y, int z) {
 		final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
 		if(!user.worldObj.isRemote && user.worldObj.rand.nextInt(48+16*lvl)==0) {
-			Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
+			final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
 			nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl+1));
 			final int flvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, is);
 			final int ulvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.unbreaking.effectId, is);

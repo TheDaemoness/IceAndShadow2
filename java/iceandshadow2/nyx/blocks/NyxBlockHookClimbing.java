@@ -26,12 +26,12 @@ public class NyxBlockHookClimbing extends BlockFence {
 	public NyxBlockHookClimbing(String texName) {
 		super(IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix
 				+ "BlockEchir", Material.iron);
-		this.setBlockName(EnumIaSModule.NYX.prefix + texName);
-		this.setStepSound(soundTypeMetal);
-		this.setCreativeTab(IaSCreativeTabs.tools);
-		this.setLightLevel(0.1F);
-		this.setResistance(20.0F);
-		this.setHardness(10.0F);
+		setBlockName(EnumIaSModule.NYX.prefix + texName);
+		setStepSound(Block.soundTypeMetal);
+		setCreativeTab(IaSCreativeTabs.tools);
+		setLightLevel(0.1F);
+		setResistance(20.0F);
+		setHardness(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 		this.texName = texName;
 	}
@@ -53,7 +53,7 @@ public class NyxBlockHookClimbing extends BlockFence {
 
 	@Override
 	public String getItemIconName() {
-		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix + texName;
+		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix + this.texName;
 	}
 
 	@Override
@@ -80,13 +80,13 @@ public class NyxBlockHookClimbing extends BlockFence {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block cock) {
-		if (this.canConnectFenceTo(w, x + 1, y, z))
+		if (canConnectFenceTo(w, x + 1, y, z))
 			return;
-		if (this.canConnectFenceTo(w, x - 1, y, z))
+		if (canConnectFenceTo(w, x - 1, y, z))
 			return;
-		if (this.canConnectFenceTo(w, x, y, z + 1))
+		if (canConnectFenceTo(w, x, y, z + 1))
 			return;
-		if (this.canConnectFenceTo(w, x, y, z - 1))
+		if (canConnectFenceTo(w, x, y, z - 1))
 			return;
 		if (w.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))
 			return;

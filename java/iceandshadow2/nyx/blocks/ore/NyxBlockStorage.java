@@ -10,9 +10,9 @@ public abstract class NyxBlockStorage extends IaSBaseBlockSingle {
 	public NyxBlockStorage(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.rock);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setHardness(1.0F);
-		this.setLuminescence(0.2F);
-		this.setResistance(5.0F);
+		setHardness(1.0F);
+		setLuminescence(0.2F);
+		setResistance(5.0F);
 	}
 
 	public abstract ItemStack getItems();

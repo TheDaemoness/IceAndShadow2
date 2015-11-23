@@ -17,9 +17,9 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 
 	public NyxBlockCrystalBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.dragonEgg);
-		this.setLuminescence(0.2F);
-		this.setLightColor(0.5F, 0.0F, 0.0F);
-		this.setResistance(1.5F);
+		setLuminescence(0.2F);
+		setLightColor(0.5F, 0.0F, 0.0F);
+		setResistance(1.5F);
 	}
 
 	@Override

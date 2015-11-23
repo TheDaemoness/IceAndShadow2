@@ -9,12 +9,12 @@ public class IaSCreativeTab extends CreativeTabs {
 
 	public IaSCreativeTab(String lable, Item it) {
 		super(lable);
-		icon = it;
+		this.icon = it;
 	}
 
 	@Override
 	public Item getTabIconItem() {
-		return icon;
+		return this.icon;
 	}
 
 }

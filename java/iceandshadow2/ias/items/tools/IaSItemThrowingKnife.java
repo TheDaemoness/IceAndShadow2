@@ -17,13 +17,13 @@ import net.minecraft.world.World;
 public class IaSItemThrowingKnife extends IaSItemWeapon {
 
 	public static final String PLAYER_NBT_ID = "iasThrowingKnifeDelay";
-	
+
 	public IaSItemThrowingKnife() {
 		super(EnumIaSToolClass.KNIFE);
-		this.setNoRepair();
-		this.setMaxDamage(0);
-		this.setUnlocalizedName("iasThrowingKnife");
-		this.setMaxStackSize(32);
+		setNoRepair();
+		setMaxDamage(0);
+		setUnlocalizedName("iasThrowingKnife");
+		setMaxStackSize(32);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World aroundThe,
 			EntityPlayer plai) {
-		int delai = plai.getEntityData().getInteger(PLAYER_NBT_ID);
+		final int delai = plai.getEntityData().getInteger(IaSItemThrowingKnife.PLAYER_NBT_ID);
 		if (delai > 0)
 			return is;
 
@@ -72,7 +72,7 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			is.stackSize -= 1;
 
 		if (!aroundThe.isRemote) {
-			plai.getEntityData().setInteger(PLAYER_NBT_ID, mat.getKnifeCooldown(is, aroundThe, plai));
+			plai.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, mat.getKnifeCooldown(is, aroundThe, plai));
 			aroundThe.spawnEntityInWorld(var8);
 		}
 
@@ -90,8 +90,8 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World world, Entity player,
 			int par4, boolean par5) {
-		int tom = player.getEntityData().getInteger(PLAYER_NBT_ID); //Political joke, pay no attention.
+		final int tom = player.getEntityData().getInteger(IaSItemThrowingKnife.PLAYER_NBT_ID); //Political joke, pay no attention.
 		if (par5 && tom > 0 && !world.isRemote)
-			player.getEntityData().setInteger(PLAYER_NBT_ID, tom-1);
+			player.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, tom-1);
 	}
 }

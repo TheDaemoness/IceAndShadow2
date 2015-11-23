@@ -94,7 +94,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager()
 				.getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2,
 						z * 4 - 2, 10, 10);
-		this.initNoiseField(x * 4, 0, z * 4);
+		initNoiseField(x * 4, 0, z * 4);
 
 		for (int xit = 0; xit < 4; ++xit) {
 			final int l = xit * 5;
@@ -275,7 +275,7 @@ public class NyxChunkProvider implements IChunkProvider {
 	 */
 	@Override
 	public Chunk loadChunk(int par1, int par2) {
-		return this.provideChunk(par1, par2);
+		return provideChunk(par1, par2);
 	}
 
 	@Override
@@ -298,7 +298,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		final long j1 = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed(xchunk * i1 + zchunk * j1 ^ this.worldObj.getSeed());
 		int xit, zit, yval;
-		
+
 		if(xchunk == 0 && zchunk == 0) {
 			new GenRuinsCentral().generate(this.worldObj, this.rand, 0, 0, 0);
 		}
@@ -334,11 +334,11 @@ public class NyxChunkProvider implements IChunkProvider {
 		this.rand.setSeed(z * 341873128712L + x * 132897987541L);
 		final Block[] ablock = new Block[65536];
 		final byte[] abyte = new byte[65536];
-		this.genTerrain(x, z, ablock);
+		genTerrain(x, z, ablock);
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager()
 				.loadBlockGeneratorData(this.biomesForGeneration, x * 16,
 						z * 16, 16, 16);
-		this.replaceBlocksForBiome(x, z, ablock, abyte,
+		replaceBlocksForBiome(x, z, ablock, abyte,
 				this.biomesForGeneration);
 
 		final Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);

@@ -37,9 +37,9 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 			if (side == 4 || side == 5)
 				return this.blockIcon;
 			else if (side == 0 || side == 1)
-				return iconSide;
+				return this.iconSide;
 			else
-				return iconSide;
+				return this.iconSide;
 		}
 
 		// North-South
@@ -47,16 +47,16 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 			if (side == 2 || side == 3)
 				return this.blockIcon;
 			else if (side == 0 || side == 1)
-				return iconSide;
+				return this.iconSide;
 			else
-				return iconSide;
+				return this.iconSide;
 		}
 		// Up-down
 		else {
 			if (side == 0 || side == 1)
 				return this.blockIcon;
 			else
-				return iconSide;
+				return this.iconSide;
 		}
 	}
 
@@ -91,7 +91,7 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(this.getTexName() + "Top");
-		this.iconSide = reg.registerIcon(this.getTexName() + "Side");
+		this.blockIcon = reg.registerIcon(getTexName() + "Top");
+		this.iconSide = reg.registerIcon(getTexName() + "Side");
 	}
 }

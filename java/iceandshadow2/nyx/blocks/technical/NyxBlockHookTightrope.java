@@ -2,6 +2,7 @@ package iceandshadow2.nyx.blocks.technical;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,10 +19,10 @@ public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {
 
 	public NyxBlockHookTightrope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.iron);
-		this.setStepSound(soundTypeMetal);
-		this.setLightLevel(0.1F);
-		this.setResistance(20.0F);
-		this.setHardness(10.0F);
+		setStepSound(Block.soundTypeMetal);
+		setLightLevel(0.1F);
+		setResistance(20.0F);
+		setHardness(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 	}
 

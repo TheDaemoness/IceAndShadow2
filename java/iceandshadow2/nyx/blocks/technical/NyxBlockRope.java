@@ -23,11 +23,11 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	public NyxBlockRope(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.cloth);
-		this.setStepSound(soundTypeCloth);
-		this.setBlockUnbreakable();
-		this.setLightLevel(0.1F);
-		this.setLightOpacity(0);
-		this.setResistance(9001F);
+		setStepSound(Block.soundTypeCloth);
+		setBlockUnbreakable();
+		setLightLevel(0.1F);
+		setLightOpacity(0);
+		setResistance(9001F);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + this.getIaSModule().prefix + "Rope";
+		return IceAndShadow2.MODID + ':' + getIaSModule().prefix + "Rope";
 	}
 
 	@Override
@@ -131,6 +131,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(this.getTexName());
+		this.blockIcon = reg.registerIcon(getTexName());
 	}
 }

@@ -11,7 +11,7 @@ public class NyxArmorHandler {
 	public void dmg(LivingHurtEvent e) {
 		if(e.entity.worldObj.isRemote)
 			return;
-		EntityLivingBase elb = e.entityLiving;
+		final EntityLivingBase elb = e.entityLiving;
 		if(elb != null && e.source.isMagicDamage()) {
 			if(e.source.isDamageAbsolute())
 				return;

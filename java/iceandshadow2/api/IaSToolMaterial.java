@@ -45,7 +45,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called by the default implementation of onAttack to determine how much
 	 * damage a tool takes from attacking.
-	 * 
+	 *
 	 * @param is
 	 * @param user
 	 * @param target
@@ -62,7 +62,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * forced to override it if it won't be used.
 	 * Cheat sheet: 0 = wood, 1 = stone, 2 =
 	 * iron, 3 = diamond/echir
-	 * 
+	 *
 	 * @return
 	 */
 	public float getBaseDamage() {
@@ -81,7 +81,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Gets the item's base mining speed. Used in default implementations of
 	 * getHarvestSpeed.
-	 * 
+	 *
 	 * @return The number of times faster than hand this tool is.
 	 */
 	public abstract float getBaseSpeed();
@@ -89,7 +89,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called when a tool breaks to determine whether or not a "broken" tool
 	 * item should be given.
-	 * 
+	 *
 	 * @param is
 	 *            The tool being used to harvest.
 	 * @param user
@@ -102,7 +102,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Get the tool's maximum durability.
-	 * 
+	 *
 	 * @param is
 	 *            The tool.
 	 * @return The tool's durability. Each point of durability is one use.
@@ -113,7 +113,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * Gets the tool's harvest level. This determines what materials it can
 	 * mine. Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
 	 * Default implementation mimics vanilla behavior.
-	 * 
+	 *
 	 * @param is
 	 *            The stack.
 	 * @param toolClass
@@ -122,14 +122,14 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 */
 	public int getHarvestLevel(ItemStack is, String toolClass) {
 		if (is.getItem().getToolClasses(is).contains(toolClass))
-			return this.getBaseLevel();
+			return getBaseLevel();
 		return -1;
 	}
 
 	/**
 	 * Gets the item's mine speed against a target block. Default implementation
 	 * mimics vanilla tool behavior.
-	 * 
+	 *
 	 * @param is
 	 *            The tool.
 	 * @param target
@@ -138,7 +138,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 */
 	public float getHarvestSpeed(ItemStack is, Block target) {
 		if (is.getItem().canHarvestBlock(target, is))
-			return this.getBaseSpeed();
+			return getBaseSpeed();
 		return 1.0F;
 	}
 
@@ -148,14 +148,14 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public IIcon getIcon(ItemStack is) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
 		if (t.isWeapon())
-			return iconWeapon[t.getClassId()];
+			return this.iconWeapon[t.getClassId()];
 		else
-			return iconTool[t.getClassId()];
+			return this.iconTool[t.getClassId()];
 	}
 
 	/**
 	 * Called to determine the cooldown time of the throwing knife.
-	 * 
+	 *
 	 * @param par1ItemStack
 	 * @param par2World
 	 * @param entityNyxSkeleton
@@ -169,7 +169,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Gets a thrown throwing knife's damage bonus against certain entities.
 	 * This is NOT called by left-click attacks.
-	 * 
+	 *
 	 * @param knife
 	 *            The in flight knife.
 	 * @param user
@@ -188,7 +188,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called to get the damage source for a throwing knife. Useful for doing
 	 * things like making a throwing knife's damage pierce armor.
-	 * 
+	 *
 	 * @param knife
 	 *            The throwing knife entity
 	 * @param thrower
@@ -207,7 +207,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * Called when a throwing knife collides with an entity or block and
 	 * onKnifeHit returns true. Used to determine the item stack that the knife
 	 * should drop.
-	 * 
+	 *
 	 * @param user
 	 *            The thrower.
 	 * @param knife
@@ -222,7 +222,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Gets the base texture for the throwing knife entity.
-	 * 
+	 *
 	 * @param knife
 	 *            The throwing knife entity.
 	 * @return The resource location for a texture to render the throwing knife
@@ -265,7 +265,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * Gets the tool's damage bonus against certain entities. This is NOT called
 	 * by in-flight throwing knives, but is called on throwing knife left-click.
 	 * Default implementation emulates vanilla damage variances between tools.
-	 * 
+	 *
 	 * @param is
 	 *            The tool.
 	 * @param user
@@ -298,7 +298,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Gets the item required in the transmutation altar to transmute a
 	 * tool/weapon to this.
-	 * 
+	 *
 	 * @return The item, or null if transmutation to this material should be
 	 *         disabled. A separate handler can still be put in place for
 	 *         transmutation under more special circumstances;
@@ -309,7 +309,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	public String getUnlocalizedName(ItemStack is) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
-		return "item.iasTool" + this.getMaterialName() + t.toString();
+		return "item.iasTool" + getMaterialName() + t.toString();
 	}
 
 	@Override
@@ -334,7 +334,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called whenever the tool does is swung at an entity. This is NOT called
 	 * when a thrown knife hits its target.
-	 * 
+	 *
 	 * @param is
 	 *            The item stack the player used to hit.
 	 * @param user
@@ -359,7 +359,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Called when a tool successfully harvests a block.
-	 * 
+	 *
 	 * @param is
 	 *            The tool being used to harvest.
 	 * @param user
@@ -376,7 +376,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Called when a throwing knife collides with a block.
-	 * 
+	 *
 	 * @param user
 	 *            The thrower.
 	 * @param knife
@@ -392,7 +392,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Called when a throwing knife collides with an entity.
-	 * 
+	 *
 	 * @param user
 	 *            The thrower.
 	 * @param knife
@@ -409,7 +409,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called when a throwing knife is thrown, just before the entity is spawned
 	 * into the world.
-	 * 
+	 *
 	 * @param is
 	 *            The item stack the player was going to throw.
 	 * @param user
@@ -424,7 +424,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Called when a player uses the left click of a tool.
-	 * 
+	 *
 	 * @param is
 	 *            The item stack being used.
 	 * @param user
@@ -439,7 +439,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	/**
 	 * Called when a player uses the right click of a tool. This does NOT get
 	 * called when using throwing knives. Use onThrowingKnifeThrow() instead.
-	 * 
+	 *
 	 * @param is
 	 *            The item stack being used.
 	 * @param user
@@ -453,7 +453,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Called when a tool is swung.
-	 * 
+	 *
 	 * @param is
 	 *            The tool being swing
 	 * @param user
@@ -475,15 +475,15 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 			else if (!cl.isWeapon() && cl.getClassId() >= lTool)
 				lTool = cl.getClassId() + 1;
 		}
-		iconTool = new IIcon[lTool];
-		iconWeapon = new IIcon[lWeapon];
-		for (int i = 0; i < iconTool.length; ++i)
-			iconTool[i] = reg.registerIcon(this.getTextureNamePrefix()
-					+ this.getMaterialName()
+		this.iconTool = new IIcon[lTool];
+		this.iconWeapon = new IIcon[lWeapon];
+		for (int i = 0; i < this.iconTool.length; ++i)
+			this.iconTool[i] = reg.registerIcon(getTextureNamePrefix()
+					+ getMaterialName()
 					+ EnumIaSToolClass.fromId(i, false).toString());
-		for (int i = 0; i < iconWeapon.length; ++i)
-			iconWeapon[i] = reg.registerIcon(this.getTextureNamePrefix()
-					+ this.getMaterialName()
+		for (int i = 0; i < this.iconWeapon.length; ++i)
+			this.iconWeapon[i] = reg.registerIcon(getTextureNamePrefix()
+					+ getMaterialName()
 					+ EnumIaSToolClass.fromId(i, true).toString());
 
 	}

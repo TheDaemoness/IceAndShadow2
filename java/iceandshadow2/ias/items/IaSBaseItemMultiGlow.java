@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 
 public class IaSBaseItemMultiGlow extends IaSBaseItemMulti implements IIaSGlowing {
-	
+
 	public IaSBaseItemMultiGlow(EnumIaSModule mod, String id, int subtypes) {
 		super(mod, id, subtypes);
 	}

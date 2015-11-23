@@ -21,18 +21,18 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active, invisible;
-	
+
 	private int yield;
 	private Item trans;
 
 	public NyxItemIngot(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setHasSubtypes(true);
+		setHasSubtypes(true);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
 				new ItemStack(this, 1, 1));
 		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this,
 				1, 1), 0);
-		yield = 0;
+		this.yield = 0;
 	}
 
 	@Override
@@ -52,9 +52,9 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (dmg > 0)
-			return active;
+			return this.active;
 		if (pass == 1)
-			return invisible;
+			return this.invisible;
 		return this.itemIcon;
 	}
 
@@ -90,13 +90,13 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		active = reg.registerIcon(this.getTexName() + "Active");
-		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		this.active = reg.registerIcon(getTexName() + "Active");
+		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 	}
 
 	public IaSBaseItem setTransmutation(Item catalyst, int ret) {
-		yield = ret;
-		trans = catalyst;
+		this.yield = ret;
+		this.trans = catalyst;
 		return this;
 	}
 }

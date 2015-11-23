@@ -25,11 +25,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 
 	public NyxBlockThornyVines(String texName) {
-		this.setBlockName("nyx" + texName);
-		this.setBlockTextureName(this.getTexName());
-		this.setLightLevel(0.1F);
-		this.setLightOpacity(0);
-		this.setStepSound(soundTypeGrass);
+		setBlockName("nyx" + texName);
+		setBlockTextureName(getTexName());
+		setLightLevel(0.1F);
+		setLightOpacity(0);
+		setStepSound(Block.soundTypeGrass);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override

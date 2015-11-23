@@ -24,11 +24,11 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	public NyxBlockOreExousium(String texName) {
 		super(texName);
-		this.setHardness(20.0F);
-		this.setLuminescence(1.0F);
-		this.setLightColor(0.9F, 1.0F, 0.9F);
-		this.setResistance(2.5F);
-		this.setTickRandomly(true);
+		setHardness(20.0F);
+		setLuminescence(1.0F);
+		setLightColor(0.9F, 1.0F, 0.9F);
+		setResistance(2.5F);
+		setTickRandomly(true);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 			return NyxBlocks.stone.getIcon(side, m);
 		else {
 			if (m != 0)
-				return iconEmpty;
+				return this.iconEmpty;
 			return this.blockIcon;
 		}
 	}
@@ -82,8 +82,8 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(this.getTexName());
-		iconEmpty = reg.registerIcon(this.getTexName() + "Empty");
+		this.blockIcon = reg.registerIcon(getTexName());
+		this.iconEmpty = reg.registerIcon(getTexName() + "Empty");
 	}
 
 	@Override

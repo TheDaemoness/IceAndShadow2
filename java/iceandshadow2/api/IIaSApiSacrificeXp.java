@@ -16,7 +16,7 @@ public interface IIaSApiSacrificeXp {
 	/**
 	 * Gets the experience spat out by an experience altar for a given item
 	 * stack.
-	 * 
+	 *
 	 * @param is
 	 *            The item stack put into an experience altar.
 	 * @param rand

@@ -20,11 +20,11 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon fillIcons[];
-	
+
 	public NyxItemExtractorPoison(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(1);
-		this.setMaxDamage(14);
+		setMaxStackSize(1);
+		setMaxDamage(14);
 	}
 
 	@Override
@@ -32,16 +32,16 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 		if(dmg == 0)
 			return this.itemIcon;
 		if(dmg >= 13)
-			return fillIcons[6];
-		return fillIcons[(dmg-1)/2];
+			return this.fillIcons[6];
+		return this.fillIcons[(dmg-1)/2];
 	}
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(this.getTexName()+"0");
-		fillIcons = new IIcon[7];
+		this.itemIcon = r.registerIcon(getTexName()+"0");
+		this.fillIcons = new IIcon[7];
 		for(int i = 1; i <= 7; ++i)
-			fillIcons[i-1] = r.registerIcon(this.getTexName()+i);
+			this.fillIcons[i-1] = r.registerIcon(getTexName()+i);
 	}
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
@@ -52,7 +52,7 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 16;
 	}
-	
+
 	@Override
 	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
 		pl.removePotionEffect(Potion.poison.id);
@@ -64,7 +64,7 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	public ItemStack onItemRightClick(ItemStack heap, World order,
 			EntityPlayer pwai) {
 		if(pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage()-1)
-			pwai.setItemInUse(heap, this.getMaxItemUseDuration(heap));
+			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
 		return heap;
 	}
 

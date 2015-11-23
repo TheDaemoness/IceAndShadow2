@@ -16,8 +16,8 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -3, 0.0F, false);
-		this.setAlwaysEdible();
-		this.setMaxStackSize(4);
+		setAlwaysEdible();
+		setMaxStackSize(4);
 	}
 
 	@Override

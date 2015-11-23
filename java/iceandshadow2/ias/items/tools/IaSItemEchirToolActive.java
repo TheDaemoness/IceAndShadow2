@@ -23,10 +23,10 @@ IIaSApiTransmute {
 
 	public IaSItemEchirToolActive(String texName, int tab, boolean isWeapon) {
 		super(EnumIaSModule.IAS, texName);
-		slot = tab; // FtM sex change, wot?
-		wep = isWeapon;
-		this.setMaxStackSize(1);
-		this.setFull3D();
+		this.slot = tab; // FtM sex change, wot?
+		this.wep = isWeapon;
+		setMaxStackSize(1);
+		setFull3D();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ IIaSApiTransmute {
 	@Override
 	public int getMaxDamage() {
 		return IaSRegistry.getDefaultMaterial().getDurability(
-				new ItemStack(IaSTools.tools[slot]));
+				new ItemStack(IaSTools.tools[this.slot]));
 	}
 
 	@Override
@@ -58,10 +58,10 @@ IIaSApiTransmute {
 		final IaSToolMaterial mat = IaSRegistry
 				.getTransmutationMaterial(catalyst);
 		catalyst.stackSize -= 3;
-		if (wep)
-			target.func_150996_a(IaSTools.weapons[slot]);
+		if (this.wep)
+			target.func_150996_a(IaSTools.weapons[this.slot]);
 		else
-			target.func_150996_a(IaSTools.tools[slot]);
+			target.func_150996_a(IaSTools.tools[this.slot]);
 		if (target.stackTagCompound == null)
 			target.setTagCompound(new NBTTagCompound());
 		final NBTTagCompound nbt = target.stackTagCompound;
@@ -74,11 +74,11 @@ IIaSApiTransmute {
 			EntityPlayer ninja) {
 		if (ninja.isSneaking()) { // Do NOT remove this if statement, it
 			// actually isn't redundant.
-			if (wep)
-				par1 = new ItemStack(IaSTools.weapons[slot], 1,
+			if (this.wep)
+				par1 = new ItemStack(IaSTools.weapons[this.slot], 1,
 						par1.getItemDamage());
 			else
-				par1 = new ItemStack(IaSTools.tools[slot], 1,
+				par1 = new ItemStack(IaSTools.tools[this.slot], 1,
 						par1.getItemDamage());
 		}
 		return par1;

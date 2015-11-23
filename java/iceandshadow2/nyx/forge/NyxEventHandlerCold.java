@@ -102,14 +102,14 @@ public class NyxEventHandlerCold {
 						0x2);
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerTriesToUseFurnace(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
 		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
 				&& !e.entityPlayer.capabilities.isCreativeMode) {
-			Block bl = e.world.getBlock(e.x, e.y, e.z);
+			final Block bl = e.world.getBlock(e.x, e.y, e.z);
 			if(bl instanceof BlockFurnace || e.world.getTileEntity(e.x, e.y, e.x) instanceof TileEntityFurnace) {
 				e.setCanceled(true);
 				IaSPlayerHelper
@@ -177,9 +177,9 @@ public class NyxEventHandlerCold {
 
 			// DO NOT SIMPLIFY!
 			if (isplant && !e.isCanceled()) {
-				boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
-				ForgeDirection face = ForgeDirection.getOrientation(e.face);
-				boolean coolair = e.world.getBlock(e.x+face.offsetX, e.y+face.offsetY, e.z+face.offsetZ) != NyxBlocks.thermalAir;
+				final boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
+				final ForgeDirection face = ForgeDirection.getOrientation(e.face);
+				final boolean coolair = e.world.getBlock(e.x+face.offsetX, e.y+face.offsetY, e.z+face.offsetZ) != NyxBlocks.thermalAir;
 				e.setCanceled(!dirt || !coolair);
 				if(!dirt)
 					IaSPlayerHelper

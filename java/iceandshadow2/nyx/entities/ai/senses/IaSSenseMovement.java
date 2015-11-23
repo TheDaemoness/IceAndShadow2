@@ -12,7 +12,7 @@ public class IaSSenseMovement extends IaSSense {
 	@Override
 	public boolean canSense(Entity ent) {
 		if(ent.isSprinting() || ent.fallDistance > 3.25F)
-			return this.isInRange(ent);
+			return isInRange(ent);
 		return false;
 	}
 }

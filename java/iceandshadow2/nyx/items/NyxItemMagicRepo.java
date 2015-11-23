@@ -22,10 +22,10 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 
 	public NyxItemMagicRepo(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setHasSubtypes(true);
-		this.setMaxStackSize(1);
+		setHasSubtypes(true);
+		setMaxStackSize(1);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean hasEffect(ItemStack is, int pass) {
@@ -35,8 +35,8 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() == this && target.getItemDamage() == 0 && catalyst.hasTagCompound()) {
-			Object mat = IaSToolMaterial.extractMaterial(catalyst);
-			NBTTagCompound tg = catalyst.getTagCompound();
+			final Object mat = IaSToolMaterial.extractMaterial(catalyst);
+			final NBTTagCompound tg = catalyst.getTagCompound();
 			if(tg.hasKey("ench") && mat != IaSRegistry.getToolMaterial("Cortra")) {
 				for(int i = 0; i < 4; ++i) {
 					if(catalyst.getItem() == IaSTools.armorCortra[i])
@@ -55,9 +55,9 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 			ItemStack catalyst, World world) {
 		if(target.getItem() == this && target.getItemDamage() == 0) {
 			target.setItemDamage(1);
-			Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
+			final Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
 			synchronized(ench) { //Dodge concurrent access issues?
-				for(Integer i : ench.keySet()) {
+				for(final Integer i : ench.keySet()) {
 					if(ench.get(i).intValue() <= 1)
 						ench.remove(i);
 					else
@@ -69,7 +69,7 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 				target.setItemDamage(0);
 			}
 		} else if(catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
-			Map<Integer,Integer> ench = new HashMap<Integer,Integer>(EnchantmentHelper.getEnchantments(catalyst));
+			final Map<Integer,Integer> ench = new HashMap<Integer,Integer>(EnchantmentHelper.getEnchantments(catalyst));
 			synchronized(ench) { //Dodge concurrent access issues?
 				EnchantmentHelper.setEnchantments(ench, target);
 				catalyst.stackSize = 0;
@@ -81,9 +81,9 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity pos) {
-		IaSFxManager.spawnParticle(world, "vanilla_spell", 
+		IaSFxManager.spawnParticle(world, "vanilla_spell",
 				pos.posX - 0.1 + world.rand.nextDouble() / 5,
-				pos.posY - 0.2 - world.rand.nextDouble() / 3, 
+				pos.posY - 0.2 - world.rand.nextDouble() / 3,
 				pos.posZ - 0.1 + world.rand.nextDouble() / 5,
 				-0.025 + world.rand.nextDouble() / 20, -0.05F,
 				-0.025 + world.rand.nextDouble() / 20, false, false);

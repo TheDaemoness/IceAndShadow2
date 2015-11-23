@@ -35,15 +35,15 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public NyxItemBow(String par1) {
 		super(EnumIaSModule.NYX,par1);
 		this.bFull3D = false;
-		inuse = false;
+		this.inuse = false;
 	}
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer ep,
 			List li, boolean boo) {
-		final int mod = this.getSpeedModifier(is);
+		final int mod = getSpeedModifier(is);
 		if(mod > 0) {
-			String tier = numerals[mod-1];
+			final String tier = NyxItemBow.numerals[mod-1];
 			li.add(EnumChatFormatting.DARK_AQUA.toString()
 					+ EnumChatFormatting.ITALIC.toString()
 					+ "Tier " + tier);
@@ -85,9 +85,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 			final int j = getMaxItemUseDuration(stack) - useRemaining;
 
-			if (j >= getTimeForIcon(this.getSpeedModifier(stack), 2))
+			if (j >= getTimeForIcon(getSpeedModifier(stack), 2))
 				return this.iconArray[2][renderPass];
-			if (j >= getTimeForIcon(this.getSpeedModifier(stack), 1))
+			if (j >= getTimeForIcon(getSpeedModifier(stack), 1))
 				return this.iconArray[1][renderPass];
 			return this.iconArray[0][renderPass];
 	}
@@ -98,9 +98,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public int getSpeedModifier(ItemStack is) {
 		if(!is.hasTagCompound())
 			return 0;
-		if(!is.getTagCompound().hasKey(nbtTierID))
+		if(!is.getTagCompound().hasKey(NyxItemBow.nbtTierID))
 			return 0;
-		return is.getTagCompound().getInteger(nbtTierID);
+		return is.getTagCompound().getInteger(NyxItemBow.nbtTierID);
 	}
 
 	@Override
@@ -124,10 +124,10 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
 
-		if (this.getDamage(par1ItemStack) < this.getMaxDamage() - 1) {
+		if (getDamage(par1ItemStack) < this.getMaxDamage() - 1) {
 			this.inuse = true;
 			par3EntityPlayer.setItemInUse(par1ItemStack,
-					this.getMaxItemUseDuration(par1ItemStack));
+					getMaxItemUseDuration(par1ItemStack));
 		}
 
 		return par1ItemStack;
@@ -153,9 +153,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != this)
 			return 0;
-		if(this.getSpeedModifier(target) >= 5)
+		if(getSpeedModifier(target) >= 5)
 			return 0;
-		if(catalyst.stackSize < this.getUpgradeCost(this.getSpeedModifier(target)))
+		if(catalyst.stackSize < getUpgradeCost(getSpeedModifier(target)))
 			return 0;
 		if(catalyst.getItem() == NyxItems.nifelhiumPowder)
 			return 160;
@@ -167,10 +167,10 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 			ItemStack catalyst, World world) {
 		if(!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
-			target.getTagCompound().setInteger(nbtTierID,1);
+			target.getTagCompound().setInteger(NyxItemBow.nbtTierID,1);
 		} else
-			target.getTagCompound().setInteger(nbtTierID,this.getSpeedModifier(target)+1);
-		catalyst.stackSize -= this.getUpgradeCost(this.getSpeedModifier(target));
+			target.getTagCompound().setInteger(NyxItemBow.nbtTierID,getSpeedModifier(target)+1);
+		catalyst.stackSize -= getUpgradeCost(getSpeedModifier(target));
 		return null;
 	}
 

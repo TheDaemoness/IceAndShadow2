@@ -9,9 +9,9 @@ public class IaSDamageSource extends DamageSource {
 	public IaSDamageSource(String unlocalizedName, float hungerDmg,
 			boolean bypass) {
 		super(unlocalizedName);
-		hungerDesat = hungerDmg;
+		this.hungerDesat = hungerDmg;
 		if (bypass)
-			this.setDamageBypassesArmor();
+			setDamageBypassesArmor();
 	}
 
 }

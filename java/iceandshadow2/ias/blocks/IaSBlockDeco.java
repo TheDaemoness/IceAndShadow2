@@ -9,7 +9,7 @@ public class IaSBlockDeco extends IaSBaseBlockSingle {
 
 	public IaSBlockDeco(EnumIaSModule mod, String id, Material par2Material) {
 		super(mod, id, par2Material);
-		this.setLightOpacity(4);
+		setLightOpacity(4);
 	}
 
 	/**

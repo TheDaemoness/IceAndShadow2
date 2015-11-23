@@ -64,7 +64,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public IChunkProvider createChunkGenerator() {
-		return new NyxChunkProvider(worldObj, worldObj.getSeed(), true);
+		return new NyxChunkProvider(this.worldObj, this.worldObj.getSeed(), true);
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
-		return worldChunkMgr.getBiomeGenAt(x, z);
+		return this.worldChunkMgr.getBiomeGenAt(x, z);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class NyxWorldProvider extends WorldProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float par1, float par2) {
-		return NYX_COLOR;
+		return NyxWorldProvider.NYX_COLOR;
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class NyxWorldProvider extends WorldProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return NYX_COLOR;
+		return NyxWorldProvider.NYX_COLOR;
 	}
 
 	@Override

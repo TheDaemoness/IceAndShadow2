@@ -23,10 +23,10 @@ public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName 
 
 	public IaSBaseBlockFluid(EnumIaSModule mod, String texName, Fluid fluid) {
 		super(fluid, Material.water);
-		this.setBlockName(mod.prefix + texName);
-		this.setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
+		setBlockName(mod.prefix + texName);
+		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
 				+ texName);
-		MODULE = mod;
+		this.MODULE = mod;
 	}
 
 	@Override
@@ -45,17 +45,17 @@ public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName 
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return side == 0 || side == 1 ? stillIcon : flowingIcon;
+		return side == 0 || side == 1 ? this.stillIcon : this.flowingIcon;
 	}
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override
@@ -71,8 +71,8 @@ public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		stillIcon = register.registerIcon(this.getTexName() + "Still");
-		flowingIcon = register.registerIcon(this.getTexName() + "Flowing");
+		this.stillIcon = register.registerIcon(getTexName() + "Still");
+		this.flowingIcon = register.registerIcon(getTexName() + "Flowing");
 	}
 
 }

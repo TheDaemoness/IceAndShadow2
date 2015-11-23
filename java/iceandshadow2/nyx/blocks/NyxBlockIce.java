@@ -8,6 +8,7 @@ import iceandshadow2.nyx.NyxItems;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -19,12 +20,12 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 
 	public NyxBlockIce(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.ice);
-		this.setLuminescence(0.3F);
-		this.setLightOpacity(7);
-		this.setHardness(3.0F);
-		this.setResistance(5.0F);
-		this.setTickRandomly(true);
-		this.setStepSound(soundTypeGlass);
+		setLuminescence(0.3F);
+		setLightOpacity(7);
+		setHardness(3.0F);
+		setResistance(5.0F);
+		setTickRandomly(true);
+		setStepSound(Block.soundTypeGlass);
 		this.slipperiness = 0.99F;
 	}
 

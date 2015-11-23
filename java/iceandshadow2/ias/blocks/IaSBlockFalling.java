@@ -36,7 +36,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 
 	public IaSBlockFalling(EnumIaSModule mod, String id, Material par2Material) {
 		super(mod, id, par2Material);
-		tryFalling = false;
+		this.tryFalling = false;
 	}
 
 	/**
@@ -44,9 +44,9 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 */
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		tryFalling = true;
+		this.tryFalling = true;
 		par1World.scheduleBlockUpdate(par2, par3, par4, this,
-				this.tickRate(par1World));
+				tickRate(par1World));
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 */
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, int par5) {
-		tryFalling = true;
+		this.tryFalling = true;
 		par1World.scheduleBlockUpdate(par2, par3, par4, this,
-				this.tickRate(par1World));
+				tickRate(par1World));
 	}
 
 	/**
@@ -87,23 +87,23 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 * If there is space to fall below will start this block falling
 	 */
 	private void tryToFall(World par1World, int par2, int par3, int par4) {
-		if (canFallBelow(par1World, par2, par3 - 1, par4) && par3 >= 0) {
+		if (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 >= 0) {
 			final byte b0 = 32;
 
-			if (!fallInstantly
+			if (!IaSBlockFalling.fallInstantly
 					&& par1World.checkChunksExist(par2 - b0, par3 - b0, par4
 							- b0, par2 + b0, par3 + b0, par4 + b0)) {
 				if (!par1World.isRemote) {
 					final EntityFallingBlock entityfallingsand = new EntityFallingBlock(
 							par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F,
 							this, par1World.getBlockMetadata(par2, par3, par4));
-					this.onStartFalling(entityfallingsand);
+					onStartFalling(entityfallingsand);
 					par1World.spawnEntityInWorld(entityfallingsand);
 				}
 			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 
-				while (canFallBelow(par1World, par2, par3 - 1, par4)
+				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4)
 						&& par3 > 0) {
 					--par3;
 				}
@@ -122,8 +122,8 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	public void updateTick(World par1World, int par2, int par3, int par4,
 			Random par5Random) {
 		if (!par1World.isRemote) {
-			this.tryToFall(par1World, par2, par3, par4);
-			tryFalling = false;
+			tryToFall(par1World, par2, par3, par4);
+			this.tryFalling = false;
 		}
 	}
 }

@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
@@ -70,15 +69,15 @@ public class NyxDeathSystem {
 	}
 
 	public NyxDeathSystem() {
-		death_inv = new HashMap<Integer, InventoryPlayer>();
+		NyxDeathSystem.death_inv = new HashMap<Integer, InventoryPlayer>();
 	}
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent e) {
 		if (e.entity instanceof EntityPlayerMP) {
 			final EntityPlayerMP playNoMore = (EntityPlayerMP) e.entityLiving;
-			plai_inv = new InventoryPlayer(playNoMore);
-			plai_inv.copyInventory(playNoMore.inventory);
+			NyxDeathSystem.plai_inv = new InventoryPlayer(playNoMore);
+			NyxDeathSystem.plai_inv.copyInventory(playNoMore.inventory);
 		}
 	}
 
@@ -90,9 +89,9 @@ public class NyxDeathSystem {
 				&& e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
 			System.out.println(e.entityPlayer.getEntityId());
 			e.setCanceled(true);
-			plai_inv = determineRespawnInventory(plai_inv, true);
-			e.entityPlayer.inventory.copyInventory(plai_inv);
-			death_inv.put(e.entityPlayer.getEntityId(),
+			NyxDeathSystem.plai_inv = NyxDeathSystem.determineRespawnInventory(NyxDeathSystem.plai_inv, true);
+			e.entityPlayer.inventory.copyInventory(NyxDeathSystem.plai_inv);
+			NyxDeathSystem.death_inv.put(e.entityPlayer.getEntityId(),
 					e.entityPlayer.inventory);
 		}
 	}
@@ -101,17 +100,17 @@ public class NyxDeathSystem {
 	public void onLogin(PlayerLoggedInEvent e) {
 		final InventoryPlayer inv = new InventoryPlayer(e.player);
 		if (e.player.isDead)
-			inv.copyInventory(determineRespawnInventory(e.player.inventory,
+			inv.copyInventory(NyxDeathSystem.determineRespawnInventory(e.player.inventory,
 					false));
 		else
 			inv.copyInventory(e.player.inventory);
-		death_inv.put(e.player.getEntityId(), inv);
+		NyxDeathSystem.death_inv.put(e.player.getEntityId(), inv);
 
 	}
 
 	@SubscribeEvent
 	public void onLogout(PlayerLoggedOutEvent e) {
-		death_inv.remove(e.player.getEntityId());
+		NyxDeathSystem.death_inv.remove(e.player.getEntityId());
 	}
 
 	@SubscribeEvent
@@ -122,8 +121,8 @@ public class NyxDeathSystem {
 				&& e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
 			if (!e.original.isDead)
 				return;
-			if (death_inv.get(e.original.getEntityId()) != null)
-				e.entityPlayer.inventory.copyInventory(death_inv.get(e.original
+			if (NyxDeathSystem.death_inv.get(e.original.getEntityId()) != null)
+				e.entityPlayer.inventory.copyInventory(NyxDeathSystem.death_inv.get(e.original
 						.getEntityId()));
 			// Raise madness.
 		}

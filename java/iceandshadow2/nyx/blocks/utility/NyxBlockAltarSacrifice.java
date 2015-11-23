@@ -14,10 +14,10 @@ public class NyxBlockAltarSacrifice extends IaSBlockAltar {
 
 	public NyxBlockAltarSacrifice(EnumIaSModule mod, String id) {
 		super(mod, id);
-		this.setLightLevel(0.5F);
-		this.setResistance(9001.0F);
-		this.setBlockUnbreakable();
-		this.setStepSound(Block.soundTypeStone);
+		setLightLevel(0.5F);
+		setResistance(9001.0F);
+		setBlockUnbreakable();
+		setStepSound(Block.soundTypeStone);
 	}
 
 	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {

@@ -1,52 +1,37 @@
 package iceandshadow2.nyx.entities.cosmetic;
 
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.render.fx.IaSFxManager;
 
-import java.util.Iterator;
-import java.util.List;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityCosmeticShadowRiser extends EntityThrowable {
 
 	public boolean isStrong() {
-		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
 	}
 
 	public boolean isUndeadHarming() {
-		return (this.getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
 	}
 
 	public EntityCosmeticShadowRiser setFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().updateObject(16,
+		getDataWatcher().updateObject(16,
 				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 		return this;
 	}
 
 	private void initFlags(boolean strong, boolean harmUndead) {
-		this.getDataWatcher().addObject(16,
+		getDataWatcher().addObject(16,
 				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 	}
 
 	public EntityCosmeticShadowRiser(World par1World) {
 		super(par1World);
-		this.getDataWatcher().addObject(16, (byte) (0));
-		this.setThrowableHeading(0, 1, 0, 1.2F, 0F);
-		this.setInvisible(true);
+		getDataWatcher().addObject(16, (byte) (0));
+		setThrowableHeading(0, 1, 0, 1.2F, 0F);
+		setInvisible(true);
 	}
 
 	@Override
@@ -73,15 +58,15 @@ public class EntityCosmeticShadowRiser extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
 		if(par1MovingObjectPosition.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY)
-			this.setDead();
+			setDead();
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if(this.ticksExisted > 50 && this.motionY < 0)
-			this.setDead();
-		String id = "shadowSmokeLarge";
+			setDead();
+		final String id = "shadowSmokeLarge";
 		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
 				this.posZ, false, false);
 		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX,

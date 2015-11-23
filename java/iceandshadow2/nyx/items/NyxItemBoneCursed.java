@@ -22,8 +22,8 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing,
 
 	public NyxItemBoneCursed(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(1);
-		this.setFull3D();
+		setMaxStackSize(1);
+		setFull3D();
 	}
 
 	@Override
@@ -40,11 +40,11 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing,
 	public IIcon getIcon(ItemStack stack, int pass) {
 		return getIconFromDamageForRenderPass(0, pass);
 	}
-	
+
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (pass == 1)
-			return glow;
+			return this.glow;
 		return this.itemIcon;
 	}
 
@@ -71,8 +71,8 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing,
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		glow = reg.registerIcon(this.getTexName() + "Glow");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.glow = reg.registerIcon(getTexName() + "Glow");
 	}
 
 	@Override

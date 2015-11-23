@@ -14,10 +14,10 @@ public class NyxBlockOreNifelhium extends NyxBlockOre {
 	public NyxBlockOreNifelhium(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 2);
-		this.setHardness(20.0F);
-		this.setLuminescence(0.3F);
-		this.setLightColor(0.9F, 0.9F, 0.9F);
-		this.setResistance(15.0F);
+		setHardness(20.0F);
+		setLuminescence(0.3F);
+		setLightColor(0.9F, 0.9F, 0.9F);
+		setResistance(15.0F);
 		GameRegistry.addSmelting(this, new ItemStack(NyxItems.nifelhiumPowder,1), 2);
 	}
 

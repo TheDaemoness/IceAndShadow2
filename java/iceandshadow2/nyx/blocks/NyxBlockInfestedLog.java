@@ -21,12 +21,12 @@ IIaSNoInfest {
 
 	public NyxBlockInfestedLog(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.wood);
-		this.setLuminescence(0.2F);
-		this.setLightColor(0.0F, 1.0F, 0.7F);
-		this.setHardness(7.5F);
-		this.setResistance(3.0F);
-		this.setStepSound(soundTypeWood);
-		this.setTickRandomly(true);
+		setLuminescence(0.2F);
+		setLightColor(0.0F, 1.0F, 0.7F);
+		setHardness(7.5F);
+		setResistance(3.0F);
+		setStepSound(Block.soundTypeWood);
+		setTickRandomly(true);
 	}
 
 	/**

@@ -16,11 +16,11 @@ import net.minecraft.world.World;
  * This takes precedence over IIaSApiTransmute.
  */
 public interface IIaSApiTransmuteLens {
-	
+
 	/**
 	 * Gets the transmutation duration.
 	 * Also used to check if a transmutation is possible.
-	 * 
+	 *
 	 * @param lenstype
 	 *            The type of the equipped lens.
 	 *            Null indicates a third-party lens.
@@ -36,7 +36,7 @@ public interface IIaSApiTransmuteLens {
 	/**
 	 * Gets the yield of the transmutation.
 	 * As a rule of thumb, the lens should NOT be consumed by the transmutation.
-	 * 
+	 *
 	 * @param lens
 	 *            The equipped lens.
 	 *            Provided for mod authors who want to do fun things with NBT.
@@ -45,22 +45,22 @@ public interface IIaSApiTransmuteLens {
 	 * @return The item stacks yielded from doing the transmutation. Null is acceptable.
 	 */
 	public List<ItemStack> getTransmuteLensYield(ItemStack lens, ItemStack target);
-	
+
 	/**
 	 * Used to get a new texture for the top of the transmutation altar.
-	 * 
+	 *
 	 * @param lens
 	 *            The equipped lens.
 	 * @return The icon to be used for the altar while this lens is equipped, or null if no change.
 	 */
 	public IIcon getAltarTopTexture(ItemStack lens);
-	
+
 	/**
 	 * Used to handle particle spawning while transmutation is happening. The
 	 * altar already spawns "item-breaking particles". This is for additional
 	 * particles. Please do not fully disable the particles. They are the
 	 * primary indication of transmutation happening.
-	 * 
+	 *
 	 * @param target
 	 *            The item stack being transmuted (on the altar).
 	 * @param catalyst

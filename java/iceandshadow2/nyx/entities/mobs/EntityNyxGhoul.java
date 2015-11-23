@@ -40,7 +40,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	private EntityLivingBase searched;
 
 	protected static double moveSpeed = 0.25;
-	
+
 	protected int regenDelay;
 
 	public EntityNyxGhoul(World par1World) {
@@ -74,7 +74,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	protected void addRandomArmor() {
 		return;
 	}
-	
+
 	@Override
 	public float getBrightness(float par1) {
 		return super.getBrightness(par1) * 0.5F + 0.5F;
@@ -89,22 +89,22 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
+		getEntityAttribute(SharedMonsterAttributes.maxHealth)
 		.setBaseValue(getScaledMaxHealth());
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
 		.setBaseValue(0.66D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
 		.setBaseValue(EntityNyxGhoul.moveSpeed);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange)
+		getEntityAttribute(SharedMonsterAttributes.followRange)
 		.setBaseValue(24.0);
-		this.getEntityAttribute(field_110186_bp)
+		getEntityAttribute(EntityZombie.field_110186_bp)
 		.setBaseValue(0.0);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		float f = this.getAttackStrength(par1Entity);
-		int i = 0;
+		final float f = getAttackStrength(par1Entity);
+		final int i = 0;
 
 		final boolean flag = par1Entity.attackEntityFrom(
 				DamageSource.causeMobDamage(this), f * 2 + 4);
@@ -129,7 +129,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				par1Entity.setFire(j * 4);
 
 			if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
-				EntityLivingBase armored = (EntityLivingBase)par1Entity;
+				final EntityLivingBase armored = (EntityLivingBase)par1Entity;
 				for(int s = 4; s >= 1; --s) {
 					if(armored.getEquipmentInSlot(s) != null) {
 						IaSEntityHelper.dropItem(this, armored.getEquipmentInSlot(s));
@@ -138,7 +138,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 					}
 				}
 				armored.addPotionEffect(new PotionEffect(Potion.wither.id,
-					75+IaSWorldHelper.getDifficulty(worldObj)*30,0));
+					75+IaSWorldHelper.getDifficulty(this.worldObj)*30,0));
 			}
 		}
 
@@ -150,14 +150,14 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (this.isEntityInvulnerable()
+		if (isEntityInvulnerable()
 				|| !par1DamageSource.isUnblockable()
 				|| par1DamageSource == DamageSource.drown)
 			return false;
 		boolean flag;
 		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
 			par2 -= IaSWorldHelper.getRegionArmorMod(this);
-		if(par1DamageSource.isDamageAbsolute() && !this.isInvisible())
+		if(par1DamageSource.isDamageAbsolute() && !isInvisible())
 			flag = super.attackEntityFrom(par1DamageSource, par2);
 		else
 			flag = super.attackEntityFrom(par1DamageSource, par2/2);
@@ -165,24 +165,24 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				&& !par1DamageSource.isMagicDamage()
 				&& !par1DamageSource.isExplosion()
 				&& !par1DamageSource.isFireDamage()) {
-			Entity ent = ((EntityDamageSource)par1DamageSource).getEntity();
+			final Entity ent = ((EntityDamageSource)par1DamageSource).getEntity();
 			if(ent instanceof EntityPlayer)
 				((EntityPlayer)ent).dropOneItem(false);
 		}
 		return flag;
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1 || this.worldObj.isRemote)
 			return;
-		
+
 		if(this.rand.nextInt(4-(IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0)) == 0)
-			this.dropItem(NyxItems.boneSanctified, 1);
+			dropItem(NyxItems.boneSanctified, 1);
 		else if(IaSWorldHelper.getDifficulty(this.worldObj)<3)
-			this.dropItem(NyxItems.alabaster, 1);
+			dropItem(NyxItems.alabaster, 1);
 		if(IaSWorldHelper.getDifficulty(this.worldObj)>=3)
-			this.dropItem(NyxItems.alabaster, 1);
+			dropItem(NyxItems.alabaster, 1);
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	}
 
 	public int getAttackStrength(Entity par1Entity) {
-		final ItemStack var2 = this.getHeldItem();
+		final ItemStack var2 = getHeldItem();
 		int var3;
 		if (this.worldObj != null)
 			var3 = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 8 : 9;
@@ -221,7 +221,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	 */
 	@Override
 	protected String getLivingSound() {
-		if(this.getAttackTarget() != null)
+		if(getAttackTarget() != null)
 			return "IceAndShadow2:mob_nyxghoul_idle";
 		return null;
 	}
@@ -235,23 +235,23 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	protected String getDeathSound() {
 		return "IceAndShadow2:mob_nyxghoul_death";
 	}
-	
+
 	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_,
 			int p_145780_3_, Block p_145780_4_) {
-		if (!this.isInvisible())
-			this.playSound("step.snow", 1.0F, 1.0F);
+		if (!isInvisible())
+			playSound("step.snow", 1.0F, 1.0F);
 	}
 
 	@Override
 	public void onKillEntity(EntityLivingBase misnomer) {
-		this.heal(misnomer.getMaxHealth()/2);
+		heal(misnomer.getMaxHealth()/2);
 		super.onKillEntity(misnomer);
 	}
 
 	@Override
 	public double getMoveSpeed() {
-		return moveSpeed;
+		return EntityNyxGhoul.moveSpeed;
 	}
 
 	@Override
@@ -261,7 +261,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public EntityLivingBase getSearchTarget() {
-		return searched;
+		return this.searched;
 	}
 
 	@Override
@@ -269,30 +269,30 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		super.onLivingUpdate();
 		if (this.worldObj.isRemote)
 			return;
-		boolean attacking = this.getAttackTarget() != null;
-		if (--regenDelay <= 0) {
+		final boolean attacking = getAttackTarget() != null;
+		if (--this.regenDelay <= 0) {
 			if(IaSWorldHelper.getDifficulty(this.worldObj) <= 1) {
-				this.setDead();
+				setDead();
 				return;
 			}
-			this.heal(1);
+			heal(1);
 			this.regenDelay = 15;
 			if(attacking) {
-				List li = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(18, 18, 18));
+				final List li = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(18, 18, 18));
 				li.addAll(this.worldObj.getEntitiesWithinAABB(EntityAnimal.class, this.boundingBox.expand(18, 18, 18)));
-				li.add(this.getAttackTarget());
-				for(Object ent : li)
+				li.add(getAttackTarget());
+				for(final Object ent : li)
 					((EntityLivingBase)ent).addPotionEffect(new PotionEffect(Potion.blindness.id,50,0));
 			}
 		}
 		if(attacking) {
-			double dist = this.getDistanceSqToEntity(this.getAttackTarget());
-			if(this.isInvisible() && dist < 9.0)
-				this.setInvisible(false);
-			else if(!this.isInvisible() && dist > 16.0)
-				this.setInvisible(true);
+			final double dist = getDistanceSqToEntity(getAttackTarget());
+			if(isInvisible() && dist < 9.0)
+				setInvisible(false);
+			else if(!isInvisible() && dist > 16.0)
+				setInvisible(true);
 		} else
-			this.setInvisible(true);
+			setInvisible(true);
 	}
 
 	@Override
@@ -303,8 +303,8 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
 		this.equipmentDropChances[0] = 0.0F;
-		
-		final int dif = IaSWorldHelper.getDifficulty(worldObj);
+
+		IaSWorldHelper.getDifficulty(this.worldObj);
 		return dat;
 	}
 
@@ -321,7 +321,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public void setSearchTarget(EntityLivingBase ent) {
-		searched = ent;
+		this.searched = ent;
 	}
 
 }

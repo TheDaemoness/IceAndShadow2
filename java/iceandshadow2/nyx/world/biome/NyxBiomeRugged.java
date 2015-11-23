@@ -16,19 +16,19 @@ public class NyxBiomeRugged extends NyxBiome {
 	public NyxBiomeRugged(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		this.setBlocks(NyxBlocks.stone, NyxBlocks.stone);
+		setBlocks(NyxBlocks.stone, NyxBlocks.stone);
 		this.doGenNifelhium = false;
 		this.doGenUnstableIce = false;
 
-		this.setColor(96 << 16 | 96 << 8 | 96);
+		setColor(96 << 16 | 96 << 8 | 96);
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(
 				EntityNyxSkeleton.class, 60, 2, 3));
 		this.spawnableMonsterList.add(new SpawnListEntry(
 				EntityNyxNecromancer.class, 10, 1, 1));
-		
-		this.setColor(96 << 16 | 96 << 8 | 96);
+
+		setColor(96 << 16 | 96 << 8 | 96);
 	}
 
 	@Override

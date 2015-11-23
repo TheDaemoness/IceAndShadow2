@@ -61,7 +61,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 			this.range = par6;
 			this.rangeSq = par6 * par6;
 			this.reqLOS = los;
-			this.setMutexBits(3);
+			setMutexBits(3);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public boolean continueExecuting() {
-		return this.shouldExecute() || !this.entityHost.getNavigator().noPath();
+		return shouldExecute() || !this.entityHost.getNavigator().noPath();
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	public void updateTask() {
 		final double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX,
 				this.attackTarget.boundingBox.minY, this.attackTarget.posZ);
-		final boolean flag = !reqLOS
+		final boolean flag = !this.reqLOS
 				|| this.entityHost.getEntitySenses().canSee(this.attackTarget);
 
 		if (flag) {
@@ -146,11 +146,11 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 			this.rangedAttackTime = MathHelper.floor_float(f
 					* (this.maxRangedAttackTime - this.minRangedAttackTime)
 					+ this.minRangedAttackTime);
-			if (reflexDelay)
+			if (this.reflexDelay)
 				this.rangedAttackEntityHost.attackEntityWithRangedAttack(
 						this.attackTarget, f1);
 			else {
-				reflexDelay = true;
+				this.reflexDelay = true;
 				this.rangedAttackTime /= 2;
 			}
 

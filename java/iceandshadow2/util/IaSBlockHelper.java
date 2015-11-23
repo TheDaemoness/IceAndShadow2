@@ -38,7 +38,7 @@ public class IaSBlockHelper {
 	public static boolean isAir(Block bl) {
 		return bl.getMaterial() == Material.air;
 	}
-	
+
 	public static boolean isFluid(Block bl) {
 		return bl instanceof BlockLiquid || bl instanceof BlockFluidBase;
 	}

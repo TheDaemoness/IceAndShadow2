@@ -14,9 +14,9 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 
 	public IaSItemShears(EnumIaSModule mod, String texName) {
 		super();
-		this.setUnlocalizedName(mod.prefix + texName);
-		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		MODULE = mod;
+		setUnlocalizedName(mod.prefix + texName);
+		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
+		this.MODULE = mod;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
+		return IceAndShadow2.MODID + ':' + this.MODULE.prefix + getModName();
 	}
 
 	public final Item register() {

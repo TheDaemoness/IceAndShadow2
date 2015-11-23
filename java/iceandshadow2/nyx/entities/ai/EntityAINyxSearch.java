@@ -13,14 +13,14 @@ public class EntityAINyxSearch extends EntityAIBase {
 	protected int seen;
 
 	public EntityAINyxSearch(EntityMob b) {
-		taskOwner = b;
+		this.taskOwner = b;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		++seen;
-		return seen < 125
-				&& !((IIaSSensate) this.taskOwner).getSense().canSense(target);
+		++this.seen;
+		return this.seen < 125
+				&& !((IIaSSensate) this.taskOwner).getSense().canSense(this.target);
 	}
 
 	@Override
@@ -41,10 +41,10 @@ public class EntityAINyxSearch extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
-		target = ((IIaSMobGetters) this.taskOwner).getSearchTarget();
-		seen = 0;
+		this.target = ((IIaSMobGetters) this.taskOwner).getSearchTarget();
+		this.seen = 0;
 		this.taskOwner.getNavigator().clearPathEntity();
-		this.taskOwner.getNavigator().tryMoveToEntityLiving(target,
+		this.taskOwner.getNavigator().tryMoveToEntityLiving(this.target,
 				((IIaSMobGetters) this.taskOwner).getMoveSpeed());
 	}
 

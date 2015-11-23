@@ -28,15 +28,15 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return extractor;
+			return this.extractor;
 		return this.itemIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.extractor = reg.registerIcon(this.getTexName() + "Extractor");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.extractor = reg.registerIcon(getTexName() + "Extractor");
 	}
 
 	@Override

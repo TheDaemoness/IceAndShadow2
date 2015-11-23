@@ -17,12 +17,12 @@ import net.minecraft.world.World;
 public class NyxBlockThermalCore extends IaSBaseBlockMulti {
 	public NyxBlockThermalCore(String id) {
 		super(EnumIaSModule.NYX, id, Material.fire, 2);
-		this.setLightOpacity(0);
-		this.setHardness(0.5F);
-		this.setLightColor(1.0F, 0.5F, 0.0F);
-		this.setResistance(NyxBlockStone.RESISTANCE);
-		this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
-		this.setTickRandomly(true);
+		setLightOpacity(0);
+		setHardness(0.5F);
+		setLightColor(1.0F, 0.5F, 0.0F);
+		setResistance(NyxBlockStone.RESISTANCE);
+		setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
+		setTickRandomly(true);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class NyxBlockThermalCore extends IaSBaseBlockMulti {
 			Explosion e) {
 		w.setBlockToAir(x, y, z);
 	}
-	
+
 	@Override
 	public void updateTick(World w, int x, int y,
 			int z, Random r) {

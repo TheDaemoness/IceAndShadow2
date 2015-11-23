@@ -10,7 +10,7 @@ public class NyxItemFoodCookie extends IaSItemFood {
 
 	public NyxItemFoodCookie(String texName) {
 		super(EnumIaSModule.NYX, texName, 3, 7.2F, false);
-		this.setEatTime(24);
+		setEatTime(24);
 	}
 
 	@Override

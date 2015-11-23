@@ -34,7 +34,7 @@ public abstract class GenRuins extends WorldGenerator {
 		if (canGenerateHere(var1, var2, x, y, z)) {
 			if (IaSFlags.flag_report_ruins_gen)
 				IceAndShadow2.getLogger().info(
-						"[DEV] Generating " + this.getLowercaseName() + " @ ("
+						"[DEV] Generating " + getLowercaseName() + " @ ("
 								+ x + "," + y + "," + z + ").");
 			buildPass(var1, var2, x, y, z);
 			damagePass(var1, var2, x, y, z);

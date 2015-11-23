@@ -5,6 +5,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,10 +20,10 @@ public class NyxBlockPlanks extends IaSBaseBlockMulti implements IIaSNoInfest {
 
 	public NyxBlockPlanks(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.wood, (byte) 2);
-		this.setLuminescence(0.2F);
-		this.setHardness(3.0F);
-		this.setResistance(5.0F);
-		this.setStepSound(soundTypeWood);
+		setLuminescence(0.2F);
+		setHardness(3.0F);
+		setResistance(5.0F);
+		setStepSound(Block.soundTypeWood);
 	}
 
 	@Override

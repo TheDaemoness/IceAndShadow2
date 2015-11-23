@@ -19,10 +19,10 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 
 	public NyxItemBoneSanctified(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(1);
-		this.setMaxDamage(300);
-		this.setNoRepair();
-		this.setFull3D();
+		setMaxStackSize(1);
+		setMaxDamage(300);
+		setNoRepair();
+		setFull3D();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 			stack.stackSize = 0;
 			return;
 		}
-		int dmg = stack.getItemDamage();
+		final int dmg = stack.getItemDamage();
 		if (stack.isItemDamaged()) {
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);

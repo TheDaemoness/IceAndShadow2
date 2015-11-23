@@ -2,18 +2,12 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSOnDeathDrop;
-import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
-import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
-import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -24,11 +18,11 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
-	
+
 	public NyxItemToxicCore(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		this.setMaxStackSize(4);
-		this.setFull3D();
+		setMaxStackSize(4);
+		setFull3D();
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
 				new ItemStack(this, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
@@ -45,15 +39,15 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return smallIcon;
+			return this.smallIcon;
 		return this.itemIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.smallIcon = reg.registerIcon(this.getTexName() + "Small");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.smallIcon = reg.registerIcon(getTexName() + "Small");
 	}
 
 	@Override

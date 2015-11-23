@@ -17,6 +17,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -38,15 +39,15 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	public NyxItemSwordFrost(String par1) {
 		super(EnumIaSModule.NYX,par1);
 		this.bFull3D = true;
-		this.setMaxDamage(512);
+		setMaxDamage(512);
 	}
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer ep,
 			List li, boolean boo) {
-		final int mod = this.getUpgradeLevel(is);
+		final int mod = getUpgradeLevel(is);
 		if(mod > 0) {
-			String tier = numerals[mod-1];
+			final String tier = NyxItemSwordFrost.numerals[mod-1];
 			li.add(EnumChatFormatting.DARK_AQUA.toString()
 					+ EnumChatFormatting.ITALIC.toString()
 					+ "Tier " + tier);
@@ -57,12 +58,12 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
-	
+
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
-		Multimap mm = HashMultimap.create();
-		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), 
-				new AttributeModifier(field_111210_e, "Weapon modifier", 5, 0));
+		final Multimap mm = HashMultimap.create();
+		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+				new AttributeModifier(Item.field_111210_e, "Weapon modifier", 5, 0));
 		return mm;
 	}
 
@@ -93,14 +94,14 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	public EnumAction getItemUseAction(ItemStack is) {
 		return EnumAction.block;
 	}
-	
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w,
 			EntityPlayer ep) {
-		ep.setItemInUse(is, this.getMaxItemUseDuration(is));
+		ep.setItemInUse(is, getMaxItemUseDuration(is));
 		return is;
 	}
-	
+
 	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
 		return 72000;
@@ -115,9 +116,9 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(target.getItem() != this)
 			return 0;
-		if(this.getUpgradeLevel(target) >= 5)
+		if(getUpgradeLevel(target) >= 5)
 			return 0;
-		if(catalyst.stackSize < this.getUpgradeCost(this.getUpgradeLevel(target)))
+		if(catalyst.stackSize < getUpgradeCost(getUpgradeLevel(target)))
 			return 0;
 		if(catalyst.getItem() == NyxItems.nifelhiumPowder)
 			return 160;
@@ -139,10 +140,10 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 			ItemStack catalyst, World world) {
 		if(!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
-			target.getTagCompound().setInteger(nbtTierID,1);
+			target.getTagCompound().setInteger(NyxItemSwordFrost.nbtTierID,1);
 		} else
-			target.getTagCompound().setInteger(nbtTierID,this.getUpgradeLevel(target)+1);
-		catalyst.stackSize -= this.getUpgradeCost(this.getUpgradeLevel(target));
+			target.getTagCompound().setInteger(NyxItemSwordFrost.nbtTierID,getUpgradeLevel(target)+1);
+		catalyst.stackSize -= getUpgradeCost(getUpgradeLevel(target));
 		return null;
 	}
 
@@ -151,13 +152,13 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 			World world, Entity ent) {
 		return false;
 	}
-	
+
 	public int getUpgradeLevel(ItemStack is) {
 		if(!is.hasTagCompound())
 			return 0;
-		if(!is.getTagCompound().hasKey(nbtTierID))
+		if(!is.getTagCompound().hasKey(NyxItemSwordFrost.nbtTierID))
 			return 0;
-		return is.getTagCompound().getInteger(nbtTierID);
+		return is.getTagCompound().getInteger(NyxItemSwordFrost.nbtTierID);
 	}
 
 	public int getUpgradeCost(int mod) {

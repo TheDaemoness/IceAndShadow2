@@ -6,6 +6,6 @@ public enum EnumIaSModule {
 	public final String prefix;
 
 	EnumIaSModule(String str) {
-		prefix = str;
+		this.prefix = str;
 	}
 }

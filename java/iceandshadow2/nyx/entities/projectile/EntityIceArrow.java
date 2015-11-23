@@ -55,7 +55,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.freezeLevel = 0;
 		this.freezeTime = 1;
 		this.renderDistanceWeight = 10.0D;
-		this.setSize(0.5F, 0.5F);
+		setSize(0.5F, 0.5F);
 	}
 
 	public EntityIceArrow(World par1World, double par2, double par4,
@@ -64,8 +64,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.freezeLevel = freezeLevel;
 		this.freezeTime = freezeTime;
 		this.renderDistanceWeight = 10.0D;
-		this.setSize(0.5F, 0.5F);
-		this.setPosition(par2, par4, par6);
+		setSize(0.5F, 0.5F);
+		setPosition(par2, par4, par6);
 		this.yOffset = 0.0F;
 	}
 
@@ -92,11 +92,11 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			final float var15 = (float) -(Math.atan2(var8, var12) * 180.0D / Math.PI);
 			final double var16 = var6 / var12;
 			final double var18 = var10 / var12;
-			this.setLocationAndAngles(par2EntityLiving.posX + var16, this.posY,
+			setLocationAndAngles(par2EntityLiving.posX + var16, this.posY,
 					par2EntityLiving.posZ + var18, var14, var15);
 			this.yOffset = 0.0F;
 			final float var20 = (float) var12 * 0.2F;
-			this.setThrowableHeading(var6, var8 + var20, var10, par4, par5);
+			setThrowableHeading(var6, var8 + var20, var10, par4, par5);
 		}
 	}
 
@@ -108,8 +108,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.renderDistanceWeight = 10.0D;
 		this.shootingEntity = par2EntityLiving;
 
-		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY
+		setSize(0.5F, 0.5F);
+		setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY
 				+ par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ,
 				par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
 		this.posX -= MathHelper
@@ -117,7 +117,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= MathHelper
 				.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
-		this.setPosition(this.posX, this.posY, this.posZ);
+		setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F
 				* (float) Math.PI)
@@ -127,7 +127,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F
 				* (float) Math.PI);
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ,
+		setThrowableHeading(this.motionX, this.motionY, this.motionZ,
 				par3 * 1.5F, 1.0F);
 	}
 
@@ -191,8 +191,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		super.onUpdate();
 
 		// Ice arrows tend to melt.
-		if (this.isBurning())
-			this.setDead();
+		if (isBurning())
+			setDead();
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
 			final float var1 = MathHelper.sqrt_double(this.motionX
@@ -225,7 +225,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
 								.lengthVector() / 5.0F), 1.2F / (this.rand
 										.nextFloat() * 0.2F + 0.9F));
-				this.setDead();
+				setDead();
 			}
 		}
 
@@ -298,7 +298,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 						* this.motionZ);
 				int var23 = MathHelper.ceiling_double_int(var20 * this.damage);
 
-				if (this.getIsCritical())
+				if (getIsCritical())
 					var23 += this.rand.nextInt(var23 / 2 + 1) + var23;
 				else
 					var23 += 2;
@@ -355,8 +355,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					// Kill the arrow IF it's non-critical and didn't hit an
 					// enderman.
 					if (!(var4.entityHit instanceof EntityEnderman)
-							&& !this.getIsCritical())
-						this.setDead();
+							&& !getIsCritical())
+						setDead();
 
 				}
 			} else {
@@ -388,14 +388,14 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 					boolean die = this.inTile.isCollidable();
 					if (this.inTile.getMaterial() == Material.glass) {
-						die &= !(this.getIsCritical() || !(this.inTile.renderAsNormalBlock() || (this.inTile instanceof BlockGlass)));
+						die &= !(getIsCritical() || !(this.inTile.renderAsNormalBlock() || (this.inTile instanceof BlockGlass)));
 						if(!this.worldObj.isRemote)
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, false);
 					}
 					else if (this.inTile.getMaterial() == Material.ice) {
-						die &= !this.getIsCritical();
-						this.setIsCritical(false);
+						die &= !getIsCritical();
+						setIsCritical(false);
 						if(!this.worldObj.isRemote) {
 							this.worldObj.func_147480_a(this.xTile, this.yTile,
 								this.zTile, true);
@@ -403,13 +403,13 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					}
 					else if (this.inTile.getMaterial() == Material.cloth)
 						die = false;
-					else if (this.inTile.getMaterial() == Material.leaves) 
-						die &= !(this.getIsCritical() || this.rand.nextInt(4) == 0);
-					else if (this.inTile.getMaterial() == Material.sand) { 
-						die &= !this.getIsCritical();
-						this.setIsCritical(false);
+					else if (this.inTile.getMaterial() == Material.leaves)
+						die &= !(getIsCritical() || this.rand.nextInt(4) == 0);
+					else if (this.inTile.getMaterial() == Material.sand) {
+						die &= !getIsCritical();
+						setIsCritical(false);
 					}
-					
+
 					if (die) {
 						this.worldObj
 						.playSoundAtEntity(
@@ -422,7 +422,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 							this.worldObj.spawnParticle("snowballpoof",
 									this.posX, this.posY, this.posZ, 0.0D,
 									0.0D, 0.0D);
-						this.setDead();
+						setDead();
 					}
 				}
 			}
@@ -459,8 +459,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		float var22 = 0.99F;
 		var11 = 0.05F;
 
-		if (this.isInWater()) {
-			for (int var25 = 0; var25 < (this.getIsCritical() ? 6 : 4); ++var25) {
+		if (isInWater()) {
+			for (int var25 = 0; var25 < (getIsCritical() ? 6 : 4); ++var25) {
 				var26 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX
 						* var26, this.posY - this.motionY * var26, this.posZ
@@ -470,13 +470,13 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 			var22 = 0.8F;
 		} else {
-			for (var9 = 0; var9 < (this.getIsCritical() ? 5 : 3); ++var9) {
+			for (var9 = 0; var9 < (getIsCritical() ? 5 : 3); ++var9) {
 				IaSFxManager.spawnParticle(this.worldObj,
-						this.getIsCritical() ? "cloud" : "cloudSmall",
+						getIsCritical() ? "cloud" : "cloudSmall",
 								this.posX + this.motionX * var9 / 4.0D, this.posY
 								+ this.motionY * var9 / 4.0D, this.posZ
 								+ this.motionZ * var9 / 4.0D, 0.0D, 0.05D,
-								0.0D, true, !this.getIsCritical());
+								0.0D, true, !getIsCritical());
 			}
 		}
 
@@ -484,7 +484,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		this.motionY *= var22;
 		this.motionZ *= var22;
 		this.motionY -= var11;
-		this.setPosition(this.posX, this.posY, this.posZ);
+		setPosition(this.posX, this.posY, this.posZ);
 	}
 
 	/**
@@ -511,7 +511,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 	@Override
 	public void setFire(int par1) {
-		this.setDead();
+		setDead();
 	}
 
 	/**
@@ -537,7 +537,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 	@Override
 	protected void setOnFireFromLava() {
-		this.setDead();
+		setDead();
 	}
 
 	@Override
@@ -548,8 +548,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 	 */
 	public void setPositionAndRotation2(double par1, double par3, double par5,
 			float par7, float par8, int par9) {
-		this.setPosition(par1, par3, par5);
-		this.setRotation(par7, par8);
+		setPosition(par1, par3, par5);
+		setRotation(par7, par8);
 	}
 
 	/**
@@ -599,7 +599,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					par3, var7) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
-			this.setLocationAndAngles(this.posX, this.posY, this.posZ,
+			setLocationAndAngles(this.posX, this.posY, this.posZ,
 					this.rotationYaw, this.rotationPitch);
 		}
 	}

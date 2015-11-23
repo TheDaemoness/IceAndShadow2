@@ -12,25 +12,25 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName {
 
 	public IaSBaseBlockFalling(EnumIaSModule mod, String texName, Material mat) {
 		super(mat);
-		this.setBlockName(mod.prefix + texName);
-		this.setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
+		setBlockName(mod.prefix + texName);
+		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
 				+ texName);
-		MODULE = mod;
+		this.MODULE = mod;
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
+		return IceAndShadow2.MODID + ':' + this.MODULE.prefix + getModName();
 	}
 
 	public final IaSBaseBlockFalling register() {

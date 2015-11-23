@@ -34,7 +34,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		this.setMaxStackSize(16);
+		setMaxStackSize(16);
 	}
 
 	@Override
@@ -69,14 +69,14 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return burned;
+			return this.burned;
 		return this.itemIcon;
 	}
 
 	@Override
 	public void registerIcons(IIconRegister ir) {
-		this.itemIcon = ir.registerIcon(this.getTexName()+'0');
-		burned = ir.registerIcon(this.getTexName()+'1');
+		this.itemIcon = ir.registerIcon(getTexName()+'0');
+		this.burned = ir.registerIcon(getTexName()+'1');
 	}
 
 	@Override
@@ -85,16 +85,16 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		if(w.isRemote || is.getItemDamage() > 0)
 			return;
 		if(e instanceof EntityLivingBase) {
-			EntityLivingBase sucker = (EntityLivingBase)e;
+			final EntityLivingBase sucker = (EntityLivingBase)e;
 			if((sucker.getAge() & 127) == 0) {
 				if(sucker.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-					List li = w.getEntitiesWithinAABBExcludingEntity(sucker, 
+					final List li = w.getEntitiesWithinAABBExcludingEntity(sucker,
 							AxisAlignedBB.getBoundingBox(
-									sucker.posX-32, sucker.posY-8, sucker.posZ-32, 
+									sucker.posX-32, sucker.posY-8, sucker.posZ-32,
 									sucker.posX+32, sucker.posY+24, sucker.posZ+32));
-					for(Object ent : li) {
+					for(final Object ent : li) {
 						if(ent instanceof EntityMob) {
-							EntityMob joker = (EntityMob)ent;
+							final EntityMob joker = (EntityMob)ent;
 							if(joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
 								if(ent instanceof IIaSMobGetters)
 									((IIaSMobGetters)ent).setSearchTarget(sucker);
@@ -123,7 +123,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
 		if(catalyst.getItemDamage() == 1) {
 			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {

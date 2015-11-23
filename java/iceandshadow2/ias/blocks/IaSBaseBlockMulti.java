@@ -26,15 +26,15 @@ IIaSModName {
 	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat,
 			int subtypes) {
 		super(mod, mat);
-		this.setBlockName(mod.prefix + id);
-		subtypeCount = (byte) Math.min(subtypes, 16);
+		setBlockName(mod.prefix + id);
+		this.subtypeCount = (byte) Math.min(subtypes, 16);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		if (meta >= subtypeCount)
-			return icons[0];
-		return icons[meta];
+		if (meta >= this.subtypeCount)
+			return this.icons[0];
+		return this.icons[meta];
 	}
 
 	@Override
@@ -44,7 +44,7 @@ IIaSModName {
 
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs p_149666_2_, List list) {
-		for (int meta = 0; meta < subtypeCount; ++meta)
+		for (int meta = 0; meta < this.subtypeCount; ++meta)
 			list.add(new ItemStack(par1, 1, meta));
 	}
 
@@ -60,9 +60,9 @@ IIaSModName {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		icons = new IIcon[subtypeCount];
-		for (byte i = 0; i < subtypeCount; ++i)
-			icons[i] = reg.registerIcon(getTexName() + i);
+		this.icons = new IIcon[this.subtypeCount];
+		for (byte i = 0; i < this.subtypeCount; ++i)
+			this.icons[i] = reg.registerIcon(getTexName() + i);
 	}
 
 }

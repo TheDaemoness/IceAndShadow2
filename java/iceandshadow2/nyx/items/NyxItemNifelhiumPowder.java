@@ -15,7 +15,7 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 
 	public NyxItemNifelhiumPowder(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(16);
+		setMaxStackSize(16);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 		--catalyst.stackSize;
 		--target.stackSize;
 		if(target.getItem() == NyxItems.icicle) {
-			List<ItemStack> li = new ArrayList<ItemStack>();
+			final List<ItemStack> li = new ArrayList<ItemStack>();
 			li.add(new ItemStack(NyxItems.icicle, 64));
 			li.add(new ItemStack(NyxItems.icicle, 64));
 			return li;
@@ -43,7 +43,7 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {	
+			World world, Entity ent) {
 		return false;
 	}
 }

@@ -50,11 +50,11 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (dmg == 2)
-			return crystalIcon[pass];
+			return this.crystalIcon[pass];
 		if (dmg == 1)
-			return rockIcon[pass];
+			return this.rockIcon[pass];
 		if (pass == 0)
-			return dustIconGlow;
+			return this.dustIconGlow;
 		return this.itemIcon;
 	}
 
@@ -88,13 +88,13 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 		this.rockIcon = new IIcon[2];
 		this.crystalIcon = new IIcon[2];
 
-		this.itemIcon = reg.registerIcon(this.getTexName() + "Dust");
-		this.rockIcon[1] = reg.registerIcon(this.getTexName() + "Rock");
-		this.crystalIcon[1] = reg.registerIcon(this.getTexName() + "Crystal");
+		this.itemIcon = reg.registerIcon(getTexName() + "Dust");
+		this.rockIcon[1] = reg.registerIcon(getTexName() + "Rock");
+		this.crystalIcon[1] = reg.registerIcon(getTexName() + "Crystal");
 
-		this.dustIconGlow = reg.registerIcon(this.getTexName() + "DustGlow");
-		this.rockIcon[0] = reg.registerIcon(this.getTexName() + "RockGlow");
-		this.crystalIcon[0] = reg.registerIcon(this.getTexName()
+		this.dustIconGlow = reg.registerIcon(getTexName() + "DustGlow");
+		this.rockIcon[0] = reg.registerIcon(getTexName() + "RockGlow");
+		this.crystalIcon[0] = reg.registerIcon(getTexName()
 				+ "CrystalGlow");
 	}
 
@@ -111,7 +111,7 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 0 || 
+		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 0 ||
 				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
 			return 0;
 		return 120;
@@ -120,7 +120,7 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		List<ItemStack> it = new ArrayList<ItemStack>();
+		final List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
 		it.add(new ItemStack(Items.iron_ingot,Math.min(2, target.stackSize),1));
 		target.stackSize -= Math.min(2, target.stackSize);

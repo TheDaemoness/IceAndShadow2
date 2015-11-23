@@ -26,11 +26,11 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 
 	public NyxBlockThermalAir(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.fire);
-		this.setLightOpacity(0);
-		this.setLightLevel(0.6F);
-		this.setTickRandomly(true);
+		setLightOpacity(0);
+		setLightLevel(0.6F);
+		setTickRandomly(true);
 	}
-	
+
 	@Override
 	public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
 		return true;
@@ -51,12 +51,12 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean canCollideCheck(int meta, boolean p_149678_2_) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean canDropFromExplosion(Explosion p_149659_1_) {
 		return false;
@@ -65,7 +65,7 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
 		if(r.nextInt(32) == 0)
-			IaSFxManager.spawnParticle(w, "vanilla_flame", 
+			IaSFxManager.spawnParticle(w, "vanilla_flame",
 					x+r.nextFloat(), y+r.nextFloat(), z+r.nextFloat(),
 					0.0, 0.0, 0.0, false, false);
 	}
@@ -73,17 +73,17 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		int highestsource = 0;
-		int lvl = w.getBlockMetadata(x, y, z);
+		final int lvl = w.getBlockMetadata(x, y, z);
 		for(int xit = -1; xit<=1; ++xit) {
 			for(int yit = -1; yit<=1; ++yit) {
 				for(int zit = -1; zit<=1; ++zit) {
-					Block bl = w.getBlock(x+xit, y+yit, z+zit);
+					final Block bl = w.getBlock(x+xit, y+yit, z+zit);
 					if(bl == NyxBlocks.thermalAir)
 						highestsource = Math.max(highestsource, w.getBlockMetadata(x+xit, y+yit, z+zit));
 					else if(bl == NyxBlocks.thermalCore)
 						highestsource = Math.max(highestsource, 8);
 					else if(bl instanceof IIaSBlockThawable) {
-						Block nb = ((IIaSBlockThawable)bl).onThaw(w, x+xit, y+yit, z+zit);
+						final Block nb = ((IIaSBlockThawable)bl).onThaw(w, x+xit, y+yit, z+zit);
 						if(nb == null || r.nextInt(4) == 0)
 							{}
 						else if(nb == bl)
@@ -91,7 +91,7 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 						else
 							w.setBlock(x+xit, y+yit, z+zit, nb);
 					}
-					else if(lvl > 1 && canReplace(w, x+xit, y+yit, z+zit))
+					else if(lvl > 1 && NyxBlockThermalAir.canReplace(w, x+xit, y+yit, z+zit))
 						w.setBlock(x+xit, y+yit, z+zit, this, lvl-1, 0x2);
 				}
 			}
@@ -121,11 +121,11 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 			}
 		}
 	}
-	
+
 	public static boolean canReplace(World w, int x, int y, int z) {
-		Block bl = w.getBlock(x, y, z);
-		return (bl.getMaterial() == Material.air || 
-				bl.getMaterial() == Material.snow  || 
+		final Block bl = w.getBlock(x, y, z);
+		return (bl.getMaterial() == Material.air ||
+				bl.getMaterial() == Material.snow  ||
 				bl.getMaterial() == Material.craftedSnow ||
 				bl.getMaterial() == Material.leaves ||
 				bl.getMaterial() == Material.plants);

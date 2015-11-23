@@ -17,7 +17,7 @@ public class NyxBiomeInfested extends NyxBiome {
 	public NyxBiomeInfested(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		this.setBlocks(Blocks.snow, Blocks.snow);
+		setBlocks(Blocks.snow, Blocks.snow);
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
@@ -25,14 +25,14 @@ public class NyxBiomeInfested extends NyxBiome {
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class,
 				10, 1, 1));
 
-		this.setColor(64 << 16 | 255 << 8 | 192);
+		setColor(64 << 16 | 255 << 8 | 192);
 	}
-	
+
 	@Override
 	protected boolean hasTowers() {
 		return false;
 	}
-	
+
 	@Override
 	protected GenRuins supplyRuins() {
 		return null;
@@ -63,7 +63,7 @@ public class NyxBiomeInfested extends NyxBiome {
 			}
 			if (y == 0)
 				continue;
-			final WorldGenerator var5 = this.getRandomWorldGenForTrees(par2Random);
+			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
 			if (var5.generate(par1World, par2Random, x, y, z))
 				++count;
 		}

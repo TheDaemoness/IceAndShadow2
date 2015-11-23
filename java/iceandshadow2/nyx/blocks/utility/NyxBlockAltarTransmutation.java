@@ -32,13 +32,13 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 
 	public NyxBlockAltarTransmutation(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setLightLevel(0.4F);
-		this.setResistance(Blocks.obsidian.getExplosionResistance(null));
-		this.setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0));
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
-		this.setLightOpacity(7);
-		this.setStepSound(Block.soundTypeStone);
-		this.setTickRandomly(false);
+		setLightLevel(0.4F);
+		setResistance(Blocks.obsidian.getExplosionResistance(null));
+		setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0));
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+		setLightOpacity(7);
+		setStepSound(Block.soundTypeStone);
+		setTickRandomly(false);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0)
-			return bot;
+			return this.bot;
 		if (side == 1)
 			return this.blockIcon;
 		return this.side;
@@ -132,11 +132,11 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess w, int x,
 			int y, int z, int side) {
-		TileEntity e = w.getTileEntity(x, y, z);
+		final TileEntity e = w.getTileEntity(x, y, z);
 		if(e instanceof NyxTeTransmutationAltar) {
-			ItemStack tar = ((NyxTeTransmutationAltar)e).target;
+			final ItemStack tar = ((NyxTeTransmutationAltar)e).target;
 			if(tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
-				IIcon retval = ((IIaSApiTransmuteLens)tar.getItem()).getAltarTopTexture(tar);
+				final IIcon retval = ((IIaSApiTransmuteLens)tar.getItem()).getAltarTopTexture(tar);
 				if(retval != null)
 					return retval;
 			}
@@ -216,9 +216,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(this.getTexName() + "Top");
-		this.side = reg.registerIcon(this.getTexName() + "Side");
-		this.bot = reg.registerIcon(this.getTexName() + "Bottom");
+		this.blockIcon = reg.registerIcon(getTexName() + "Top");
+		this.side = reg.registerIcon(getTexName() + "Side");
+		this.bot = reg.registerIcon(getTexName() + "Bottom");
 	}
 
 }

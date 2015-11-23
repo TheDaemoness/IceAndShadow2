@@ -33,13 +33,13 @@ public class RenderNyxSkeleton extends RenderBiped {
 	}
 
 	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving) {
-		return this.func_110860_a((EntityNyxSkeleton) par1EntityLiving);
+		return func_110860_a((EntityNyxSkeleton) par1EntityLiving);
 	}
 
 	protected ResourceLocation func_110860_a(
 			EntityNyxSkeleton par1EntitySkeleton) {
-		return par1EntitySkeleton.getSkeletonType() == 1 ? necromancerskin
-				: winterskeletonskin;
+		return par1EntitySkeleton.getSkeletonType() == 1 ? RenderNyxSkeleton.necromancerskin
+				: RenderNyxSkeleton.winterskeletonskin;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.func_110860_a((EntityNyxSkeleton) par1Entity);
+		return func_110860_a((EntityNyxSkeleton) par1Entity);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
 			float par2) {
-		this.func_82438_a((EntitySkeleton) par1EntityLivingBase, par2);
+		func_82438_a((EntitySkeleton) par1EntityLivingBase, par2);
 	}
 
 	/**
@@ -80,9 +80,9 @@ public class RenderNyxSkeleton extends RenderBiped {
 			final float f1 = 1.0F;
 
 			if (par1Entity.getSkeletonType() == 1)
-				this.bindTexture(wickednecromancer_eyes);
+				bindTexture(RenderNyxSkeleton.wickednecromancer_eyes);
 			else
-				this.bindTexture(winterskeleton_eyes);
+				bindTexture(RenderNyxSkeleton.winterskeleton_eyes);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -110,7 +110,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 	@Override
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase,
 			int par2, float par3) {
-		this.setSkeletonEyeBrightness((EntityNyxSkeleton) par1EntityLivingBase,
+		setSkeletonEyeBrightness((EntityNyxSkeleton) par1EntityLivingBase,
 				par2, par3);
 		return super.shouldRenderPass(par1EntityLivingBase, par2, par3);
 	}

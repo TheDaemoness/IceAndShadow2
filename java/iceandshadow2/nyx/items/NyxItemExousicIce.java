@@ -24,7 +24,7 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 		if(catalyst.getItem() != this)
 			return 0;
 		if(target.getItem() instanceof ItemBlock) {
-			Block bl = ((ItemBlock)target.getItem()).field_150939_a;
+			final Block bl = ((ItemBlock)target.getItem()).field_150939_a;
 			if(bl == NyxBlocks.brickFrozen && catalyst.stackSize >= 3)
 				return 25;
 			if(bl == NyxBlocks.brickPaleCracked)
@@ -36,7 +36,7 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		ArrayList<ItemStack> li = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> li = new ArrayList<ItemStack>();
 		int quant = Math.min(target.stackSize,catalyst.stackSize);
 		if(target.getItem() instanceof ItemBlock) {
 			if(((ItemBlock)target.getItem()).field_150939_a == NyxBlocks.brickPaleCracked) {

@@ -22,8 +22,8 @@ IIaSNoInfest {
 
 	public NyxBlockInfestedLeaves(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setLightLevel(0.1F);
-		this.setLightOpacity(4);
+		setLightLevel(0.1F);
+		setLightOpacity(4);
 	}
 
 	@Override

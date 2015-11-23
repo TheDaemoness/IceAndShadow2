@@ -16,14 +16,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderNyxSpider extends RenderLiving {
-	private static final ResourceLocation field_110891_a = new ResourceLocation(
+	private static final ResourceLocation skin_glow = new ResourceLocation(
 			"iceandshadow2:textures/mob/spiderwisp_eyes.png");
-	private static final ResourceLocation field_110890_f = new ResourceLocation(
+	private static final ResourceLocation skin = new ResourceLocation(
 			"iceandshadow2:textures/mob/spiderwisp.png");
 
 	public RenderNyxSpider() {
 		super(new ModelSpider(), 1.0F);
-		this.setRenderPassModel(new ModelSpider());
+		setRenderPassModel(new ModelSpider());
 		this.shadowSize *= 0.8;
 	}
 
@@ -35,24 +35,23 @@ public class RenderNyxSpider extends RenderLiving {
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 		GL11.glDepthMask(true);
 		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
-		this.func_110827_b(par1EntityLiving, par2, par4, par6, par8, par9);
+		func_110827_b(par1EntityLiving, par2, par4, par6, par8, par9);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 	}
 
 	protected ResourceLocation func_110889_a(EntityNyxSpider par1EntitySpider) {
-		return field_110890_f;
+		return RenderNyxSpider.skin;
 	}
 
 	@Override
 	protected float getDeathMaxRotation(EntityLivingBase par1EntityLivingBase) {
-		return this
-				.setSpiderDeathMaxRotation((EntityNyxSpider) par1EntityLivingBase);
+		return setSpiderDeathMaxRotation((EntityNyxSpider) par1EntityLivingBase);
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.func_110889_a((EntityNyxSpider) par1Entity);
+		return func_110889_a((EntityNyxSpider) par1Entity);
 	}
 
 	/**
@@ -63,7 +62,7 @@ public class RenderNyxSpider extends RenderLiving {
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
 			float par2) {
 		super.preRenderCallback(par1EntityLivingBase, par2);
-		this.scaleSpider((EntityNyxSpider) par1EntityLivingBase, par2);
+		scaleSpider((EntityNyxSpider) par1EntityLivingBase, par2);
 	}
 
 	protected void scaleSpider(EntityNyxSpider par1EntityCaveSpider, float par2) {
@@ -83,7 +82,7 @@ public class RenderNyxSpider extends RenderLiving {
 		if (par2 != 0 || par1EntitySpider.isInvisible()) {
 			return -1;
 		} else {
-			this.bindTexture(field_110891_a);
+			bindTexture(RenderNyxSpider.skin_glow);
 			final float f1 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -107,7 +106,7 @@ public class RenderNyxSpider extends RenderLiving {
 	@Override
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase,
 			int par2, float par3) {
-		return this.setSpiderEyeBrightness(
+		return setSpiderEyeBrightness(
 				(EntityNyxSpider) par1EntityLivingBase, par2, par3);
 	}
 }

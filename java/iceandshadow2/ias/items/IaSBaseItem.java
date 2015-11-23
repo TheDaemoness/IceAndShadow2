@@ -12,7 +12,7 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 
 	protected IaSBaseItem(EnumIaSModule mod) {
 		super();
-		MODULE = mod;
+		this.MODULE = mod;
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	public final IaSBaseItem register() {

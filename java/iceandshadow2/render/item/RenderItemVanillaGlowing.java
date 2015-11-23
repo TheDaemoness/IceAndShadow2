@@ -30,8 +30,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 	protected Minecraft mc;
 
 	public RenderItemVanillaGlowing() {
-		rend = new RenderItem();
-		mc = Minecraft.getMinecraft();
+		this.rend = new RenderItem();
+		this.mc = Minecraft.getMinecraft();
 	}
 
 	@Override

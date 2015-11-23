@@ -14,7 +14,7 @@ public class NyxBlockHookTightropeX extends NyxBlockHookTightrope {
 
 	public NyxBlockHookTightropeX(String texName) {
 		super(texName);
-		this.setBlockBounds(0.0F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+		setBlockBounds(0.0F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
 	}
 
 	@Override

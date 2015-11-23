@@ -2,7 +2,6 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
@@ -32,61 +31,61 @@ public class NyxBiome extends BiomeGenBase {
 	public NyxBiome(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register);
-		this.setHeight(new Height(heightRoot, heightVari));
-		this.setTemperatureRainfall(0.0F, 0.0F);
+		setHeight(new Height(heightRoot, heightVari));
+		setTemperatureRainfall(0.0F, 0.0F);
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.topBlock = Blocks.snow;
 		this.fillerBlock = NyxBlocks.permafrost;
 
-		doGenDevora = true;
-		doGenNifelhium = true;
-		doGenUnstableIce = true;
+		this.doGenDevora = true;
+		this.doGenNifelhium = true;
+		this.doGenUnstableIce = true;
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(
 				EntityNyxSkeleton.class, 40, 1, 2));
 
-		this.setBiomeName("Nyx");
-		rare = isRare;
+		setBiomeName("Nyx");
+		this.rare = isRare;
 
-		this.setColor(255 << 16 | 255 << 8 | 255);
+		setColor(255 << 16 | 255 << 8 | 255);
 	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk,
 			int zchunk) {
-		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
-		genNavistra = new WorldGenNyxOre(NyxBlocks.oreNavistra, 6);
-		genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
-		genDraconium = new WorldGenNyxOre(NyxBlocks.oreDraconium, 8);
-		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
+		this.genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
+		this.genNavistra = new WorldGenNyxOre(NyxBlocks.oreNavistra, 6);
+		this.genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
+		this.genDraconium = new WorldGenNyxOre(NyxBlocks.oreDraconium, 8);
+		this.genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
 
-		if (doGenDevora)
-			genDevora = new WorldGenNyxOre(NyxBlocks.oreDevora, 8);
+		if (this.doGenDevora)
+			this.genDevora = new WorldGenNyxOre(NyxBlocks.oreDevora, 8);
 
 		// Unstable ice.
-		if (doGenUnstableIce) {
-			genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 36);
-			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0,
+		if (this.doGenUnstableIce) {
+			this.genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 36);
+			GenOre.genOreStandard(this.genUnstableIce, par1World, xchunk, zchunk, 0,
 					128, 10);
 		}
 
-		if (doGenDevora)
-			GenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96,
+		if (this.doGenDevora)
+			GenOre.genOreStandard(this.genDevora, par1World, xchunk, zchunk, 96,
 					255, 20);
 
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 160, 255, 4);
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 128, 255, 6);
-		GenOre.genOreStandard(genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
-		GenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 8);
-		GenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 225,
+		GenOre.genOreStandard(this.genEchir, par1World, xchunk, zchunk, 160, 255, 4);
+		GenOre.genOreStandard(this.genEchir, par1World, xchunk, zchunk, 128, 255, 6);
+		GenOre.genOreStandard(this.genNavistra, par1World, xchunk, zchunk, 64, 96, 2);
+		GenOre.genOreStandard(this.genCortra, par1World, xchunk, zchunk, 128, 225, 8);
+		GenOre.genOreStandard(this.genDraconium, par1World, xchunk, zchunk, 225,
 				255, 3);
-		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192,
+		GenOre.genOreStandard(this.genGemstone, par1World, xchunk, zchunk, 96, 192,
 				10);
 
-		if (doGenNifelhium)
+		if (this.doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
 					zchunk);
 
@@ -118,11 +117,11 @@ public class NyxBiome extends BiomeGenBase {
 			int zchunk) {
 
 	}
-	
+
 	protected boolean hasTowers() {
 		return true;
 	}
-	
+
 	protected GenRuins supplyRuins() {
 		return null;
 	}
@@ -234,7 +233,7 @@ public class NyxBiome extends BiomeGenBase {
 	}
 
 	public boolean isRare() {
-		return rare;
+		return this.rare;
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {

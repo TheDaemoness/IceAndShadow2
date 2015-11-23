@@ -14,23 +14,23 @@ public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 
 	public IaSSetSenses(EntityLivingBase elb) {
 		super(elb, 0.0);
-		senses = new ArrayList<IaSSense>();
+		this.senses = new ArrayList<IaSSense>();
 	}
 
 	@Override
 	public boolean add(IaSSense sense) {
-		dist = Math.max(dist, sense.getRange());
-		return senses.add(sense);
+		this.dist = Math.max(this.dist, sense.getRange());
+		return this.senses.add(sense);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends IaSSense> c) {
-		return senses.addAll(c);
+		return this.senses.addAll(c);
 	}
 
 	@Override
 	public boolean canSense(Entity ent) {
-		for (final IaSSense s : senses) {
+		for (final IaSSense s : this.senses) {
 			if (s.canSense(ent))
 				return true;
 		}
@@ -39,17 +39,17 @@ public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 
 	@Override
 	public void clear() {
-		senses.clear();
+		this.senses.clear();
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		return senses.contains(o);
+		return this.senses.contains(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return senses.containsAll(c);
+		return this.senses.containsAll(c);
 	}
 
 	@Override
@@ -59,36 +59,36 @@ public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 
 	@Override
 	public Iterator<IaSSense> iterator() {
-		return senses.iterator();
+		return this.senses.iterator();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return senses.remove(o);
+		return this.senses.remove(o);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return senses.removeAll(c);
+		return this.senses.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return senses.retainAll(c);
+		return this.senses.retainAll(c);
 	}
 
 	@Override
 	public int size() {
-		return senses.size();
+		return this.senses.size();
 	}
 
 	@Override
 	public Object[] toArray() {
-		return senses.toArray();
+		return this.senses.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return senses.toArray(a);
+		return this.senses.toArray(a);
 	}
 }

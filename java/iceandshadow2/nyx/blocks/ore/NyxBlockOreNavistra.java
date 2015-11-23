@@ -14,8 +14,8 @@ public class NyxBlockOreNavistra extends NyxBlockOre {
 	public NyxBlockOreNavistra(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 3);
-		this.setHardness(40.0F);
-		this.setResistance(120.0F);
+		setHardness(40.0F);
+		setResistance(120.0F);
 		GameRegistry.addSmelting(this, new ItemStack(NyxItems.navistraShard,2), 2);
 	}
 

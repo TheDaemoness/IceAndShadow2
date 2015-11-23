@@ -18,7 +18,7 @@ public interface IIaSApiExaminable {
 
 	/**
 	 * Indicates whether the examination of a certain item or block is possible by this handler.
-	 * 
+	 *
 	 * @param toExam
 	 *            The item stack being examined.
 	 * @param knowledge
@@ -29,7 +29,7 @@ public interface IIaSApiExaminable {
 
 	/**
 	 * Stops the execution of further relevant handlers. This should generally be false.
-	 * 
+	 *
 	 * @param toExam
 	 *            The item stack being examined.
 	 * @param knowledge
@@ -43,7 +43,7 @@ public interface IIaSApiExaminable {
 	/**
 	 * Gets information about this item to put into a book. If multiple handlers
 	 * have book information, the first one registered is the only one called.
-	 * 
+	 *
 	 * @param toExam
 	 *            The item stack being examined.
 	 * @param knowledge
@@ -56,7 +56,7 @@ public interface IIaSApiExaminable {
 	/**
 	 * Returns a list of any knowledge that should be changed after examining
 	 * the item, in addition to the knowledge gained from simply examining the item or block.
-	 * 
+	 *
 	 * @param toExam
 	 *            The item stack being examined.
 	 * @param knowledge

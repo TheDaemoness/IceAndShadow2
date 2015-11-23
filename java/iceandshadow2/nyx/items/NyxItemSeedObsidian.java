@@ -19,14 +19,14 @@ IIaSOnDeathKeep {
 
 	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(16);
+		setMaxStackSize(16);
 	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
 		return EnumRarity.rare;
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld,
 			int ehx, int uay, int zee, int metuh, float pex, float pay,

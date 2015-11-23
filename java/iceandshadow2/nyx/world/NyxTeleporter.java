@@ -23,8 +23,8 @@ public class NyxTeleporter extends Teleporter {
 
 	private void placeInNyx(Entity par1Entity, int x, int z) {
 		for(int i = 0; i <= 3; ++i)
-			world.getChunkProvider().loadChunk(-(i>>1), -(i&1));
-		int y = GenRuinsCentral.getGenHeight(world,0,0)+3;
+			this.world.getChunkProvider().loadChunk(-(i>>1), -(i&1));
+		final int y = GenRuinsCentral.getGenHeight(this.world,0,0)+3;
 		par1Entity.setLocationAndAngles(0.5, y, 0.5,
 				this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
@@ -32,24 +32,24 @@ public class NyxTeleporter extends Teleporter {
 	private void placeInOverworld(Entity par1Entity, int x, int z) {
 		int y = 5;
 		for (; y + 2 <= 255; ++y) {
-			if (!world.isAirBlock(x, y, z))
+			if (!this.world.isAirBlock(x, y, z))
 				continue;
-			if (!world.isAirBlock(x, y + 1, z))
+			if (!this.world.isAirBlock(x, y + 1, z))
 				continue;
-			if (!world.isAirBlock(x, y + 2, z))
+			if (!this.world.isAirBlock(x, y + 2, z))
 				continue;
 			break;
 		}
 		if (y == 253)
 			y = 255;
-		if (world.getBlock(x, y - 1, z) == Blocks.water)
-			world.setBlock(x, y - 1, z, Blocks.ice);
-		else if (world.getBlock(x, y - 1, z) == Blocks.lava)
-			world.setBlock(x, y - 1, z, Blocks.cobblestone);
-		else if (world.getBlock(x, y - 1, z) == Blocks.cactus)
-			world.setBlock(x, y - 1, z, Blocks.sandstone);
-		else if (world.getBlock(x, y - 1, z) == Blocks.fire)
-			world.setBlock(x, y - 1, z, Blocks.air);
+		if (this.world.getBlock(x, y - 1, z) == Blocks.water)
+			this.world.setBlock(x, y - 1, z, Blocks.ice);
+		else if (this.world.getBlock(x, y - 1, z) == Blocks.lava)
+			this.world.setBlock(x, y - 1, z, Blocks.cobblestone);
+		else if (this.world.getBlock(x, y - 1, z) == Blocks.cactus)
+			this.world.setBlock(x, y - 1, z, Blocks.sandstone);
+		else if (this.world.getBlock(x, y - 1, z) == Blocks.fire)
+			this.world.setBlock(x, y - 1, z, Blocks.air);
 		par1Entity.setLocationAndAngles(x + 0.5, y + 1.0, z + 0.5,
 				this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
@@ -59,10 +59,10 @@ public class NyxTeleporter extends Teleporter {
 			float par8) {
 
 		if (this.world.provider.dimensionId == 0)
-			this.placeInOverworld(par1Entity, (int) x, (int) z);
+			placeInOverworld(par1Entity, (int) x, (int) z);
 		else if (!placeOnExistingPlatform(par1Entity, (int) x, (int) y, (int) z)) {
 			if(!placeOnExistingPlatform(
-					par1Entity, 0, world.getPrecipitationHeight((int) x, (int) z), 0))
+					par1Entity, 0, this.world.getPrecipitationHeight((int) x, (int) z), 0))
 				placeInNyx(par1Entity, (int) x, (int) z);
 		}
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;

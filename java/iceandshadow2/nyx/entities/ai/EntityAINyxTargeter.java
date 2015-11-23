@@ -19,7 +19,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 
 	public EntityAINyxTargeter(EntityMob par1EntityCreature) {
 		super(par1EntityCreature, false, false);
-		lastSeen = 0;
+		this.lastSeen = 0;
 	}
 
 	/**
@@ -34,8 +34,8 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		} else if (!elb.isEntityAlive()) {
 			return false;
 		} else if (!((IIaSSensate) this.taskOwner).getSense().canSense(elb)) {
-			++lastSeen;
-			if (lastSeen > 30) {
+			++this.lastSeen;
+			if (this.lastSeen > 30) {
 				((IIaSMobGetters) this.taskOwner).setSearchTarget(elb);
 				return false;
 			}
@@ -44,7 +44,7 @@ public class EntityAINyxTargeter extends EntityAITarget {
 			if (((EntityPlayer) elb).capabilities.isCreativeMode)
 				return false;
 		}
-		lastSeen = 0;
+		this.lastSeen = 0;
 		return true;
 	}
 
@@ -107,9 +107,9 @@ public class EntityAINyxTargeter extends EntityAITarget {
 
 	@Override
 	public void startExecuting() {
-		lastSeen = 0;
+		this.lastSeen = 0;
 		this.taskOwner.setAttackTarget(this.targetEntity);
-		targetEntity = null;
+		this.targetEntity = null;
 		this.taskOwner.getNavigator().clearPathEntity();
 		super.startExecuting();
 	}

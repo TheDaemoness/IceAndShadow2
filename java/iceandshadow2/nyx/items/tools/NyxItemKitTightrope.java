@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -22,7 +23,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 
 	public NyxItemKitTightrope(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(4);
+		setMaxStackSize(4);
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 		int xc = x;
 		final int yc = y;
 		int zc = z;
-		for (int i = 1; i < LENGTH_MAX; ++i) {
+		for (int i = 1; i < NyxItemKitTightrope.LENGTH_MAX; ++i) {
 			xc += dir.offsetX;
 			zc += dir.offsetZ;
 			final Block bl = w.getBlock(xc, yc, zc);
@@ -65,13 +66,13 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 					"That distance would be a waste of a tightrope.");
 			return false;
 		}
-		if (ilen == LENGTH_MAX) {
+		if (ilen == NyxItemKitTightrope.LENGTH_MAX) {
 			IaSPlayerHelper.messagePlayer(pl,
 					"The tightrope won't reach that far.");
 			return false;
 		}
 		w.playSoundAtEntity(pl, "random.bow", 1.0F,
-				1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+				1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F));
 
 		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
 			w.setBlock(x + dir.offsetX, y, z, NyxBlocks.hookTightropeX);
@@ -92,7 +93,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 					NyxBlocks.hookTightropeZ);
 		w.playSoundEffect(x + (ilen - 1) * dir.offsetX + 0.5, y + 0.5, z
 				+ (ilen - 1) * dir.offsetZ + 0.5, "dig.stone", 1.0F,
-				1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+				1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F));
 
 		is.stackSize -= 1;
 		return true;
@@ -134,7 +135,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 						(int) el.posY - 2, modZ + (int) el.posZ, dir.ordinal(),
 						v);
 			} else {
-				mop = this.getMovingObjectPositionFromPlayer(w, el, true);
+				mop = getMovingObjectPositionFromPlayer(w, el, true);
 				if (mop == null)
 					return;
 				if (mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK)
@@ -148,7 +149,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			int zc = mop.blockZ;
 			if (!w.isSideSolid(xc, mop.blockY, zc, dir))
 				return;
-			for (int i = 0; i < LENGTH_MAX; ++i) {
+			for (int i = 0; i < NyxItemKitTightrope.LENGTH_MAX; ++i) {
 				xc += dir.offsetX;
 				zc += dir.offsetZ;
 				final Block bl = w.getBlock(xc, mop.blockY, zc);
@@ -167,7 +168,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				return;
 			if (ilen < 5)
 				return;
-			if (ilen >= LENGTH_MAX)
+			if (ilen >= NyxItemKitTightrope.LENGTH_MAX)
 				return;
 			for (int i = 1; i < ilen+1; ++i) {
 				if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)

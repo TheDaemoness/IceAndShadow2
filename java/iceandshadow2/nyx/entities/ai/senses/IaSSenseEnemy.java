@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.entities.ai.senses;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 
 public class IaSSenseEnemy extends IaSSense {
@@ -12,7 +11,7 @@ public class IaSSenseEnemy extends IaSSense {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		return this.isInRange(ent) && ((EntityMob)this.owner).getAttackTarget() == ent;
+		return isInRange(ent) && ((EntityMob)this.owner).getAttackTarget() == ent;
 	}
 
 }

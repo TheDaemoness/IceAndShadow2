@@ -29,7 +29,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return knife_tex;
+		return NyxMaterialEchir.knife_tex;
 	}
 
 	@Override

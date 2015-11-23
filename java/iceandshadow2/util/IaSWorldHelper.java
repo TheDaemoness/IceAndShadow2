@@ -9,15 +9,15 @@ public class IaSWorldHelper {
 	public static int getDifficulty(World w) {
 		return w.difficultySetting.getDifficultyId();
 	}
-	
+
 	public static int getRegionArmorMod(Entity ent) {
 		if(ent.dimension != IaSFlags.dim_nyx_id)
 			return 0;
 		return (int)((Math.abs(ent.posX)+Math.abs(ent.posZ))/500);
 	}
-	
+
 	public static int getRegionLevel(World w, int x, int y, int z) {
-		int dist = (int)Math.sqrt(x*x+z*z);
+		final int dist = (int)Math.sqrt(x*x+z*z);
 		if(dist >= 196608)
 			return 12;
 		if(dist >= 98304)
@@ -44,11 +44,11 @@ public class IaSWorldHelper {
 			return 1;
 		return 0;
 	}
-	
+
 	public static int getRegionLevel(Entity ent) {
 		if(ent.dimension != IaSFlags.dim_nyx_id)
 			return 0;
-		final int lvl = getRegionLevel(ent.worldObj, (int)ent.posX, (int)ent.posY, (int)ent.posZ);
+		final int lvl = IaSWorldHelper.getRegionLevel(ent.worldObj, (int)ent.posX, (int)ent.posY, (int)ent.posZ);
 		return lvl+(IaSWorldHelper.getDifficulty(ent.worldObj)>=3?1:0);
 	}
 }

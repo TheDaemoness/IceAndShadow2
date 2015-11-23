@@ -84,9 +84,9 @@ public class WorldGenNyxOre extends WorldGenerator {
 								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
 									if (w.getBlock(xit, yit, zit)
 											.isReplaceableOreGen(w, xit, yit,
-													zit, target)) {
+													zit, this.target)) {
 										w.setBlock(xit, yit, zit, this.ore,
-												mineableBlockMeta, 2);
+												this.mineableBlockMeta, 2);
 										w.updateLightByType(EnumSkyBlock.Block,
 												xit, yit, zit);
 										w.updateLightByType(EnumSkyBlock.Sky,

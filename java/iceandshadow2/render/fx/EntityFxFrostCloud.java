@@ -42,12 +42,12 @@ public class EntityFxFrostCloud extends EntityFX {
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		moveEntity(this.motionX, this.motionY, this.motionZ);
 
 		if (this.particleAge++ >= this.particleMaxAge)
-			this.setDead();
+			setDead();
 
-		this.setParticleTextureIndex(7 - this.particleAge * 8
+		setParticleTextureIndex(7 - this.particleAge * 8
 				/ this.particleMaxAge);
 
 		this.motionX *= 0.9599999785423279D;

@@ -26,17 +26,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class NyxBlockGatestone extends IaSBaseBlockMulti {
 
 	public static final int RANGE = 384;
-	
+
 	protected IIcon[] iconTop;
 
 	public NyxBlockGatestone(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.rock, (byte) 3);
-		this.setBlockUnbreakable();
-		this.setResistance(9001.0F);
-		this.setLightOpacity(0);
-		this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.4F, 0.9F);
-		this.setLightColor(1.0F, 0.60F, 0.80F);
-		this.setLuminescence(0.2F);
+		setBlockUnbreakable();
+		setResistance(9001.0F);
+		setLightOpacity(0);
+		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.4F, 0.9F);
+		setLightColor(1.0F, 0.60F, 0.80F);
+		setLuminescence(0.2F);
 	}
 
 	public void doTPFX(World theWorld, double posX, double posY, double posZ,
@@ -46,8 +46,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		if (theWorld.isRemote)
 			theWorld.spawnParticle("portal", posX,
 					posY + theWorld.rand.nextDouble() * 2.0D, posZ,
-					theWorld.rand.nextGaussian() * (modX / RANGE), 0.0D,
-					theWorld.rand.nextGaussian() * (modZ / RANGE));
+					theWorld.rand.nextGaussian() * (modX / NyxBlockGatestone.RANGE), 0.0D,
+					theWorld.rand.nextGaussian() * (modZ / NyxBlockGatestone.RANGE));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -131,8 +131,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					else
 						dir = ForgeDirection.NORTH;
 				}
-				int posXMod = RANGE*dir.offsetX;
-				int posZMod = RANGE*dir.offsetZ;
+				final int posXMod = NyxBlockGatestone.RANGE*dir.offsetX;
+				final int posZMod = NyxBlockGatestone.RANGE*dir.offsetZ;
 				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
 						+ posXMod, z + posZMod) + 1;
 				for (int gateY = posYNew; gateY >= 0; --gateY) {
@@ -157,10 +157,10 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		iconTop = new IIcon[3];
+		this.iconTop = new IIcon[3];
 		for (int i = 0; i <= 2; ++i)
-			this.iconTop[i] = reg.registerIcon(this.getTexName() + "Top" + i);
-		this.blockIcon = reg.registerIcon(this.getTexName() + "Side");
+			this.iconTop[i] = reg.registerIcon(getTexName() + "Top" + i);
+		this.blockIcon = reg.registerIcon(getTexName() + "Side");
 	}
 
 	/**

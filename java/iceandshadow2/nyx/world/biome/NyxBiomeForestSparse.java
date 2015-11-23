@@ -9,7 +9,6 @@ import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestSparse extends NyxBiome {
@@ -17,8 +16,8 @@ public class NyxBiomeForestSparse extends NyxBiome {
 	public NyxBiomeForestSparse(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		this.setBlocks(Blocks.snow, NyxBlocks.permafrost);
-		
+		setBlocks(Blocks.snow, NyxBlocks.permafrost);
+
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class,
 				40, 1,1));
 	}
@@ -53,8 +52,7 @@ public class NyxBiomeForestSparse extends NyxBiome {
 			}
 			if (y == 0)
 				continue;
-			final WorldGenerator var5 = this
-					.getRandomWorldGenForTrees(par2Random);
+			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
 			if (var5.generate(par1World, par2Random, x, y, z))
 				++i;
 		}

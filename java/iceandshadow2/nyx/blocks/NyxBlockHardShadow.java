@@ -26,13 +26,13 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon openIcon;
-	
+
 	public NyxBlockHardShadow(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.portal);
-		this.setBlockUnbreakable();
+		setBlockUnbreakable();
 		this.slipperiness = 0.99F;
 	}
-	
+
 	@Override
 	public boolean canCollideCheck(int meta, boolean p_149678_2_) {
 		return meta == 0;
@@ -41,9 +41,9 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public void onBlockAdded(World w, int x,
 			int y, int z) {
-		this.onNeighborBlockChange(w,x,y,z,null);
+		onNeighborBlockChange(w,x,y,z,null);
 	}
-	
+
 	@Override
 	public boolean canDropFromExplosion(Explosion p_149659_1_) {
 		return false;
@@ -61,13 +61,13 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		super.registerBlockIcons(reg);
-		openIcon = reg.registerIcon(IceAndShadow2.MODID+':'+EnumIaSModule.IAS.prefix+"Invisible");
+		this.openIcon = reg.registerIcon(IceAndShadow2.MODID+':'+EnumIaSModule.IAS.prefix+"Invisible");
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return meta>0?openIcon:this.blockIcon;
+		return meta>0?this.openIcon:this.blockIcon;
 	}
 
 	@Override
@@ -77,10 +77,10 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 		if(w.getBlockMetadata(x, y, z) != 0)
 			return null;
 		return AxisAlignedBB.getBoundingBox(
-				x + var5, y + var5, z + var5, 
+				x + var5, y + var5, z + var5,
 				x + 1 - var5, y + 1 - var5, z + 1 - var5);
 	}
-	
+
 	@Override
 	public int getRenderBlockPass() {
 		return 1;
@@ -103,8 +103,8 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public boolean addHitEffects(World w, MovingObjectPosition t,
 			EffectRenderer effectRenderer) {
-			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", 
-					t.blockX+w.rand.nextDouble(), 
+			IaSFxManager.spawnParticle(w, "shadowSmokeSmall",
+					t.blockX+w.rand.nextDouble(),
 					t.blockY+w.rand.nextDouble(),
 					t.blockZ+w.rand.nextDouble(),
 				0.0, 0.0, 0.0, false, true);
@@ -157,7 +157,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 				for(int yit = -1; yit <= 1; ++yit) {
 					if(((xit==0?1:0) + (yit==0?1:0) + (zit==0?1:0)) != 2)
 						continue;
-					Block bl = w.getBlock(x+xit, y+yit, z+zit);
+					final Block bl = w.getBlock(x+xit, y+yit, z+zit);
 					if(bl instanceof NyxBlockHardShadow)
 						power = Math.max(power, Math.max(0, w.getBlockMetadata(x+xit, y+yit, z+zit)-1));
 					if(w.isBlockIndirectlyGettingPowered(x+xit, y+yit, z+zit))
@@ -167,7 +167,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 				}
 			}
 		}
-		int oldmeta = w.getBlockMetadata(x, y, z);
+		final int oldmeta = w.getBlockMetadata(x, y, z);
 		if(power != oldmeta)
 			w.setBlockMetadataWithNotify(x, y, z, power, 0x3);
 	}
@@ -197,5 +197,5 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	public int getMobilityFlag() {
 		return 0;
 	}
-	
+
 }

@@ -33,7 +33,7 @@ implements ITileEntityProvider {
 		super.onBlockAdded(w, x, y, z);
 		onBlockAddedPre(w, x, y, z);
 		w.setTileEntity(x, y, z,
-				this.createNewTileEntity(w, w.getBlockMetadata(x, y, z)));
+				createNewTileEntity(w, w.getBlockMetadata(x, y, z)));
 	}
 
 	/**

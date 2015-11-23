@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 public class Sculptor {
 	/**
 	 * Create a rugged empty space centered at (x,y,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -30,7 +30,7 @@ public class Sculptor {
 	/**
 	 * Create the vertical corners of a cube centered at x, y, and z (no
 	 * corners).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -57,7 +57,7 @@ public class Sculptor {
 
 	/**
 	 * Creates a cube-shaped space.
-	 * 
+	 *
 	 * @param world
 	 * @param xLow
 	 * @param yLow
@@ -81,7 +81,7 @@ public class Sculptor {
 	/**
 	 * Create a cylinder-shaped space starting from (x,y,z) and rising to
 	 * (x,y+height,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -103,7 +103,7 @@ public class Sculptor {
 
 	/**
 	 * Create a dome-shaped space with the center of the flat base at (x,y,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -124,7 +124,7 @@ public class Sculptor {
 
 	/**
 	 * Create a sphere-shaped space centered at (x,y,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -145,7 +145,7 @@ public class Sculptor {
 
 	/**
 	 * Extrudes the terrain below a certain region.
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -177,7 +177,7 @@ public class Sculptor {
 
 	/**
 	 * Create the walls of a cube centered at x, y, and z (no corners).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y

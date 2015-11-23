@@ -30,9 +30,9 @@ public class IaSEntityHelper {
 			return entityitem;
 		}
 	}
-	
+
 	public static BiomeGenBase getBiome(Entity ent) {
-		return getBiome(ent, 0, 0);
+		return IaSEntityHelper.getBiome(ent, 0, 0);
 	}
 
 	public static BiomeGenBase getBiome(Entity ent, double offsetX,
@@ -43,14 +43,14 @@ public class IaSEntityHelper {
 			offsetZ -= 1;
 		final int x = (int) (ent.posX + offsetX);
 		final int z = (int) (ent.posZ + offsetZ);
-		final int[] c = splitCoords(x, z);
+		final int[] c = IaSEntityHelper.splitCoords(x, z);
 		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1])
 				.getBiomeGenForWorldCoords(c[2], c[3],
 						ent.worldObj.getWorldChunkManager());
 	}
 
 	public static Block getBlock(Entity ent) {
-		return getBlock(ent, 0, 0, 0);
+		return IaSEntityHelper.getBlock(ent, 0, 0, 0);
 	}
 
 	public static Block getBlock(Entity ent, double offsetX, double offsetY,
@@ -62,13 +62,13 @@ public class IaSEntityHelper {
 		final long x = (int) (ent.posX + offsetX);
 		final long y = (int) (ent.posY + offsetY);
 		final long z = (int) (ent.posZ + offsetZ);
-		final int[] c = splitCoords(x, z);
+		final int[] c = IaSEntityHelper.splitCoords(x, z);
 		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1]).getBlock(c[2],
 				(int) Math.min(Math.max(0, y), 255), c[3]);
 	}
 
 	public static int getLight(Entity ent) {
-		return getLight(ent, 0, 0, 0);
+		return IaSEntityHelper.getLight(ent, 0, 0, 0);
 	}
 
 	public static int getLight(Entity ent, double offsetX, double offsetY,
@@ -80,7 +80,7 @@ public class IaSEntityHelper {
 		final int x = (int) (ent.posX + offsetX);
 		final int y = (int) (ent.posY + offsetY);
 		final int z = (int) (ent.posZ + offsetZ);
-		splitCoords(x, z);
+		IaSEntityHelper.splitCoords(x, z);
 		return ent.worldObj.getBlockLightValue(x, y, z);
 	}
 
@@ -118,16 +118,16 @@ public class IaSEntityHelper {
 	}
 
 	public static TempCategory getTemperatureCategory(Entity ent) {
-		return getTemperatureCategory(ent, 0, 0);
+		return IaSEntityHelper.getTemperatureCategory(ent, 0, 0);
 	}
 
 	public static TempCategory getTemperatureCategory(Entity ent,
 			double offsetX, double offsetZ) {
-		return getBiome(ent, offsetX, offsetZ).getTempCategory();
+		return IaSEntityHelper.getBiome(ent, offsetX, offsetZ).getTempCategory();
 	}
 
 	public static float getTemperatureFloat(Entity ent) {
-		return getTemperatureFloat(ent, 0, 0, 0);
+		return IaSEntityHelper.getTemperatureFloat(ent, 0, 0, 0);
 	}
 
 	public static float getTemperatureFloat(Entity ent, double offsetX,
@@ -139,7 +139,7 @@ public class IaSEntityHelper {
 		final int x = (int) (ent.posX + offsetX);
 		final int y = (int) (ent.posY + offsetY);
 		final int z = (int) (ent.posZ + offsetZ);
-		return getBiome(ent, offsetX, offsetZ).getFloatTemperature(x, y, z);
+		return IaSEntityHelper.getBiome(ent, offsetX, offsetZ).getFloatTemperature(x, y, z);
 	}
 
 	public static int[] splitCoords(long x, long z) {

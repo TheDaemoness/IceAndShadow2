@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +23,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 
 	public NyxItemBowFrostLong(String par1) {
 		super(par1);
-		this.setMaxDamage(256);
+		setMaxDamage(256);
 	}
 
 	@Override
@@ -34,10 +35,10 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		final int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
-		inuse = false;
+		final int var6 = getMaxItemUseDuration(par1ItemStack) - par4;
+		this.inuse = false;
 
-		float var7 = var6 / (35.0F-this.getSpeedModifier(par1ItemStack)*2);
+		float var7 = var6 / (35.0F-getSpeedModifier(par1ItemStack)*2);
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
 
 		if (var7 < 0.6F)
@@ -69,7 +70,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);
 
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F
-				/ (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
+				/ (Item.itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
 		if (!par2World.isRemote) {
 			par2World.spawnEntityInWorld(var8);
@@ -89,7 +90,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 	public int getUpgradeCost(int mod) {
 		return 8+(mod+1)/2;
 	}
-	
+
 	@Override
 	public EntityAIBase getEntityUseTask(EntityLivingBase user) {
 		return new EntityAINyxRangedAttack(
@@ -101,7 +102,7 @@ IIaSGlowing, IIaSEntityWeaponRanged {
 		final int slowtime = IaSWorldHelper.getDifficulty(user.worldObj) * 75;
 		final int slowstr = IaSWorldHelper.getDifficulty(user.worldObj) + 1;
 		final int dif = IaSWorldHelper.getDifficulty(user.worldObj);
-		EntityIceArrow arrow = new EntityIceArrow(user.worldObj, user, target,
+		final EntityIceArrow arrow = new EntityIceArrow(user.worldObj, user, target,
 					1.8F, 5.0F, slowstr, slowtime);
 		int power = EnchantmentHelper.getEnchantmentLevel(
 				Enchantment.power.effectId, user.getHeldItem());

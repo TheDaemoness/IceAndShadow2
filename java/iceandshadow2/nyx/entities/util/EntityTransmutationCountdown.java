@@ -15,12 +15,12 @@ public class EntityTransmutationCountdown extends Entity {
 
 	public EntityTransmutationCountdown(World w) {
 		super(w);
-		this.setSize(0.0F, 0.0F);
+		setSize(0.0F, 0.0F);
 	}
 
 	public EntityTransmutationCountdown(World w, int x, int y, int z, int time) {
 		this(w);
-		this.setPosition(x + 0.5, y + 1.25, z + 0.5);
+		setPosition(x + 0.5, y + 1.25, z + 0.5);
 		this.dataWatcher.updateObject(16, time);
 	}
 
@@ -55,7 +55,7 @@ public class EntityTransmutationCountdown extends Entity {
 	}
 
 	public int getAge() {
-		return age;
+		return this.age;
 	}
 
 	public int getTransmutationTime() {
@@ -70,20 +70,20 @@ public class EntityTransmutationCountdown extends Entity {
 		final int z = (int) (this.posZ - 0.5);
 		final TileEntity te = this.worldObj.getTileEntity(x, y, z);
 		if (!(te instanceof NyxTeTransmutationAltar)) {
-			this.setDead();
+			setDead();
 			return;
 		}
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 		if (this.worldObj.getBlock(x, y + 1, z).getMaterial() != Material.air) {
-			this.setDead();
+			setDead();
 			return;
 		}
 		if (!tte.canAttemptTransmutation()) {
-			this.setDead();
+			setDead();
 			return;
 		}
-		++age;
-		if (age >= this.dataWatcher.getWatchableObjectInt(16)
+		++this.age;
+		if (this.age >= this.dataWatcher.getWatchableObjectInt(16)
 				&& !this.worldObj.isRemote) {
 			if (this.worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
 				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) this.worldObj
@@ -91,13 +91,13 @@ public class EntityTransmutationCountdown extends Entity {
 				bl.doTransmutation(this.worldObj, x, y, z, this.worldObj.rand);
 				this.worldObj.markBlockForUpdate(x, y, z);
 				this.worldObj.markTileEntityChunkModified(x, y, z, tte);
-				this.setDead();
+				setDead();
 				return;
 			}
 		}
 		final double xposMod = 0.4 + this.worldObj.rand.nextDouble() / 5, zposMod = 0.4 + this.worldObj.rand
 				.nextDouble() / 5;
-		if (age % 3 == 0)
+		if (this.age % 3 == 0)
 			return;
 		if (this.worldObj.isRemote && tte.handler != null) {
 			if (!tte.handler.spawnTransmuteParticles(tte.target, tte.catalyst,
@@ -119,7 +119,7 @@ public class EntityTransmutationCountdown extends Entity {
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound dat) {
 		if (dat.hasKey("nyxTimeLived"))
-			age = dat.getInteger("nyxTimeLived");
+			this.age = dat.getInteger("nyxTimeLived");
 	}
 
 }

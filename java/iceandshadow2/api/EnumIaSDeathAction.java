@@ -11,15 +11,15 @@ public enum EnumIaSDeathAction {
 	ALTER_DROP, //Alters and drops the ItemStack on death.
 	ALTER_KEEP, //Alters and keeps the ItemStack on death.
 	ALTER_BOTH; //Drops an ItemStack, but keeps an altered version.
-	
+
 	public boolean keep() {
 		return this == KEEP || this == ALTER_KEEP;
 	}
-	
+
 	public boolean drop() {
 		return this == DROP || this == ALTER_DROP;
 	}
-	
+
 	public boolean alter() {
 		return this == ALTER_DROP || this == ALTER_KEEP || this == ALTER_BOTH;
 	}

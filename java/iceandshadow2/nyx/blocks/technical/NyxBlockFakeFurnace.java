@@ -17,8 +17,8 @@ public class NyxBlockFakeFurnace extends IaSBaseBlockTechnical {
 	public NyxBlockFakeFurnace() {
 		super(EnumIaSModule.IAS, "FakeFurnace", Material.rock);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setHardness(Blocks.furnace.getBlockHardness(null, 0, 0, 0));
-		this.setResistance(Blocks.furnace.getExplosionResistance(null));
+		setHardness(Blocks.furnace.getBlockHardness(null, 0, 0, 0));
+		setResistance(Blocks.furnace.getExplosionResistance(null));
 	}
 
 
@@ -31,7 +31,7 @@ public class NyxBlockFakeFurnace extends IaSBaseBlockTechnical {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
 			int metadata, int fortune) {
-		ArrayList<ItemStack> li = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> li = new ArrayList<ItemStack>();
 		li.add(new ItemStack(Blocks.furnace,1));
 		return li;
 	}

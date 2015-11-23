@@ -53,7 +53,7 @@ public interface IIaSApiItemStackIO {
 	 * May be called multiple times.
 	 * @param x X coordinate of the block from which items will be extracted.
 	 * @param tx X coordinate of the block items will be inserted into.
-	 * @param cmp 
+	 * @param cmp
 	 * 		Should be used to check whether the caller accepts particular item stack or not.
 	 * This may be null, in which case the caller does not care about what type of item stack is returned.
 	 * If non-null, cmp.fitsCriteria(<return value>) should return true for the returned item stack.
@@ -62,7 +62,7 @@ public interface IIaSApiItemStackIO {
 	public ItemStack handleInput(World w, int x, int y, int z, IaSItemStackCriteria cmp, int tx, int ty, int tz);
 
 	/**
-	 * Does the actual work of placing item stacks into a 
+	 * Does the actual work of placing item stacks into a
 	 * This method is responsible for merging item stacks where possible.
 	 * This method should NOT affect the block at <tx, ty, tz> in any way.
 	 * @param x X coordinate of the block into which items will be inserted.

@@ -8,18 +8,18 @@ public abstract class IaSSense {
 	protected double dist;
 
 	public IaSSense(EntityLivingBase elb, double range) {
-		owner = elb;
-		dist = range;
+		this.owner = elb;
+		this.dist = range;
 	}
 
 	public abstract boolean canSense(Entity ent);
 
 	public double getRange() {
-		return dist;
+		return this.dist;
 	}
 
 	protected boolean isInRange(Entity ent) {
 		final double range = getRange();
-		return owner.getDistanceSqToEntity(ent) < range * range;
+		return this.owner.getDistanceSqToEntity(ent) < range * range;
 	}
 }

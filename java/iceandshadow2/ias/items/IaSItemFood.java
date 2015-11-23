@@ -21,9 +21,9 @@ IIaSModName {
 			float hungerSat, boolean doWolvesEat) {
 		super(hungerVal, hungerSat, doWolvesEat);
 		setEatTime(32);
-		this.setUnlocalizedName(mod.prefix + texName);
-		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		MODULE = mod;
+		setUnlocalizedName(mod.prefix + texName);
+		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
+		this.MODULE = mod;
 	}
 
 	@Override
@@ -33,12 +33,12 @@ IIaSModName {
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return consume;
+		return this.consume;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ IIaSModName {
 
 	@Override
 	public int getXpValue(ItemStack is, Random rand) {
-		return xpAltarValue;
+		return this.xpAltarValue;
 	}
 
 	public final IaSItemFood register() {
@@ -62,12 +62,12 @@ IIaSModName {
 	}
 
 	public IaSItemFood setEatTime(int eat) {
-		consume = eat;
+		this.consume = eat;
 		return this;
 	}
 
 	public IaSItemFood setXpAltarMinimumValue(int val) {
-		xpAltarValue = val;
+		this.xpAltarValue = val;
 		return this;
 	}
 

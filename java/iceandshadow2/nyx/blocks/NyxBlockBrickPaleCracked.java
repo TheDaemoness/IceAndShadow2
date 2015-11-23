@@ -14,10 +14,10 @@ public class NyxBlockBrickPaleCracked extends IaSBaseBlockSingle {
 
 	public NyxBlockBrickPaleCracked(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(5.0F);
-		this.setHardness(1.0F);
+		setResistance(5.0F);
+		setHardness(1.0F);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLuminescence(0.3F);
+		setLuminescence(0.3F);
 	}
 
 	@Override

@@ -20,8 +20,8 @@ public class NyxFrostSwordHandler {
 		if(e.entityLiving.worldObj.isRemote)
 			return;
 		if(e.entityLiving instanceof EntityPlayer) {
-			EntityPlayer pwai = (EntityPlayer)e.entityLiving;
-			ItemStack is = pwai.getEquipmentInSlot(0);
+			final EntityPlayer pwai = (EntityPlayer)e.entityLiving;
+			final ItemStack is = pwai.getEquipmentInSlot(0);
 			if(is != null && is.getItem() == NyxItems.frostSword && pwai.isUsingItem()) { //Probably redundant.
 				if(e.source.isProjectile()) {
 					if(!e.source.isDamageAbsolute()) {
@@ -42,9 +42,9 @@ public class NyxFrostSwordHandler {
 						} else
 							e.ammount=e.ammount/2;
 					}
-					Entity attacker = ((EntityDamageSource)e.source).getEntity();
+					final Entity attacker = ((EntityDamageSource)e.source).getEntity();
 					if(attacker instanceof EntityLivingBase) {
-						int ulevel = ((NyxItemSwordFrost)NyxItems.frostSword).getUpgradeLevel(is);
+						final int ulevel = ((NyxItemSwordFrost)NyxItems.frostSword).getUpgradeLevel(is);
 						((EntityLivingBase)attacker).addPotionEffect(
 								new PotionEffect(Potion.resistance.id,15,-(ulevel+1)));
 					}

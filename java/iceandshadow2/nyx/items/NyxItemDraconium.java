@@ -21,7 +21,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
-	
+
 	public NyxItemDraconium(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
@@ -35,15 +35,15 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return smallIcon;
+			return this.smallIcon;
 		return this.itemIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(this.getTexName());
-		this.smallIcon = reg.registerIcon(this.getTexName() + "Small");
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.smallIcon = reg.registerIcon(getTexName() + "Small");
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || 
+		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 ||
 				catalyst.getItem() != this || catalyst.getItemDamage() != 1)
 			return 0;
 		return 120;
@@ -79,7 +79,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		List<ItemStack> it = new ArrayList<ItemStack>();
+		final List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
 		target.stackSize -= 1;
 		it.add(new ItemStack(NyxItems.draconiumIngot,1,1));

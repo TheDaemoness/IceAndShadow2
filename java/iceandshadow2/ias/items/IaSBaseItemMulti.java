@@ -14,8 +14,8 @@ public class IaSBaseItemMulti extends IaSBaseItemSingle {
 
 	public IaSBaseItemMulti(EnumIaSModule mod, String id, int subtypes) {
 		super(mod, id);
-		this.setHasSubtypes(true);
-		subtypeCount = subtypes;
+		setHasSubtypes(true);
+		this.subtypeCount = subtypes;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -28,7 +28,7 @@ public class IaSBaseItemMulti extends IaSBaseItemSingle {
 	}
 
 	public int getSubtypeCount() {
-		return subtypeCount;
+		return this.subtypeCount;
 	}
 
 	@Override

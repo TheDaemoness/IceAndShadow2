@@ -12,7 +12,7 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 
 	public EntityAINyxSkeletonWeaponSwitch(EntityNyxSkeleton skello) {
 		this.skel = skello;
-		this.setMutexBits(1);
+		setMutexBits(1);
 	}
 
 	/**
@@ -29,19 +29,19 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 			if (this.skel.getHeldItem() == null
 					&& this.skel.getReserveWeapon() != null)
 				return true;
-			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
-				if (skel.isUsingAlternateWeapon()) {
-					if (skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) > 9)
+			if (this.skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
+				if (this.skel.isUsingAlternateWeapon()) {
+					if (this.skel.isPotionActive(Potion.moveSlowdown.id)
+							&& this.skel.getDistanceSqToEntity(entityliving) > 9)
 						return true;
-					if (skel.getDistanceSqToEntity(entityliving) > 25)
+					if (this.skel.getDistanceSqToEntity(entityliving) > 25)
 						return true;
 				} else {
-					if (skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) < 4)
+					if (this.skel.isPotionActive(Potion.moveSlowdown.id)
+							&& this.skel.getDistanceSqToEntity(entityliving) < 4)
 						return true;
-					if (!skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) < 16)
+					if (!this.skel.isPotionActive(Potion.moveSlowdown.id)
+							&& this.skel.getDistanceSqToEntity(entityliving) < 16)
 						return true;
 				}
 			}
@@ -56,16 +56,16 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 	public void startExecuting() {
 		final EntityLivingBase entityliving = this.skel.getAttackTarget();
 		if (entityliving != null) {
-			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
-				if (skel.isUsingAlternateWeapon())
-					skel.useAlternateWeapon(false);
+			if (this.skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
+				if (this.skel.isUsingAlternateWeapon())
+					this.skel.useAlternateWeapon(false);
 				else
-					skel.useAlternateWeapon(true);
+					this.skel.useAlternateWeapon(true);
 			} else if (this.skel.getHeldItem() == null) {
-				if (skel.isUsingAlternateWeapon())
-					skel.useAlternateWeapon(false);
+				if (this.skel.isUsingAlternateWeapon())
+					this.skel.useAlternateWeapon(false);
 				else
-					skel.useAlternateWeapon(true);
+					this.skel.useAlternateWeapon(true);
 			}
 		}
 	}

@@ -27,62 +27,62 @@ public class NyxBlocks {
 	public static Fluid fluidExousia;
 
 	public static void init() {
-		stone = new NyxBlockStone("Stone").register();
-		unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
-		permafrost = new NyxBlockPermafrost("Permafrost").register();
-		dirt = new NyxBlockDirt("Dirt").register();
-		cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian")
+		NyxBlocks.stone = new NyxBlockStone("Stone").register();
+		NyxBlocks.unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
+		NyxBlocks.permafrost = new NyxBlockPermafrost("Permafrost").register();
+		NyxBlocks.dirt = new NyxBlockDirt("Dirt").register();
+		NyxBlocks.cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian")
 		.register();
-		thornyVines = new NyxBlockThornyVines("ThornyVines").register();
-		exousicIce = new NyxBlockIce("ExousicIce").register();
-		poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
-		poisonLog = new NyxBlockPoisonLog("PoisonwoodLog").register();
-		infestLeaves = new NyxBlockInfestedLeaves("InfestedLeaves").register();
-		infestLog = new NyxBlockInfestedLog("InfestedLog").register();
-		silkBerryPod = new NyxBlockSilkBerryPod("SilkBerryPod").register();
-		planks = new NyxBlockPlanks("Planks").register();
+		NyxBlocks.thornyVines = new NyxBlockThornyVines("ThornyVines").register();
+		NyxBlocks.exousicIce = new NyxBlockIce("ExousicIce").register();
+		NyxBlocks.poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
+		NyxBlocks.poisonLog = new NyxBlockPoisonLog("PoisonwoodLog").register();
+		NyxBlocks.infestLeaves = new NyxBlockInfestedLeaves("InfestedLeaves").register();
+		NyxBlocks.infestLog = new NyxBlockInfestedLog("InfestedLog").register();
+		NyxBlocks.silkBerryPod = new NyxBlockSilkBerryPod("SilkBerryPod").register();
+		NyxBlocks.planks = new NyxBlockPlanks("Planks").register();
 
-		oreGemstone = new NyxBlockOreGemstone("OreGemstone").register();
-		oreEchir = new NyxBlockOreEchir("OreEchir").register();
-		oreDevora = new NyxBlockOreDevora("OreDevora").register();
-		oreNavistra = new NyxBlockOreNavistra("OreNavistra").register();
-		oreCortra = new NyxBlockOreCortra("OreCortra").register();
-		oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
-		oreExousium = new NyxBlockOreExousium("OreExousium").register();
-		oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
-		crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
+		NyxBlocks.oreGemstone = new NyxBlockOreGemstone("OreGemstone").register();
+		NyxBlocks.oreEchir = new NyxBlockOreEchir("OreEchir").register();
+		NyxBlocks.oreDevora = new NyxBlockOreDevora("OreDevora").register();
+		NyxBlocks.oreNavistra = new NyxBlockOreNavistra("OreNavistra").register();
+		NyxBlocks.oreCortra = new NyxBlockOreCortra("OreCortra").register();
+		NyxBlocks.oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
+		NyxBlocks.oreExousium = new NyxBlockOreExousium("OreExousium").register();
+		NyxBlocks.oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
+		NyxBlocks.crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
 		.register();
-		crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
+		NyxBlocks.crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
 		.register();
 
-		fluidExousia = new Fluid("nyxFluidExousicWater");
-		fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10)
+		NyxBlocks.fluidExousia = new Fluid("nyxFluidExousicWater");
+		NyxBlocks.fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10)
 		.setViscosity(500);
-		IaSRegistration.register(fluidExousia);
-		exousicWater = new NyxBlockWater("ExousicWater", fluidExousia)
+		IaSRegistration.register(NyxBlocks.fluidExousia);
+		NyxBlocks.exousicWater = new NyxBlockWater("ExousicWater", NyxBlocks.fluidExousia)
 		.register();
 
-		brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
-		brickPale = new NyxBlockBrickPale("PaleBrick").register();
-		brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked")
+		NyxBlocks.brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
+		NyxBlocks.brickPale = new NyxBlockBrickPale("PaleBrick").register();
+		NyxBlocks.brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked")
 		.register();
-		gatestone = new NyxBlockGatestone("Gatestone").register();
+		NyxBlocks.gatestone = new NyxBlockGatestone("Gatestone").register();
 
-		transmutationAltar = new NyxBlockAltarTransmutation(
+		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation(
 				"TransmutationAltar").register();
 
-		hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
-		hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")
+		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
+		NyxBlocks.hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")
 		.register();
-		hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ")
+		NyxBlocks.hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ")
 		.register();
-		ropeY = new NyxBlockRopeY("RopeY").register();
-		ropeX = new NyxBlockRopeX("RopeX").register();
-		ropeZ = new NyxBlockRopeZ("RopeZ").register();
-		
-		hardShadow = new NyxBlockHardShadow("HardShadow").register();
-		thermalCore = new NyxBlockThermalCore("ThermalCore").register();
-		thermalAir = new NyxBlockThermalAir("ThermalAir").register();
+		NyxBlocks.ropeY = new NyxBlockRopeY("RopeY").register();
+		NyxBlocks.ropeX = new NyxBlockRopeX("RopeX").register();
+		NyxBlocks.ropeZ = new NyxBlockRopeZ("RopeZ").register();
+
+		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
+		NyxBlocks.thermalCore = new NyxBlockThermalCore("ThermalCore").register();
+		NyxBlocks.thermalAir = new NyxBlockThermalAir("ThermalAir").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,
 				"nyxTeTransmutationAltar");

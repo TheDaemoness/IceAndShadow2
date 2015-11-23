@@ -6,6 +6,7 @@ import iceandshadow2.nyx.NyxItems;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,10 +23,10 @@ public class NyxBlockCrystalExousium extends IaSBlockDeco {
 
 	public NyxBlockCrystalExousium(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.glass);
-		this.setLuminescence(0.2F);
-		this.setLightColor(0.0F, 0.5F, 0.4F);
-		this.setResistance(1.5F);
-		this.setStepSound(soundTypeGlass);
+		setLuminescence(0.2F);
+		setLightColor(0.0F, 0.5F, 0.4F);
+		setResistance(1.5F);
+		setStepSound(Block.soundTypeGlass);
 	}
 
 	@Override

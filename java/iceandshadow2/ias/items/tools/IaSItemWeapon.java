@@ -40,8 +40,8 @@ IIaSGlowing {
 
 	public IaSItemWeapon(EnumIaSToolClass cl) {
 		super(ToolMaterial.EMERALD);
-		this.setUnlocalizedName("iasTool");
-		classe = cl;
+		setUnlocalizedName("iasTool");
+		this.classe = cl;
 	}
 
 	@Override
@@ -58,9 +58,9 @@ IIaSGlowing {
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
-		Multimap mm = HashMultimap.create();
-		IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
-		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
+		final Multimap mm = HashMultimap.create();
+		final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
+		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(Item.field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
 		return mm;
 	}
 
@@ -81,14 +81,14 @@ IIaSGlowing {
 
 	@Override
 	public EnumIaSToolClass getIaSToolClass() {
-		return classe;
+		return this.classe;
 	}
 
 	@Override
 	public IIcon getIcon(ItemStack is, int renderPass) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if (renderPass == 1 && !m.glows(this.getIaSToolClass()))
-			return invisible;
+		if (renderPass == 1 && !m.glows(getIaSToolClass()))
+			return this.invisible;
 		return m.getIcon(is);
 	}
 
@@ -96,8 +96,8 @@ IIaSGlowing {
 	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
 			ItemStack usingItem, int useRemaining) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if (renderPass == 1 && !m.glows(this.getIaSToolClass()))
-			return invisible;
+		if (renderPass == 1 && !m.glows(getIaSToolClass()))
+			return this.invisible;
 		return m.getIcon(is);
 	}
 
@@ -202,7 +202,7 @@ IIaSGlowing {
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 		// See IaSRegistry.
 	}
 

@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.world.biome;
 
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 import iceandshadow2.util.IaSBlockHelper;
@@ -10,7 +9,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestDense extends NyxBiome {
@@ -18,13 +16,13 @@ public class NyxBiomeForestDense extends NyxBiome {
 	public NyxBiomeForestDense(int par1, boolean register, float heightRoot,
 			float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		this.setBlocks(Blocks.snow, Blocks.snow);
-		
+		setBlocks(Blocks.snow, Blocks.snow);
+
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class,
 				60, 1,1));
-		
-		this.setColor(0 << 16 | 96 << 8 | 96);
+
+		setColor(0 << 16 | 96 << 8 | 96);
 	}
 
 	@Override
@@ -57,8 +55,7 @@ public class NyxBiomeForestDense extends NyxBiome {
 			}
 			if (y == 0)
 				continue;
-			final WorldGenerator var5 = this
-					.getRandomWorldGenForTrees(par2Random);
+			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
 			var5.generate(par1World, par2Random, x, y, z);
 		}
 	}

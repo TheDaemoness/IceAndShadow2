@@ -35,15 +35,15 @@ IIaSModName, IShearable {
 
 	public IaSBaseBlockLeaves(EnumIaSModule mod, String texName) {
 		super(Material.leaves, false);
-		MODULE = mod;
-		this.setBlockName(mod.prefix + texName);
-		this.setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
+		this.MODULE = mod;
+		setBlockName(mod.prefix + texName);
+		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
 				+ texName);
-		this.setTickRandomly(true);
-		this.setCreativeTab(IaSCreativeTabs.blocks);
-		this.setHardness(0.3F);
-		this.setLightOpacity(2);
-		this.setStepSound(soundTypeGrass);
+		setTickRandomly(true);
+		setCreativeTab(IaSCreativeTabs.blocks);
+		setHardness(0.3F);
+		setLightOpacity(2);
+		setStepSound(Block.soundTypeGrass);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ IIaSModName, IShearable {
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return MODULE;
+		return this.MODULE;
 	}
 
 	@Override
@@ -104,14 +104,14 @@ IIaSModName, IShearable {
 	public IIcon getIcon(int par1, int par2) {
 		Minecraft.getMinecraft();
 		if (Minecraft.isFancyGraphicsEnabled())
-			return iconFancy;
+			return this.iconFancy;
 		else
-			return iconFast;
+			return this.iconFast;
 	}
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override
@@ -164,9 +164,9 @@ IIaSModName, IShearable {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		iconFancy = reg.registerIcon(getTexName() + "Fancy");
-		iconFast = reg.registerIcon(getTexName() + "Fast");
-		this.blockIcon = iconFast;
+		this.iconFancy = reg.registerIcon(getTexName() + "Fancy");
+		this.iconFast = reg.registerIcon(getTexName() + "Fast");
+		this.blockIcon = this.iconFast;
 	}
 
 	private void removeLeaves(World p_150126_1_, int p_150126_2_,
@@ -286,7 +286,7 @@ IIaSModName, IShearable {
 				if (l1 >= 0) {
 					w.setBlockMetadataWithNotify(x, y, z, l & -9, 4);
 				} else {
-					this.removeLeaves(w, x, y, z);
+					removeLeaves(w, x, y, z);
 				}
 			}
 		}

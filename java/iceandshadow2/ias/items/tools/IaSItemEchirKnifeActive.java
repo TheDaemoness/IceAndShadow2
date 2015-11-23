@@ -18,8 +18,8 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 
 	public IaSItemEchirKnifeActive(String texName, int tab) {
 		super(EnumIaSModule.IAS, texName);
-		this.setMaxStackSize(32);
-		this.setFull3D();
+		setMaxStackSize(32);
+		setFull3D();
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target,
 			ItemStack catalyst, World world) {
-		int mut = Math.min(target.stackSize,4);
+		final int mut = Math.min(target.stackSize,4);
 		target.stackSize -= mut;
 		catalyst.stackSize -= 1;
-		ItemStack res = IaSTools.setToolMaterial(IaSTools.knife, IaSRegistry.getTransmutationMaterial(catalyst).getMaterialName());
+		final ItemStack res = IaSTools.setToolMaterial(IaSTools.knife, IaSRegistry.getTransmutationMaterial(catalyst).getMaterialName());
 		res.stackSize = mut;
-		ArrayList<ItemStack> st = new ArrayList<ItemStack>(1);
+		final ArrayList<ItemStack> st = new ArrayList<ItemStack>(1);
 		st.add(res);
 		return st;
 	}

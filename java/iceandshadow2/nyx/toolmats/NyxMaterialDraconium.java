@@ -31,7 +31,7 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 	public int getDurability(ItemStack is) {
 		return 96;
 	}
-	
+
 	@Override
 	public float getBaseDamage() {
 		return 4;
@@ -39,7 +39,7 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return knife_tex;
+		return NyxMaterialDraconium.knife_tex;
 	}
 
 	@Override

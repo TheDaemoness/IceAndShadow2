@@ -18,8 +18,8 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 
 	protected IaSBlockAltar(EnumIaSModule mod, String id) {
 		super(mod, id, Material.rock);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
-		this.setLightOpacity(7);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+		setLightOpacity(7);
 	}
 
 	@Override
@@ -42,12 +42,12 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = reg.registerIcon("IceAndShadow2:" + this.getModName()
+		this.iconTop = reg.registerIcon("IceAndShadow2:" + getModName()
 				+ "Top");
-		this.iconSide = reg.registerIcon("IceAndShadow2:" + this.getModName()
+		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName()
 				+ "Side");
-		this.iconBottom = reg.registerIcon("IceAndShadow2:" + this.getModName()
+		this.iconBottom = reg.registerIcon("IceAndShadow2:" + getModName()
 				+ "Bottom");
-		this.blockIcon = iconSide;
+		this.blockIcon = this.iconSide;
 	}
 }

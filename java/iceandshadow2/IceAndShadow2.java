@@ -43,32 +43,32 @@ public class IceAndShadow2 {
 
 	private static boolean acceptRegistration = false;
 
-	@Instance(MODID)
+	@Instance(IceAndShadow2.MODID)
 	public static IceAndShadow2 instance;
 
 	public static Logger getLogger() {
-		return logger;
+		return IceAndShadow2.logger;
 	}
 
 	private static List toPreRegister;
 	private static List toPostRegister;
 
 	public static Collection getPreRegistrationHandlers() {
-		return Collections.unmodifiableList(toPreRegister);
+		return Collections.unmodifiableList(IceAndShadow2.toPreRegister);
 	}
 	public static Collection getPostRegistrationHandlers() {
-		return Collections.unmodifiableList(toPostRegister);
+		return Collections.unmodifiableList(IceAndShadow2.toPostRegister);
 	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		event.getModLog().info("Ice and Shadow 2, version " + VERSION + ".");
-		logger = event.getModLog();
+		event.getModLog().info("Ice and Shadow 2, version " + IceAndShadow2.VERSION + ".");
+		IceAndShadow2.logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
 			event.getModLog()
 			.info("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
-		cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(),
-				CONFIG_MAJ, CONFIG_MIN);
+		IceAndShadow2.cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(),
+				IceAndShadow2.CONFIG_MAJ, IceAndShadow2.CONFIG_MIN);
 
 		IaSCreativeTabs.init();
 		IaSItemStarterKit.init();
@@ -76,15 +76,15 @@ public class IceAndShadow2 {
 		InitNyx.init(this);
 		IaSDamageSources.init();
 
-		toPreRegister = new ArrayList<Object>();
+		IceAndShadow2.toPreRegister = new ArrayList<Object>();
 		addToolMaterials();
 		IaSRegistry.preInit();
-		toPreRegister.clear();
+		IceAndShadow2.toPreRegister.clear();
 		IaSTools.init();
 
 		if (event.getSide() == Side.CLIENT)
 			IaSRenderers.init();
-		acceptRegistration = true;
+		IceAndShadow2.acceptRegistration = true;
 	}
 
 	@EventHandler
@@ -105,23 +105,23 @@ public class IceAndShadow2 {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		acceptRegistration = false;
-		toPostRegister = new ArrayList<Object>();
+		IceAndShadow2.acceptRegistration = false;
+		IceAndShadow2.toPostRegister = new ArrayList<Object>();
 		addPostInitHandlers();
 		IaSRegistry.postInit();
-		toPostRegister.clear();
+		IceAndShadow2.toPostRegister.clear();
 	}
 
 	private void addToolMaterials() {
-		toPreRegister.add(new NyxMaterialDevora());
-		toPreRegister.add(new NyxMaterialCortra());
-		toPreRegister.add(new NyxMaterialNavistra());
-		toPreRegister.add(new NyxMaterialExousium());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialDevora());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialCortra());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialNavistra());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialExousium());
 	}
 
 	private void addPostInitHandlers() {
-		toPostRegister.add(new IaSHandlerTransmutationRepair());
-		toPostRegister.add(new IaSHandlerTransmutationHeat());
+		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationRepair());
+		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationHeat());
 	}
 
 	@EventHandler
@@ -130,6 +130,6 @@ public class IceAndShadow2 {
 	}
 
 	public static boolean isRegistrationPublic() {
-		return acceptRegistration;
+		return IceAndShadow2.acceptRegistration;
 	}
 }

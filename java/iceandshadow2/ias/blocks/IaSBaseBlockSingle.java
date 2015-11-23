@@ -8,13 +8,13 @@ public class IaSBaseBlockSingle extends IaSBaseBlock {
 
 	public IaSBaseBlockSingle(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, mat);
-		this.setBlockName(mod.prefix + texName);
-		this.setBlockTextureName(getTexName());
+		setBlockName(mod.prefix + texName);
+		setBlockTextureName(getTexName());
 	}
 
 	@Override
 	public String getModName() {
-		return this.getUnlocalizedName().substring(5);
+		return getUnlocalizedName().substring(5);
 	}
 
 	@Override

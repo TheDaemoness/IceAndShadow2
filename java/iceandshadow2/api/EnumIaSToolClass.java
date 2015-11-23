@@ -11,7 +11,7 @@ public enum EnumIaSToolClass {
 							2.0F, ImmutableSet.of(), true);
 
 	public static EnumIaSToolClass fromId(int itemDamage, boolean isSword) {
-		for (final EnumIaSToolClass cl : values()) {
+		for (final EnumIaSToolClass cl : EnumIaSToolClass.values()) {
 			if (cl.id == itemDamage && cl.isSword == isSword)
 				return cl;
 		}
@@ -27,24 +27,24 @@ public enum EnumIaSToolClass {
 	EnumIaSToolClass(int id, float dmg, Set cls, boolean isSword) {
 		this.id = id;
 		this.attackDmg = dmg;
-		classes = cls;
+		this.classes = cls;
 		this.isSword = isSword;
 	}
 
 	public float getBaseDamage() {
-		return attackDmg;
+		return this.attackDmg;
 	}
 
 	public int getClassId() {
-		return id;
+		return this.id;
 	}
 
 	public Set<String> getToolClassSet() {
-		return classes;
+		return this.classes;
 	}
 
 	public boolean isWeapon() {
-		return isSword;
+		return this.isSword;
 	}
 
 	@Override

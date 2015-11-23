@@ -7,10 +7,10 @@ public class NyxBlockOreEchir extends NyxBlockOre {
 	public NyxBlockOreEchir(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 1);
-		this.setHardness(10.0F);
-		this.setLuminescence(0.2F);
-		this.setLightColor(0.75F, 1.0F, 0.75F);
-		this.setResistance(20.0F);
+		setHardness(10.0F);
+		setLuminescence(0.2F);
+		setLightColor(0.75F, 1.0F, 0.75F);
+		setResistance(20.0F);
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class SearchBlocks {
 	/**
 	 * Create a cylinder-shaped space starting from (x,y,z) and rising to
 	 * (x,y+height,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -47,7 +47,7 @@ public class SearchBlocks {
 
 	/**
 	 * Create a dome-shaped space with the center of the flat base at (x,y,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -68,7 +68,7 @@ public class SearchBlocks {
 
 	/**
 	 * Create a sphere-shaped space centered at (x,y,z).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y
@@ -89,7 +89,7 @@ public class SearchBlocks {
 
 	/**
 	 * Create the walls of a cube centered at x, y, and z (no corners).
-	 * 
+	 *
 	 * @param world
 	 * @param x
 	 * @param y

@@ -5,12 +5,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderNyxGhoul extends RenderZombie {
-	
-	private static final ResourceLocation ghoul_body = new 
+
+	private static final ResourceLocation ghoul_body = new
 			ResourceLocation("iceandshadow2:textures/mob/whiteghoul.png");
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-        return ghoul_body;
+        return RenderNyxGhoul.ghoul_body;
     }
 }

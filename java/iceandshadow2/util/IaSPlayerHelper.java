@@ -11,14 +11,14 @@ public class IaSPlayerHelper {
 	private static boolean dochat = true;
 
 	public static void alertPlayer(EntityPlayer plai, String str) {
-		if (dochat && plai.worldObj.isRemote) {
+		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final ChatComponentText txt = new ChatComponentText(str);
 			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true)
 					.setColor(EnumChatFormatting.RED));
 			plai.addChatMessage(txt);
-			dochat = false;
+			IaSPlayerHelper.dochat = false;
 		} else
-			dochat = true;
+			IaSPlayerHelper.dochat = true;
 	}
 
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
@@ -32,13 +32,13 @@ public class IaSPlayerHelper {
 	}
 
 	public static void messagePlayer(EntityPlayer plai, String str) {
-		if (dochat && plai.worldObj.isRemote) {
+		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final ChatComponentText txt = new ChatComponentText(str);
 			txt.setChatStyle(new ChatStyle().setItalic(true).setColor(
 					EnumChatFormatting.GRAY));
 			plai.addChatMessage(txt);
-			dochat = false;
+			IaSPlayerHelper.dochat = false;
 		} else
-			dochat = true;
+			IaSPlayerHelper.dochat = true;
 	}
 }

@@ -22,17 +22,17 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 	@Override
 	public int[] getInts(int x, int z, int xlim, int zlim) {
 		final int[] var6 = IntCache.getIntCache(xlim * zlim);
-		int rl = IaSWorldHelper.getRegionLevel(null, x*16, -1, z*16);
+		final int rl = IaSWorldHelper.getRegionLevel(null, x*16, -1, z*16);
 		for (int zit = 0; zit < zlim; ++zit) {
 			for (int xit = 0; xit < xlim; ++xit) {
-				this.initChunkSeed(xit + x, zit + z);
-				int nb = this.nextInt(this.allowedBiomes.length);
+				initChunkSeed(xit + x, zit + z);
+				int nb = nextInt(this.allowedBiomes.length);
 				if (this.allowedBiomes[nb] == NyxBiomes.nyxInfested) {
 					if(rl < 1)
 						nb = NyxBiomes.nyxHillForest.biomeID;
 					else if(rl < 3)
 						nb = NyxBiomes.nyxMesaForest.biomeID;
-					else 
+					else
 						nb = this.allowedBiomes[nb].biomeID;
 				} else if (this.allowedBiomes[nb] == NyxBiomes.nyxRugged) {
 					if(rl < 1)

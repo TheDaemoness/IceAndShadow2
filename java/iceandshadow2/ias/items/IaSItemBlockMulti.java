@@ -13,7 +13,7 @@ public class IaSItemBlockMulti extends ItemBlock {
 	public IaSItemBlockMulti(Block bl) throws Exception {
 		super(bl);
 		if (bl instanceof IaSBaseBlockMulti)
-			theblock = (IaSBaseBlockMulti) bl;
+			this.theblock = (IaSBaseBlockMulti) bl;
 		else
 			throw new Exception("Block with iconString " + this.iconString
 					+ " is not an IaS Multiblock!");
@@ -22,7 +22,7 @@ public class IaSItemBlockMulti extends ItemBlock {
 
 	@Override
 	public IIcon getIconFromDamage(int par1) {
-		return theblock.getIcon(0, par1);
+		return this.theblock.getIcon(0, par1);
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class IaSItemBlockMulti extends ItemBlock {
 
 	@Override
 	public String getUnlocalizedName() {
-		return theblock.getUnlocalizedName();
+		return this.theblock.getUnlocalizedName();
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
-		return theblock.getUnlocalizedName(par1ItemStack.getItemDamage());
+		return this.theblock.getUnlocalizedName(par1ItemStack.getItemDamage());
 	}
 
 }

@@ -18,11 +18,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	public NyxBlockUnstableIce(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.sand);
-		this.setStepSound(Block.soundTypeGlass);
-		this.setHardness(0.1F);
-		this.setResistance(0.5F);
-		this.setLightOpacity(4);
-		this.setTickRandomly(true);
+		setStepSound(Block.soundTypeGlass);
+		setHardness(0.1F);
+		setResistance(0.5F);
+		setLightOpacity(4);
+		setTickRandomly(true);
 		this.slipperiness = 1.08F;
 		this.setHarvestLevel("spade", 0);
 	}

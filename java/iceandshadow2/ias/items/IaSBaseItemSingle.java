@@ -7,8 +7,8 @@ public class IaSBaseItemSingle extends IaSBaseItem {
 
 	public IaSBaseItemSingle(EnumIaSModule mod, String texName) {
 		super(mod);
-		this.setUnlocalizedName(mod.prefix + texName);
-		this.setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
+		setUnlocalizedName(mod.prefix + texName);
+		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 	}
 
 	@Override

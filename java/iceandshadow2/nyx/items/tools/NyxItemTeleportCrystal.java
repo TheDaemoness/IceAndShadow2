@@ -5,7 +5,6 @@ import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.world.NyxTeleporter;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -33,7 +32,7 @@ IIaSOnDeathKeep {
 
 	public NyxItemTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
 				new ItemStack(Items.nether_star), new ItemStack(
 						Items.ender_pearl), new ItemStack(Items.snowball));
@@ -43,7 +42,7 @@ IIaSOnDeathKeep {
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if ((dmg & 4) == 4)
-			return empty;
+			return this.empty;
 		return this.itemIcon;
 	}
 
@@ -133,7 +132,7 @@ IIaSOnDeathKeep {
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
-		pwai.setItemInUse(heap, this.getMaxItemUseDuration(heap));
+		pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
 		pwai.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));
 		return heap;
 	}
@@ -182,6 +181,6 @@ IIaSOnDeathKeep {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		empty = reg.registerIcon(this.getTexName() + "Empty");
+		this.empty = reg.registerIcon(getTexName() + "Empty");
 	}
 }

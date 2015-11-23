@@ -67,7 +67,7 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return knife_tex;
+		return NyxMaterialNavistra.knife_tex;
 	}
 
 	@Override

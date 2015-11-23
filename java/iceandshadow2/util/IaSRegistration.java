@@ -12,11 +12,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class IaSRegistration {
 	public static void register(Object obj) {
 		if (obj instanceof Block)
-			registerBlock((Block) obj);
+			IaSRegistration.registerBlock((Block) obj);
 		else if (obj instanceof Item)
-			registerItem((Item) obj);
+			IaSRegistration.registerItem((Item) obj);
 		else if (obj instanceof Fluid)
-			registerFluid((Fluid) obj);
+			IaSRegistration.registerFluid((Fluid) obj);
 	}
 
 	private static Block registerBlock(Block block) {

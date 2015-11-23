@@ -34,7 +34,7 @@ public class RenderIceArrow extends Render {
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 		GL11.glDepthMask(false);
-		this.renderArrow((EntityIceArrow) par1Entity, par2, par4, par6, par8,
+		renderArrow((EntityIceArrow) par1Entity, par2, par4, par6, par8,
 				par9);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -47,7 +47,7 @@ public class RenderIceArrow extends Render {
 
 	public void renderArrow(EntityIceArrow par1EntityArrow, double par2,
 			double par4, double par6, float par8, float par9) {
-		this.bindTexture(icearrow_resourceloc);
+		bindTexture(RenderIceArrow.icearrow_resourceloc);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
 		GL11.glRotatef(

@@ -45,8 +45,8 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 
 	public NyxBlockStone(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		this.setResistance(HARDNESS);
-		this.setHardness(RESISTANCE);
+		setResistance(NyxBlockStone.HARDNESS);
+		setHardness(NyxBlockStone.RESISTANCE);
 		this.setHarvestLevel("pickaxe", 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone),
 				new ItemStack(this));
@@ -71,7 +71,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	@Override
 	public void onEntityWalking(World theWorld, int x, int y, int z,
 			Entity theEntity) {
-		doDamage(theWorld, x, y, z, theEntity,
+		NyxBlockStone.doDamage(theWorld, x, y, z, theEntity,
 				theEntity.worldObj.difficultySetting.getDifficultyId() + 2);
 	}
 
@@ -83,7 +83,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		int dmg = 2 * theEntity.worldObj.difficultySetting.getDifficultyId();
 		if (dmg == 0)
 			dmg = 1;
-		doDamage(woild, x, y, z, theEntity, dmg);
+		NyxBlockStone.doDamage(woild, x, y, z, theEntity, dmg);
 	}
 
 	@Override

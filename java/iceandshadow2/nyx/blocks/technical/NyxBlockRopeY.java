@@ -13,7 +13,7 @@ public class NyxBlockRopeY extends NyxBlockRope {
 
 	public NyxBlockRopeY(String texName) {
 		super(texName);
-		this.setBlockBounds(0.45F, 0.0F, 0.45F, 0.55F, 1.0F, 0.55F);
+		setBlockBounds(0.45F, 0.0F, 0.45F, 0.55F, 1.0F, 0.55F);
 	}
 
 	@Override

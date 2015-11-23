@@ -13,9 +13,9 @@ public class NyxBlockOreGemstone extends NyxBlockOre {
 	public NyxBlockOreGemstone(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 2);
-		this.setHardness(4.0F);
-		this.setLuminescence(0.2F);
-		this.setResistance(1.0F);
+		setHardness(4.0F);
+		setLuminescence(0.2F);
+		setResistance(1.0F);
 		GameRegistry.addSmelting(this, new ItemStack(Items.diamond,2), 1);
 	}
 
