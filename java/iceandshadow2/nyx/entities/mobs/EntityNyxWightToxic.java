@@ -166,12 +166,15 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1)
 			return;
-
-		final int baite = this.rand.nextInt(6 + par2) - par2;
+		
+		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
+		final int baite = this.rand.nextInt(8 - diff + par2) - par2;
+		
 		if (baite <= 0)
 			dropItem(NyxItems.toxicCore, 1);
 
-		dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
+		dropItem(NyxItems.resin,(
+				this.rand.nextInt(diff+par2)>1?2:1));
 	}
 
 	@Override

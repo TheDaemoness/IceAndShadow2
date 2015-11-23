@@ -103,11 +103,12 @@ public class EntityNyxSpider extends EntitySpider {
 			dropItem(Items.experience_bottle,
 					1 + this.rand.nextInt(2 + par2));
 
-		final int baite = this.rand.nextInt(6 + par2) - par2;
+		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
+		final int baite = this.rand.nextInt(8 - diff + par2) - par2;
 		if (baite <= 0)
 			dropItem(NyxItems.toughGossamer, 1);
 
-		 if(this.rand.nextInt(5) < 2+this.worldObj.difficultySetting.getDifficultyId())
+		 if(this.rand.nextInt(5) < 2+diff)
 			 dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
 	}
 
