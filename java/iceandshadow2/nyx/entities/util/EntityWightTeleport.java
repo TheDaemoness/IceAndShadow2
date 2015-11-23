@@ -65,6 +65,11 @@ public class EntityWightTeleport extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition pom) {
 		if(pom.typeOfHit == MovingObjectType.BLOCK) {
+			this.worldObj
+			.playSoundAtEntity(this,
+					"IceAndShadow2:mob_nyxwight_tele_arrive",
+					0.8F, 
+					this.rand.nextFloat() * 0.1F + 0.9F);
 			if(!this.worldObj.isRemote) {
 				Block bl = this.worldObj.getBlock(pom.blockX, pom.blockY, pom.blockZ);
 				if(bl.getMaterial() == Material.leaves)

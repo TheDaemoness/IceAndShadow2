@@ -19,6 +19,9 @@ import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
 import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.nyx.entities.util.EntityWightTeleport;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
+import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
@@ -36,6 +39,8 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,12 +53,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters, IIaSSensate {
 
 	private EntityLivingBase searched;
 
-	protected static double moveSpeed = 0.25;
+	protected static double moveSpeed = 0.4;
 	
 	protected int regenDelay;
 	protected IaSSetSenses senses;
@@ -87,8 +93,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 				EntityPlayer.class, 6.0F, 0.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSpider.class, 6, true));
+        this.targetTasks.addTask(3, new EntityAINyxTargeter(this));
 	}
 
 	@Override
@@ -115,11 +121,19 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
 		.setBaseValue(0.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-		.setBaseValue(EntityNyxWightToxic.moveSpeed);
+		.setBaseValue(this.moveSpeed);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange)
 		.setBaseValue(16.0);
 		this.getEntityAttribute(field_110186_bp)
 		.setBaseValue(0.0);
+	}
+	
+	// To protect spoidahs.
+	@Override
+	public void addPotionEffect(PotionEffect eff) {
+		if (eff.getPotionID() == Potion.poison.id)
+			return;
+		super.addPotionEffect(eff);
 	}
 
 	@Override
@@ -187,19 +201,17 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	 */
 	@Override
 	protected String getLivingSound() {
-		if(this.getAttackTarget() != null)
-			return "IceAndShadow2:mob_nyxghoul_idle";
 		return null;
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "IceAndShadow2:mob_nyxghoul_hurt";
+		return null;
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "IceAndShadow2:mob_nyxghoul_death";
+		return null;
 	}
 	
 	@Override
@@ -261,7 +273,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 									posX-TELEPORT_RANGE, posY-TELEPORT_RANGE, posZ-TELEPORT_RANGE,
 									posX+TELEPORT_RANGE, posY+TELEPORT_RANGE, posZ+TELEPORT_RANGE));
 					for(Object ent : ents) {
-						if(ent instanceof EntityAgeable || ent instanceof EntityPlayer) {
+						if(ent instanceof EntityAgeable || ent instanceof EntityPlayer || ent instanceof EntityNyxSpider) {
 							EntityPoisonBall pb = new EntityPoisonBall(worldObj,this);
 							EntityLivingBase elb = (EntityLivingBase)ent;
 							pb.setThrowableHeading(
@@ -279,7 +291,21 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		}
 	}
 	
+	@Override
+	public float getBlockPathWeight(int i, int j, int k) {
+		if (this.getAttackTarget() != null || this.getSearchTarget() != null)
+			return 1;
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
+		if (biome instanceof NyxBiomeInfested)
+			return 1;
+		else if (biome instanceof NyxBiomeForestDense || biome instanceof NyxBiomeForestSparse)
+			return 15;
+		return 3;
+	}
+	
 	public void teleportAt(Entity target) {
+		target.worldObj.playSoundEffect(posX, posY, posZ, "mob.endermen.portal", 0.7F,
+				0.7F + target.worldObj.rand.nextFloat() * 0.1F);
 		if (this.worldObj.isRemote)
 			return;
 		EntityWightTeleport wt;
