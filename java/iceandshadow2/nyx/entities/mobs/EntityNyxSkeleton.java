@@ -30,6 +30,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -122,6 +123,8 @@ IIaSMobGetters {
 		this.tasks.addTask(2, new EntityAINyxSkeletonWeaponSwitch(this));
 		this.tasks.addTask(3, new EntityAIFleeSun(this,
 				EntityNyxSkeleton.moveSpeed + 0.5));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityNyxWightToxic.class, 5.0F,
+				EntityNyxSkeleton.moveSpeed, EntityNyxSkeleton.moveSpeed + 0.5));
 		this.tasks.addTask(4, new EntityAINyxSearch(this));
 		this.tasks.addTask(5, new EntityAIWander(this,
 				EntityNyxSkeleton.moveSpeed));
