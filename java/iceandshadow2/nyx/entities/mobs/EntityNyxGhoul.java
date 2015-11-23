@@ -110,18 +110,6 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				DamageSource.causeMobDamage(this), f * 2 + 4);
 
 		if (flag) {
-			if (i > 0) {
-				par1Entity.addVelocity(
-						-MathHelper.sin(this.rotationYaw * (float) Math.PI
-								/ 180.0F)
-								* i * 0.5F,
-								0.1D,
-								MathHelper.cos(this.rotationYaw * (float) Math.PI
-										/ 180.0F)
-										* i * 0.5F);
-				this.motionX *= 0.6D;
-				this.motionZ *= 0.6D;
-			}
 
 			final int j = EnchantmentHelper.getFireAspectModifier(this);
 

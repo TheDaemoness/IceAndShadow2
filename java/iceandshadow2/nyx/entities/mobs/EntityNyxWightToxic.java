@@ -72,8 +72,9 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		this.targetTasks.taskEntries.clear();
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, true));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.2D, true));
+        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.5D, true));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityNyxSpider.class, 0.5D, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.5D, true));
 		this.tasks.addTask(5, new EntityAIFleeSun(this,
 				EntityNyxWightToxic.moveSpeed + 0.5));
         //this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0D));
