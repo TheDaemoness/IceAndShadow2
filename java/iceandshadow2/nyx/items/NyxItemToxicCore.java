@@ -14,7 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeathDrop {
+public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
@@ -28,11 +28,6 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow implements IIaSOnDeat
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
 				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
 				new ItemStack(this, 1, 1));
-	}
-
-	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
 	}
 
 	@SideOnly(Side.CLIENT)
