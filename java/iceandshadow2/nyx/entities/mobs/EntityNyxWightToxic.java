@@ -14,6 +14,7 @@ import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
+import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -32,6 +33,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -160,9 +162,9 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
 			par2 -= IaSWorldHelper.getRegionArmorMod(this);
 		if(par1DamageSource.isDamageAbsolute())
-			flag = super.attackEntityFrom(par1DamageSource, par2);
+			flag = super.attackEntityFrom(par1DamageSource, par2*1.5F);
 		else
-			flag = super.attackEntityFrom(par1DamageSource, par2/2);
+			flag = super.attackEntityFrom(par1DamageSource, par2);
 		return flag;
 	}
 
@@ -172,10 +174,10 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 			return;
 
 		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
-		final int baite = this.rand.nextInt(6 - diff + par2) - par2;
+		final int baite = this.rand.nextInt(8 + par2) - par2 - diff;
 
 		if (baite <= 0)
-			dropItem(NyxItems.toxicCore, 0);
+			IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.toxicCore, 1, 1));
 
 		dropItem(NyxItems.resin,(
 				this.rand.nextInt(diff+par2)>1?2:1));
@@ -225,8 +227,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	@Override
 	public double getScaledMaxHealth() {
 		if(this.worldObj == null)
-			return 25.0D;
-		return 5.0D+IaSWorldHelper.getDifficulty(this.worldObj)*10;
+			return 35.0D;
+		return 15.0D+IaSWorldHelper.getDifficulty(this.worldObj)*10;
 	}
 
 	@Override
