@@ -15,6 +15,7 @@ public class NyxArmorHandler {
 		if(elb != null && e.source.isMagicDamage()) {
 			if(e.source.isDamageAbsolute())
 				return;
+			int pieces = 0;
 			if(elb.getEquipmentInSlot(1) != null &&
 					elb.getEquipmentInSlot(1).getItem() == IaSTools.armorSpiderSilk[3]) {
 				e.ammount -= 1;
@@ -23,19 +24,22 @@ public class NyxArmorHandler {
 			if(elb.getEquipmentInSlot(2) != null &&
 					elb.getEquipmentInSlot(2).getItem() == IaSTools.armorSpiderSilk[2]) {
 				e.ammount -= 3;
+				++pieces;
 				elb.getEquipmentInSlot(2).damageItem(3, elb);
 			}
 			if(elb.getEquipmentInSlot(3) != null &&
 					elb.getEquipmentInSlot(3).getItem() == IaSTools.armorSpiderSilk[1]) {
 				e.ammount -= 2;
+				++pieces;
 				elb.getEquipmentInSlot(3).damageItem(2, elb);
 			}
 			if(elb.getEquipmentInSlot(4) != null &&
 					elb.getEquipmentInSlot(4).getItem() == IaSTools.armorSpiderSilk[0]) {
 				e.ammount -= 1;
+				++pieces;
 				//Boots deliberately do not get damaged.
 			}
-			e.ammount = Math.max(1, e.ammount);
+			e.ammount = Math.max(1, e.ammount-pieces/2);
 		}
 	}
 }
