@@ -20,7 +20,7 @@ public class NyxBiomeForestDense extends NyxBiome {
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class,
-				60, 1,1));
+				40, 1,1));
 
 		setColor(0 << 16 | 96 << 8 | 96);
 	}

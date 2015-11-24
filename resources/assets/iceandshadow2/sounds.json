@@ -4,5 +4,6 @@
    "mob_nyxghoul_hurt": {"category":"hostile" ,"sounds":["mob_nyxghoul_hurt1","mob_nyxghoul_hurt2","mob_nyxghoul_hurt3"]},
    "mob_nyxghoul_death": {"category":"hostile" ,"sounds":["mob_nyxghoul_death"]},
    "mob_nyxwisp_materialize": {"category":"hostile" ,"sounds":["mob_nyxwisp_materialize"]},
-   "mob_nyxwight_tele_arrive": {"category":"hostile" ,"sounds":["toxtele1","toxtele2","toxtele3"]}
+   "mob_nyxwight_tele_arrive": {"category":"hostile" ,"sounds":["toxtele1","toxtele2","toxtele3"]},
+   "mob_nyxwight_toxic_attack_brutal": {"category":"hostile" ,"sounds":["toxbrutal"]}
 }

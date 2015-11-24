@@ -8,13 +8,7 @@ import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
-import iceandshadow2.nyx.entities.ai.senses.IaSSense;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseEnemy;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseMovement;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseTouch;
-import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
-import iceandshadow2.nyx.entities.ai.senses.IaSSetSenses;
+import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
@@ -59,33 +53,34 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	public EntityNyxWightToxic(World par1World) {
 		super(par1World);
 
-		this.experienceValue = 25;
-		this.regenDelay = 0;
+		this.experienceValue = 15;
+		this.regenDelay = 15;
 
 		this.senses = new IaSSetSenses(this);
 		this.senses.add(new IaSSenseMovement(this, 24.0));
+		this.senses.add(new IaSSenseActions(this, 16.0));
 		this.senses.add(new IaSSenseTouch(this));
-		this.senses.add(new IaSSenseEnemy(this, 6.0F));
-		this.senses.add(new IaSSenseVision(this, 3.0F));
+		this.senses.add(new IaSSenseAura(this, 5.0F));
+		this.senses.add(new IaSSensePoisoned(this, 9.0F));
 
 		this.tasks.taskEntries.clear();
 		this.targetTasks.taskEntries.clear();
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.5D, true));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityNyxSpider.class, 0.5D, true));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.5D, true));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.8D, true));
+		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityNyxSpider.class, 0.8D, true));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.8D, true));
 		this.tasks.addTask(5, new EntityAIFleeSun(this,
 				EntityNyxWightToxic.moveSpeed + 0.5));
-        //this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		//this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this,
 				EntityNyxWightToxic.moveSpeed));
 		this.tasks.addTask(8, new EntityAINyxWatchClosest(this,
 				EntityPlayer.class, 6.0F, 0.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSpider.class, 6, true));
-        this.targetTasks.addTask(3, new EntityAINyxTargeter(this));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSpider.class, 6, true));
+		this.targetTasks.addTask(3, new EntityAINyxTargeter(this));
 	}
 
 	@Override
@@ -129,18 +124,29 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		final boolean flag = par1Entity.attackEntityFrom(
-				DamageSource.causeThornsDamage(this), IaSWorldHelper.getDifficulty(this.worldObj));
-
-		if (flag) {
-			if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
-				final EntityLivingBase tox = (EntityLivingBase)par1Entity;
-				tox.addPotionEffect(new PotionEffect(Potion.poison.id,
-					75+IaSWorldHelper.getDifficulty(this.worldObj)*15,1));
+		int dmg = IaSWorldHelper.getDifficulty(this.worldObj);
+		boolean flag;
+		if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
+			final EntityLivingBase tox = (EntityLivingBase)par1Entity;
+			final PotionEffect pot = tox.getActivePotionEffect(Potion.poison);
+			if(pot != null)
+				dmg += 9+pot.getAmplifier()*(2*dmg);
+			if(tox.attackEntityFrom(DamageSource.causeIndirectMagicDamage(tox, this),dmg)) {
+				if(pot != null) {
+					this.worldObj
+					.playSoundAtEntity(this,
+							"IceAndShadow2:mob_nyxwight_toxic_attack_brutal",
+							0.5F,
+							this.rand.nextFloat() * 0.15F + 0.85F);
+					tox.removePotionEffect(Potion.poison.id);
+					heal(getMaxHealth());
+					if(tox.getHealth() > 0)
+						teleportAway(par1Entity);
+				}
+				return true;
 			}
 		}
-
-		return flag;
+		return false;
 	}
 
 	/**
@@ -148,10 +154,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (isEntityInvulnerable()
-				|| (par1DamageSource.isProjectile() && !par1DamageSource.isDamageAbsolute())
-				|| par1DamageSource == DamageSource.drown)
-			return false;
+		if (par1DamageSource.isProjectile() && !par1DamageSource.isDamageAbsolute())
+			return super.attackEntityFrom(par1DamageSource, 1);
 		boolean flag;
 		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
 			par2 -= IaSWorldHelper.getRegionArmorMod(this);
@@ -166,12 +170,12 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1)
 			return;
-		
+
 		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
-		final int baite = this.rand.nextInt(8 - diff + par2) - par2;
-		
+		final int baite = this.rand.nextInt(6 - diff + par2) - par2;
+
 		if (baite <= 0)
-			dropItem(NyxItems.toxicCore, 1);
+			dropItem(NyxItems.toxicCore, 0);
 
 		dropItem(NyxItems.resin,(
 				this.rand.nextInt(diff+par2)>1?2:1));
@@ -214,12 +218,6 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	}
 
 	@Override
-	public void onKillEntity(EntityLivingBase misnomer) {
-		heal(misnomer.getMaxHealth()/2);
-		super.onKillEntity(misnomer);
-	}
-
-	@Override
 	public double getMoveSpeed() {
 		return EntityNyxWightToxic.moveSpeed;
 	}
@@ -242,10 +240,10 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	}
 
 	@Override
-    public boolean isOnLadder()
-    {
-        return this.isCollidedHorizontally;
-    }
+	public boolean isOnLadder()
+	{
+		return this.isCollidedHorizontally;
+	}
 
 	@Override
 	public void onLivingUpdate() {
@@ -259,17 +257,21 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 				return;
 			}
 			if(attacking) {
-				if(getDistanceSqToEntity(getAttackTarget()) > EntityNyxWightToxic.TELEPORT_RANGE*EntityNyxWightToxic.TELEPORT_RANGE)
+				final double range = EntityNyxWightToxic.TELEPORT_RANGE*EntityNyxWightToxic.TELEPORT_RANGE;
+				final boolean poisoned = getAttackTarget().isPotionActive(Potion.poison);
+				if(getDistanceSqToEntity(getAttackTarget()) > range/(poisoned?2:1)) {
 					teleportAt(getAttackTarget());
-				else if(!this.worldObj.isRemote) {
+				} else if(!this.worldObj.isRemote) {
 					final List ents = this.worldObj.getEntitiesWithinAABBExcludingEntity(this,
 							AxisAlignedBB.getBoundingBox(
 									this.posX-EntityNyxWightToxic.TELEPORT_RANGE, this.posY-EntityNyxWightToxic.TELEPORT_RANGE, this.posZ-EntityNyxWightToxic.TELEPORT_RANGE,
 									this.posX+EntityNyxWightToxic.TELEPORT_RANGE, this.posY+EntityNyxWightToxic.TELEPORT_RANGE, this.posZ+EntityNyxWightToxic.TELEPORT_RANGE));
 					for(final Object ent : ents) {
 						if(ent instanceof EntityAgeable || ent instanceof EntityPlayer || ent instanceof EntityNyxSpider) {
-							final EntityPoisonBall pb = new EntityPoisonBall(this.worldObj,this);
 							final EntityLivingBase elb = (EntityLivingBase)ent;
+							if(elb == this.getAttackTarget() && elb.isPotionActive(Potion.poison))
+								continue;
+							final EntityPoisonBall pb = new EntityPoisonBall(this.worldObj,this);
 							pb.setThrowableHeading(
 									elb.posX-this.posX,
 									elb.posY-this.posY+elb.getEyeHeight()-getEyeHeight(),
@@ -281,7 +283,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 				}
 			}
 			heal(1);
-			this.regenDelay = 35;
+			this.regenDelay = (IaSWorldHelper.getDifficulty(worldObj)>=3?20:35);
 		}
 	}
 
@@ -316,6 +318,29 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 				- this.posZ;
 
 		wt.setThrowableHeading(d0, d1, d2, 1, 2.0F);
+		this.worldObj.spawnEntityInWorld(wt);
+		setDead();
+	}
+
+	public void teleportAway(Entity target) {
+		target.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "mob.endermen.portal", 0.7F,
+				0.7F + target.worldObj.rand.nextFloat() * 0.1F);
+		if (this.worldObj.isRemote)
+			return;
+		EntityWightTeleport wt;
+		if(target instanceof EntityLivingBase)
+			wt = new EntityWightTeleport(this.worldObj,this,(EntityLivingBase)target);
+		else
+			wt = new EntityWightTeleport(this.worldObj,this);
+		final double d0 = target.posX + target.motionX
+				- this.posX;
+		final double d1 = target.posY
+				+ target.getEyeHeight() - getEyeHeight()
+				- this.posY;
+		final double d2 = target.posZ + target.motionZ
+				- this.posZ;
+
+		wt.setThrowableHeading(-d0, -d1, -d2, 0.5F, 20.0F);
 		this.worldObj.spawnEntityInWorld(wt);
 		setDead();
 	}
