@@ -142,10 +142,6 @@ public class EntityWightTeleport extends EntityThrowable {
 				this.worldObj.spawnEntityInWorld(spawn);
 			}
 			setDead();
-		} else if (pom.typeOfHit == MovingObjectType.ENTITY) {
-			this.motionX *= 0.1;
-			this.motionY = -0.3;
-			this.motionZ *= 0.1;
 		}
 	}
 }
