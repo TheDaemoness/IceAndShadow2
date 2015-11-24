@@ -243,7 +243,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 			// Bones.
 			else if (rewardid < 35)
-				itemz = new ItemStack(NyxItems.boneCursed, 1 + var2.nextInt(2));
+				itemz = new ItemStack(NyxItems.boneCursed, 1);
 
 			// Food.
 			else if (rewardid < 50) {
@@ -256,8 +256,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 				else if (foodtype < 16)
 					itemz = new ItemStack(NyxItems.cookie, 3 + var2.nextInt(5));
 				else
-					itemz = new ItemStack(NyxItems.poisonFruit,
-							2 + var2.nextInt(4));
+					itemz = new ItemStack(NyxItems.silkBerries, 3 + var2.nextInt(3));
 			}
 
 			// Sanctified Bone
