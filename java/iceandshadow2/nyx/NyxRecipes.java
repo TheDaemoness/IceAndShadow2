@@ -102,5 +102,8 @@ public class NyxRecipes {
 
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt,1,1), new ItemStack(NyxBlocks.dirt), 0);
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.toxicCore, 1, 1), new ItemStack(
+				NyxItems.poisonFruit));
 	}
 }
