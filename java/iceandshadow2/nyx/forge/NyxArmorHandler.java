@@ -19,6 +19,7 @@ public class NyxArmorHandler {
 			if(elb.getEquipmentInSlot(1) != null &&
 					elb.getEquipmentInSlot(1).getItem() == IaSTools.armorSpiderSilk[3]) {
 				e.ammount -= 1;
+				++pieces;
 				elb.getEquipmentInSlot(1).damageItem(1, elb);
 			}
 			if(elb.getEquipmentInSlot(2) != null &&
