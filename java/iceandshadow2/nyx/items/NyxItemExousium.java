@@ -76,8 +76,7 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 			else if (el.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 				return;
 			else if (!el.isPotionActive(Potion.wither.id))
-				el.addPotionEffect(new PotionEffect(Potion.wither.id, 41, is
-						.getItemDamage()));
+				el.addPotionEffect(new PotionEffect(Potion.wither.id, 41, 0));
 		}
 		super.onUpdate(is, w, ent, time, holding);
 	}
