@@ -5,6 +5,7 @@ import java.util.Map;
 
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.items.tools.IaSItemWeapon;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -53,21 +54,21 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if(target instanceof EntityLivingBase) {
+		if(target instanceof EntityLivingBase && is.getItem() instanceof IaSItemWeapon) {
 			final EntityLivingBase elb = (EntityLivingBase)target;
 			final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
 			final int shlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, is);
 			final int smlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, is);
 			if(!user.worldObj.isRemote) {
 				if(elb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
-					nu.put(Enchantment.sharpness.effectId, shlvl);
+					nu.remove(Enchantment.sharpness.effectId);
 					if(smlvl < 5 && user.worldObj.rand.nextInt(64+smlvl*12)==0)
 						nu.put(Enchantment.smite.effectId, smlvl+1);
 					else if(smlvl > 0)
 						nu.put(Enchantment.smite.effectId, smlvl);
 				}
 				else {
-					nu.put(Enchantment.smite.effectId, smlvl);
+					nu.remove(Enchantment.smite.effectId);
 					if(shlvl < 5 && user.worldObj.rand.nextInt(48+shlvl*8)==0)
 						nu.put(Enchantment.sharpness.effectId, shlvl+1);
 					else if(shlvl > 0)
@@ -82,23 +83,25 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	@Override
 	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
 			int y, int z) {
-		final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
-		if(!user.worldObj.isRemote && user.worldObj.rand.nextInt(48+16*lvl)==0) {
-			final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
-			nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl+1));
-			final int flvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, is);
-			final int ulvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.unbreaking.effectId, is);
-			if(flvl < 3 && lvl >= 3 && user.worldObj.rand.nextInt(5) == 0)
-				nu.put(Enchantment.fortune.effectId, Math.min(3, flvl+1));
-			else {
-				if(flvl > 0)
-					nu.put(Enchantment.fortune.effectId, flvl);
-				if(ulvl < 5 && lvl >= 1 && user.worldObj.rand.nextInt(4) == 0)
-					nu.put(Enchantment.unbreaking.effectId, Math.min(5, ulvl+1));
-				else if(ulvl > 0)
-					nu.put(Enchantment.unbreaking.effectId, ulvl);
+		if(!(is.getItem() instanceof IaSItemWeapon)) {
+			final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
+			if(!user.worldObj.isRemote && user.worldObj.rand.nextInt(48+16*lvl)==0) {
+				final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
+				nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl+1));
+				final int flvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, is);
+				final int ulvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.unbreaking.effectId, is);
+				if(flvl < 3 && lvl >= 3 && user.worldObj.rand.nextInt(5) == 0)
+					nu.put(Enchantment.fortune.effectId, Math.min(3, flvl+1));
+				else {
+					if(flvl > 0)
+						nu.put(Enchantment.fortune.effectId, flvl);
+					if(ulvl < 5 && lvl >= 1 && user.worldObj.rand.nextInt(4) == 0)
+						nu.put(Enchantment.unbreaking.effectId, Math.min(5, ulvl+1));
+					else if(ulvl > 0)
+						nu.put(Enchantment.unbreaking.effectId, ulvl);
+				}
+				EnchantmentHelper.setEnchantments(nu, is);
 			}
-			EnchantmentHelper.setEnchantments(nu, is);
 		}
 		return super.onHarvest(is, user, w, x, y, z);
 	}
