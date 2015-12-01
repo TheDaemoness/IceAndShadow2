@@ -5,13 +5,16 @@ import java.util.Random;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.render.fx.IaSFxManager;
+import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSPlayerHelper;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -25,8 +28,14 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setLuminescence(1.0F);
 		setLightColor(0.9F, 0.8F, 1.0F);
-		setBlockUnbreakable();
 		setResistance(2000.0F);
+		this.setHarvestLevel("pickaxe", 3);
+	}
+
+	@Override
+	public float getBlockHardness(World w, int x,
+			int y, int z) {
+		return (w.getBlockMetadata(x, y, z)!=0?-1:Blocks.obsidian.getBlockHardness(w, x, y, z));
 	}
 
 	@Override
@@ -76,27 +85,27 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 				if (elb.isPotionActive(Potion.confusion))
 					elb.addPotionEffect(new PotionEffect(Potion.confusion.id,
 							2, 0));
-				else {
-					if (elb instanceof EntityPlayer) {
-						final EntityPlayer playuh = (EntityPlayer) elb;
-						for (int xit = -1; xit <= 1; ++xit) {
-							for (int zit = -1; zit <= 1; ++zit) {
-								if (par1World.getBlock(x + xit, y, z + zit) != this)
-									return;
-							}
+				else if (elb instanceof EntityPlayer) {
+					final EntityPlayer playuh = (EntityPlayer) elb;
+					for (int xit = -1; xit <= 1; ++xit) {
+						for (int zit = -1; zit <= 1; ++zit) {
+							if (par1World.getBlock(x + xit, y, z + zit) != this)
+								return;
 						}
-						if (par1World.getBlock(x, y + 1, z).getMaterial() != Material.air)
-							return;
-						IaSPlayerHelper
-						.messagePlayer(playuh,
-								"You feel something bind your life force to the obsidian....");
-						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z),
-								true);
-						if (playuh.getHealth() > 2.0F)
-							playuh.attackEntityFrom(DamageSource.magic, 1);
-						elb.addPotionEffect(new PotionEffect(
-								Potion.confusion.id, 2, 0));
 					}
+					if (!IaSBlockHelper.isTransient(par1World, x, y + 1, z))
+						return;
+					if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
+						return;
+					IaSPlayerHelper
+					.messagePlayer(playuh,
+							"You feel something bind your life force to the obsidian....");
+					playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z),
+							true);
+					if (playuh.getHealth() > 2.0F)
+						playuh.attackEntityFrom(DamageSource.magic, 1);
+					elb.addPotionEffect(new PotionEffect(
+							Potion.confusion.id, 2, 0));
 				}
 			}
 		}

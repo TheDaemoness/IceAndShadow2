@@ -50,4 +50,13 @@ public class IaSBlockHelper {
 		}
 		return false;
 	}
+
+	public static boolean isTransient(World w, int x, int y, int z) {
+		final Block bl = w.getBlock(x, y, z);
+		if(isAir(bl))
+			return true;
+		if(bl.isReplaceable(w, x, y, z))
+			return true;
+		return false;
+	}
 }
