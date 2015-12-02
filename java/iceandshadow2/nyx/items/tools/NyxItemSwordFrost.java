@@ -39,7 +39,7 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	public NyxItemSwordFrost(String par1) {
 		super(EnumIaSModule.NYX,par1);
 		this.bFull3D = true;
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
 		setMaxDamage(512);
 	}
 

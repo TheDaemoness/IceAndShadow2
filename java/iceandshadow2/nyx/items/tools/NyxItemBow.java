@@ -34,6 +34,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	public NyxItemBow(String par1) {
 		super(EnumIaSModule.NYX,par1);
+		setMaxStackSize(1);
 		this.bFull3D = false;
 		this.inuse = false;
 	}
