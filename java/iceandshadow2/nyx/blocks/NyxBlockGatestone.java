@@ -6,6 +6,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSPlayerHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -94,7 +98,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 						for (int zit = -1; zit <= 1; ++zit) {
 							if (par1World.getBlock(x + xit, y - 1, z + zit) == Blocks.obsidian)
 								par1World.setBlock(x + xit, y - 1, z + zit,
-										NyxBlocks.cryingObsidian, 2, 0x2);
+										NyxBlocks.cryingObsidian, 0, 0x2);
 						}
 					}
 					par1World.spawnEntityInWorld(new EntityLightningBolt(
@@ -170,5 +174,29 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
+	}
+
+
+	@Override
+	public void randomDisplayTick(World par1World, int par2, int par3,
+			int par4, Random par5Random) {
+		if (par1World.getBlockMetadata(par2, par3, par4) != 0)
+			return;
+		
+		final double var9 = par3 + par5Random.nextFloat();
+		double var13 = 0.0D;
+		double var15 = 0.0D;
+		double var17 = 0.0D;
+		final int var19 = par5Random.nextInt(2) * 2 - 1;
+		final int var20 = par5Random.nextInt(2) * 2 - 1;
+		var13 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var15 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var17 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		final double var11 = par4 + 0.5D + 0.25D * var20;
+		var17 = par5Random.nextFloat() * 1.0F * var20;
+		final double var7 = par2 + 0.5D + 0.25D * var19;
+		var13 = par5Random.nextFloat() * 1.0F * var19;
+		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11,
+				var13, var15, var17, false, true);
 	}
 }

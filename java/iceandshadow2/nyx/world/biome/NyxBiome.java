@@ -135,13 +135,13 @@ public class NyxBiome extends BiomeGenBase {
 			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
 			for (int xit = -1; xit <= 1; ++xit) {
 				for (int zit = -1; zit <= 1; ++zit) {
-					par1World
-					.setBlock(x + xit, y - 1, z + zit, Blocks.obsidian);
+					par1World.setBlock(x + xit, y - 1, z + zit, Blocks.obsidian);
 					for (int yit = y + 3; yit > y; --yit)
 						par1World.setBlockToAir(x + xit, yit, z + zit);
 
 				}
 			}
+			par1World.setBlock(x, y - 1, z, Blocks.bedrock);
 			Sculptor.terrainFlatten(par1World, x - 1, y - 2, z - 1, x + 1, 4,
 					z + 1);
 			par1World.setBlock(x, y, z, NyxBlocks.gatestone,
