@@ -38,7 +38,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		setBlockUnbreakable();
 		setResistance(9001.0F);
 		setLightOpacity(0);
-		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.4F, 0.9F);
+		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.35F, 0.9F);
 		setLightColor(1.0F, 0.60F, 0.80F);
 		setLuminescence(0.2F);
 	}
