@@ -17,7 +17,7 @@ public class NyxBlocks {
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
 	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow, thermalCore, thermalAir;
+	hardShadow, thermalCore, thermalAir, xpAltar;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -70,6 +70,7 @@ public class NyxBlocks {
 
 		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation(
 				"TransmutationAltar").register();
+		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 
 		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		NyxBlocks.hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")

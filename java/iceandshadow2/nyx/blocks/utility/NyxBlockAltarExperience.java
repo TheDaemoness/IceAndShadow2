@@ -1,27 +1,37 @@
 package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockAltar;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class NyxBlockAltarSacrifice extends IaSBlockAltar {
+public class NyxBlockAltarExperience extends IaSBlockAltar {
 
-	public NyxBlockAltarSacrifice(EnumIaSModule mod, String id) {
-		super(mod, id);
-		setLightLevel(0.5F);
+	public NyxBlockAltarExperience(String id) {
+		super(EnumIaSModule.NYX, id);
+		setLightLevel(0.75F);
 		setResistance(9001.0F);
 		setBlockUnbreakable();
 		setStepSound(Block.soundTypeStone);
 	}
 
 	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {
-		return true;
+		int xpgain = IaSRegistry.getSacrificeXpYield(is)*is.stackSize;
+		while (xpgain > 0) {
+			int i1 = EntityXPOrb.getXPSplit(xpgain);
+			xpgain -= i1;
+			wd.spawnEntityInWorld(new EntityXPOrb(
+					wd, (double) x + 0.5D, (double) y + 0.8D,
+					(double) z + 0.5D, i1));
+		}
+		return xpgain != 0;
 	}
 
 	@Override

@@ -78,6 +78,7 @@ public class IceAndShadow2 {
 
 		IceAndShadow2.toPreRegister = new ArrayList<Object>();
 		addToolMaterials();
+		IceAndShadow2.toPreRegister.add(new IaSHandlerSacrificeXPBasics());
 		IaSRegistry.preInit();
 		IceAndShadow2.toPreRegister.clear();
 		IaSTools.init();
