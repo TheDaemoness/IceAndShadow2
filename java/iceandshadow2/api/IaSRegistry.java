@@ -103,7 +103,7 @@ public final class IaSRegistry {
 		return null;
 	}
 
-	public static int getSacrificeXpYield(ItemStack target) {
+	public static float getSacrificeXpYield(ItemStack target) {
 		if (target == null)
 			return 0;
 		Object obj;
@@ -118,7 +118,7 @@ public final class IaSRegistry {
 			return Math.max(0, sac.getXpValue(target, r));
 		}
 
-		int sum = 0;
+		float sum = 0;
 		for (final IIaSApiSacrificeXp xp : IaSRegistry.handlersSacrificeXp) {
 			sum = xp.getXpValue(target, r);
 			if (sum > 0)

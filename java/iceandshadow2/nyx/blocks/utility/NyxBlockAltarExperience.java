@@ -23,14 +23,15 @@ public class NyxBlockAltarExperience extends IaSBlockAltar {
 	}
 
 	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {
-		int xpgain = IaSRegistry.getSacrificeXpYield(is)*is.stackSize;
-		while (xpgain > 0) {
-			int i1 = EntityXPOrb.getXPSplit(xpgain);
+		float xpgain = IaSRegistry.getSacrificeXpYield(is)*is.stackSize;
+		while ((int)xpgain > 0) {
+			int i1 = EntityXPOrb.getXPSplit((int)xpgain);
 			xpgain -= i1;
 			wd.spawnEntityInWorld(new EntityXPOrb(
 					wd, (double) x + 0.5D, (double) y + 0.8D,
 					(double) z + 0.5D, i1));
 		}
+		xpgain += (wd.rand.nextFloat()<xpgain)?1:0;
 		return xpgain != 0;
 	}
 

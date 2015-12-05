@@ -24,5 +24,5 @@ public interface IIaSApiSacrificeXp {
 	 * @return The experience to be returned, or 0 if the item should be
 	 *         destroyed with no yield. Negative numbers are treated as 0.
 	 */
-	public int getXpValue(ItemStack is, Random rand);
+	public float getXpValue(ItemStack is, Random rand);
 }

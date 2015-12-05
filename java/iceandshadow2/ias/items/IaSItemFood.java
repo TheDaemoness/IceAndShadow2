@@ -52,7 +52,7 @@ IIaSModName {
 	}
 
 	@Override
-	public int getXpValue(ItemStack is, Random rand) {
+	public float getXpValue(ItemStack is, Random rand) {
 		return this.xpAltarValue;
 	}
 

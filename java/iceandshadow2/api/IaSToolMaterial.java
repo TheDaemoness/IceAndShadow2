@@ -313,7 +313,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	}
 
 	@Override
-	public int getXpValue(ItemStack is, Random rand)  {
+	public float getXpValue(ItemStack is, Random rand)  {
 		return 0;
 	}
 

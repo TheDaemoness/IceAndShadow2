@@ -16,7 +16,7 @@ import iceandshadow2.nyx.items.NyxItemIngot;
 public class IaSHandlerSacrificeXPBasics implements IIaSApiSacrificeXp {
 
 	@Override
-	public int getXpValue(ItemStack staque, Random rand) {
+	public float getXpValue(ItemStack staque, Random rand) {
 		if (staque.getItem() == Items.emerald)
 			return 3;
 		if (staque.getItem() == Items.gold_ingot)
