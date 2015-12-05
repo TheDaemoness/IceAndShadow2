@@ -62,7 +62,6 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
 			World world, Entity ent) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

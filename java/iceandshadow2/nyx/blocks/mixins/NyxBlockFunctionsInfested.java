@@ -57,8 +57,7 @@ public class NyxBlockFunctionsInfested {
 					} else if (b.isFoliage(w, x + xit, y + yit, z + zit)) {
 						w.setBlockToAir(x + xit, y + yit, z + zit);
 					} else if (b.getMaterial() == Material.wood) {
-						w.setBlockToAir(x + xit, y + yit, z + zit); // TODO:
-						// Fix.
+						w.setBlockToAir(x + xit, y + yit, z + zit); //TODO: Fix.
 					}
 				}
 			}
