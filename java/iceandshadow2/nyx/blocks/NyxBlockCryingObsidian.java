@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	public NyxBlockCryingObsidian(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		setLuminescence(1.0F);
+		setLuminescence(0.4F);
 		setLightColor(0.9F, 0.8F, 1.0F);
 		setResistance(2000.0F);
 		this.setHarvestLevel("pickaxe", 3);
