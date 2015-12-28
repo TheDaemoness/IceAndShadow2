@@ -33,6 +33,13 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	}
 
 	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		if(world.getBlockMetadata(x, y, z) != 0)
+			return 14;
+		return super.getLightValue(world, x, y, z);
+	}
+
+	@Override
 	public float getBlockHardness(World w, int x,
 			int y, int z) {
 		return (w.getBlockMetadata(x, y, z)!=0?-1:Blocks.obsidian.getBlockHardness(w, x, y, z));
