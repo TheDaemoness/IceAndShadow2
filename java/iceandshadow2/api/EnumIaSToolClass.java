@@ -5,10 +5,11 @@ import java.util.Set;
 import com.google.common.collect.ImmutableSet;
 
 public enum EnumIaSToolClass {
-	AXE(0, 3.0F, ImmutableSet.of("axe"), false), PICKAXE(1, 2.0F, ImmutableSet
-			.of("pickaxe"), false), SPADE(2, 1.0F, ImmutableSet.of("spade"),
-					false), SWORD(0, 4.0F, ImmutableSet.of("sword"), true), KNIFE(1,
-							2.0F, ImmutableSet.of(), true);
+	AXE(0, 3.0F, ImmutableSet.of("axe"), false), 
+	PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe"), false),
+	SPADE(2, 1.0F, ImmutableSet.of("spade"), false),
+	SWORD(0, 4.0F, ImmutableSet.of("sword"), true),
+	KNIFE(1, 2.0F, ImmutableSet.of(), true);
 
 	public static EnumIaSToolClass fromId(int itemDamage, boolean isSword) {
 		for (final EnumIaSToolClass cl : EnumIaSToolClass.values()) {

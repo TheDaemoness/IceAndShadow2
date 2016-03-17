@@ -19,6 +19,22 @@ import net.minecraft.world.World;
 public class GenRuinsTowerLookout extends GenRuins {
 
 	/**
+	 * Determines whether or not ruins can be generated here. Does not do any
+	 * building.
+	 */
+	@Override
+	public boolean canGenerateHere(World var1, Random var2, int x, int y, int z) {
+		for (int xdelta = -36; xdelta <= 36; ++xdelta) {
+			for (int zdelta = -36; zdelta <= 36; ++zdelta)
+				for (int ydelta = -4; ydelta <= 8; ++ydelta) {
+					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickPale)
+						return false;
+				}
+		}
+		return Math.abs(x) > 16 || Math.abs(z) > 16;
+	}
+
+	/**
 	 * Generates the basic structure of the building. May also even out terrain
 	 * that the building is on.
 	 */
@@ -43,22 +59,6 @@ public class GenRuinsTowerLookout extends GenRuins {
 				NyxBlocks.brickPale, 0);
 		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2,
 				NyxBlocks.brickPale, 0);
-	}
-
-	/**
-	 * Determines whether or not ruins can be generated here. Does not do any
-	 * building.
-	 */
-	@Override
-	public boolean canGenerateHere(World var1, Random var2, int x, int y, int z) {
-		for (int xdelta = -36; xdelta <= 36; ++xdelta) {
-			for (int zdelta = -36; zdelta <= 36; ++zdelta)
-				for (int ydelta = -4; ydelta <= 8; ++ydelta) {
-					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickPale)
-						return false;
-				}
-		}
-		return Math.abs(x) > 16 || Math.abs(z) > 16;
 	}
 
 	/**
