@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
+import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSPlayerHelper;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -15,6 +16,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
@@ -205,18 +208,24 @@ public class NyxEventHandlerCold {
 			final ItemStack ite = e.entityPlayer.getEquipmentInSlot(0);
 			if (ite == null)
 				return;
-			else if (ite.getItem() == Items.potionitem) {
+			else if (ite.getItem() instanceof ItemPotion) {
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
 					IaSPlayerHelper
 					.messagePlayer(e.entityPlayer,
-							"The contents of the bottle have become thoroughly frozen.");
+							"The contents of the bottle have frozen solid.");
 				}
 			} else if (ite.getItem() == Items.milk_bucket) {
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"The milk has turned rather solid.");
+							"The milk has frozen solid.");
+				}
+			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood)) {
+				if (!e.isCanceled()) {
+					e.setCanceled(true);
+					IaSPlayerHelper.messagePlayer(e.entityPlayer,
+							"It's been frozen solid. Eating it would be dangerous.");
 				}
 			}
 		}

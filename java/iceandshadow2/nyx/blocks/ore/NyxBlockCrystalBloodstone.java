@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks.ore;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,15 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World w,
 			int x, int y, int z) {
 		return super.getSelectedBoundingBoxFromPool(w, x, y, z).contract(0.1, 0.15, 0.1).offset(0.0, -0.15, 0.0);
+	}
+	
+	@Override
+	public void onBlockDestroyedByPlayer(World worldObj, int x, int y, int z,
+			int q) {
+		if(!worldObj.isRemote)
+			worldObj.spawnEntityInWorld(
+				new EntityOrbNourishment(worldObj, x+0.5, y+0.25, z+0.5, 5));
+		super.onBlockDestroyedByPlayer(worldObj, x, y, z, q);
 	}
 
 	@Override

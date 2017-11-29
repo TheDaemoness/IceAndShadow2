@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
@@ -110,6 +111,10 @@ public class EntityNyxSpider extends EntitySpider {
 
 		 if(this.rand.nextInt(5) < 2+diff)
 			 dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
+			
+		this.worldObj.spawnEntityInWorld(
+			new EntityOrbNourishment(this.worldObj,
+				this.posX, this.posY, this.posZ, 1));
 	}
 
 	@Override

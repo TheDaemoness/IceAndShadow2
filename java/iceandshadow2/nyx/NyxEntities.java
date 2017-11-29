@@ -71,6 +71,9 @@ public class NyxEntities {
 
 		EntityRegistry.registerModEntity(EntityPoisonBall.class,
 				"nyxProjectilePoisonBall", 12, owner, 40, 2, true);
+		
+		EntityRegistry.registerModEntity(EntityOrbNourishment.class,
+				"nyxEntityOrbNourishment", 13, owner, 60, 1, true);
 	}
 
 	@SuppressWarnings("unchecked")

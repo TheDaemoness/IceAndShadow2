@@ -12,6 +12,7 @@ import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
 import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
@@ -186,6 +187,10 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 		dropItem(NyxItems.resin,(
 				this.rand.nextInt(diff+par2)>1?2:1));
+		
+		this.worldObj.spawnEntityInWorld(
+				new EntityOrbNourishment(this.worldObj,
+						this.posX, this.posY, this.posZ, 2));
 	}
 
 	@Override

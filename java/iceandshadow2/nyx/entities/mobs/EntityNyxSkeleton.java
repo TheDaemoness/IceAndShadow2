@@ -17,6 +17,7 @@ import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
 import iceandshadow2.util.IaSWorldHelper;
@@ -334,6 +335,10 @@ IIaSMobGetters {
 		this.dropItem(Items.bone, 1);
 		if (this.rand.nextBoolean())
 			this.dropItem(NyxItems.icicle, 1);
+		
+		this.worldObj.spawnEntityInWorld(
+				new EntityOrbNourishment(this.worldObj,
+						this.posX, this.posY, this.posZ, 1));
 
 		/*
 		 * Calendar var1 = this.worldObj.getCurrentDate(); if (var1.get(2) + 1

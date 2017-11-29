@@ -53,6 +53,8 @@ public class IaSRenderers {
 				EntityTransmutationCountdown.class, new RenderNot());
 		RenderingRegistry.registerEntityRenderingHandler(
 				EntityWightTeleport.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityOrbNourishment.class, new RenderOrbNourishment());
 
 		// Items
 		for (final Field f : NyxItems.class.getFields()) {

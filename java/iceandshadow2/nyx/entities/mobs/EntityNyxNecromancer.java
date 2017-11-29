@@ -8,6 +8,7 @@ import iceandshadow2.nyx.entities.ai.senses.IaSSenseTouch;
 import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
 import iceandshadow2.nyx.entities.cosmetic.EntityCosmeticShadowRiser;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -89,6 +90,10 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 			this.dropItem(NyxItems.boneCursed, 1);
 		if(IaSWorldHelper.getDifficulty(this.worldObj)>=3)
 			this.dropItem(NyxItems.boneCursed, 1);
+		
+		this.worldObj.spawnEntityInWorld(
+				new EntityOrbNourishment(this.worldObj,
+						this.posX, this.posY, this.posZ, 5));
 	}
 
 	@Override
