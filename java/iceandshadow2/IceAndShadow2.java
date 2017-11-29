@@ -34,7 +34,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies = "required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
 	public static final String MODID = "IceAndShadow2";
-	public static final String VERSION = "Pre-Alpha 13";
+	public static final String VERSION = "Pre-Alpha 14";
 	public static final int CONFIG_MAJ = 2;
 	public static final int CONFIG_MIN = 1;
 
@@ -66,7 +66,7 @@ public class IceAndShadow2 {
 		IceAndShadow2.logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
 			event.getModLog()
-			.info("While being SMP compatible, pings > 100 can make Ice and Shadow exponentially harder. You've been warned.");
+			.info("While designed to be mostly multiplayer compatible, pings > 200 can make Ice and Shadow exponentially harder. You've been warned.");
 		IceAndShadow2.cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(),
 				IceAndShadow2.CONFIG_MAJ, IceAndShadow2.CONFIG_MIN);
 

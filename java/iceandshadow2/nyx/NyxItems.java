@@ -57,11 +57,11 @@ public class NyxItems {
 		NyxItems.silkBerries = new NyxItemSilkBerries("SilkBerries").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.frostBowShort = new NyxItemBowFrostShort("FrostShortBow").register()
-				.setCreativeTab(IaSCreativeTabs.combat);
+				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.frostBowLong = new NyxItemBowFrostLong("FrostLongBow").register()
-				.setCreativeTab(IaSCreativeTabs.combat);
+				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.frostSword = new NyxItemSwordFrost("FrostSword").register()
-				.setCreativeTab(IaSCreativeTabs.combat);
+				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.boneCursed = new NyxItemBoneCursed("CursedBone").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.boneSanctified = new NyxItemBoneSanctified("SanctifiedBone").register()
@@ -92,8 +92,8 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.alabaster = new NyxItemAlabaster("Alabaster").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
-				.setCreativeTab(IaSCreativeTabs.misc);
+		//NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
+				//.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 	}

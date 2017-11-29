@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -31,6 +33,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 		super(EnumIaSModule.NYX, texName, Material.portal);
 		setBlockUnbreakable();
 		this.slipperiness = 0.99F;
+		setTickRandomly(true);
 	}
 
 	@Override
@@ -47,6 +50,17 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public boolean canDropFromExplosion(Explosion p_149659_1_) {
 		return false;
+	}
+	
+	@Override
+	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
+		int chance = 16;
+		if(w.getBlockMetadata(x, y, z) != 0)
+			chance = 8;
+		if(r.nextInt(chance) == 0)
+			IaSFxManager.spawnParticle(w, "shadowSmokeSmall",
+					x+r.nextFloat(), y+r.nextFloat(), z+r.nextFloat(),
+					0.0, 0.0, 0.0, false, false);
 	}
 
 	@Override
@@ -115,7 +129,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	public void onEntityCollidedWithBlock(World w, int x,
 			int y, int z, Entity e) {
 		if(w.isRemote) {
-			if(e instanceof EntityLivingBase)
+			if(e instanceof EntityLivingBase && w.rand.nextBoolean())
 				IaSFxManager.spawnParticle(w, "shadowSmokeSmall",
 						x+w.rand.nextDouble(),
 						y+w.rand.nextDouble(),
@@ -130,7 +144,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 			float vel) {
 		if(w.isRemote) {
 			if(e instanceof EntityLivingBase)
-				for(int i = 0; i < 2+vel*8; ++i) {
+				for(int i = 0; i < 2+vel*4; ++i) {
 					IaSFxManager.spawnParticle(w, "blackMagic", x+w.rand.nextDouble(), y+1, z+w.rand.nextDouble(),
 						0.0, 0.0, 0.0, false, true);
 				}

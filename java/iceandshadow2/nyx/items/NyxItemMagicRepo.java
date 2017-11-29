@@ -55,8 +55,8 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 			ItemStack catalyst, World world) {
 		if(target.getItem() == this && target.getItemDamage() == 0) {
 			target.setItemDamage(1);
-			final Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
-			synchronized(ench) { //Dodge concurrent access issues?
+			synchronized(catalyst) { //Dodge concurrent access issues?
+				final Map<Integer,Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
 				for(final Integer i : ench.keySet()) {
 					if(ench.get(i).intValue() <= 1)
 						ench.remove(i);

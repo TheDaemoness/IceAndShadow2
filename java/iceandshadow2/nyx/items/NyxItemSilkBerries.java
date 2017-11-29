@@ -15,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -29,7 +30,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		super(EnumIaSModule.NYX, id, 1, 1.6F, false);
 		setAlwaysEdible();
 		setHasSubtypes(true);
-		setMaxStackSize(32);
+		setMaxStackSize(16);
 		setEatTime(16);
 		setXpAltarMinimumValue(2);
 	}
@@ -66,7 +67,12 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@Override
 	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		par3EntityPlayer.heal(3.0F*(2*par1ItemStack.getItemDamage()+1)+par2World.rand.nextInt(2));
+		par3EntityPlayer.removePotionEffect(Potion.poison.id);
+		par3EntityPlayer.heal(1+par2World.rand.nextInt(2));
+		if(par1ItemStack.getItemDamage() > 0) {
+			par3EntityPlayer.heal(2);
+			par3EntityPlayer.removePotionEffect(Potion.moveSlowdown.id);
+		}
 	}
 
 	/**

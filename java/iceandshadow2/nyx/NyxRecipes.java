@@ -93,9 +93,9 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,1,1),
 				new ItemStack(NyxItems.extractorPoison,1,13));
 
-		GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ", "cac", " c ",
-				'a', new ItemStack(NyxItems.alabaster),
-				'c', new ItemStack(NyxItems.cortraIngot,1,1));
+		//GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ", "cac", " c ",
+		//		'a', new ItemStack(NyxItems.alabaster),
+		//		'c', new ItemStack(NyxItems.cortraIngot,1,1));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.thermalCore),
 				new ItemStack(NyxItems.alabaster, 1, 1));;

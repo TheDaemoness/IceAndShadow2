@@ -74,7 +74,7 @@ public class EntityPoisonBall extends EntityThrowable {
 			else if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase) {
 				final EntityLivingBase victim = (EntityLivingBase)(par1MovingObjectPosition.entityHit);
 				if(victim instanceof EntityNyxSpider) {
-					victim.attackEntityFrom(DamageSource.wither, 11);
+					victim.attackEntityFrom(DamageSource.wither, 16);
 					victim.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,165,3));
 					victim.addPotionEffect(new PotionEffect(Potion.wither.id,
 							165,1));

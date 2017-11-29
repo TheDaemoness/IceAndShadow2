@@ -15,7 +15,6 @@ public class IaSFlags {
 			biome_id_nyxMesaForest = 250, biome_id_nyxRugged = 249,
 			biome_id_nyxInfested = 248;
 
-	// LIAR!
 	public static int entity_id_start = 512;
 
 	// Mod plugin flags.

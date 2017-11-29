@@ -158,8 +158,8 @@ public class IaSTools {
 		IaSTools.axe.setCreativeTab(IaSCreativeTabs.tools);
 		IaSTools.pickaxe.setCreativeTab(IaSCreativeTabs.tools);
 		IaSTools.spade.setCreativeTab(IaSCreativeTabs.tools);
-		IaSTools.sword.setCreativeTab(IaSCreativeTabs.combat);
-		IaSTools.knife.setCreativeTab(IaSCreativeTabs.combat);
+		IaSTools.sword.setCreativeTab(IaSCreativeTabs.tools);
+		IaSTools.knife.setCreativeTab(IaSCreativeTabs.tools);
 	}
 
 	protected static void initArmor(IaSItemArmor[] arm,
@@ -167,7 +167,7 @@ public class IaSTools {
 		for (int i = 0; i < 4; ++i) {
 			arm[i] = new IaSItemArmor(mat, 3, i, tex);
 			GameRegistry.registerItem(arm[i], arm[i].getModName());
-			arm[i].setCreativeTab(IaSCreativeTabs.combat);
+			arm[i].setCreativeTab(IaSCreativeTabs.tools);
 		}
 	}
 

@@ -176,7 +176,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The user.
 	 * @param target
 	 *            The target.
-	 * @return The damage that the knife should do. Note that this is pure
+	 * @return The damage that the knife should do. Note that this is the full physical
 	 *         damage, not bonus damage, so returning 0.0F will cause the tool
 	 *         to do no damage.
 	 */
@@ -297,7 +297,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Gets the item required in the transmutation altar to transmute a
-	 * tool/weapon to this.
+	 * tool/weapon to this. Used for cases where the transmutation itself is quite basic.
 	 *
 	 * @return The item, or null if transmutation to this material should be
 	 *         disabled. A separate handler can still be put in place for

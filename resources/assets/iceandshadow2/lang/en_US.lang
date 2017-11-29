@@ -113,6 +113,7 @@ tile.nyxPermafrost.name=Permafrost
 tile.nyxExousicWater.name=Exousic Ether
 tile.nyxExousicIce.name=Exousic Ice
 tile.nyxCrystalBloodstone.name=Bloodstone Crystal
+tile.nyxCrystalExousium.name=Exousium Crystal
 tile.nyxThornyVines.name=Thorny Vines
 tile.nyxPoisonwoodLeaves.name=Poisonwood Leaves
 tile.nyxPoisonwoodLog.name=Poisonwood Log
@@ -155,7 +156,7 @@ tile.nyxAltarExperience.name=Experience Altar
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources
-itemGroup.IaSTools=Nyxian Tools
+itemGroup.IaSTools=Nyxian Equipment
 itemGroup.IaSCombat=Nyxian Combat Items
 
 death.attack.IceAndShadow2.nyxStoneDamage=%1$s bled to death on Nyxian stone
