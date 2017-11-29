@@ -1,10 +1,12 @@
 package iceandshadow2.nyx.entities.mobs;
 
 import java.util.List;
+import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
@@ -14,6 +16,7 @@ import iceandshadow2.nyx.entities.util.EntityWightTeleport;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
+import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
@@ -54,6 +57,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 	public EntityNyxWightToxic(World par1World) {
 		super(par1World);
+		
+		this.stepHeight = 0.0f;
 
 		this.experienceValue = 15;
 		this.regenDelay = 15;
@@ -190,10 +195,18 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 	@Override
 	protected void fall(float par1) {}
-
+	
 	@Override
 	public boolean getCanSpawnHere() {
-		return this.posY > 48.0F && super.getCanSpawnHere();
+		for(int x = -16; x <= 16; ++x) {
+			for(int y = -4; y <= 4; ++y) {
+				for(int z = -16; z <= 16; ++z) {
+					if(IaSEntityHelper.getBlock(this, x, y, z) == NyxBlocks.poisonLeaves)
+						return this.posY > 48.0F && super.getCanSpawnHere();
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -235,15 +248,14 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	public EntityLivingBase getSearchTarget() {
 		return this.searched;
 	}
-
+	
 	@Override
 	protected void jump() {
 		return;
 	}
 
 	@Override
-	public boolean isOnLadder()
-	{
+	public boolean isOnLadder() {
 		return this.isCollidedHorizontally;
 	}
 
@@ -251,6 +263,16 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		this.motionY = Math.max(-0.3, this.motionY);
+		Random rand = this.worldObj.rand;
+		if(this.worldObj.isRemote) {
+			IaSFxManager.spawnParticle(
+					this.worldObj, rand.nextBoolean()?"poisonSmoke":"shadowSmokeSmall",
+					this.posX-(0.5-rand.nextDouble())/4,
+					this.posY+rand.nextDouble(),
+					this.posZ-(0.5-rand.nextDouble())/4,
+					0.0, 0.0, 0.0,
+					false, true);
+		}
 		final boolean attacking = getAttackTarget() != null;
 		if (--this.regenDelay <= 0) {
 			if(IaSWorldHelper.getDifficulty(this.worldObj) <= 1) {
@@ -271,7 +293,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 					for(final Object ent : ents) {
 						if(ent instanceof EntityAgeable || ent instanceof EntityPlayer || ent instanceof EntityNyxSpider) {
 							final EntityLivingBase elb = (EntityLivingBase)ent;
-							if(elb == this.getAttackTarget() && elb.isPotionActive(Potion.poison))
+							if(elb == this.getAttackTarget() || elb.isPotionActive(Potion.poison))
 								continue;
 							final EntityPoisonBall pb = new EntityPoisonBall(this.worldObj,this);
 							pb.setThrowableHeading(
@@ -295,7 +317,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 			return 1;
 		final BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(i, k);
 		if (biome instanceof NyxBiomeInfested)
-			return 1;
+			return 0;
 		else if (biome instanceof NyxBiomeForestDense || biome instanceof NyxBiomeForestSparse)
 			return 15;
 		return 3;
@@ -379,6 +401,31 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	@Override
 	public IaSSense getSense() {
 		return this.senses;
+	}
+	
+	@Override
+	public void setAttackTarget(EntityLivingBase ent) {
+		//NOTE: Leaving this seperate as future checks may assume that ent is non-null.
+		if(ent == null || ent == this.getAttackTarget()) {
+			super.setAttackTarget(ent);
+			return;
+		}
+		boolean op = false;
+		if(ent instanceof EntityNyxSpider)
+			op = true;
+		else if(this.getHealth() < this.getMaxHealth())
+			op = true;
+		for(int x = -4; !op && x <= 4; ++x) {
+			for(int y = -8; !op && y <= 8; ++y) {
+				for(int z = -4; !op && z <= 4; ++z) {
+					if(IaSEntityHelper.getBlock(ent, x, y, z) == NyxBlocks.poisonLog) {
+						op = true;
+					}
+				}
+			}
+		}
+		if(op)
+			super.setAttackTarget(ent);
 	}
 
 }

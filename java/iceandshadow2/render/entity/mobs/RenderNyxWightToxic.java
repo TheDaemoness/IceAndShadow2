@@ -66,6 +66,8 @@ public class RenderNyxWightToxic extends RenderZombie {
 			this.modelBipedMain.bipedBody.renderWithRotation(par3);
 			this.modelBipedMain.bipedHead.renderWithRotation(par3);
 			this.modelBipedMain.bipedHeadwear.renderWithRotation(par3);
+			this.modelBipedMain.bipedLeftArm.renderWithRotation(0.056F);
+			this.modelBipedMain.bipedRightArm.renderWithRotation(0.056F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 		}
