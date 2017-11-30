@@ -9,6 +9,7 @@ import iceandshadow2.nyx.blocks.utility.*;
 import iceandshadow2.nyx.tileentities.*;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
@@ -17,7 +18,7 @@ public class NyxBlocks {
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
 	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow, thermalCore, thermalAir, xpAltar, icicles;
+	hardShadow, unstableDevora, thermalAir, xpAltar, icicles;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -49,7 +50,7 @@ public class NyxBlocks {
 		NyxBlocks.oreCortra = new NyxBlockOreCortra("OreCortra").register();
 		NyxBlocks.oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
 		NyxBlocks.oreExousium = new NyxBlockOreExousium("OreExousium").register();
-		NyxBlocks.oreDraconium = new NyxBlockOreDraconium("OreDraconium").register();
+		NyxBlocks.oreDraconium = Blocks.air; //new NyxBlockOreDraconium("OreDraconium").register();
 		NyxBlocks.crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
 		.register();
 		NyxBlocks.crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
@@ -83,7 +84,7 @@ public class NyxBlocks {
 		NyxBlocks.ropeZ = new NyxBlockRopeZ("RopeZ").register();
 
 		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
-		NyxBlocks.thermalCore = new NyxBlockThermalCore("ThermalCore").register();
+		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
 		NyxBlocks.thermalAir = new NyxBlockThermalAir("ThermalAir").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,

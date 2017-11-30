@@ -80,8 +80,6 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 					final Block bl = w.getBlock(x+xit, y+yit, z+zit);
 					if(bl == NyxBlocks.thermalAir)
 						highestsource = Math.max(highestsource, w.getBlockMetadata(x+xit, y+yit, z+zit));
-					else if(bl == NyxBlocks.thermalCore)
-						highestsource = Math.max(highestsource, 8);
 					else if(bl instanceof IIaSBlockThawable) {
 						final Block nb = ((IIaSBlockThawable)bl).onThaw(w, x+xit, y+yit, z+zit);
 						if(nb == null || r.nextInt(4) == 0)
