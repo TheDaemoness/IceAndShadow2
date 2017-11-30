@@ -420,9 +420,9 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 			op = true;
 		else if(this.getHealth() < this.getMaxHealth())
 			op = true;
-		for(int x = -4; !op && x <= 4; ++x) {
+		for(int x = -8; !op && x <= 8; ++x) {
 			for(int y = -8; !op && y <= 8; ++y) {
-				for(int z = -4; !op && z <= 4; ++z) {
+				for(int z = -8; !op && z <= 8; ++z) {
 					if(IaSEntityHelper.getBlock(ent, x, y, z) == NyxBlocks.poisonLog) {
 						op = true;
 					}
