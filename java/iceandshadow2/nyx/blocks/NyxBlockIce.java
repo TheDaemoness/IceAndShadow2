@@ -22,7 +22,7 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 		super(EnumIaSModule.NYX, texName, Material.ice);
 		setLuminescence(0.3F);
 		setLightOpacity(7);
-		setHardness(3.0F);
+		setHardness(0.5F);
 		setResistance(5.0F);
 		setTickRandomly(true);
 		setStepSound(Block.soundTypeGlass);

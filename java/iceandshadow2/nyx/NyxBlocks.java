@@ -17,7 +17,7 @@ public class NyxBlocks {
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
 	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow, thermalCore, thermalAir, xpAltar;
+	hardShadow, thermalCore, thermalAir, xpAltar, icicles;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
@@ -54,6 +54,7 @@ public class NyxBlocks {
 		.register();
 		NyxBlocks.crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
 		.register();
+		NyxBlocks.icicles = new NyxBlockIcicles("Icicles").register();
 
 		NyxBlocks.fluidExousia = new Fluid("nyxFluidExousicWater");
 		NyxBlocks.fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10)

@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 
 import java.util.Random;

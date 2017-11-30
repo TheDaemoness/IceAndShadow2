@@ -11,6 +11,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class IaSBlockHelper {
+	public static boolean breakBlock(World w, int x, int y, int z, boolean drop) {
+		return w.func_147480_a(x, y, z, drop);
+	}
+	public static boolean breakBlock(World w, int x, int y, int z) {
+		return breakBlock(w, x, y, z, true);
+	}
+	
 	public static Vec3 getBlockSideCoords(int x, int y, int z,
 			ForgeDirection dir) {
 		final double xN = 0.5 + 0.5 * dir.offsetX;

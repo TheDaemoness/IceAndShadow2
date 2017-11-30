@@ -16,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBiome extends BiomeGenBase {
 
@@ -56,6 +57,7 @@ public class NyxBiome extends BiomeGenBase {
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk,
 			int zchunk) {
+		
 		this.genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
 		this.genNavistra = new WorldGenNyxOre(NyxBlocks.oreNavistra, 6);
 		this.genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
@@ -93,6 +95,29 @@ public class NyxBiome extends BiomeGenBase {
 				1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
+		
+		for(int xit = 0; xit < 16; ++xit) {
+			for(int zit = 0; zit < 16; ++zit) {
+				if(par2Random.nextInt(24) == 0) {
+					boolean inair = false;
+					for(int yit = par1World.getPrecipitationHeight(xchunk+xit, zchunk+zit)-1;
+							yit > 0;
+							--yit) {
+						if(!inair && par1World.isAirBlock(xchunk+xit, yit, zchunk+zit)) {
+							inair=true;
+						} else if (inair && !par1World.isAirBlock(xchunk+xit, yit, zchunk+zit)) {
+							if(par1World.isSideSolid(xchunk+xit, yit, zchunk+zit, ForgeDirection.UP) && 
+									par2Random.nextBoolean()) {
+								par1World.setBlock(xchunk+xit, yit+1, zchunk+zit, NyxBlocks.icicles);
+								break;
+							}
+							inair=false;
+						}
+					}
+				}
+			}
+		}
+		
 		genFoliage(par1World, par2Random, xchunk, zchunk);
 
 		final int x = xchunk + par1World.rand.nextInt(16);

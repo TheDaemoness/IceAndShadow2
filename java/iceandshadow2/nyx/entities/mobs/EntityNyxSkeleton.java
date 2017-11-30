@@ -333,8 +333,7 @@ IIaSMobGetters {
 			return;
 
 		this.dropItem(Items.bone, 1);
-		if (this.rand.nextBoolean())
-			this.dropItem(NyxItems.icicle, 1);
+		this.dropItem(NyxItems.icicle, 1+this.worldObj.rand.nextInt(2));
 		
 		this.worldObj.spawnEntityInWorld(
 				new EntityOrbNourishment(this.worldObj,

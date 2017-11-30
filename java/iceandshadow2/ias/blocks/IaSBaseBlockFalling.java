@@ -3,6 +3,7 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName {
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
 				+ texName);
 		this.MODULE = mod;
+		this.setCreativeTab(IaSCreativeTabs.blocks);
 	}
 
 	@Override
