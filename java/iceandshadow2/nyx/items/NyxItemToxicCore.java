@@ -4,12 +4,19 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
+import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import java.util.List;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,13 +28,11 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 
 	public NyxItemToxicCore(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		setMaxStackSize(4);
+		setMaxStackSize(16);
 		setFull3D();
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
-				new ItemStack(this, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
-				new ItemStack(this, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1), new ItemStack(this, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -68,11 +73,24 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
-			EntityPlayer player) {
-		if (!par2World.isRemote && par1Stack.getItemDamage() == 1) {
-			par2World.spawnEntityInWorld(new EntityPoisonBall(par2World,
-					player));
+	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World, EntityPlayer player) {
+		if (!par2World.isRemote) {
+			par2World.spawnEntityInWorld(new EntityPoisonBall(par2World, player));
+			if (par1Stack.getItemDamage() == 0) {
+				List<Entity> l = par2World.getEntitiesWithinAABBExcludingEntity(player,
+						AxisAlignedBB.getBoundingBox(player.posX - 16, player.posY - 16, player.posZ - 16,
+								player.posX + 16, player.posY + 24, player.posZ + 16));
+				for (Entity ent : l) {
+					if (ent instanceof EntityMob) {
+						EntityPoisonBall pb = new EntityPoisonBall(par2World, player);
+						pb.setThrowableHeading(ent.posX - player.posX,
+								ent.posY - player.posY + ((EntityMob) ent).getEyeHeight() * 1.25 - player.getEyeHeight(),
+								ent.posZ - player.posZ, 1.0F, 1.0F);
+						par2World.spawnEntityInWorld(pb);
+					}
+				}
+				IaSPlayerHelper.giveItem(player, new ItemStack(this, 1, 1));
+			}
 			par1Stack.stackSize -= 1;
 		}
 		return par1Stack;

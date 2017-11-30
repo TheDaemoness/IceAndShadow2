@@ -49,7 +49,7 @@ public class EntityPoisonBall extends EntityThrowable {
 	 */
 	@Override
 	protected float getGravityVelocity() {
-		return 0.01F;
+		return 0.005F;
 	}
 
 	@Override
@@ -98,6 +98,8 @@ public class EntityPoisonBall extends EntityThrowable {
 						victim.addPotionEffect(new PotionEffect(Potion.poison.id,
 								165,0));
 				}
+				victim.addPotionEffect(new PotionEffect(Potion.confusion.id,
+						85,0));
 			}
 
 		}

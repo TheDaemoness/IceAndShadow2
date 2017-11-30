@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
 
 public class EntityAINyxTargeter extends EntityAITarget {
 
@@ -30,6 +31,8 @@ public class EntityAINyxTargeter extends EntityAITarget {
 		final EntityLivingBase elb = this.taskOwner.getAttackTarget();
 
 		if (elb == null) {
+			return false;
+		} else if (this.taskOwner.isPotionActive(Potion.confusion.id)) {
 			return false;
 		} else if (!elb.isEntityAlive()) {
 			return false;
@@ -65,6 +68,8 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	 */
 	@Override
 	public boolean shouldExecute() {
+		if(this.taskOwner.isPotionActive(Potion.confusion.id))
+			return false;
 		final double d0 = ((IIaSSensate) this.taskOwner).getSense().getRange();
 		final List<Entity> list = this.taskOwner.worldObj
 				.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
