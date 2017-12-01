@@ -18,12 +18,12 @@ public class NyxBlocks {
 	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
 	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
 	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow, unstableDevora, thermalAir, xpAltar, icicles;
+	hardShadow, unstableDevora, thermalAir, xpAltar, icicles, gravel, stoneGrowing;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
 	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
 
-	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace;
+	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace, stoneMemory;
 
 	public static Fluid fluidExousia;
 
@@ -86,8 +86,13 @@ public class NyxBlocks {
 		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
 		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
 		NyxBlocks.thermalAir = new NyxBlockThermalAir("ThermalAir").register();
+		
+		NyxBlocks.gravel = new NyxBlockGravel("Gravel").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,
 				"nyxTeTransmutationAltar");
+		
+		NyxBlocks.stoneMemory = new NyxBlockStoneMemory("StoneRegen").register();
+		NyxBlocks.stoneGrowing = new NyxBlockStoneGrowing("StoneGrowing").register();
 	}
 }

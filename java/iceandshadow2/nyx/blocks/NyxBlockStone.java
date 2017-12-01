@@ -4,6 +4,8 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -14,7 +16,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.ArrayList;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawable {
@@ -47,10 +55,27 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setResistance(NyxBlockStone.HARDNESS);
 		setHardness(NyxBlockStone.RESISTANCE);
-		this.setHarvestLevel("pickaxe", 0);
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.cobblestone),
-				new ItemStack(this));
-		GameRegistry.addSmelting(this, new ItemStack(Blocks.stone), 0);
+		this.setHarvestLevel("pickaxe", 1);
+		GameRegistry.addSmelting(this, new ItemStack(Blocks.cobblestone), 0);
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		return new ArrayList<ItemStack>();
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
+			int p_149664_5_) {
+		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
+		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.gravel);
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
+			Explosion p_149723_5_) {
+		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
+		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, NyxBlocks.gravel);
 	}
 
 	public boolean isGenMineableReplaceable(World world, int x, int y, int z) {

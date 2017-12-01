@@ -1,11 +1,15 @@
 package iceandshadow2.util;
 
 import java.util.Random;
+import java.util.Stack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.block.material.MaterialLogic;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -40,6 +44,15 @@ public class IaSBlockHelper {
 			zN += r.nextDouble() * size - size / 2.0;
 		return Vec3.createVectorHelper(x - 0.05 + 1.10 * xN, y - 0.05 + 1.10
 				* yN, z - 0.05 + 1.10 * zN);
+	}
+	
+	public static boolean isAdjacent(IBlockAccess w, int x, int y, int z, Block bl) {
+		for(int i = 0; i < ForgeDirection.values().length; ++i) {
+			final ForgeDirection dir = ForgeDirection.getOrientation(i);
+			if(bl.getClass().isInstance(w.getBlock(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)))
+				return true;
+		}
+		return false;
 	}
 
 	public static boolean isAir(Block bl) {
