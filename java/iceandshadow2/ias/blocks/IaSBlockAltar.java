@@ -25,8 +25,7 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2) {
-		return par1 == 0 ? this.iconBottom : par1 == 1 ? this.iconTop
-				: this.blockIcon;
+		return par1 == 0 ? this.iconBottom : par1 == 1 ? this.iconTop : this.blockIcon;
 	}
 
 	@Override
@@ -42,12 +41,9 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = reg.registerIcon("IceAndShadow2:" + getModName()
-				+ "Top");
-		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName()
-				+ "Side");
-		this.iconBottom = reg.registerIcon("IceAndShadow2:" + getModName()
-				+ "Bottom");
+		this.iconTop = reg.registerIcon("IceAndShadow2:" + getModName() + "Top");
+		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName() + "Side");
+		this.iconBottom = reg.registerIcon("IceAndShadow2:" + getModName() + "Bottom");
 		this.blockIcon = this.iconSide;
 	}
 }

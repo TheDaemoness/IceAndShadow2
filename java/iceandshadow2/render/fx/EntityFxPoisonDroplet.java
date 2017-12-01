@@ -17,8 +17,7 @@ public class EntityFxPoisonDroplet extends EntityFX {
 	/** The height of the current bob */
 	private int bobTimer;
 
-	public EntityFxPoisonDroplet(World par1World, double par2, double par4,
-			double par6) {
+	public EntityFxPoisonDroplet(World par1World, double par2, double par4, double par6) {
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
 
 		this.particleRed = 0.0F;
@@ -69,19 +68,14 @@ public class EntityFxPoisonDroplet extends EntityFX {
 			// this.posZ, 0.0D, 0.0D, 0.0D);
 		}
 
-		final Material material = this.worldObj.getBlock(
-				MathHelper.floor_double(this.posX),
-				MathHelper.floor_double(this.posY),
-				MathHelper.floor_double(this.posZ)).getMaterial();
+		final Material material = this.worldObj.getBlock(MathHelper.floor_double(this.posX),
+				MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)).getMaterial();
 
 		if (material.isLiquid() || material.isSolid()) {
-			final double d0 = MathHelper.floor_double(this.posY)
-					+ 1
-					- BlockLiquid.getLiquidHeightPercent(this.worldObj
-							.getBlockMetadata(
-									MathHelper.floor_double(this.posX),
-									MathHelper.floor_double(this.posY),
-									MathHelper.floor_double(this.posZ)));
+			final double d0 = MathHelper.floor_double(this.posY) + 1
+					- BlockLiquid
+							.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX),
+									MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
 
 			if (this.posY < d0) {
 				setDead();

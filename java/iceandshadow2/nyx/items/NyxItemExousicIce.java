@@ -21,41 +21,38 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(catalyst.getItem() != this)
+		if (catalyst.getItem() != this)
 			return 0;
-		if(target.getItem() instanceof ItemBlock) {
-			final Block bl = ((ItemBlock)target.getItem()).field_150939_a;
-			if(bl == NyxBlocks.brickFrozen && catalyst.stackSize >= 3)
+		if (target.getItem() instanceof ItemBlock) {
+			final Block bl = ((ItemBlock) target.getItem()).field_150939_a;
+			if (bl == NyxBlocks.brickFrozen && catalyst.stackSize >= 3)
 				return 25;
-			if(bl == NyxBlocks.brickPaleCracked)
+			if (bl == NyxBlocks.brickPaleCracked)
 				return 25;
 		}
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final ArrayList<ItemStack> li = new ArrayList<ItemStack>();
-		int quant = Math.min(target.stackSize,catalyst.stackSize);
-		if(target.getItem() instanceof ItemBlock) {
-			if(((ItemBlock)target.getItem()).field_150939_a == NyxBlocks.brickPaleCracked) {
-				catalyst.stackSize -= 1*quant;
-				li.add(new ItemStack(NyxBlocks.brickPale,quant));
+		int quant = Math.min(target.stackSize, catalyst.stackSize);
+		if (target.getItem() instanceof ItemBlock) {
+			if (((ItemBlock) target.getItem()).field_150939_a == NyxBlocks.brickPaleCracked) {
+				catalyst.stackSize -= 1 * quant;
+				li.add(new ItemStack(NyxBlocks.brickPale, quant));
+			} else {
+				quant = Math.min(target.stackSize, catalyst.stackSize / 3);
+				catalyst.stackSize -= 3 * quant;
+				li.add(new ItemStack(NyxBlocks.brickPale, quant * 2));
 			}
-			else {
-				quant = Math.min(target.stackSize,catalyst.stackSize/3);
-				catalyst.stackSize -= 3*quant;
-				li.add(new ItemStack(NyxBlocks.brickPale,quant*2));
-			}
-			target.stackSize -= 1*quant;
+			target.stackSize -= 1 * quant;
 		}
 		return li;
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 }

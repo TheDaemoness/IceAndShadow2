@@ -12,8 +12,7 @@ public class IaSFakeBlock extends Block {
 	public IaSFakeBlock(EnumIaSModule mod, String texName) {
 		super(Material.dragonEgg);
 		setBlockName("fake" + mod.prefix + texName);
-		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
-				+ texName);
+		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		IaSRegistration.register(this);
 	}
 

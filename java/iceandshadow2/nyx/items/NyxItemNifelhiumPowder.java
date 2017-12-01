@@ -20,19 +20,18 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(catalyst.getItem() != this)
+		if (catalyst.getItem() != this)
 			return 0;
-		if(target.getItem() == NyxItems.icicle)
+		if (target.getItem() == NyxItems.icicle)
 			return 160;
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		--catalyst.stackSize;
 		--target.stackSize;
-		if(target.getItem() == NyxItems.icicle) {
+		if (target.getItem() == NyxItems.icicle) {
 			final List<ItemStack> li = new ArrayList<ItemStack>();
 			li.add(new ItemStack(NyxItems.icicle, 64));
 			li.add(new ItemStack(NyxItems.icicle, 64));
@@ -42,8 +41,7 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 }

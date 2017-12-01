@@ -23,11 +23,6 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 		IaSItemStarterKit.instance = new IaSItemStarterKit("StarterKit");
 	}
 
-	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
-	}
-
 	public IaSItemStarterKit(String texName) {
 		super(EnumIaSModule.IAS, texName);
 		setMaxStackSize(1);
@@ -36,17 +31,19 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 	}
 
 	@Override
-	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_,
-			List l, boolean p_77624_4_) {
-		l.add(EnumChatFormatting.GRAY.toString()
-				+ EnumChatFormatting.ITALIC.toString()
+	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List l, boolean p_77624_4_) {
+		l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 				+ "Creative only, breaks on death.");
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World w,
-			EntityPlayer pwai) {
-		if(w.isRemote || !pwai.capabilities.isCreativeMode)
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer pwai) {
+		if (w.isRemote || !pwai.capabilities.isCreativeMode)
 			return is;
 		is.stackSize = 1;
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.diamond_helmet));
@@ -70,15 +67,13 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 		it.addEnchantment(Enchantment.punch, 1);
 		it.addEnchantment(Enchantment.infinity, 1);
 		IaSPlayerHelper.giveItem(pwai, it);
-		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.cooked_porkchop,64));
+		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.cooked_porkchop, 64));
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.shears));
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Blocks.cobblestone, 64));
-		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.arrow,16));
+		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.arrow, 16));
 		is.setItemDamage(0);
 		is.func_150996_a(NyxItems.teleportCrystal);
 		return is;
 	}
-
-
 
 }

@@ -11,17 +11,16 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class IaSItemArmor extends ItemArmor implements IIaSModName {
 
-	public static ArmorMaterial MATERIAL_ECHIR = EnumHelper
-			.addArmorMaterial("Echir", 44, new int[] { 3, 8, 6, 3 }, 16);
+	public static ArmorMaterial MATERIAL_ECHIR = EnumHelper.addArmorMaterial("Echir", 44, new int[] { 3, 8, 6, 3 }, 16);
 
-	public static ArmorMaterial MATERIAL_NAVISTRA = EnumHelper
-			.addArmorMaterial("Navistra", 88, new int[] { 4, 8, 6, 3 }, 8);
+	public static ArmorMaterial MATERIAL_NAVISTRA = EnumHelper.addArmorMaterial("Navistra", 88,
+			new int[] { 4, 8, 6, 3 }, 8);
 
-	public static ArmorMaterial MATERIAL_CORTRA = EnumHelper
-			.addArmorMaterial("Cortra", 33, new int[] { 3, 7, 5, 3 }, 24);
+	public static ArmorMaterial MATERIAL_CORTRA = EnumHelper.addArmorMaterial("Cortra", 33, new int[] { 3, 7, 5, 3 },
+			24);
 
-	public static ArmorMaterial MATERIAL_SPIDERSILK = EnumHelper
-			.addArmorMaterial("NyxSpiderSilk", 22, new int[] { 2, 7, 5, 2 }, 16);
+	public static ArmorMaterial MATERIAL_SPIDERSILK = EnumHelper.addArmorMaterial("NyxSpiderSilk", 22,
+			new int[] { 2, 7, 5, 2 }, 16);
 
 	static {
 		IaSItemArmor.MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
@@ -36,18 +35,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		super(arm, leg, head);
 		this.armorTexString = body;
 		setUnlocalizedName("iasArmor" + arm.name() + this.armorType);
-		setTextureName("IceAndShadow2:armor/iasArmor" + arm.name()
-				+ this.armorType);
+		setTextureName("IceAndShadow2:armor/iasArmor" + arm.name() + this.armorType);
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.common;
-	}
-
-	@Override
-	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot,
-			String type) {
+	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, String type) {
 		if (entity.isInvisible())
 			return "IceAndShadow2:textures/armor/the_invisible_man.png";
 		if (slot == 2)
@@ -62,11 +54,6 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	}
 
 	@Override
-	public boolean isDamageable() {
-		return getArmorMaterial() != IaSItemArmor.MATERIAL_NAVISTRA;
-	}
-
-	@Override
 	public EnumIaSModule getIaSModule() {
 		return EnumIaSModule.IAS;
 	}
@@ -77,9 +64,19 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	}
 
 	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
+	}
+
+	@Override
 	@Deprecated
 	public String getTexName() {
 		return "IceAndShadow2:armor/" + getModName();
+	}
+
+	@Override
+	public boolean isDamageable() {
+		return getArmorMaterial() != IaSItemArmor.MATERIAL_NAVISTRA;
 	}
 
 	@Override

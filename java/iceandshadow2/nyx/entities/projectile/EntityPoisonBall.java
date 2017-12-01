@@ -3,7 +3,6 @@ package iceandshadow2.nyx.entities.projectile;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
@@ -24,13 +23,11 @@ public class EntityPoisonBall extends EntityThrowable {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public EntityPoisonBall(World par1World, double par2, double par4,
-			double par6) {
+	public EntityPoisonBall(World par1World, double par2, double par4, double par6) {
 		super(par1World, par2, par4, par6);
 	}
 
-	public EntityPoisonBall(World par1World,
-			EntityLivingBase par2EntityLivingBase) {
+	public EntityPoisonBall(World par1World, EntityLivingBase par2EntityLivingBase) {
 		super(par1World, par2EntityLivingBase);
 	}
 
@@ -55,8 +52,7 @@ public class EntityPoisonBall extends EntityThrowable {
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
-		IaSFxManager.spawnParticle(this.worldObj, "poisonSmoke", this.posX, this.posY,
-				this.posZ, false, false);
+		IaSFxManager.spawnParticle(this.worldObj, "poisonSmoke", this.posX, this.posY, this.posZ, false, false);
 	}
 
 	/**
@@ -70,36 +66,30 @@ public class EntityPoisonBall extends EntityThrowable {
 				setDead();
 				return;
 			}
-			if(par1MovingObjectPosition.entityHit instanceof EntityNyxWightToxic) {}
-			else if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase) {
-				final EntityLivingBase victim = (EntityLivingBase)(par1MovingObjectPosition.entityHit);
-				if(victim instanceof EntityNyxSpider) {
+			if (par1MovingObjectPosition.entityHit instanceof EntityNyxWightToxic) {
+			} else if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase) {
+				final EntityLivingBase victim = (EntityLivingBase) (par1MovingObjectPosition.entityHit);
+				if (victim instanceof EntityNyxSpider) {
 					victim.attackEntityFrom(DamageSource.wither, 16);
-					victim.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,165,3));
-					victim.addPotionEffect(new PotionEffect(Potion.wither.id,
-							165,1));
+					victim.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 165, 3));
+					victim.addPotionEffect(new PotionEffect(Potion.wither.id, 165, 1));
 				} else {
-					if(getThrower() != null)
+					if (getThrower() != null)
 						victim.attackEntityFrom(DamageSource.causeIndirectMagicDamage(victim, getThrower()), 2);
 					else
 						victim.attackEntityFrom(DamageSource.magic, 1);
-					if(victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-						victim.addPotionEffect(new PotionEffect(Potion.wither.id,
-								165,1));
-					else if(this.getThrower() instanceof EntityMob) {
+					if (victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+						victim.addPotionEffect(new PotionEffect(Potion.wither.id, 165, 1));
+					else if (this.getThrower() instanceof EntityMob) {
 						final PotionEffect pot = victim.getActivePotionEffect(Potion.poison);
-						if(pot != null)
-							victim.addPotionEffect(new PotionEffect(Potion.poison.id,
-									125,1+pot.getAmplifier()));
+						if (pot != null)
+							victim.addPotionEffect(new PotionEffect(Potion.poison.id, 125, 1 + pot.getAmplifier()));
 						else
-							victim.addPotionEffect(new PotionEffect(Potion.poison.id,
-									125,0));
+							victim.addPotionEffect(new PotionEffect(Potion.poison.id, 125, 0));
 					} else
-						victim.addPotionEffect(new PotionEffect(Potion.poison.id,
-								165,0));
+						victim.addPotionEffect(new PotionEffect(Potion.poison.id, 165, 0));
 				}
-				victim.addPotionEffect(new PotionEffect(Potion.confusion.id,
-						85,0));
+				victim.addPotionEffect(new PotionEffect(Potion.confusion.id, 85, 0));
 			}
 
 		}

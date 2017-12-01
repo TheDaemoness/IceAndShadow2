@@ -13,8 +13,8 @@ public class IaSSensePoisoned extends IaSSense {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		if(ent instanceof EntityLivingBase) {
-			if(((EntityLivingBase)ent).isPotionActive(Potion.poison))
+		if (ent instanceof EntityLivingBase) {
+			if (((EntityLivingBase) ent).isPotionActive(Potion.poison))
 				return isInRange(ent);
 		}
 		return false;

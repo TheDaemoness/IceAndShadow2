@@ -15,8 +15,7 @@ public class GenInfestedTrees extends WorldGenerator {
 	 * Contains three sets of two values that provide complimentary indices for
 	 * a given 'major' index - 1 and 2 for 0, 0 and 2 for 1, and 0 and 1 for 2.
 	 */
-	static final byte[] otherCoordPairs = new byte[] { (byte) 2, (byte) 0,
-		(byte) 0, (byte) 1, (byte) 2, (byte) 1 };
+	static final byte[] otherCoordPairs = new byte[] { (byte) 2, (byte) 0, (byte) 0, (byte) 1, (byte) 2, (byte) 1 };
 
 	/** random seed for GenBigTree */
 	Random rand = new Random();
@@ -95,18 +94,13 @@ public class GenInfestedTrees extends WorldGenerator {
 
 			for (j = aint2[b1] + b4; i != j; i += b4) {
 				aint3[b1] = par1ArrayOfInteger[b1] + i;
-				aint3[b2] = MathHelper.floor_double(par1ArrayOfInteger[b2] + i
-						* d0);
-				aint3[b3] = MathHelper.floor_double(par1ArrayOfInteger[b3] + i
-						* d1);
-				final Block block = this.worldObj.getBlock(aint3[0], aint3[1],
-						aint3[2]);
+				aint3[b2] = MathHelper.floor_double(par1ArrayOfInteger[b2] + i * d0);
+				aint3[b3] = MathHelper.floor_double(par1ArrayOfInteger[b3] + i * d1);
+				final Block block = this.worldObj.getBlock(aint3[0], aint3[1], aint3[2]);
 
-				if (block != null
-						&& !block.isAir(this.worldObj, aint3[0], aint3[1], aint3[2])
-						&& !block.isLeaves(this.worldObj, aint3[0], aint3[1],
-								aint3[2]) && !(block != Blocks.snow)
-								&& !(block != Blocks.snow_layer)) {
+				if (block != null && !block.isAir(this.worldObj, aint3[0], aint3[1], aint3[2])
+						&& !block.isLeaves(this.worldObj, aint3[0], aint3[1], aint3[2]) && !(block != Blocks.snow)
+						&& !(block != Blocks.snow_layer)) {
 					break;
 				}
 			}
@@ -116,8 +110,7 @@ public class GenInfestedTrees extends WorldGenerator {
 	}
 
 	@Override
-	public boolean generate(World par1World, Random par2Random, int x, int y,
-			int z) {
+	public boolean generate(World par1World, Random par2Random, int x, int y, int z) {
 		this.worldObj = par1World;
 		final long l = par2Random.nextLong();
 		this.rand.setSeed(l);
@@ -157,10 +150,8 @@ public class GenInfestedTrees extends WorldGenerator {
 		else if (dir == 3)
 			--x; // West
 		meta |= this.rand.nextInt(3) == 0 ? 0x8 : 0x4;
-		if (this.worldObj.isAirBlock(x, y, z)
-				|| this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
-			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta,
-					0x2);
+		if (this.worldObj.isAirBlock(x, y, z) || this.worldObj.getBlock(x, y, z) == NyxBlocks.infestLeaves) {
+			this.worldObj.setBlock(x, y, z, NyxBlocks.silkBerryPod, meta, 0x2);
 		}
 	}
 
@@ -173,8 +164,7 @@ public class GenInfestedTrees extends WorldGenerator {
 
 		for (final int i1 = par2 + this.leafDistanceLimit; l < i1; ++l) {
 			final float f = leafSize(l - par2);
-			genTreeLayer(par1, l, par3, f, (byte) 1,
-					NyxBlocks.infestLeaves);
+			genTreeLayer(par1, l, par3, f, (byte) 1, NyxBlocks.infestLeaves);
 		}
 	}
 
@@ -186,8 +176,7 @@ public class GenInfestedTrees extends WorldGenerator {
 		int i = 0;
 		final int j = this.leafNodes.length;
 
-		for (final int[] aint = new int[] { this.basePos[0], this.basePos[1],
-				this.basePos[2] }; i < j; ++i) {
+		for (final int[] aint = new int[] { this.basePos[0], this.basePos[1], this.basePos[2] }; i < j; ++i) {
 			final int[] aint1 = this.leafNodes[i];
 			final int[] aint2 = new int[] { aint1[0], aint1[1], aint1[2] };
 			aint[1] = aint1[3];
@@ -210,8 +199,7 @@ public class GenInfestedTrees extends WorldGenerator {
 			this.height = this.heightLimit - 1;
 		}
 
-		int i = (int) (1.382D + Math.pow(this.leafDensity * this.heightLimit
-				/ 13.0D, 2.0D));
+		int i = (int) (1.382D + Math.pow(this.leafDensity * this.heightLimit / 13.0D, 2.0D));
 
 		if (i < 1) {
 			i = 1;
@@ -237,25 +225,17 @@ public class GenInfestedTrees extends WorldGenerator {
 				--i1;
 			} else {
 				for (final double d0 = 0.5D; j1 < i; ++j1) {
-					final double d1 = this.scaleWidth * f
-							* (this.rand.nextFloat() + 0.328D);
+					final double d1 = this.scaleWidth * f * (this.rand.nextFloat() + 0.328D);
 					final double d2 = this.rand.nextFloat() * 2.0D * Math.PI;
-					final int k1 = MathHelper.floor_double(d1 * Math.sin(d2)
-							+ this.basePos[0] + d0);
-					final int l1 = MathHelper.floor_double(d1 * Math.cos(d2)
-							+ this.basePos[2] + d0);
+					final int k1 = MathHelper.floor_double(d1 * Math.sin(d2) + this.basePos[0] + d0);
+					final int l1 = MathHelper.floor_double(d1 * Math.cos(d2) + this.basePos[2] + d0);
 					final int[] aint1 = new int[] { k1, j, l1 };
-					final int[] aint2 = new int[] { k1,
-							j + this.leafDistanceLimit, l1 };
+					final int[] aint2 = new int[] { k1, j + this.leafDistanceLimit, l1 };
 
 					if (checkBlockLine(aint1, aint2) == -1) {
-						final int[] aint3 = new int[] { this.basePos[0],
-								this.basePos[1], this.basePos[2] };
-						final double d3 = Math.sqrt(Math.pow(
-								Math.abs(this.basePos[0] - aint1[0]), 2.0D)
-								+ Math.pow(
-										Math.abs(this.basePos[2] - aint1[2]),
-										2.0D));
+						final int[] aint3 = new int[] { this.basePos[0], this.basePos[1], this.basePos[2] };
+						final double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - aint1[0]), 2.0D)
+								+ Math.pow(Math.abs(this.basePos[2] - aint1[2]), 2.0D));
 						final double d4 = d3 * this.branchSlope;
 
 						if (aint1[1] - d4 > l) {
@@ -324,8 +304,7 @@ public class GenInfestedTrees extends WorldGenerator {
 		}
 	}
 
-	void genTreeLayer(int par1, int par2, int par3, float par4, byte par5,
-			Block par6) {
+	void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6) {
 		final int i1 = (int) (par4 + 0.618D);
 		final byte b1 = GenInfestedTrees.otherCoordPairs[par5];
 		final byte b2 = GenInfestedTrees.otherCoordPairs[par5 + 3];
@@ -339,25 +318,19 @@ public class GenInfestedTrees extends WorldGenerator {
 			k1 = -i1;
 
 			while (k1 <= i1) {
-				final double d0 = Math.pow(Math.abs(j1) + 0.5D, 2.0D)
-						+ Math.pow(Math.abs(k1) + 0.5D, 2.0D);
+				final double d0 = Math.pow(Math.abs(j1) + 0.5D, 2.0D) + Math.pow(Math.abs(k1) + 0.5D, 2.0D);
 
 				if (d0 > par4 * par4) {
 					++k1;
 				} else {
 					aint1[b2] = aint[b2] + k1;
-					final Block block = this.worldObj.getBlock(aint1[0],
-							aint1[1], aint1[2]);
+					final Block block = this.worldObj.getBlock(aint1[0], aint1[1], aint1[2]);
 
-					if (block != null
-							&& !block.isAir(this.worldObj, aint1[0], aint1[1],
-									aint1[2])
-									&& !block.isLeaves(this.worldObj, aint1[0], aint1[1],
-											aint1[2])) {
+					if (block != null && !block.isAir(this.worldObj, aint1[0], aint1[1], aint1[2])
+							&& !block.isLeaves(this.worldObj, aint1[0], aint1[1], aint1[2])) {
 						++k1;
 					} else {
-						this.worldObj.setBlock(aint1[0], aint1[1], aint1[2],
-								par6, 0, 0x8);
+						this.worldObj.setBlock(aint1[0], aint1[1], aint1[2], par6, 0, 0x8);
 						++k1;
 					}
 				}
@@ -381,8 +354,7 @@ public class GenInfestedTrees extends WorldGenerator {
 			} else if (Math.abs(f1) >= f) {
 				f2 = 0.0F;
 			} else {
-				f2 = (float) Math.sqrt(Math.pow(Math.abs(f), 2.0D)
-						- Math.pow(Math.abs(f1), 2.0D));
+				f2 = (float) Math.sqrt(Math.pow(Math.abs(f), 2.0D) - Math.pow(Math.abs(f1), 2.0D));
 			}
 
 			f2 *= 0.5F;
@@ -399,16 +371,15 @@ public class GenInfestedTrees extends WorldGenerator {
 	}
 
 	float leafSize(int par1) {
-		return par1 >= 0 && par1 < this.leafDistanceLimit ? par1 != 0
-				&& par1 != this.leafDistanceLimit - 1 ? 3.0F : 2.0F : -1.0F;
+		return par1 >= 0 && par1 < this.leafDistanceLimit
+				? par1 != 0 && par1 != this.leafDistanceLimit - 1 ? 3.0F : 2.0F : -1.0F;
 	}
 
 	/**
 	 * Places a line of the specified block ID into the world from the first
 	 * coordinate triplet to the second.
 	 */
-	void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger,
-			Block par3) {
+	void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3) {
 		final int[] aint2 = new int[] { 0, 0, 0 };
 		byte b0 = 0;
 		byte b1;
@@ -438,12 +409,9 @@ public class GenInfestedTrees extends WorldGenerator {
 			int j = 0;
 
 			for (final int k = aint2[b1] + b4; j != k; j += b4) {
-				aint3[b1] = MathHelper.floor_double(par1ArrayOfInteger[b1] + j
-						+ 0.5D);
-				aint3[b2] = MathHelper.floor_double(par1ArrayOfInteger[b2] + j
-						* d0 + 0.5D);
-				aint3[b3] = MathHelper.floor_double(par1ArrayOfInteger[b3] + j
-						* d1 + 0.5D);
+				aint3[b1] = MathHelper.floor_double(par1ArrayOfInteger[b1] + j + 0.5D);
+				aint3[b2] = MathHelper.floor_double(par1ArrayOfInteger[b2] + j * d0 + 0.5D);
+				aint3[b3] = MathHelper.floor_double(par1ArrayOfInteger[b3] + j * d1 + 0.5D);
 				byte b5 = 0;
 				final int l = Math.abs(aint3[0] - par1ArrayOfInteger[0]);
 				final int i1 = Math.abs(aint3[2] - par1ArrayOfInteger[2]);
@@ -457,8 +425,7 @@ public class GenInfestedTrees extends WorldGenerator {
 					}
 				}
 
-				this.worldObj.setBlock(aint3[0], aint3[1], aint3[2], par3, b5,
-						0x2);
+				this.worldObj.setBlock(aint3[0], aint3[1], aint3[2], par3, b5, 0x2);
 			}
 		}
 	}
@@ -483,13 +450,10 @@ public class GenInfestedTrees extends WorldGenerator {
 	 * tree, spanning basePos to to the height limit, is valid.
 	 */
 	boolean validTreeLocation() {
-		final int[] aint = new int[] { this.basePos[0], this.basePos[1] + 2,
-				this.basePos[2] };
-		final int[] aint1 = new int[] { this.basePos[0],
-				this.basePos[1] + this.heightLimit - 1, this.basePos[2] };
+		final int[] aint = new int[] { this.basePos[0], this.basePos[1] + 2, this.basePos[2] };
+		final int[] aint1 = new int[] { this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2] };
 
-		final Block soil = this.worldObj.getBlock(this.basePos[0],
-				this.basePos[1] - 1, this.basePos[2]);
+		final Block soil = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 		final boolean isValidSoil = soil != null && soil == Blocks.snow;
 		if (!isValidSoil) {
 			return false;

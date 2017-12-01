@@ -32,8 +32,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 			return IaSRegistry.getDefaultMaterial();
 		if (!is.getTagCompound().hasKey("iasMaterial"))
 			return IaSRegistry.getDefaultMaterial();
-		final IaSToolMaterial m = IaSRegistry.getToolMaterial(is
-				.getTagCompound().getString("iasMaterial"));
+		final IaSToolMaterial m = IaSRegistry.getToolMaterial(is.getTagCompound().getString("iasMaterial"));
 		if (m == null)
 			IaSRegistry.getDefaultMaterial();
 		return m;
@@ -51,17 +50,15 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @param target
 	 * @return
 	 */
-	public int damageToolOnAttack(ItemStack is, EntityLivingBase user,
-			Entity target) {
+	public int damageToolOnAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		return 1;
 	}
 
 	/**
 	 * Gets the item's base attack damage. This is called by the default
 	 * implementations of getToolDamage() and getKnifeDamage(). Players are not
-	 * forced to override it if it won't be used.
-	 * Cheat sheet: 0 = wood, 1 = stone, 2 =
-	 * iron, 3 = diamond/echir
+	 * forced to override it if it won't be used. Cheat sheet: 0 = wood, 1 =
+	 * stone, 2 = iron, 3 = diamond/echir
 	 *
 	 * @return
 	 */
@@ -161,8 +158,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @param entityNyxSkeleton
 	 * @return
 	 */
-	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World,
-			EntityLivingBase elb) {
+	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World, EntityLivingBase elb) {
 		return 12;
 	}
 
@@ -176,12 +172,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The user.
 	 * @param target
 	 *            The target.
-	 * @return The damage that the knife should do. Note that this is the full physical
-	 *         damage, not bonus damage, so returning 0.0F will cause the tool
-	 *         to do no damage.
+	 * @return The damage that the knife should do. Note that this is the full
+	 *         physical damage, not bonus damage, so returning 0.0F will cause
+	 *         the tool to do no damage.
 	 */
-	public float getKnifeDamage(IaSEntityKnifeBase knife,
-			EntityLivingBase user, Entity target) {
+	public float getKnifeDamage(IaSEntityKnifeBase knife, EntityLivingBase user, Entity target) {
 		return getBaseDamage() + 2;
 	}
 
@@ -195,8 +190,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The thrower, or null if there was no throwing entity.
 	 * @return A damage source.
 	 */
-	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
-			Entity thrower) {
+	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife, Entity thrower) {
 		if (thrower == null)
 			return DamageSource.causeThrownDamage(knife, knife);
 		else
@@ -215,9 +209,12 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return The item stack to drop when the knife hits something, or null if
 	 *         no drop.
 	 */
-	public ItemStack getKnifeDrop(EntityLivingBase user,
-			IaSEntityKnifeBase knife) {
+	public ItemStack getKnifeDrop(EntityLivingBase user, IaSEntityKnifeBase knife) {
 		return knife.getItemStack();
+	}
+
+	public String getKnifeMissSound() {
+		return "random.anvil_land";
 	}
 
 	/**
@@ -276,12 +273,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *         damage, not bonus damage, so returning 0.0F will cause the tool
 	 *         to do no damage.
 	 */
-	public float getToolDamage(ItemStack is, EntityLivingBase user,
-			Entity target) {
+	public float getToolDamage(ItemStack is, EntityLivingBase user, Entity target) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
 		float baseDmg = getBaseDamage();
-		if(target instanceof EntityLivingBase)
-			baseDmg += EnchantmentHelper.getEnchantmentModifierLiving(user, (EntityLivingBase)target);
+		if (target instanceof EntityLivingBase)
+			baseDmg += EnchantmentHelper.getEnchantmentModifierLiving(user, (EntityLivingBase) target);
 		if (t == EnumIaSToolClass.AXE)
 			return baseDmg + 3;
 		if (t == EnumIaSToolClass.PICKAXE)
@@ -297,7 +293,8 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 
 	/**
 	 * Gets the item required in the transmutation altar to transmute a
-	 * tool/weapon to this. Used for cases where the transmutation itself is quite basic.
+	 * tool/weapon to this. Used for cases where the transmutation itself is
+	 * quite basic.
 	 *
 	 * @return The item, or null if transmutation to this material should be
 	 *         disabled. A separate handler can still be put in place for
@@ -313,7 +310,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	}
 
 	@Override
-	public float getXpValue(ItemStack is, Random rand)  {
+	public float getXpValue(ItemStack is, Random rand) {
 		return 0;
 	}
 
@@ -347,12 +344,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {
 			if (user instanceof EntityPlayer)
-				target.attackEntityFrom(
-						DamageSource.causePlayerDamage((EntityPlayer) user),
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user),
 						getToolDamage(is, user, target));
 			else
-				target.attackEntityFrom(DamageSource.causeMobDamage(user),
-						getToolDamage(is, user, target));
+				target.attackEntityFrom(DamageSource.causeMobDamage(user), getToolDamage(is, user, target));
 		}
 		return damageToolOnAttack(is, user, target);
 	}
@@ -369,8 +364,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return The number of points of durability that should be deducted by
 	 *         this harvest.
 	 */
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
-			int y, int z) {
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
 		return 1;
 	}
 
@@ -385,8 +379,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The block hit.
 	 * @return If the knife should drop as an item or not.
 	 */
-	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
-			ChunkCoordinates block) {
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
 		return true;
 	}
 
@@ -401,8 +394,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The entity hit.
 	 * @return If the knife should drop as an item or not.
 	 */
-	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
-			Entity target) {
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
 		return true;
 	}
 
@@ -417,8 +409,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @param knife
 	 *            The knife entity that will be spawned.
 	 */
-	public void onKnifeThrow(ItemStack is, EntityLivingBase user,
-			IaSEntityKnifeBase knife) {
+	public void onKnifeThrow(ItemStack is, EntityLivingBase user, IaSEntityKnifeBase knife) {
 		return;
 	}
 
@@ -478,17 +469,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 		this.iconTool = new IIcon[lTool];
 		this.iconWeapon = new IIcon[lWeapon];
 		for (int i = 0; i < this.iconTool.length; ++i)
-			this.iconTool[i] = reg.registerIcon(getTextureNamePrefix()
-					+ getMaterialName()
-					+ EnumIaSToolClass.fromId(i, false).toString());
+			this.iconTool[i] = reg.registerIcon(
+					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, false).toString());
 		for (int i = 0; i < this.iconWeapon.length; ++i)
-			this.iconWeapon[i] = reg.registerIcon(getTextureNamePrefix()
-					+ getMaterialName()
-					+ EnumIaSToolClass.fromId(i, true).toString());
+			this.iconWeapon[i] = reg.registerIcon(
+					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, true).toString());
 
-	}
-
-	public String getKnifeMissSound() {
-		return "random.anvil_land";
 	}
 }

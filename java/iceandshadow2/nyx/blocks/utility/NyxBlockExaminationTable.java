@@ -47,20 +47,18 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z,
-			EntityPlayer pl, int meta, float a, float b, float c) {
+	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer pl, int meta, float a, float b,
+			float c) {
 		final TileEntity ent = w.getTileEntity(x, y, z);
 		if (ent instanceof NyxTeExaminationTable) {
 			final NyxTeExaminationTable nteet = (NyxTeExaminationTable) ent;
 			final Map<String, Integer> chknow = new TreeMap<String, Integer>();
-			Map<String, Integer> temp = IaSRegistry.handleExamination(pl,
-					nteet.knowledge);
+			Map<String, Integer> temp = IaSRegistry.handleExamination(pl, nteet.knowledge);
 			if (temp != null) {
 				for (final String key : temp.keySet())
 					chknow.put(key, temp.get(key));
 			}
-			temp = IaSRegistry.handleExaminationBook(pl, x, y, z,
-					nteet.knowledge);
+			temp = IaSRegistry.handleExaminationBook(pl, x, y, z, nteet.knowledge);
 			if (temp != null) {
 				for (final String key : temp.keySet())
 					chknow.put(key, temp.get(key));
@@ -75,9 +73,7 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon("IceAndShadow2:" + getModName()
-				+ "Top");
-		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName()
-				+ "Side");
+		this.blockIcon = reg.registerIcon("IceAndShadow2:" + getModName() + "Top");
+		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName() + "Side");
 	}
 }

@@ -14,8 +14,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class NyxItemSeedObsidian extends IaSBaseItemSingle implements
-IIaSOnDeathKeep {
+public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSOnDeathKeep {
 
 	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -28,9 +27,8 @@ IIaSOnDeathKeep {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld,
-			int ehx, int uay, int zee, int metuh, float pex, float pay,
-			float pez) {
+	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld, int ehx, int uay, int zee, int metuh,
+			float pex, float pay, float pez) {
 		boolean trans = true;
 		for (int xit = -2; xit <= 2; ++xit) {
 			for (int zit = -2; zit <= 2; ++zit) {
@@ -42,11 +40,9 @@ IIaSOnDeathKeep {
 			for (int xit = -2; xit <= 2; ++xit) {
 				for (int zit = -2; zit <= 2; ++zit) {
 					if (Math.abs(xit) == 2 || Math.abs(zit) == 2)
-						wurld.setBlock(ehx + xit, uay, zee + zit,
-								Blocks.obsidian);
+						wurld.setBlock(ehx + xit, uay, zee + zit, Blocks.obsidian);
 					else
-						wurld.setBlock(ehx + xit, uay, zee + zit,
-								NyxBlocks.cryingObsidian, 1, 0x2);
+						wurld.setBlock(ehx + xit, uay, zee + zit, NyxBlocks.cryingObsidian, 1, 0x2);
 
 					if (xit == 0 && zit == 0)
 						wurld.func_147480_a(ehx + xit, uay + 3, zee + zit, true);
@@ -56,22 +52,16 @@ IIaSOnDeathKeep {
 				}
 			}
 			staq.stackSize -= 1;
-			wurld.spawnEntityInWorld(new EntityLightningBolt(wurld, ehx, uay,
-					zee));
-			IaSPlayerHelper.messagePlayer(playuh,
-					"You feel something bind your life force to the obsidian.");
+			wurld.spawnEntityInWorld(new EntityLightningBolt(wurld, ehx, uay, zee));
+			IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian.");
 			playuh.setSpawnChunk(new ChunkCoordinates(ehx, uay + 1, zee), true);
 			if (playuh.getHealth() > 2.0F)
 				playuh.attackEntityFrom(DamageSource.magic, 1);
-			IaSPlayerHelper
-			.messagePlayer(
-					playuh,
+			IaSPlayerHelper.messagePlayer(playuh,
 					"You may be able to rebind it to other platforms, simply by crouching on the center block.");
 			return true;
 		} else
-			IaSPlayerHelper
-			.messagePlayer(
-					playuh,
+			IaSPlayerHelper.messagePlayer(playuh,
 					"That seed needs a larger flat area of Nyxian stone to avoid being wasteful. How do I know that...?");
 		return false;
 	}

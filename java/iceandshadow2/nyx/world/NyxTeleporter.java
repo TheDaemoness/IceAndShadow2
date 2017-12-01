@@ -22,11 +22,10 @@ public class NyxTeleporter extends Teleporter {
 	}
 
 	private void placeInNyx(Entity par1Entity, int x, int z) {
-		for(int i = 0; i <= 3; ++i)
-			this.world.getChunkProvider().loadChunk(-(i>>1), -(i&1));
-		final int y = GenRuinsCentral.getGenHeight(this.world,0,0)+3;
-		par1Entity.setLocationAndAngles(0.5, y, 0.5,
-				this.world.rand.nextFloat() * 360.0F, 0.0F);
+		for (int i = 0; i <= 3; ++i)
+			this.world.getChunkProvider().loadChunk(-(i >> 1), -(i & 1));
+		final int y = GenRuinsCentral.getGenHeight(this.world, 0, 0) + 3;
+		par1Entity.setLocationAndAngles(0.5, y, 0.5, this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
 
 	private void placeInOverworld(Entity par1Entity, int x, int z) {
@@ -50,26 +49,22 @@ public class NyxTeleporter extends Teleporter {
 			this.world.setBlock(x, y - 1, z, Blocks.sandstone);
 		else if (this.world.getBlock(x, y - 1, z) == Blocks.fire)
 			this.world.setBlock(x, y - 1, z, Blocks.air);
-		par1Entity.setLocationAndAngles(x + 0.5, y + 1.0, z + 0.5,
-				this.world.rand.nextFloat() * 360.0F, 0.0F);
+		par1Entity.setLocationAndAngles(x + 0.5, y + 1.0, z + 0.5, this.world.rand.nextFloat() * 360.0F, 0.0F);
 	}
 
 	@Override
-	public void placeInPortal(Entity par1Entity, double x, double y, double z,
-			float par8) {
+	public void placeInPortal(Entity par1Entity, double x, double y, double z, float par8) {
 
 		if (this.world.provider.dimensionId == 0)
 			placeInOverworld(par1Entity, (int) x, (int) z);
 		else if (!placeOnExistingPlatform(par1Entity, (int) x, (int) y, (int) z)) {
-			if(!placeOnExistingPlatform(
-					par1Entity, 0, this.world.getPrecipitationHeight((int) x, (int) z), 0))
+			if (!placeOnExistingPlatform(par1Entity, 0, this.world.getPrecipitationHeight((int) x, (int) z), 0))
 				placeInNyx(par1Entity, (int) x, (int) z);
 		}
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	}
 
-	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y,
-			int z) {
+	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y, int z) {
 		for (int xi = 0; xi < 32; ++xi) {
 			for (int yi = 0; yi < 32; ++yi) {
 				for (int zi = 0; zi < 32; ++zi) {
@@ -86,18 +81,14 @@ public class NyxTeleporter extends Teleporter {
 						final int yvalue = ycalc;
 						final int zvalue = z + zi * zfactor;
 						Block bid = this.world.getBlock(xvalue, yvalue, zvalue);
-						final int bmet = this.world.getBlockMetadata(xvalue,
-								yvalue, zvalue);
+						final int bmet = this.world.getBlockMetadata(xvalue, yvalue, zvalue);
 
 						if (bid == NyxBlocks.cryingObsidian && bmet == 1) {
-							bid = this.world.getBlock(xvalue, yvalue + 1,
-									zvalue);
-							final Block bid2 = this.world.getBlock(xvalue,
-									yvalue + 2, zvalue);
+							bid = this.world.getBlock(xvalue, yvalue + 1, zvalue);
+							final Block bid2 = this.world.getBlock(xvalue, yvalue + 2, zvalue);
 							if (bid == Blocks.air && bid2 == Blocks.air) {
-								par1Entity.setLocationAndAngles(xvalue,
-										yvalue + 1, zvalue,
-										par1Entity.rotationYaw, 0.0F);
+								par1Entity.setLocationAndAngles(xvalue, yvalue + 1, zvalue, par1Entity.rotationYaw,
+										0.0F);
 								return true;
 							}
 						}

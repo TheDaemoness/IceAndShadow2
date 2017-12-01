@@ -16,13 +16,13 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.common;
+	public EnumIaSModule getIaSModule() {
+		return this.MODULE;
 	}
 
 	@Override
-	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	public final IaSBaseItem register() {

@@ -30,46 +30,40 @@ public class NyxBlockCrystalExousium extends IaSBlockDeco {
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x,
-			int y, int z, int metadata) {
+	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
 		return false;
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess p_149655_1_, int p_149655_2_,
-			int p_149655_3_, int p_149655_4_) {
+	public boolean getBlocksMovement(IBlockAccess p_149655_1_, int p_149655_2_, int p_149655_3_, int p_149655_4_) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		return null;
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World w,
-			int x, int y, int z) {
-		return super.getSelectedBoundingBoxFromPool(w, x, y, z).contract(0.1, 0.15, 0.1).offset(0.0, -0.15, 0.0);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World w, int x,
-			int y, int z, Entity ent) {
-		if(ent instanceof EntityLivingBase && !(ent instanceof EntityMob))
-			((EntityLivingBase)ent).addPotionEffect(new PotionEffect(Potion.wither.id,41,2));
-	}
-
-	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.exousium, 2+2*world.rand.nextInt(2)+world.rand.nextInt(2), 0));
+		is.add(new ItemStack(NyxItems.exousium, 2 + 2 * world.rand.nextInt(2) + world.rand.nextInt(2), 0));
 		return is;
 	}
 
 	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
 		return 2;
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World w, int x, int y, int z) {
+		return super.getSelectedBoundingBoxFromPool(w, x, y, z).contract(0.1, 0.15, 0.1).offset(0.0, -0.15, 0.0);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity ent) {
+		if (ent instanceof EntityLivingBase && !(ent instanceof EntityMob))
+			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 41, 2));
 	}
 }

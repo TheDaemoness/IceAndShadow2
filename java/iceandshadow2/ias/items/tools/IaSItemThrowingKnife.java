@@ -37,33 +37,27 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack par1ItemStack,
-			EntityLivingBase par2EntityLivingBase,
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase,
 			EntityLivingBase par3EntityLivingBase) {
 		return true;
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_,
-			Block p_150894_3_, int p_150894_4_, int p_150894_5_,
-			int p_150894_6_, EntityLivingBase p_150894_7_) {
+	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_,
+			int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
 		return false;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World aroundThe,
-			EntityPlayer plai) {
+	public ItemStack onItemRightClick(ItemStack is, World aroundThe, EntityPlayer plai) {
 		final int delai = plai.getEntityData().getInteger(IaSItemThrowingKnife.PLAYER_NBT_ID);
 		if (delai > 0)
 			return is;
 
-		EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.knockback.effectId, is);
-		final EntityThrowingKnife var8 = new EntityThrowingKnife(aroundThe,
-				plai, 1.0F, is);
+		EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, is);
+		final EntityThrowingKnife var8 = new EntityThrowingKnife(aroundThe, plai, 1.0F, is);
 
-		final IaSToolMaterial mat = IaSToolMaterial
-				.extractMaterial(is);
+		final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
 		mat.onKnifeThrow(is, plai, var8);
 
 		aroundThe.playSoundAtEntity(plai, "random.bow", 0.5F, 0.75F);
@@ -72,7 +66,8 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 			is.stackSize -= 1;
 
 		if (!aroundThe.isRemote) {
-			plai.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, mat.getKnifeCooldown(is, aroundThe, plai));
+			plai.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID,
+					mat.getKnifeCooldown(is, aroundThe, plai));
 			aroundThe.spawnEntityInWorld(var8);
 		}
 
@@ -80,18 +75,20 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
-			Entity target) {
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user, Entity target) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		m.onAttack(is, user, target);
 		return true;
 	}
 
 	@Override
-	public void onUpdate(ItemStack par1ItemStack, World world, Entity player,
-			int par4, boolean par5) {
-		final int tom = player.getEntityData().getInteger(IaSItemThrowingKnife.PLAYER_NBT_ID); //Political joke, pay no attention.
+	public void onUpdate(ItemStack par1ItemStack, World world, Entity player, int par4, boolean par5) {
+		final int tom = player.getEntityData().getInteger(IaSItemThrowingKnife.PLAYER_NBT_ID); // Political
+																								// joke,
+																								// pay
+																								// no
+																								// attention.
 		if (par5 && tom > 0 && !world.isRemote)
-			player.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, tom-1);
+			player.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, tom - 1);
 	}
 }

@@ -16,19 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderNyxWightToxic extends RenderZombie {
 
-	private static ResourceLocation skin = new ResourceLocation(
-			"iceandshadow2:textures/mob/wighttoxic.png");
-	private static ResourceLocation skin_glow = new ResourceLocation(
-			"iceandshadow2:textures/mob/wighttoxic_glow.png");
+	private static ResourceLocation skin = new ResourceLocation("iceandshadow2:textures/mob/wighttoxic.png");
+	private static ResourceLocation skin_glow = new ResourceLocation("iceandshadow2:textures/mob/wighttoxic_glow.png");
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-        return RenderNyxWightToxic.skin;
-    }
-
-	@Override
-	public void doRender(EntityLiving par1EntityLiving, double par2,
-			double par4, double par6, float par8, float par9) {
+	public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -39,10 +31,13 @@ public class RenderNyxWightToxic extends RenderZombie {
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 	}
 
-	protected void setGlow(EntityNyxWightToxic par1Entity,
-			int par2, float par3) {
-		if (par2 > 1 || par1Entity.isInvisible() || par1Entity.hurtTime > 0
-				|| par1Entity.getHealth() <= 0.0F)
+	@Override
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+		return RenderNyxWightToxic.skin;
+	}
+
+	protected void setGlow(EntityNyxWightToxic par1Entity, int par2, float par3) {
+		if (par2 > 1 || par1Entity.isInvisible() || par1Entity.hurtTime > 0 || par1Entity.getHealth() <= 0.0F)
 			return;
 		else {
 			final float f1 = 1.0F;
@@ -57,8 +52,7 @@ public class RenderNyxWightToxic extends RenderZombie {
 			final char c0 = 61680;
 			final int j = c0 % 65536;
 			final int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-					j / 1.0F, k / 1.0F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
@@ -77,8 +71,7 @@ public class RenderNyxWightToxic extends RenderZombie {
 	 * Queries whether should render the specified pass or not.
 	 */
 	@Override
-	protected int shouldRenderPass(EntityLivingBase par1,
-			int par2, float par3) {
+	protected int shouldRenderPass(EntityLivingBase par1, int par2, float par3) {
 		setGlow((EntityNyxWightToxic) par1, par2, par3);
 		return super.shouldRenderPass(par1, par2, par3);
 	}

@@ -14,28 +14,15 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeInfested extends NyxBiome {
 
-	public NyxBiomeInfested(int par1, boolean register, float heightRoot,
-			float heightVari, boolean isRare) {
+	public NyxBiomeInfested(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(Blocks.snow, Blocks.snow);
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				60, 3, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class,
-				10, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 60, 3, 5));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class, 10, 1, 1));
 
 		setColor(64 << 16 | 255 << 8 | 192);
-	}
-
-	@Override
-	protected boolean hasTowers() {
-		return false;
-	}
-
-	@Override
-	protected GenRuins supplyRuins() {
-		return null;
 	}
 
 	@Override
@@ -71,6 +58,16 @@ public class NyxBiomeInfested extends NyxBiome {
 
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
 		return new GenInfestedTrees();
+	}
+
+	@Override
+	protected boolean hasTowers() {
+		return false;
+	}
+
+	@Override
+	protected GenRuins supplyRuins() {
+		return null;
 	}
 
 }

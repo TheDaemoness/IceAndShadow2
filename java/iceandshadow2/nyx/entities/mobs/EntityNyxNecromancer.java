@@ -46,37 +46,54 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-		.setBaseValue(getScaledMaxHealth());
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-		.setBaseValue(0.5);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-		.setBaseValue(EntityNyxSkeleton.moveSpeed-0.2);
-		getEntityAttribute(SharedMonsterAttributes.followRange)
-		.setBaseValue(24.0);
-	}
-
-
-	@Override
-	public void setCombatTask() {
-		this.tasks.removeTask(this.rangedAttackDefault);
-		this.tasks.removeTask(this.rangedAttackLong);
-		this.tasks.removeTask(this.meleeAttackPlayer);
-		this.tasks.removeTask(this.meleeAttackPassive);
-		this.tasks.removeTask(this.shadowAttack);
-		this.tasks.addTask(4, this.shadowAttack);
-	}
-
-	@Override
-	public double getScaledMaxHealth() {
-		return 70.0;
-	}
-
-	@Override
 	protected void addRandomArmor() {
 		return;
+	}
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EntityNyxSkeleton.moveSpeed - 0.2);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
+		addPotionEffect(new PotionEffect(Potion.hunger.id, 25, 1));
+		if (par1DamageSource.isMagicDamage())
+			dmg /= 2;
+		return super.attackEntityFrom(par1DamageSource, dmg);
+	}
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase sucker, float par2) {
+		if (this.worldObj.isRemote)
+			return;
+		final EntityCosmeticShadowRiser ecsr = new EntityCosmeticShadowRiser(this.worldObj);
+		ecsr.setPosition(this.posX, this.posY + getEyeHeight(), this.posZ);
+		this.worldObj.spawnEntityInWorld(ecsr);
+		final boolean harm_undead = sucker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+		final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(sucker.posX - 8.0, sucker.posY - 16.0, sucker.posZ - 8.0,
+				sucker.posX + 8.0, sucker.posY + 16.0, sucker.posZ + 8.0);
+		if (!harm_undead) {
+			final List li = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, bb);
+			for (final Object obj : li) {
+				if (obj instanceof EntityNyxSkeleton) {
+					final EntityThrowable entityball = new EntityShadowBall(this.worldObj, this, false, true);
+					final Entity target = (Entity) obj;
+					entityball.setPosition(target.posX, target.posY + 32 + this.worldObj.rand.nextFloat() * 32,
+							target.posZ);
+					entityball.setThrowableHeading(0, -1, 0, 0.40F, 0F);
+					this.worldObj.spawnEntityInWorld(entityball);
+				}
+			}
+		}
+		final EntityThrowable entitysmite = new EntityShadowBall(this.worldObj, this, harm_undead, true);
+		entitysmite.setPosition(sucker.posX, sucker.posY + 32 + this.worldObj.rand.nextFloat() * 32, sucker.posZ);
+		entitysmite.setThrowableHeading(0, -1, 0, 0.40F, 0F);
+		this.worldObj.spawnEntityInWorld(entitysmite);
 	}
 
 	@Override
@@ -84,16 +101,14 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 		if (!par1 || this.worldObj.isRemote)
 			return;
 
-		if(this.rand.nextInt(4-(IaSWorldHelper.getDifficulty(this.worldObj)>=3?1:0)) == 0)
+		if (this.rand.nextInt(4 - (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 1 : 0)) == 0)
 			this.dropItem(NyxItems.nifelhiumPowder, 1);
-		else if(IaSWorldHelper.getDifficulty(this.worldObj)<3)
+		else if (IaSWorldHelper.getDifficulty(this.worldObj) < 3)
 			this.dropItem(NyxItems.boneCursed, 1);
-		if(IaSWorldHelper.getDifficulty(this.worldObj)>=3)
+		if (IaSWorldHelper.getDifficulty(this.worldObj) >= 3)
 			this.dropItem(NyxItems.boneCursed, 1);
-		
-		this.worldObj.spawnEntityInWorld(
-				new EntityOrbNourishment(this.worldObj,
-						this.posX, this.posY, this.posZ, 5));
+
+		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 5));
 	}
 
 	@Override
@@ -102,37 +117,9 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase sucker, float par2) {
-		if(this.worldObj.isRemote)
-			return;
-		final EntityCosmeticShadowRiser ecsr = new EntityCosmeticShadowRiser(this.worldObj);
-		ecsr.setPosition(this.posX, this.posY+getEyeHeight(), this.posZ);
-		this.worldObj.spawnEntityInWorld(ecsr);
-		final boolean harm_undead = sucker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
-		final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
-				sucker.posX-8.0, sucker.posY-16.0, sucker.posZ-8.0,
-				sucker.posX+8.0, sucker.posY+16.0, sucker.posZ+8.0);
-		if(!harm_undead) {
-			final List li = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, bb);
-			for(final Object obj : li) {
-				if(obj instanceof EntityNyxSkeleton) {
-					final EntityThrowable entityball = new EntityShadowBall(this.worldObj,
-							this, false, true);
-					final Entity target = (Entity)obj;
-					entityball.setPosition(target.posX, target.posY+32+this.worldObj.rand.nextFloat()*32, target.posZ);
-					entityball.setThrowableHeading(0, -1, 0, 0.40F, 0F);
-					this.worldObj.spawnEntityInWorld(entityball);
-				}
-			}
-		}
-		final EntityThrowable entitysmite = new EntityShadowBall(this.worldObj,
-				this, harm_undead, true);
-		entitysmite.setPosition(sucker.posX, sucker.posY+32+this.worldObj.rand.nextFloat()*32, sucker.posZ);
-		entitysmite.setThrowableHeading(0, -1, 0, 0.40F, 0F);
-		this.worldObj.spawnEntityInWorld(entitysmite);
+	public double getScaledMaxHealth() {
+		return 70.0;
 	}
-
-
 
 	@Override
 	public void onLivingUpdate() {
@@ -142,35 +129,33 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 		if (!this.isPotionActive(Potion.hunger) && getAttackTarget() != null) {
 			int count = 0;
 			final Entity sucker = getAttackTarget();
-			final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
-					this.posX-12.0, this.posY-16.0, this.posZ-12.0,
-					this.posX+12.0, this.posY+16.0, this.posZ+12.0);
+			final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(this.posX - 12.0, this.posY - 16.0, this.posZ - 12.0,
+					this.posX + 12.0, this.posY + 16.0, this.posZ + 12.0);
 			final boolean threat = sucker instanceof EntityPlayer && sucker.getDistanceSqToEntity(this) < 256;
 			final boolean alone = this.worldObj.getEntitiesWithinAABB(EntityNyxSkeleton.class, bb).size() == 1;
-			if(threat || alone) {
+			if (threat || alone) {
 				final List li = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, bb);
 				li.add(sucker);
-				for(; count < IaSWorldHelper.getDifficulty(this.worldObj) && getHealth() > 6 && !li.isEmpty();
-						++count) {
+				for (; count < IaSWorldHelper.getDifficulty(this.worldObj) && getHealth() > 6
+						&& !li.isEmpty(); ++count) {
 					EntityMob summon;
-					if(this.rand.nextInt(3) == 0)
-						summon = new EntityNyxSkeleton(this.worldObj,EnumNyxSkeletonType.MAGIC_SHADOW);
+					if (this.rand.nextInt(3) == 0)
+						summon = new EntityNyxSkeleton(this.worldObj, EnumNyxSkeletonType.MAGIC_SHADOW);
 					else
-						summon = new EntityNyxSkeleton(this.worldObj,EnumNyxSkeletonType.RAPIER);
+						summon = new EntityNyxSkeleton(this.worldObj, EnumNyxSkeletonType.RAPIER);
 					summon.setPosition(this.posX, this.posY, this.posZ);
-					summon.setAttackTarget((EntityLivingBase)li.get(0));
+					summon.setAttackTarget((EntityLivingBase) li.get(0));
 					li.remove(0);
-					this.worldObj.playSoundAtEntity(this, "mob.wither.shoot",
-						0.5F, 0.33F + 0.33F * this.rand.nextFloat());
+					this.worldObj.playSoundAtEntity(this, "mob.wither.shoot", 0.5F,
+							0.33F + 0.33F * this.rand.nextFloat());
 
-					if(this.worldObj.spawnEntityInWorld(summon))
-						this.worldObj.playSoundAtEntity(summon,
-								"mob.silverfish.kill", 0.7F,
+					if (this.worldObj.spawnEntityInWorld(summon))
+						this.worldObj.playSoundAtEntity(summon, "mob.silverfish.kill", 0.7F,
 								0.33F + 0.33F * this.rand.nextFloat());
 					heal(-5);
 				}
-				if(count > 0)
-					addPotionEffect(new PotionEffect(Potion.hunger.id,85,0));
+				if (count > 0)
+					addPotionEffect(new PotionEffect(Potion.hunger.id, 85, 0));
 			}
 		}
 	}
@@ -185,12 +170,13 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
-		addPotionEffect(new PotionEffect(Potion.hunger.id, 25, 1));
-		if(par1DamageSource.isMagicDamage())
-			dmg /= 2;
-		return super.attackEntityFrom(par1DamageSource, dmg);
+	public void setCombatTask() {
+		this.tasks.removeTask(this.rangedAttackDefault);
+		this.tasks.removeTask(this.rangedAttackLong);
+		this.tasks.removeTask(this.meleeAttackPlayer);
+		this.tasks.removeTask(this.meleeAttackPassive);
+		this.tasks.removeTask(this.shadowAttack);
+		this.tasks.addTask(4, this.shadowAttack);
 	}
-
 
 }

@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -9,7 +8,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -35,6 +33,11 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
 	}
 
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
@@ -43,33 +46,10 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 		return this.itemIcon;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.smallIcon = reg.registerIcon(getTexName() + "Small");
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderPasses(int metadata) {
 		return 2;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
 	}
 
 	@Override
@@ -83,8 +63,8 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 				for (Entity ent : l) {
 					if (ent instanceof EntityMob) {
 						EntityPoisonBall pb = new EntityPoisonBall(par2World, player);
-						pb.setThrowableHeading(ent.posX - player.posX,
-								ent.posY - player.posY + ((EntityMob) ent).getEyeHeight() * 1.25 - player.getEyeHeight(),
+						pb.setThrowableHeading(ent.posX - player.posX, ent.posY - player.posY
+								+ ((EntityMob) ent).getEyeHeight() * 1.25 - player.getEyeHeight(),
 								ent.posZ - player.posZ, 1.0F, 1.0F);
 						par2World.spawnEntityInWorld(pb);
 					}
@@ -94,5 +74,23 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 			par1Stack.stackSize -= 1;
 		}
 		return par1Stack;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.smallIcon = reg.registerIcon(getTexName() + "Small");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

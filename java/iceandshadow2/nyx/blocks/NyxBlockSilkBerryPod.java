@@ -67,15 +67,14 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int p_149690_5_, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int p_149690_5_, int fortune) {
 		final ArrayList<ItemStack> dropped = new ArrayList<ItemStack>();
 		final int j1 = BlockCocoa.func_149987_c(p_149690_5_);
 		byte b0 = 0;
 
 		if (j1 >= 2) {
-			b0 = (byte)(2+world.rand.nextInt(2));
-			if(world.rand.nextInt(4) == 0)
+			b0 = (byte) (2 + world.rand.nextInt(2));
+			if (world.rand.nextInt(4) == 0)
 				dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
 		}
 
@@ -101,8 +100,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	}
 
 	@Override
-	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_,
-			int p_149694_4_) {
+	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
 		return NyxItems.silkBerries;
 	}
 
@@ -131,8 +129,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4,
-			Random par5Random) {
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (par5Random.nextBoolean())
 			super.updateTick(par1World, par2, par3, par4, par5Random);
 	}

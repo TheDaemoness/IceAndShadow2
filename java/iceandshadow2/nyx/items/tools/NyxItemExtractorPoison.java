@@ -29,20 +29,13 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		if(dmg == 0)
+		if (dmg == 0)
 			return this.itemIcon;
-		if(dmg >= 13)
+		if (dmg >= 13)
 			return this.fillIcons[6];
-		return this.fillIcons[(dmg-1)/2];
+		return this.fillIcons[(dmg - 1) / 2];
 	}
 
-	@Override
-	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(getTexName()+"0");
-		this.fillIcons = new IIcon[7];
-		for(int i = 1; i <= 7; ++i)
-			this.fillIcons[i-1] = r.registerIcon(getTexName()+i);
-	}
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.block;
@@ -54,34 +47,39 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
-		pl.removePotionEffect(Potion.poison.id);
-		is.setItemDamage(is.getItemDamage()+1);
-		return is;
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack heap, World order,
-			EntityPlayer pwai) {
-		if(pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage()-1)
-			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
-		return heap;
-	}
-
-	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		return null;
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
+		pl.removePotionEffect(Potion.poison.id);
+		is.setItemDamage(is.getItemDamage() + 1);
+		return is;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
+		if (pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage() - 1)
+			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
+		return heap;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister r) {
+		this.itemIcon = r.registerIcon(getTexName() + "0");
+		this.fillIcons = new IIcon[7];
+		for (int i = 1; i <= 7; ++i)
+			this.fillIcons[i - 1] = r.registerIcon(getTexName() + i);
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 }

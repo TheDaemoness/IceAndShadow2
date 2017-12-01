@@ -19,8 +19,8 @@ public class IaSEntityHelper {
 		if (par1ItemStack.stackSize == 0) {
 			return null;
 		} else {
-			final EntityItem entityitem = new EntityItem(ent.worldObj,
-					ent.posX+ent.width/2, ent.posY, ent.posZ+ent.width/2, par1ItemStack);
+			final EntityItem entityitem = new EntityItem(ent.worldObj, ent.posX + ent.width / 2, ent.posY,
+					ent.posZ + ent.width / 2, par1ItemStack);
 			entityitem.delayBeforeCanPickup = 10;
 			if (ent.captureDrops) {
 				ent.capturedDrops.add(entityitem);
@@ -35,8 +35,7 @@ public class IaSEntityHelper {
 		return IaSEntityHelper.getBiome(ent, 0, 0);
 	}
 
-	public static BiomeGenBase getBiome(Entity ent, double offsetX,
-			double offsetZ) {
+	public static BiomeGenBase getBiome(Entity ent, double offsetX, double offsetZ) {
 		if (ent.posX < 0)
 			offsetX -= 1;
 		if (ent.posZ < 0)
@@ -44,17 +43,15 @@ public class IaSEntityHelper {
 		final int x = (int) (ent.posX + offsetX);
 		final int z = (int) (ent.posZ + offsetZ);
 		final int[] c = IaSEntityHelper.splitCoords(x, z);
-		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1])
-				.getBiomeGenForWorldCoords(c[2], c[3],
-						ent.worldObj.getWorldChunkManager());
+		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1]).getBiomeGenForWorldCoords(c[2], c[3],
+				ent.worldObj.getWorldChunkManager());
 	}
 
 	public static Block getBlock(Entity ent) {
 		return IaSEntityHelper.getBlock(ent, 0, 0, 0);
 	}
 
-	public static Block getBlock(Entity ent, double offsetX, double offsetY,
-			double offsetZ) {
+	public static Block getBlock(Entity ent, double offsetX, double offsetY, double offsetZ) {
 		if (ent.posX < 0)
 			offsetX -= 1;
 		if (ent.posZ < 0)
@@ -63,16 +60,15 @@ public class IaSEntityHelper {
 		final long y = (int) (ent.posY + offsetY);
 		final long z = (int) (ent.posZ + offsetZ);
 		final int[] c = IaSEntityHelper.splitCoords(x, z);
-		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1]).getBlock(c[2],
-				(int) Math.min(Math.max(0, y), 255), c[3]);
+		return ent.worldObj.getChunkFromChunkCoords(c[0], c[1]).getBlock(c[2], (int) Math.min(Math.max(0, y), 255),
+				c[3]);
 	}
 
 	public static int getLight(Entity ent) {
 		return IaSEntityHelper.getLight(ent, 0, 0, 0);
 	}
 
-	public static int getLight(Entity ent, double offsetX, double offsetY,
-			double offsetZ) {
+	public static int getLight(Entity ent, double offsetX, double offsetY, double offsetZ) {
 		if (ent.posX < 0)
 			offsetX -= 1;
 		if (ent.posZ < 0)
@@ -84,19 +80,18 @@ public class IaSEntityHelper {
 		return ent.worldObj.getBlockLightValue(x, y, z);
 	}
 
-	public static MovingObjectPosition getObjectPosition(World world,
-			EntityLivingBase ent, boolean flag) {
+	public static MovingObjectPosition getObjectPosition(World world, EntityLivingBase ent, boolean flag) {
 		final float f = 1.0F;
-		final float f1 = ent.prevRotationPitch
-				+ (ent.rotationPitch - ent.prevRotationPitch) * f;
-		final float f2 = ent.prevRotationYaw
-				+ (ent.rotationYaw - ent.prevRotationYaw) * f;
+		final float f1 = ent.prevRotationPitch + (ent.rotationPitch - ent.prevRotationPitch) * f;
+		final float f2 = ent.prevRotationYaw + (ent.rotationYaw - ent.prevRotationYaw) * f;
 		final double d0 = ent.prevPosX + (ent.posX - ent.prevPosX) * f;
-		final double d1 = ent.prevPosY
-				+ (ent.posY - ent.prevPosY)
-				* f
-				+ (world.isRemote ? ent.getEyeHeight() - 0.12F : ent
-						.getEyeHeight()); // isRemote check to revert changes to
+		final double d1 = ent.prevPosY + (ent.posY - ent.prevPosY) * f
+				+ (world.isRemote ? ent.getEyeHeight() - 0.12F : ent.getEyeHeight()); // isRemote
+																						// check
+																						// to
+																						// revert
+																						// changes
+																						// to
 		// ray trace position due to adding
 		// the eye height clientside and
 		// player yOffset differences
@@ -110,8 +105,7 @@ public class IaSEntityHelper {
 		final float f8 = f3 * f5;
 		double d3 = 5.0D;
 		if (ent instanceof EntityPlayerMP) {
-			d3 = ((EntityPlayerMP) ent).theItemInWorldManager
-					.getBlockReachDistance();
+			d3 = ((EntityPlayerMP) ent).theItemInWorldManager.getBlockReachDistance();
 		}
 		final Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
 		return world.func_147447_a(vec3, vec31, flag, !flag, false);
@@ -121,8 +115,7 @@ public class IaSEntityHelper {
 		return IaSEntityHelper.getTemperatureCategory(ent, 0, 0);
 	}
 
-	public static TempCategory getTemperatureCategory(Entity ent,
-			double offsetX, double offsetZ) {
+	public static TempCategory getTemperatureCategory(Entity ent, double offsetX, double offsetZ) {
 		return IaSEntityHelper.getBiome(ent, offsetX, offsetZ).getTempCategory();
 	}
 
@@ -130,8 +123,7 @@ public class IaSEntityHelper {
 		return IaSEntityHelper.getTemperatureFloat(ent, 0, 0, 0);
 	}
 
-	public static float getTemperatureFloat(Entity ent, double offsetX,
-			double offsetY, double offsetZ) {
+	public static float getTemperatureFloat(Entity ent, double offsetX, double offsetY, double offsetZ) {
 		if (ent.posX < 0)
 			offsetX -= 1;
 		if (ent.posZ < 0)

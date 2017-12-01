@@ -24,11 +24,14 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 
 	public NyxItemDraconium(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1),
-				new ItemStack(this, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1), new ItemStack(this, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
 				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -39,22 +42,34 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 		return this.itemIcon;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if (target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || catalyst.getItem() != this
+				|| catalyst.getItemDamage() != 1)
+			return 0;
+		return 120;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final List<ItemStack> it = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		target.stackSize -= 1;
+		it.add(new ItemStack(NyxItems.draconiumIngot, 1, 1));
+		return it;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		this.itemIcon = reg.registerIcon(getTexName());
 		this.smallIcon = reg.registerIcon(getTexName() + "Small");
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
 	}
 
 	@Override
@@ -64,32 +79,13 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	}
 
 	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
+		return false;
+	}
+
+	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-
-	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 ||
-				catalyst.getItem() != this || catalyst.getItemDamage() != 1)
-			return 0;
-		return 120;
-	}
-
-	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final List<ItemStack> it = new ArrayList<ItemStack>();
-		catalyst.stackSize -= 1;
-		target.stackSize -= 1;
-		it.add(new ItemStack(NyxItems.draconiumIngot,1,1));
-		return it;
-	}
-
-	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
-		return false;
 	}
 
 }

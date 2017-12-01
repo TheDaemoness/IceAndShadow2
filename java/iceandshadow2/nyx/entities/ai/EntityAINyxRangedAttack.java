@@ -35,23 +35,20 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	private float rangeSq;
 	private boolean reqLOS;
 
-	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob,
-			double par2, int par4, float par5) {
+	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, float par5) {
 		this(par1IRangedAttackMob, par2, par4, par4, par5);
 	}
 
-	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob,
-			double par2, int par4, int par5, float par6) {
+	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, int par5, float par6) {
 		this(par1IRangedAttackMob, par2, par4, par5, par6, true);
 	}
 
-	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob,
-			double par2, int par4, int par5, float par6, boolean los) {
+	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, int par5, float par6,
+			boolean los) {
 		this.rangedAttackTime = -1;
 
 		if (!(par1IRangedAttackMob instanceof EntityLivingBase)) {
-			throw new IllegalArgumentException(
-					"ArrowAttackGoal requires Mob implements RangedAttackMob");
+			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
 		} else {
 			this.rangedAttackEntityHost = par1IRangedAttackMob;
 			this.entityHost = (EntityLiving) par1IRangedAttackMob;
@@ -89,8 +86,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		final EntityLivingBase entitylivingbase = this.entityHost
-				.getAttackTarget();
+		final EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
 
 		if (entitylivingbase == null || entitylivingbase.isDead) {
 			return false;
@@ -105,10 +101,9 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public void updateTask() {
-		final double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX,
-				this.attackTarget.boundingBox.minY, this.attackTarget.posZ);
-		final boolean flag = !this.reqLOS
-				|| this.entityHost.getEntitySenses().canSee(this.attackTarget);
+		final double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.boundingBox.minY,
+				this.attackTarget.posZ);
+		final boolean flag = !this.reqLOS || this.entityHost.getEntitySenses().canSee(this.attackTarget);
 
 		if (flag) {
 			if (this.stopMovingDelay < 10)
@@ -117,15 +112,13 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 			this.stopMovingDelay = 0;
 
 		if (d0 > this.rangeSq || this.stopMovingDelay < 10) {
-			this.entityHost.getNavigator().tryMoveToEntityLiving(
-					this.attackTarget, this.entityMoveSpeed);
+			this.entityHost.getNavigator().tryMoveToEntityLiving(this.attackTarget, this.entityMoveSpeed);
 		} else {
 			this.entityHost.getNavigator().clearPathEntity();
 		}
 
 		float f;
-		this.entityHost.getLookHelper().setLookPositionWithEntity(
-				this.attackTarget, 30.0F, 30.0F);
+		this.entityHost.getLookHelper().setLookPositionWithEntity(this.attackTarget, 30.0F, 30.0F);
 
 		if (--this.rangedAttackTime <= 0) {
 			if (d0 > this.rangeSq || !flag) {
@@ -143,12 +136,10 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 				f1 = 1.1F;
 			}
 
-			this.rangedAttackTime = MathHelper.floor_float(f
-					* (this.maxRangedAttackTime - this.minRangedAttackTime)
-					+ this.minRangedAttackTime);
+			this.rangedAttackTime = MathHelper
+					.floor_float(f * (this.maxRangedAttackTime - this.minRangedAttackTime) + this.minRangedAttackTime);
 			if (this.reflexDelay)
-				this.rangedAttackEntityHost.attackEntityWithRangedAttack(
-						this.attackTarget, f1);
+				this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
 			else {
 				this.reflexDelay = true;
 				this.rangedAttackTime /= 2;

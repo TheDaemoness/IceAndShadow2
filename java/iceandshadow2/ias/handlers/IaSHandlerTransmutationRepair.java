@@ -21,15 +21,14 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 		final Item it = target.getItem();
 		if (it instanceof ItemArmor) {
 			if (catalyst.getItem() == ((ItemArmor) it).getArmorMaterial().customCraftingMaterial) {
-				if (catalyst.getItem() instanceof NyxItemIngot
-						&& catalyst.getItemDamage() == 0)
+				if (catalyst.getItem() instanceof NyxItemIngot && catalyst.getItemDamage() == 0)
 					return 0;
 				return 850;
 			}
 		}
 		if (it instanceof IIaSTool) {
-			if (((IIaSTool)it).canRepair()) {
-				if (IaSToolMaterial.extractMaterial(target).isRepairable(target,catalyst))
+			if (((IIaSTool) it).canRepair()) {
+				if (IaSToolMaterial.extractMaterial(target).isRepairable(target, catalyst))
 					return 450;
 			}
 			return 0;
@@ -40,20 +39,18 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final Item it = target.getItem();
 		do {
-			final int repair = Math.max(0, target.getItemDamage()-it.getMaxDamage(target)/5);
+			final int repair = Math.max(0, target.getItemDamage() - it.getMaxDamage(target) / 5);
 			target.setItemDamage(repair);
 			--catalyst.stackSize;
-		} while(target.isItemDamaged() && catalyst.stackSize > 0);
+		} while (target.isItemDamaged() && catalyst.stackSize > 0);
 		return null;
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 

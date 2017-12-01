@@ -26,14 +26,12 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public void dropItems() {
 		if (!this.worldObj.isRemote) {
 			if (this.catalyst != null) {
-				final EntityItem cat = new EntityItem(this.worldObj,
-						this.xCoord + 0.5F, this.yCoord + 0.80F,
+				final EntityItem cat = new EntityItem(this.worldObj, this.xCoord + 0.5F, this.yCoord + 0.80F,
 						this.zCoord + 0.5F, this.catalyst);
 				this.worldObj.spawnEntityInWorld(cat);
 			}
 			if (this.target != null) {
-				final EntityItem tar = new EntityItem(this.worldObj,
-						this.xCoord + 0.5F, this.yCoord + 0.80F,
+				final EntityItem tar = new EntityItem(this.worldObj, this.xCoord + 0.5F, this.yCoord + 0.80F,
 						this.zCoord + 0.5F, this.target);
 				this.worldObj.spawnEntityInWorld(tar);
 			}
@@ -46,12 +44,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public Packet getDescriptionPacket() {
 		final NBTTagCompound syncData = new NBTTagCompound();
 		writeToNBT(syncData);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord,
-				this.zCoord, 1, syncData);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
 	}
 
 	public boolean handlePlace(ItemStack is) {
-		if(!(is.getItem() instanceof IIaSApiTransmuteLens)) {
+		if (!(is.getItem() instanceof IIaSApiTransmuteLens)) {
 			if (this.catalyst == null) {
 				this.catalyst = is;
 				return true;
@@ -66,7 +63,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 
 	public ItemStack handleRemove(boolean isSneaking) {
 		final boolean lensFlag;
-		if(this.target != null)
+		if (this.target != null)
 			lensFlag = this.target.getItem() instanceof IIaSApiTransmuteLens;
 		else
 			lensFlag = false;
@@ -106,13 +103,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 			this.catalyst = null;
 
 		if (canAttemptTransmutation())
-			this.handler = IaSRegistry
-			.getHandlerTransmutation(this.target, this.catalyst);
+			this.handler = IaSRegistry.getHandlerTransmutation(this.target, this.catalyst);
 	}
 
 	public void scheduleUpdate(int x, int y, int z, int time) {
-		final Entity cd = new EntityTransmutationCountdown(this.worldObj, x, y,
-				z, time);
+		final Entity cd = new EntityTransmutationCountdown(this.worldObj, x, y, z, time);
 		this.worldObj.spawnEntityInWorld(cd);
 	}
 

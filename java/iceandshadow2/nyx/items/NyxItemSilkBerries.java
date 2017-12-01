@@ -35,15 +35,6 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		setXpAltarMinimumValue(2);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
-			List par3List) {
-		for (int meta = 0; meta <= 1; ++meta) {
-			par3List.add(new ItemStack(par1, 1, meta));
-		}
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
@@ -52,24 +43,24 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		return this.itemIcon;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.matureIcon = reg.registerIcon(getTexName() + "Mature");
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+		for (int meta = 0; meta <= 1; ++meta) {
+			par3List.add(new ItemStack(par1, 1, meta));
+		}
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return this.getUnlocalizedName() + (is.getItemDamage()==1?"Mature":"");
+		return this.getUnlocalizedName() + (is.getItemDamage() == 1 ? "Mature" : "");
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
+	protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		par3EntityPlayer.removePotionEffect(Potion.poison.id);
-		par3EntityPlayer.heal(1+par2World.rand.nextInt(2));
-		if(par1ItemStack.getItemDamage() > 0) {
+		par3EntityPlayer.heal(1 + par2World.rand.nextInt(2));
+		if (par1ItemStack.getItemDamage() > 0) {
 			par3EntityPlayer.heal(2);
 			par3EntityPlayer.removePotionEffect(Potion.moveSlowdown.id);
 		}
@@ -80,11 +71,10 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	 * pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 
 		final MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
-						true);
+				true);
 
 		if (movingobjectposition != null) {
 			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK && par1ItemStack.getItemDamage() == 1) {
@@ -94,16 +84,14 @@ public class NyxItemSilkBerries extends IaSItemFood {
 				final int s = movingobjectposition.sideHit;
 
 				if (!par2World.canMineBlock(par3EntityPlayer, i, j, k)) {
-				} else if (!par3EntityPlayer.canPlayerEdit(i, j, k,
-						movingobjectposition.sideHit, par1ItemStack)) {
+				} else if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack)) {
 				} else {
 					final Block i1 = par2World.getBlock(i, j, k);
 					par2World.getBlockMetadata(i, j, k);
 					if (i1 == NyxBlocks.infestLog) {
 						if (par2World.getBiomeGenForCoords(i, k).biomeID != NyxBiomes.nyxInfested.biomeID
 								&& !par3EntityPlayer.capabilities.isCreativeMode) {
-							IaSPlayerHelper
-							.messagePlayer(par3EntityPlayer,
+							IaSPlayerHelper.messagePlayer(par3EntityPlayer,
 									"It doesn't seem like it'll grow outside of an infested forest.");
 							return par1ItemStack;
 						}
@@ -120,11 +108,9 @@ public class NyxItemSilkBerries extends IaSItemFood {
 						if (s == 5)
 							++i;
 						if (par2World.isAirBlock(i, j, k)) {
-							final int k1 = NyxBlocks.silkBerryPod
-									.onBlockPlaced(par2World, i, j, k, s, 0.5F,
-											0.5F, 0.5F, 0);
-							par2World.setBlock(i, j, k, NyxBlocks.silkBerryPod,
-									k1, 3);
+							final int k1 = NyxBlocks.silkBerryPod.onBlockPlaced(par2World, i, j, k, s, 0.5F, 0.5F, 0.5F,
+									0);
+							par2World.setBlock(i, j, k, NyxBlocks.silkBerryPod, k1, 3);
 
 							if (!par3EntityPlayer.capabilities.isCreativeMode)
 								--par1ItemStack.stackSize;
@@ -136,10 +122,16 @@ public class NyxItemSilkBerries extends IaSItemFood {
 			}
 		}
 		if (par3EntityPlayer.canEat(true))
-			par3EntityPlayer.setItemInUse(par1ItemStack,
-					getMaxItemUseDuration(par1ItemStack));
+			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 
 		return par1ItemStack;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.matureIcon = reg.registerIcon(getTexName() + "Mature");
 	}
 
 }

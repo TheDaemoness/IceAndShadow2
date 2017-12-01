@@ -41,20 +41,17 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x,
-			int y, int z, int metadata) {
+	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
 		return false;
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World w, int x, int y, int z, int m,
-			float q, int f) {
+	public void dropBlockAsItemWithChance(World w, int x, int y, int z, int m, float q, int f) {
 		return;
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world,
-			int x, int y, int z) {
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
 		return new ItemStack(NyxItems.rope);
 	}
 
@@ -74,8 +71,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public boolean isLadder(IBlockAccess world, int x, int y, int z,
-			EntityLivingBase entity) {
+	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
 		return true;
 	}
 
@@ -95,8 +91,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z,
-			ForgeDirection side) {
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
 
@@ -111,8 +106,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public abstract void onNeighborBlockChange(World w, int x, int y, int z,
-			Block bl);
+	public abstract void onNeighborBlockChange(World w, int x, int y, int z, Block bl);
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {

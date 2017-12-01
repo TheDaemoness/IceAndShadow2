@@ -26,43 +26,45 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 	}
 
 	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack) {
 		return par1ItemStack.getItemDamage() > 0;
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
+	public boolean onEntityItemUpdate(EntityItem entityItem) {
+		if (entityItem.getEntityItem().isItemDamaged())
+			entityItem.setDead();
+		return false;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack isk, World par2World,
-			EntityPlayer plai) {
+	public ItemStack onItemRightClick(ItemStack isk, World par2World, EntityPlayer plai) {
 		if (plai.capabilities.isCreativeMode) {
-			IaSPlayerHelper
-			.messagePlayer(
-					plai,
+			IaSPlayerHelper.messagePlayer(plai,
 					"The bone becomes thicker than before, as if resentful of your use of creative mode.");
 			return isk;
 		}
 		if (!isk.isItemDamaged()) {
 			if (plai.dimension != IaSFlags.dim_nyx_id) {
-				IaSPlayerHelper
-				.messagePlayer(
-						plai,
+				IaSPlayerHelper.messagePlayer(plai,
 						"The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.");
 				return isk;
 			}
-			plai.attackEntityFrom(DamageSource.magic, Math.max(0, plai.worldObj.difficultySetting.getDifficultyId()-1));
+			plai.attackEntityFrom(DamageSource.magic,
+					Math.max(0, plai.worldObj.difficultySetting.getDifficultyId() - 1));
 			isk.setItemDamage(1);
 		}
 		return isk;
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World par2World, Entity par3Entity,
-			int par4, boolean par5) {
+	public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(stack, par2World, par3Entity, par4, par5);
 		if (!(par3Entity instanceof EntityPlayer)) {
 			stack.stackSize = 0;
@@ -72,18 +74,11 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 		if (stack.isItemDamaged()) {
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
-			else if(dmg < 300 && dmg > 0)
-				stack.setItemDamage(dmg+1);
+			else if (dmg < 300 && dmg > 0)
+				stack.setItemDamage(dmg + 1);
 			else
 				stack.stackSize = 0;
 		}
-	}
-
-	@Override
-	public boolean onEntityItemUpdate(EntityItem entityItem) {
-		if (entityItem.getEntityItem().isItemDamaged())
-			entityItem.setDead();
-		return false;
 	}
 
 	@Override

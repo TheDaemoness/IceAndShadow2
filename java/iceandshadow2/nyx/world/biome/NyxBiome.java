@@ -22,15 +22,13 @@ public class NyxBiome extends BiomeGenBase {
 
 	private final boolean rare;
 
-	WorldGenNyxOre genDevora, genEchir, genCortra, genDraconium,
-	genGemstone, genUnstableIce;
+	WorldGenNyxOre genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
 	protected boolean doGenUnstableIce;
 
-	public NyxBiome(int par1, boolean register, float heightRoot,
-			float heightVari, boolean isRare) {
+	public NyxBiome(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register);
 		setHeight(new Height(heightRoot, heightVari));
 		setTemperatureRainfall(0.0F, 0.0F);
@@ -45,8 +43,7 @@ public class NyxBiome extends BiomeGenBase {
 		this.doGenUnstableIce = true;
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(
-				EntityNyxSkeleton.class, 40, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 40, 1, 2));
 
 		setBiomeName("Nyx");
 		this.rare = isRare;
@@ -55,9 +52,8 @@ public class NyxBiome extends BiomeGenBase {
 	}
 
 	@Override
-	public void decorate(World par1World, Random par2Random, int xchunk,
-			int zchunk) {
-		
+	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
+
 		this.genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
 		this.genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
 		this.genDraconium = new WorldGenNyxOre(NyxBlocks.oreDraconium, 8);
@@ -69,53 +65,45 @@ public class NyxBiome extends BiomeGenBase {
 		// Unstable ice.
 		if (this.doGenUnstableIce) {
 			this.genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 36);
-			GenOre.genOreStandard(this.genUnstableIce, par1World, xchunk, zchunk, 0,
-					128, 10);
+			GenOre.genOreStandard(this.genUnstableIce, par1World, xchunk, zchunk, 0, 128, 10);
 		}
 
 		if (this.doGenDevora)
-			GenOre.genOreStandard(this.genDevora, par1World, xchunk, zchunk, 96,
-					255, 20);
+			GenOre.genOreStandard(this.genDevora, par1World, xchunk, zchunk, 96, 255, 20);
 
 		GenOre.genOreStandard(this.genEchir, par1World, xchunk, zchunk, 160, 255, 4);
 		GenOre.genOreStandard(this.genEchir, par1World, xchunk, zchunk, 128, 255, 6);
 		GenOre.genOreStandard(this.genCortra, par1World, xchunk, zchunk, 128, 225, 8);
-		GenOre.genOreStandard(this.genDraconium, par1World, xchunk, zchunk, 225,
-				255, 3);
-		GenOre.genOreStandard(this.genGemstone, par1World, xchunk, zchunk, 96, 192,
-				10);
+		GenOre.genOreStandard(this.genDraconium, par1World, xchunk, zchunk, 225, 255, 3);
+		GenOre.genOreStandard(this.genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 
 		if (this.doGenNifelhium)
-			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk,
-					zchunk);
+			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
 
-		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk,
-				1 + par2Random.nextInt(3));
+		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk, 1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
-		
-		for(int xit = 0; xit < 16; ++xit) {
-			for(int zit = 0; zit < 16; ++zit) {
-				if(par2Random.nextInt(24) == 0) {
+
+		for (int xit = 0; xit < 16; ++xit) {
+			for (int zit = 0; zit < 16; ++zit) {
+				if (par2Random.nextInt(24) == 0) {
 					boolean inair = false;
-					for(int yit = par1World.getPrecipitationHeight(xchunk+xit, zchunk+zit)-1;
-							yit > 0;
-							--yit) {
-						if(!inair && par1World.isAirBlock(xchunk+xit, yit, zchunk+zit)) {
-							inair=true;
-						} else if (inair && !par1World.isAirBlock(xchunk+xit, yit, zchunk+zit)) {
-							if(par1World.isSideSolid(xchunk+xit, yit, zchunk+zit, ForgeDirection.UP) && 
-									par2Random.nextBoolean()) {
-								par1World.setBlock(xchunk+xit, yit+1, zchunk+zit, NyxBlocks.icicles);
+					for (int yit = par1World.getPrecipitationHeight(xchunk + xit, zchunk + zit) - 1; yit > 0; --yit) {
+						if (!inair && par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
+							inair = true;
+						} else if (inair && !par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
+							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
+									&& par2Random.nextBoolean()) {
+								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
 								break;
 							}
-							inair=false;
+							inair = false;
 						}
 					}
 				}
 			}
 		}
-		
+
 		genFoliage(par1World, par2Random, xchunk, zchunk);
 
 		final int x = xchunk + par1World.rand.nextInt(16);
@@ -136,21 +124,11 @@ public class NyxBiome extends BiomeGenBase {
 		}
 	}
 
-	protected void genFoliage(World par1World, Random par2Random, int xchunk,
-			int zchunk) {
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
 
-	protected boolean hasTowers() {
-		return true;
-	}
-
-	protected GenRuins supplyRuins() {
-		return null;
-	}
-
-	protected void genStructures(World par1World, Random par2Random,
-			int xchunk, int zchunk) {
+	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 		// Gatestone generation.
 		if (xchunk % 128 == 0 && zchunk % 128 == 0) {
 			final int x = xchunk + 8;
@@ -165,10 +143,8 @@ public class NyxBiome extends BiomeGenBase {
 				}
 			}
 			par1World.setBlock(x, y - 1, z, Blocks.bedrock);
-			Sculptor.terrainFlatten(par1World, x - 1, y - 2, z - 1, x + 1, 4,
-					z + 1);
-			par1World.setBlock(x, y, z, NyxBlocks.gatestone,
-					1 + par1World.rand.nextInt(2), 0x2);
+			Sculptor.terrainFlatten(par1World, x - 1, y - 2, z - 1, x + 1, 4, z + 1);
+			par1World.setBlock(x, y, z, NyxBlocks.gatestone, 1 + par1World.rand.nextInt(2), 0x2);
 		} else {
 			final int x = xchunk + 8;
 			final int z = zchunk + 8;
@@ -184,8 +160,7 @@ public class NyxBiome extends BiomeGenBase {
 	}
 
 	@Override
-	public void genTerrainBlocks(World world, Random rand, Block[] blocks,
-			byte[] meta, int a, int b, double c) {
+	public void genTerrainBlocks(World world, Random rand, Block[] blocks, byte[] meta, int a, int b, double c) {
 		Block block = this.topBlock;
 		byte b0 = (byte) (this.field_150604_aj & 255);
 		Block block1 = this.fillerBlock;
@@ -203,9 +178,8 @@ public class NyxBiome extends BiomeGenBase {
 			} else if (l1 < 63 && blocks[i2].getMaterial() != Material.air
 					&& blocks[i2].getMaterial() != Material.water) {
 				blocks[i2] = NyxBlocks.stone;
-			} else if (l1 == 63
-					&& (blocks[i2] == null
-					|| blocks[i2].getMaterial() == Material.air || blocks[i2] == Blocks.snow_layer)) {
+			} else if (l1 == 63 && (blocks[i2] == null || blocks[i2].getMaterial() == Material.air
+					|| blocks[i2] == Blocks.snow_layer)) {
 				blocks[i2] = NyxBlocks.exousicIce;
 				blocks[i2 - 1] = NyxBlocks.exousicWater;
 			} else {
@@ -224,9 +198,8 @@ public class NyxBiome extends BiomeGenBase {
 								block1 = this.fillerBlock;
 							}
 
-							if (l1 < 63
-									&& (block == null
-									|| block.getMaterial() == Material.air || block == Blocks.snow_layer)) {
+							if (l1 < 63 && (block == null || block.getMaterial() == Material.air
+									|| block == Blocks.snow_layer)) {
 								block = NyxBlocks.exousicIce;
 								b0 = 0;
 							}
@@ -255,6 +228,10 @@ public class NyxBiome extends BiomeGenBase {
 		}
 	}
 
+	protected boolean hasTowers() {
+		return true;
+	}
+
 	public boolean isRare() {
 		return this.rare;
 	}
@@ -263,6 +240,10 @@ public class NyxBiome extends BiomeGenBase {
 		this.topBlock = top;
 		this.fillerBlock = filler;
 		return this;
+	}
+
+	protected GenRuins supplyRuins() {
+		return null;
 	}
 
 }

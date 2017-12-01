@@ -12,8 +12,8 @@ public class GenOre {
 	/**
 	 * Standard ore generation helper.
 	 */
-	public static void genOreStandard(WorldGenerator wgen, World par1World,
-			int x, int z, int lower, int upper, int rarity) {
+	public static void genOreStandard(WorldGenerator wgen, World par1World, int x, int z, int lower, int upper,
+			int rarity) {
 		for (int var5 = 0; var5 < rarity; ++var5) {
 			final int var6 = x + par1World.rand.nextInt(16);
 			final int var7 = par1World.rand.nextInt(upper - lower) + lower;
@@ -24,8 +24,7 @@ public class GenOre {
 		}
 	}
 
-	public static void genOreSurface(Block bloque, World par1World, int xchunk,
-			int zchunk) {
+	public static void genOreSurface(Block bloque, World par1World, int xchunk, int zchunk) {
 		final int x = xchunk + par1World.rand.nextInt(16);
 		final int z = zchunk + par1World.rand.nextInt(16);
 		int ybest = 0, ytarget = 64;
@@ -39,12 +38,9 @@ public class GenOre {
 					ytarget = par1World.rand.nextInt(y - 63) + 64;
 				} else {
 					// Check for bordering air.
-					if (par1World.isAirBlock(x + 1, y, z)
-							|| par1World.isAirBlock(x - 1, y, z)
-							|| par1World.isAirBlock(x, y, z + 1)
-							|| par1World.isAirBlock(x, y, z - 1)
-							|| par1World.isAirBlock(x, y + 1, z)
-							|| par1World.isAirBlock(x, y - 1, z)) {
+					if (par1World.isAirBlock(x + 1, y, z) || par1World.isAirBlock(x - 1, y, z)
+							|| par1World.isAirBlock(x, y, z + 1) || par1World.isAirBlock(x, y, z - 1)
+							|| par1World.isAirBlock(x, y + 1, z) || par1World.isAirBlock(x, y - 1, z)) {
 						ybest = y;
 					}
 				}
@@ -55,8 +51,7 @@ public class GenOre {
 
 	}
 
-	public static void genOreWater(Block bloque, World par1World, int xchunk,
-			int zchunk, int rate) {
+	public static void genOreWater(Block bloque, World par1World, int xchunk, int zchunk, int rate) {
 		for (int times = 0; times < rate; ++times) {
 
 			final int x = xchunk + par1World.rand.nextInt(16);

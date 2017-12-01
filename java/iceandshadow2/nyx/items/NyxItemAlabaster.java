@@ -38,31 +38,10 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
-	}
-
-	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
 		if (s.getItemDamage() == 0) {
-			l.add(EnumChatFormatting.DARK_RED.toString()
-					+ EnumChatFormatting.ITALIC.toString()
-					+ "They are coming.");
+			l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "They are coming.");
 		}
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
-			Entity e) {
-		if(player.worldObj.isRemote)
-			return true;
-		if(stack.getItemDamage() == 0 && e instanceof EntityMagmaCube) {
-			((EntityMagmaCube)e).setDead();
-			player.worldObj.createExplosion(player, e.posX, e.posY, e.posZ, 0.5f, true);
-			stack.setItemDamage(1);
-			return true;
-		}
-		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -74,31 +53,66 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	}
 
 	@Override
-	public void registerIcons(IIconRegister ir) {
-		this.itemIcon = ir.registerIcon(getTexName()+'0');
-		this.burned = ir.registerIcon(getTexName()+'1');
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
 	}
 
 	@Override
-	public void onUpdate(ItemStack is, World w,
-			Entity e, int i, boolean isHeld) {
-		if(w.isRemote || is.getItemDamage() > 0)
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if (catalyst.getItem() != this)
+			return 0;
+		if (catalyst.getItemDamage() == 1) {
+			if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
+				;
+			return 240;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		if (catalyst.getItemDamage() == 1) {
+			if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxItems.devora, 27));
+			}
+		}
+		return retval;
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity e) {
+		if (player.worldObj.isRemote)
+			return true;
+		if (stack.getItemDamage() == 0 && e instanceof EntityMagmaCube) {
+			((EntityMagmaCube) e).setDead();
+			player.worldObj.createExplosion(player, e.posX, e.posY, e.posZ, 0.5f, true);
+			stack.setItemDamage(1);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void onUpdate(ItemStack is, World w, Entity e, int i, boolean isHeld) {
+		if (w.isRemote || is.getItemDamage() > 0)
 			return;
-		if(e instanceof EntityLivingBase) {
-			final EntityLivingBase sucker = (EntityLivingBase)e;
-			if((sucker.getAge() & 127) == 0) {
-				if(sucker.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
+		if (e instanceof EntityLivingBase) {
+			final EntityLivingBase sucker = (EntityLivingBase) e;
+			if ((sucker.getAge() & 127) == 0) {
+				if (sucker.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
 					final List li = w.getEntitiesWithinAABBExcludingEntity(sucker,
-							AxisAlignedBB.getBoundingBox(
-									sucker.posX-32, sucker.posY-8, sucker.posZ-32,
-									sucker.posX+32, sucker.posY+24, sucker.posZ+32));
-					for(final Object ent : li) {
-						if(ent instanceof EntityMob) {
-							final EntityMob joker = (EntityMob)ent;
-							if(joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
-								if(ent instanceof IIaSMobGetters)
-									((IIaSMobGetters)ent).setSearchTarget(sucker);
-								else if(!joker.isInvisible() && joker.getAttackTarget() == null)
+							AxisAlignedBB.getBoundingBox(sucker.posX - 32, sucker.posY - 8, sucker.posZ - 32,
+									sucker.posX + 32, sucker.posY + 24, sucker.posZ + 32));
+					for (final Object ent : li) {
+						if (ent instanceof EntityMob) {
+							final EntityMob joker = (EntityMob) ent;
+							if (joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+								if (ent instanceof IIaSMobGetters)
+									((IIaSMobGetters) ent).setSearchTarget(sucker);
+								else if (!joker.isInvisible() && joker.getAttackTarget() == null)
 									joker.setTarget(sucker);
 							}
 						}
@@ -110,36 +124,14 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	}
 
 	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(catalyst.getItem() != this)
-			return 0;
-		if(catalyst.getItemDamage() == 1) {
-			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block));
-			return 240;
-		}
-		return 0;
+	public void registerIcons(IIconRegister ir) {
+		this.itemIcon = ir.registerIcon(getTexName() + '0');
+		this.burned = ir.registerIcon(getTexName() + '1');
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
-		catalyst.stackSize -= 1;
-		if(catalyst.getItemDamage() == 1) {
-			if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
-				target.stackSize -= 1;
-				retval.add(new ItemStack(NyxItems.devora,27));
-			}
-		}
-		return retval;
-	}
-
-	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
-
-
 
 }

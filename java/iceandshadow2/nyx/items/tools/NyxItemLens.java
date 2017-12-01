@@ -27,13 +27,14 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 		this.overrideAltar = altar;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.lensicon = reg.registerIcon(getTexName()+"Glow");
-		if(this.overrideAltar)
-			this.altaricon = reg.registerIcon(getTexName()+"Altar");
+	public IIcon getAltarTopTexture(ItemStack lens) {
+		return this.altaricon;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
 	}
 
 	@Override
@@ -43,29 +44,27 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 		return this.itemIcon;
 	}
 
+	public abstract EnumIaSLenses getLensType();
+
 	@Override
-	public abstract int getTransmuteLensRate(EnumIaSLenses lenstype, ItemStack lens,
-			ItemStack target);
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	public abstract int getTransmuteLensRate(EnumIaSLenses lenstype, ItemStack lens, ItemStack target);
 
 	@Override
 	public abstract List<ItemStack> getTransmuteLensYield(ItemStack lens, ItemStack target);
 
+	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getAltarTopTexture(ItemStack lens) {
-		return this.altaricon;
-	}
-
-	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
-		return false;
-	}
-
-	public abstract EnumIaSLenses getLensType();
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
+	public void registerIcons(IIconRegister reg) {
+		this.itemIcon = reg.registerIcon(getTexName());
+		this.lensicon = reg.registerIcon(getTexName() + "Glow");
+		if (this.overrideAltar)
+			this.altaricon = reg.registerIcon(getTexName() + "Altar");
 	}
 
 	@Override
@@ -75,9 +74,8 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
+	public boolean spawnParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
+		return false;
 	}
 
 	@Override

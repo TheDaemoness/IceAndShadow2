@@ -21,14 +21,11 @@ public class IaSRegistration {
 
 	private static Block registerBlock(Block block) {
 		if (block instanceof IaSBaseBlockMulti)
-			return GameRegistry.registerBlock(block, IaSItemBlockMulti.class,
-					((IIaSModName) block).getModName());
+			return GameRegistry.registerBlock(block, IaSItemBlockMulti.class, ((IIaSModName) block).getModName());
 		else if (block instanceof IIaSModName)
-			return GameRegistry.registerBlock(block,
-					((IIaSModName) block).getModName());
+			return GameRegistry.registerBlock(block, ((IIaSModName) block).getModName());
 		else
-			return GameRegistry.registerBlock(block, block.getUnlocalizedName()
-					.substring(5));
+			return GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 	}
 
 	private static void registerFluid(Fluid obj) {

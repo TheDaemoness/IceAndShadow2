@@ -23,15 +23,15 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 			"iceandshadow2:textures/entity/nyxknife_cortra.png");
 
 	@Override
-	public int getBaseLevel() {
+	public float getBaseDamage() {
 		return 2;
 	}
 
 	@Override
-	public float getBaseDamage() {
+	public int getBaseLevel() {
 		return 2;
 	}
-	
+
 	@Override
 	public float getBaseSpeed() {
 		return 6;
@@ -58,25 +58,29 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return mat.getItem() == NyxItems.cortraIngot && mat.getItemDamage() == 1;
+	}
+
+	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if(target instanceof EntityLivingBase && is.getItem() instanceof IaSItemWeapon) {
-			final EntityLivingBase elb = (EntityLivingBase)target;
-			final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
+		if (target instanceof EntityLivingBase && is.getItem() instanceof IaSItemWeapon) {
+			final EntityLivingBase elb = (EntityLivingBase) target;
+			final Map<Integer, Integer> nu = new HashMap<Integer, Integer>();
 			final int shlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, is);
 			final int smlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, is);
-			if(!user.worldObj.isRemote) {
-				if(elb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+			if (!user.worldObj.isRemote) {
+				if (elb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
 					nu.remove(Enchantment.sharpness.effectId);
-					if(smlvl < 5 && user.worldObj.rand.nextInt(64+smlvl*12)==0)
-						nu.put(Enchantment.smite.effectId, smlvl+1);
-					else if(smlvl > 0)
+					if (smlvl < 5 && user.worldObj.rand.nextInt(64 + smlvl * 12) == 0)
+						nu.put(Enchantment.smite.effectId, smlvl + 1);
+					else if (smlvl > 0)
 						nu.put(Enchantment.smite.effectId, smlvl);
-				}
-				else {
+				} else {
 					nu.remove(Enchantment.smite.effectId);
-					if(shlvl < 5 && user.worldObj.rand.nextInt(48+shlvl*8)==0)
-						nu.put(Enchantment.sharpness.effectId, shlvl+1);
-					else if(shlvl > 0)
+					if (shlvl < 5 && user.worldObj.rand.nextInt(48 + shlvl * 8) == 0)
+						nu.put(Enchantment.sharpness.effectId, shlvl + 1);
+					else if (shlvl > 0)
 						nu.put(Enchantment.sharpness.effectId, shlvl);
 				}
 				EnchantmentHelper.setEnchantments(nu, is);
@@ -86,33 +90,27 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
-			int y, int z) {
-		if(!(is.getItem() instanceof IaSItemWeapon)) {
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+		if (!(is.getItem() instanceof IaSItemWeapon)) {
 			final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
-			if(!user.worldObj.isRemote && user.worldObj.rand.nextInt(48+16*lvl)==0) {
-				final Map<Integer,Integer> nu = new HashMap<Integer,Integer>();
-				nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl+1));
+			if (!user.worldObj.isRemote && user.worldObj.rand.nextInt(48 + 16 * lvl) == 0) {
+				final Map<Integer, Integer> nu = new HashMap<Integer, Integer>();
+				nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl + 1));
 				final int flvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, is);
 				final int ulvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.unbreaking.effectId, is);
-				if(flvl < 3 && lvl >= 3 && user.worldObj.rand.nextInt(5) == 0)
-					nu.put(Enchantment.fortune.effectId, Math.min(3, flvl+1));
+				if (flvl < 3 && lvl >= 3 && user.worldObj.rand.nextInt(5) == 0)
+					nu.put(Enchantment.fortune.effectId, Math.min(3, flvl + 1));
 				else {
-					if(flvl > 0)
+					if (flvl > 0)
 						nu.put(Enchantment.fortune.effectId, flvl);
-					if(ulvl < 5 && lvl >= 1 && user.worldObj.rand.nextInt(4) == 0)
-						nu.put(Enchantment.unbreaking.effectId, Math.min(5, ulvl+1));
-					else if(ulvl > 0)
+					if (ulvl < 5 && lvl >= 1 && user.worldObj.rand.nextInt(4) == 0)
+						nu.put(Enchantment.unbreaking.effectId, Math.min(5, ulvl + 1));
+					else if (ulvl > 0)
 						nu.put(Enchantment.unbreaking.effectId, ulvl);
 				}
 				EnchantmentHelper.setEnchantments(nu, is);
 			}
 		}
 		return super.onHarvest(is, user, w, x, y, z);
-	}
-
-	@Override
-	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.cortraIngot && mat.getItemDamage() == 1;
 	}
 }

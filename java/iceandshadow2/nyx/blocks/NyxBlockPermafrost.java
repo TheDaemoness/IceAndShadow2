@@ -32,15 +32,15 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 			return this.iconSide;
 	}
 
+	@Override
+	public Block onThaw(World w, int x, int y, int z) {
+		return NyxBlocks.dirt;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		this.iconTop = reg.registerIcon(getTexName() + "Top");
 		this.iconSide = reg.registerIcon(getTexName() + "Side");
-	}
-
-	@Override
-	public Block onThaw(World w, int x, int y, int z) {
-		return NyxBlocks.dirt;
 	}
 }

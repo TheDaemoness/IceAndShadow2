@@ -22,8 +22,7 @@ public class NyxBlockOreDraconium extends NyxBlockOre {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		is.add(new ItemStack(NyxItems.draconium));
 		return is;

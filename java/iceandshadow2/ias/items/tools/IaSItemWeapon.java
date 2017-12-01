@@ -32,8 +32,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool,
-IIaSGlowing {
+public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, IIaSGlowing {
 
 	private final EnumIaSToolClass classe;
 	protected IIcon invisible;
@@ -45,8 +44,7 @@ IIaSGlowing {
 	}
 
 	@Override
-	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_,
-			List li, boolean p_77624_4_) {
+	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List li, boolean p_77624_4_) {
 		return;
 	}
 
@@ -56,11 +54,11 @@ IIaSGlowing {
 	}
 
 	@Override
-	public Multimap getAttributeModifiers(ItemStack stack)
-	{
+	public Multimap getAttributeModifiers(ItemStack stack) {
 		final Multimap mm = HashMultimap.create();
 		final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(stack);
-		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(Item.field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
+		mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+				new AttributeModifier(Item.field_111210_e, "Weapon modifier", mat.getToolDamage(stack, null, null), 0));
 		return mm;
 	}
 
@@ -93,8 +91,7 @@ IIaSGlowing {
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player,
-			ItemStack usingItem, int useRemaining) {
+	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (renderPass == 1 && !m.glows(getIaSToolClass()))
 			return this.invisible;
@@ -177,8 +174,7 @@ IIaSGlowing {
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x,
-			int y, int z, EntityLivingBase user) {
+	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x, int y, int z, EntityLivingBase user) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (m == null)
 			return false;
@@ -193,8 +189,7 @@ IIaSGlowing {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user,
-			Entity target) {
+	public boolean onLeftClickEntity(ItemStack is, EntityPlayer user, Entity target) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		is.damageItem(m.onAttack(is, user, target), user);
 		return true;

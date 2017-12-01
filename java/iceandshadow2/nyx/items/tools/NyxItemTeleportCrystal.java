@@ -24,8 +24,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements
-IIaSOnDeathKeep {
+public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnDeathKeep {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon empty;
@@ -33,9 +32,8 @@ IIaSOnDeathKeep {
 	public NyxItemTeleportCrystal(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		setMaxStackSize(1);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
-				new ItemStack(Items.nether_star), new ItemStack(
-						Items.ender_pearl), new ItemStack(Items.snowball));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(Items.nether_star),
+				new ItemStack(Items.ender_pearl), new ItemStack(Items.snowball));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -82,25 +80,14 @@ IIaSOnDeathKeep {
 			if (pl instanceof EntityPlayerMP) {
 				final EntityPlayerMP plm = (EntityPlayerMP) pl;
 				if (pl.dimension != IaSFlags.dim_nyx_id) {
-					plm.mcServer
-					.getConfigurationManager()
-					.transferPlayerToDimension(
-							plm,
-							IaSFlags.dim_nyx_id,
-							new NyxTeleporter(
-									plm.mcServer
-									.worldServerForDimension(IaSFlags.dim_nyx_id)));
-					plm.worldObj.playSoundAtEntity(plm,
-							"IceAndShadow2:portal_travel", 0.7F,
+					plm.mcServer.getConfigurationManager().transferPlayerToDimension(plm, IaSFlags.dim_nyx_id,
+							new NyxTeleporter(plm.mcServer.worldServerForDimension(IaSFlags.dim_nyx_id)));
+					plm.worldObj.playSoundAtEntity(plm, "IceAndShadow2:portal_travel", 0.7F,
 							plm.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 				} else {
 					is.setItemDamage(is.getItemDamage() | 4);
-					plm.mcServer.getConfigurationManager()
-					.transferPlayerToDimension(
-							plm,
-							0,
-							new NyxTeleporter(plm.mcServer
-									.worldServerForDimension(0)));
+					plm.mcServer.getConfigurationManager().transferPlayerToDimension(plm, 0,
+							new NyxTeleporter(plm.mcServer.worldServerForDimension(0)));
 				}
 			}
 		}
@@ -108,26 +95,19 @@ IIaSOnDeathKeep {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack heap, World order,
-			EntityPlayer pwai) {
-		if ((heap.getItemDamage() & 4) == 4
-				&& pwai.dimension == IaSFlags.dim_nyx_id) {
-			IaSPlayerHelper
-			.messagePlayer(
-					pwai,
+	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
+		if ((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
+			IaSPlayerHelper.messagePlayer(pwai,
 					"You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
 		if ((heap.getItemDamage() & 1) == 0) {
 			if (pwai.dimension == IaSFlags.dim_nyx_id)
-				IaSPlayerHelper
-				.messagePlayer(
-						pwai,
+				IaSPlayerHelper.messagePlayer(pwai,
 						"You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
 			else
-				IaSPlayerHelper
-				.messagePlayer(pwai,
+				IaSPlayerHelper.messagePlayer(pwai,
 						"The crystal barely responds. It seems to prefer cold and dark places.");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
@@ -138,16 +118,14 @@ IIaSOnDeathKeep {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack p_77615_1_, World p_77615_2_,
-			EntityPlayer plai, int time) {
+	public void onPlayerStoppedUsing(ItemStack p_77615_1_, World p_77615_2_, EntityPlayer plai, int time) {
 		if (time > 40)
 			plai.removePotionEffect(Potion.confusion.id);
 		super.onPlayerStoppedUsing(p_77615_1_, p_77615_2_, plai, time);
 	}
 
 	@Override
-	public void onUpdate(ItemStack pile, World earth, Entity tree, int time,
-			boolean boule) {
+	public void onUpdate(ItemStack pile, World earth, Entity tree, int time, boolean boule) {
 		if (tree.worldObj.isRemote)
 			return;
 		boolean active = true;
@@ -170,11 +148,9 @@ IIaSOnDeathKeep {
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		if (player.dimension != IaSFlags.dim_nyx_id && count < 50)
-			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math
-					.min(50 - count, 25), 0));
+			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));
 		else if (count < 40 && player.dimension == IaSFlags.dim_nyx_id)
-			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math
-					.min(50 - count, 25), 0));
+			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));
 	}
 
 	@SideOnly(Side.CLIENT)

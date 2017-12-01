@@ -7,11 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class IaSBaseBlockTileEntity extends IaSBaseBlockSingle
-implements ITileEntityProvider {
+public abstract class IaSBaseBlockTileEntity extends IaSBaseBlockSingle implements ITileEntityProvider {
 
-	public IaSBaseBlockTileEntity(EnumIaSModule mod, String texName,
-			Material mat) {
+	public IaSBaseBlockTileEntity(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, texName, mat);
 	}
 
@@ -32,8 +30,7 @@ implements ITileEntityProvider {
 	public void onBlockAdded(World w, int x, int y, int z) {
 		super.onBlockAdded(w, x, y, z);
 		onBlockAddedPre(w, x, y, z);
-		w.setTileEntity(x, y, z,
-				createNewTileEntity(w, w.getBlockMetadata(x, y, z)));
+		w.setTileEntity(x, y, z, createNewTileEntity(w, w.getBlockMetadata(x, y, z)));
 	}
 
 	/**
@@ -43,8 +40,7 @@ implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean onBlockEventReceived(World w, int x, int y, int z, int a,
-			int b) {
+	public boolean onBlockEventReceived(World w, int x, int y, int z, int a, int b) {
 		super.onBlockEventReceived(w, x, y, z, a, b);
 		final TileEntity tileentity = w.getTileEntity(x, y, z);
 		return tileentity != null ? tileentity.receiveClientEvent(a, b) : false;

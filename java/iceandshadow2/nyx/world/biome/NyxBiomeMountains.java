@@ -10,17 +10,14 @@ import net.minecraft.world.World;
 
 public class NyxBiomeMountains extends NyxBiome {
 
-	public NyxBiomeMountains(int par1, boolean register, float heightRoot,
-			float heightVari, boolean isRare) {
+	public NyxBiomeMountains(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class,
-				10, 2, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 10, 2, 3));
 	}
 
 	@Override
-	protected void genFoliage(World par1World, Random par2Random, int xchunk,
-			int zchunk) {
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 		/*
 		 * if (par2Random.nextInt(16) == 0) { WorldGenerator aden = new
 		 * WorldGenNyxNecromancerDen(); aden.generate(par1World, par2Random, x,

@@ -27,29 +27,25 @@ public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x,
-			int y, int z, int metadata) {
+	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
 		return false;
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> lilili = new ArrayList<ItemStack>();
 		lilili.add(new ItemStack(NyxBlocks.hookClimbing));
 		return lilili;
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world,
-			int x, int y, int z) {
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
 		return new ItemStack(NyxBlocks.hookClimbing);
 	}
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix
-				+ "BlockEchir";
+		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix + "BlockEchir";
 	}
 
 	@Override
@@ -63,8 +59,7 @@ public class NyxBlockHookTightrope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z,
-			ForgeDirection side) {
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
 }

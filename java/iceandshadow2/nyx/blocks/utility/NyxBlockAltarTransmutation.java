@@ -63,12 +63,10 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (!tte.canAttemptTransmutation())
 			return;
 		if (tte.handler == null)
-			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
-					tte.catalyst);
+			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 		if (tte.handler == null)
 			return;
-		final List<ItemStack> l_ist = tte.handler.getTransmuteYield(
-				tte.target, tte.catalyst, w);
+		final List<ItemStack> l_ist = tte.handler.getTransmuteYield(tte.target, tte.catalyst, w);
 		if (tte.target.stackSize <= 0)
 			tte.target = null;
 		if (tte.catalyst.stackSize <= 0)
@@ -77,15 +75,15 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			TileEntityHopper teh = null;
 			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper)
 				teh = (TileEntityHopper) w.getTileEntity(x, y - 1, z);
-			if(l_ist.size() == 1 && tte.target == null) {
-				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y-1, z))
-					if(l_ist.size() == 1 && tte.target == null) {
+			if (l_ist.size() == 1 && tte.target == null) {
+				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y - 1, z))
+					if (l_ist.size() == 1 && tte.target == null) {
 						tte.target = l_ist.get(0);
 						l_ist.clear();
 					}
 			}
 			for (final ItemStack is : l_ist) {
-				if (teh != null && !w.isBlockIndirectlyGettingPowered(x, y-1, z)) {
+				if (teh != null && !w.isBlockIndirectlyGettingPowered(x, y - 1, z)) {
 					int i;
 					for (i = 0; i < teh.getSizeInventory(); ++i) {
 						if (teh.getStackInSlot(i) == null)
@@ -97,8 +95,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 					}
 				}
 				if (!w.isRemote) {
-					final EntityItem ei = new EntityItem(w, x + 0.5, y + 0.8,
-							z + 0.5, is);
+					final EntityItem ei = new EntityItem(w, x + 0.5, y + 0.8, z + 0.5, is);
 					ei.lifespan = Integer.MAX_VALUE - 1;
 					w.spawnEntityInWorld(ei);
 				}
@@ -107,16 +104,29 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				w.markBlockForUpdate(x, y - 1, z);
 		}
 		if (tte.canAttemptTransmutation()) {
-			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
-					tte.catalyst);
+			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 			if (tte.handler == null) {
 				w.markBlockForUpdate(x, y, z);
 				return;
 			}
-			tte.scheduleUpdate(x, y, z,
-					tte.handler.getTransmuteTime(tte.target, tte.catalyst));
+			tte.scheduleUpdate(x, y, z, tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
 		w.markBlockForUpdate(x, y, z);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess w, int x, int y, int z, int side) {
+		final TileEntity e = w.getTileEntity(x, y, z);
+		if (e instanceof NyxTeTransmutationAltar) {
+			final ItemStack tar = ((NyxTeTransmutationAltar) e).target;
+			if (tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
+				final IIcon retval = ((IIaSApiTransmuteLens) tar.getItem()).getAltarTopTexture(tar);
+				if (retval != null)
+					return retval;
+			}
+		}
+		return getIcon(side, 0);
 	}
 
 	@Override
@@ -129,33 +139,16 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess w, int x,
-			int y, int z, int side) {
-		final TileEntity e = w.getTileEntity(x, y, z);
-		if(e instanceof NyxTeTransmutationAltar) {
-			final ItemStack tar = ((NyxTeTransmutationAltar)e).target;
-			if(tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
-				final IIcon retval = ((IIaSApiTransmuteLens)tar.getItem()).getAltarTopTexture(tar);
-				if(retval != null)
-					return retval;
-			}
-		}
-		return getIcon(side, 0);
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z,
-			EntityPlayer ep, int side, float xl, float yl, float zl) {
+	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer ep, int side, float xl, float yl,
+			float zl) {
 		final Block check = w.getBlock(x, y + 1, z);
 		if (check != null && check.getMaterial() != Material.air) {
-			IaSPlayerHelper.messagePlayer(ep,
-					"That altar needs an empty space above it to work.");
+			IaSPlayerHelper.messagePlayer(ep, "That altar needs an empty space above it to work.");
 			return false;
 		}
 		final TileEntity te = w.getTileEntity(x, y, z);
@@ -175,11 +168,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		else
 			is.stackSize = 0;
 		if (tte.canAttemptTransmutation()) {
-			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target,
-					tte.catalyst);
+			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 			if (tte.handler != null) {
-				tte.scheduleUpdate(x, y, z,
-						tte.handler.getTransmuteTime(tte.target, tte.catalyst));
+				tte.scheduleUpdate(x, y, z, tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 			}
 			w.markBlockForUpdate(x, y, z);
 			return true;

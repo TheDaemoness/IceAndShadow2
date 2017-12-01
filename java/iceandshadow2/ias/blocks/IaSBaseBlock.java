@@ -17,15 +17,22 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
 		this.MODULE = mod;
-		if(mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock))
+		if (mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock))
 			setCreativeTab(IaSCreativeTabs.blocks);
 	}
 
-	public IaSBaseBlock setLuminescence(float lum) {
-		this.lum = lum;
-		if(this.getLightOpacity() >= 15)
-			setLightOpacity(14);
-		setLightLevel(lum);
+	@Override
+	public EnumIaSModule getIaSModule() {
+		return this.MODULE;
+	}
+
+	@Override
+	public int getMobilityFlag() {
+		return 1;
+	}
+
+	public IaSBaseBlock register() {
+		IaSRegistration.register(this);
 		return this;
 	}
 
@@ -36,16 +43,11 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 		return this;
 	}
 
-	public IaSBaseBlock register() {
-		IaSRegistration.register(this);
+	public IaSBaseBlock setLuminescence(float lum) {
+		this.lum = lum;
+		if (this.getLightOpacity() >= 15)
+			setLightOpacity(14);
+		setLightLevel(lum);
 		return this;
 	}
-
-	@Override
-	public int getMobilityFlag() {
-		return 1;
-	}
-
-	@Override
-	public EnumIaSModule getIaSModule() {return this.MODULE;}
 }

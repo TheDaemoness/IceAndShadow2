@@ -14,8 +14,7 @@ public class NyxItemFoodCookie extends IaSItemFood {
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_,
-			EntityPlayer pwai) {
+	public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_, EntityPlayer pwai) {
 		pwai.heal(1.0F);
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
 	}

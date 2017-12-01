@@ -50,8 +50,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate,
-IIaSMobGetters {
+public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, IIaSMobGetters {
 
 	public enum EnumNyxSkeletonType {
 		RANDOM(-1), BOW_FROST_SHORT(0), KNIFE(1), MAGIC_SHADOW(2), BOW_FROST_LONG(3), RAPIER(4);
@@ -71,32 +70,31 @@ IIaSMobGetters {
 		}
 	}
 
-	protected EntityAINyxRangedAttack rangedAttackDefault = new EntityAINyxRangedAttack(
-			this, EntityNyxSkeleton.moveSpeed, 25, 35, 24.0F);
-	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(
-			this, EntityNyxSkeleton.moveSpeed, 45, 55, 32.0F);
-	protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(
-			this, EntityPlayer.class, EntityNyxSkeleton.moveSpeed + 0.3, false);
-	protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(
-			this, EntityAgeable.class, EntityNyxSkeleton.moveSpeed + 0.3, true);
-	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(
-			this, EntityNyxSkeleton.moveSpeed + 0.2, 35, 45, 12.0F);
+	/** Probability to get armor */
+	protected static float[] nyxSkeletonArmorProbability = new float[] { 0.0F, 0.01F, 0.03F, 0.09F };
+	protected static double moveSpeed = 0.5;
+	protected EntityAINyxRangedAttack rangedAttackDefault = new EntityAINyxRangedAttack(this,
+			EntityNyxSkeleton.moveSpeed, 25, 35, 24.0F);
+	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, EntityNyxSkeleton.moveSpeed,
+			45, 55, 32.0F);
+	protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class,
+			EntityNyxSkeleton.moveSpeed + 0.3, false);
+
+	protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class,
+			EntityNyxSkeleton.moveSpeed + 0.3, true);
+	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this,
+			EntityNyxSkeleton.moveSpeed + 0.2, 35, 45, 12.0F);
 
 	protected IaSSetSenses senses;
+
 	private EntityLivingBase searched;
 
 	private int regenDelay;
-
-	/** Probability to get armor */
-	protected static float[] nyxSkeletonArmorProbability = new float[] { 0.0F,
-		0.01F, 0.03F, 0.09F };
-
 	protected EnumNyxSkeletonType typpe;
 	protected boolean altWeaponFlag;
 	protected ItemStack reserveWeapon;
-	protected int throwDelay;
 
-	protected static double moveSpeed = 0.5;
+	protected int throwDelay;
 
 	public EntityNyxSkeleton(World par1World) {
 		this(par1World, EnumNyxSkeletonType.RANDOM);
@@ -120,15 +118,12 @@ IIaSMobGetters {
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAINyxSkeletonWeaponSwitch(this));
-		this.tasks.addTask(3, new EntityAIFleeSun(this,
-				EntityNyxSkeleton.moveSpeed + 0.5));
+		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxSkeleton.moveSpeed + 0.5));
 		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityNyxWightToxic.class, 5.0F,
 				EntityNyxSkeleton.moveSpeed, EntityNyxSkeleton.moveSpeed + 0.5));
 		this.tasks.addTask(4, new EntityAINyxSearch(this));
-		this.tasks.addTask(5, new EntityAIWander(this,
-				EntityNyxSkeleton.moveSpeed));
-		this.tasks.addTask(6, new EntityAINyxWatchClosest(this,
-				EntityPlayer.class, 8.0F));
+		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxSkeleton.moveSpeed));
+		this.tasks.addTask(6, new EntityAINyxWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
@@ -136,7 +131,7 @@ IIaSMobGetters {
 		if (par1World != null && !par1World.isRemote)
 			setCombatTask();
 
-		if(type != EnumNyxSkeletonType.RANDOM)
+		if (type != EnumNyxSkeletonType.RANDOM)
 			setNyxSkeletonCombatType(type);
 		else
 			this.typpe = type;
@@ -145,11 +140,9 @@ IIaSMobGetters {
 	@Override
 	protected void addRandomArmor() {
 		if (this.rand.nextFloat() < EntityNyxSkeleton.nyxSkeletonArmorProbability[IaSWorldHelper
-		                                                        .getDifficulty(this.worldObj)]) {
-			int i = this.rand.nextInt(2 + (IaSWorldHelper
-					.getDifficulty(this.worldObj) == 3 ? 1 : 0));
-			final float f = IaSWorldHelper.getDifficulty(this.worldObj) == 3 ? 0.1F
-					: 0.25F;
+				.getDifficulty(this.worldObj)]) {
+			int i = this.rand.nextInt(2 + (IaSWorldHelper.getDifficulty(this.worldObj) == 3 ? 1 : 0));
+			final float f = IaSWorldHelper.getDifficulty(this.worldObj) == 3 ? 0.1F : 0.25F;
 
 			for (int val = 0; val < 3; ++val) {
 				if (this.rand.nextFloat() < 0.095F)
@@ -173,14 +166,10 @@ IIaSMobGetters {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-		.setBaseValue(getScaledMaxHealth());
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-		.setBaseValue(0.33D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-		.setBaseValue(EntityNyxSkeleton.moveSpeed);
-		getEntityAttribute(SharedMonsterAttributes.followRange)
-		.setBaseValue(24.0);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.33D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EntityNyxSkeleton.moveSpeed);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
 	}
 
 	@Override
@@ -189,25 +178,16 @@ IIaSMobGetters {
 		int i = 0;
 
 		if (par1Entity instanceof EntityLivingBase) {
-			f += EnchantmentHelper.getEnchantmentModifierLiving(this,
-					(EntityLivingBase) par1Entity);
-			i += EnchantmentHelper.getKnockbackModifier(this,
-					(EntityLivingBase) par1Entity);
+			f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) par1Entity);
+			i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) par1Entity);
 		}
 
-		final boolean flag = par1Entity.attackEntityFrom(
-				DamageSource.causeMobDamage(this), f * 2 + 4);
+		final boolean flag = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), f * 2 + 4);
 
 		if (flag) {
 			if (i > 0) {
-				par1Entity.addVelocity(
-						-MathHelper.sin(this.rotationYaw * (float) Math.PI
-								/ 180.0F)
-								* i * 0.5F,
-								0.1D,
-								MathHelper.cos(this.rotationYaw * (float) Math.PI
-										/ 180.0F)
-										* i * 0.5F);
+				par1Entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 0.1D,
+						MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -218,12 +198,11 @@ IIaSMobGetters {
 				par1Entity.setFire(j * 4);
 
 			if (par1Entity instanceof EntityLivingBase) {
-				if(getEquipmentInSlot(0) == null)
+				if (getEquipmentInSlot(0) == null)
 					return flag;
-				if(getEquipmentInSlot(0).getItem() == NyxItems.frostSword)
-					((EntityLivingBase) par1Entity)
-						.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
-						5+5*IaSWorldHelper.getDifficulty(this.worldObj), 4));
+				if (getEquipmentInSlot(0).getItem() == NyxItems.frostSword)
+					((EntityLivingBase) par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
+							5 + 5 * IaSWorldHelper.getDifficulty(this.worldObj), 4));
 			}
 		}
 
@@ -232,28 +211,24 @@ IIaSMobGetters {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
-		if (isEntityInvulnerable()
-				|| par1DamageSource == DamageSource.drown)
+		if (isEntityInvulnerable() || par1DamageSource == DamageSource.drown)
 			return false;
-		if (getEquipmentInSlot(2) != null
-				&& !par1DamageSource.isUnblockable()
+		if (getEquipmentInSlot(2) != null && !par1DamageSource.isUnblockable()
 				&& getEquipmentInSlot(2).getItem() == IaSTools.armorNavistra[2])
 			return false;
 		addPotionEffect(new PotionEffect(Potion.hunger.id, 179, 0));
 		if (par1DamageSource.isFireDamage())
 			return super.attackEntityFrom(par1DamageSource, dmg * 3);
-		if(par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
-			return super.attackEntityFrom(par1DamageSource, Math.max(1,dmg-IaSWorldHelper.getRegionArmorMod(this)));
+		if (par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
+			return super.attackEntityFrom(par1DamageSource, Math.max(1, dmg - IaSWorldHelper.getRegionArmorMod(this)));
 		return super.attackEntityFrom(par1DamageSource, dmg);
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving,
-			float par2) {
+	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving, float par2) {
 		final ItemStack wielding = getHeldItem();
 		if (wielding != null && wielding.getItem() instanceof NyxItemBow) {
-			doBowAttack(par1EntityLiving, par2,
-					wielding.getItem() instanceof NyxItemBowFrostLong);
+			doBowAttack(par1EntityLiving, par2, wielding.getItem() instanceof NyxItemBowFrostLong);
 		} else {
 			doShadowAttack(par1EntityLiving, par2);
 			if (this.typpe != EnumNyxSkeletonType.MAGIC_SHADOW)
@@ -261,28 +236,21 @@ IIaSMobGetters {
 		}
 	}
 
-	public void doBowAttack(EntityLivingBase par1EntityLiving, float par2,
-			boolean longe) {
-		final int slowtime = IaSWorldHelper.getDifficulty(this.worldObj)
-				* (longe ? 70 : 15);
-		final int slowstr = IaSWorldHelper.getDifficulty(this.worldObj)
-				+ (longe ? 1 : -1);
+	public void doBowAttack(EntityLivingBase par1EntityLiving, float par2, boolean longe) {
+		final int slowtime = IaSWorldHelper.getDifficulty(this.worldObj) * (longe ? 70 : 15);
+		final int slowstr = IaSWorldHelper.getDifficulty(this.worldObj) + (longe ? 1 : -1);
 		final int dif = IaSWorldHelper.getDifficulty(this.worldObj);
 		EntityIceArrow var2;
 		if (longe) {
-			var2 = new EntityIceArrow(this.worldObj, this, 2.4F, slowstr,
-					slowtime);
+			var2 = new EntityIceArrow(this.worldObj, this, 2.4F, slowstr, slowtime);
 			final double ydelta = par1EntityLiving.posY - this.posY + par1EntityLiving.getEyeHeight() - getEyeHeight();
-			var2.setThrowableHeading(par1EntityLiving.posX - this.posX, ydelta,
-					par1EntityLiving.posZ - this.posZ, 3.2F, 2.0F);
+			var2.setThrowableHeading(par1EntityLiving.posX - this.posX, ydelta, par1EntityLiving.posZ - this.posZ, 3.2F,
+					2.0F);
 		} else
-			var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving,
-					1.8F, 5.0F, slowstr, slowtime);
+			var2 = new EntityIceArrow(this.worldObj, this, par1EntityLiving, 1.8F, 5.0F, slowstr, slowtime);
 		var2.setIsCritical(longe);
-		int var3 = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.power.effectId, getHeldItem());
-		final int var4 = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.punch.effectId, getHeldItem());
+		int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, getHeldItem());
+		final int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, getHeldItem());
 		var3 += dif == 3 ? 1 : 0;
 
 		var2.setDamage(getAttackStrength(par1EntityLiving));
@@ -295,23 +263,18 @@ IIaSMobGetters {
 			var2.setKnockbackStrength(var4);
 		}
 
-		playSound("random.bow", 1.0F,
-				1.0F / (getRNG().nextFloat() * 0.3F + 0.6F));
+		playSound("random.bow", 1.0F, 1.0F / (getRNG().nextFloat() * 0.3F + 0.6F));
 		this.worldObj.spawnEntityInWorld(var2);
 	}
 
 	public void doShadowAttack(EntityLivingBase par1EntityLiving, float par2) {
 		final boolean harm_undead = par1EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
-		final EntityThrowable entityball = new EntityShadowBall(this.worldObj,
-				this, harm_undead, IaSWorldHelper.getRegionLevel(par1EntityLiving)>=6);
+		final EntityThrowable entityball = new EntityShadowBall(this.worldObj, this, harm_undead,
+				IaSWorldHelper.getRegionLevel(par1EntityLiving) >= 6);
 
-		final double d0 = par1EntityLiving.posX + par1EntityLiving.motionX
-				- this.posX;
-		final double d1 = par1EntityLiving.posY
-				+ par1EntityLiving.getEyeHeight() - getEyeHeight()
-				- this.posY;
-		final double d2 = par1EntityLiving.posZ + par1EntityLiving.motionZ
-				- this.posZ;
+		final double d0 = par1EntityLiving.posX + par1EntityLiving.motionX - this.posX;
+		final double d1 = par1EntityLiving.posY + par1EntityLiving.getEyeHeight() - getEyeHeight() - this.posY;
+		final double d2 = par1EntityLiving.posZ + par1EntityLiving.motionZ - this.posZ;
 		final float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
 		if (f1 <= 2.0)
@@ -333,11 +296,9 @@ IIaSMobGetters {
 			return;
 
 		this.dropItem(Items.bone, 1);
-		this.dropItem(NyxItems.icicle, 1+this.worldObj.rand.nextInt(2));
-		
-		this.worldObj.spawnEntityInWorld(
-				new EntityOrbNourishment(this.worldObj,
-						this.posX, this.posY, this.posZ, 1));
+		this.dropItem(NyxItems.icicle, 1 + this.worldObj.rand.nextInt(2));
+
+		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 1));
 
 		/*
 		 * Calendar var1 = this.worldObj.getCurrentDate(); if (var1.get(2) + 1
@@ -352,8 +313,7 @@ IIaSMobGetters {
 		if (par1ItemStack.stackSize == 0) {
 			return null;
 		} else {
-			final EntityItem entityitem = new EntityItem(this.worldObj,
-					this.posX, this.posY, this.posZ, par1ItemStack);
+			final EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, par1ItemStack);
 			entityitem.delayBeforeCanPickup = 10;
 			if (this.captureDrops) {
 				this.capturedDrops.add(entityitem);
@@ -379,14 +339,13 @@ IIaSMobGetters {
 		int var3;
 		if (this.worldObj != null)
 			var3 = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 7 : 8;
-			else
-				var3 = 8;
+		else
+			var3 = 8;
 
 		if (var2 != null) {
 			if (var2.getItem() instanceof IIaSTool)
-				var3 += MathHelper.ceiling_float_int(IaSToolMaterial
-						.extractMaterial(var2).getToolDamage(var2, this,
-								par1Entity));
+				var3 += MathHelper
+						.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity));
 		}
 		return var3;
 	}
@@ -399,11 +358,9 @@ IIaSMobGetters {
 		return lightb > 7 ? lightb / 2 : 0;
 	}
 
-
-
 	@Override
 	public boolean getCanSpawnHere() {
-		if(this.posX*this.posX+this.posZ*this.posZ < 1024)
+		if (this.posX * this.posX + this.posZ * this.posZ < 1024)
 			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
@@ -412,13 +369,12 @@ IIaSMobGetters {
 		if (taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
 			return new ItemStack(Items.bone);
 		else
-			return new ItemStack(NyxItems.frostSword,1,475+this.rand.nextInt(25));
+			return new ItemStack(NyxItems.frostSword, 1, 475 + this.rand.nextInt(25));
 	}
 
 	public ItemStack getDefaultWeapon(EnumNyxSkeletonType taipe) {
 		if (taipe == EnumNyxSkeletonType.KNIFE) {
-			final ItemStack ait = IaSTools.setToolMaterial(IaSTools.knife,
-					"Icicle");
+			final ItemStack ait = IaSTools.setToolMaterial(IaSTools.knife, "Icicle");
 			ait.stackSize = new Random().nextInt(8) + 4;
 
 			final int lvl = IaSWorldHelper.getRegionLevel(this);
@@ -429,15 +385,13 @@ IIaSMobGetters {
 			return ait;
 		}
 		if (taipe == EnumNyxSkeletonType.BOW_FROST_SHORT)
-			return new ItemStack(NyxItems.frostBowShort, 1,
-					383 - this.rand.nextInt(16));
+			return new ItemStack(NyxItems.frostBowShort, 1, 383 - this.rand.nextInt(16));
 		if (taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
 			return new ItemStack(NyxItems.boneCursed);
 		if (taipe == EnumNyxSkeletonType.BOW_FROST_LONG)
-			return new ItemStack(NyxItems.frostBowLong, 1,
-					254 - this.rand.nextInt(16));
+			return new ItemStack(NyxItems.frostBowLong, 1, 254 - this.rand.nextInt(16));
 		if (taipe == EnumNyxSkeletonType.RAPIER)
-			return new ItemStack(NyxItems.frostSword, 1, 45+this.rand.nextInt(50));
+			return new ItemStack(NyxItems.frostSword, 1, 45 + this.rand.nextInt(50));
 		return null;
 	}
 
@@ -477,13 +431,13 @@ IIaSMobGetters {
 		return this.senses;
 	}
 
-	public boolean isUsingAlternateWeapon() {
-		return this.altWeaponFlag;
-	}
-
 	@Override
 	public int getTotalArmorValue() {
-		return super.getTotalArmorValue()+IaSWorldHelper.getRegionArmorMod(this);
+		return super.getTotalArmorValue() + IaSWorldHelper.getRegionArmorMod(this);
+	}
+
+	public boolean isUsingAlternateWeapon() {
+		return this.altWeaponFlag;
 	}
 
 	@Override
@@ -505,8 +459,7 @@ IIaSMobGetters {
 		}
 		if (getEquipmentInSlot(0) != null && !this.worldObj.isRemote) {
 			final ItemStack is = getEquipmentInSlot(0);
-			if (is.getItem() instanceof IaSItemThrowingKnife
-					&& getAttackTarget() != null) {
+			if (is.getItem() instanceof IaSItemThrowingKnife && getAttackTarget() != null) {
 				if (this.throwDelay <= 0) {
 					final double dist = getDistanceSqToEntity(getAttackTarget());
 					if (dist < 4 || dist > 100)
@@ -514,17 +467,15 @@ IIaSMobGetters {
 					if (!getEntitySenses().canSee(getAttackTarget()))
 						return;
 					final ItemStack projkni = is.copy();
-					projkni.addEnchantment(Enchantment.sharpness, 1+this.worldObj.difficultySetting.getDifficultyId());
-					final EntityThrowingKnife etn = new EntityThrowingKnife(
-							this.worldObj, this, getAttackTarget(), 1.1F,
-							2.0F, projkni);
-					this.worldObj.playSoundAtEntity(this, "random.bow", 0.5F,
-							0.75F);
+					projkni.addEnchantment(Enchantment.sharpness,
+							1 + this.worldObj.difficultySetting.getDifficultyId());
+					final EntityThrowingKnife etn = new EntityThrowingKnife(this.worldObj, this, getAttackTarget(),
+							1.1F, 2.0F, projkni);
+					this.worldObj.playSoundAtEntity(this, "random.bow", 0.5F, 0.75F);
 					final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
 					mat.onKnifeThrow(is, this, etn);
 					this.worldObj.spawnEntityInWorld(etn);
-					this.throwDelay = mat.getKnifeCooldown(is, this.worldObj,
-							this) * 2;
+					this.throwDelay = mat.getKnifeCooldown(is, this.worldObj, this) * 2;
 				} else
 					--this.throwDelay;
 			}
@@ -536,7 +487,7 @@ IIaSMobGetters {
 		this.equipmentDropChances[0] = 0.0F;
 		this.altWeaponFlag = false;
 
-		if(getSkeletonType() == 1 || this.typpe != EnumNyxSkeletonType.RANDOM)
+		if (getSkeletonType() == 1 || this.typpe != EnumNyxSkeletonType.RANDOM)
 			return dat;
 
 		final int dif = IaSWorldHelper.getDifficulty(this.worldObj);
@@ -554,8 +505,7 @@ IIaSMobGetters {
 			((ItemArmor) helm.getItem()).func_82813_b(helm, 0x773333);
 			setCurrentItemOrArmor(4, helm);
 			this.equipmentDropChances[4] = 0.0F;
-			if (reg >= 5
-					&& this.rand.nextBoolean()) {
+			if (reg >= 5 && this.rand.nextBoolean()) {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
 				this.equipmentDropChances[0] = 0.33F;
 			} else {
@@ -565,8 +515,7 @@ IIaSMobGetters {
 
 		// Bow skeleton.
 		else {
-			setCurrentItemOrArmor(0,
-					getDefaultWeapon(EnumNyxSkeletonType.BOW_FROST_SHORT));
+			setCurrentItemOrArmor(0, getDefaultWeapon(EnumNyxSkeletonType.BOW_FROST_SHORT));
 			setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_SHORT);
 			this.equipmentDropChances[0] = 0.05F;
 		}
@@ -581,8 +530,7 @@ IIaSMobGetters {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 		if (par1NBTTagCompound.hasKey("NyxSkeletonCombatStyle"))
-			this.setNyxSkeletonCombatType(par1NBTTagCompound
-					.getByte("NyxSkeletonCombatStyle"));
+			this.setNyxSkeletonCombatType(par1NBTTagCompound.getByte("NyxSkeletonCombatStyle"));
 
 		super.readEntityFromNBT(par1NBTTagCompound);
 

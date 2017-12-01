@@ -9,13 +9,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class NyxMaterialDraconium extends IaSToolMaterial {
 
-	@Override
-	public ItemStack getTransmutationCatalyst() {
-		return new ItemStack(NyxItems.draconium,1,1);
-	}
-
 	private static ResourceLocation knife_tex = new ResourceLocation(
 			"iceandshadow2:textures/entity/nyxknife_draconium.png");
+
+	@Override
+	public float getBaseDamage() {
+		return 4;
+	}
 
 	@Override
 	public int getBaseLevel() {
@@ -33,11 +33,6 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getBaseDamage() {
-		return 4;
-	}
-
-	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
 		return NyxMaterialDraconium.knife_tex;
 	}
@@ -50,6 +45,11 @@ public class NyxMaterialDraconium extends IaSToolMaterial {
 	@Override
 	public String getMaterialName() {
 		return "Draconium";
+	}
+
+	@Override
+	public ItemStack getTransmutationCatalyst() {
+		return new ItemStack(NyxItems.draconium, 1, 1);
 	}
 
 	@Override

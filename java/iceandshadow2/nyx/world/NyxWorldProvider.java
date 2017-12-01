@@ -17,18 +17,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxWorldProvider extends WorldProvider {
 
-	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0,
-			0.05F);
+	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0, 0.05F);
 
 	public NyxWorldProvider() {
 		this.isHellWorld = false;
 		this.hasNoSky = true;
 		registerWorldChunkManager();
-	}
-
-	@Override
-	public ChunkCoordinates getSpawnPoint() {
-		return new ChunkCoordinates(0,this.worldObj.getPrecipitationHeight(0, 0),0);
 	}
 
 	@Override
@@ -78,8 +72,7 @@ public class NyxWorldProvider extends WorldProvider {
 		final float f = 0.005F;
 		for (int i = 0; i <= 15; ++i) {
 			final float var3 = 1.0F - i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F)
-					* (1.0F - f) + f;
+			this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F) * (1.0F - f) + f;
 		}
 	}
 
@@ -138,6 +131,11 @@ public class NyxWorldProvider extends WorldProvider {
 	}
 
 	@Override
+	public ChunkCoordinates getSpawnPoint() {
+		return new ChunkCoordinates(0, this.worldObj.getPrecipitationHeight(0, 0), 0);
+	}
+
+	@Override
 	public String getWelcomeMessage() {
 		return "Entering Nyx...";
 	}
@@ -154,18 +152,15 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		final BiomeGenBase[] nyxBiomes = { NyxBiomes.nyxHighMountains,
-				NyxBiomes.nyxLowMountains, NyxBiomes.nyxMesas,
-				NyxBiomes.nyxHills, NyxBiomes.nyxMesaForest,
-				NyxBiomes.nyxHillForest, NyxBiomes.nyxRugged,
+		final BiomeGenBase[] nyxBiomes = { NyxBiomes.nyxHighMountains, NyxBiomes.nyxLowMountains, NyxBiomes.nyxMesas,
+				NyxBiomes.nyxHills, NyxBiomes.nyxMesaForest, NyxBiomes.nyxHillForest, NyxBiomes.nyxRugged,
 				NyxBiomes.nyxInfested };
 		GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
 		biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
 		GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
 		biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
 
-		this.worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer,
-				biomesIndexLayer, this.worldObj);
+		this.worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer, biomesIndexLayer, this.worldObj);
 		this.dimensionId = IaSFlags.dim_nyx_id;
 		this.hasNoSky = true;
 	}

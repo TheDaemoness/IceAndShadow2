@@ -9,11 +9,9 @@ public class IaSFlags {
 	public static int dim_nyx_id = -2;
 
 	// YOU LIED MORE.
-	public static short biome_id_nyxLowMountains = 255,
-			biome_id_nyxHighMountains = 254, biome_id_nyxHills = 253,
-			biome_id_nyxMesas = 252, biome_id_nyxHillForest = 251,
-			biome_id_nyxMesaForest = 250, biome_id_nyxRugged = 249,
-			biome_id_nyxInfested = 248;
+	public static short biome_id_nyxLowMountains = 255, biome_id_nyxHighMountains = 254, biome_id_nyxHills = 253,
+			biome_id_nyxMesas = 252, biome_id_nyxHillForest = 251, biome_id_nyxMesaForest = 250,
+			biome_id_nyxRugged = 249, biome_id_nyxInfested = 248;
 
 	public static int entity_id_start = 512;
 

@@ -16,8 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockInfestedLog extends IaSBlockDirectional implements
-IIaSNoInfest {
+public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoInfest {
 
 	public NyxBlockInfestedLog(String par1) {
 		super(EnumIaSModule.NYX, par1, Material.wood);
@@ -33,22 +32,18 @@ IIaSNoInfest {
 	 * ejects contained items into the world, and notifies neighbours of an
 	 * update, as appropriate
 	 */
-	public void breakBlock(World par1World, int par2, int par3, int par4,
-			int par5, int par6) {
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		final byte var7 = 4;
 		final int var8 = var7 + 1;
 
-		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8,
-				par2 + var8, par3 + var8, par4 + var8)) {
+		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8)) {
 			for (int var9 = -var7; var9 <= var7; ++var9) {
 				for (int var10 = -var7; var10 <= var7; ++var10) {
 					for (int var11 = -var7; var11 <= var7; ++var11) {
-						final Block var12 = par1World.getBlock(par2 + var9,
-								par3 + var10, par4 + var11);
+						final Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
 
 						if (var12 != null)
-							var12.beginLeavesDecay(par1World, par2 + var9, par3
-									+ var10, par4 + var11);
+							var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
 					}
 				}
 			}
@@ -81,10 +76,8 @@ IIaSNoInfest {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
-		return NyxBlockFunctionsInfested.getCollisionBoundingBoxFromPool(
-				par1World, par2, par3, par4);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+		return NyxBlockFunctionsInfested.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
 	}
 
 	@Override
@@ -93,17 +86,13 @@ IIaSNoInfest {
 	}
 
 	@Override
-	public void onBlockClicked(World par1World, int par2, int par3, int par4,
-			EntityPlayer par5EntityPlayer) {
-		NyxBlockFunctionsInfested.onBlockClicked(par1World, par2, par3, par4,
-				par5EntityPlayer);
+	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+		NyxBlockFunctionsInfested.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
-			int par4, Entity par5Entity) {
-		NyxBlockFunctionsInfested.onEntityCollidedWithBlock(par1World, par2,
-				par3, par4, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+		NyxBlockFunctionsInfested.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 	}
 
 	/**

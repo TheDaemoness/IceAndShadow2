@@ -18,8 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderNyxSpider extends RenderLiving {
 	private static final ResourceLocation skin_glow = new ResourceLocation(
 			"iceandshadow2:textures/mob/spiderwisp_eyes.png");
-	private static final ResourceLocation skin = new ResourceLocation(
-			"iceandshadow2:textures/mob/spiderwisp.png");
+	private static final ResourceLocation skin = new ResourceLocation("iceandshadow2:textures/mob/spiderwisp.png");
 
 	public RenderNyxSpider() {
 		super(new ModelSpider(), 1.0F);
@@ -28,8 +27,7 @@ public class RenderNyxSpider extends RenderLiving {
 	}
 
 	@Override
-	public void doRender(EntityLiving par1EntityLiving, double par2,
-			double par4, double par6, float par8, float par9) {
+	public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -59,8 +57,7 @@ public class RenderNyxSpider extends RenderLiving {
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
 	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
-			float par2) {
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		super.preRenderCallback(par1EntityLivingBase, par2);
 		scaleSpider((EntityNyxSpider) par1EntityLivingBase, par2);
 	}
@@ -76,8 +73,7 @@ public class RenderNyxSpider extends RenderLiving {
 	/**
 	 * Sets the spider's glowing eyes
 	 */
-	protected int setSpiderEyeBrightness(EntityNyxSpider par1EntitySpider,
-			int par2, float par3) {
+	protected int setSpiderEyeBrightness(EntityNyxSpider par1EntitySpider, int par2, float par3) {
 
 		if (par2 != 0 || par1EntitySpider.isInvisible()) {
 			return -1;
@@ -92,8 +88,7 @@ public class RenderNyxSpider extends RenderLiving {
 			final char c0 = 61680;
 			final int j = c0 % 65536;
 			final int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-					j / 1.0F, k / 1.0F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
 			return 1;
@@ -104,9 +99,7 @@ public class RenderNyxSpider extends RenderLiving {
 	 * Queries whether should render the specified pass or not.
 	 */
 	@Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase,
-			int par2, float par3) {
-		return setSpiderEyeBrightness(
-				(EntityNyxSpider) par1EntityLivingBase, par2, par3);
+	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
+		return setSpiderEyeBrightness((EntityNyxSpider) par1EntityLivingBase, par2, par3);
 	}
 }

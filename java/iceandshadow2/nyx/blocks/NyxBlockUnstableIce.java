@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 
 import java.util.Random;
@@ -44,23 +43,20 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z,
-			ForgeDirection side) {
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z,
-			int s) {
+	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int s) {
 		if (w.getBlock(x, y, z) == this)
 			return false;
 		return super.shouldSideBeRendered(w, x, y, z, s);
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4,
-			Random par5Random) {
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) >= 14) {
 			if (par1World.provider.isHellWorld)

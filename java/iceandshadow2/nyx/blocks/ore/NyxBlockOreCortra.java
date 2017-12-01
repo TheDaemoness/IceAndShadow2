@@ -23,8 +23,7 @@ public class NyxBlockOreCortra extends NyxBlockOre {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		final int e = world.rand.nextInt(3 + fortune) + 2;
 		for (int i = 0; i < e; ++i) {

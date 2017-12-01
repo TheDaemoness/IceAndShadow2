@@ -10,8 +10,7 @@ import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemIcicle extends IaSBaseItemSingle implements
-IIaSApiTransmute {
+public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmute {
 
 	public NyxItemIcicle(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -31,8 +30,7 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World w) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World w) {
 		catalyst.stackSize -= 1;
 		if (target.getItem() == NyxItems.frostBowLong)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 1));
@@ -44,8 +42,7 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity pos) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity pos) {
 		return false;
 	}
 }

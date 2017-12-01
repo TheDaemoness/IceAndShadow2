@@ -12,12 +12,12 @@ public class IaSSenseActions extends IaSSense {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		if(isInRange(ent)) {
-			if(ent instanceof EntityLivingBase) {
-				if(((EntityLivingBase)ent).isSwingInProgress)
+		if (isInRange(ent)) {
+			if (ent instanceof EntityLivingBase) {
+				if (((EntityLivingBase) ent).isSwingInProgress)
 					return true;
-				if(ent instanceof EntityPlayer)
-					return ((EntityPlayer)ent).isUsingItem();
+				if (ent instanceof EntityPlayer)
+					return ((EntityPlayer) ent).isUsingItem();
 			}
 		}
 		return false;

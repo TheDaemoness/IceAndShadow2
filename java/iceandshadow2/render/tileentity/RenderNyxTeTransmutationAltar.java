@@ -17,8 +17,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 	private EntityItem cat, tar;
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-			float eh) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float eh) {
 		GL11.glPushMatrix();
 		// This will move our renderer so that it will be on proper place in the
 		// world
@@ -26,30 +25,28 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 		final NyxTeTransmutationAltar alt = (NyxTeTransmutationAltar) te;
 
 		if (this.cat == null && alt.catalyst != null)
-			this.cat = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D,
-					alt.catalyst);
+			this.cat = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.catalyst);
 		else if (this.cat != null) {
 			if (alt.catalyst == null)
 				this.cat = null;
 			else if (alt.catalyst.getItem() != this.cat.getEntityItem().getItem())
 				this.cat.setEntityItemStack(alt.catalyst);
-			else if (!alt.catalyst.getItem().isDamageable() &&
-					alt.catalyst.getItemDamage() != this.cat.getEntityItem().getItemDamage())
+			else if (!alt.catalyst.getItem().isDamageable()
+					&& alt.catalyst.getItemDamage() != this.cat.getEntityItem().getItemDamage())
 				this.cat.setEntityItemStack(alt.catalyst);
 			else if (alt.catalyst.stackSize != this.cat.getEntityItem().stackSize)
 				this.cat.setEntityItemStack(alt.catalyst);
 		}
 
 		if (this.tar == null && alt.target != null)
-			this.tar = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D,
-					alt.target);
+			this.tar = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.target);
 		else if (this.tar != null) {
 			if (alt.target == null)
 				this.tar = null;
 			else if (alt.target.getItem() != this.tar.getEntityItem().getItem())
 				this.tar.setEntityItemStack(alt.target);
-			else if (!alt.target.getItem().isDamageable() &&
-					alt.target.getItemDamage() != this.tar.getEntityItem().getItemDamage())
+			else if (!alt.target.getItem().isDamageable()
+					&& alt.target.getItemDamage() != this.tar.getEntityItem().getItemDamage())
 				this.tar.setEntityItemStack(alt.target);
 			else if (alt.target.stackSize != this.tar.getEntityItem().stackSize)
 				this.tar.setEntityItemStack(alt.target);
@@ -59,8 +56,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			this.cat.hoverStart = 0.0F;
 			GL11.glTranslatef(0.0F, 1.25F, 0.0F);
 			GL11.glPushMatrix();
-			RenderManager.instance.renderEntityWithPosYaw(this.cat, 0.0D, 0.0D,
-					0.0D, 0.0F,
+			RenderManager.instance.renderEntityWithPosYaw(this.cat, 0.0D, 0.0D, 0.0D, 0.0F,
 					Minecraft.getMinecraft().theWorld.getTotalWorldTime());
 			GL11.glPopMatrix();
 			GL11.glTranslatef(0.0F, -1.25F, 0.0F);
@@ -76,8 +72,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 				GL11.glTranslatef(0.0F, 0.8F, -0.225F);
 				GL11.glRotatef(180.F, 0, 1, 1);
 			}
-			RenderManager.instance.renderEntityWithPosYaw(this.tar, 0.0D, 0.0D,
-					0.0D, 0.0F, 0.0F);
+			RenderManager.instance.renderEntityWithPosYaw(this.tar, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			GL11.glPopMatrix();
 			RenderItem.renderInFrame = false;
 		}

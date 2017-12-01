@@ -17,8 +17,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	/**
 	 * Checks to see if the sand can fall into the block below it
 	 */
-	public static boolean canFallBelow(World par0World, int par1, int par2,
-			int par3) {
+	public static boolean canFallBelow(World par0World, int par1, int par2, int par3) {
 		final Block l = par0World.getBlock(par1, par2, par3);
 
 		if (par0World.isAirBlock(par1, par2, par3)) {
@@ -27,8 +26,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 			return true;
 		} else {
 			final Material material = l.getMaterial();
-			return material == Material.water ? true
-					: material == Material.lava;
+			return material == Material.water ? true : material == Material.lava;
 		}
 	}
 
@@ -45,16 +43,14 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		this.tryFalling = true;
-		par1World.scheduleBlockUpdate(par2, par3, par4, this,
-				tickRate(par1World));
+		par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World));
 	}
 
 	/**
 	 * Called when the falling block entity for this block hits the ground and
 	 * turns back into a block
 	 */
-	public void onFinishFalling(World par1World, int par2, int par3, int par4,
-			int par5) {
+	public void onFinishFalling(World par1World, int par2, int par3, int par4, int par5) {
 	}
 
 	/**
@@ -62,11 +58,9 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
 	 * neighbor blockID
 	 */
-	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		this.tryFalling = true;
-		par1World.scheduleBlockUpdate(par2, par3, par4, this,
-				tickRate(par1World));
+		par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World));
 	}
 
 	/**
@@ -91,20 +85,17 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 			final byte b0 = 32;
 
 			if (!IaSBlockFalling.fallInstantly
-					&& par1World.checkChunksExist(par2 - b0, par3 - b0, par4
-							- b0, par2 + b0, par3 + b0, par4 + b0)) {
+					&& par1World.checkChunksExist(par2 - b0, par3 - b0, par4 - b0, par2 + b0, par3 + b0, par4 + b0)) {
 				if (!par1World.isRemote) {
-					final EntityFallingBlock entityfallingsand = new EntityFallingBlock(
-							par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F,
-							this, par1World.getBlockMetadata(par2, par3, par4));
+					final EntityFallingBlock entityfallingsand = new EntityFallingBlock(par1World, par2 + 0.5F,
+							par3 + 0.5F, par4 + 0.5F, this, par1World.getBlockMetadata(par2, par3, par4));
 					onStartFalling(entityfallingsand);
 					par1World.spawnEntityInWorld(entityfallingsand);
 				}
 			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 
-				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4)
-						&& par3 > 0) {
+				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0) {
 					--par3;
 				}
 
@@ -119,8 +110,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4,
-			Random par5Random) {
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (!par1World.isRemote) {
 			tryToFall(par1World, par2, par3, par4);
 			this.tryFalling = false;

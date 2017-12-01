@@ -13,8 +13,7 @@ public class IaSPlayerHelper {
 	public static void alertPlayer(EntityPlayer plai, String str) {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final ChatComponentText txt = new ChatComponentText(str);
-			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true)
-					.setColor(EnumChatFormatting.RED));
+			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
 			plai.addChatMessage(txt);
 			IaSPlayerHelper.dochat = false;
 		} else
@@ -24,8 +23,8 @@ public class IaSPlayerHelper {
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
 		final boolean added = plai.inventory.addItemStackToInventory(is);
 		if (!added && !plai.worldObj.isRemote) {
-			final EntityItem item = new EntityItem(plai.worldObj, plai.posX,
-					plai.posY + plai.getEyeHeight() / 2.0, plai.posZ, is);
+			final EntityItem item = new EntityItem(plai.worldObj, plai.posX, plai.posY + plai.getEyeHeight() / 2.0,
+					plai.posZ, is);
 			plai.worldObj.spawnEntityInWorld(item);
 		}
 		return added;
@@ -34,8 +33,7 @@ public class IaSPlayerHelper {
 	public static void messagePlayer(EntityPlayer plai, String str) {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final ChatComponentText txt = new ChatComponentText(str);
-			txt.setChatStyle(new ChatStyle().setItalic(true).setColor(
-					EnumChatFormatting.GRAY));
+			txt.setChatStyle(new ChatStyle().setItalic(true).setColor(EnumChatFormatting.GRAY));
 			plai.addChatMessage(txt);
 			IaSPlayerHelper.dochat = false;
 		} else

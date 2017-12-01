@@ -19,6 +19,27 @@ import net.minecraft.world.World;
 public class GenRuinsTowerLookout extends GenRuins {
 
 	/**
+	 * Generates the basic structure of the building. May also even out terrain
+	 * that the building is on.
+	 */
+	@Override
+	public void buildPass(World world, Random var2, int x, int y, int z) {
+		Sculptor.terrainFlatten(world, x - 3, y - 1, z - 3, x + 3, 4, z + 3);
+
+		Sculptor.walls(world, x - 1, y - 3, z - 1, x + 1, y - 3, z + 1, world.getBiomeGenForCoords(x, z).fillerBlock,
+				0);
+		Sculptor.cube(world, x - 2, y - 2, z - 2, x + 2, y - 2, z + 2, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
+		Sculptor.walls(world, x - 3, y - 1, z - 3, x + 3, y - 1, z + 3, world.getBiomeGenForCoords(x, z).fillerBlock,
+				0);
+		Sculptor.cube(world, x - 2, y - 1, z - 2, x + 2, y, z + 2, NyxBlocks.brickPale, 0);
+		Sculptor.cube(world, x - 4, y, z - 4, x + 4, y + 13, z + 4, Blocks.air, 0);
+
+		Sculptor.walls(world, x - 2, y, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickPale, 0);
+		Sculptor.walls(world, x - 3, y + 11, z - 3, x + 3, y + 11, z + 3, NyxBlocks.brickPale, 0);
+		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickPale, 0);
+	}
+
+	/**
 	 * Determines whether or not ruins can be generated here. Does not do any
 	 * building.
 	 */
@@ -32,33 +53,6 @@ public class GenRuinsTowerLookout extends GenRuins {
 				}
 		}
 		return Math.abs(x) > 16 || Math.abs(z) > 16;
-	}
-
-	/**
-	 * Generates the basic structure of the building. May also even out terrain
-	 * that the building is on.
-	 */
-	@Override
-	public void buildPass(World world, Random var2, int x, int y, int z) {
-		Sculptor.terrainFlatten(world, x - 3, y - 1, z - 3, x + 3, 4, z + 3);
-
-		Sculptor.walls(world, x - 1, y - 3, z - 1, x + 1, y - 3, z + 1,
-				world.getBiomeGenForCoords(x, z).fillerBlock, 0);
-		Sculptor.cube(world, x - 2, y - 2, z - 2, x + 2, y - 2, z + 2,
-				world.getBiomeGenForCoords(x, z).fillerBlock, 0);
-		Sculptor.walls(world, x - 3, y - 1, z - 3, x + 3, y - 1, z + 3,
-				world.getBiomeGenForCoords(x, z).fillerBlock, 0);
-		Sculptor.cube(world, x - 2, y - 1, z - 2, x + 2, y, z + 2,
-				NyxBlocks.brickPale, 0);
-		Sculptor.cube(world, x - 4, y, z - 4, x + 4, y + 13, z + 4, Blocks.air,
-				0);
-
-		Sculptor.walls(world, x - 2, y, z - 2, x + 2, y + 10, z + 2,
-				NyxBlocks.brickPale, 0);
-		Sculptor.walls(world, x - 3, y + 11, z - 3, x + 3, y + 11, z + 3,
-				NyxBlocks.brickPale, 0);
-		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2,
-				NyxBlocks.brickPale, 0);
 	}
 
 	/**
@@ -77,8 +71,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			final int xpos = x - 2 + var2.nextInt(5);
 			final int zpos = z - 2 + var2.nextInt(5);
 			if (var2.nextInt(3) != 0)
-				Sculptor.blast(var1, xpos, y + ydim, zpos,
-						1.5 + var2.nextDouble());
+				Sculptor.blast(var1, xpos, y + ydim, zpos, 1.5 + var2.nextDouble());
 		}
 
 		final int f = var2.nextInt(4);
@@ -86,17 +79,14 @@ public class GenRuinsTowerLookout extends GenRuins {
 			for (int zdim = -2; zdim <= 2; ++zdim) {
 
 				// Check to make sure we're dealing with a wall.
-				if (MathHelper.abs_int(xdim) == 2
-						|| MathHelper.abs_int(zdim) == 2) {
+				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2) {
 					// Swiss cheese pass.
 					for (int ydim = 1; ydim < 10; ++ydim) {
 						if (!var1.isAirBlock(x + xdim, y + ydim, z + zdim)) {
 							if (var2.nextInt(5) == 0)
-								var1.setBlock(x + xdim, y + ydim, z + zdim,
-										Blocks.air);
+								var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
 							else if (var2.nextInt(3) == 0)
-								var1.setBlock(x + xdim, y + ydim, z + zdim,
-										NyxBlocks.brickPaleCracked);
+								var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickPaleCracked);
 						}
 					}
 				}
@@ -105,20 +95,16 @@ public class GenRuinsTowerLookout extends GenRuins {
 				for (int ydim = 10; ydim > -1; --ydim) {
 					if (f == 0) {
 						if (!var1.isAirBlock(x, y + ydim, z - 2))
-							var1.setBlock(x, y + ydim, z - 1, Blocks.ladder,
-									0x3, 0x2);
+							var1.setBlock(x, y + ydim, z - 1, Blocks.ladder, 0x3, 0x2);
 					} else if (f == 1) {
 						if (!var1.isAirBlock(x + 2, y + ydim, z))
-							var1.setBlock(x + 1, y + ydim, z, Blocks.ladder,
-									0x4, 0x2);
+							var1.setBlock(x + 1, y + ydim, z, Blocks.ladder, 0x4, 0x2);
 					} else if (f == 2) {
 						if (!var1.isAirBlock(x, y + ydim, z + 2))
-							var1.setBlock(x, y + ydim, z + 1, Blocks.ladder,
-									0x2, 0x2);
+							var1.setBlock(x, y + ydim, z + 1, Blocks.ladder, 0x2, 0x2);
 					} else if (f == 3) {
 						if (!var1.isAirBlock(x - 2, y + ydim, z))
-							var1.setBlock(x - 1, y + ydim, z, Blocks.ladder,
-									0x5, 0x2);
+							var1.setBlock(x - 1, y + ydim, z, Blocks.ladder, 0x5, 0x2);
 					}
 				}
 
@@ -174,8 +160,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		var1.setBlock(xloc, y, zloc, Blocks.chest, chestf, 0x2);
 
 		// Start filling the chest with goodies.
-		final TileEntityChest chestent = (TileEntityChest) var1.getTileEntity(
-				xloc, y, zloc);
+		final TileEntityChest chestent = (TileEntityChest) var1.getTileEntity(xloc, y, zloc);
 
 		// Add more random loot.
 		final int chestcontentamount = 4 + var2.nextInt(4);
@@ -183,8 +168,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		boolean boneflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
-			ItemStack itemz = new ItemStack(NyxItems.icicle,
-					1 + var2.nextInt(4));
+			ItemStack itemz = new ItemStack(NyxItems.icicle, 1 + var2.nextInt(4));
 
 			// Magic repository.
 			if (rewardid == 0 && rareflag) {
@@ -195,13 +179,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 			// Long bow
 			else if (rewardid < 5 && rareflag) {
 				final NBTTagCompound c = new NBTTagCompound();
-				if(var2.nextInt(3) == 0)
-					itemz = new ItemStack(NyxItems.frostBowShort, 1,
-							48 + var2.nextInt(96));
+				if (var2.nextInt(3) == 0)
+					itemz = new ItemStack(NyxItems.frostBowShort, 1, 48 + var2.nextInt(96));
 				else
-					itemz = new ItemStack(NyxItems.frostBowLong, 1,
-						32 + var2.nextInt(64));
-				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3)==0?1:2);
+					itemz = new ItemStack(NyxItems.frostBowLong, 1, 32 + var2.nextInt(64));
+				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3) == 0 ? 1 : 2);
 				itemz.setTagCompound(c);
 				rareflag = false;
 			}
@@ -223,17 +205,14 @@ public class GenRuinsTowerLookout extends GenRuins {
 						break;
 					case 4:
 						itemz = new ItemStack(Items.diamond_helmet);
-						itemz.addEnchantment(Enchantment.thorns,
-								1 + var2.nextInt(2));
+						itemz.addEnchantment(Enchantment.thorns, 1 + var2.nextInt(2));
 						break;
 					case 5:
 						itemz = new ItemStack(Items.diamond_boots);
-						itemz.addEnchantment(Enchantment.featherFalling,
-								1 + var2.nextInt(2));
+						itemz.addEnchantment(Enchantment.featherFalling, 1 + var2.nextInt(2));
 						break;
 					}
-					itemz.addEnchantment(Enchantment.protection,
-							1 + var2.nextInt(2));
+					itemz.addEnchantment(Enchantment.protection, 1 + var2.nextInt(2));
 				}
 			}
 
@@ -249,8 +228,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(20);
 				if (foodtype < 6)
-					itemz = new ItemStack(Items.golden_apple,
-							1 + var2.nextInt(2));
+					itemz = new ItemStack(Items.golden_apple, 1 + var2.nextInt(2));
 				else if (foodtype < 12)
 					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
 				else if (foodtype < 16)
@@ -273,12 +251,10 @@ public class GenRuinsTowerLookout extends GenRuins {
 		}
 
 		if (var2.nextInt(4) != 0)
-			chestent.setInventorySlotContents(
-				1 + var2.nextInt(chestent.getSizeInventory() - 1),
-				new ItemStack(NyxItems.boneSanctified));
+			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
+					new ItemStack(NyxItems.boneSanctified));
 		if (var2.nextInt(3) != 0)
-			chestent.setInventorySlotContents(
-					1 + var2.nextInt(chestent.getSizeInventory() - 1),
+			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.draconium));
 		chestent.setInventorySlotContents(0, new ItemStack(NyxItems.page, 1, 0));
 	}

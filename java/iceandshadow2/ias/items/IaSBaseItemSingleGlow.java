@@ -6,8 +6,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSBaseItemSingleGlow extends IaSBaseItemSingle implements
-IIaSGlowing {
+public class IaSBaseItemSingleGlow extends IaSBaseItemSingle implements IIaSGlowing {
 
 	public IaSBaseItemSingleGlow(EnumIaSModule mod, String texName) {
 		super(mod, texName);

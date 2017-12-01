@@ -20,8 +20,8 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 	}
 
 	@Override
-	public boolean requiresMultipleRenderPasses() {
-		return true;
+	public int getFirstGlowPass(ItemStack is) {
+		return 0;
 	}
 
 	@Override
@@ -30,27 +30,16 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 0;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
-	}
-
-	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() == this && catalyst.getItem() == NyxItems.boneCursed)
-			return target.stackSize>=9?420:0;
+		if (target.getItem() == this && catalyst.getItem() == NyxItems.boneCursed)
+			return target.stackSize >= 9 ? 420 : 0;
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		int ss = 0;
-		while(target.stackSize >= 9) {
+		while (target.stackSize >= 9) {
 			target.stackSize -= 9;
 			++ss;
 		}
@@ -61,8 +50,17 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target,
-			ItemStack catalyst, World world, Entity ent) {
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

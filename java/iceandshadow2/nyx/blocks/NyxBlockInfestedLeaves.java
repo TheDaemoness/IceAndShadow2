@@ -15,8 +15,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements
-IIaSNoInfest {
+public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
 
 	private static Random r = new Random();
 
@@ -27,35 +26,27 @@ IIaSNoInfest {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
-		return NyxBlockFunctionsInfested.getCollisionBoundingBoxFromPool(
-				par1World, par2, par3, par4);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+		return NyxBlockFunctionsInfested.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int meta, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		return new ArrayList<ItemStack>();
 	}
 
 	@Override
-	public void onBlockClicked(World par1World, int par2, int par3, int par4,
-			EntityPlayer par5EntityPlayer) {
-		NyxBlockFunctionsInfested.onBlockClicked(par1World, par2, par3, par4,
-				par5EntityPlayer);
+	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+		NyxBlockFunctionsInfested.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
-			int par4, Entity par5Entity) {
-		NyxBlockFunctionsInfested.onEntityCollidedWithBlock(par1World, par2,
-				par3, par4, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+		NyxBlockFunctionsInfested.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
-			int x, int y, int z, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		return super.onSheared(item, world, x, y, z, fortune);
 	}
 

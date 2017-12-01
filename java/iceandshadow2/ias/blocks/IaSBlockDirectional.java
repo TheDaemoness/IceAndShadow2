@@ -67,8 +67,8 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public int onBlockPlaced(World par1World, int x, int y, int z, int face,
-			float par6, float par7, float par8, int par9) {
+	public int onBlockPlaced(World par1World, int x, int y, int z, int face, float par6, float par7, float par8,
+			int par9) {
 		byte align = 0;
 
 		switch (face) {

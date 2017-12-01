@@ -20,11 +20,6 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.common;
-	}
-
-	@Override
 	public EnumIaSModule getIaSModule() {
 		return this.MODULE;
 	}
@@ -32,6 +27,11 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 	@Override
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	@Override

@@ -19,8 +19,7 @@ public class EntityAINyxSearch extends EntityAIBase {
 	@Override
 	public boolean continueExecuting() {
 		++this.seen;
-		return this.seen < 125
-				&& !((IIaSSensate) this.taskOwner).getSense().canSense(this.target);
+		return this.seen < 125 && !((IIaSSensate) this.taskOwner).getSense().canSense(this.target);
 	}
 
 	@Override

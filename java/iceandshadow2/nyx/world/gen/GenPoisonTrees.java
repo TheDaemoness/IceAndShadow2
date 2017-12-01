@@ -13,8 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class GenPoisonTrees extends WorldGenerator {
 
 	@Override
-	public boolean generate(World par1World, Random par2Random, int x, int y,
-			int z) {
+	public boolean generate(World par1World, Random par2Random, int x, int y, int z) {
 		final int var6 = par2Random.nextInt(4) + 6;
 		final int var7 = 1 + par2Random.nextInt(2);
 		final int var8 = var6 - var7;
@@ -37,12 +36,10 @@ public class GenPoisonTrees extends WorldGenerator {
 				for (var13 = x - var21; var13 <= x + var21 && var10; ++var13) {
 					for (int var14 = z - var21; var14 <= z + var21 && var10; ++var14) {
 						if (var11 >= 0 && var11 < 256) {
-							final Block block = par1World.getBlock(var13,
-									var11, var14);
+							final Block block = par1World.getBlock(var13, var11, var14);
 
 							if (!par1World.isAirBlock(var13, var11, var14)
-									&& !block.isLeaves(par1World, var13, var11,
-											var14))
+									&& !block.isLeaves(par1World, var13, var11, var14))
 								var10 = false;
 						} else {
 							var10 = false;
@@ -56,8 +53,7 @@ public class GenPoisonTrees extends WorldGenerator {
 			} else {
 				final Block bl = par1World.getBlock(x, y - 1, z);
 
-				if ((bl == Blocks.snow || bl == NyxBlocks.permafrost)
-						&& y < 256 - var6 - 1) {
+				if ((bl == Blocks.snow || bl == NyxBlocks.permafrost) && y < 256 - var6 - 1) {
 					var21 = par2Random.nextInt(2);
 					var13 = 1;
 					byte var22 = 0;
@@ -73,17 +69,12 @@ public class GenPoisonTrees extends WorldGenerator {
 							for (int var19 = z - var21; var19 <= z + var21; ++var19) {
 								final int var20 = var19 - z;
 
-								final Block block = par1World.getBlock(var17,
-										var16, var19);
+								final Block block = par1World.getBlock(var17, var16, var19);
 
-								if ((Math.abs(var18) != var21
-										|| Math.abs(var20) != var21 || var21 <= 0)
-										&& (block == null || block
-										.canBeReplacedByLeaves(
-												par1World, var17,
-												var16, var19))) {
-									par1World.setBlock(var17, var16, var19,
-											NyxBlocks.poisonLeaves);
+								if ((Math.abs(var18) != var21 || Math.abs(var20) != var21 || var21 <= 0)
+										&& (block == null
+												|| block.canBeReplacedByLeaves(par1World, var17, var16, var19))) {
+									par1World.setBlock(var17, var16, var19, NyxBlocks.poisonLeaves);
 								}
 							}
 						}
@@ -105,10 +96,8 @@ public class GenPoisonTrees extends WorldGenerator {
 
 					for (var16 = 0; var16 < var6 - var15; ++var16) {
 						final Block b = par1World.getBlock(x, y + var16, z);
-						if (IaSBlockHelper.isAir(b)
-								|| b == NyxBlocks.poisonLeaves)
-							par1World.setBlock(x, y + var16, z,
-									NyxBlocks.poisonLog);
+						if (IaSBlockHelper.isAir(b) || b == NyxBlocks.poisonLeaves)
+							par1World.setBlock(x, y + var16, z, NyxBlocks.poisonLog);
 					}
 
 					return true;

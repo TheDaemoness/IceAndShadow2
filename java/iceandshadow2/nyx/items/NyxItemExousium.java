@@ -36,56 +36,17 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 
 	public NyxItemExousium(String texName) {
 		super(EnumIaSModule.NYX, texName, 3);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 1),
-				new ItemStack(this, 1, 0), new ItemStack(this, 1, 0),
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 1), new ItemStack(this, 1, 0), new ItemStack(this, 1, 0),
 				new ItemStack(this, 1, 0), new ItemStack(this, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 2),
-				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 2), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
 				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 16, 0),
-				new ItemStack(this, 1, 2));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 0),
-				new ItemStack(this, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 16, 0), new ItemStack(this, 1, 2));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 0), new ItemStack(this, 1, 1));
 	}
 
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer p, World w, int x,
-			int y, int z, int dmg, float a, float b, float c) {
-		final Block bl = w.getBlock(x, y, z);
-		if(is.getItemDamage() >= 1) {
-			boolean converted = false;
-			if(bl.getMaterial() == Material.ice) {
-				w.setBlockToAir(x, y, z);
-				w.setBlock(x, y, z, NyxBlocks.exousicWater, 14, 3);
-				converted = true;
-			} 
-			else if(bl instanceof BlockSnow) {
-				w.setBlockToAir(x, y, z);
-				w.setBlock(x, y, z, NyxBlocks.exousicWater, w.getBlockMetadata(x, y, z)/2, 3);
-				converted = true;
-			}
-			else if(bl.getMaterial() == Material.snow || bl.getMaterial() == Material.craftedSnow) {
-				w.setBlockToAir(x, y, z);
-				w.setBlock(x, y, z, NyxBlocks.exousicWater, 8, 3);
-				converted = true;
-			}
-			if(converted) {
-				is.stackSize -= 1;
-				if(is.getItemDamage() >= 2)
-					IaSPlayerHelper.giveItem(p, new ItemStack(NyxItems.exousium, 3, 1));
-			}
-			return converted;
-		} else if(is.getItemDamage() >= 2 && w.getBlock(x, y, z) instanceof NyxBlockStone) {
-			w.setBlock(x, y, z, NyxBlocks.oreExousium, 1, 0);
-			is.stackSize -= 1;
-			return true;
-		}
-		return super.onItemUse(is, p, w, x, y, z, dmg, a, b, c);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -107,11 +68,60 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	}
 
 	@Override
-	public void onUpdate(ItemStack is, World w, Entity ent, int time,
-			boolean holding) {
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if (target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 0 || catalyst.getItem() != this
+				|| catalyst.getItemDamage() != 0)
+			return 0;
+		return 120;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final List<ItemStack> it = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		it.add(new ItemStack(Items.iron_ingot, Math.min(2, target.stackSize), 1));
+		target.stackSize -= Math.min(2, target.stackSize);
+		return it;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer p, World w, int x, int y, int z, int dmg, float a, float b,
+			float c) {
+		final Block bl = w.getBlock(x, y, z);
+		if (is.getItemDamage() >= 1) {
+			boolean converted = false;
+			if (bl.getMaterial() == Material.ice) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, 14, 3);
+				converted = true;
+			} else if (bl instanceof BlockSnow) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, w.getBlockMetadata(x, y, z) / 2, 3);
+				converted = true;
+			} else if (bl.getMaterial() == Material.snow || bl.getMaterial() == Material.craftedSnow) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, 8, 3);
+				converted = true;
+			}
+			if (converted) {
+				is.stackSize -= 1;
+				if (is.getItemDamage() >= 2)
+					IaSPlayerHelper.giveItem(p, new ItemStack(NyxItems.exousium, 3, 1));
+			}
+			return converted;
+		} else if (is.getItemDamage() >= 2 && w.getBlock(x, y, z) instanceof NyxBlockStone) {
+			w.setBlock(x, y, z, NyxBlocks.oreExousium, 1, 0);
+			is.stackSize -= 1;
+			return true;
+		}
+		return super.onItemUse(is, p, w, x, y, z, dmg, a, b, c);
+	}
+
+	@Override
+	public void onUpdate(ItemStack is, World w, Entity ent, int time, boolean holding) {
 		if (ent instanceof EntityLivingBase) {
 			final EntityLivingBase el = (EntityLivingBase) ent;
-			if(el.getEquipmentInSlot(0) == null)
+			if (el.getEquipmentInSlot(0) == null)
 				return;
 			if (el.getEquipmentInSlot(0).getItem() != this)
 				return;
@@ -135,8 +145,7 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 
 		this.dustIconGlow = reg.registerIcon(getTexName() + "DustGlow");
 		this.rockIcon[0] = reg.registerIcon(getTexName() + "RockGlow");
-		this.crystalIcon[0] = reg.registerIcon(getTexName()
-				+ "CrystalGlow");
+		this.crystalIcon[0] = reg.registerIcon(getTexName() + "CrystalGlow");
 	}
 
 	@Override
@@ -146,32 +155,13 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	}
 
 	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
+		return false;
+	}
+
+	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-
-	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 0 ||
-				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
-			return 0;
-		return 120;
-	}
-
-	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final List<ItemStack> it = new ArrayList<ItemStack>();
-		catalyst.stackSize -= 1;
-		it.add(new ItemStack(Items.iron_ingot,Math.min(2, target.stackSize),1));
-		target.stackSize -= Math.min(2, target.stackSize);
-		return it;
-	}
-
-	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
-		return false;
 	}
 
 }

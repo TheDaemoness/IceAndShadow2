@@ -26,29 +26,23 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
-			int x, int y, int z) {
+	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		final float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(
-				par2, par3 + var5, par4,
-				par2 + 1, par3 + 1 - var5, par4 + 1);
+		return AxisAlignedBB.getBoundingBox(par2, par3 + var5, par4, par2 + 1, par3 + 1 - var5, par4 + 1);
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z,
-			Explosion e) {
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion e) {
 		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z,
-			Entity ent) {
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		if (ent instanceof EntityLivingBase) {
 			final EntityLivingBase lb = (EntityLivingBase) ent;
 			if (lb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)

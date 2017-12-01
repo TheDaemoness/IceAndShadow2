@@ -46,18 +46,61 @@ public class IceAndShadow2 {
 	@Instance(IceAndShadow2.MODID)
 	public static IceAndShadow2 instance;
 
+	private static List toPreRegister;
+
+	private static List toPostRegister;
+
 	public static Logger getLogger() {
 		return IceAndShadow2.logger;
 	}
 
-	private static List toPreRegister;
-	private static List toPostRegister;
+	public static Collection getPostRegistrationHandlers() {
+		return Collections.unmodifiableList(IceAndShadow2.toPostRegister);
+	}
 
 	public static Collection getPreRegistrationHandlers() {
 		return Collections.unmodifiableList(IceAndShadow2.toPreRegister);
 	}
-	public static Collection getPostRegistrationHandlers() {
-		return Collections.unmodifiableList(IceAndShadow2.toPostRegister);
+
+	public static boolean isRegistrationPublic() {
+		return IceAndShadow2.acceptRegistration;
+	}
+
+	private void addPostInitHandlers() {
+		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationRepair());
+		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationHeat());
+	}
+
+	private void addToolMaterials() {
+		IceAndShadow2.toPreRegister.add(new NyxMaterialDevora());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialCortra());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialNavistra());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialExousium());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialIcicle());
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		if (IaSFlags.flag_death_system)
+			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
+
+		NyxBiomes.registerBiomes();
+		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
+		MinecraftForge.EVENT_BUS.register(new NyxFrostSwordHandler());
+		MinecraftForge.EVENT_BUS.register(new NyxArmorHandler());
+		GameRegistry.registerFuelHandler(new NyxFuelHandler());
+
+		// Be nice, Thaumcraft.
+		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", "" + IaSFlags.dim_nyx_id + ":0");
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		IceAndShadow2.acceptRegistration = false;
+		IceAndShadow2.toPostRegister = new ArrayList<Object>();
+		addPostInitHandlers();
+		IaSRegistry.postInit();
+		IceAndShadow2.toPostRegister.clear();
 	}
 
 	@EventHandler
@@ -65,10 +108,10 @@ public class IceAndShadow2 {
 		event.getModLog().info("Ice and Shadow 2, version " + IceAndShadow2.VERSION + ".");
 		IceAndShadow2.logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
-			event.getModLog()
-			.info("While designed to be mostly multiplayer compatible, pings > 200 can make Ice and Shadow exponentially harder. You've been warned.");
-		IceAndShadow2.cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(),
-				IceAndShadow2.CONFIG_MAJ, IceAndShadow2.CONFIG_MIN);
+			event.getModLog().info(
+					"While designed to be mostly multiplayer compatible, pings > 200 can make Ice and Shadow exponentially harder. You've been warned.");
+		IceAndShadow2.cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), IceAndShadow2.CONFIG_MAJ,
+				IceAndShadow2.CONFIG_MIN);
 
 		IaSCreativeTabs.init();
 		IaSItemStarterKit.init();
@@ -89,49 +132,7 @@ public class IceAndShadow2 {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		if (IaSFlags.flag_death_system)
-			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
-
-		NyxBiomes.registerBiomes();
-		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
-		MinecraftForge.EVENT_BUS.register(new NyxFrostSwordHandler());
-		MinecraftForge.EVENT_BUS.register(new NyxArmorHandler());
-		GameRegistry.registerFuelHandler(new NyxFuelHandler());
-
-		// Be nice, Thaumcraft.
-		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", ""
-				+ IaSFlags.dim_nyx_id + ":0");
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		IceAndShadow2.acceptRegistration = false;
-		IceAndShadow2.toPostRegister = new ArrayList<Object>();
-		addPostInitHandlers();
-		IaSRegistry.postInit();
-		IceAndShadow2.toPostRegister.clear();
-	}
-
-	private void addToolMaterials() {
-		IceAndShadow2.toPreRegister.add(new NyxMaterialDevora());
-		IceAndShadow2.toPreRegister.add(new NyxMaterialCortra());
-		IceAndShadow2.toPreRegister.add(new NyxMaterialNavistra());
-		IceAndShadow2.toPreRegister.add(new NyxMaterialExousium());
-		IceAndShadow2.toPreRegister.add(new NyxMaterialIcicle());
-	}
-
-	private void addPostInitHandlers() {
-		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationRepair());
-		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationHeat());
-	}
-
-	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
 		event.registerServerCommand(new IaSServerCommand());
-	}
-
-	public static boolean isRegistrationPublic() {
-		return IceAndShadow2.acceptRegistration;
 	}
 }

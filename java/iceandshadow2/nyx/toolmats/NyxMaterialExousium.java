@@ -25,13 +25,13 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 			"iceandshadow2:textures/entity/nyxknife_exousium.png");
 
 	@Override
-	public int getBaseLevel() {
-		return 2;
+	public float getBaseDamage() {
+		return 4;
 	}
 
 	@Override
-	public int getHarvestLevel(ItemStack is, String toolClass) {
-		return getBaseLevel();
+	public int getBaseLevel() {
+		return 2;
 	}
 
 	@Override
@@ -40,35 +40,38 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public float getHarvestSpeed(ItemStack is, Block target) {
-		final Set<String> s = is.getItem().getToolClasses(is);
-		if (!s.contains(target.getHarvestTool(0)))
-			return getBaseSpeed()/4;
-		return getBaseSpeed();
-	}
-
-	@Override
-	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World,
-			EntityLivingBase elb) {
-		return 16;
-	}
-
-	@Override
 	public int getDurability(ItemStack is) {
 		return 32;
 	}
 
 	@Override
-	public float getBaseDamage() {
-		return 4;
+	public int getHarvestLevel(ItemStack is, String toolClass) {
+		return getBaseLevel();
 	}
 
 	@Override
-	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife,
-			Entity thrower) {
-		final DamageSource ds = super.getKnifeDamageSource(knife, thrower)
-				.setDamageBypassesArmor().setDamageIsAbsolute();
+	public float getHarvestSpeed(ItemStack is, Block target) {
+		final Set<String> s = is.getItem().getToolClasses(is);
+		if (!s.contains(target.getHarvestTool(0)))
+			return getBaseSpeed() / 4;
+		return getBaseSpeed();
+	}
+
+	@Override
+	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World, EntityLivingBase elb) {
+		return 16;
+	}
+
+	@Override
+	public DamageSource getKnifeDamageSource(IaSEntityKnifeBase knife, Entity thrower) {
+		final DamageSource ds = super.getKnifeDamageSource(knife, thrower).setDamageBypassesArmor()
+				.setDamageIsAbsolute();
 		return ds;
+	}
+
+	@Override
+	public String getKnifeMissSound() {
+		return "random.fizz";
 	}
 
 	@Override
@@ -87,34 +90,8 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if (target instanceof EntityLivingBase) {
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
-			if (user instanceof EntityPlayer)
-				target.attackEntityFrom(
-						DamageSource.causePlayerDamage((EntityPlayer) user).
-						setDamageBypassesArmor().setDamageIsAbsolute(),
-						getToolDamage(is, user, target));
-			else
-				target.attackEntityFrom(DamageSource.causeMobDamage(user).
-						setDamageBypassesArmor().setDamageIsAbsolute(),
-						getToolDamage(is, user, target));
-		}
-		return damageToolOnAttack(is, user, target);
-	}
-
-	
-
-	@Override
-	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
-		if(target instanceof EntityLivingBase)
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
-		return super.onKnifeHit(user, knife, target);
-	}
-
-	@Override
-	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
+	public ItemStack getTransmutationCatalyst() {
+		return new ItemStack(NyxItems.exousium, 1, 1);
 	}
 
 	@Override
@@ -123,33 +100,48 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife,
-			ChunkCoordinates block) {
-		super.onKnifeHit(user, knife, block);
-		return false;
+	public boolean isRepairable(ItemStack tool, ItemStack mat) {
+		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
 	}
 
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x,
-			int y, int z) {
-		if(w.isRemote)
+	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
+		if (target instanceof EntityLivingBase) {
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+			if (user instanceof EntityPlayer)
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user).setDamageBypassesArmor()
+						.setDamageIsAbsolute(), getToolDamage(is, user, target));
+			else
+				target.attackEntityFrom(
+						DamageSource.causeMobDamage(user).setDamageBypassesArmor().setDamageIsAbsolute(),
+						getToolDamage(is, user, target));
+		}
+		return damageToolOnAttack(is, user, target);
+	}
+
+	@Override
+	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+		if (w.isRemote)
 			return 0;
 		final Block bl = w.getBlock(x, y, z);
-		final int hl = bl.getHarvestLevel(w.getBlockMetadata(x,y,z));
-		int durab = Math.max(0,hl);
+		final int hl = bl.getHarvestLevel(w.getBlockMetadata(x, y, z));
+		int durab = Math.max(0, hl);
 		if (!is.getItem().getToolClasses(is).contains(bl.getHarvestTool(0)))
-			durab += Math.max(0,hl+1);
+			durab += Math.max(0, hl + 1);
 		w.setBlockToAir(x, y, z);
 		return durab;
 	}
 
 	@Override
-	public ItemStack getTransmutationCatalyst() {
-		return new ItemStack(NyxItems.exousium,1,1);
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
+		super.onKnifeHit(user, knife, block);
+		return false;
 	}
-	
+
 	@Override
-	public String getKnifeMissSound() {
-		return "random.fizz";
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
+		if (target instanceof EntityLivingBase)
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+		return super.onKnifeHit(user, knife, target);
 	}
 }

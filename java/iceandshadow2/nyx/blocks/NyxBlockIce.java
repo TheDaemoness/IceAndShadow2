@@ -30,8 +30,7 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList is = new ArrayList<ItemStack>();
 		final int r = 2 + world.rand.nextInt(3);
 		for (int i = 0; i < r; ++i)
@@ -51,8 +50,7 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z,
-			int s) {
+	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int s) {
 		if (w.getBlock(x, y, z) == this)
 			return false;
 		return super.shouldSideBeRendered(w, x, y, z, s);

@@ -20,8 +20,8 @@ public class NyxItemRope extends IaSBaseItemSingle {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer pl, World w, int x,
-			int y, int z, int meta, float lx, float ly, float lz) {
+	public boolean onItemUse(ItemStack is, EntityPlayer pl, World w, int x, int y, int z, int meta, float lx, float ly,
+			float lz) {
 		if (w.getBlock(x, y, z) == NyxBlocks.hookClimbing) {
 			for (int i = 1; i <= 2; ++i) {
 				final Block bl = w.getBlock(x, y - i, z);
@@ -36,7 +36,7 @@ public class NyxItemRope extends IaSBaseItemSingle {
 			w.func_147480_a(x, y - 2, z, true);
 			w.setBlock(x, y - 2, z, NyxBlocks.ropeY);
 			y -= 3;
-			for (final int e = Math.max(0, y-NyxItemRope.LENGTH_MAX); y > e; --y) {
+			for (final int e = Math.max(0, y - NyxItemRope.LENGTH_MAX); y > e; --y) {
 				final Block bl = w.getBlock(x, y, z);
 				if (!IaSBlockHelper.isAir(bl)) {
 					if (IaSBlockHelper.isFluid(bl))

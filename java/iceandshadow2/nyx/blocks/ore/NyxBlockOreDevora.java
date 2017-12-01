@@ -22,8 +22,7 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		final int e = 1 + world.rand.nextInt(2 + fortune);
 		for (int i = 0; i < e; ++i)
@@ -41,18 +40,15 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 	}
 
 	@Override
-	public void onBlockExploded(World world, int x, int y, int z,
-			Explosion explosion) {
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
 		if (!world.isRemote) {
 			world.setBlockToAir(x, y, z);
-			world.createExplosion(explosion.exploder, 0.5 + x, 0.5 + y,
-					0.5 + z, 2.5F, true);
+			world.createExplosion(explosion.exploder, 0.5 + x, 0.5 + y, 0.5 + z, 2.5F, true);
 		}
 	}
 
 	@Override
-	public void randomDisplayTick(World par1World, int par2, int par3,
-			int par4, Random par5Random) {
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (par5Random.nextBoolean())
 			return;
 		final double var9 = par3 + par5Random.nextFloat();

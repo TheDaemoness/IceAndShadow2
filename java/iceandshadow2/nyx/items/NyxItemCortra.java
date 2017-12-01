@@ -23,8 +23,8 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 
 	public NyxItemCortra(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		GameRegistry.addSmelting(new ItemStack(this,1,0), new ItemStack(this,1,1), 0);
-		GameRegistry.addShapelessRecipe(new ItemStack(this,1,0), new ItemStack(this,1,1));
+		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -35,6 +35,23 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 		return this.itemIcon;
 	}
 
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if (target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 || catalyst.getItem() != this
+				|| catalyst.getItemDamage() != 0)
+			return 0;
+		return 120;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final List<ItemStack> it = new ArrayList<ItemStack>();
+		catalyst.stackSize -= 1;
+		it.add(new ItemStack(NyxItems.cortraIngot, Math.min(2, target.stackSize), 1));
+		target.stackSize -= Math.min(2, target.stackSize);
+		return it;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
@@ -43,26 +60,7 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	}
 
 	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() != NyxItems.echirIngot || target.getItemDamage() != 1 ||
-				catalyst.getItem() != this || catalyst.getItemDamage() != 0)
-			return 0;
-		return 120;
-	}
-
-	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final List<ItemStack> it = new ArrayList<ItemStack>();
-		catalyst.stackSize -= 1;
-		it.add(new ItemStack(NyxItems.cortraIngot,Math.min(2, target.stackSize),1));
-		target.stackSize -= Math.min(2, target.stackSize);
-		return it;
-	}
-
-	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 }

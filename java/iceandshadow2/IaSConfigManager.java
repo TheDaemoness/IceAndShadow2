@@ -32,8 +32,7 @@ public class IaSConfigManager {
 		try {
 			lis = new Scanner(this.config);
 		} catch (final FileNotFoundException e) {
-			IceAndShadow2.getLogger().warn(
-					"Could not open config file for reading");
+			IceAndShadow2.getLogger().warn("Could not open config file for reading");
 			e.printStackTrace();
 			return true;
 		}
@@ -44,22 +43,17 @@ public class IaSConfigManager {
 		}
 		final String config_ver[] = lis.nextLine().split("\\s+", 3);
 		if (config_ver.length != 3) {
-			IceAndShadow2
-			.getLogger()
-			.error("Config file doesn't start with verion info (will overwrite)");
+			IceAndShadow2.getLogger().error("Config file doesn't start with verion info (will overwrite)");
 			lis.close();
 			return true;
 		}
 		if (!config_ver[0].contentEquals("version")) {
-			IceAndShadow2
-			.getLogger()
-			.error("Config file doesn't start with verion info (will overwrite)");
+			IceAndShadow2.getLogger().error("Config file doesn't start with verion info (will overwrite)");
 			lis.close();
 			return true;
 		}
 		if (Integer.parseInt(config_ver[1]) != this.exp_maj) {
-			IceAndShadow2.getLogger().error(
-					"Incompatible configuration file version (will overwrite)");
+			IceAndShadow2.getLogger().error("Incompatible configuration file version (will overwrite)");
 			lis.close();
 			return true;
 		}
@@ -67,27 +61,22 @@ public class IaSConfigManager {
 			final String orig = lis.nextLine();
 			final String data[] = orig.split("\\s+", 3);
 			if (data.length < 1) {
-				IceAndShadow2.getLogger().error(
-						"Invalid number of space-separated fields (minimum 2): "
-								+ orig);
+				IceAndShadow2.getLogger().error("Invalid number of space-separated fields (minimum 2): " + orig);
 				continue;
 			}
-			if(data[0].length() == 0)
+			if (data[0].length() == 0)
 				continue;
 			if (data[0].charAt(0) == '#')
 				continue;
 			if (data.length < 2) {
-				IceAndShadow2.getLogger().error(
-						"Invalid number of space-separated fields (minimum 2): "
-								+ orig);
+				IceAndShadow2.getLogger().error("Invalid number of space-separated fields (minimum 2): " + orig);
 				continue;
 			}
 			Field f;
 			try {
 				f = IaSFlags.class.getField(data[1]);
 			} catch (final NoSuchFieldException e) {
-				IceAndShadow2.getLogger().error(
-						"No such config field: " + data[1]);
+				IceAndShadow2.getLogger().error("No such config field: " + data[1]);
 				continue;
 			} catch (final SecurityException e) {
 				continue;
@@ -96,20 +85,17 @@ public class IaSConfigManager {
 			try {
 				typecheck = f.get(null);
 			} catch (final IllegalArgumentException e) {
-				IceAndShadow2.getLogger().error(
-						"No such config field: " + data[1]);
+				IceAndShadow2.getLogger().error("No such config field: " + data[1]);
 				continue;
 			} catch (final IllegalAccessException e) {
-				IceAndShadow2.getLogger().error(
-						"No such config field: " + data[1]);
+				IceAndShadow2.getLogger().error("No such config field: " + data[1]);
 				continue;
 			}
 			try {
 				if (typecheck instanceof Boolean) {
 					if (data.length != 2) {
-						IceAndShadow2.getLogger().error(
-								"Invalid number of space-separated fields (expected 2): "
-										+ orig);
+						IceAndShadow2.getLogger()
+								.error("Invalid number of space-separated fields (expected 2): " + orig);
 						continue;
 					}
 					if (data[0].contentEquals("enable"))
@@ -117,54 +103,41 @@ public class IaSConfigManager {
 					else if (data[0].contentEquals("disable"))
 						f.set(null, false);
 					else
-						IceAndShadow2.getLogger().error(
-								"Invalid prefix (expected 'enable' or 'disable): "
-										+ data[2]);
+						IceAndShadow2.getLogger().error("Invalid prefix (expected 'enable' or 'disable): " + data[2]);
 					continue;
 				}
 				if (data.length != 3) {
-					IceAndShadow2.getLogger().error(
-							"Invalid number of space-separated fields (expected 3): "
-									+ orig);
+					IceAndShadow2.getLogger().error("Invalid number of space-separated fields (expected 3): " + orig);
 					continue;
 				}
 				if (typecheck instanceof Integer) {
 					if (!data[0].contentEquals("set-int"))
-						IceAndShadow2.getLogger().warn(
-								"Ambiguous prefix (expected 'set-int'): "
-										+ data[0]);
+						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-int'): " + data[0]);
 					try {
 						f.set(null, Integer.parseInt(data[2]));
 					} catch (final NumberFormatException e) {
-						IceAndShadow2.getLogger().error(
-								"Malformed 32-bit integer: " + data[2]);
+						IceAndShadow2.getLogger().error("Malformed 32-bit integer: " + data[2]);
 						continue;
 					}
 				}
 				if (typecheck instanceof Short) {
 					if (!data[0].contentEquals("set-byte"))
-						IceAndShadow2.getLogger().warn(
-								"Ambiguous prefix (expected 'set-byte'): "
-										+ data[0]);
+						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-byte'): " + data[0]);
 					try {
 						final short s = Short.parseShort(data[2]);
 						if (s > 255) {
-							IceAndShadow2.getLogger().error(
-									"Byte value > 255: " + data[2]);
+							IceAndShadow2.getLogger().error("Byte value > 255: " + data[2]);
 							continue;
 						}
 						f.set(null, s);
 					} catch (final NumberFormatException e) {
-						IceAndShadow2.getLogger().error(
-								"Malformed 8-bit integer: " + data[2]);
+						IceAndShadow2.getLogger().error("Malformed 8-bit integer: " + data[2]);
 						continue;
 					}
 				}
 				if (typecheck instanceof String) {
 					if (!data[0].contentEquals("set-string"))
-						IceAndShadow2.getLogger().warn(
-								"Ambiguous prefix (expected 'set-string'): "
-										+ data[0]);
+						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-string'): " + data[0]);
 					f.set(null, data[2]);
 				}
 			} catch (final IllegalArgumentException e) {
@@ -182,8 +155,7 @@ public class IaSConfigManager {
 		try {
 			ecris = new PrintWriter(this.config);
 		} catch (final FileNotFoundException e) {
-			IceAndShadow2.getLogger().warn(
-					"Could not open config file for writing");
+			IceAndShadow2.getLogger().warn("Could not open config file for writing");
 			e.printStackTrace();
 			return;
 		}

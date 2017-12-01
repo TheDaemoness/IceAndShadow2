@@ -15,8 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements
-IIaSApiTransmute {
+public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
 
 	protected int slot;
 	protected boolean wep;
@@ -31,32 +30,27 @@ IIaSApiTransmute {
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()
-				+ EnumChatFormatting.ITALIC.toString()
+		l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 				+ "Sneak and Use Item to finalize.");
 	}
 
 	@Override
 	public int getMaxDamage() {
-		return IaSRegistry.getDefaultMaterial().getDurability(
-				new ItemStack(IaSTools.tools[this.slot]));
+		return IaSRegistry.getDefaultMaterial().getDurability(new ItemStack(IaSTools.tools[this.slot]));
 	}
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
-		if (IaSRegistry.getTransmutationMaterial(catalyst) != null
-				&& catalyst.stackSize >= 3)
+		if (IaSRegistry.getTransmutationMaterial(catalyst) != null && catalyst.stackSize >= 3)
 			return 300;
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final IaSToolMaterial mat = IaSRegistry
-				.getTransmutationMaterial(catalyst);
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final IaSToolMaterial mat = IaSRegistry.getTransmutationMaterial(catalyst);
 		catalyst.stackSize -= 3;
 		if (this.wep)
 			target.func_150996_a(IaSTools.weapons[this.slot]);
@@ -70,23 +64,19 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1, World w,
-			EntityPlayer ninja) {
+	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer ninja) {
 		if (ninja.isSneaking()) { // Do NOT remove this if statement, it
 			// actually isn't redundant.
 			if (this.wep)
-				par1 = new ItemStack(IaSTools.weapons[this.slot], 1,
-						par1.getItemDamage());
+				par1 = new ItemStack(IaSTools.weapons[this.slot], 1, par1.getItemDamage());
 			else
-				par1 = new ItemStack(IaSTools.tools[this.slot], 1,
-						par1.getItemDamage());
+				par1 = new ItemStack(IaSTools.tools[this.slot], 1, par1.getItemDamage());
 		}
 		return par1;
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 

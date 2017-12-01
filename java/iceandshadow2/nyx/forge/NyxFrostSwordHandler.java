@@ -17,39 +17,40 @@ public class NyxFrostSwordHandler {
 
 	@SubscribeEvent
 	public void dmg(LivingHurtEvent e) {
-		if(e.entityLiving.worldObj.isRemote)
+		if (e.entityLiving.worldObj.isRemote)
 			return;
-		if(e.entityLiving instanceof EntityPlayer) {
-			final EntityPlayer pwai = (EntityPlayer)e.entityLiving;
+		if (e.entityLiving instanceof EntityPlayer) {
+			final EntityPlayer pwai = (EntityPlayer) e.entityLiving;
 			final ItemStack is = pwai.getEquipmentInSlot(0);
-			if(is != null && is.getItem() == NyxItems.frostSword && pwai.isUsingItem()) { //Probably redundant.
-				if(e.source.isProjectile()) {
-					if(!e.source.isDamageAbsolute()) {
-						if(e.source.isFireDamage() && !e.source.isDamageAbsolute()) {
+			if (is != null && is.getItem() == NyxItems.frostSword && pwai.isUsingItem()) { // Probably
+																							// redundant.
+				if (e.source.isProjectile()) {
+					if (!e.source.isDamageAbsolute()) {
+						if (e.source.isFireDamage() && !e.source.isDamageAbsolute()) {
 							pwai.extinguish();
 							e.setCanceled(true);
 						} else
-							e.ammount=e.ammount/2;
+							e.ammount = e.ammount / 2;
 					}
-					pwai.getEquipmentInSlot(0).damageItem((int)(e.ammount+1), pwai);
+					pwai.getEquipmentInSlot(0).damageItem((int) (e.ammount + 1), pwai);
 				} else if (e.source.isMagicDamage() || e.source.isExplosion())
 					return;
 				else if (e.source instanceof EntityDamageSource) {
-					if(!e.source.isDamageAbsolute()) {
-						if(e.source.isFireDamage()) {
+					if (!e.source.isDamageAbsolute()) {
+						if (e.source.isFireDamage()) {
 							pwai.extinguish();
 							e.setCanceled(true);
 						} else
-							e.ammount=e.ammount/2;
+							e.ammount = e.ammount / 2;
 					}
-					final Entity attacker = ((EntityDamageSource)e.source).getEntity();
-					if(attacker instanceof EntityLivingBase) {
-						final int ulevel = ((NyxItemSwordFrost)NyxItems.frostSword).getUpgradeLevel(is);
-						((EntityLivingBase)attacker).addPotionEffect(
-								new PotionEffect(Potion.resistance.id,15,-(ulevel+1)));
+					final Entity attacker = ((EntityDamageSource) e.source).getEntity();
+					if (attacker instanceof EntityLivingBase) {
+						final int ulevel = ((NyxItemSwordFrost) NyxItems.frostSword).getUpgradeLevel(is);
+						((EntityLivingBase) attacker)
+								.addPotionEffect(new PotionEffect(Potion.resistance.id, 15, -(ulevel + 1)));
 					}
 					pwai.attackTargetEntityWithCurrentItem(attacker);
-					pwai.getEquipmentInSlot(0).damageItem((int)(e.ammount+1), pwai);
+					pwai.getEquipmentInSlot(0).damageItem((int) (e.ammount + 1), pwai);
 				}
 			}
 		}

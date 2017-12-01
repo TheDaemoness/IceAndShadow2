@@ -27,11 +27,6 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing,
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.uncommon;
-	}
-
-	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -49,21 +44,24 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing,
 	}
 
 	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.uncommon;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderPasses(int metadata) {
 		return 2;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World,
-			EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World, EntityPlayer player) {
 		if (!par2World.isRemote)
-			par2World.spawnEntityInWorld(new EntityShadowBall(par2World,
-					player, true, true));
+			par2World.spawnEntityInWorld(new EntityShadowBall(par2World, player, true, true));
 		if (!player.capabilities.isCreativeMode) {
 			par1Stack.stackSize -= 1;
 			player.attackEntityFrom(DamageSource.magic,
-					Math.max(0, player.worldObj.difficultySetting.getDifficultyId()-1));
+					Math.max(0, player.worldObj.difficultySetting.getDifficultyId() - 1));
 		}
 		return par1Stack;
 	}

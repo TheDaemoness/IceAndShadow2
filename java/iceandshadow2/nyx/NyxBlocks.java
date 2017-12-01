@@ -13,15 +13,13 @@ import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt,
-	exousicIce, exousicWater, crystalBloodstone, crystalExousium,
-	thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves, poisonLog,
-	brickFrozen, planks, gatestone, brickPale, brickPaleCracked,
-	hookClimbing, transmutationAltar, examinationTable,
-	hardShadow, unstableDevora, thermalAir, xpAltar, icicles, gravel, stoneGrowing;
+	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
+			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
+			poisonLog, brickFrozen, planks, gatestone, brickPale, brickPaleCracked, hookClimbing, transmutationAltar,
+			examinationTable, hardShadow, unstableDevora, thermalAir, xpAltar, icicles, gravel, stoneGrowing;
 
-	public static Block oreEchir, oreDevora, oreNavistra, oreCortra,
-	oreNifelhium, oreExousium, oreDraconium, oreGemstone;
+	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
+			oreGemstone;
 
 	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace, stoneMemory;
 
@@ -32,8 +30,7 @@ public class NyxBlocks {
 		NyxBlocks.unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		NyxBlocks.permafrost = new NyxBlockPermafrost("Permafrost").register();
 		NyxBlocks.dirt = new NyxBlockDirt("Dirt").register();
-		NyxBlocks.cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian")
-		.register();
+		NyxBlocks.cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
 		NyxBlocks.thornyVines = new NyxBlockThornyVines("ThornyVines").register();
 		NyxBlocks.exousicIce = new NyxBlockIce("ExousicIce").register();
 		NyxBlocks.poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
@@ -50,35 +47,28 @@ public class NyxBlocks {
 		NyxBlocks.oreCortra = new NyxBlockOreCortra("OreCortra").register();
 		NyxBlocks.oreNifelhium = new NyxBlockOreNifelhium("OreNifelhium").register();
 		NyxBlocks.oreExousium = new NyxBlockOreExousium("OreExousium").register();
-		NyxBlocks.oreDraconium = Blocks.air; //new NyxBlockOreDraconium("OreDraconium").register();
-		NyxBlocks.crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone")
-		.register();
-		NyxBlocks.crystalExousium = new NyxBlockCrystalExousium("CrystalExousium")
-		.register();
+		NyxBlocks.oreDraconium = Blocks.air; // new
+												// NyxBlockOreDraconium("OreDraconium").register();
+		NyxBlocks.crystalBloodstone = new NyxBlockCrystalBloodstone("CrystalBloodstone").register();
+		NyxBlocks.crystalExousium = new NyxBlockCrystalExousium("CrystalExousium").register();
 		NyxBlocks.icicles = new NyxBlockIcicles("Icicles").register();
 
 		NyxBlocks.fluidExousia = new Fluid("nyxFluidExousicWater");
-		NyxBlocks.fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10)
-		.setViscosity(500);
+		NyxBlocks.fluidExousia.setDensity(1500).setLuminosity(6).setTemperature(10).setViscosity(500);
 		IaSRegistration.register(NyxBlocks.fluidExousia);
-		NyxBlocks.exousicWater = new NyxBlockWater("ExousicWater", NyxBlocks.fluidExousia)
-		.register();
+		NyxBlocks.exousicWater = new NyxBlockWater("ExousicWater", NyxBlocks.fluidExousia).register();
 
 		NyxBlocks.brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
 		NyxBlocks.brickPale = new NyxBlockBrickPale("PaleBrick").register();
-		NyxBlocks.brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked")
-		.register();
+		NyxBlocks.brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked").register();
 		NyxBlocks.gatestone = new NyxBlockGatestone("Gatestone").register();
 
-		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation(
-				"TransmutationAltar").register();
+		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 
 		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
-		NyxBlocks.hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX")
-		.register();
-		NyxBlocks.hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ")
-		.register();
+		NyxBlocks.hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX").register();
+		NyxBlocks.hookTightropeZ = new NyxBlockHookTightropeZ("HookTightropeZ").register();
 		NyxBlocks.ropeY = new NyxBlockRopeY("RopeY").register();
 		NyxBlocks.ropeX = new NyxBlockRopeX("RopeX").register();
 		NyxBlocks.ropeZ = new NyxBlockRopeZ("RopeZ").register();
@@ -86,12 +76,11 @@ public class NyxBlocks {
 		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
 		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
 		NyxBlocks.thermalAir = new NyxBlockThermalAir("ThermalAir").register();
-		
+
 		NyxBlocks.gravel = new NyxBlockGravel("Gravel").register();
 
-		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class,
-				"nyxTeTransmutationAltar");
-		
+		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class, "nyxTeTransmutationAltar");
+
 		NyxBlocks.stoneMemory = new NyxBlockStoneMemory("StoneRegen").register();
 		NyxBlocks.stoneGrowing = new NyxBlockStoneGrowing("StoneGrowing").register();
 	}

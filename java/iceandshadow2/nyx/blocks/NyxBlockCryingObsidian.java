@@ -8,7 +8,6 @@ import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSNourishmentHelper;
 import iceandshadow2.util.IaSPlayerHelper;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,18 +33,6 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		if (world.getBlockMetadata(x, y, z) != 0)
-			return 14;
-		return super.getLightValue(world, x, y, z);
-	}
-
-	@Override
-	public float getBlockHardness(World w, int x, int y, int z) {
-		return (w.getBlockMetadata(x, y, z) != 0 ? -1 : Blocks.obsidian.getBlockHardness(w, x, y, z));
-	}
-
-	@Override
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
 		return type != EnumCreatureType.monster;
 	}
@@ -53,6 +40,11 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 	@Override
 	public int damageDropped(int par1) {
 		return 0;
+	}
+
+	@Override
+	public float getBlockHardness(World w, int x, int y, int z) {
+		return (w.getBlockMetadata(x, y, z) != 0 ? -1 : Blocks.obsidian.getBlockHardness(w, x, y, z));
 	}
 
 	@Override
@@ -65,6 +57,13 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 		final float var5 = 0.0125F;
 		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5, par2 + 1 - var5, par3 + 1 - var5,
 				par4 + 1 - var5);
+	}
+
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		if (world.getBlockMetadata(x, y, z) != 0)
+			return 14;
+		return super.getLightValue(world, x, y, z);
 	}
 
 	@Override
@@ -85,7 +84,7 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 			 * PotionEffect(Potion.regeneration.id,51,1));
 			 */
 			if (elb instanceof EntityPlayer) {
-				IaSNourishmentHelper.regen((EntityPlayer)elb, 1);
+				IaSNourishmentHelper.regen((EntityPlayer) elb, 1);
 				if (elb.isSneaking()) {
 					if (elb.isPotionActive(Potion.confusion))
 						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));

@@ -16,14 +16,13 @@ public class NyxBlockOreNavistra extends NyxBlockOre {
 		this.setHarvestLevel("pickaxe", 3);
 		setHardness(40.0F);
 		setResistance(120.0F);
-		GameRegistry.addSmelting(this, new ItemStack(NyxItems.navistraShard,2), 2);
+		GameRegistry.addSmelting(this, new ItemStack(NyxItems.navistraShard, 2), 2);
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-			int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.navistraShard, world.rand.nextInt(1+fortune)>=2?2:1));
+		is.add(new ItemStack(NyxItems.navistraShard, world.rand.nextInt(1 + fortune) >= 2 ? 2 : 1));
 		return is;
 	}
 

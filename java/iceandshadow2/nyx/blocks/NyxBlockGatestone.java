@@ -43,13 +43,11 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		setLuminescence(0.2F);
 	}
 
-	public void doTPFX(World theWorld, double posX, double posY, double posZ,
-			int modX, int modZ) {
+	public void doTPFX(World theWorld, double posX, double posY, double posZ, int modX, int modZ) {
 		theWorld.playSoundEffect(posX, posY, posZ, "mob.endermen.portal", 1.0F,
 				0.8F + theWorld.rand.nextFloat() * 0.1F);
 		if (theWorld.isRemote)
-			theWorld.spawnParticle("portal", posX,
-					posY + theWorld.rand.nextDouble() * 2.0D, posZ,
+			theWorld.spawnParticle("portal", posX, posY + theWorld.rand.nextDouble() * 2.0D, posZ,
 					theWorld.rand.nextGaussian() * (modX / NyxBlockGatestone.RANGE), 0.0D,
 					theWorld.rand.nextGaussian() * (modZ / NyxBlockGatestone.RANGE));
 	}
@@ -78,31 +76,26 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int x, int y, int z,
-			EntityPlayer par5EntityPlayer, int side, float px, float py,
-			float pz) {
+	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int side,
+			float px, float py, float pz) {
 		if (par1World.getBlockMetadata(x, y, z) > 0) {
 			if (par5EntityPlayer.getEquipmentInSlot(0) == null) {
-				IaSPlayerHelper
-				.messagePlayer(par5EntityPlayer,
+				IaSPlayerHelper.messagePlayer(par5EntityPlayer,
 						"It's missing something. That center stone looks like bloodstone...");
 				return false;
 			}
 			if (par5EntityPlayer.getEquipmentInSlot(0).getItem() == NyxItems.bloodstone) {
-				par1World.setBlockMetadataWithNotify(x, y, z,
-						par1World.getBlockMetadata(x, y, z) - 1, 0x2);
+				par1World.setBlockMetadataWithNotify(x, y, z, par1World.getBlockMetadata(x, y, z) - 1, 0x2);
 				if (!par5EntityPlayer.capabilities.isCreativeMode)
 					par5EntityPlayer.getEquipmentInSlot(0).stackSize -= 1;
 				if (par1World.getBlockMetadata(x, y, z) == 0) {
 					for (int xit = -1; xit <= 1; ++xit) {
 						for (int zit = -1; zit <= 1; ++zit) {
 							if (par1World.getBlock(x + xit, y - 1, z + zit) == Blocks.obsidian)
-								par1World.setBlock(x + xit, y - 1, z + zit,
-										NyxBlocks.cryingObsidian, 0, 0x2);
+								par1World.setBlock(x + xit, y - 1, z + zit, NyxBlocks.cryingObsidian, 0, 0x2);
 						}
 					}
-					par1World.spawnEntityInWorld(new EntityLightningBolt(
-							par1World, x, y, z));
+					par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, x, y, z));
 				}
 			}
 			return true;
@@ -111,8 +104,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	}
 
 	@Override
-	public void onEntityWalking(World theWorld, int x, int y, int z,
-			Entity theEntity) {
+	public void onEntityWalking(World theWorld, int x, int y, int z, Entity theEntity) {
 		if (theWorld.getBlockMetadata(x, y, z) != 0)
 			return;
 		if (theEntity.dimension != IaSFlags.dim_nyx_id)
@@ -120,7 +112,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		if (!(theEntity instanceof EntityMob)) {
 			if (theEntity instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) theEntity;
-				if(!elb.isSprinting())
+				if (!elb.isSprinting())
 					return;
 				ForgeDirection dir;
 				final Vec3 v = elb.getLookVec();
@@ -135,27 +127,44 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					else
 						dir = ForgeDirection.NORTH;
 				}
-				final int posXMod = NyxBlockGatestone.RANGE*dir.offsetX;
-				final int posZMod = NyxBlockGatestone.RANGE*dir.offsetZ;
-				int posYNew = theWorld.getTopSolidOrLiquidBlock(x
-						+ posXMod, z + posZMod) + 1;
+				final int posXMod = NyxBlockGatestone.RANGE * dir.offsetX;
+				final int posZMod = NyxBlockGatestone.RANGE * dir.offsetZ;
+				int posYNew = theWorld.getTopSolidOrLiquidBlock(x + posXMod, z + posZMod) + 1;
 				for (int gateY = posYNew; gateY >= 0; --gateY) {
-					if (theWorld.getBlock(x + posXMod, gateY, z
-							+ posZMod) == this) {
+					if (theWorld.getBlock(x + posXMod, gateY, z + posZMod) == this) {
 						posYNew = gateY;
 						break;
 					}
 				}
 				doTPFX(theWorld, elb.posX, elb.posY, elb.posZ, posXMod, posZMod);
 				if (!theWorld.isRemote)
-					elb.setPositionAndUpdate(x + 0.5 + posXMod,
-							posYNew, x + 0.5 + posZMod);
+					elb.setPositionAndUpdate(x + 0.5 + posXMod, posYNew, x + 0.5 + posZMod);
 				elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
-						3.0F + 2.0F*IaSWorldHelper.getDifficulty(theWorld));
-				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod,
-						posXMod, posZMod);
+						3.0F + 2.0F * IaSWorldHelper.getDifficulty(theWorld));
+				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod, posXMod, posZMod);
 			}
 		}
+	}
+
+	@Override
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+		if (par1World.getBlockMetadata(par2, par3, par4) != 0)
+			return;
+
+		final double var9 = par3 + par5Random.nextFloat();
+		double var13 = 0.0D;
+		double var15 = 0.0D;
+		double var17 = 0.0D;
+		final int var19 = par5Random.nextInt(2) * 2 - 1;
+		final int var20 = par5Random.nextInt(2) * 2 - 1;
+		var13 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var15 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		var17 = (par5Random.nextFloat() - 0.5D) * 0.125D;
+		final double var11 = par4 + 0.5D + 0.25D * var20;
+		var17 = par5Random.nextFloat() * 1.0F * var20;
+		final double var7 = par2 + 0.5D + 0.25D * var19;
+		var13 = par5Random.nextFloat() * 1.0F * var19;
+		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11, var13, var15, var17, false, true);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -174,29 +183,5 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
-	}
-
-
-	@Override
-	public void randomDisplayTick(World par1World, int par2, int par3,
-			int par4, Random par5Random) {
-		if (par1World.getBlockMetadata(par2, par3, par4) != 0)
-			return;
-		
-		final double var9 = par3 + par5Random.nextFloat();
-		double var13 = 0.0D;
-		double var15 = 0.0D;
-		double var17 = 0.0D;
-		final int var19 = par5Random.nextInt(2) * 2 - 1;
-		final int var20 = par5Random.nextInt(2) * 2 - 1;
-		var13 = (par5Random.nextFloat() - 0.5D) * 0.125D;
-		var15 = (par5Random.nextFloat() - 0.5D) * 0.125D;
-		var17 = (par5Random.nextFloat() - 0.5D) * 0.125D;
-		final double var11 = par4 + 0.5D + 0.25D * var20;
-		var17 = par5Random.nextFloat() * 1.0F * var20;
-		final double var7 = par2 + 0.5D + 0.25D * var19;
-		var13 = par5Random.nextFloat() * 1.0F * var19;
-		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11,
-				var13, var15, var17, false, true);
 	}
 }

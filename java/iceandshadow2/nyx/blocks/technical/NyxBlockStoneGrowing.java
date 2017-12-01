@@ -10,7 +10,6 @@ import iceandshadow2.nyx.blocks.NyxBlockGravel;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
 import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -31,15 +30,17 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 	}
 
 	@Override
+	public String getTexName() {
+		return IceAndShadow2.MODID + ':' + ((IaSBaseBlockSingle) NyxBlocks.stone).getModName();
+	}
+
+	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (!w.isRemote) {
 			boolean finished = true;
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				// TODO: Pushing mechanics.
-				final int
-					i = x + dir.offsetX,
-					j = y + dir.offsetY,
-					k = z + dir.offsetZ;
+				final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
 				final Block bl = w.getBlock(i, j, k);
 				if (bl instanceof NyxBlockStone)
 					continue;
@@ -53,11 +54,6 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 				w.setBlock(x, y, z, NyxBlocks.stone);
 		}
 		super.updateTick(w, x, y, z, r);
-	}
-
-	@Override
-	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + ((IaSBaseBlockSingle) NyxBlocks.stone).getModName();
 	}
 
 }

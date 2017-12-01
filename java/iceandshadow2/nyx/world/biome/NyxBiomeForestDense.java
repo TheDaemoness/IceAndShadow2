@@ -13,21 +13,18 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestDense extends NyxBiome {
 
-	public NyxBiomeForestDense(int par1, boolean register, float heightRoot,
-			float heightVari, boolean isRare) {
+	public NyxBiomeForestDense(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(Blocks.snow, Blocks.snow);
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class,
-				40, 1,1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
 
 		setColor(0 << 16 | 96 << 8 | 96);
 	}
 
 	@Override
-	protected void genFoliage(World par1World, Random par2Random, int xchunk,
-			int zchunk) {
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 		for (int i = 0; i < 10; ++i) {
 			final int x = xchunk + par2Random.nextInt(16) + 8;

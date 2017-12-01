@@ -27,34 +27,22 @@ public class IaSRenderers {
 	public static void init() {
 
 		// Mobs.
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityNyxSkeleton.class, new RenderNyxSkeleton());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class,
-				new RenderNyxSpider());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNyxGhoul.class,
-				new RenderNyxGhoul());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class,
-				new RenderNyxWightToxic());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSkeleton.class, new RenderNyxSkeleton());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class, new RenderNyxSpider());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxGhoul.class, new RenderNyxGhoul());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class, new RenderNyxWightToxic());
 
 		// Projectiles.
-		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class,
-				new RenderIceArrow());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityShadowBall.class, new RenderNot());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityThrowingKnife.class, new RenderThrowingKnife());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityCosmeticShadowRiser.class, new RenderNot());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityPoisonBall.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class, new RenderIceArrow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBall.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrowingKnife.class, new RenderThrowingKnife());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCosmeticShadowRiser.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonBall.class, new RenderNot());
 
 		// Technical entities.
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityTransmutationCountdown.class, new RenderNot());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityWightTeleport.class, new RenderNot());
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityOrbNourishment.class, new RenderOrbNourishment());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTransmutationCountdown.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityWightTeleport.class, new RenderNot());
+		RenderingRegistry.registerEntityRenderingHandler(EntityOrbNourishment.class, new RenderOrbNourishment());
 
 		// Items
 		for (final Field f : NyxItems.class.getFields()) {
@@ -62,35 +50,26 @@ public class IaSRenderers {
 				final Object o = f.get(null);
 				if (o instanceof IIaSGlowing && o instanceof Item) {
 					if (((IIaSGlowing) o).usesDefaultGlowRenderer())
-						MinecraftForgeClient.registerItemRenderer((Item) o,
-								new RenderItemVanillaGlowing());
+						MinecraftForgeClient.registerItemRenderer((Item) o, new RenderItemVanillaGlowing());
 				}
 			} catch (final Exception e) {
 			}
 		}
-		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort,
-				new RenderItemBow(false));
-		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong,
-				new RenderItemBow(true));
+		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
+		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
 
 		for (final Item item : IaSTools.tools)
-			MinecraftForgeClient.registerItemRenderer(item,
-					new RenderItemVanillaGlowing());
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for (final Item item : IaSTools.toolsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item,
-					new RenderItemVanillaGlowing());
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for (final Item item : IaSTools.weapons)
-			MinecraftForgeClient.registerItemRenderer(item,
-					new RenderItemVanillaGlowing());
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for (final Item item : IaSTools.swordsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item,
-					new RenderItemVanillaGlowing());
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for (final Item item : IaSTools.armorActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item,
-					new RenderItemVanillaGlowing());
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 
-		ClientRegistry.bindTileEntitySpecialRenderer(
-				NyxTeTransmutationAltar.class,
+		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransmutationAltar.class,
 				new RenderNyxTeTransmutationAltar());
 	}
 

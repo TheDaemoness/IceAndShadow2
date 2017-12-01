@@ -16,12 +16,9 @@ public class InitNyx {
 		NyxRecipes.init();
 		NyxEntities.init(owner);
 
-		GameRegistry.registerTileEntity(NyxTeSingleItemStorage.class,
-				"NyxTeSingleItemStorage");
+		GameRegistry.registerTileEntity(NyxTeSingleItemStorage.class, "NyxTeSingleItemStorage");
 
-		DimensionManager.registerProviderType(IaSFlags.dim_nyx_id,
-				NyxWorldProvider.class, false);
-		DimensionManager.registerDimension(IaSFlags.dim_nyx_id,
-				IaSFlags.dim_nyx_id);
+		DimensionManager.registerProviderType(IaSFlags.dim_nyx_id, NyxWorldProvider.class, false);
+		DimensionManager.registerDimension(IaSFlags.dim_nyx_id, IaSFlags.dim_nyx_id);
 	}
 }

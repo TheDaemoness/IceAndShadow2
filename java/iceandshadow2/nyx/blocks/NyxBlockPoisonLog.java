@@ -23,8 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxBlockPoisonLog extends IaSBlockDirectional implements
-IIaSNoInfest {
+public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfest {
 	@SideOnly(Side.CLIENT)
 	IIcon ringsIcon, barkIcon;
 
@@ -43,22 +42,18 @@ IIaSNoInfest {
 	 * update, as appropriate
 	 */
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4,
-			Block par5, int par6) {
+	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
 		final byte var7 = 4;
 		final int var8 = var7 + 1;
 
-		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8,
-				par2 + var8, par3 + var8, par4 + var8)) {
+		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8)) {
 			for (int var9 = -var7; var9 <= var7; ++var9) {
 				for (int var10 = -var7; var10 <= var7; ++var10) {
 					for (int var11 = -var7; var11 <= var7; ++var11) {
-						final Block var12 = par1World.getBlock(par2 + var9,
-								par3 + var10, par4 + var11);
+						final Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
 
 						if (var12 != null) {
-							var12.beginLeavesDecay(par1World, par2 + var9, par3
-									+ var10, par4 + var11);
+							var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
 						}
 					}
 				}
@@ -92,11 +87,10 @@ IIaSNoInfest {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		final float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4
-				+ var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
+		return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4 + var5, par2 + 1 - var5, par3 + 1 - var5,
+				par4 + 1 - var5);
 	}
 
 	/**
@@ -114,29 +108,20 @@ IIaSNoInfest {
 	}
 
 	@Override
-	public void onBlockClicked(World par1World, int par2, int par3, int par4,
-			EntityPlayer par5EntityPlayer) {
+	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null)
-			par5EntityPlayer
-			.addPotionEffect(new PotionEffect(
-					Potion.poison.id,
-					20 * (par1World.difficultySetting.getDifficultyId() + 1),
-					1));
+			par5EntityPlayer.addPotionEffect(
+					new PotionEffect(Potion.poison.id, 20 * (par1World.difficultySetting.getDifficultyId() + 1), 1));
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
-			int par4, Entity par5Entity) {
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		if (par5Entity instanceof EntityLivingBase) {
 			if (!(par5Entity instanceof EntityMob)) {
-				((EntityLivingBase) par5Entity).attackEntityFrom(
-						IaSDamageSources.dmgPoisonwood, 1);
-				if (!((EntityLivingBase) par5Entity)
-						.isPotionActive(Potion.poison))
-					((EntityLivingBase) par5Entity)
-					.addPotionEffect(new PotionEffect(Potion.poison.id,
-							35 * (par1World.difficultySetting
-									.getDifficultyId() + 1), 1));
+				((EntityLivingBase) par5Entity).attackEntityFrom(IaSDamageSources.dmgPoisonwood, 1);
+				if (!((EntityLivingBase) par5Entity).isPotionActive(Potion.poison))
+					((EntityLivingBase) par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id,
+							35 * (par1World.difficultySetting.getDifficultyId() + 1), 1));
 			}
 		}
 	}

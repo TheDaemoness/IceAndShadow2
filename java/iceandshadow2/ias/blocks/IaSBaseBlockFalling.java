@@ -14,8 +14,7 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName {
 	public IaSBaseBlockFalling(EnumIaSModule mod, String texName, Material mat) {
 		super(mat);
 		setBlockName(mod.prefix + texName);
-		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
-				+ texName);
+		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		this.MODULE = mod;
 		this.setCreativeTab(IaSCreativeTabs.blocks);
 	}

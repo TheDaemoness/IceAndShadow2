@@ -36,8 +36,7 @@ public class NyxEventHandlerCold {
 		if (e.entity == null)
 			return;
 		if (e.entity.dimension == IaSFlags.dim_nyx_id) {
-			if (e.entity instanceof EntitySmallFireball
-					|| e.entity instanceof EntityFireball
+			if (e.entity instanceof EntitySmallFireball || e.entity instanceof EntityFireball
 					|| e.entity instanceof EntityLargeFireball)
 				e.setCanceled(true);
 		}
@@ -47,10 +46,9 @@ public class NyxEventHandlerCold {
 	public void onPlayerTriesToPlaceBucket(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
-		if(e.entityPlayer.isInsideOfMaterial(Material.fire))
+		if (e.entityPlayer.isInsideOfMaterial(Material.fire))
 			return;
-		if (e.entityPlayer.dimension != IaSFlags.dim_nyx_id
-				|| !e.entityPlayer.capabilities.isCreativeMode)
+		if (e.entityPlayer.dimension != IaSFlags.dim_nyx_id || !e.entityPlayer.capabilities.isCreativeMode)
 			return;
 		if (e.entityPlayer.getEquipmentInSlot(0) == null)
 			return;
@@ -85,40 +83,13 @@ public class NyxEventHandlerCold {
 				break;
 			}
 			e.useItem = Result.DENY;
-			e.entityPlayer.setCurrentItemOrArmor(0, new ItemStack(
-					Items.bucket));
+			e.entityPlayer.setCurrentItemOrArmor(0, new ItemStack(Items.bucket));
 			if (itid == Items.lava_bucket) {
-				e.entityPlayer.worldObj
-				.playSoundEffect(
-						x + 0.5F,
-						y + 0.5F,
-						z + 0.5F,
-						"random.fizz",
-						0.5F,
-						2.6F + (e.entityPlayer.worldObj.rand
-								.nextFloat() - e.entityPlayer.worldObj.rand
-								.nextFloat()) * 0.8F);
-				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.obsidian,
-						0, 0x2);
+				e.entityPlayer.worldObj.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F
+						+ (e.entityPlayer.worldObj.rand.nextFloat() - e.entityPlayer.worldObj.rand.nextFloat()) * 0.8F);
+				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.obsidian, 0, 0x2);
 			} else if (itid == Items.water_bucket)
-				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0,
-						0x2);
-		}
-	}
-
-	@SubscribeEvent
-	public void onPlayerTriesToUseFurnace(PlayerInteractEvent e) {
-		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
-			return;
-		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
-				&& !e.entityPlayer.capabilities.isCreativeMode) {
-			final Block bl = e.world.getBlock(e.x, e.y, e.z);
-			if(bl instanceof BlockFurnace || e.world.getTileEntity(e.x, e.y, e.x) instanceof TileEntityFurnace) {
-				e.setCanceled(true);
-				IaSPlayerHelper
-				.messagePlayer(e.entityPlayer,
-						"It's too cold to light that furnace here. Find another way to smelt.");
-			}
+				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0, 0x2);
 		}
 	}
 
@@ -126,8 +97,7 @@ public class NyxEventHandlerCold {
 	public void onPlayerTriesToStartFires(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
-		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id
-				&& !e.entityPlayer.capabilities.isCreativeMode) {
+		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
 
 			boolean flaque = false;
 			if (e.entityPlayer.getEquipmentInSlot(0) == null)
@@ -150,23 +120,33 @@ public class NyxEventHandlerCold {
 			if (flaque && !e.isCanceled()) {
 				e.setCanceled(true);
 				if (id == Blocks.torch)
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"It's far too cold to light a torch in Nyx.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer, "It's far too cold to light a torch in Nyx.");
 				else
-					IaSPlayerHelper
-					.messagePlayer(e.entityPlayer,
-							"It's far too cold to start a fire that way in Nyx.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer, "It's far too cold to start a fire that way in Nyx.");
 			}
 		}
 
 	}
 
 	@SubscribeEvent
+	public void onPlayerTriesToUseFurnace(PlayerInteractEvent e) {
+		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+			return;
+		if (e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
+			final Block bl = e.world.getBlock(e.x, e.y, e.z);
+			if (bl instanceof BlockFurnace || e.world.getTileEntity(e.x, e.y, e.x) instanceof TileEntityFurnace) {
+				e.setCanceled(true);
+				IaSPlayerHelper.messagePlayer(e.entityPlayer,
+						"It's too cold to light that furnace here. Find another way to smelt.");
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public void onTryToPlant(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
-		if (e.entity.dimension == IaSFlags.dim_nyx_id
-				&& !e.entityPlayer.capabilities.isCreativeMode) {
+		if (e.entity.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
 			boolean isplant = false;
 			final ItemStack ite = e.entityPlayer.getEquipmentInSlot(0);
 			if (ite == null)
@@ -182,16 +162,15 @@ public class NyxEventHandlerCold {
 			if (isplant && !e.isCanceled()) {
 				final boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
 				final ForgeDirection face = ForgeDirection.getOrientation(e.face);
-				final boolean coolair = e.world.getBlock(e.x+face.offsetX, e.y+face.offsetY, e.z+face.offsetZ) != NyxBlocks.thermalAir;
+				final boolean coolair = e.world.getBlock(e.x + face.offsetX, e.y + face.offsetY,
+						e.z + face.offsetZ) != NyxBlocks.thermalAir;
 				e.setCanceled(!dirt || !coolair);
-				if(!dirt)
-					IaSPlayerHelper
-					.messagePlayer(e.entityPlayer,
-						"There's no way that this will grow off of warm native soil in this realm.");
-				else if(!coolair)
-					IaSPlayerHelper
-					.messagePlayer(e.entityPlayer,
-						"Better, but now the firey energies in the air make it prohibitive for new life to take root. Maybe heat the soil from beneath?");
+				if (!dirt)
+					IaSPlayerHelper.messagePlayer(e.entityPlayer,
+							"There's no way that this will grow off of warm native soil in this realm.");
+				else if (!coolair)
+					IaSPlayerHelper.messagePlayer(e.entityPlayer,
+							"Better, but now the firey energies in the air make it prohibitive for new life to take root. Maybe heat the soil from beneath?");
 			}
 		}
 	}
@@ -201,25 +180,21 @@ public class NyxEventHandlerCold {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR
 				&& e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 			return;
-		if(e.entityPlayer.isInsideOfMaterial(Material.fire))
+		if (e.entityPlayer.isInsideOfMaterial(Material.fire))
 			return;
-		if (e.entity.dimension == IaSFlags.dim_nyx_id
-				&& !e.entityPlayer.capabilities.isCreativeMode) {
+		if (e.entity.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
 			final ItemStack ite = e.entityPlayer.getEquipmentInSlot(0);
 			if (ite == null)
 				return;
 			else if (ite.getItem() instanceof ItemPotion) {
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
-					IaSPlayerHelper
-					.messagePlayer(e.entityPlayer,
-							"The contents of the bottle have frozen solid.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer, "The contents of the bottle have frozen solid.");
 				}
 			} else if (ite.getItem() == Items.milk_bucket) {
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"The milk has frozen solid.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer, "The milk has frozen solid.");
 				}
 			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood)) {
 				if (!e.isCanceled()) {

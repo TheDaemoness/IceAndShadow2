@@ -8,25 +8,6 @@ import net.minecraft.world.World;
 
 public class EntityCosmeticShadowRiser extends EntityThrowable {
 
-	public boolean isStrong() {
-		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
-	}
-
-	public boolean isUndeadHarming() {
-		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
-	}
-
-	public EntityCosmeticShadowRiser setFlags(boolean strong, boolean harmUndead) {
-		getDataWatcher().updateObject(16,
-				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
-		return this;
-	}
-
-	private void initFlags(boolean strong, boolean harmUndead) {
-		getDataWatcher().addObject(16,
-				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
-	}
-
 	public EntityCosmeticShadowRiser(World par1World) {
 		super(par1World);
 		getDataWatcher().addObject(16, (byte) (0));
@@ -52,24 +33,40 @@ public class EntityCosmeticShadowRiser extends EntityThrowable {
 		return 0.001F;
 	}
 
+	private void initFlags(boolean strong, boolean harmUndead) {
+		getDataWatcher().addObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
+	}
+
+	public boolean isStrong() {
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
+	}
+
+	public boolean isUndeadHarming() {
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
+	}
+
 	/**
 	 * Called when this EntityThrowable hits a block or entity.
 	 */
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
-		if(par1MovingObjectPosition.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY)
+		if (par1MovingObjectPosition.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY)
 			setDead();
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(this.ticksExisted > 50 && this.motionY < 0)
+		if (this.ticksExisted > 50 && this.motionY < 0)
 			setDead();
 		final String id = "shadowSmokeLarge";
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
-				this.posZ, false, false);
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX,
-				this.posY + this.motionY, this.posZ + this.motionZ, false, false);
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY, this.posZ, false, false);
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX, this.posY + this.motionY,
+				this.posZ + this.motionZ, false, false);
+	}
+
+	public EntityCosmeticShadowRiser setFlags(boolean strong, boolean harmUndead) {
+		getDataWatcher().updateObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
+		return this;
 	}
 }

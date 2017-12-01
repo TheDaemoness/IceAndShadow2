@@ -22,50 +22,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityShadowBall extends EntityThrowable {
 
-	public boolean isStrong() {
-		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
-	}
-
-	public boolean isUndeadHarming() {
-		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
-	}
-
-	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
-		getDataWatcher().updateObject(16,
-				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
-		return this;
-	}
-
-	private void initFlags(boolean strong, boolean harmUndead) {
-		getDataWatcher().addObject(16,
-				(byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
-	}
-
 	public EntityShadowBall(World par1World) {
 		super(par1World);
 		getDataWatcher().addObject(16, (byte) (0));
 	}
 
 	@SideOnly(Side.CLIENT)
-	public EntityShadowBall(World par1World, double par2, double par4,
-			double par6) {
+	public EntityShadowBall(World par1World, double par2, double par4, double par6) {
 		this(par1World, par2, par4, par6, true, false);
 	}
 
-	public EntityShadowBall(World par1World, double par2, double par4,
-			double par6, boolean hundead, boolean power) {
+	public EntityShadowBall(World par1World, double par2, double par4, double par6, boolean hundead, boolean power) {
 		super(par1World, par2, par4, par6);
 		initFlags(power, hundead);
 	}
 
-	public EntityShadowBall(World par1World,
-			EntityLivingBase par2EntityLivingBase) {
+	public EntityShadowBall(World par1World, EntityLivingBase par2EntityLivingBase) {
 		this(par1World, par2EntityLivingBase, true, false);
 	}
 
-	public EntityShadowBall(World par1World,
-			EntityLivingBase par2EntityLivingBase, boolean hundead,
-			boolean power) {
+	public EntityShadowBall(World par1World, EntityLivingBase par2EntityLivingBase, boolean hundead, boolean power) {
 		super(par1World, par2EntityLivingBase);
 		initFlags(power, hundead);
 	}
@@ -88,6 +64,18 @@ public class EntityShadowBall extends EntityThrowable {
 		return 0.05F;
 	}
 
+	private void initFlags(boolean strong, boolean harmUndead) {
+		getDataWatcher().addObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
+	}
+
+	public boolean isStrong() {
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x1) != 0;
+	}
+
+	public boolean isUndeadHarming() {
+		return (getDataWatcher().getWatchableObjectByte(16) & 0x2) != 0;
+	}
+
 	/**
 	 * Called when this EntityThrowable hits a block or entity.
 	 */
@@ -102,19 +90,17 @@ public class EntityShadowBall extends EntityThrowable {
 				return;
 			if (par1MovingObjectPosition.entityHit instanceof EntityNyxSkeleton
 					&& getThrower() instanceof EntityNyxNecromancer) {
-				if(isUndeadHarming() && !getThrower().isDead && getThrower().getHealth() >= 1)
+				if (isUndeadHarming() && !getThrower().isDead && getThrower().getHealth() >= 1)
 					par1MovingObjectPosition.entityHit.attackEntityFrom(
-						DamageSource.causeIndirectMagicDamage(
-								par1MovingObjectPosition.entityHit, getThrower()), 666);
+							DamageSource.causeIndirectMagicDamage(par1MovingObjectPosition.entityHit, getThrower()),
+							666);
 				return;
 			}
 		}
 
 		if (!this.worldObj.isRemote) {
-			final AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D,
-					2.0D, 4.0D);
-			final List list1 = this.worldObj.getEntitiesWithinAABB(
-					EntityLivingBase.class, axisalignedbb);
+			final AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
+			final List list1 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 
 			if (list1 != null && !list1.isEmpty()) {
 				final Iterator iterator = list1.iterator();
@@ -128,31 +114,24 @@ public class EntityShadowBall extends EntityThrowable {
 
 						final float power = basepower * d1 + basepower;
 
-						elmo.addPotionEffect(new PotionEffect(
-								Potion.blindness.id, 39, 0));
+						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id, 39, 0));
 
-						if (!isUndeadHarming()
-								&& elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+						if (!isUndeadHarming() && elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							elmo.heal(power);
 						else if (getThrower() != null && elmo.getEntityId() == getThrower().getEntityId()) {
 							if (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 								elmo.heal(power);
 							else
-								elmo.attackEntityFrom(DamageSource.magic,
-										power / 2);
+								elmo.attackEntityFrom(DamageSource.magic, power / 2);
 						} else
 							elmo.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(elmo,
-											getThrower() == null ? this
-													: getThrower()),
-									power
-											* (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? 3.0F
-													: 1.0F));
-						elmo.addPotionEffect(new PotionEffect(
-								Potion.blindness.id, 69, 1));
-						if(getThrower() != null)
-							getThrower().heal(
-								power / Math.min(1 + list1.size(), 4));
+											getThrower() == null ? this : getThrower()),
+									power * (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? 3.0F
+											: 1.0F));
+						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id, 69, 1));
+						if (getThrower() != null)
+							getThrower().heal(power / Math.min(1 + list1.size(), 4));
 					}
 				}
 			}
@@ -160,14 +139,12 @@ public class EntityShadowBall extends EntityThrowable {
 
 		final String id = strong ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		for (int i = 0; i < 48; ++i) {
-			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", this.posX
-					- 3.5F + 7.0F * this.rand.nextDouble(), this.posY - 1.5F
-					+ 3.0F * this.rand.nextDouble(), this.posZ - 3.5F + 7.0F
-					* this.rand.nextDouble(), 0.0, -0.01, 0.0, false, true);
-			IaSFxManager.spawnParticle(this.worldObj, id, this.posX - 3.5F
-					+ 7.0F * this.rand.nextDouble(), this.posY - 1.5F + 3.0F
-					* this.rand.nextDouble(), this.posZ - 3.5F + 7.0F
-					* this.rand.nextDouble(), 0.0, -0.01, 0.0, false, false);
+			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", this.posX - 3.5F + 7.0F * this.rand.nextDouble(),
+					this.posY - 1.5F + 3.0F * this.rand.nextDouble(), this.posZ - 3.5F + 7.0F * this.rand.nextDouble(),
+					0.0, -0.01, 0.0, false, true);
+			IaSFxManager.spawnParticle(this.worldObj, id, this.posX - 3.5F + 7.0F * this.rand.nextDouble(),
+					this.posY - 1.5F + 3.0F * this.rand.nextDouble(), this.posZ - 3.5F + 7.0F * this.rand.nextDouble(),
+					0.0, -0.01, 0.0, false, false);
 		}
 
 		setDead();
@@ -177,9 +154,13 @@ public class EntityShadowBall extends EntityThrowable {
 	public void onUpdate() {
 		super.onUpdate();
 		final String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY,
-				this.posZ, true);
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX,
-				this.posY + this.motionY, this.posZ + this.motionZ, true);
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY, this.posZ, true);
+		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX, this.posY + this.motionY,
+				this.posZ + this.motionZ, true);
+	}
+
+	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
+		getDataWatcher().updateObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
+		return this;
 	}
 }

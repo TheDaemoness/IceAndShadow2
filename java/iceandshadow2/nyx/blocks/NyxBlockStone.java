@@ -5,7 +5,6 @@ import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -17,10 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -29,19 +25,15 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	public static final float HARDNESS = 2.0F;
 	public static final float RESISTANCE = 9.0F;
 
-	public static void doDamage(World theWorld, int x, int y, int z,
-			Entity theEntity, int dmg) {
+	public static void doDamage(World theWorld, int x, int y, int z, Entity theEntity, int dmg) {
 		if (!(theEntity instanceof EntityMob)) {
 			if (theEntity instanceof EntityLivingBase) {
 				if (((EntityLivingBase) theEntity).getEquipmentInSlot(1) != null) {
-					final Item it = ((EntityLivingBase) theEntity)
-							.getEquipmentInSlot(1).getItem();
+					final Item it = ((EntityLivingBase) theEntity).getEquipmentInSlot(1).getItem();
 					if (it instanceof ItemArmor) {
-						if (((ItemArmor) it).getArmorMaterial()
-								.getDamageReductionAmount(3) == 1)
-							theEntity.attackEntityFrom(
-									IaSDamageSources.dmgStone, dmg / 2 + 1);
-						if(((EntityLivingBase) theEntity).getEquipmentInSlot(1).attemptDamageItem(1, theWorld.rand))
+						if (((ItemArmor) it).getArmorMaterial().getDamageReductionAmount(3) == 1)
+							theEntity.attackEntityFrom(IaSDamageSources.dmgStone, dmg / 2 + 1);
+						if (((EntityLivingBase) theEntity).getEquipmentInSlot(1).attemptDamageItem(1, theWorld.rand))
 							((EntityLivingBase) theEntity).setCurrentItemOrArmor(1, null);
 					}
 					return;
@@ -58,10 +50,29 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		this.setHarvestLevel("pickaxe", 1);
 		GameRegistry.addSmelting(this, new ItemStack(Blocks.cobblestone), 0);
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		return new ArrayList<ItemStack>();
+	}
+
+	public boolean isGenMineableReplaceable(World world, int x, int y, int z) {
+		return true;
+	}
+
+	@Override
+	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+		if (par5EntityPlayer.getCurrentEquippedItem() == null
+				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0)
+			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
+					par5EntityPlayer.worldObj.difficultySetting.getDifficultyId());
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
+			Explosion p_149723_5_) {
+		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
+		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, NyxBlocks.gravel);
 	}
 
 	@Override
@@ -72,37 +83,13 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
-			Explosion p_149723_5_) {
-		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, NyxBlocks.gravel);
-	}
-
-	public boolean isGenMineableReplaceable(World world, int x, int y, int z) {
-		return true;
-	}
-
-	@Override
-	public void onBlockClicked(World par1World, int par2, int par3, int par4,
-			EntityPlayer par5EntityPlayer) {
-		if (par5EntityPlayer.getCurrentEquippedItem() == null
-				&& par5EntityPlayer.worldObj.difficultySetting
-				.getDifficultyId() > 0)
-			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
-					par5EntityPlayer.worldObj.difficultySetting
-					.getDifficultyId());
-	}
-
-	@Override
-	public void onEntityWalking(World theWorld, int x, int y, int z,
-			Entity theEntity) {
+	public void onEntityWalking(World theWorld, int x, int y, int z, Entity theEntity) {
 		NyxBlockStone.doDamage(theWorld, x, y, z, theEntity,
 				theEntity.worldObj.difficultySetting.getDifficultyId() + 2);
 	}
 
 	@Override
-	public void onFallenUpon(World woild, int x, int y, int z,
-			Entity theEntity, float height) {
+	public void onFallenUpon(World woild, int x, int y, int z, Entity theEntity, float height) {
 		super.onFallenUpon(woild, x, y, z, theEntity, height);
 
 		int dmg = 2 * theEntity.worldObj.difficultySetting.getDifficultyId();

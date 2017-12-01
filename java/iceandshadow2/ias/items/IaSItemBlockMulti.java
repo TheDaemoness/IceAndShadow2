@@ -15,8 +15,7 @@ public class IaSItemBlockMulti extends ItemBlock {
 		if (bl instanceof IaSBaseBlockMulti)
 			this.theblock = (IaSBaseBlockMulti) bl;
 		else
-			throw new Exception("Block with iconString " + this.iconString
-					+ " is not an IaS Multiblock!");
+			throw new Exception("Block with iconString " + this.iconString + " is not an IaS Multiblock!");
 		setHasSubtypes(true);
 	}
 

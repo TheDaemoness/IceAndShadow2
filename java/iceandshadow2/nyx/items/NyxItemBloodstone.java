@@ -52,32 +52,12 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack par1ItemStack, World par2World,
-			EntityPlayer par3EntityPlayer) {
-		par2World.playSoundAtEntity(par3EntityPlayer, "mob.zombie.unfect",
-				0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
-		par3EntityPlayer.clearActivePotions();
-		par3EntityPlayer.attackEntityFrom(DamageSource.outOfWorld, par3EntityPlayer.getHealth()*2);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
-	}
-
-	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(catalyst.getItem() != this)
+		if (catalyst.getItem() != this)
 			return 0;
-		if(target.getItem() instanceof ItemBlock) {
-			final Block bl = ((ItemBlock)target.getItem()).field_150939_a;
-			if(bl == Blocks.obsidian)
+		if (target.getItem() instanceof ItemBlock) {
+			final Block bl = ((ItemBlock) target.getItem()).field_150939_a;
+			if (bl == Blocks.obsidian)
 				return 160;
 		}
 		return 0;
@@ -87,19 +67,38 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		--catalyst.stackSize;
 		int i = 0;
-		for(; i < 3; ++i) {
-			if(target.stackSize > 0)
+		for (; i < 3; ++i) {
+			if (target.stackSize > 0)
 				--target.stackSize;
 			else
 				break;
 		}
 		List<ItemStack> retval = new ArrayList<ItemStack>();
-		retval.add(new ItemStack(NyxBlocks.cryingObsidian,i));
+		retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
 		return retval;
+	}
+
+	@Override
+	protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+		par2World.playSoundAtEntity(par3EntityPlayer, "mob.zombie.unfect", 0.5F,
+				par2World.rand.nextFloat() * 0.1F + 0.9F);
+		par3EntityPlayer.clearActivePotions();
+		par3EntityPlayer.attackEntityFrom(DamageSource.outOfWorld, par3EntityPlayer.getHealth() * 2);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

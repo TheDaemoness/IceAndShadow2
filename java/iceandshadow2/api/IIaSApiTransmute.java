@@ -49,8 +49,7 @@ public interface IIaSApiTransmute {
 	 * @return The item stack yielded from doing the transmutation, or null if
 	 *         the transmutation should destroy the target.
 	 */
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world);
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world);
 
 	/**
 	 * Used to handle particle spawning while transmutation is happening. The
@@ -71,6 +70,5 @@ public interface IIaSApiTransmute {
 	 * @return True if item breaking particles should NOT be spawned, false if
 	 *         they should.
 	 */
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent);
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent);
 }

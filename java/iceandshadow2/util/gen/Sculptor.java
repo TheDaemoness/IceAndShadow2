@@ -19,8 +19,7 @@ public class Sculptor {
 		for (int yit = less; yit <= more; ++yit) {
 			for (int xit = less; xit <= more; ++xit) {
 				for (int zit = less; zit <= more; ++zit) {
-					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < Math
-							.sqrt(world.rand.nextDouble()) * radius)
+					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < Math.sqrt(world.rand.nextDouble()) * radius)
 						world.setBlockToAir(x + xit, y + yit, z + zit);
 				}
 			}
@@ -45,8 +44,8 @@ public class Sculptor {
 	 *            number of blocks to remove before or after the specified z
 	 *            coordinate.
 	 */
-	public static void corners(World world, int xLow, int yLow, int zLow,
-			int xHigh, int yHigh, int zHigh, Block bl, int meta) {
+	public static void corners(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
+			int meta) {
 		for (int yit = yLow; yit <= yHigh; ++yit) {
 			world.setBlock(xLow, yit, zLow, bl, meta, 0x2);
 			world.setBlock(xLow, yit, zHigh, bl, meta, 0x2);
@@ -68,8 +67,8 @@ public class Sculptor {
 	 * @param bl
 	 * @param meta
 	 */
-	public static void cube(World world, int xLow, int yLow, int zLow,
-			int xHigh, int yHigh, int zHigh, Block bl, int meta) {
+	public static void cube(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
+			int meta) {
 		for (int yit = yLow; yit <= yHigh; ++yit) {
 			for (int xit = xLow; xit <= xHigh; ++xit) {
 				for (int zit = zLow; zit <= zHigh; ++zit)
@@ -89,8 +88,7 @@ public class Sculptor {
 	 * @param radius
 	 * @param height
 	 */
-	public static void cylinder(World world, int x, int y, int z, int radius,
-			int height, Block bl, int meta) {
+	public static void cylinder(World world, int x, int y, int z, int radius, int height, Block bl, int meta) {
 		for (int yit = 0; yit <= height; ++yit) {
 			for (int xit = -radius; xit <= radius; ++xit) {
 				for (int zit = -radius; zit <= radius; ++zit) {
@@ -110,8 +108,7 @@ public class Sculptor {
 	 * @param z
 	 * @param radius
 	 */
-	public static void dome(World world, int x, int y, int z, int radius,
-			Block bl, int meta) {
+	public static void dome(World world, int x, int y, int z, int radius, Block bl, int meta) {
 		for (int yit = 0; yit <= radius; ++yit) {
 			for (int xit = -radius; xit <= radius; ++xit) {
 				for (int zit = -radius; zit <= radius; ++zit) {
@@ -131,8 +128,7 @@ public class Sculptor {
 	 * @param z
 	 * @param radius
 	 */
-	public static void sphere(World world, int x, int y, int z, int radius,
-			Block bl, int meta) {
+	public static void sphere(World world, int x, int y, int z, int radius, Block bl, int meta) {
 		for (int yit = -radius; yit <= radius; ++yit) {
 			for (int xit = -radius; xit <= radius; ++xit) {
 				for (int zit = -radius; zit <= radius; ++zit) {
@@ -159,8 +155,7 @@ public class Sculptor {
 	 *            The number of blocks to extrude before or after the specified
 	 *            z coordinate.
 	 */
-	public static void terrainFlatten(World world, int xLow, int y, int zLow,
-			int xHigh, int yDown, int zHigh) {
+	public static void terrainFlatten(World world, int xLow, int y, int zLow, int xHigh, int yDown, int zHigh) {
 		for (int xit = xLow; xit <= xHigh; ++xit) {
 			for (int zit = zLow; zit <= zHigh; ++zit) {
 				boolean setblock = false;
@@ -192,8 +187,8 @@ public class Sculptor {
 	 *            number of blocks to remove before or after the specified z
 	 *            coordinate.
 	 */
-	public static void walls(World world, int xLow, int yLow, int zLow,
-			int xHigh, int yHigh, int zHigh, Block bl, int meta) {
+	public static void walls(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
+			int meta) {
 		for (int yit = yLow; yit <= yHigh; ++yit) {
 			for (int xit = xLow + 1; xit < xHigh; ++xit) {
 				world.setBlock(xit, yit, zLow, bl, meta, 0x2);

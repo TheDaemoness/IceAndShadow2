@@ -18,16 +18,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing,
-IIaSApiTransmute {
+public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon icons[];
 
 	public NyxItemHeat(String texName) {
 		super(EnumIaSModule.NYX, texName, 4);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 8, 1),
-				new ItemStack(this, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 8, 1), new ItemStack(this, 1, 0));
 	}
 
 	@Override
@@ -56,22 +54,18 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final List<ItemStack> li = new ArrayList<ItemStack>();
 		int time;
 		if (catalyst.getItemDamage() > 3)
 			time = 0;
 		else
 			time = catalyst.getItemDamage();
-		final int finalSize = (int) Math.max(0,
-				target.stackSize - Math.pow(4, time));
+		final int finalSize = (int) Math.max(0, target.stackSize - Math.pow(4, time));
 		while (target.stackSize > finalSize) {
-			final ItemStack ret = FurnaceRecipes.smelting()
-					.getSmeltingResult(target).copy();
+			final ItemStack ret = FurnaceRecipes.smelting().getSmeltingResult(target).copy();
 			final int quantity = ret.stackSize;
-			ret.stackSize = (int) Math.min(Math.pow(4, time), target.stackSize)
-					* quantity;
+			ret.stackSize = (int) Math.min(Math.pow(4, time), target.stackSize) * quantity;
 			ret.stackSize = Math.min(ret.getMaxStackSize(), ret.stackSize);
 			li.add(ret);
 			target.stackSize -= ret.stackSize / quantity;
@@ -94,14 +88,10 @@ IIaSApiTransmute {
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity pos) {
-		IaSFxManager.spawnParticle(world, "vanilla_flame", pos.posX - 0.1
-				+ world.rand.nextDouble() / 5,
-				pos.posY + world.rand.nextDouble() / 3, pos.posZ - 0.1
-				+ world.rand.nextDouble() / 5,
-				-0.05 + world.rand.nextDouble() / 10, -0.1F,
-				-0.05 + world.rand.nextDouble() / 10, false, false);
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity pos) {
+		IaSFxManager.spawnParticle(world, "vanilla_flame", pos.posX - 0.1 + world.rand.nextDouble() / 5,
+				pos.posY + world.rand.nextDouble() / 3, pos.posZ - 0.1 + world.rand.nextDouble() / 5,
+				-0.05 + world.rand.nextDouble() / 10, -0.1F, -0.05 + world.rand.nextDouble() / 10, false, false);
 		return true;
 	}
 

@@ -11,24 +11,17 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp,
-IIaSModName {
+public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;
 
-	public IaSItemFood(EnumIaSModule mod, String texName, int hungerVal,
-			float hungerSat, boolean doWolvesEat) {
+	public IaSItemFood(EnumIaSModule mod, String texName, int hungerVal, float hungerSat, boolean doWolvesEat) {
 		super(hungerVal, hungerSat, doWolvesEat);
 		setEatTime(32);
 		setUnlocalizedName(mod.prefix + texName);
 		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		this.MODULE = mod;
-	}
-
-	@Override
-	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.common;
 	}
 
 	@Override
@@ -44,6 +37,11 @@ IIaSModName {
 	@Override
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return EnumRarity.common;
 	}
 
 	@Override

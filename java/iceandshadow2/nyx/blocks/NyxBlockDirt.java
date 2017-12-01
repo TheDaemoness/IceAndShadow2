@@ -32,43 +32,43 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z,
-			ForgeDirection direction, IPlantable plantable) {
+	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction,
+			IPlantable plantable) {
 		return world.getBlockMetadata(x, y, z) != 1;
 	}
 
 	@Override
+	public Block onThaw(World w, int x, int y, int z) {
+		if (w.getBlockMetadata(x, y, z) != 0)
+			return this;
+		return null;
+	}
+
+	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		final int meta = w.getBlockMetadata(x,y,z);
-		if(meta == 1)
+		final int meta = w.getBlockMetadata(x, y, z);
+		if (meta == 1)
 			return;
-		if(!(w.getWorldChunkManager() instanceof NyxChunkManager)) {
+		if (!(w.getWorldChunkManager() instanceof NyxChunkManager)) {
 			w.setBlock(x, y, z, Blocks.dirt, 1, 0x3);
 			return;
 		}
-		final Block bl = w.getBlock(x, y+1, z);
-		if(bl instanceof IGrowable)
-			((IGrowable)bl).func_149853_b(w, r, x, y+1, z);
+		final Block bl = w.getBlock(x, y + 1, z);
+		if (bl instanceof IGrowable)
+			((IGrowable) bl).func_149853_b(w, r, x, y + 1, z);
 		else
-			MinecraftForge.EVENT_BUS.post(new BonemealEvent(null, w, bl, x, y+1, z));
+			MinecraftForge.EVENT_BUS.post(new BonemealEvent(null, w, bl, x, y + 1, z));
 		boolean foundThermal = false;
-		for(int xit = -1; xit<=1; ++xit) {
-			for(int yit = -1; yit<=1; ++yit) {
-				for(int zit = -1; zit<=1; ++zit) {
-					if(w.getBlock(x+xit, y+yit, z+zit).getMaterial() == Material.fire)
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int yit = -1; yit <= 1; ++yit) {
+				for (int zit = -1; zit <= 1; ++zit) {
+					if (w.getBlock(x + xit, y + yit, z + zit).getMaterial() == Material.fire)
 						foundThermal = true;
 				}
 			}
 		}
-		if(!foundThermal)
+		if (!foundThermal)
 			w.setBlockMetadataWithNotify(x, y, z, 1, 0x3);
-	}
-
-	@Override
-	public Block onThaw(World w, int x, int y, int z) {
-		if(w.getBlockMetadata(x, y, z) != 0)
-			return this;
-		return null;
 	}
 
 }

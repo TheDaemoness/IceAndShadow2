@@ -41,19 +41,16 @@ public class EntityNyxSpider extends EntitySpider {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-		.setBaseValue(getScaledMaxHealth());
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-		.setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-		.setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		setInvisible(false);
 
-		final float dmg = (IaSWorldHelper.getDifficulty(this.worldObj)>=3?2:1)
+		final float dmg = (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 2 : 1)
 				+ IaSWorldHelper.getRegionArmorMod(this);
 
 		final DamageSource dmgsrc = DamageSource.causeMobDamage(this);
@@ -63,18 +60,15 @@ public class EntityNyxSpider extends EntitySpider {
 		if (flag) {
 			if (par1Entity instanceof EntityLivingBase) {
 				final int lvl = IaSWorldHelper.getDifficulty(this.worldObj) - 1;
-				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 225
-						: 275;
+				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 225 : 275;
 				final EntityLivingBase elb = (EntityLivingBase) par1Entity;
 				final boolean hometurf = IaSEntityHelper.getBiome(elb) == NyxBiomes.nyxInfested;
-				if(!elb.isPotionActive(Potion.poison))
+				if (!elb.isPotionActive(Potion.poison))
 					mod /= 2;
-				if(hometurf)
+				if (hometurf)
 					mod /= 2;
-				elb.addPotionEffect(new PotionEffect(
-						Potion.poison.id, mod + 60, hometurf?1:0));
-				elb.addPotionEffect(new PotionEffect(
-						Potion.weakness.id, mod + 90, lvl+(hometurf?1:0)));
+				elb.addPotionEffect(new PotionEffect(Potion.poison.id, mod + 60, hometurf ? 1 : 0));
+				elb.addPotionEffect(new PotionEffect(Potion.weakness.id, mod + 90, lvl + (hometurf ? 1 : 0)));
 			}
 			return true;
 		} else {
@@ -83,11 +77,8 @@ public class EntityNyxSpider extends EntitySpider {
 	}
 
 	protected void doUncloakSound() {
-		this.worldObj
-		.playSoundAtEntity(this,
-				"IceAndShadow2:mob_nyxwisp_materialize",
-				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F,
-				this.rand.nextFloat() * 0.2F + 0.9F);
+		this.worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwisp_materialize",
+				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F, this.rand.nextFloat() * 0.2F + 0.9F);
 	}
 
 	/**
@@ -101,20 +92,17 @@ public class EntityNyxSpider extends EntitySpider {
 			return;
 
 		if (isInvisible())
-			dropItem(Items.experience_bottle,
-					1 + this.rand.nextInt(2 + par2));
+			dropItem(Items.experience_bottle, 1 + this.rand.nextInt(2 + par2));
 
 		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
 		final int baite = this.rand.nextInt(Math.max(1, 8 - diff) + par2) - par2;
 		if (baite <= 0)
 			dropItem(NyxItems.toughGossamer, 1);
 
-		 if(this.rand.nextInt(5) < 2+diff)
-			 dropItem(NyxItems.resin,this.rand.nextInt(3)<par2-1?2:1);
-			
-		this.worldObj.spawnEntityInWorld(
-			new EntityOrbNourishment(this.worldObj,
-				this.posX, this.posY, this.posZ, 1));
+		if (this.rand.nextInt(5) < 2 + diff)
+			dropItem(NyxItems.resin, this.rand.nextInt(3) < par2 - 1 ? 2 : 1);
+
+		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 1));
 	}
 
 	@Override
@@ -129,10 +117,8 @@ public class EntityNyxSpider extends EntitySpider {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		final double range = this.isPotionActive(Potion.blindness.id) ? 2.0D
-				: 12.0D;
-		final EntityPlayer plai = this.worldObj
-				.getClosestVulnerablePlayerToEntity(this, range);
+		final double range = this.isPotionActive(Potion.blindness.id) ? 2.0D : 12.0D;
+		final EntityPlayer plai = this.worldObj.getClosestVulnerablePlayerToEntity(this, range);
 
 		if (plai != null && !plai.isInvisible()) {
 			if (isInvisible()) {
@@ -146,8 +132,7 @@ public class EntityNyxSpider extends EntitySpider {
 	}
 
 	@Override
-	protected void func_145780_a(int p_145780_1_, int p_145780_2_,
-			int p_145780_3_, Block p_145780_4_) {
+	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
 		if (!isInvisible())
 			playSound("mob.spider.step", 0.15F, 1.0F);
 	}
@@ -178,7 +163,7 @@ public class EntityNyxSpider extends EntitySpider {
 	@Override
 	public boolean getCanSpawnHere() {
 		final int wl = IaSWorldHelper.getRegionLevel(this);
-		if(wl < 1)
+		if (wl < 1)
 			return false;
 		return this.posY > 64.0F && super.getCanSpawnHere();
 	}
@@ -226,10 +211,8 @@ public class EntityNyxSpider extends EntitySpider {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(
-			IEntityLivingData par1EntityLivingData) {
-		final Object par1EntityLivingData1 = super
-				.onSpawnWithEgg(par1EntityLivingData);
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
+		final Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
 
 		// No spider wisp jokeys.
 		if (this.riddenByEntity != null) {

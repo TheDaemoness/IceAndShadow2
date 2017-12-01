@@ -7,7 +7,6 @@ import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityBubbleFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,24 +27,25 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		super.updateTick(world, x, y, z, rand);
-		final Block bl = world.getBlock(x, y-1, z);
-		if(!(bl instanceof BlockFluidBase) && bl.getHarvestLevel(world.getBlockMetadata(x, y-1, z)) < 1 && !world.isRemote)
-			IaSBlockHelper.breakBlock(world, x, y-1, z, false);
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
+		if (!(ent instanceof EntityFX)) {
+			if (ent.worldObj.isRemote && ent.worldObj.rand.nextBoolean())
+				IaSFxManager.spawnParticle(ent.worldObj, "shadowSmokeLarge", ent.posX, ent.posY, ent.posZ, 0, 0, 0,
+						false, true);
+			ent.attackEntityFrom(DamageSource.wither, 2);
+			if (ent instanceof EntityLivingBase)
+				((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
+		}
+		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z,
-			Entity ent) {
-		if(!(ent instanceof EntityFX)) {
-			if(ent.worldObj.isRemote && ent.worldObj.rand.nextBoolean())
-				IaSFxManager.spawnParticle(ent.worldObj, "shadowSmokeLarge", ent.posX, ent.posY, ent.posZ, 0, 0, 0, false, true);
-			ent.attackEntityFrom(DamageSource.wither, 2);
-			if (ent instanceof EntityLivingBase)
-				((EntityLivingBase)ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
-		}
-		super.onEntityCollidedWithBlock(world, x, y, z, ent);
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		super.updateTick(world, x, y, z, rand);
+		final Block bl = world.getBlock(x, y - 1, z);
+		if (!(bl instanceof BlockFluidBase) && bl.getHarvestLevel(world.getBlockMetadata(x, y - 1, z)) < 1
+				&& !world.isRemote)
+			IaSBlockHelper.breakBlock(world, x, y - 1, z, false);
 	}
 
 }

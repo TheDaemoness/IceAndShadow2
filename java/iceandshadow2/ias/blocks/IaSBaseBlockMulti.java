@@ -15,16 +15,14 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements
-IIaSModName {
+public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModName {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
 
 	public final byte subtypeCount;
 
-	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat,
-			int subtypes) {
+	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat, int subtypes) {
 		super(mod, mat);
 		setBlockName(mod.prefix + id);
 		this.subtypeCount = (byte) Math.min(subtypes, 16);

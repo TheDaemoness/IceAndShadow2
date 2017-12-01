@@ -18,9 +18,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class IaSFxManager {
 
 	@SideOnly(Side.CLIENT)
-	protected static void doParticleSpawn(World woild, String name, double x,
-			double y, double z, double velX, double velY, double velZ,
-			Object extra, boolean unbounded, boolean isDecorative) {
+	protected static void doParticleSpawn(World woild, String name, double x, double y, double z, double velX,
+			double velY, double velZ, Object extra, boolean unbounded, boolean isDecorative) {
 
 		Minecraft.getMinecraft();
 		Minecraft.getMinecraft();
@@ -30,22 +29,18 @@ public class IaSFxManager {
 			unbounded = false;
 		}
 
-		if (!unbounded
-				&& Minecraft.getMinecraft().renderViewEntity.getDistanceSq(x,
-						y, z) > 576.0F)
+		if (!unbounded && Minecraft.getMinecraft().renderViewEntity.getDistanceSq(x, y, z) > 576.0F)
 			return;
 
-		final EntityFX effex = IaSFxManager.getParticleInstanceByName(woild, name, x, y, z,
-				velX, velY, velZ, extra);
+		final EntityFX effex = IaSFxManager.getParticleInstanceByName(woild, name, x, y, z, velX, velY, velZ, extra);
 
 		if (effex != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(effex);
 	}
 
 	@SideOnly(Side.CLIENT)
-	protected static EntityFX getParticleInstanceByName(World woild,
-			String name, double x, double y, double z, double velX,
-			double velY, double velZ, Object extra) {
+	protected static EntityFX getParticleInstanceByName(World woild, String name, double x, double y, double z,
+			double velX, double velY, double velZ, Object extra) {
 
 		EntityFX efx = null;
 
@@ -61,23 +56,18 @@ public class IaSFxManager {
 		}
 		if (name == "blackMagic") {
 			efx = new EntitySpellParticleFX(woild, x, y, z, velX, velY, velZ);
-			efx.setRBGColorF(0.01F * woild.rand.nextFloat(),
-					0.01F * woild.rand.nextFloat(),
+			efx.setRBGColorF(0.01F * woild.rand.nextFloat(), 0.01F * woild.rand.nextFloat(),
 					0.01F * woild.rand.nextFloat());
 		} else if (name == "cloudSmall")
-			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ,
-					0.25F);
+			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ, 0.25F);
 		else if (name == "cortraSmoke")
 			return new EntityReddustFX(woild, x, y, z, 0.75F, 0.0F, 0.9F, 1.0F);
 		else if (name == "cloud")
-			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ,
-					0.75F);
+			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ, 0.75F);
 		else if (name == "cloudLarge")
-			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ,
-					2.25F);
+			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ, 2.25F);
 		else if (name == "cloudHuge")
-			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ,
-					6.75F);
+			return new EntityFxFrostCloud(woild, x, y, z, velX, velY, velZ, 6.75F);
 		else if (name == "vanilla_portal")
 			return new EntityPortalFX(woild, x, y, z, velX, velY, velZ);
 		else if (name == "vanilla_spell")
@@ -99,55 +89,47 @@ public class IaSFxManager {
 		} else if (name == "breakingItem") {
 			if (extra == null)
 				return null;
-			efx = new EntityBreakingFX(woild, x, y, z, velX, velY, velZ,
-					((ItemStack) extra).getItem(),
+			efx = new EntityBreakingFX(woild, x, y, z, velX, velY, velZ, ((ItemStack) extra).getItem(),
 					((ItemStack) extra).getItemDamage());
 		}
 
 		return efx;
 	}
 
-	public static void spawnItemParticle(World woild, ItemStack is, double x,
-			double y, double z, double velX, double velY, double velZ,
-			boolean unbounded, boolean isDecorative) {
+	public static void spawnItemParticle(World woild, ItemStack is, double x, double y, double z, double velX,
+			double velY, double velZ, boolean unbounded, boolean isDecorative) {
 
 		if (woild.isRemote)
-			IaSFxManager.doParticleSpawn(woild, "breakingItem", x, y, z, velX, velY, velZ,
-					is, unbounded, isDecorative);
+			IaSFxManager.doParticleSpawn(woild, "breakingItem", x, y, z, velX, velY, velZ, is, unbounded, isDecorative);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z) {
 		IaSFxManager.spawnParticle(woild, name, x, y, z, 0.0, 0.0, 0.0, false);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z, boolean unbounded) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z, boolean unbounded) {
 		IaSFxManager.spawnParticle(woild, name, x, y, z, 0.0, 0.0, 0.0, unbounded, false);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z, boolean unbounded, boolean isDecorative) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z, boolean unbounded,
+			boolean isDecorative) {
 		IaSFxManager.spawnParticle(woild, name, x, y, z, 0.0, 0.0, 0.0, unbounded, isDecorative);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z, double velX, double velY, double velZ) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z, double velX, double velY,
+			double velZ) {
 		IaSFxManager.spawnParticle(woild, name, x, y, z, velX, velY, velZ, false, false);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z, double velX, double velY, double velZ,
-			boolean unbounded) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z, double velX, double velY,
+			double velZ, boolean unbounded) {
 		IaSFxManager.spawnParticle(woild, name, x, y, z, velX, velY, velZ, unbounded, false);
 	}
 
-	public static void spawnParticle(World woild, String name, double x,
-			double y, double z, double velX, double velY, double velZ,
-			boolean unbounded, boolean isDecorative) {
+	public static void spawnParticle(World woild, String name, double x, double y, double z, double velX, double velY,
+			double velZ, boolean unbounded, boolean isDecorative) {
 
 		if (woild.isRemote)
-			IaSFxManager.doParticleSpawn(woild, name, x, y, z, velX, velY, velZ, null,
-					unbounded, isDecorative);
+			IaSFxManager.doParticleSpawn(woild, name, x, y, z, velX, velY, velZ, null, unbounded, isDecorative);
 	}
 }

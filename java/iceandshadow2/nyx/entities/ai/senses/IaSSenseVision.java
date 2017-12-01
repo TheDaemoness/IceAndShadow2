@@ -15,8 +15,7 @@ public class IaSSenseVision extends IaSSense {
 					if (seekable.getEquipmentInSlot(i) != null) {
 						if (i == 0)
 							return false;
-						if (i >= 2
-								&& !(seekable.getEquipmentInSlot(i).getItem() instanceof IaSItemArmor))
+						if (i >= 2 && !(seekable.getEquipmentInSlot(i).getItem() instanceof IaSItemArmor))
 							return false;
 					}
 				}
@@ -48,11 +47,11 @@ public class IaSSenseVision extends IaSSense {
 		final double zdif = ent.posZ - this.owner.posZ;
 		double ratio;
 
-		if(2*Math.sqrt(xdif*xdif+zdif*zdif) < (ent.posY-this.owner.posY))
+		if (2 * Math.sqrt(xdif * xdif + zdif * zdif) < (ent.posY - this.owner.posY))
 			return false;
 
 		if (xdif == 0.0)
-			ratio = zdif/xdif;
+			ratio = zdif / xdif;
 		else
 			ratio = 0;
 
@@ -62,7 +61,8 @@ public class IaSSenseVision extends IaSSense {
 		else if (zdif < 0)
 			ang += 360.0;
 
-		double delta = ang - this.owner.rotationYawHead; // NOTE: When the skeleton
+		double delta = ang - this.owner.rotationYawHead; // NOTE: When the
+															// skeleton
 		// looks directly at the
 		// player, this will be 90.
 

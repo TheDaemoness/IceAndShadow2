@@ -36,8 +36,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 		return func_110860_a((EntityNyxSkeleton) par1EntityLiving);
 	}
 
-	protected ResourceLocation func_110860_a(
-			EntityNyxSkeleton par1EntitySkeleton) {
+	protected ResourceLocation func_110860_a(EntityNyxSkeleton par1EntitySkeleton) {
 		return par1EntitySkeleton.getSkeletonType() == 1 ? RenderNyxSkeleton.necromancerskin
 				: RenderNyxSkeleton.winterskeletonskin;
 	}
@@ -63,18 +62,15 @@ public class RenderNyxSkeleton extends RenderBiped {
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
 	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
-			float par2) {
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		func_82438_a((EntitySkeleton) par1EntityLivingBase, par2);
 	}
 
 	/**
 	 * Sets the skeleton's glowing eyes
 	 */
-	protected void setSkeletonEyeBrightness(EntityNyxSkeleton par1Entity,
-			int par2, float par3) {
-		if (par2 > 1 || par1Entity.isInvisible() || par1Entity.hurtTime > 0
-				|| par1Entity.getHealth() <= 0.0F)
+	protected void setSkeletonEyeBrightness(EntityNyxSkeleton par1Entity, int par2, float par3) {
+		if (par2 > 1 || par1Entity.isInvisible() || par1Entity.hurtTime > 0 || par1Entity.getHealth() <= 0.0F)
 			return;
 		else {
 			final float f1 = 1.0F;
@@ -92,8 +88,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 			final char c0 = 61680;
 			final int j = c0 % 65536;
 			final int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-					j / 1.0F, k / 1.0F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
@@ -108,10 +103,8 @@ public class RenderNyxSkeleton extends RenderBiped {
 	 * Queries whether should render the specified pass or not.
 	 */
 	@Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase,
-			int par2, float par3) {
-		setSkeletonEyeBrightness((EntityNyxSkeleton) par1EntityLivingBase,
-				par2, par3);
+	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
+		setSkeletonEyeBrightness((EntityNyxSkeleton) par1EntityLivingBase, par2, par3);
 		return super.shouldRenderPass(par1EntityLivingBase, par2, par3);
 	}
 }

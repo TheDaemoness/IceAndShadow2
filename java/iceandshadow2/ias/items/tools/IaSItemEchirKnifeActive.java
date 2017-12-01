@@ -24,17 +24,8 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString()
-				+ EnumChatFormatting.ITALIC.toString()
+		l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 				+ "Sneak and Use Item to finalize.");
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1, World w,
-			EntityPlayer pirate) {
-		if (pirate.isSneaking()) // Pirates can have subtlety too!
-			par1 = new ItemStack(IaSTools.knife, par1.stackSize);
-		return par1;
 	}
 
 	@Override
@@ -47,12 +38,12 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target,
-			ItemStack catalyst, World world) {
-		final int mut = Math.min(target.stackSize,4);
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final int mut = Math.min(target.stackSize, 4);
 		target.stackSize -= mut;
 		catalyst.stackSize -= 1;
-		final ItemStack res = IaSTools.setToolMaterial(IaSTools.knife, IaSRegistry.getTransmutationMaterial(catalyst).getMaterialName());
+		final ItemStack res = IaSTools.setToolMaterial(IaSTools.knife,
+				IaSRegistry.getTransmutationMaterial(catalyst).getMaterialName());
 		res.stackSize = mut;
 		final ArrayList<ItemStack> st = new ArrayList<ItemStack>(1);
 		st.add(res);
@@ -60,8 +51,14 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 	}
 
 	@Override
-	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst,
-			World world, Entity ent) {
+	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer pirate) {
+		if (pirate.isSneaking()) // Pirates can have subtlety too!
+			par1 = new ItemStack(IaSTools.knife, par1.stackSize);
+		return par1;
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 

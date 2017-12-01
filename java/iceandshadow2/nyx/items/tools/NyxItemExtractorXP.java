@@ -15,7 +15,7 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 
 public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathRuin {
 
-	//TODO: RENDER PASSES AND ICONS!
+	// TODO: RENDER PASSES AND ICONS!
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon fillIcons[];
@@ -24,6 +24,11 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 		super(EnumIaSModule.NYX, texName);
 		setMaxStackSize(1);
 		setMaxDamage(14);
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 2;
 	}
 
 	@Override
@@ -39,14 +44,6 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 	}
 
 	@Override
-	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(getTexName());
-		this.fillIcons = new IIcon[7];
-		for(int i = 0; i < 7; ++i)
-			this.fillIcons[i] = r.registerIcon(getTexName()+i);
-	}
-
-	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 		return EnumAction.block;
 	}
@@ -57,23 +54,31 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 3;
+	}
+
+	@Override
 	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
 		pl.addExperienceLevel(-5);
-		is.setItemDamage(is.getItemDamage()-1);
+		is.setItemDamage(is.getItemDamage() - 1);
 		return is;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack heap, World order,
-			EntityPlayer pwai) {
-		if(pwai.experienceLevel >= 5 && heap.getItemDamage() > 0)
+	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
+		if (pwai.experienceLevel >= 5 && heap.getItemDamage() > 0)
 			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
 		return heap;
 	}
 
 	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
+	public void registerIcons(IIconRegister r) {
+		this.itemIcon = r.registerIcon(getTexName());
+		this.fillIcons = new IIcon[7];
+		for (int i = 0; i < 7; ++i)
+			this.fillIcons[i] = r.registerIcon(getTexName() + i);
 	}
 
 	@Override
@@ -83,13 +88,7 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 3;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 2;
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

@@ -28,22 +28,18 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	public NyxItemIngot(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		setHasSubtypes(true);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0),
-				new ItemStack(this, 1, 1));
-		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this,
-				1, 1), 0);
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
+		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
 		this.yield = 0;
 	}
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
 		if (s.getItemDamage() == 1) {
-			l.add(EnumChatFormatting.GRAY.toString()
-					+ EnumChatFormatting.ITALIC.toString()
+			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "Sneak and Use Item to finalize.");
 		} else {
-			l.add(EnumChatFormatting.GRAY.toString()
-					+ EnumChatFormatting.ITALIC.toString()
+			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "This needs to be heated up...");
 		}
 	}
@@ -79,8 +75,7 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack heap, World order,
-			EntityPlayer pwai) {
+	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
 		if (pwai.isSneaking())
 			heap.setItemDamage(0);
 		return heap;

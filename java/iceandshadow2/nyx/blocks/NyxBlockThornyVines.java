@@ -39,18 +39,14 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
 		return par1World.isSideSolid(par2 - 1, par3, par4, ForgeDirection.EAST)
-				|| par1World.isSideSolid(par2 + 1, par3, par4,
-						ForgeDirection.WEST, false)
-						|| par1World.isSideSolid(par2, par3, par4 - 1,
-								ForgeDirection.SOUTH, false)
-								|| par1World.isSideSolid(par2, par3, par4 + 1,
-										ForgeDirection.NORTH, false);
+				|| par1World.isSideSolid(par2 + 1, par3, par4, ForgeDirection.WEST, false)
+				|| par1World.isSideSolid(par2, par3, par4 - 1, ForgeDirection.SOUTH, false)
+				|| par1World.isSideSolid(par2, par3, par4 + 1, ForgeDirection.NORTH, false);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2,
-			int par3, int par4) {
+	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
 		return 0xFFFFFF;
 	}
 
@@ -70,8 +66,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World theWorld, int x, int y, int z,
-			Entity theEntity) {
+	public void onEntityCollidedWithBlock(World theWorld, int x, int y, int z, Entity theEntity) {
 
 		if (theEntity instanceof EntityLivingBase && !theEntity.onGround) {
 			boolean movflag = theEntity.posY != theEntity.prevPosY;
@@ -87,8 +82,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,
-			int x, int y, int z, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		final ArrayList<ItemStack> li = new ArrayList<ItemStack>();
 		li.add(new ItemStack(NyxItems.vineBundle, 1));
 		return li;

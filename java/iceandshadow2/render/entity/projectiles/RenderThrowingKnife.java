@@ -23,10 +23,8 @@ public class RenderThrowingKnife extends Render {
 	 * f1). But JAD is pre 1.5 so doesn't do that.
 	 */
 	@Override
-	public void doRender(Entity par1Entity, double par2, double par4,
-			double par6, float par8, float par9) {
-		renderKnife((EntityThrowingKnife) par1Entity, par2, par4, par6,
-				par8, par9);
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+		renderKnife((EntityThrowingKnife) par1Entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override
@@ -36,17 +34,14 @@ public class RenderThrowingKnife extends Render {
 		return null;
 	}
 
-	public void renderKnife(EntityThrowingKnife knife, double par2,
-			double par4, double par6, float par8, float par9) {
+	public void renderKnife(EntityThrowingKnife knife, double par2, double par4, double par6, float par8, float par9) {
 		bindTexture(knife.getTexture());
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
-		GL11.glRotatef(knife.prevRotationYaw
-				+ (knife.rotationYaw - knife.prevRotationYaw) * par9 - 90.0F,
-				0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(knife.prevRotationPitch
-				+ (knife.rotationPitch - knife.prevRotationPitch) * par9, 0.0F,
-				0.0F, 1.0F);
+		GL11.glRotatef(knife.prevRotationYaw + (knife.rotationYaw - knife.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F,
+				0.0F);
+		GL11.glRotatef(knife.prevRotationPitch + (knife.rotationPitch - knife.prevRotationPitch) * par9, 0.0F, 0.0F,
+				1.0F);
 		final Tessellator var10 = Tessellator.instance;
 		final byte var11 = 0;
 		final float var12 = 0.0F;

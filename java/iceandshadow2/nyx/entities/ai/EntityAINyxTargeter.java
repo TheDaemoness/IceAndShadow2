@@ -68,12 +68,11 @@ public class EntityAINyxTargeter extends EntityAITarget {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		if(this.taskOwner.isPotionActive(Potion.confusion.id))
+		if (this.taskOwner.isPotionActive(Potion.confusion.id))
 			return false;
 		final double d0 = ((IIaSSensate) this.taskOwner).getSense().getRange();
-		final List<Entity> list = this.taskOwner.worldObj
-				.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
-						this.taskOwner.boundingBox.expand(d0, d0, d0));
+		final List<Entity> list = this.taskOwner.worldObj.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
+				this.taskOwner.boundingBox.expand(d0, d0, d0));
 
 		if (list.isEmpty())
 			return false;

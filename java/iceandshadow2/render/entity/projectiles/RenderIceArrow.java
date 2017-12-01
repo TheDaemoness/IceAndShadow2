@@ -28,14 +28,12 @@ public class RenderIceArrow extends Render {
 	 * f1). But JAD is pre 1.5 so doesn't do that.
 	 */
 	@Override
-	public void doRender(Entity par1Entity, double par2, double par4,
-			double par6, float par8, float par9) {
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 		GL11.glDepthMask(false);
-		renderArrow((EntityIceArrow) par1Entity, par2, par4, par6, par8,
-				par9);
+		renderArrow((EntityIceArrow) par1Entity, par2, par4, par6, par8, par9);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 	}
@@ -45,19 +43,15 @@ public class RenderIceArrow extends Render {
 		return RenderIceArrow.icearrow_resourceloc;
 	}
 
-	public void renderArrow(EntityIceArrow par1EntityArrow, double par2,
-			double par4, double par6, float par8, float par9) {
+	public void renderArrow(EntityIceArrow par1EntityArrow, double par2, double par4, double par6, float par8,
+			float par9) {
 		bindTexture(RenderIceArrow.icearrow_resourceloc);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
-		GL11.glRotatef(
-				par1EntityArrow.prevRotationYaw
-				+ (par1EntityArrow.rotationYaw - par1EntityArrow.prevRotationYaw)
-				* par9 - 90.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(
-				par1EntityArrow.prevRotationPitch
-				+ (par1EntityArrow.rotationPitch - par1EntityArrow.prevRotationPitch)
-				* par9, 0.0F, 0.0F, 1.0F);
+		GL11.glRotatef(par1EntityArrow.prevRotationYaw
+				+ (par1EntityArrow.rotationYaw - par1EntityArrow.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(par1EntityArrow.prevRotationPitch
+				+ (par1EntityArrow.rotationPitch - par1EntityArrow.prevRotationPitch) * par9, 0.0F, 0.0F, 1.0F);
 		final Tessellator var10 = Tessellator.instance;
 		final byte var11 = 0;
 		final float var12 = 0.0F;
@@ -77,8 +71,7 @@ public class RenderIceArrow extends Render {
 			GL11.glRotatef(var22, 0.0F, 0.0F, 1.0F);
 		}
 
-		GL11.glRotatef(45.0F - 18.0F * par1EntityArrow.ticksExisted, 1.0F,
-				0.0F, 0.0F);
+		GL11.glRotatef(45.0F - 18.0F * par1EntityArrow.ticksExisted, 1.0F, 0.0F, 0.0F);
 		GL11.glScalef(var20, var20, var20);
 		GL11.glTranslatef(-4.0F, 0.0F, 0.0F);
 		GL11.glNormal3f(var20, 0.0F, 0.0F);

@@ -83,11 +83,9 @@ public class EntityTransmutationCountdown extends Entity {
 			return;
 		}
 		++this.age;
-		if (this.age >= this.dataWatcher.getWatchableObjectInt(16)
-				&& !this.worldObj.isRemote) {
+		if (this.age >= this.dataWatcher.getWatchableObjectInt(16) && !this.worldObj.isRemote) {
 			if (this.worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
-				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) this.worldObj
-						.getBlock(x, y, z);
+				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) this.worldObj.getBlock(x, y, z);
 				bl.doTransmutation(this.worldObj, x, y, z, this.worldObj.rand);
 				this.worldObj.markBlockForUpdate(x, y, z);
 				this.worldObj.markTileEntityChunkModified(x, y, z, tte);
@@ -95,19 +93,16 @@ public class EntityTransmutationCountdown extends Entity {
 				return;
 			}
 		}
-		final double xposMod = 0.4 + this.worldObj.rand.nextDouble() / 5, zposMod = 0.4 + this.worldObj.rand
-				.nextDouble() / 5;
+		final double xposMod = 0.4 + this.worldObj.rand.nextDouble() / 5,
+				zposMod = 0.4 + this.worldObj.rand.nextDouble() / 5;
 		if (this.age % 3 == 0)
 			return;
 		if (this.worldObj.isRemote && tte.handler != null) {
-			if (!tte.handler.spawnTransmuteParticles(tte.target, tte.catalyst,
-					this.worldObj, this))
-				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst,
-						this.posX - 0.5 + xposMod, this.posY
-						+ this.worldObj.rand.nextDouble() / 2,
-						this.posZ - 0.5 + zposMod, (0.5 - xposMod) / 10, -0.05
-						- this.worldObj.rand.nextDouble() * 0.1,
-						(0.5 - zposMod) / 10, false, false);
+			if (!tte.handler.spawnTransmuteParticles(tte.target, tte.catalyst, this.worldObj, this))
+				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst, this.posX - 0.5 + xposMod,
+						this.posY + this.worldObj.rand.nextDouble() / 2, this.posZ - 0.5 + zposMod,
+						(0.5 - xposMod) / 10, -0.05 - this.worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10,
+						false, false);
 		}
 	}
 

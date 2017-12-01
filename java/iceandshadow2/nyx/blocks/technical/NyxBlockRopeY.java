@@ -17,11 +17,9 @@ public class NyxBlockRopeY extends NyxBlockRope {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		final float var5 = 0.375F;
-		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5,
-				par2 + 1 - var5, par3 + 1, par4 + 1 - var5);
+		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5, par2 + 1 - var5, par3 + 1, par4 + 1 - var5);
 	}
 
 	@Override
