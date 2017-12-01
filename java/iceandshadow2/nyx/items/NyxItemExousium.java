@@ -7,11 +7,18 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.NyxBlockStone;
+import iceandshadow2.util.IaSPlayerHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -44,6 +51,41 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer p, World w, int x,
+			int y, int z, int dmg, float a, float b, float c) {
+		final Block bl = w.getBlock(x, y, z);
+		if(is.getItemDamage() >= 1) {
+			boolean converted = false;
+			if(bl.getMaterial() == Material.ice) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, 14, 3);
+				converted = true;
+			} 
+			else if(bl instanceof BlockSnow) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, w.getBlockMetadata(x, y, z)/2, 3);
+				converted = true;
+			}
+			else if(bl.getMaterial() == Material.snow || bl.getMaterial() == Material.craftedSnow) {
+				w.setBlockToAir(x, y, z);
+				w.setBlock(x, y, z, NyxBlocks.exousicWater, 8, 3);
+				converted = true;
+			}
+			if(converted) {
+				is.stackSize -= 1;
+				if(is.getItemDamage() >= 2)
+					IaSPlayerHelper.giveItem(p, new ItemStack(NyxItems.exousium, 3, 1));
+			}
+			return converted;
+		} else if(is.getItemDamage() >= 2 && w.getBlock(x, y, z) instanceof NyxBlockStone) {
+			w.setBlock(x, y, z, NyxBlocks.oreExousium, 1, 0);
+			is.stackSize -= 1;
+			return true;
+		}
+		return super.onItemUse(is, p, w, x, y, z, dmg, a, b, c);
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -4,17 +4,23 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.util.IaSRegistration;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
+
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName {
+public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 
 	private final EnumIaSModule MODULE;
 
@@ -27,30 +33,23 @@ public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName 
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix
 				+ texName);
 		this.MODULE = mod;
+		this.setQuantaPerBlock(16);
 	}
-
-	@Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-			return false;
-		return super.canDisplace(world, x, y, z);
-	}
-
-	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z) {
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-			return false;
-		return super.displaceIfPossible(world, x, y, z);
-	}
+	
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+    {
+        Block block = world.getBlock(x, y, z);
+        if (block != this)
+            return block.shouldSideBeRendered(world, x, y, z, side);
+        final ForgeDirection dir = ForgeDirection.getOrientation(side);
+        final Block bl = world.getBlock(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ);
+        return dir == ForgeDirection.UP || (!bl.isOpaqueCube() && bl != this);
+    }
 
 	@Override
 	public EnumIaSModule getIaSModule() {
 		return this.MODULE;
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 || side == 1 ? this.stillIcon : this.flowingIcon;
 	}
 
 	@Override
@@ -68,11 +67,24 @@ public class IaSBaseBlockFluid extends BlockFluidClassic implements IIaSModName 
 		return this;
 	}
 
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		switch(ForgeDirection.getOrientation(side)) {
+		case UP:
+		case DOWN:
+		case UNKNOWN:
+			return this.stillIcon;
+		default:
+			return this.flowingIcon;
+		}
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		this.stillIcon = register.registerIcon(getTexName() + "Still");
 		this.flowingIcon = register.registerIcon(getTexName() + "Flowing");
+		this.getFluid().setIcons(this.stillIcon, this.flowingIcon);
 	}
 
 }

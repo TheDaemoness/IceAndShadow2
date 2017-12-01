@@ -14,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,6 +30,13 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 		setLightColor(0.9F, 1.0F, 0.9F);
 		setResistance(2.5F);
 		setTickRandomly(true);
+	}
+
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {
+		super.onBlockAdded(w, x, y, z);
+		if(!w.isRemote && w.rand.nextInt(20) == 0)
+			w.setBlock(x, y, z, NyxBlocks.oreNavistra);
 	}
 
 	@Override
@@ -71,13 +79,15 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 	@Override
 	public void onBlockDestroyedByExplosion(World w, int x, int y, int z,
 			Explosion e) {
-		w.setBlockToAir(x, y, z);
+		w.setBlock(x, y, z, NyxBlocks.exousicWater, 15, 0);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World w, int x, int y, int z, int meta) {
 		if (meta == 0)
 			w.setBlock(x, y, z, this, 1, 0x2);
+		else
+			w.setBlock(x, y, z, NyxBlocks.exousicWater, 15, 0);
 	}
 
 	@Override
@@ -88,19 +98,26 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		if (w.getBlockMetadata(x, y, z) != 0 && r.nextBoolean()) {
-			while(true) {
-				if(w.getBlock(x + 1, y, z) == NyxBlocks.exousicWater)
-					break;
-				if(w.getBlock(x - 1, y, z) == NyxBlocks.exousicWater)
-					break;
-				if(w.getBlock(x, y, z + 1) == NyxBlocks.exousicWater)
-					break;
-				if(w.getBlock(x, y, z - 1) == NyxBlocks.exousicWater)
-					break;
-				return;
+		if (!w.isRemote) {
+			boolean wasted = false;
+			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+				if(dir == ForgeDirection.UP || dir == ForgeDirection.DOWN)
+					continue;
+				final int i = x+dir.offsetX, j = y+dir.offsetY, k = z+dir.offsetZ;
+				if(w.getBlock(i, j, k) == NyxBlocks.exousicWater) {
+					final int meta = w.getBlockMetadata(i, j, k);
+					if(meta >= 15) //Hedging.
+						continue;
+					wasted = true;
+					w.setBlockMetadataWithNotify(i, j, k, meta+1, 2);
+				}
+				else if (w.getBlock(i, j, k).isReplaceable(w, i, j, k)) {
+					wasted = true;
+					w.setBlock(i, j, k, NyxBlocks.exousicWater, 1, 2);
+				}
 			}
-			w.setBlock(x, y, z, this, 0, 0x2);
+			if(w.getBlockMetadata(x, y, z) != 0 && !wasted && r.nextBoolean())
+				w.setBlock(x, y, z, this, 0, 0x2);
 		}
 	}
 }

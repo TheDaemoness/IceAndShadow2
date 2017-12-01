@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	public NyxBlockUnstableIce(String par1) {
-		super(EnumIaSModule.NYX, par1, Material.sand);
+		super(EnumIaSModule.NYX, par1, Material.ice);
 		setStepSound(Block.soundTypeGlass);
 		setHardness(0.1F);
 		setResistance(0.5F);
@@ -62,7 +62,7 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	public void updateTick(World par1World, int par2, int par3, int par4,
 			Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
-		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11) {
+		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) >= 14) {
 			if (par1World.provider.isHellWorld)
 				par1World.setBlockToAir(par2, par3, par4);
 			else

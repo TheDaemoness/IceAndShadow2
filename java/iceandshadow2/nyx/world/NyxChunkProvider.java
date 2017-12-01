@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.world;
 
+import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
@@ -140,10 +141,10 @@ public class NyxChunkProvider implements IChunkProvider {
 								if ((d15 += d16) > 0.0D)
 									blockArr[arrIndex += 256] = NyxBlocks.stone;
 
-								else if (yit * 8 + l2 < b0)
+								else if (yit * 8 + l2 < b0) {
 									blockArr[arrIndex += 256] = NyxBlocks.exousicWater;
-
-								else
+									
+								} else
 									blockArr[arrIndex += 256] = null;
 							}
 
@@ -342,6 +343,14 @@ public class NyxChunkProvider implements IChunkProvider {
 				this.biomesForGeneration);
 
 		final Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);
+		for(int xit = 0; xit < 16; ++xit) {
+			for(int zit = 0; zit < 16; ++zit) {
+				for(int yit = 0; yit <= 64; ++yit) {
+					if(chunk.getBlock(xit, yit, zit) instanceof IaSBaseBlockFluid)
+						chunk.setBlockMetadata(xit, yit, zit, 15);
+				}
+			}
+		}
 
 		final byte[] abyte1 = chunk.getBiomeArray();
 
