@@ -118,15 +118,10 @@ public class IaSTools {
 		                                       .getClassId()];
 
 		IaSTools.makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.stick);
-		IaSTools.makeEchirToolRecipe(0, "ee ", "es ", " s ", Items.bone);
 		IaSTools.makeEchirToolRecipe(1, "eee", " s ", " s ", Items.stick);
-		IaSTools.makeEchirToolRecipe(1, "eee", " s ", " s ", Items.bone);
 		IaSTools.makeEchirToolRecipe(2, " e ", " s ", " s ", Items.stick);
-		IaSTools.makeEchirToolRecipe(2, " e ", " s ", " s ", Items.bone);
 		IaSTools.makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
-		IaSTools.makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.bone);
 		IaSTools.makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
-		IaSTools.makeEchirWeaponRecipe(1, " e", "s ", Items.bone);
 
 		IaSTools.armorEchir = new IaSItemArmor[4];
 		IaSTools.initArmor(IaSTools.armorEchir, IaSItemArmor.MATERIAL_ECHIR,
@@ -160,6 +155,36 @@ public class IaSTools {
 		IaSTools.spade.setCreativeTab(IaSCreativeTabs.tools);
 		IaSTools.sword.setCreativeTab(IaSCreativeTabs.tools);
 		IaSTools.knife.setCreativeTab(IaSCreativeTabs.tools);
+		
+		GameRegistry.addRecipe(IaSTools.setToolMaterial(IaSTools.axe, "Icicle"),
+				"ii",
+				"is",
+				" s",
+				'i', new ItemStack(NyxItems.icicle, 1),
+				's', new ItemStack(Items.stick));
+		GameRegistry.addRecipe(IaSTools.setToolMaterial(IaSTools.pickaxe, "Icicle"),
+				"iii",
+				" s ",
+				" s ",
+				'i', new ItemStack(NyxItems.icicle, 1),
+				's', new ItemStack(Items.stick));
+		GameRegistry.addRecipe(IaSTools.setToolMaterial(IaSTools.spade, "Icicle"),
+				"i",
+				"s",
+				"s",
+				'i', new ItemStack(NyxItems.icicle, 1),
+				's', new ItemStack(Items.stick));
+		GameRegistry.addRecipe(IaSTools.setToolMaterial(IaSTools.sword, "Icicle"),
+				"i",
+				"i",
+				"s",
+				'i', new ItemStack(NyxItems.icicle, 1),
+				's', new ItemStack(Items.stick));
+		GameRegistry.addRecipe(IaSTools.setToolMaterial(new ItemStack(IaSTools.knife, 2), "Icicle"),
+				" i",
+				"s ",
+				'i', new ItemStack(NyxItems.icicle, 1),
+				's', new ItemStack(Items.stick));
 	}
 
 	protected static void initArmor(IaSItemArmor[] arm,

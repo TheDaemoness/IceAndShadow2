@@ -487,4 +487,8 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 					+ EnumIaSToolClass.fromId(i, true).toString());
 
 	}
+
+	public String getKnifeMissSound() {
+		return "random.anvil_land";
+	}
 }

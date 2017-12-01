@@ -35,7 +35,7 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 4;
+		return 2;
 	}
 
 	@Override

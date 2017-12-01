@@ -197,15 +197,15 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				final Vec3 vel = Vec3.createVectorHelper(this.motionX,
 						this.motionY, this.motionZ);
 
-				this.worldObj.playSoundAtEntity(
-						this,
-						"random.anvil_land",
-						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
-								.lengthVector() / 5.0F), 1.6F / (this.rand
-										.nextFloat() * 0.2F + 0.9F));
 				final IaSToolMaterial mat = IaSRegistry
 						.getToolMaterial(this.dataWatcher
 								.getWatchableObjectString(16));
+				this.worldObj.playSoundAtEntity(
+						this,
+						mat.getKnifeMissSound(),
+						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel
+								.lengthVector() / 5.0F), 1.6F / (this.rand
+										.nextFloat() * 0.2F + 0.4F));
 				if (mat.onKnifeHit(
 						this.shootingEntity,
 						this,
@@ -273,16 +273,17 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		float var26;
 
 		if (var4 != null) {
+			
+			final IaSToolMaterial mat = IaSRegistry
+					.getToolMaterial(this.dataWatcher
+							.getWatchableObjectString(16));
+			
 			if (var4.entityHit != null && var4.entityHit != this.shootingEntity) {
 				this.worldObj.playSoundAtEntity(this,
 						"game.hostile.hurt.fall.small", (float) (var4.hitVec
 								.lengthVector() / 5.0F > 1.0 ? 1.0F
 										: var4.hitVec.lengthVector() / 5.0F),
 										1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-
-				final IaSToolMaterial mat = IaSRegistry
-						.getToolMaterial(this.dataWatcher
-								.getWatchableObjectString(16));
 
 				var20 = MathHelper.sqrt_double(this.motionX * this.motionX
 						+ this.motionY * this.motionY + this.motionZ
@@ -390,14 +391,11 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 					this.worldObj
 					.playSoundAtEntity(
 							this,
-							"random.anvil_land",
+							mat.getKnifeMissSound(),
 							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 									: var4.hitVec.lengthVector() / 5.0F),
-									1.6F / (this.rand.nextFloat() * 0.2F + 0.9F));
+									1.6F / (this.rand.nextFloat() * 0.2F + 0.4F));
 
-					final IaSToolMaterial mat = IaSRegistry
-							.getToolMaterial(this.dataWatcher
-									.getWatchableObjectString(16));
 					if (mat.onKnifeHit(this.shootingEntity, this,
 							new ChunkCoordinates(this.xTile, this.yTile,
 									this.zTile)))

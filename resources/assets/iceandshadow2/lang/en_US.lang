@@ -50,6 +50,11 @@ item.nyxMagicRepo.name=Magic Repository
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 
+item.iasToolIciclePickaxe.name=Ice Pickaxe
+item.iasToolIcicleSpade.name=Ice Spade
+item.iasToolIcicleSword.name=Ice Sword
+item.iasToolIcicleKnife.name=Ice Throwing Knife
+item.iasToolIcicleAxe.name=Ice Axe
 item.iasToolEchirAxe.name=Echir Axe
 item.iasToolEchirPickaxe.name=Echir Pickaxe
 item.iasToolEchirSpade.name=Echir Spade

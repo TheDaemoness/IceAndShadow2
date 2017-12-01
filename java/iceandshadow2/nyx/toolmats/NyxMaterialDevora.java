@@ -39,7 +39,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 6;
+		return 5;
 	}
 
 	@Override
@@ -112,8 +112,8 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					true);
 		final List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(user,
 				AxisAlignedBB.getBoundingBox(
-						target.posX-2.5F, target.posY-3.0F, target.posZ-2.5F,
-						target.posX+2.5F, target.posY+2.0F, target.posZ+2.5F));
+						target.posX-3.5F, target.posY-4.0F, target.posZ-3.5F,
+						target.posX+3.5F, target.posY+3.0F, target.posZ+3.5F));
 		for(final Object o : ents) {
 			if(o != target && o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase)o;
@@ -121,7 +121,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				if(o instanceof EntityMob && user instanceof EntityMob)
 					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), getToolDamage(is, user, target)/elb.getDistanceToEntity(user));
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity)o, user), getToolDamage(is, user, target));
 			}
 		}
 		return super.onAttack(is, user, target);
@@ -139,8 +139,8 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 			bl.onBlockExploded(knife.worldObj, block.posX, block.posY, block.posZ, ex);
 		final List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
 				AxisAlignedBB.getBoundingBox(
-						knife.posX-1.5F, knife.posY-2.0F, knife.posZ-1.5F,
-						knife.posX+1.5F, knife.posY+1.0F, knife.posZ+1.5F));
+						knife.posX-2.5F, knife.posY-3.0F, knife.posZ-2.5F,
+						knife.posX+2.5F, knife.posY+2.0F, knife.posZ+2.5F));
 		for(final Object o : ents) {
 			if(o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase)o;
@@ -164,8 +164,8 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 				knife.posZ, 0.3F, true);
 		final List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
 				AxisAlignedBB.getBoundingBox(
-						target.posX-1.5F, target.posY-2.0F, target.posZ-1.5F,
-						target.posX+1.5F, target.posY+1.0F, target.posZ+1.5F));
+						target.posX-2.5F, target.posY-3.0F, target.posZ-2.5F,
+						target.posX+2.5F, target.posY+2.0F, target.posZ+2.5F));
 		for(final Object o : ents) {
 			if(o != target && o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase)o;

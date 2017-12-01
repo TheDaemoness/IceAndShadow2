@@ -24,9 +24,14 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 8;
+		return 2;
 	}
 
+	@Override
+	public float getBaseDamage() {
+		return 2;
+	}
+	
 	@Override
 	public float getBaseSpeed() {
 		return 6;

@@ -12,6 +12,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -24,7 +26,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return -1;
+		return 2;
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 7;
+		return 4;
 	}
 
 	@Override
@@ -87,6 +89,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
 			if (user instanceof EntityPlayer)
 				target.attackEntityFrom(
 						DamageSource.causePlayerDamage((EntityPlayer) user).
@@ -100,6 +103,14 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 		return damageToolOnAttack(is, user, target);
 	}
 
+	
+
+	@Override
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
+		if(target instanceof EntityLivingBase)
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+		return super.onKnifeHit(user, knife, target);
+	}
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
@@ -135,5 +146,10 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	@Override
 	public ItemStack getTransmutationCatalyst() {
 		return new ItemStack(NyxItems.exousium,1,1);
+	}
+	
+	@Override
+	public String getKnifeMissSound() {
+		return "random.fizz";
 	}
 }

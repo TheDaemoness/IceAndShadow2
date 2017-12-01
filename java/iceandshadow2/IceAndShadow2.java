@@ -118,6 +118,7 @@ public class IceAndShadow2 {
 		IceAndShadow2.toPreRegister.add(new NyxMaterialCortra());
 		IceAndShadow2.toPreRegister.add(new NyxMaterialNavistra());
 		IceAndShadow2.toPreRegister.add(new NyxMaterialExousium());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialIcicle());
 	}
 
 	private void addPostInitHandlers() {

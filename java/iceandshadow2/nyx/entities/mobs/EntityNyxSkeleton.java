@@ -418,7 +418,7 @@ IIaSMobGetters {
 	public ItemStack getDefaultWeapon(EnumNyxSkeletonType taipe) {
 		if (taipe == EnumNyxSkeletonType.KNIFE) {
 			final ItemStack ait = IaSTools.setToolMaterial(IaSTools.knife,
-					"Devora");
+					"Icicle");
 			ait.stackSize = new Random().nextInt(8) + 4;
 
 			final int lvl = IaSWorldHelper.getRegionLevel(this);

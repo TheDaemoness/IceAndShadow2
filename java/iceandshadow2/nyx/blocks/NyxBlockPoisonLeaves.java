@@ -11,6 +11,7 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -29,6 +30,7 @@ IIaSNoInfest {
 			int meta, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if (!world.isRemote) {
+			is.add(new ItemStack(Items.stick, 2));
 			if (world.rand.nextInt(20) == 0)
 				is.add(new ItemStack(NyxItems.poisonFruit));
 		}
