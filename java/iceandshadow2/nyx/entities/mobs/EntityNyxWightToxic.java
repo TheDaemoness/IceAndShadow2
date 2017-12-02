@@ -114,12 +114,12 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		int dmg = IaSWorldHelper.getDifficulty(this.worldObj);
+		int dmg = 2*IaSWorldHelper.getDifficulty(this.worldObj) - 1;
 		if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
 			final EntityLivingBase tox = (EntityLivingBase) par1Entity;
 			final PotionEffect pot = tox.getActivePotionEffect(Potion.poison);
 			if (pot != null)
-				dmg += 9 + pot.getAmplifier() * (2 * dmg);
+				dmg += 9 + pot.getAmplifier() * dmg;
 			if (tox.attackEntityFrom(DamageSource.causeIndirectMagicDamage(tox, this), dmg)) {
 				if (pot != null) {
 					this.worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwight_toxic_attack_brutal", 0.5F,
@@ -306,7 +306,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 						if (ent instanceof EntityAgeable || ent instanceof EntityPlayer
 								|| ent instanceof EntityNyxSpider) {
 							final EntityLivingBase elb = (EntityLivingBase) ent;
-							if (elb == this.getAttackTarget() || elb.isPotionActive(Potion.poison))
+							if ((elb == this.getAttackTarget() && this.getHealth() >= this.getMaxHealth()) || elb.isPotionActive(Potion.poison))
 								continue;
 							final EntityPoisonBall pb = new EntityPoisonBall(this.worldObj, this);
 							pb.setThrowableHeading(elb.posX - this.posX,
