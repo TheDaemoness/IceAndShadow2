@@ -56,10 +56,12 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		double percentage = 0.5+(0.5*target.getItemDamage()/target.getMaxDamage());
 		if (catalyst.getItem() == NyxItems.cortra)
 			target.func_150996_a(IaSTools.armorCortra[this.slot]);
 		if (catalyst.getItem() == NyxItems.navistraShard)
 			target.func_150996_a(IaSTools.armorNavistra[this.slot]);
+		target.setItemDamage((int)(target.getMaxDamage()*percentage)-1);
 		switch (this.slot) {
 		case 0:
 			catalyst.stackSize -= 5;

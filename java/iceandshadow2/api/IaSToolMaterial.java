@@ -351,7 +351,18 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 		}
 		return damageToolOnAttack(is, user, target);
 	}
-
+	
+	/**
+	 * Called before a tool harvests a block.
+	 * 
+	 * @param is
+	 * @param user
+	 * @return True if the tool should harvest, false otherwise.
+	 */
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
+		return true;
+	}
+	
 	/**
 	 * Called when a tool successfully harvests a block.
 	 *
@@ -364,7 +375,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return The number of points of durability that should be deducted by
 	 *         this harvest.
 	 */
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
 		return 1;
 	}
 

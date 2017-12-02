@@ -7,6 +7,7 @@ import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTNT;
 import net.minecraft.entity.Entity;
@@ -27,18 +28,19 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	private static ResourceLocation knife_tex = new ResourceLocation(
 			"iceandshadow2:textures/entity/nyxknife_devora.png");
 
-	protected void explodeMine(EntityPlayer user, World w, int x, int y, int z, float hard) {
+	protected void explodeMine(EntityPlayer user, World w, int x, int y, int z, float hard, Explosion ex) {
 		final Block bl = w.getBlock(x, y, z);
 		if (!bl.canHarvestBlock(user, w.getBlockMetadata(x, y, z)))
 			return;
 		if (bl.getBlockHardness(w, x, y, z) < hard)
 			return;
-		w.func_147480_a(x, y, z, true);
+		w.getBlock(x, y, z).onBlockDestroyedByExplosion(w, x, y, z, ex);
+		IaSBlockHelper.breakBlock(w, x, y, z, w.rand.nextBoolean());
 	}
 
 	@Override
 	public float getBaseDamage() {
-		return 5;
+		return 6;
 	}
 
 	@Override
@@ -106,22 +108,27 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		}
 		return super.onAttack(is, user, target);
 	}
-
+	
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z) {
 		if (!(user instanceof EntityPlayer))
-			return super.onHarvest(is, user, w, x, y, z);
+			return super.onPreHarvest(is, user, w, x, y, z);
 		final Block origin = w.getBlock(x, y, z);
 		final float hardness = origin.getBlockHardness(w, x, y, z);
+		Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
 		for (int i = 1; i < 9; i += 2) {
 			final int xit = i % 3 - 1;
 			final int zit = i / 3 - 1;
-			explodeMine((EntityPlayer) user, w, x + xit, y, z + zit, hardness);
+			explodeMine((EntityPlayer) user, w, x + xit, y, z + zit, hardness, ex);
 		}
-		explodeMine((EntityPlayer) user, w, x, y + 1, z, hardness);
-		explodeMine((EntityPlayer) user, w, x, y - 1, z, hardness);
-		w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
-		return 2 * super.onHarvest(is, user, w, x, y, z);
+		explodeMine((EntityPlayer) user, w, x, y + 1, z, hardness, ex);
+		explodeMine((EntityPlayer) user, w, x, y - 1, z, hardness, ex);
+		return true;
+	}
+
+	@Override
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+		return 2 * super.onPostHarvest(is, user, w, x, y, z);
 	}
 
 	@Override

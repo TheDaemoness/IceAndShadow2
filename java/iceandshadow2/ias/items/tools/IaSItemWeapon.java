@@ -178,7 +178,7 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (m == null)
 			return false;
-		is.damageItem(m.onHarvest(is, user, w, x, y, z), user);
+		is.damageItem(m.onPostHarvest(is, user, w, x, y, z), user);
 		return true;
 	}
 

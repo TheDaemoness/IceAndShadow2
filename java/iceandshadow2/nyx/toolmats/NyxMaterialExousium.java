@@ -101,7 +101,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
-		return mat.getItem() == NyxItems.exousium && mat.getItemDamage() == 0;
+		return false;
 	}
 
 	@Override
@@ -120,16 +120,10 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
-		if (w.isRemote)
-			return 0;
-		final Block bl = w.getBlock(x, y, z);
-		final int hl = bl.getHarvestLevel(w.getBlockMetadata(x, y, z));
-		int durab = Math.max(0, hl);
-		if (!is.getItem().getToolClasses(is).contains(bl.getHarvestTool(0)))
-			durab += Math.max(0, hl + 1);
-		w.setBlockToAir(x, y, z);
-		return durab;
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
+		if(!worldObj.isRemote)
+			worldObj.setBlockToAir(x, y, z);
+		return true;
 	}
 
 	@Override

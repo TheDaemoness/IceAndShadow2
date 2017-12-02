@@ -40,11 +40,9 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 	}
 
 	@Override
-	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
-		if (!world.isRemote) {
-			world.setBlockToAir(x, y, z);
-			world.createExplosion(explosion.exploder, 0.5 + x, 0.5 + y, 0.5 + z, 2.5F, true);
-		}
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
+		world.setBlockToAir(x, y, z);
+		world.createExplosion(explosion.exploder, 0.5 + x, 0.5 + y, 0.5 + z, 2.5F, true);
 	}
 
 	@Override

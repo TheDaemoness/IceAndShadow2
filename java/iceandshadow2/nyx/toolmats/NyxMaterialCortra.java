@@ -90,7 +90,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
 		if (!(is.getItem() instanceof IaSItemWeapon)) {
 			final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
 			if (!user.worldObj.isRemote && user.worldObj.rand.nextInt(48 + 16 * lvl) == 0) {
@@ -111,6 +111,6 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 				EnchantmentHelper.setEnchantments(nu, is);
 			}
 		}
-		return super.onHarvest(is, user, w, x, y, z);
+		return super.onPostHarvest(is, user, w, x, y, z);
 	}
 }

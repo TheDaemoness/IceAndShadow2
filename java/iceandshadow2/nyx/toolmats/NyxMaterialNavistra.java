@@ -82,8 +82,8 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
-		super.onHarvest(is, user, w, x, y, z);
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+		super.onPostHarvest(is, user, w, x, y, z);
 		return 0;
 	}
 
