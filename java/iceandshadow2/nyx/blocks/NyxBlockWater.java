@@ -43,8 +43,7 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		super.updateTick(world, x, y, z, rand);
 		final Block bl = world.getBlock(x, y - 1, z);
-		if (!(bl instanceof BlockFluidBase) && bl.getHarvestLevel(world.getBlockMetadata(x, y - 1, z)) < 1
-				&& !world.isRemote)
+		if (!world.isRemote && !(bl instanceof BlockFluidBase) && bl.getHarvestLevel(world.getBlockMetadata(x, y - 1, z)) < rand.nextInt(2))
 			IaSBlockHelper.breakBlock(world, x, y - 1, z, false);
 	}
 

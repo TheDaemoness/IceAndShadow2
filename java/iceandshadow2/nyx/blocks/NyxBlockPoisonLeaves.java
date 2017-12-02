@@ -28,7 +28,7 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if (!world.isRemote) {
-			is.add(new ItemStack(Items.stick, 2));
+			is.add(new ItemStack(Items.stick, 1));
 			if (world.rand.nextInt(20) == 0)
 				is.add(new ItemStack(NyxItems.poisonFruit));
 		}
@@ -47,7 +47,9 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-		return super.onSheared(item, world, x, y, z, fortune);
+		ArrayList<ItemStack> islist = super.onSheared(item, world, x, y, z, fortune);
+		islist.add(new ItemStack(Items.stick, 1));
+		return islist;
 	}
 
 }

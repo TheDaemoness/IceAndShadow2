@@ -18,9 +18,9 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 	private IIcon iconTop, iconSide;
 
 	public NyxBlockPermafrost(String id) {
-		super(EnumIaSModule.NYX, id, Material.packedIce);
-		setHardness(1.0F);
-		setResistance(5.0F);
+		super(EnumIaSModule.NYX, id, Material.rock);
+		setHardness(1.5F);
+		setResistance(10.0F);
 		this.setHarvestLevel("pickaxe", 0);
 	}
 

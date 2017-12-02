@@ -18,6 +18,8 @@ public class NyxArmorHandler {
 			return;
 		if (e.source.isDamageAbsolute())
 			return;
+		if (e.source.getSourceOfDamage() == null && !e.source.isMagicDamage())
+			return;
 		int protection = 0;
 		if (elb.getEquipmentInSlot(1) != null && elb.getEquipmentInSlot(1).getItem() == IaSTools.armorSpiderSilk[3]) {
 			protection += 1;

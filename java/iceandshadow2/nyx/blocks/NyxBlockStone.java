@@ -23,7 +23,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawable {
 	public static final float HARDNESS = 2.0F;
-	public static final float RESISTANCE = 9.0F;
+	public static final float RESISTANCE = 15F;
 
 	public static void doDamage(World theWorld, int x, int y, int z, Entity theEntity, int dmg) {
 		if (!(theEntity instanceof EntityMob)) {
@@ -72,14 +72,14 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
 			Explosion p_149723_5_) {
 		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, NyxBlocks.gravel);
+		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, p_149723_1_.rand.nextBoolean()?NyxBlocks.gravel:NyxBlocks.stoneMemory);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
 			int p_149664_5_) {
 		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
-		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.gravel);
+		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.stoneMemory);
 	}
 
 	@Override

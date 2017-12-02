@@ -37,21 +37,25 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (!w.isRemote) {
-			boolean finished = true;
-			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				// TODO: Pushing mechanics.
-				final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
-				final Block bl = w.getBlock(i, j, k);
-				if (bl instanceof NyxBlockStone)
-					continue;
-				finished = false;
-				if (bl.isReplaceable(w, i, j, k) || (bl.getMobilityFlag() == 0 && !(bl instanceof NyxBlockGravel))) {
-					IaSBlockHelper.breakBlock(w, i, j, k, true);
-					w.setBlock(i, j, k, NyxBlocks.gravel);
+			if (w.getBlockMetadata(x, y, z) > 0) {
+				boolean finished = true;
+				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+					// TODO: Pushing mechanics.
+					final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
+					final Block bl = w.getBlock(i, j, k);
+					if (bl instanceof NyxBlockStone)
+						continue;
+					finished = false;
+					if (bl.isReplaceable(w, i, j, k)
+							|| (bl.getMobilityFlag() == 0 && !(bl instanceof NyxBlockGravel))) {
+						IaSBlockHelper.breakBlock(w, i, j, k, true);
+						w.setBlock(i, j, k, NyxBlocks.gravel);
+					}
 				}
-			}
-			if (finished)
-				w.setBlock(x, y, z, NyxBlocks.stone);
+				if (finished)
+					w.setBlock(x, y, z, NyxBlocks.stone);
+			} else
+				w.setBlockMetadataWithNotify(x, y, z, 1, 2);
 		}
 		super.updateTick(w, x, y, z, r);
 	}
