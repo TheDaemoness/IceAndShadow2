@@ -35,7 +35,7 @@ public class NyxArmorHandler {
 		}
 		if (elb.getEquipmentInSlot(4) != null && elb.getEquipmentInSlot(4).getItem() == IaSTools.armorSpiderSilk[0]) {
 			protection += 2;
-			elb.getEquipmentInSlot(1).damageItem(1, elb);
+			elb.getEquipmentInSlot(4).damageItem(1, elb);
 		}
 		if (e.source.isMagicDamage())
 			e.ammount = Math.max(1, e.ammount - protection);

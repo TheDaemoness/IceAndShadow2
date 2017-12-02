@@ -8,6 +8,7 @@ import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -66,6 +67,8 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 	@Override
 	public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(stack, par2World, par3Entity, par4, par5);
+		if(par2World.isRemote)
+			return;
 		if (!(par3Entity instanceof EntityPlayer)) {
 			stack.stackSize = 0;
 			return;
@@ -74,10 +77,10 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 		if (stack.isItemDamaged()) {
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
-			else if (dmg < 300 && dmg > 0)
-				stack.setItemDamage(dmg + 1);
-			else
-				stack.stackSize = 0;
+			else if (dmg > 0) {
+				if(stack.attemptDamageItem(1, par2World.rand))
+					stack.func_150996_a(Items.bone);
+			}
 		}
 	}
 
