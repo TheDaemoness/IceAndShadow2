@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSBlockHelper;
@@ -75,7 +76,8 @@ public class NyxBlockIcicles extends IaSBlockDeco {
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity e, float distance) {
-		super.onFallenUpon(world, x, y, z, e, 4 + distance * 2);
+		e.attackEntityFrom(IaSDamageSources.dmgStalagmite, 3+2*world.difficultySetting.getDifficultyId()+distance*2);
+		super.onFallenUpon(world, x, y, z, e, 3+2*world.difficultySetting.getDifficultyId()+distance*2);
 		IaSBlockHelper.breakBlock(world, x, y, z, false);
 	}
 }
