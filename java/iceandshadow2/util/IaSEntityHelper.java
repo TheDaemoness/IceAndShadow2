@@ -1,5 +1,6 @@
 package iceandshadow2.util;
 
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -153,5 +154,13 @@ public class IaSEntityHelper {
 		else
 			ret[3] = (int) (z % 16);
 		return ret;
+	}
+	
+	public static void spawnNourishment(World w, double x, double y, double z, int amount) {
+		if(!w.isRemote)
+			w.spawnEntityInWorld(new EntityOrbNourishment(w, x, y, z, amount));
+	}
+	public static void spawnNourishment(Entity who, int amount) {
+		spawnNourishment(who.worldObj, who.posX, who.posY, who.posZ, amount);
 	}
 }

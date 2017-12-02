@@ -6,7 +6,6 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.IaSNourishmentHelper;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -84,7 +83,8 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 			 * PotionEffect(Potion.regeneration.id,51,1));
 			 */
 			if (elb instanceof EntityPlayer) {
-				IaSNourishmentHelper.regen((EntityPlayer) elb, 1);
+				if (par1World.rand.nextBoolean())
+					IaSPlayerHelper.regen((EntityPlayer) elb, 1);
 				if (elb.isSneaking()) {
 					if (elb.isPotionActive(Potion.confusion))
 						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));

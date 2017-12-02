@@ -98,14 +98,14 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnD
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
 		if ((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
 			IaSPlayerHelper.messagePlayer(pwai,
-					"You find strange thoughts coming to your mind. Something about getting power from exousium crystals made from merged exousium dust...");
+					"You find strange thoughts coming to your mind. Something about getting power from crystals made from merged exousium dust...");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
 		if ((heap.getItemDamage() & 1) == 0) {
 			if (pwai.dimension == IaSFlags.dim_nyx_id)
 				IaSPlayerHelper.messagePlayer(pwai,
-						"You find strange thoughts coming to your mind. Something about needing to be standing on crying obsidian...");
+						"You find strange thoughts coming to your mind. Something about needing to be standing on sanguine obsidian...");
 			else
 				IaSPlayerHelper.messagePlayer(pwai,
 						"The crystal barely responds. It seems to prefer cold and dark places.");

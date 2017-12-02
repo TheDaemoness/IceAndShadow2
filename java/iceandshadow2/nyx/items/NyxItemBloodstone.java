@@ -6,6 +6,8 @@ import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
+import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSOnDeathDrop, IIaSApiTransmute {
 
 	public NyxItemBloodstone(String texName) {
-		super(EnumIaSModule.NYX, texName, -3, 0.0F, false);
+		super(EnumIaSModule.NYX, texName, -20, 0.0F, false);
 		setAlwaysEdible();
 		setMaxStackSize(4);
 	}
@@ -79,11 +81,12 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		par2World.playSoundAtEntity(par3EntityPlayer, "mob.zombie.unfect", 0.5F,
-				par2World.rand.nextFloat() * 0.1F + 0.9F);
-		par3EntityPlayer.clearActivePotions();
-		par3EntityPlayer.attackEntityFrom(DamageSource.outOfWorld, par3EntityPlayer.getHealth() * 2);
+	protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
+		if(!par2World.isRemote) {
+			player.clearActivePotions();
+			IaSEntityHelper.spawnNourishment(player, (int)(player.getHealth()*2));
+			player.attackEntityFrom(DamageSource.outOfWorld, player.getMaxHealth() + 2*player.getHealth());
+		}
 	}
 
 	@Override

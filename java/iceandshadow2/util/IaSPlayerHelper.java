@@ -3,6 +3,8 @@ package iceandshadow2.util;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -38,5 +40,30 @@ public class IaSPlayerHelper {
 			IaSPlayerHelper.dochat = false;
 		} else
 			IaSPlayerHelper.dochat = true;
+	}
+
+	public static void feed(EntityPlayer pl, int amount) {
+		regen(pl, amount, true);
+	}
+
+	public static void regen(EntityPlayer pl, int amount, boolean overflow) {
+		final float heals = amount / 2.0F;
+		if(pl.getHealth()+heals>pl.getMaxHealth()) {
+			final float delta = pl.getMaxHealth()-pl.getHealth();
+			pl.heal(delta);
+			if(overflow) {
+				int time = (int)((heals-delta)*25);
+				PotionEffect pe = pl.getActivePotionEffect(Potion.regeneration);
+				if(pe != null && pe.getAmplifier() >= 0)
+					time += pe.getDuration()/(pe.getAmplifier()+1);
+				pl.addPotionEffect(new PotionEffect(Potion.regeneration.id, time, 1));
+			}
+		} else
+			pl.heal(heals);
+		pl.getFoodStats().addStats((int)(heals*2), (int)(heals*2));
+	}
+	
+	public static void regen(EntityPlayer pl, int amount) {
+		regen(pl, amount, false);
 	}
 }
