@@ -102,7 +102,7 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 			for (int yit = -1; yit <= 1; ++yit) {
 				for (int zit = -1; zit <= 1; ++zit) {
 					final Block bl = w.getBlock(x + xit, y + yit, z + zit);
-					if (bl == NyxBlocks.thermalAir)
+					if (bl == this)
 						highestsource = Math.max(highestsource, w.getBlockMetadata(x + xit, y + yit, z + zit));
 					else if (bl instanceof IIaSBlockThawable) {
 						final Block nb = ((IIaSBlockThawable) bl).onThaw(w, x + xit, y + yit, z + zit);
@@ -120,7 +120,7 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 			for (int xit = -2; xit <= 2; ++xit) {
 				for (int yit = -2; yit <= 2; ++yit) {
 					for (int zit = -2; zit <= 2; ++zit) {
-						if (w.getBlock(x + xit, y + yit, z + zit) == NyxBlocks.thermalAir)
+						if (w.getBlock(x + xit, y + yit, z + zit) == this)
 							w.setBlock(x + xit, y + yit, z + zit, Blocks.air, 0, 0x3);
 					}
 				}

@@ -6,6 +6,7 @@ import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
+import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import iceandshadow2.util.gen.Sculptor;
 
@@ -88,7 +89,7 @@ public class NyxBiome extends BiomeGenBase {
 			for (int zit = 0; zit < 16; ++zit) {
 				if (par2Random.nextInt(24) == 0) {
 					boolean inair = false;
-					for (int yit = par1World.getPrecipitationHeight(xchunk + xit, zchunk + zit) - 1; yit > 0; --yit) {
+					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 0; --yit) {
 						if (!inair && par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
 							inair = true;
 						} else if (inair && !par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
@@ -108,7 +109,7 @@ public class NyxBiome extends BiomeGenBase {
 
 		final int x = xchunk + par1World.rand.nextInt(16);
 		final int z = zchunk + par1World.rand.nextInt(16);
-		final int y = par1World.getPrecipitationHeight(x, z);
+		final int y = IaSBlockHelper.getHeight(par1World, x, z);
 		if (y >= 230 && IaSWorldHelper.getRegionLevel(par1World, x, y, z) > 0) {
 			boolean makestone = true;
 			for (int xit = -32; xit <= 32 && makestone; ++xit) {

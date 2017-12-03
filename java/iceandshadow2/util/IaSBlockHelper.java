@@ -4,6 +4,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -11,6 +13,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class IaSBlockHelper {
+	public static int getHeight(World w, int x, int z) {
+		int y = 255;
+		for(; y > 0; --y) {
+			final Block bl = w.getBlock(x, y, z);
+			if(bl.getBlocksMovement(w, x, y, z))
+				break;
+		}
+		return y;
+	}
+	
 	public static boolean breakBlock(World w, int x, int y, int z) {
 		return breakBlock(w, x, y, z, true);
 	}
@@ -71,5 +83,11 @@ public class IaSBlockHelper {
 		if (bl.isReplaceable(w, x, y, z))
 			return true;
 		return false;
+	}
+	
+	public static void makeSpawner(World w, int x, int y, int z, String entityName) {
+		w.setBlock(x, y, z, Blocks.mob_spawner);
+		TileEntityMobSpawner tes = (TileEntityMobSpawner)w.getTileEntity(x, y, z);
+		tes.func_145881_a().setEntityName(entityName);
 	}
 }

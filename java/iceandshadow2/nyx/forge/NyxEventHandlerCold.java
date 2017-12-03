@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
+import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -9,6 +10,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -19,12 +22,16 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
 public class NyxEventHandlerCold {
 
@@ -162,15 +169,10 @@ public class NyxEventHandlerCold {
 			if (isplant && !e.isCanceled()) {
 				final boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
 				final ForgeDirection face = ForgeDirection.getOrientation(e.face);
-				final boolean coolair = e.world.getBlock(e.x + face.offsetX, e.y + face.offsetY,
-						e.z + face.offsetZ) != NyxBlocks.thermalAir;
-				e.setCanceled(!dirt || !coolair);
+				e.setCanceled(!dirt);
 				if (!dirt)
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"There's no way that this will grow off of warm native soil in this realm.");
-				else if (!coolair)
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"Better, but now the firey energies in the air make it prohibitive for new life to take root. Maybe heat the soil from beneath?");
+							"There's no way that this will grow in this realm.");
 			}
 		}
 	}

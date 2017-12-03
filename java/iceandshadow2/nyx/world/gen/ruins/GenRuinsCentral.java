@@ -21,11 +21,11 @@ public class GenRuinsCentral extends GenRuins {
 		int y = 156;
 		for (int xit = -1; xit <= 1; ++xit) {
 			for (int zit = -4; zit <= 4; ++zit)
-				y = Math.min(w.getPrecipitationHeight(x + xit, z + zit), y);
+				y = Math.min(w.getTopSolidOrLiquidBlock(x + xit, z + zit), y);
 		}
 		for (int xit = -4; xit <= 4; ++xit) {
 			for (int zit = -1; zit <= 1; ++zit)
-				y = Math.min(w.getPrecipitationHeight(x + xit, z + zit), y);
+				y = Math.min(w.getTopSolidOrLiquidBlock(x + xit, z + zit), y);
 		}
 		return y;
 	}

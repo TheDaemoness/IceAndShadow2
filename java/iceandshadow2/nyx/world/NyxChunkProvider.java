@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.blocks.NyxBlockAir;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
 import java.util.List;
@@ -89,7 +90,7 @@ public class NyxChunkProvider implements IChunkProvider {
 	}
 
 	public void genTerrain(int x, int z, Block[] blockArr) {
-		final byte b0 = 63;
+		final byte levelWater = 63;
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration,
 				x * 4 - 2, z * 4 - 2, 10, 10);
 		initNoiseField(x * 4, 0, z * 4);
@@ -133,13 +134,13 @@ public class NyxChunkProvider implements IChunkProvider {
 								if ((d15 += d16) > 0.0D)
 									blockArr[arrIndex += 256] = NyxBlocks.stone;
 
-								else if (yit * 8 + l2 < b0) {
+								else if (yit * 8 + l2 < levelWater)
 									blockArr[arrIndex += 256] = NyxBlocks.exousicWater;
-
-								} else
+								else if(yit * 8 + l2 < NyxBlockAir.ATMOS_HEIGHT)
 									blockArr[arrIndex += 256] = null;
+								else
+									blockArr[arrIndex += 256] = NyxBlocks.air;	
 							}
-
 							d10 += d12;
 							d11 += d13;
 						}

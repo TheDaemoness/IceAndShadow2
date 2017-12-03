@@ -16,7 +16,7 @@ public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickPale, brickPaleCracked, hookClimbing, transmutationAltar,
-			examinationTable, hardShadow, unstableDevora, thermalAir, xpAltar, icicles, gravel, stoneGrowing;
+			examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing, air;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -75,7 +75,7 @@ public class NyxBlocks {
 
 		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
 		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
-		NyxBlocks.thermalAir = new NyxBlockThermalAir("ThermalAir").register();
+		NyxBlocks.air = new NyxBlockAir("Air").register();
 
 		NyxBlocks.gravel = new NyxBlockGravel("Gravel").register();
 

@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxGhoul;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
+import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 
@@ -19,8 +20,8 @@ public class NyxBiomeInfested extends NyxBiome {
 		setBlocks(Blocks.snow, Blocks.snow);
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 60, 3, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class, 10, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 65, 2, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxGhoul.class, 5, 1, 1));
 
 		setColor(64 << 16 | 255 << 8 | 192);
 	}

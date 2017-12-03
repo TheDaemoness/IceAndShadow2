@@ -22,8 +22,8 @@ public class NyxBiomeRugged extends NyxBiome {
 		setColor(96 << 16 | 96 << 8 | 96);
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 60, 2, 3));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 10, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 65, 1, 3));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 5, 1, 1));
 
 		setColor(96 << 16 | 96 << 8 | 96);
 	}
