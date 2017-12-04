@@ -9,6 +9,8 @@ Ice and Shadow II is licensed under the GPL v3 wherever the GPL may be applied.
 
 ## Dependencies
 * Minecraft 1.7.10. Other versions of Minecraft are unsupported and, as this is mostly a stress relief project, are unlikely to ever be supported.
+* The latest version of Minecraft Forge for 1.7.10. Earlier versions may work, but the latest is what this is developed against.
+* PlayerAPI.
 * Not Enough Items (or some equivalent), while not required, is strongly recommended.
 
 ## Getting Started

@@ -100,12 +100,8 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
 							return;
-						IaSPlayerHelper.messagePlayer(playuh,
-								"You feel something bind your life force to the obsidian....");
-						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
-						if (playuh.getHealth() > 2.0F)
-							playuh.attackEntityFrom(DamageSource.magic, 1);
-						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));
+						if(IaSPlayerHelper.drainXP(playuh, 19, "Something forcefully binds your life to the obsidian.") >= 19)
+							playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
 					}
 				}
 			} else {

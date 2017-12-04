@@ -1,5 +1,6 @@
 package iceandshadow2.util;
 
+import iceandshadow2.ias.IaSDamageSources;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 
 public class IaSPlayerHelper {
@@ -16,7 +18,9 @@ public class IaSPlayerHelper {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final ChatComponentText txt = new ChatComponentText(str);
 			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
+			plai.addChatMessage(new ChatComponentText(""));
 			plai.addChatMessage(txt);
+			plai.addChatMessage(new ChatComponentText(""));
 			IaSPlayerHelper.dochat = false;
 		} else
 			IaSPlayerHelper.dochat = true;
@@ -65,5 +69,34 @@ public class IaSPlayerHelper {
 	
 	public static void regen(EntityPlayer pl, int amount) {
 		regen(pl, amount, false);
+	}
+	
+	public static int drainXP(EntityPlayer pl, final int amount, String warning) {
+		if(pl.xpCooldown > 0)
+			return -1;
+		if(amount <= 0)
+			return -1;
+		pl.xpCooldown = pl.maxHurtResistantTime;
+		if(!pl.isPotionActive(Potion.confusion) && warning != null)
+			IaSPlayerHelper.alertPlayer(pl, warning);
+		pl.addPotionEffect(new PotionEffect(Potion.confusion.id, 45, 0));
+		int original = (int)(pl.experience*pl.xpBarCap());
+		pl.experience = 0;
+		int originalLevel = pl.experienceLevel;
+		for(pl.experienceLevel = 0; pl.experienceLevel < originalLevel; ++pl.experienceLevel) {
+			original += pl.xpBarCap();
+		}
+		pl.experienceLevel = 0;
+		pl.experienceTotal = (int)Math.max(0, original-amount);
+		int xpPool = pl.experienceTotal;
+		while(xpPool > pl.xpBarCap()) {
+			xpPool -= pl.xpBarCap();
+			++pl.experienceLevel;
+		}
+		pl.experience = (float)xpPool/pl.xpBarCap();
+		final int drained = original-pl.experienceTotal;
+		if(drained < amount)
+			pl.attackEntityFrom(IaSDamageSources.dmgDrain, amount-drained);
+		return drained;
 	}
 }

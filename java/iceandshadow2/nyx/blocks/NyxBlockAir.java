@@ -10,6 +10,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EntityFX;
@@ -37,7 +38,11 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
-		//TODO: Figure out a decent suffocation (or pseudo-suffocation) mechanism.
+		final int hardness = IaSWorldHelper.getDifficulty(world);
+		if(ent instanceof EntityPlayer)
+			IaSPlayerHelper.drainXP((EntityPlayer)ent, hardness, "Your life begins to bleed into your surroundings.");
+		else if(ent instanceof EntityAgeable)
+			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 1+hardness);
 	}
 
 	@Override

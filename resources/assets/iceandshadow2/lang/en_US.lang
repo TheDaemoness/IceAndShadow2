@@ -172,6 +172,7 @@ death.attack.IceAndShadow2.nyxStalagmiteDamage=%1$s sat on some stalagmites
 death.attack.IceAndShadow2.nyxGatestoneDamage=%1$s didn't survive the gatestones
 death.attack.IceAndShadow2.nyxXpAltarDamage=%1$s was converted into experience
 death.attack.IceAndShadow2.nyxFreezingDamage=%1$s froze to death
+death.attack.IceAndShadow2.nyxDrainDamage=%1$s was drained of life
 
 entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
 entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
