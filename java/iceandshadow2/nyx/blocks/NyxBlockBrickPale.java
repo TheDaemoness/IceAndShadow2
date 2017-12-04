@@ -1,21 +1,30 @@
 package iceandshadow2.nyx.blocks;
 
+import java.util.Random;
+
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
+import iceandshadow2.util.IaSEntityHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockBrickPale extends IaSBaseBlockSingle {
+public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPathDesirability {
 
 	public NyxBlockBrickPale(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
@@ -26,18 +35,23 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	}
 
 	@Override
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		return null;
+	}
+
+	@Override
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		final float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(par2, par3 + var5, par4, par2 + 1, par3 + 1 - var5, par4 + 1);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - 0.0125F, z + 1);
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion e) {
+	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_) {
+		super.breakBlock(world, x, y, z, p_149749_5_, p_149749_6_);
 		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
 	}
 
@@ -45,13 +59,16 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle {
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		if (ent instanceof EntityLivingBase) {
 			final EntityLivingBase lb = (EntityLivingBase) ent;
-			if (lb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-				return;
-			if (lb.getEquipmentInSlot(1) != null)
-				return;
-			if (!lb.isPotionActive(Potion.wither.id))
+			if (IaSEntityHelper.isTouchingGround(lb)) {
+				lb.attackEntityFrom(DamageSource.wither, 0.5F);
 				lb.addPotionEffect(new PotionEffect(Potion.wither.id, 41, 0));
+			}
 		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
+	}
+
+	@Override
+	public float getBlockPathWeight(IBlockAccess w, int x, int y, int z) {
+		return -32;
 	}
 }

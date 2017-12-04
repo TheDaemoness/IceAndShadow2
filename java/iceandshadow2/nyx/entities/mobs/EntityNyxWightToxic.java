@@ -10,6 +10,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
+import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
 import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
@@ -187,10 +188,14 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 			return 1;
 		final BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(i, k);
 		if (biome instanceof NyxBiomeInfested)
-			return 0;
+			return -3;
 		else if (biome instanceof NyxBiomeForestDense || biome instanceof NyxBiomeForestSparse)
 			return 15;
-		return 3;
+		float mod = 0F;
+		final Block bl = this.worldObj.getBlock(i, j, k);
+		if(bl instanceof IIaSBlockPathDesirability)
+			mod = ((IIaSBlockPathDesirability)bl).getBlockPathWeight(this.worldObj, i, j, k);
+		return mod+super.getBlockPathWeight(i, j, k);
 	}
 
 	@Override
@@ -409,5 +414,14 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		this.worldObj.spawnEntityInWorld(wt);
 		setDead();
 	}
+	
+	@Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
 
+	@Override
+	public boolean couldFlyFasterWithBoots() {
+		return true;
+	}
 }

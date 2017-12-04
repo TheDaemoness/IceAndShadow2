@@ -3,38 +3,25 @@ package iceandshadow2.nyx.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockBrickPaleCracked extends IaSBaseBlockSingle {
-
+public class NyxBlockBrickPaleCracked extends NyxBlockBrickPale {
 	public NyxBlockBrickPaleCracked(String id) {
-		super(EnumIaSModule.NYX, id, Material.rock);
-		setResistance(5.0F);
-		setHardness(1.0F);
-		this.setHarvestLevel("pickaxe", 0);
-		setLuminescence(0.3F);
+		super(id);
+		setResistance(NyxBlockStone.RESISTANCE/2);
+		setHardness(NyxBlockStone.HARDNESS/2);
 	}
-
+	
 	@Override
-	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		final float var5 = 0.0125F;
-		return AxisAlignedBB.getBoundingBox(par2 + var5, par3 + var5, par4 + var5, par2 + 1 - var5, par3 + 1 - var5,
-				par4 + 1 - var5);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_,
-			Entity p_149670_5_) {
-		NyxBlocks.brickPale.onEntityCollidedWithBlock(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_4_, p_149670_5_);
+	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_,
+			int p_149749_6_) {
+		NyxBlocks.stone.breakBlock(world, x, y, z, p_149749_5_, p_149749_6_); //Opportunism.
 	}
 }

@@ -1,5 +1,6 @@
 package iceandshadow2.util;
 
+import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -15,6 +16,16 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 
 public class IaSEntityHelper {
+	
+	public static boolean isTouchingGround(EntityLivingBase ent) {
+		if(ent.isAirBorne)
+			return false;
+		if(ent.isRiding())
+			return false;
+		if(ent instanceof IIaSMobGetters && ((IIaSMobGetters)ent).couldFlyFasterWithBoots())
+			return false;
+		return ent.getEquipmentInSlot(1) == null;
+	}
 	
 	//Returns true is b is in front of a, by some fairly loose definitions of "in front of".
 	public static boolean isInFrontOf(Entity a, Entity b) {

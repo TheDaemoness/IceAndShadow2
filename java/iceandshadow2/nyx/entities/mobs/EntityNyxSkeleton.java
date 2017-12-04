@@ -13,6 +13,7 @@ import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
+import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
 import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
@@ -20,7 +21,11 @@ import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
+import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
+import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
 import iceandshadow2.util.IaSWorldHelper;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -49,6 +54,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, IIaSMobGetters {
 
@@ -355,7 +361,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		if (getAttackTarget() != null || getSearchTarget() != null)
 			return 1;
 		final int lightb = this.worldObj.getBlockLightValue(i, j, k);
-		return lightb > 7 ? lightb / 2 : 0;
+		float mod = 0F;
+		final Block bl = this.worldObj.getBlock(i, j, k);
+		if(bl instanceof IIaSBlockPathDesirability)
+			mod = ((IIaSBlockPathDesirability)bl).getBlockPathWeight(this.worldObj, i, j, k);
+		return mod+(lightb >= 7 ? lightb * 2 : 0);
 	}
 
 	@Override
@@ -605,6 +615,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setByte("NyxSkeletonCombatStyle", this.typpe.id);
+	}
+
+	@Override
+	public boolean couldFlyFasterWithBoots() {
+		return false;
 	}
 
 }
