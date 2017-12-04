@@ -3,13 +3,16 @@ package iceandshadow2.nyx.forge;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.api.IIaSOnDeathRuin;
+import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.HashMap;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -74,6 +77,8 @@ public class NyxDeathSystem {
 	public void onDeath(LivingDeathEvent e) {
 		if (e.entity instanceof EntityPlayerMP) {
 			final EntityPlayerMP playNoMore = (EntityPlayerMP) e.entityLiving;
+			if(e.source != IaSDamageSources.dmgDrain)
+				IaSPlayerHelper.drainXP(playNoMore, playNoMore.experienceTotal/2, null, true);
 			IaSEntityHelper.spawnNourishment(playNoMore, playNoMore.getFoodStats().getPrevFoodLevel());
 			NyxDeathSystem.plai_inv = new InventoryPlayer(playNoMore);
 			NyxDeathSystem.plai_inv.copyInventory(playNoMore.inventory);

@@ -1,13 +1,17 @@
 package iceandshadow2.nyx.forge;
 
+import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSTools;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class NyxArmorHandler {
+public class NyxDamageHandler {
 
 	@SubscribeEvent
 	public void dmg(LivingHurtEvent e) {
@@ -16,6 +20,10 @@ public class NyxArmorHandler {
 		final EntityLivingBase elb = e.entityLiving;
 		if (elb == null)
 			return;
+		if (elb instanceof EntityPlayer && e.source != IaSDamageSources.dmgDrain) {
+			if(((EntityPlayer)elb).inventory.hasItem(NyxItems.bloodstone))
+				IaSPlayerHelper.drainXP(((EntityPlayer)elb), (int)(1+e.ammount), null, true);
+		}
 		if (e.source.isDamageAbsolute())
 			return;
 		if (e.source.getSourceOfDamage() == null && !e.source.isMagicDamage())

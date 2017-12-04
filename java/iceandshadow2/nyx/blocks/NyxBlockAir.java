@@ -40,7 +40,7 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		final int hardness = IaSWorldHelper.getDifficulty(world);
 		if(ent instanceof EntityPlayer)
-			IaSPlayerHelper.drainXP((EntityPlayer)ent, hardness, "Your life begins to bleed into your surroundings.");
+			IaSPlayerHelper.drainXP((EntityPlayer)ent, hardness, "Your life begins to bleed into your surroundings.", false);
 		else if(ent instanceof EntityAgeable)
 			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 1+hardness);
 	}

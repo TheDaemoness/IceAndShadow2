@@ -1,6 +1,7 @@
 package iceandshadow2.util;
 
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -71,12 +72,12 @@ public class IaSPlayerHelper {
 		regen(pl, amount, false);
 	}
 	
-	public static int drainXP(EntityPlayer pl, final int amount, String warning) {
-		if(pl.xpCooldown > 0)
+	public static int drainXP(EntityPlayer pl, final int amount, String warning, boolean bypass) {
+		if(pl.xpCooldown > 0 && !bypass)
 			return -1;
 		if(amount <= 0)
 			return -1;
-		pl.xpCooldown = pl.maxHurtResistantTime;
+		pl.xpCooldown = pl.maxHurtResistantTime/(pl.inventory.hasItem(NyxItems.bloodstone)?2:1);
 		if(!pl.isPotionActive(Potion.confusion) && warning != null)
 			IaSPlayerHelper.alertPlayer(pl, warning);
 		pl.addPotionEffect(new PotionEffect(Potion.confusion.id, 45, 0));
