@@ -15,6 +15,24 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 
 public class IaSEntityHelper {
+	
+	//Returns true is b is in front of a, by some fairly loose definitions of "in front of".
+	public static boolean isInFrontOf(Entity a, Entity b) {
+		final double xdif = b.posX - a.posX;
+		final double zdif = b.posZ - a.posZ;
+		final double range = Math.sqrt(xdif * xdif + zdif * zdif);
+		if (1 + 2 * range < Math.abs(b.posY - a.posY))
+			return false;
+		
+		//NOTE: Using the notation for polar coordinates I'm used to, z in MC is x, and x in MC is y.
+		double ratio = xdif==0?0:Math.abs(xdif/zdif);
+		double ang = Math.atan(ratio) * 180.0 / Math.PI;
+		if(zdif < 0)
+			ang=180-ang;
+
+		double delta = Math.abs(ang-Math.abs(a.rotationYaw));
+		return delta <= 75;
+	}
 
 	public static EntityItem dropItem(Entity ent, ItemStack par1ItemStack) {
 		if (par1ItemStack.stackSize == 0) {

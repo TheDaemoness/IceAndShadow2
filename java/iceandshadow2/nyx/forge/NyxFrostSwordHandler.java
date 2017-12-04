@@ -32,7 +32,7 @@ public class NyxFrostSwordHandler {
 						} else
 							e.ammount = e.ammount / 2;
 					}
-					pwai.getEquipmentInSlot(0).damageItem((int) (e.ammount + 1), pwai);
+					is.damageItem((int) (e.ammount + 1), pwai);
 				} else if (e.source.isMagicDamage() || e.source.isExplosion())
 					return;
 				else if (e.source instanceof EntityDamageSource) {
@@ -50,7 +50,7 @@ public class NyxFrostSwordHandler {
 								.addPotionEffect(new PotionEffect(Potion.resistance.id, 15, -(ulevel + 1)));
 					}
 					pwai.attackTargetEntityWithCurrentItem(attacker);
-					pwai.getEquipmentInSlot(0).damageItem((int) (e.ammount + 1), pwai);
+					is.damageItem((int) (e.ammount + 1), pwai);
 				}
 			}
 		}

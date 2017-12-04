@@ -1,6 +1,9 @@
 package iceandshadow2.nyx.entities.projectile;
 
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
+import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.util.IaSWorldHelper;
 
 import java.util.List;
 
@@ -14,8 +17,10 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.potion.Potion;
@@ -187,14 +192,14 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, var1) * 180.0D / Math.PI);
 		}
 
-		final Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+		final Block blockIn = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-		if (var16 != null) {
-			var16.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-			final AxisAlignedBB var2 = var16.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile,
+		if (blockIn != null) {
+			blockIn.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
+			final AxisAlignedBB blockBB = blockIn.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile,
 					this.zTile);
 
-			if (var2 != null && var2.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
+			if (blockBB != null && blockBB.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
 
 				final Vec3 vel = Vec3.createVectorHelper(this.motionX, this.motionY, this.motionZ);
 
@@ -254,65 +259,85 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 		float var20;
 		float var26;
+		boolean shouldKill = true;
 
 		if (var4 != null) {
-			if (var4.entityHit != null) {
-				this.worldObj.playSoundAtEntity(this, "dig.glass",
-						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
-						1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+			if(var4.entityHit != null) {
+				Entity target = var4.entityHit;
+				Item equip = null;
+				boolean swordInUse = false;
+				if(target instanceof EntityLivingBase && ((EntityLivingBase)target).getEquipmentInSlot(0) != null)
+					equip = ((EntityLivingBase)target).getEquipmentInSlot(0).getItem();
+				if(target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf(((EntityPlayer)target), this))
+					swordInUse = ((EntityPlayer)target).isUsingItem();
+				if(equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
+					final int itemDamage = (IaSWorldHelper.getDifficulty(this.worldObj)+(int)this.damage)*(this.getIsCritical()?2:1);
+					((EntityLivingBase)target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase)target);
+					if(!this.getIsCritical()) {
+						this.motionX = -this.motionX;
+						this.motionY = -this.motionY;
+						this.motionZ = -this.motionZ;
+						this.worldObj.playSoundAtEntity(this, "random.bow",
+							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
+							1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						shouldKill = false;
+					} else
+						this.setIsCritical(false);
+				} /*Damage block*/ {
+					var20 = MathHelper.sqrt_double(
+							this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+					int var23 = MathHelper.ceiling_double_int(var20 * this.damage);
 
-				var20 = MathHelper.sqrt_double(
-						this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-				int var23 = MathHelper.ceiling_double_int(var20 * this.damage);
+					if (getIsCritical())
+						var23 += this.rand.nextInt(var23 / 2 + 1) + var23;
+					else
+						var23 += 2;
 
-				if (getIsCritical())
-					var23 += this.rand.nextInt(var23 / 2 + 1) + var23;
-				else
-					var23 += 2;
+					if (var4.entityHit instanceof EntityBlaze || var4.entityHit instanceof EntityMagmaCube)
+						var23 += 3;
 
-				if (var4.entityHit instanceof EntityBlaze || var4.entityHit instanceof EntityMagmaCube)
-					var23 += 3;
+					DamageSource dmgSrc = null;
 
-				DamageSource var21 = null;
-
-				if (this.shootingEntity == null) {
-					var21 = DamageSource.causeThrownDamage(this, this);
-				} else {
-					var21 = DamageSource.causeThrownDamage(this, this.shootingEntity);
-				}
-
-				// Slow enemies it hits.
-				if (var4.entityHit instanceof EntityLivingBase && this.freezeTime > 0)
-					((EntityLivingBase) var4.entityHit).addPotionEffect(
-							new PotionEffect(Potion.moveSlowdown.id, this.freezeTime, this.freezeLevel));
-
-				if (var4.entityHit.attackEntityFrom(var21, var23)) {
-					if (var4.entityHit instanceof EntityLiving) {
-
-						if (this.knockbackStrength > 0) {
-							var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-
-							if (var26 > 0.0F) {
-								var4.entityHit.addVelocity(
-										this.motionX * this.knockbackStrength * 0.6000000238418579D / var26,
-										0.1D * this.knockbackStrength,
-										this.motionZ * this.knockbackStrength * 0.6000000238418579D / var26);
-							}
-						}
-
-						if (this.shootingEntity != null && var4.entityHit != this.shootingEntity
-								&& var4.entityHit instanceof EntityPlayer
-								&& this.shootingEntity instanceof EntityPlayerMP) {
-							((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
-									.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
-						}
+					if (this.shootingEntity == null) {
+						dmgSrc = DamageSource.causeThrownDamage(this, this);
+					} else {
+						dmgSrc = DamageSource.causeThrownDamage(this, this.shootingEntity);
 					}
 
-					// Kill the arrow IF it's non-critical and didn't hit an
-					// enderman.
-					if (!(var4.entityHit instanceof EntityEnderman) && !getIsCritical())
-						setDead();
+					// Slow enemies it hits.
+					if (var4.entityHit instanceof EntityLivingBase && this.freezeTime > 0)
+						((EntityLivingBase) var4.entityHit).addPotionEffect(
+								new PotionEffect(Potion.moveSlowdown.id, this.freezeTime, this.freezeLevel));
 
+					if (var4.entityHit.attackEntityFrom(dmgSrc, var23)) {
+						if (var4.entityHit instanceof EntityLiving) {
+							if (this.knockbackStrength > 0) {
+								var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+
+								if (var26 > 0.0F) {
+									var4.entityHit.addVelocity(
+											this.motionX * this.knockbackStrength * 0.6000000238418579D / var26,
+											0.1D * this.knockbackStrength,
+											this.motionZ * this.knockbackStrength * 0.6000000238418579D / var26);
+								}
+							}
+
+							if (this.shootingEntity != null && var4.entityHit != this.shootingEntity
+									&& var4.entityHit instanceof EntityPlayer
+									&& this.shootingEntity instanceof EntityPlayerMP) {
+								((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
+								.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+							}
+						}
+						// Kill the arrow IF it's non-critical and didn't hit an
+						// enderman.
+						if (shouldKill && !(var4.entityHit instanceof EntityEnderman) && !getIsCritical())
+							setDead();
+						if(!this.isEntityAlive())
+							this.worldObj.playSoundAtEntity(this, "dig.glass",
+									(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
+									1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+					}
 				}
 			} else {
 				this.xTile = var4.blockX;
@@ -373,35 +398,35 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			}
 		}
 
-		this.posX += this.motionX;
-		this.posY += this.motionY;
-		this.posZ += this.motionZ;
-		var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
+		this.posX+=this.motionX;this.posY+=this.motionY;this.posZ+=this.motionZ;var20=MathHelper.sqrt_double(this.motionX*this.motionX+this.motionZ*this.motionZ);this.rotationYaw=(float)(Math.atan2(this.motionX,this.motionZ)*180.0D/Math.PI);
 
-		for (this.rotationPitch = (float) (Math.atan2(this.motionY, var20) * 180.0D / Math.PI); this.rotationPitch
-				- this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+		for(this.rotationPitch=(float)(Math.atan2(this.motionY,var20)*180.0D/Math.PI);this.rotationPitch-this.prevRotationPitch<-180.0F;this.prevRotationPitch-=360.0F)
+
+		{
 			;
 		}
 
-		while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
+		while(this.rotationPitch-this.prevRotationPitch>=180.0F)
+		{
 			this.prevRotationPitch += 360.0F;
 		}
 
-		while (this.rotationYaw - this.prevRotationYaw < -180.0F) {
+		while(this.rotationYaw-this.prevRotationYaw<-180.0F)
+		{
 			this.prevRotationYaw -= 360.0F;
 		}
 
-		while (this.rotationYaw - this.prevRotationYaw >= 180.0F) {
+		while(this.rotationYaw-this.prevRotationYaw>=180.0F)
+		{
 			this.prevRotationYaw += 360.0F;
 		}
 
-		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-		float var22 = 0.99F;
-		var11 = 0.05F;
+		this.rotationPitch=this.prevRotationPitch+(this.rotationPitch-this.prevRotationPitch)*0.2F;this.rotationYaw=this.prevRotationYaw+(this.rotationYaw-this.prevRotationYaw)*0.2F;
+		float var22 = 0.99F;var11=0.05F;
 
-		if (isInWater()) {
+		if(
+
+				isInWater()) {
 			for (int var25 = 0; var25 < (getIsCritical() ? 6 : 4); ++var25) {
 				var26 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var26,
