@@ -170,20 +170,23 @@ public class GenRuinsTowerLookout extends GenRuins {
 			final int rewardid = var2.nextInt(100);
 			ItemStack itemz = new ItemStack(NyxItems.icicle, 1 + var2.nextInt(4));
 
-			// Magic repository.
-			if (rewardid == 0 && rareflag) {
-				itemz = new ItemStack(NyxItems.magicRepo);
-				rareflag = false;
-			}
-
-			// Long bow
-			else if (rewardid < 5 && rareflag) {
+			// Bow.
+			if (rewardid < 2 && rareflag) {
 				final NBTTagCompound c = new NBTTagCompound();
 				if (var2.nextInt(3) == 0)
 					itemz = new ItemStack(NyxItems.frostBowShort, 1, 48 + var2.nextInt(96));
 				else
 					itemz = new ItemStack(NyxItems.frostBowLong, 1, 32 + var2.nextInt(64));
 				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3) == 0 ? 1 : 2);
+				itemz.setTagCompound(c);
+				rareflag = false;
+			}
+
+			// Frost rapier.
+			else if (rewardid < 5 && rareflag) {
+				final NBTTagCompound c = new NBTTagCompound();
+				itemz = new ItemStack(NyxItems.frostSword, 1, 64 + var2.nextInt(128));
+				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3) == 0 ? 2 : 1);
 				itemz.setTagCompound(c);
 				rareflag = false;
 			}
@@ -224,11 +227,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 			else if (rewardid < 35)
 				itemz = new ItemStack(NyxItems.boneCursed, 1);
 
-			// Food.
+			// Experience bottles and food.
 			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(20);
 				if (foodtype < 6)
-					itemz = new ItemStack(Items.golden_apple, 1 + var2.nextInt(2));
+					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
 				else if (foodtype < 12)
 					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
 				else if (foodtype < 16)
