@@ -168,7 +168,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		boolean boneflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
-			ItemStack itemz = new ItemStack(NyxItems.icicle, 1 + var2.nextInt(4));
+			ItemStack itemz = new ItemStack(NyxItems.resin, 2 + var2.nextInt(2), 0);
 
 			// Bow.
 			if (rewardid < 2 && rareflag) {

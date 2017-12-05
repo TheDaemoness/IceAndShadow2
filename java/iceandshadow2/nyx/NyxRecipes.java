@@ -11,7 +11,8 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.teleportCrystal, 1, 2),
 				new ItemStack(NyxItems.teleportCrystal, 1, 6), new ItemStack(NyxItems.exousium, 1, 2));
 
-		GameRegistry.addSmelting(NyxBlocks.oreEchir, new ItemStack(NyxItems.echirIngot, 1, 1), 1);
+		GameRegistry.addSmelting(NyxBlocks.oreEchir, new ItemStack(NyxItems.echirIngot, 2, 1), 1);
+		GameRegistry.addSmelting(NyxItems.echirDust, new ItemStack(NyxItems.echirIngot, 1, 1), 1);
 
 		GameRegistry.addRecipe(new ItemStack(NyxItems.bread), "vvv", 'v', new ItemStack(NyxItems.vineBundle));
 		GameRegistry.addRecipe(new ItemStack(Items.paper, 3), "v", "v", "v", 'v', new ItemStack(NyxItems.vineBundle));

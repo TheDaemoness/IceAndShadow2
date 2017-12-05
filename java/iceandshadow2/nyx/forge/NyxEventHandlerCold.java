@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -10,8 +9,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -22,20 +19,27 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 
 public class NyxEventHandlerCold {
 
 	public NyxEventHandlerCold() {
+	}
+
+	@SubscribeEvent
+	public void onBlockPlaced(PlaceEvent e) {
+		if (e.player.dimension == IaSFlags.dim_nyx_id) {
+			if (e.block == Blocks.furnace || e.block == Blocks.lit_furnace) {
+				e.setCanceled(true);
+				IaSPlayerHelper.messagePlayer(e.player, "There's no point in placing one of those here.");
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -52,8 +56,6 @@ public class NyxEventHandlerCold {
 	@SubscribeEvent
 	public void onPlayerTriesToPlaceBucket(PlayerInteractEvent e) {
 		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
-			return;
-		if (e.entityPlayer.isInsideOfMaterial(Material.fire))
 			return;
 		if (e.entityPlayer.dimension != IaSFlags.dim_nyx_id || !e.entityPlayer.capabilities.isCreativeMode)
 			return;
@@ -168,11 +170,10 @@ public class NyxEventHandlerCold {
 			// DO NOT SIMPLIFY!
 			if (isplant && !e.isCanceled()) {
 				final boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
-				final ForgeDirection face = ForgeDirection.getOrientation(e.face);
+				ForgeDirection.getOrientation(e.face);
 				e.setCanceled(!dirt);
 				if (!dirt)
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"There's no way that this will grow in this realm.");
+					IaSPlayerHelper.messagePlayer(e.entityPlayer, "There's no way that this will grow in this realm.");
 			}
 		}
 	}

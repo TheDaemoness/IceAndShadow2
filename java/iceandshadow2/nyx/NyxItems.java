@@ -3,6 +3,7 @@ package iceandshadow2.nyx;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.nyx.items.tools.*;
@@ -14,7 +15,7 @@ public class NyxItems {
 			nifelhiumPowder, navistraShard, devora, cortra, exousium, draconium, exousicIceShard, toughGossamer,
 			poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort, frostBowLong, frostSword, boneCursed,
 			boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle, page, rope, kitTightrope, echirShears,
-			crystalVial, extractorPoison, magicRepo, toxicCore;
+			crystalVial, extractorPoison, magicRepo, toxicCore, echirDust;
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
@@ -71,5 +72,6 @@ public class NyxItems {
 		// NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 		// .setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register().setCreativeTab(IaSCreativeTabs.resources);
 	}
 }
