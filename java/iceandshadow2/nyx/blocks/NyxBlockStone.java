@@ -1,11 +1,14 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,13 +18,17 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawable {
+public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawable, IIaSBlockClimbable {
 	public static final float HARDNESS = 2.0F;
 	public static final float RESISTANCE = 15F;
 
@@ -69,11 +76,11 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
-			Explosion p_149723_5_) {
-		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
-				p_149723_1_.rand.nextBoolean() ? NyxBlocks.gravel : NyxBlocks.stoneMemory);
+	public void onBlockDestroyedByExplosion(World w, int x, int y, int z,
+			Explosion ex) {
+		super.onBlockDestroyedByExplosion(w, x, y, z, ex);
+		w.setBlock(x, y, z,
+				IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stoneMemory) ? NyxBlocks.gravel : NyxBlocks.stoneMemory);
 	}
 
 	@Override
