@@ -113,7 +113,7 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		this.dropItem(NyxItems.bloodstone, 1);
+		this.dropItem(NyxItems.draconium, 1);
 	}
 
 	@Override

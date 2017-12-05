@@ -258,7 +258,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 					new ItemStack(NyxItems.boneSanctified));
 		if (var2.nextInt(3) != 0)
 			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
-					new ItemStack(NyxItems.draconium));
+					new ItemStack(NyxItems.rope));
 		chestent.setInventorySlotContents(0, new ItemStack(NyxItems.page, 1, 0));
 	}
 

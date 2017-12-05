@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -28,6 +30,13 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 		setLightLevel(0.1F);
 		setLightOpacity(0);
 		setResistance(9001F);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
+		if(e instanceof EntityPlayer) {
+			IaSBaseBlockAirlike.spreadClimbable(w, x, y, z);
+		}
 	}
 
 	@Override

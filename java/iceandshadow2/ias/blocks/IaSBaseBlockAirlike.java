@@ -48,6 +48,17 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 			((IaSBaseBlockAirlike)bl).setClimbable(w, x, y, z, true);
 	}
 	
+	public static void spreadClimbable(World w, int x, int y, int z) {
+		for(int xit = -1; xit <= 1; ++xit) {
+			for(int yit = -1; yit <= 1; ++yit) {
+				for(int zit = -1; zit <= 1; ++zit) {
+					if(testClimbable(w, x+xit, y+yit, z+zit))
+						makeClimbable(w, x+xit, y+yit, z+zit);
+				}
+			}
+		}
+	}
+	
 	public IaSBaseBlockAirlike(EnumIaSModule mod, String texName) {
 		super(mod, texName, new MaterialTransparent(MapColor.airColor));
 		this.setBlockBounds(0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
@@ -71,14 +82,7 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 		if(w.getBlockMetadata(x, y, z) < 8)
 			return;
 		if(e instanceof EntityPlayer) {
-			for(int xit = -1; xit <= 1; ++xit) {
-				for(int yit = -1; yit <= 1; ++yit) {
-					for(int zit = -1; zit <= 1; ++zit) {
-						if(testClimbable(w, x+xit, y+yit, z+zit))
-							makeClimbable(w, x+xit, y+yit, z+zit);
-					}
-				}
-			}
+			spreadClimbable(w, x, y, z);
 		}
 	}
 	

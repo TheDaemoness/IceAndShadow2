@@ -103,7 +103,7 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				return;
 			ForgeDirection dir = null;
 			MovingObjectPosition mop = null;
-			if (el.isSneaking()) {
+			if (el.isSneaking() && !el.isOnLadder()) {
 				final Vec3 v = el.getLookVec();
 				if (Math.abs(v.xCoord) > Math.abs(v.zCoord)) {
 					if (v.xCoord > 0)
