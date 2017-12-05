@@ -98,7 +98,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnD
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
 		if ((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
 			IaSPlayerHelper.messagePlayer(pwai,
-					"You find strange thoughts coming to your mind. Something about getting power from crystals made from merged exousium dust...");
+					"You find strange thoughts coming to your mind. Something about getting power from either alabaster or the Wither...");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
@@ -147,6 +147,8 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnD
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+		if(count < getMaxItemUseDuration(stack))
+			IaSPlayerHelper.drainXP(player, 2, null, false);
 		if (player.dimension != IaSFlags.dim_nyx_id && count < 50)
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));
 		else if (count < 40 && player.dimension == IaSFlags.dim_nyx_id)

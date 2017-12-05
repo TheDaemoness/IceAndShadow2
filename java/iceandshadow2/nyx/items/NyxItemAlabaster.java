@@ -3,6 +3,7 @@ package iceandshadow2.nyx.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,6 +14,7 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,7 +36,8 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
-		setMaxStackSize(16);
+		setMaxStackSize(4);
+		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
 	}
 
 	@Override
@@ -61,9 +64,17 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (catalyst.getItem() != this)
 			return 0;
-		if (catalyst.getItemDamage() == 1) {
-			if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
-				;
+		if (catalyst.getItemDamage() == 0) {
+			do {
+				if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
+					break;
+				else if(target.getItem() == Item.getItemFromBlock(Blocks.gold_ore))
+					break;
+				else if(target.getItem() == Item.getItemFromBlock(Blocks.redstone_block))
+					break;
+				else
+					return 0;
+			} while(false);
 			return 240;
 		}
 		return 0;
@@ -73,26 +84,20 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
-		if (catalyst.getItemDamage() == 1) {
-			if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
+		if (catalyst.getItemDamage() == 0) {
+			final Item tem = target.getItem(); //No Undertale.
+			if (tem == Item.getItemFromBlock(Blocks.coal_block)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxItems.devora, 27));
+			} else if (tem == Item.getItemFromBlock(Blocks.gold_block)) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxItems.echirIngot, 27, 1));
+			} else if (tem == Item.getItemFromBlock(Blocks.redstone_block)) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxItems.cortra, 27, 1));
 			}
 		}
 		return retval;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity e) {
-		if (player.worldObj.isRemote)
-			return true;
-		if (stack.getItemDamage() == 0 && e instanceof EntityMagmaCube) {
-			((EntityMagmaCube) e).setDead();
-			player.worldObj.createExplosion(player, e.posX, e.posY, e.posZ, 0.5f, true);
-			stack.setItemDamage(1);
-			return true;
-		}
-		return false;
 	}
 
 	@Override
