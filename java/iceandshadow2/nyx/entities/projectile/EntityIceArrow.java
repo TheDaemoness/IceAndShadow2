@@ -263,30 +263,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 
 		if (var4 != null) {
 			if (var4.entityHit != null) {
-				Entity target = var4.entityHit;
-				Item equip = null;
-				boolean swordInUse = false;
-				if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getEquipmentInSlot(0) != null)
-					equip = ((EntityLivingBase) target).getEquipmentInSlot(0).getItem();
-				if (target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf((target), this))
-					swordInUse = ((EntityPlayer) target).isUsingItem();
-				if (equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
-					final int itemDamage = (IaSWorldHelper.getDifficulty(this.worldObj) + (int) this.damage)
-							* (this.getIsCritical() ? 2 : 1);
-					((EntityLivingBase) target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase) target);
-					if (!this.getIsCritical()) {
-						this.motionX = -this.motionX;
-						this.motionY = -this.motionY;
-						this.motionZ = -this.motionZ;
-						this.worldObj.playSoundAtEntity(this, "random.bow",
-								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-										: var4.hitVec.lengthVector() / 5.0F),
-								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-						shouldKill = false;
-					} else
-						this.setIsCritical(false);
-				}
-				/* Damage block */ {
+				{
 					var20 = MathHelper.sqrt_double(
 							this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 					int var23 = MathHelper.ceiling_double_int(var20 * this.damage);
@@ -429,7 +406,7 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		}
 
 		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw);
 		float var22 = 0.99F;
 		var11 = 0.05F;
 

@@ -27,6 +27,7 @@ public class EntityNyxSpider extends EntitySpider {
 		super(par1World);
 		setSize(0.7F, 0.5F);
 		this.experienceValue = 4;
+		this.maxHurtResistantTime /= 2;
 		setInvisible(true);
 	}
 

@@ -13,59 +13,17 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
-public class EntityAINyxTargeter extends EntityAITarget {
-
-	protected int lastSeen;
-	protected EntityLivingBase targetEntity;
+public class EntityAINyxTargeter extends EntityAINyxAttack {
 
 	public EntityAINyxTargeter(EntityMob par1EntityCreature) {
-		super(par1EntityCreature, false, false);
-		this.lastSeen = 0;
+		super(par1EntityCreature);
 	}
 
-	/**
-	 * Returns whether an in-progress EntityAIBase should continue executing
-	 */
 	@Override
 	public boolean continueExecuting() {
-		final EntityLivingBase elb = this.taskOwner.getAttackTarget();
-
-		if (elb == null) {
-			return false;
-		} else if (this.taskOwner.isPotionActive(Potion.confusion.id)) {
-			return false;
-		} else if (!elb.isEntityAlive()) {
-			return false;
-		} else if (!((IIaSSensate) this.taskOwner).getSense().canSense(elb)) {
-			++this.lastSeen;
-			if (this.lastSeen > 30) {
-				((IIaSMobGetters) this.taskOwner).setSearchTarget(elb);
-				return false;
-			}
-			return true;
-		} else if (elb instanceof EntityPlayer) {
-			if (((EntityPlayer) elb).capabilities.isCreativeMode)
-				return false;
-		}
-		this.lastSeen = 0;
-		return true;
+		return !this.taskOwner.isPotionActive(Potion.confusion.id) && super.continueExecuting();
 	}
 
-	@Override
-	protected boolean isSuitableTarget(EntityLivingBase candi, boolean par2) {
-		if (!super.isSuitableTarget(candi, par2))
-			return false;
-		return ((IIaSSensate) this.taskOwner).getSense().canSense(candi);
-	}
-
-	@Override
-	public void resetTask() {
-		super.resetTask();
-	}
-
-	/**
-	 * Returns whether the EntityAIBase should begin execution.
-	 */
 	@Override
 	public boolean shouldExecute() {
 		if (this.taskOwner.isPotionActive(Potion.confusion.id))
@@ -103,19 +61,12 @@ public class EntityAINyxTargeter extends EntityAITarget {
 			}
 		}
 		if (targ != null) {
-			this.targetEntity = targ;
+			this.lastSeen = 0;
+			this.taskOwner.setAttackTarget(targ);
+			this.taskOwner.getNavigator().clearPathEntity();
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public void startExecuting() {
-		this.lastSeen = 0;
-		this.taskOwner.setAttackTarget(this.targetEntity);
-		this.targetEntity = null;
-		this.taskOwner.getNavigator().clearPathEntity();
-		super.startExecuting();
 	}
 
 }

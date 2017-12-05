@@ -8,6 +8,9 @@ import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSTools;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,8 +20,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
@@ -232,7 +237,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 
 		float var20;
 		float var26;
-
+		
+		boolean shouldKill = true;
 		if (var4 != null) {
 
 			final IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
@@ -246,6 +252,29 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 
 				float basedmg = mat.getKnifeDamage(this, this.shootingEntity, var4.entityHit);
+				
+
+				
+				Entity target = var4.entityHit;
+				Item equip = null;
+				boolean swordInUse = false;
+				if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getEquipmentInSlot(0) != null)
+					equip = ((EntityLivingBase) target).getEquipmentInSlot(0).getItem();
+				if (target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf((target), this))
+					swordInUse = ((EntityPlayer) target).isUsingItem();
+				if (equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
+					final int itemDamage = (IaSWorldHelper.getDifficulty(this.worldObj) + (int) basedmg);
+					((EntityLivingBase) target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase) target);
+						this.motionX = -this.motionX;
+						this.motionY = -this.motionY;
+						this.motionZ = -this.motionZ;
+						this.worldObj.playSoundAtEntity(this, "random.bow",
+								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+										: var4.hitVec.lengthVector() / 5.0F),
+								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						shouldKill = false;
+				}
+				
 				if (this.origin != null) {
 					int enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, this.origin);
 					basedmg += 1.25 * enchant;
@@ -266,7 +295,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				final int var23 = MathHelper.ceiling_double_int(var20 * basedmg);
 
 				final DamageSource var21 = mat.getKnifeDamageSource(this, this.shootingEntity);
-				final boolean drop = mat.onKnifeHit(this.shootingEntity, this, var4.entityHit);
+				final boolean drop = shouldKill?mat.onKnifeHit(this.shootingEntity, this, var4.entityHit):false;
 
 				if (var4.entityHit.attackEntityFrom(var21, var23)) {
 					if (this.origin != null) {
@@ -297,7 +326,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						}
 					}
 
-					if (!(var4.entityHit instanceof EntityEnderman)) {
+					if (shouldKill && !(var4.entityHit instanceof EntityEnderman)) {
 						if (drop)
 							doDrop(mat);
 						setDead();

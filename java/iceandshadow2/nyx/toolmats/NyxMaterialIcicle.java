@@ -26,17 +26,17 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 2;
+		return 3;
 	}
 
 	@Override
 	public int getBaseLevel() {
-		return 0;
+		return 2;
 	}
 
 	@Override
 	public float getBaseSpeed() {
-		return 8;
+		return 12;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 32;
+		return 8;
 	}
 
 	@Override
@@ -121,6 +121,20 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 			return false;
 		if (target instanceof EntityLivingBase)
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 65, 1));
+		final List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
+				AxisAlignedBB.getBoundingBox(knife.posX - 1.5F, knife.posY - 2.0F, knife.posZ - 1.5F, knife.posX + 1.5F,
+						knife.posY + 1.0F, knife.posZ + 1.5F));
+		for (final Object o : ents) {
+			if (o instanceof EntityLivingBase) {
+				final EntityLivingBase elb = (EntityLivingBase) o;
+				if (o instanceof EntityPlayer && !(user instanceof EntityPlayer))
+					continue;
+				if (o instanceof EntityMob && user instanceof EntityMob)
+					continue;
+				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
+				elb.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 45, 0));
+			}
+		}
 		knife.setDead();
 		return false;
 	}

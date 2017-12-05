@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import iceandshadow2.IaSFlags;
@@ -9,6 +11,7 @@ import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;
+import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSearch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxSkeletonWeaponSwitch;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
@@ -21,6 +24,7 @@ import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
+import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -48,6 +52,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -104,6 +109,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
 	public EntityNyxSkeleton(World par1World, EnumNyxSkeletonType type) {
 		super(par1World);
+		this.maxHurtResistantTime /= 2;
 
 		this.senses = new IaSSetSenses(this);
 		this.senses.add(new IaSSenseMovement(this, 12.0));
@@ -127,7 +133,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxSkeleton.moveSpeed));
 		this.tasks.addTask(6, new EntityAINyxWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
 		this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
 
 		if (par1World != null && !par1World.isRemote)
@@ -141,6 +147,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
 	@Override
 	protected void addRandomArmor() {
+		if (IaSWorldHelper.getRegionLevel(this) < 2)
+			return;
 		if (this.rand.nextFloat() < EntityNyxSkeleton.nyxSkeletonArmorProbability[IaSWorldHelper
 				.getDifficulty(this.worldObj)]) {
 			int i = this.rand.nextInt(2 + (IaSWorldHelper.getDifficulty(this.worldObj) == 3 ? 1 : 0));
@@ -202,9 +210,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			if (par1Entity instanceof EntityLivingBase) {
 				if (getEquipmentInSlot(0) == null)
 					return flag;
-				if (getEquipmentInSlot(0).getItem() == NyxItems.frostSword)
-					((EntityLivingBase) par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
-							5 + 5 * IaSWorldHelper.getDifficulty(this.worldObj), 4));
+				((EntityLivingBase) par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,
+						5 + 5 * IaSWorldHelper.getDifficulty(this.worldObj), 4));
 			}
 		}
 
@@ -213,6 +220,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
+		if(par1DamageSource.getEntity() != null)
+			this.removePotionEffect(Potion.confusion.id);
 		if (isEntityInvulnerable() || par1DamageSource == DamageSource.drown)
 			return false;
 		if (getEquipmentInSlot(2) != null && !par1DamageSource.isUnblockable()
@@ -223,6 +232,21 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			return super.attackEntityFrom(par1DamageSource, dmg * 3);
 		if (par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
 			return super.attackEntityFrom(par1DamageSource, Math.max(1, dmg - IaSWorldHelper.getRegionArmorMod(this)));
+		if (par1DamageSource.isProjectile())
+			return super.attackEntityFrom(par1DamageSource, dmg);
+		if (getEquipmentInSlot(0).getItem() == NyxItems.frostSword) {
+			final Entity attacker = par1DamageSource.getEntity();
+			if(attacker != null) {
+				attacker.hurtResistantTime = 0;
+				if (attacker instanceof EntityLivingBase) {
+					final int ulevel = ((NyxItemSwordFrost) NyxItems.frostSword).getUpgradeLevel(getEquipmentInSlot(0));
+					((EntityLivingBase) attacker)
+						.addPotionEffect(new PotionEffect(Potion.resistance.id, 15, -(ulevel + 1)));
+				}
+				this.attackEntityAsMob(attacker);
+				return super.attackEntityFrom(par1DamageSource, dmg/2);
+			}
+		}
 		return super.attackEntityFrom(par1DamageSource, dmg);
 	}
 
@@ -303,9 +327,9 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			return;
 
 		this.dropItem(Items.bone, 1);
-		this.dropItem(NyxItems.icicle, 1 + this.worldObj.rand.nextInt(2));
+		this.dropItem(NyxItems.icicle, this.worldObj.rand.nextInt(2));
 
-		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 1));
+		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 2));
 
 		/*
 		 * Calendar var1 = this.worldObj.getCurrentDate(); if (var1.get(2) + 1
@@ -348,12 +372,13 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			var3 = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 7 : 8;
 		else
 			var3 = 8;
-
+		
+		/*
 		if (var2 != null) {
 			if (var2.getItem() instanceof IIaSTool)
 				var3 += MathHelper
-						.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity));
-		}
+						.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity))/2;
+		}*/
 		return var3;
 	}
 
@@ -371,16 +396,20 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (this.posX * this.posX + this.posZ * this.posZ < 1024)
+		final int SAFE_RADIUS = 48;
+		if (this.posX * this.posX + this.posZ * this.posZ < SAFE_RADIUS*SAFE_RADIUS)
 			return false;
-		return this.posY > 64.0F && super.getCanSpawnHere();
+        List list = this.worldObj.getEntitiesWithinAABB(
+        		this.getClass(),
+        		AxisAlignedBB.getBoundingBox(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16, 12, 16));
+		return list.size() <= (1+IaSWorldHelper.getRegionLevel(this)/2) && this.posY > 64.0F && super.getCanSpawnHere();
 	}
 
 	public ItemStack getDefaultAlternateWeapon(EnumNyxSkeletonType taipe) {
 		if (taipe == EnumNyxSkeletonType.MAGIC_SHADOW)
 			return new ItemStack(Items.bone);
 		else
-			return new ItemStack(NyxItems.frostSword, 1, 475 + this.rand.nextInt(25));
+			return IaSTools.setToolMaterial(IaSTools.sword, "Icicle");
 	}
 
 	public ItemStack getDefaultWeapon(EnumNyxSkeletonType taipe) {
@@ -518,17 +547,19 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			this.equipmentDropChances[4] = 0.0F;
 			if (reg >= 5 && this.rand.nextBoolean()) {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_LONG);
-				this.equipmentDropChances[0] = 0.33F;
-			} else {
+				this.equipmentDropChances[0] = 0.1F;
+			} else if (reg >= 3 && this.rand.nextBoolean()) {
+				setNyxSkeletonCombatType(EnumNyxSkeletonType.RAPIER);
+				this.equipmentDropChances[0] = 0.1F;
+			} else
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-			}
 		}
 
 		// Bow skeleton.
 		else {
 			setCurrentItemOrArmor(0, getDefaultWeapon(EnumNyxSkeletonType.BOW_FROST_SHORT));
 			setNyxSkeletonCombatType(EnumNyxSkeletonType.BOW_FROST_SHORT);
-			this.equipmentDropChances[0] = 0.05F;
+			this.equipmentDropChances[0] = 0.02F;
 		}
 
 		addRandomArmor();
@@ -546,6 +577,13 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		setCombatTask();
+	}
+	
+	@Override
+	public void setAttackTarget(EntityLivingBase p_70624_1_) {
+		if(this.isPotionActive(Potion.confusion))
+			return;
+		super.setAttackTarget(p_70624_1_);
 	}
 
 	@Override

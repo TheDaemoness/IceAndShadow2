@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
 import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
@@ -85,7 +86,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		this.tasks.addTask(7, new EntityAIWander(this, EntityNyxWightToxic.moveSpeed));
 		this.tasks.addTask(8, new EntityAINyxWatchClosest(this, EntityPlayer.class, 6.0F, 0.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSpider.class, 6, true));
 		this.targetTasks.addTask(3, new EntityAINyxTargeter(this));
 	}
@@ -224,8 +225,12 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		for (int x = -16; x <= 16; ++x) {
 			for (int y = -4; y <= 4; ++y) {
 				for (int z = -16; z <= 16; ++z) {
-					if (IaSEntityHelper.getBlock(this, x, y, z) == NyxBlocks.poisonLeaves)
-						return this.posY > 48.0F && super.getCanSpawnHere();
+					if (IaSEntityHelper.getBlock(this, x, y, z) == NyxBlocks.poisonLeaves) {
+				        List list = this.worldObj.getEntitiesWithinAABB(
+				        		this.getClass(),
+				        		AxisAlignedBB.getBoundingBox(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16, 12, 16));
+						return list.size() < (1+IaSWorldHelper.getRegionLevel(this)/2) && this.posY > 64.0F && super.getCanSpawnHere();
+					}
 				}
 			}
 		}
