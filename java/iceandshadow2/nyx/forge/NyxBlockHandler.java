@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.api.IIaSBlockClimbable;
+import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
@@ -30,7 +31,8 @@ public class NyxBlockHandler {
 			final int z = (int) (e.entityLiving.posZ - (e.entityLiving.posZ<0?1:0));
 			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if(w.getBlock(x+dir.offsetX, y, z+dir.offsetZ) instanceof IIaSBlockClimbable) {
-					w.setBlock(x, y, z, NyxBlocks.virtualLadder);
+					IaSBaseBlockAirlike.makeClimbable(w, x, y, z);
+					IaSBaseBlockAirlike.makeClimbable(w, x, y+1, z);
 					break;
 				}
 			}

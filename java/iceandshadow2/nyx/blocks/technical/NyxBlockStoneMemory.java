@@ -13,7 +13,7 @@ import iceandshadow2.nyx.NyxBlocks;
 public class NyxBlockStoneMemory extends IaSBaseBlockAirlike {
 
 	public NyxBlockStoneMemory(String texName) {
-		super(EnumIaSModule.NYX, texName, Material.fire);
+		super(EnumIaSModule.NYX, texName);
 		setLightOpacity(0);
 		setTickRandomly(true);
 	}
@@ -36,5 +36,6 @@ public class NyxBlockStoneMemory extends IaSBaseBlockAirlike {
 			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone)
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.stoneGrowing);
 		}
+		super.updateTick(w, x, y, z, r);
 	}
 }
