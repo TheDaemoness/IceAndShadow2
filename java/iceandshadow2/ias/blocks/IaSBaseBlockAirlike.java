@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.IIaSBlockClimbable;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,9 +19,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
+	
 	public IaSBaseBlockAirlike(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, texName, mat);
 		this.setBlockBounds(0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
+        this.disableStats();
 	}
 
 	@Override

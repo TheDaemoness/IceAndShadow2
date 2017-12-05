@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockThawable {
+public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockThawable, IIaSBlockClimbable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon iconTop, iconSide;
