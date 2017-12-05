@@ -20,7 +20,7 @@ public class Sculptor {
 			for (int xit = less; xit <= more; ++xit) {
 				for (int zit = less; zit <= more; ++zit) {
 					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < Math.sqrt(world.rand.nextDouble()) * radius)
-						world.setBlockToAir(x + xit, y + yit, z + zit);
+						world.getBlock(x + xit, y + yit, z + zit).onBlockExploded(world, x + xit, y + yit, z + zit, null);
 				}
 			}
 		}
