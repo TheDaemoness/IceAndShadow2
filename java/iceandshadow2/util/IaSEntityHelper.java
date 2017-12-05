@@ -16,34 +16,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 
 public class IaSEntityHelper {
-	
-	public static boolean isTouchingGround(EntityLivingBase ent) {
-		if(ent.isAirBorne)
-			return false;
-		if(ent.isRiding())
-			return false;
-		if(ent instanceof IIaSMobGetters && ((IIaSMobGetters)ent).couldFlyFasterWithBoots())
-			return false;
-		return ent.getEquipmentInSlot(1) == null;
-	}
-	
-	//Returns true is b is in front of a, by some fairly loose definitions of "in front of".
-	public static boolean isInFrontOf(Entity a, Entity b) {
-		final double xdif = b.posX - a.posX;
-		final double zdif = b.posZ - a.posZ;
-		final double range = Math.sqrt(xdif * xdif + zdif * zdif);
-		if (1 + 2 * range < Math.abs(b.posY - a.posY))
-			return false;
-		
-		//NOTE: Using the notation for polar coordinates I'm used to, z in MC is x, and x in MC is y.
-		double ratio = xdif==0?0:Math.abs(xdif/zdif);
-		double ang = Math.atan(ratio) * 180.0 / Math.PI;
-		if(zdif < 0)
-			ang=180-ang;
-
-		double delta = Math.abs(ang-Math.abs(a.rotationYaw));
-		return delta <= 75;
-	}
 
 	public static EntityItem dropItem(Entity ent, ItemStack par1ItemStack) {
 		if (par1ItemStack.stackSize == 0) {
@@ -164,6 +136,45 @@ public class IaSEntityHelper {
 		return IaSEntityHelper.getBiome(ent, offsetX, offsetZ).getFloatTemperature(x, y, z);
 	}
 
+	// Returns true is b is in front of a, by some fairly loose definitions of
+	// "in front of".
+	public static boolean isInFrontOf(Entity a, Entity b) {
+		final double xdif = b.posX - a.posX;
+		final double zdif = b.posZ - a.posZ;
+		final double range = Math.sqrt(xdif * xdif + zdif * zdif);
+		if (1 + 2 * range < Math.abs(b.posY - a.posY))
+			return false;
+
+		// NOTE: Using the notation for polar coordinates I'm used to, z in MC
+		// is x, and x in MC is y.
+		double ratio = xdif == 0 ? 0 : Math.abs(xdif / zdif);
+		double ang = Math.atan(ratio) * 180.0 / Math.PI;
+		if (zdif < 0)
+			ang = 180 - ang;
+
+		double delta = Math.abs(ang - Math.abs(a.rotationYaw));
+		return delta <= 75;
+	}
+
+	public static boolean isTouchingGround(EntityLivingBase ent) {
+		if (ent.isAirBorne)
+			return false;
+		if (ent.isRiding())
+			return false;
+		if (ent instanceof IIaSMobGetters && ((IIaSMobGetters) ent).couldFlyFasterWithBoots())
+			return false;
+		return ent.getEquipmentInSlot(1) == null;
+	}
+
+	public static void spawnNourishment(Entity who, int amount) {
+		spawnNourishment(who.worldObj, who.posX, who.posY, who.posZ, amount);
+	}
+
+	public static void spawnNourishment(World w, double x, double y, double z, int amount) {
+		if (!w.isRemote)
+			w.spawnEntityInWorld(new EntityOrbNourishment(w, x, y, z, amount));
+	}
+
 	public static int[] splitCoords(long x, long z) {
 		final int[] ret = new int[4];
 		if (x < 0)
@@ -183,13 +194,5 @@ public class IaSEntityHelper {
 		else
 			ret[3] = (int) (z % 16);
 		return ret;
-	}
-	
-	public static void spawnNourishment(World w, double x, double y, double z, int amount) {
-		if(!w.isRemote)
-			w.spawnEntityInWorld(new EntityOrbNourishment(w, x, y, z, amount));
-	}
-	public static void spawnNourishment(Entity who, int amount) {
-		spawnNourishment(who.worldObj, who.posX, who.posY, who.posZ, amount);
 	}
 }

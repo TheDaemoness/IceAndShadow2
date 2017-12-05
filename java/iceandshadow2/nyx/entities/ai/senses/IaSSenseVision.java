@@ -43,7 +43,7 @@ public class IaSSenseVision extends IaSSense {
 			if (((EntityMob) this.owner).getAttackTarget() == ent)
 				return this.owner.canEntityBeSeen(ent);
 		}
-		if(!IaSEntityHelper.isInFrontOf(this.owner, ent))
+		if (!IaSEntityHelper.isInFrontOf(this.owner, ent))
 			return false;
 		return this.owner.canEntityBeSeen(ent);
 	}

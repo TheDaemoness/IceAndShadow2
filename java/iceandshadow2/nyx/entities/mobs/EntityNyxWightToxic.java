@@ -115,7 +115,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
-		int dmg = 2*IaSWorldHelper.getDifficulty(this.worldObj) - 1;
+		int dmg = 2 * IaSWorldHelper.getDifficulty(this.worldObj) - 1;
 		if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
 			final EntityLivingBase tox = (EntityLivingBase) par1Entity;
 			final PotionEffect pot = tox.getActivePotionEffect(Potion.poison);
@@ -151,6 +151,16 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		else
 			flag = super.attackEntityFrom(par1DamageSource, par2);
 		return flag;
+	}
+
+	@Override
+	protected boolean canTriggerWalking() {
+		return false;
+	}
+
+	@Override
+	public boolean couldFlyFasterWithBoots() {
+		return true;
 	}
 
 	@Override
@@ -193,9 +203,9 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 			return 15;
 		float mod = 0F;
 		final Block bl = this.worldObj.getBlock(i, j, k);
-		if(bl instanceof IIaSBlockPathDesirability)
-			mod = ((IIaSBlockPathDesirability)bl).getBlockPathWeight(this.worldObj, i, j, k);
-		return mod+super.getBlockPathWeight(i, j, k);
+		if (bl instanceof IIaSBlockPathDesirability)
+			mod = ((IIaSBlockPathDesirability) bl).getBlockPathWeight(this.worldObj, i, j, k);
+		return mod + super.getBlockPathWeight(i, j, k);
 	}
 
 	@Override
@@ -311,7 +321,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 						if (ent instanceof EntityAgeable || ent instanceof EntityPlayer
 								|| ent instanceof EntityNyxSpider) {
 							final EntityLivingBase elb = (EntityLivingBase) ent;
-							if ((elb == this.getAttackTarget() && this.getHealth() >= this.getMaxHealth()) || elb.isPotionActive(Potion.poison))
+							if ((elb == this.getAttackTarget() && this.getHealth() >= this.getMaxHealth())
+									|| elb.isPotionActive(Potion.poison))
 								continue;
 							final EntityPoisonBall pb = new EntityPoisonBall(this.worldObj, this);
 							pb.setThrowableHeading(elb.posX - this.posX,
@@ -413,15 +424,5 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		wt.setThrowableHeading(-d0, -d1, -d2, 0.5F, 20.0F);
 		this.worldObj.spawnEntityInWorld(wt);
 		setDead();
-	}
-	
-	@Override
-    protected boolean canTriggerWalking() {
-        return false;
-    }
-
-	@Override
-	public boolean couldFlyFasterWithBoots() {
-		return true;
 	}
 }

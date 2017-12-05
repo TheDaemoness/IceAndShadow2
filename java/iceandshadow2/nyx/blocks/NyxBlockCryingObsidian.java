@@ -18,7 +18,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -100,8 +99,10 @@ public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
 							return;
-						if(IaSPlayerHelper.drainXP(playuh, 19, "Something forcefully binds your life to the obsidian.", true) >= 19);
-							playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
+						if (IaSPlayerHelper.drainXP(playuh, 19, "Something forcefully binds your life to the obsidian.",
+								true) >= 19)
+							;
+						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
 					}
 				}
 			} else {

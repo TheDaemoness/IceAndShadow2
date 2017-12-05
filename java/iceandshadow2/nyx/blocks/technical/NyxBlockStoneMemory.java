@@ -1,20 +1,13 @@
 package iceandshadow2.nyx.blocks.technical;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
-import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.nyx.NyxBlocks;
 
 public class NyxBlockStoneMemory extends IaSBaseBlockAirlike {

@@ -119,7 +119,8 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (isEntityInvulnerable() || !par1DamageSource.isUnblockable() || par1DamageSource == DamageSource.drown || par1DamageSource == DamageSource.wither)
+		if (isEntityInvulnerable() || !par1DamageSource.isUnblockable() || par1DamageSource == DamageSource.drown
+				|| par1DamageSource == DamageSource.wither)
 			return false;
 		boolean flag;
 		if (par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
@@ -136,6 +137,11 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				((EntityPlayer) ent).dropOneItem(false);
 		}
 		return flag;
+	}
+
+	@Override
+	public boolean couldFlyFasterWithBoots() {
+		return false;
 	}
 
 	@Override
@@ -203,6 +209,13 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	protected String getDeathSound() {
 		return "IceAndShadow2:mob_nyxghoul_death";
+	}
+
+	@Override
+	public ItemStack getEquipmentInSlot(int equip) {
+		if (equip == 1)
+			return null;
+		return super.getEquipmentInSlot(equip);
 	}
 
 	@Override
@@ -277,13 +290,6 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		} else
 			setInvisible(true);
 	}
-	
-	@Override
-	public ItemStack getEquipmentInSlot(int equip) {
-		if(equip == 1)
-			return null;
-		return super.getEquipmentInSlot(equip);
-	}
 
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
@@ -307,10 +313,5 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void setSearchTarget(EntityLivingBase ent) {
 		this.searched = ent;
-	}
-
-	@Override
-	public boolean couldFlyFasterWithBoots() {
-		return false;
 	}
 }

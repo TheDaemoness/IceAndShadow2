@@ -136,10 +136,10 @@ public class NyxChunkProvider implements IChunkProvider {
 
 								else if (yit * 8 + l2 < levelWater)
 									blockArr[arrIndex += 256] = NyxBlocks.exousicWater;
-								else if(yit * 8 + l2 < NyxBlockAir.ATMOS_HEIGHT)
+								else if (yit * 8 + l2 < NyxBlockAir.ATMOS_HEIGHT)
 									blockArr[arrIndex += 256] = null;
 								else
-									blockArr[arrIndex += 256] = NyxBlocks.air;	
+									blockArr[arrIndex += 256] = NyxBlocks.air;
 							}
 							d10 += d12;
 							d11 += d13;

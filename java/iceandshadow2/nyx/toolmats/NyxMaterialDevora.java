@@ -108,28 +108,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		}
 		return super.onAttack(is, user, target);
 	}
-	
-	@Override
-	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z) {
-		if (!(user instanceof EntityPlayer))
-			return super.onPreHarvest(is, user, w, x, y, z);
-		final Block origin = w.getBlock(x, y, z);
-		final float hardness = origin.getBlockHardness(w, x, y, z);
-		Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
-		for (int i = 1; i < 9; i += 2) {
-			final int xit = i % 3 - 1;
-			final int zit = i / 3 - 1;
-			explodeMine((EntityPlayer) user, w, x + xit, y, z + zit, hardness, ex);
-		}
-		explodeMine((EntityPlayer) user, w, x, y + 1, z, hardness, ex);
-		explodeMine((EntityPlayer) user, w, x, y - 1, z, hardness, ex);
-		return true;
-	}
-
-	@Override
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
-		return 2 * super.onPostHarvest(is, user, w, x, y, z);
-	}
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
@@ -176,5 +154,27 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		}
 		knife.setDead();
 		return false;
+	}
+
+	@Override
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+		return 2 * super.onPostHarvest(is, user, w, x, y, z);
+	}
+
+	@Override
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z) {
+		if (!(user instanceof EntityPlayer))
+			return super.onPreHarvest(is, user, w, x, y, z);
+		final Block origin = w.getBlock(x, y, z);
+		final float hardness = origin.getBlockHardness(w, x, y, z);
+		Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
+		for (int i = 1; i < 9; i += 2) {
+			final int xit = i % 3 - 1;
+			final int zit = i / 3 - 1;
+			explodeMine(user, w, x + xit, y, z + zit, hardness, ex);
+		}
+		explodeMine(user, w, x, y + 1, z, hardness, ex);
+		explodeMine(user, w, x, y - 1, z, hardness, ex);
+		return true;
 	}
 }

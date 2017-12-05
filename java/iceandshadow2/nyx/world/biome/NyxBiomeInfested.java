@@ -2,7 +2,6 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxGhoul;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
 

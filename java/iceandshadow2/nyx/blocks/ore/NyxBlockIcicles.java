@@ -76,8 +76,9 @@ public class NyxBlockIcicles extends IaSBlockDeco {
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity e, float distance) {
-		e.attackEntityFrom(IaSDamageSources.dmgStalagmite, 3+2*world.difficultySetting.getDifficultyId()+distance*2);
-		super.onFallenUpon(world, x, y, z, e, 3+2*world.difficultySetting.getDifficultyId()+distance*2);
+		e.attackEntityFrom(IaSDamageSources.dmgStalagmite,
+				3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
+		super.onFallenUpon(world, x, y, z, e, 3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
 		IaSBlockHelper.breakBlock(world, x, y, z, false);
 	}
 }

@@ -147,7 +147,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnD
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		if(count < getMaxItemUseDuration(stack))
+		if (count < getMaxItemUseDuration(stack))
 			IaSPlayerHelper.drainXP(player, 2, null, false);
 		if (player.dimension != IaSFlags.dim_nyx_id && count < 50)
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));

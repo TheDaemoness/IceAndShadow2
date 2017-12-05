@@ -72,7 +72,8 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
 			Explosion p_149723_5_) {
 		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, p_149723_1_.rand.nextBoolean()?NyxBlocks.gravel:NyxBlocks.stoneMemory);
+		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
+				p_149723_1_.rand.nextBoolean() ? NyxBlocks.gravel : NyxBlocks.stoneMemory);
 	}
 
 	@Override

@@ -89,7 +89,8 @@ public class NyxBiome extends BiomeGenBase {
 			for (int zit = 0; zit < 16; ++zit) {
 				if (par2Random.nextInt(24) == 0) {
 					boolean inair = false;
-					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 0; --yit) {
+					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit)
+							- 1; yit > 0; --yit) {
 						if (!inair && par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
 							inair = true;
 						} else if (inair && !par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {

@@ -1,8 +1,6 @@
 package iceandshadow2.nyx.world.gen;
 
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.util.IaSBlockHelper;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;

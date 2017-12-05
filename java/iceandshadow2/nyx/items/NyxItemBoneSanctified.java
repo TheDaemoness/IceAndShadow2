@@ -67,7 +67,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 	@Override
 	public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(stack, par2World, par3Entity, par4, par5);
-		if(par2World.isRemote)
+		if (par2World.isRemote)
 			return;
 		if (!(par3Entity instanceof EntityPlayer)) {
 			stack.stackSize = 0;
@@ -78,7 +78,7 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
 			else if (dmg > 0) {
-				if(stack.attemptDamageItem(1, par2World.rand))
+				if (stack.attemptDamageItem(1, par2World.rand))
 					stack.func_150996_a(Items.bone);
 			}
 		}

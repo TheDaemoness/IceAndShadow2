@@ -120,13 +120,6 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
-		if(!worldObj.isRemote)
-			worldObj.setBlockToAir(x, y, z);
-		return true;
-	}
-
-	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
 		super.onKnifeHit(user, knife, block);
 		return false;
@@ -137,5 +130,12 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 		if (target instanceof EntityLivingBase)
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
 		return super.onKnifeHit(user, knife, target);
+	}
+
+	@Override
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
+		if (!worldObj.isRemote)
+			worldObj.setBlockToAir(x, y, z);
+		return true;
 	}
 }

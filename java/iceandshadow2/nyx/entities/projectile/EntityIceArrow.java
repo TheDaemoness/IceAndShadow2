@@ -262,28 +262,31 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		boolean shouldKill = true;
 
 		if (var4 != null) {
-			if(var4.entityHit != null) {
+			if (var4.entityHit != null) {
 				Entity target = var4.entityHit;
 				Item equip = null;
 				boolean swordInUse = false;
-				if(target instanceof EntityLivingBase && ((EntityLivingBase)target).getEquipmentInSlot(0) != null)
-					equip = ((EntityLivingBase)target).getEquipmentInSlot(0).getItem();
-				if(target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf(((EntityPlayer)target), this))
-					swordInUse = ((EntityPlayer)target).isUsingItem();
-				if(equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
-					final int itemDamage = (IaSWorldHelper.getDifficulty(this.worldObj)+(int)this.damage)*(this.getIsCritical()?2:1);
-					((EntityLivingBase)target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase)target);
-					if(!this.getIsCritical()) {
+				if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getEquipmentInSlot(0) != null)
+					equip = ((EntityLivingBase) target).getEquipmentInSlot(0).getItem();
+				if (target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf((target), this))
+					swordInUse = ((EntityPlayer) target).isUsingItem();
+				if (equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
+					final int itemDamage = (IaSWorldHelper.getDifficulty(this.worldObj) + (int) this.damage)
+							* (this.getIsCritical() ? 2 : 1);
+					((EntityLivingBase) target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase) target);
+					if (!this.getIsCritical()) {
 						this.motionX = -this.motionX;
 						this.motionY = -this.motionY;
 						this.motionZ = -this.motionZ;
 						this.worldObj.playSoundAtEntity(this, "random.bow",
-							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
-							1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+										: var4.hitVec.lengthVector() / 5.0F),
+								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 						shouldKill = false;
 					} else
 						this.setIsCritical(false);
-				} /*Damage block*/ {
+				}
+				/* Damage block */ {
 					var20 = MathHelper.sqrt_double(
 							this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 					int var23 = MathHelper.ceiling_double_int(var20 * this.damage);
@@ -312,7 +315,8 @@ public class EntityIceArrow extends Entity implements IProjectile {
 					if (var4.entityHit.attackEntityFrom(dmgSrc, var23)) {
 						if (var4.entityHit instanceof EntityLiving) {
 							if (this.knockbackStrength > 0) {
-								var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+								var26 = MathHelper
+										.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
 								if (var26 > 0.0F) {
 									var4.entityHit.addVelocity(
@@ -326,16 +330,17 @@ public class EntityIceArrow extends Entity implements IProjectile {
 									&& var4.entityHit instanceof EntityPlayer
 									&& this.shootingEntity instanceof EntityPlayerMP) {
 								((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
-								.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+										.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
 							}
 						}
 						// Kill the arrow IF it's non-critical and didn't hit an
 						// enderman.
 						if (shouldKill && !(var4.entityHit instanceof EntityEnderman) && !getIsCritical())
 							setDead();
-						if(!this.isEntityAlive())
+						if (!this.isEntityAlive())
 							this.worldObj.playSoundAtEntity(this, "dig.glass",
-									(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
+									(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+											: var4.hitVec.lengthVector() / 5.0F),
 									1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 					}
 				}
@@ -398,35 +403,39 @@ public class EntityIceArrow extends Entity implements IProjectile {
 			}
 		}
 
-		this.posX+=this.motionX;this.posY+=this.motionY;this.posZ+=this.motionZ;var20=MathHelper.sqrt_double(this.motionX*this.motionX+this.motionZ*this.motionZ);this.rotationYaw=(float)(Math.atan2(this.motionX,this.motionZ)*180.0D/Math.PI);
+		this.posX += this.motionX;
+		this.posY += this.motionY;
+		this.posZ += this.motionZ;
+		var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+		this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-		for(this.rotationPitch=(float)(Math.atan2(this.motionY,var20)*180.0D/Math.PI);this.rotationPitch-this.prevRotationPitch<-180.0F;this.prevRotationPitch-=360.0F)
+		for (this.rotationPitch = (float) (Math.atan2(this.motionY, var20) * 180.0D / Math.PI); this.rotationPitch
+				- this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
 
 		{
 			;
 		}
 
-		while(this.rotationPitch-this.prevRotationPitch>=180.0F)
-		{
+		while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 			this.prevRotationPitch += 360.0F;
 		}
 
-		while(this.rotationYaw-this.prevRotationYaw<-180.0F)
-		{
+		while (this.rotationYaw - this.prevRotationYaw < -180.0F) {
 			this.prevRotationYaw -= 360.0F;
 		}
 
-		while(this.rotationYaw-this.prevRotationYaw>=180.0F)
-		{
+		while (this.rotationYaw - this.prevRotationYaw >= 180.0F) {
 			this.prevRotationYaw += 360.0F;
 		}
 
-		this.rotationPitch=this.prevRotationPitch+(this.rotationPitch-this.prevRotationPitch)*0.2F;this.rotationYaw=this.prevRotationYaw+(this.rotationYaw-this.prevRotationYaw)*0.2F;
-		float var22 = 0.99F;var11=0.05F;
+		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
+		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+		float var22 = 0.99F;
+		var11 = 0.05F;
 
-		if(
+		if (
 
-				isInWater()) {
+		isInWater()) {
 			for (int var25 = 0; var25 < (getIsCritical() ? 6 : 4); ++var25) {
 				var26 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var26,

@@ -1,35 +1,22 @@
 package iceandshadow2.nyx.blocks;
 
-import java.lang.reflect.Field;
-import java.util.Random;
-
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
-import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
-import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSPlayerHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.Fluid;
 
 //NOTE: This is air used for underground and very high areas in Nyx.
 //It's used to suffocate players and other such entities.
 public class NyxBlockAir extends IaSBaseBlockAirlike {
-	
+
 	public static final short ATMOS_HEIGHT = 192;
 
 	public NyxBlockAir(String id) {
@@ -39,10 +26,11 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		final int hardness = IaSWorldHelper.getDifficulty(world);
-		if(ent instanceof EntityPlayer)
-			IaSPlayerHelper.drainXP((EntityPlayer)ent, hardness, "Your life begins to bleed into your surroundings.", false);
-		else if(ent instanceof EntityAgeable)
-			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 1+hardness);
+		if (ent instanceof EntityPlayer)
+			IaSPlayerHelper.drainXP((EntityPlayer) ent, hardness, "Your life begins to bleed into your surroundings.",
+					false);
+		else if (ent instanceof EntityAgeable)
+			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 1 + hardness);
 	}
 
 	@Override

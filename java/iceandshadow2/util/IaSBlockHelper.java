@@ -13,16 +13,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class IaSBlockHelper {
-	public static int getHeight(World w, int x, int z) {
-		int y = 255;
-		for(; y > 0; --y) {
-			final Block bl = w.getBlock(x, y, z);
-			if(bl.getBlocksMovement(w, x, y, z))
-				break;
-		}
-		return y;
-	}
-	
 	public static boolean breakBlock(World w, int x, int y, int z) {
 		return breakBlock(w, x, y, z, true);
 	}
@@ -49,6 +39,16 @@ public class IaSBlockHelper {
 		if (dir.offsetZ == 0)
 			zN += r.nextDouble() * size - size / 2.0;
 		return Vec3.createVectorHelper(x - 0.05 + 1.10 * xN, y - 0.05 + 1.10 * yN, z - 0.05 + 1.10 * zN);
+	}
+
+	public static int getHeight(World w, int x, int z) {
+		int y = 255;
+		for (; y > 0; --y) {
+			final Block bl = w.getBlock(x, y, z);
+			if (bl.getBlocksMovement(w, x, y, z))
+				break;
+		}
+		return y;
 	}
 
 	public static boolean isAdjacent(IBlockAccess w, int x, int y, int z, Block bl) {
@@ -84,10 +84,10 @@ public class IaSBlockHelper {
 			return true;
 		return false;
 	}
-	
+
 	public static void makeSpawner(World w, int x, int y, int z, String entityName) {
 		w.setBlock(x, y, z, Blocks.mob_spawner);
-		TileEntityMobSpawner tes = (TileEntityMobSpawner)w.getTileEntity(x, y, z);
+		TileEntityMobSpawner tes = (TileEntityMobSpawner) w.getTileEntity(x, y, z);
 		tes.func_145881_a().setEntityName(entityName);
 	}
 }

@@ -7,7 +7,6 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -16,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
@@ -33,10 +31,11 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 		setAlwaysEdible();
 		setMaxStackSize(4);
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "Your life bleeds freely.");
+		l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString()
+				+ "Your life bleeds freely.");
 	}
 
 	@Override
@@ -89,10 +88,10 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 
 	@Override
 	protected void onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-		if(!par2World.isRemote) {
+		if (!par2World.isRemote) {
 			player.clearActivePotions();
-			IaSEntityHelper.spawnNourishment(player, (int)(player.getHealth()*2));
-			player.attackEntityFrom(IaSDamageSources.dmgDrain, player.getMaxHealth() + 2*player.getHealth());
+			IaSEntityHelper.spawnNourishment(player, (int) (player.getHealth() * 2));
+			player.attackEntityFrom(IaSDamageSources.dmgDrain, player.getMaxHealth() + 2 * player.getHealth());
 		}
 	}
 

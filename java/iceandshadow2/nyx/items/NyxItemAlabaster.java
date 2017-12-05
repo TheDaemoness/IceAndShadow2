@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -66,15 +65,15 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			return 0;
 		if (catalyst.getItemDamage() == 0) {
 			do {
-				if(target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
+				if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
 					break;
-				else if(target.getItem() == Item.getItemFromBlock(Blocks.gold_ore))
+				else if (target.getItem() == Item.getItemFromBlock(Blocks.gold_ore))
 					break;
-				else if(target.getItem() == Item.getItemFromBlock(Blocks.redstone_block))
+				else if (target.getItem() == Item.getItemFromBlock(Blocks.redstone_block))
 					break;
 				else
 					return 0;
-			} while(false);
+			} while (false);
 			return 240;
 		}
 		return 0;
@@ -85,7 +84,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
 		if (catalyst.getItemDamage() == 0) {
-			final Item tem = target.getItem(); //No Undertale.
+			final Item tem = target.getItem(); // No Undertale.
 			if (tem == Item.getItemFromBlock(Blocks.coal_block)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxItems.devora, 27));

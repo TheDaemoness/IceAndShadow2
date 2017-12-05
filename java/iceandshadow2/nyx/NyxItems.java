@@ -72,6 +72,7 @@ public class NyxItems {
 		// NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 		// .setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 	}
 }

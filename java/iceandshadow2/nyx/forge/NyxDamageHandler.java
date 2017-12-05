@@ -21,8 +21,8 @@ public class NyxDamageHandler {
 		if (elb == null)
 			return;
 		if (elb instanceof EntityPlayer && e.source != IaSDamageSources.dmgDrain) {
-			if(((EntityPlayer)elb).inventory.hasItem(NyxItems.bloodstone))
-				IaSPlayerHelper.drainXP(((EntityPlayer)elb), (int)(1+e.ammount), null, true);
+			if (((EntityPlayer) elb).inventory.hasItem(NyxItems.bloodstone))
+				IaSPlayerHelper.drainXP(((EntityPlayer) elb), (int) (1 + e.ammount), null, true);
 		}
 		if (e.source.isDamageAbsolute())
 			return;

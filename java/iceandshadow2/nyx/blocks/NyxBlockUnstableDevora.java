@@ -31,11 +31,6 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 		setTickRandomly(true);
 		setLuminescence(0.5F);
 	}
-	
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
-		return new ItemStack(NyxItems.devora);
-	}
 
 	@Override
 	protected boolean canSilkHarvest() {
@@ -52,6 +47,11 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 	@Override
 	public int getMixedBrightnessForBlock(IBlockAccess p_149677_1_, int p_149677_2_, int p_149677_3_, int p_149677_4_) {
 		return p_149677_1_.getLightBrightnessForSkyBlocks(p_149677_2_, p_149677_3_, p_149677_4_, 15);
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+		return new ItemStack(NyxItems.devora);
 	}
 
 	@Override

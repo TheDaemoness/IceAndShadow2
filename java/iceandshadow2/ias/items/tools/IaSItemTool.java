@@ -207,16 +207,6 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 			return null;
 		return m.getUnlocalizedName(is);
 	}
-	
-	
-
-	@Override
-	public boolean onBlockStartBreak(ItemStack is, int X, int Y, int Z, EntityPlayer user) {
-		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if (m == null)
-			return false;
-		return !m.onPreHarvest(is, user, user.worldObj, X, Y, Z);
-	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x, int y, int z, EntityLivingBase user) {
@@ -225,6 +215,14 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 			return false;
 		is.damageItem(m.onPostHarvest(is, user, w, x, y, z), user);
 		return true;
+	}
+
+	@Override
+	public boolean onBlockStartBreak(ItemStack is, int X, int Y, int Z, EntityPlayer user) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return false;
+		return !m.onPreHarvest(is, user, user.worldObj, X, Y, Z);
 	}
 
 	@Override

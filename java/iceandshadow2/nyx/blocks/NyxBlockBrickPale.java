@@ -11,16 +11,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -35,8 +31,9 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPa
 	}
 
 	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		return null;
+	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_) {
+		super.breakBlock(world, x, y, z, p_149749_5_, p_149749_6_);
+		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
 	}
 
 	@Override
@@ -45,14 +42,18 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPa
 	}
 
 	@Override
+	public float getBlockPathWeight(IBlockAccess w, int x, int y, int z) {
+		return -32;
+	}
+
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
 		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - 0.0125F, z + 1);
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block p_149749_5_, int p_149749_6_) {
-		super.breakBlock(world, x, y, z, p_149749_5_, p_149749_6_);
-		world.setBlock(x, y, z, NyxBlocks.brickPaleCracked);
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		return null;
 	}
 
 	@Override
@@ -65,10 +66,5 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPa
 			}
 		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
-	}
-
-	@Override
-	public float getBlockPathWeight(IBlockAccess w, int x, int y, int z) {
-		return -32;
 	}
 }
