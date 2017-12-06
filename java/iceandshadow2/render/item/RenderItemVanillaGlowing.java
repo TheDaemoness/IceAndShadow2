@@ -62,6 +62,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			}
 		}
 
+		final boolean blendWasEnabled = GL11.glIsEnabled(GL11.GL_BLEND);
 		if (doGlowTransforms) {
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -97,8 +98,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
 
 		if (doGlowTransforms) {
-			// GL11.glDisable(GL11.GL_BLEND); //Find a way to re-enable this
-			// later.
+			if(!blendWasEnabled)
+				GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
 
