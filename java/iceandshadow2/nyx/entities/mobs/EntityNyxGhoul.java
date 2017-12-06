@@ -10,6 +10,9 @@ import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.entities.ai.senses.*;
+import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
+import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
@@ -45,6 +48,8 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	private EntityLivingBase searched;
 
 	protected int regenDelay;
+	
+	protected IaSSetSenses senses;
 
 	public EntityNyxGhoul(World par1World) {
 		super(par1World);
@@ -56,19 +61,19 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		this.targetTasks.taskEntries.clear();
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityNyxSkeleton.class, 1.0D, true));
-		this.tasks.addTask(5, new EntityAIFleeSun(this, EntityNyxGhoul.moveSpeed + 0.5));
-		// this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this,
+		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, true));
+		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxGhoul.moveSpeed + 0.5));
+		// this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this,
 		// 1.0D));
-		this.tasks.addTask(7, new EntityAIWander(this, EntityNyxGhoul.moveSpeed));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(9, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSkeleton.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
+		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxGhoul.moveSpeed));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
+		this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
+		
+		senses = new IaSSetSenses(this);
+		senses.add(new IaSSenseAura(this, 16F));
+		senses.add(new IaSSenseTouch(this));
 	}
 
 	@Override
@@ -139,6 +144,15 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 				((EntityPlayer) ent).dropOneItem(false);
 		}
 		return flag;
+	}
+	
+	@Override
+	public void addPotionEffect(PotionEffect pe) {
+		if(pe == null) //Paranoia
+			return;
+		if(pe.getPotionID() == Potion.wither.id || pe.getPotionID() == Potion.moveSlowdown.id)
+			return;
+		super.addPotionEffect(pe);
 	}
 
 	@Override
@@ -320,5 +334,15 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.INFESTATION;
+	}
+	
+	@Override
+	public boolean hates(EnumIaSAspect aspect) {
+		return aspect == null || aspect == EnumIaSAspect.NYX;
+	}
+
+	@Override
+	public IaSSense getSense() {
+		return senses;
 	}
 }

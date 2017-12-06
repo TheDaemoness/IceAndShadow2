@@ -13,7 +13,7 @@ public enum EnumIaSAspect {
 	BLOOD,
 	PURE;
 	
-	EnumIaSAspect getAspect(Object o) {
+	public static EnumIaSAspect getAspect(Object o) {
 		if(o instanceof IIaSAspect)
 			return ((IIaSAspect)o).getAspect();
 		return null;

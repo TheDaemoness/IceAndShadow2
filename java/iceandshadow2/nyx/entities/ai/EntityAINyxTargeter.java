@@ -1,8 +1,10 @@
 package iceandshadow2.nyx.entities.ai;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -14,7 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
 public class EntityAINyxTargeter extends EntityAINyxAttack {
-
+	
 	public EntityAINyxTargeter(EntityMob par1EntityCreature) {
 		super(par1EntityCreature);
 	}
@@ -46,17 +48,22 @@ public class EntityAINyxTargeter extends EntityAINyxAttack {
 			if (!isSuitableTarget((EntityLivingBase) ent, false))
 				continue;
 
+			boolean hates = true;
+			if(this.taskOwner instanceof IIaSMobGetters)
+				hates = ((IIaSMobGetters)this.taskOwner).hates(EnumIaSAspect.getAspect(ent));
 			// Give priority to players.
-			if (ent instanceof EntityPlayer) {
-				playerflag = true;
-				if (this.taskOwner.getDistanceSqToEntity(ent) < nearest) {
-					nearest = this.taskOwner.getDistanceSqToEntity(ent);
-					targ = (EntityLivingBase) ent;
-				}
-			} else if (!playerflag && ent instanceof EntityAgeable) {
-				if (this.taskOwner.getDistanceSqToEntity(ent) < nearest) {
-					nearest = this.taskOwner.getDistanceSqToEntity(ent);
-					targ = (EntityLivingBase) ent;
+			if(hates) {
+				if (ent instanceof EntityPlayer) {
+					playerflag = true;
+					if (this.taskOwner.getDistanceSqToEntity(ent) < nearest) {
+						nearest = this.taskOwner.getDistanceSqToEntity(ent);
+						targ = (EntityLivingBase) ent;
+					}
+				} else if (!playerflag) {
+					if (this.taskOwner.getDistanceSqToEntity(ent) < nearest) {
+						nearest = this.taskOwner.getDistanceSqToEntity(ent);
+						targ = (EntityLivingBase) ent;
+					}
 				}
 			}
 		}

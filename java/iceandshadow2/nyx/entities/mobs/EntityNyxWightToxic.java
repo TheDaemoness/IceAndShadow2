@@ -48,7 +48,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters, IIaSSensate {
+public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters {
 
 	protected static double moveSpeed = 0.4;
 
@@ -78,18 +78,15 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		this.targetTasks.taskEntries.clear();
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.8D, true));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityNyxSpider.class, 0.8D, true));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.8D, true));
-		this.tasks.addTask(5, new EntityAIFleeSun(this, EntityNyxWightToxic.moveSpeed + 0.5));
-		// this.tasks.addTask(6, new EntityAIMoveTowardsRestriction(this,
+		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.8D, true));
+		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxWightToxic.moveSpeed + 0.5));
+		// this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this,
 		// 1.0D));
-		this.tasks.addTask(7, new EntityAIWander(this, EntityNyxWightToxic.moveSpeed));
-		this.tasks.addTask(8, new EntityAINyxWatchClosest(this, EntityPlayer.class, 6.0F, 0.0F));
-		this.tasks.addTask(9, new EntityAILookIdle(this));
+		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxWightToxic.moveSpeed));
+		this.tasks.addTask(6, new EntityAINyxWatchClosest(this, EntityPlayer.class, 6.0F, 0.0F));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityNyxSpider.class, 6, true));
-		this.targetTasks.addTask(3, new EntityAINyxTargeter(this));
+		this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
 	}
 
 	// To protect spoidahs.
@@ -318,14 +315,14 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 				} else if (!this.worldObj.isRemote) {
 					final List ents = this.worldObj.getEntitiesWithinAABBExcludingEntity(this,
 							AxisAlignedBB.getBoundingBox(this.posX - EntityNyxWightToxic.TELEPORT_RANGE,
-									this.posY - EntityNyxWightToxic.TELEPORT_RANGE,
+									this.posY - EntityNyxWightToxic.TELEPORT_RANGE*2,
 									this.posZ - EntityNyxWightToxic.TELEPORT_RANGE,
 									this.posX + EntityNyxWightToxic.TELEPORT_RANGE,
 									this.posY + EntityNyxWightToxic.TELEPORT_RANGE,
 									this.posZ + EntityNyxWightToxic.TELEPORT_RANGE));
 					for (final Object ent : ents) {
 						if (ent instanceof EntityAgeable || ent instanceof EntityPlayer
-								|| ent instanceof EntityNyxSpider) {
+								|| EnumIaSAspect.getAspect(ent) == EnumIaSAspect.INFESTATION) {
 							final EntityLivingBase elb = (EntityLivingBase) ent;
 							if ((elb == this.getAttackTarget() && this.getHealth() >= this.getMaxHealth())
 									|| elb.isPotionActive(Potion.poison))
@@ -435,5 +432,10 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.POISONWOOD;
+	}
+
+	@Override
+	public boolean hates(EnumIaSAspect aspect) {
+		return aspect == null || aspect == EnumIaSAspect.INFESTATION || aspect == EnumIaSAspect.ANCIENT;
 	}
 }

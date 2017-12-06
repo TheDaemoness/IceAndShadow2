@@ -1,7 +1,9 @@
 package iceandshadow2.nyx.entities.ai;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import iceandshadow2.util.IaSWorldHelper;
 
 import java.util.Iterator;
 import java.util.List;
@@ -53,8 +55,10 @@ public class EntityAINyxAttack extends EntityAITarget {
 	@Override
 	protected boolean isSuitableTarget(EntityLivingBase candi, boolean par2) {
 		//Discard parameter 2.
-		//It normally indicates whether or not players in creative mode should be included.
 		if (!super.isSuitableTarget(candi, false))
+			return false;
+		if (IaSWorldHelper.getDifficulty(this.taskOwner.worldObj) >= 3 &&
+				EnumIaSAspect.getAspect(candi) == EnumIaSAspect.getAspect(this.taskOwner))
 			return false;
 		return ((IIaSSensate) this.taskOwner).getSense().canSense(candi);
 	}

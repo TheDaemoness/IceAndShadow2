@@ -58,7 +58,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, IIaSMobGetters {
+public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters {
 
 	public enum EnumNyxSkeletonType {
 		RANDOM(-1), BOW_FROST_SHORT(0), KNIFE(1), MAGIC_SHADOW(2), BOW_FROST_LONG(3), RAPIER(4);
@@ -85,11 +85,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 			EntityNyxSkeleton.moveSpeed, 25, 35, 24.0F);
 	protected EntityAINyxRangedAttack rangedAttackLong = new EntityAINyxRangedAttack(this, EntityNyxSkeleton.moveSpeed,
 			45, 55, 32.0F);
-	protected EntityAIAttackOnCollide meleeAttackPlayer = new EntityAIAttackOnCollide(this, EntityPlayer.class,
+	protected EntityAIAttackOnCollide meleeAttack = new EntityAIAttackOnCollide(this, EntityLivingBase.class,
 			EntityNyxSkeleton.moveSpeed + 0.3, false);
 
-	protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class,
-			EntityNyxSkeleton.moveSpeed + 0.3, true);
+	//protected EntityAIAttackOnCollide meleeAttackPassive = new EntityAIAttackOnCollide(this, EntityAgeable.class,
+			//EntityNyxSkeleton.moveSpeed + 0.3, true);
 	protected EntityAINyxRangedAttack shadowAttack = new EntityAINyxRangedAttack(this,
 			EntityNyxSkeleton.moveSpeed + 0.2, 35, 45, 12.0F);
 
@@ -591,8 +591,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	public void setCombatTask() {
 		this.tasks.removeTask(this.rangedAttackDefault);
 		this.tasks.removeTask(this.rangedAttackLong);
-		this.tasks.removeTask(this.meleeAttackPlayer);
-		this.tasks.removeTask(this.meleeAttackPassive);
+		this.tasks.removeTask(this.meleeAttack);
+		//this.tasks.removeTask(this.meleeAttackPassive);
 		this.tasks.removeTask(this.shadowAttack);
 		final ItemStack var1 = getHeldItem();
 
@@ -605,8 +605,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 		} else if (this.typpe == EnumNyxSkeletonType.MAGIC_SHADOW) {
 			this.tasks.addTask(4, this.shadowAttack);
 		} else {
-			this.tasks.addTask(4, this.meleeAttackPlayer);
-			this.tasks.addTask(4, this.meleeAttackPassive);
+			this.tasks.addTask(4, this.meleeAttack);
+			//this.tasks.addTask(4, this.meleeAttackPassive);
 		}
 	}
 
@@ -660,5 +660,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSSensate, II
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.NYX;
+	}
+	
+	@Override
+	public boolean hates(EnumIaSAspect aspect) {
+		return aspect == null || aspect == EnumIaSAspect.ANCIENT;
 	}
 }

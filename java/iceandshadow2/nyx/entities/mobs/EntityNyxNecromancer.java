@@ -173,8 +173,8 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	public void setCombatTask() {
 		this.tasks.removeTask(this.rangedAttackDefault);
 		this.tasks.removeTask(this.rangedAttackLong);
-		this.tasks.removeTask(this.meleeAttackPlayer);
-		this.tasks.removeTask(this.meleeAttackPassive);
+		this.tasks.removeTask(this.meleeAttack);
+		//this.tasks.removeTask(this.meleeAttackPassive);
 		this.tasks.removeTask(this.shadowAttack);
 		this.tasks.addTask(4, this.shadowAttack);
 	}
