@@ -14,6 +14,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,6 +29,11 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 		setTickRandomly(true);
 		setStepSound(Block.soundTypeGlass);
 		this.slipperiness = 0.99F;
+	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return true;
 	}
 
 	@Override

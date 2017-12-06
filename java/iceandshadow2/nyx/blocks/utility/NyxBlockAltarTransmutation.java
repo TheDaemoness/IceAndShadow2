@@ -28,6 +28,7 @@ import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 //See, this is why we need some form of MI in Java, be it mixins or traits.
 public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
@@ -35,6 +36,11 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.ANCIENT;
+	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side == ForgeDirection.DOWN;
 	}
 
 	@SideOnly(Side.CLIENT)

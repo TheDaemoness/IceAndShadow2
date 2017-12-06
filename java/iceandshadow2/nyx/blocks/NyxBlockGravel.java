@@ -43,11 +43,6 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return false;
-	}
-
-	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
 		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
 			w.scheduleBlockUpdate(x, y, z, this, this.tickRate(w));

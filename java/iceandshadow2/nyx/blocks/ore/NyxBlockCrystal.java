@@ -17,25 +17,37 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class NyxBlockIcicles extends NyxBlockCrystal {
-	public NyxBlockIcicles(String texName) {
-		super(texName);
-		setLuminescence(0.1F);
-		setLightColor(0.8F, 0.8F, 1.0F);
-		setResistance(1.5F);
+public class NyxBlockCrystal extends IaSBlockDeco {
+	public NyxBlockCrystal(String texName) {
+		super(EnumIaSModule.NYX, texName, Material.glass);
+		setStepSound(Block.soundTypeGlass);
 		this.slipperiness = 2.0F;
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.icicle, 2 + world.rand.nextInt(2), 0));
-		return is;
+	public boolean canPlaceBlockAt(World w, int x, int y, int z) {
+		return super.canPlaceBlockAt(w, x, y, z) && w.getBlock(x, y-1, z).isSideSolid(w, x, y, z, ForgeDirection.UP);
 	}
 
 	@Override
-	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
+	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+		return false;
+	}
+
+	@Override
+	public boolean getBlocksMovement(IBlockAccess p_149655_1_, int p_149655_2_, int p_149655_3_, int p_149655_4_) {
+		return true;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World w, int x, int y, int z) {
+		return super.getSelectedBoundingBoxFromPool(w, x, y, z).contract(0.0, 0.2, 0.0);
+	}
+
+	@Override
+	public int getRenderBlockPass() {
 		return 1;
 	}
 
@@ -56,13 +68,7 @@ public class NyxBlockIcicles extends NyxBlockCrystal {
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity e, float distance) {
-		e.attackEntityFrom(IaSDamageSources.dmgStalagmite,
-				3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
-		super.onFallenUpon(world, x, y, z, e, 3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
+		super.onFallenUpon(world, x, y, z, e, distance);
+		IaSBlockHelper.breakBlock(world, x, y, z, false);
 	}
 }

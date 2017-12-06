@@ -9,6 +9,8 @@ import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, IIaSAspect {
 	public final EnumIaSModule MODULE;
@@ -44,6 +46,11 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, II
 	@Override
 	public EnumIaSAspect getAspect() {
 		return null;
+	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side == ForgeDirection.UP;
 	}
 
 }

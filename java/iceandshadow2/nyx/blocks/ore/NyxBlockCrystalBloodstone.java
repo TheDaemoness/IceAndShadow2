@@ -5,38 +5,26 @@ import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
+import iceandshadow2.util.IaSBlockHelper;
+import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
+public class NyxBlockCrystalBloodstone extends NyxBlockCrystal {
 
 	public NyxBlockCrystalBloodstone(String texName) {
-		super(EnumIaSModule.NYX, texName, Material.dragonEgg);
+		super(texName);
 		setLuminescence(0.2F);
 		setLightColor(0.5F, 0.0F, 0.0F);
 		setResistance(1.5F);
-	}
-
-	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
-		return false;
-	}
-
-	@Override
-	public boolean getBlocksMovement(IBlockAccess p_149655_1_, int p_149655_2_, int p_149655_3_, int p_149655_4_) {
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		return null;
 	}
 
 	@Override
@@ -66,5 +54,12 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.BLOOD;
+	}
+	
+	@Override
+	public void onFallenUpon(World world, int x, int y, int z, Entity e, float distance) {
+		if(e instanceof EntityPlayer)
+			IaSPlayerHelper.drainXP((EntityPlayer)e, 20, "The bloodstone drains you.", true);
+		super.onFallenUpon(world, x, y, z, e, distance);
 	}
 }

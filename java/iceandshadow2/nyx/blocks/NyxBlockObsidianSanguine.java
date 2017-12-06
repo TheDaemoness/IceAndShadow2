@@ -22,6 +22,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 	public NyxBlockObsidianSanguine(String id) {
@@ -40,6 +41,11 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 	@Override
 	public int damageDropped(int par1) {
 		return 0;
+	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side != ForgeDirection.UP;
 	}
 
 	@Override

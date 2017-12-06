@@ -20,29 +20,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockCrystalExousium extends IaSBlockDeco {
+public class NyxBlockCrystalExousium extends NyxBlockCrystal {
 
 	public NyxBlockCrystalExousium(String texName) {
-		super(EnumIaSModule.NYX, texName, Material.glass);
+		super(texName);
 		setLuminescence(0.2F);
 		setLightColor(0.0F, 0.5F, 0.4F);
 		setResistance(1.5F);
-		setStepSound(Block.soundTypeGlass);
-	}
-
-	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
-		return false;
-	}
-
-	@Override
-	public boolean getBlocksMovement(IBlockAccess p_149655_1_, int p_149655_2_, int p_149655_3_, int p_149655_4_) {
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		return null;
 	}
 
 	@Override
@@ -64,8 +48,9 @@ public class NyxBlockCrystalExousium extends IaSBlockDeco {
 
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity ent) {
-		if (ent instanceof EntityLivingBase && !(ent instanceof EntityMob))
-			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 41, 2));
+		if (ent instanceof EntityLivingBase)
+			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 81, 2));
+		super.onEntityCollidedWithBlock(w, x, y, z, ent);
 	}
 	
 	@Override
