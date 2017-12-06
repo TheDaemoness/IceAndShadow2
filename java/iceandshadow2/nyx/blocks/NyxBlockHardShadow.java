@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
@@ -125,11 +127,17 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
-		if (w.isRemote) {
-			if (e instanceof EntityLivingBase && w.rand.nextBoolean())
-				IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + w.rand.nextDouble(),
-						z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
+		final boolean iselb = e instanceof EntityLivingBase;
+		if(w.getBlockMetadata(x, y, z) != 0) {
+			if (iselb)
+				((EntityLivingBase)e).addPotionEffect(new PotionEffect(Potion.blindness.id,22,0));
+			e.motionX *= 0.1;
+			e.motionY *= 0.3;
+			e.motionZ *= 0.1;
 		}
+		if(iselb && w.rand.nextBoolean())
+			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + w.rand.nextDouble(),
+				z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
 	}
 
 	@Override
@@ -137,7 +145,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 		if (w.isRemote) {
 			if (e instanceof EntityLivingBase)
 				for (int i = 0; i < 2 + vel * 4; ++i) {
-					IaSFxManager.spawnParticle(w, "blackMagic", x + w.rand.nextDouble(), y + 1, z + w.rand.nextDouble(),
+					IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + 1 - w.rand.nextFloat()*1.5, z + w.rand.nextDouble(),
 							0.0, 0.0, 0.0, false, true);
 				}
 		}
@@ -170,12 +178,12 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
-		int chance = 16;
+		int chance = 8;
 		if (w.getBlockMetadata(x, y, z) != 0)
-			chance = 8;
+			chance = 2;
 		if (r.nextInt(chance) == 0)
 			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + r.nextFloat(), y + r.nextFloat(), z + r.nextFloat(),
-					0.0, 0.0, 0.0, false, false);
+					0.0, 0.0, 0.0, false, w.rand.nextBoolean());
 	}
 
 	@Override

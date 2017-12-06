@@ -31,19 +31,19 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if (target.getItem() == this && catalyst.getItem() == NyxItems.boneCursed)
-			return target.stackSize >= 9 ? 420 : 0;
+		if (catalyst.getItem() == this && target.getItem() == NyxItems.boneCursed)
+			return catalyst.stackSize >= 9 ? 420 : 0; //Blaze it.
 		return 0;
 	}
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		int ss = 0;
-		while (target.stackSize >= 9) {
-			target.stackSize -= 9;
+		while (catalyst.stackSize >= 9) {
+			catalyst.stackSize -= 9;
 			++ss;
 		}
-		catalyst.stackSize -= 1;
+		target.stackSize -= 1;
 		final List<ItemStack> retval = new ArrayList<ItemStack>(1);
 		retval.add(new ItemStack(NyxBlocks.hardShadow, ss));
 		return retval;
