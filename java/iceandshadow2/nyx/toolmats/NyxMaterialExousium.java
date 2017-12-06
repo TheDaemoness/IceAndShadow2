@@ -2,7 +2,9 @@ package iceandshadow2.nyx.toolmats;
 
 import java.util.Set;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.EnumIaSToolClass;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
@@ -51,9 +53,10 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public float getHarvestSpeed(ItemStack is, Block target) {
-		final Set<String> s = is.getItem().getToolClasses(is);
-		if (!s.contains(target.getHarvestTool(0)))
-			return getBaseSpeed() / 4;
+		if(target instanceof IIaSAspect) {
+			if(((IIaSAspect)target).getAspect() == EnumIaSAspect.NAVISTRA)
+				return 0.5F;
+		}
 		return getBaseSpeed();
 	}
 
@@ -133,7 +136,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	}
 
 	@Override
-	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block bl) {
 		if (!worldObj.isRemote)
 			worldObj.setBlockToAir(x, y, z);
 		return true;

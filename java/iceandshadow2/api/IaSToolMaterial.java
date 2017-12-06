@@ -420,10 +420,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The user of the tool.
 	 * @param w
 	 *            The world object for the block being harvested.
+	 * @param block 
 	 * @return The number of points of durability that should be deducted by
 	 *         this harvest.
 	 */
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z, Block block) {
 		return 1;
 	}
 
@@ -432,9 +433,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * 
 	 * @param is
 	 * @param user
+	 * @param block 
 	 * @return True if the tool should harvest, false otherwise.
 	 */
-	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z) {
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block block) {
 		return true;
 	}
 
@@ -486,5 +488,19 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 			this.iconWeapon[i] = reg.registerIcon(
 					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, true).toString());
 
+	}
+
+	/**
+	 * Called to determine harvest effectiveness.
+	 * In the future, will be used to add fortune-like effects to harvesting.
+	 * @param bl
+	 * @param is
+	 * @return
+	 * -1 if this tool cannot harvest a given block,
+	 * 0 if the tool should behave as normal, and
+	 * anything greater than 0 if the tool can harvest the specified block.
+	 */
+	public int getHarvestEffectiveness(Block bl, ItemStack is) {
+		return 0;
 	}
 }

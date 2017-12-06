@@ -172,13 +172,21 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 			return null;
 		return m.getUnlocalizedName(is);
 	}
+	
+	@Override
+	public boolean onBlockStartBreak(ItemStack is, int x, int y, int z, EntityPlayer user) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return false;
+		return !m.onPreHarvest(is, user, user.worldObj, x, y, z, user.worldObj.getBlock(x, y, z));
+	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x, int y, int z, EntityLivingBase user) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (m == null)
 			return false;
-		is.damageItem(m.onPostHarvest(is, user, w, x, y, z), user);
+		is.damageItem(m.onPostHarvest(is, user, w, x, y, z, bl), user);
 		return true;
 	}
 

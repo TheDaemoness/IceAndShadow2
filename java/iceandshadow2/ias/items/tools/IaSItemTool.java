@@ -57,7 +57,10 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		final Set<String> s = getToolClasses(is);
 		if (!s.contains(bl.getHarvestTool(0)))
 			return false;
-		return bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
+		final int harvestEffectiveness = m.getHarvestEffectiveness(bl, is);
+		if(harvestEffectiveness > 0)
+			return true;
+		return harvestEffectiveness == 0 && bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
 	}
 
 	@Override
@@ -213,16 +216,16 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (m == null)
 			return false;
-		is.damageItem(m.onPostHarvest(is, user, w, x, y, z), user);
+		is.damageItem(m.onPostHarvest(is, user, w, x, y, z, bl), user);
 		return true;
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack is, int X, int Y, int Z, EntityPlayer user) {
+	public boolean onBlockStartBreak(ItemStack is, int x, int y, int z, EntityPlayer user) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (m == null)
 			return false;
-		return !m.onPreHarvest(is, user, user.worldObj, X, Y, Z);
+		return !m.onPreHarvest(is, user, user.worldObj, x, y, z, user.worldObj.getBlock(x, y, z));
 	}
 
 	@Override

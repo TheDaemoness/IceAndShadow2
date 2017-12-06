@@ -3,6 +3,8 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
@@ -130,6 +132,12 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 		final double var7 = par2 + 0.5D + 0.25D * var19;
 		var13 = par5Random.nextFloat() * 1.0F * var19;
 		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11, var13, var15, var17, false, true);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

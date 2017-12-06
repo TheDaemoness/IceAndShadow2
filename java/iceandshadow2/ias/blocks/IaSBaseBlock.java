@@ -2,13 +2,15 @@ package iceandshadow2.ias.blocks;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public abstract class IaSBaseBlock extends Block implements IIaSModName {
+public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAspect {
 	public final EnumIaSModule MODULE;
 
 	private float lum;
@@ -49,5 +51,10 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName {
 			setLightOpacity(14);
 		setLightLevel(lum);
 		return this;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
 	}
 }

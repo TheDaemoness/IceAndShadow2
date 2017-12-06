@@ -3,6 +3,7 @@ package iceandshadow2.nyx.toolmats;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -82,8 +83,8 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
-		super.onPostHarvest(is, user, w, x, y, z);
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z, Block bl) {
+		super.onPostHarvest(is, user, w, x, y, z, bl);
 		return 0;
 	}
 

@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
@@ -49,18 +50,16 @@ public class NyxDeathSystem {
 				}
 				if (!drop_main)
 					continue;
-				if (it instanceof ItemTool || it instanceof ItemSword) {
-					if (i < 9)
-						continue;
-				}
-				if(it == Items.arrow)
-					continue;
-				if (it == Items.bow) {
-					if (i < 9)
-						continue;
-				}
 				if (it instanceof IIaSOnDeathKeep)
 					continue;
+				if (i < 9) {
+					if(it instanceof ItemTool || it instanceof ItemSword)
+						continue;
+					if(it instanceof ItemBow)
+						continue;
+					if(it == Items.arrow)
+						continue;
+				}
 				if (do_drop && !(it instanceof IIaSOnDeathRuin))
 					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 				plai_inv.mainInventory[i] = null;

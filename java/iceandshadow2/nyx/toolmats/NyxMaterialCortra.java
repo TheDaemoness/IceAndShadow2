@@ -7,6 +7,7 @@ import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemWeapon;
 import iceandshadow2.nyx.NyxItems;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -90,7 +91,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z, Block bl) {
 		if (!(is.getItem() instanceof IaSItemWeapon)) {
 			final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
 			if (!user.worldObj.isRemote && user.worldObj.rand.nextInt(48 + 16 * lvl) == 0) {
@@ -111,6 +112,6 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 				EnchantmentHelper.setEnchantments(nu, is);
 			}
 		}
-		return super.onPostHarvest(is, user, w, x, y, z);
+		return super.onPostHarvest(is, user, w, x, y, z, bl);
 	}
 }

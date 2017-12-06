@@ -157,14 +157,14 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 	}
 
 	@Override
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z) {
-		return 2 * super.onPostHarvest(is, user, w, x, y, z);
+	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z, Block bl) {
+		return 2 * super.onPostHarvest(is, user, w, x, y, z, bl);
 	}
 
 	@Override
-	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z) {
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z, Block bl) {
 		if (!(user instanceof EntityPlayer))
-			return super.onPreHarvest(is, user, w, x, y, z);
+			return super.onPreHarvest(is, user, w, x, y, z, bl);
 		final Block origin = w.getBlock(x, y, z);
 		final float hardness = origin.getBlockHardness(w, x, y, z);
 		Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
