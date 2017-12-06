@@ -53,6 +53,8 @@ public class NyxDeathSystem {
 					if (i < 9)
 						continue;
 				}
+				if(it == Items.arrow)
+					continue;
 				if (it == Items.bow) {
 					if (i < 9)
 						continue;
