@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.IaSDamageSources;
@@ -109,5 +110,10 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSO
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.BLOOD;
 	}
 }

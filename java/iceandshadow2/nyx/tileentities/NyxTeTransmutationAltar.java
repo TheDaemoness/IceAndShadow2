@@ -1,12 +1,15 @@
 package iceandshadow2.nyx.tileentities;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
+import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,7 +50,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
 	}
 
-	public boolean handlePlace(ItemStack is) {
+	public boolean handlePlace(EntityPlayer ep, ItemStack is) {
 		if (!(is.getItem() instanceof IIaSApiTransmuteLens)) {
 			if (this.catalyst == null) {
 				this.catalyst = is;
@@ -55,10 +58,19 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 			}
 		}
 		if (this.target == null) {
+			if(!canPlace(is)) {
+				IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
+				return false;
+			}
 			this.target = is;
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean canPlace(ItemStack is) {
+		final EnumIaSAspect a = EnumIaSAspect.getAspect(is);
+		return a != EnumIaSAspect.DRACONIUM && a != EnumIaSAspect.BLOOD;
 	}
 
 	public ItemStack handleRemove(boolean isSneaking) {

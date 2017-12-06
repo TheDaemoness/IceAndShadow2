@@ -98,11 +98,10 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			TileEntityHopper teh = null;
 			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper)
 				teh = (TileEntityHopper) w.getTileEntity(x, y - 1, z);
-			if (l_ist.size() == 1 && tte.target == null) {
-				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y - 1, z))
-					if (l_ist.size() == 1 && tte.target == null) {
+			if (tte.target == null && tte.canPlace(l_ist.get(0))) {
+				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y - 1, z)) {
 						tte.target = l_ist.get(0);
-						l_ist.clear();
+						l_ist.remove(0);
 					}
 			}
 			for (final ItemStack is : l_ist) {
@@ -191,7 +190,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			w.markBlockForUpdate(x, y, z);
 			return true;
 		}
-		if (!tte.handlePlace(is.copy()))
+		if (!tte.handlePlace(ep, is.copy()))
 			return false;
 		else
 			is.stackSize = 0;

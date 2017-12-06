@@ -91,7 +91,7 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	
 	@Override
 	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.ANCIENT;
+		return EnumIaSAspect.DRACONIUM;
 	}
 
 }
