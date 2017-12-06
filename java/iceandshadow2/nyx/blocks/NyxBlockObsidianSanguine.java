@@ -21,8 +21,8 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockCryingObsidian extends IaSBaseBlockSingle {
-	public NyxBlockCryingObsidian(String id) {
+public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
+	public NyxBlockObsidianSanguine(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setLuminescence(0.4F);
 		setLightColor(0.9F, 0.8F, 1.0F);

@@ -115,6 +115,7 @@ item.nyxToxicCore1.name=Toxic Lump
 tile.nyxStone.name=Nyxian Stone
 tile.nyxGravel.name=Nyxian Gravel
 tile.nyxCryingObsidian.name=Sanguine Obsidian
+tile.nyxSanctifiedObsidian.name=Sanctified Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
 tile.nyxPermafrost.name=Permafrost
 tile.nyxExousicWater.name=Exousic Ether
@@ -157,7 +158,8 @@ tile.nyxGatestone0.name=Active Gatestone
 tile.nyxGatestone1.name=Inactive Gatestone
 tile.nyxGatestone2.name=Inactive Gatestone
 
-tile.nyxTransmutationAltar.name=Transmutation Altar
+tile.nyxTransmutationAltar.name=Transfusion Altar
+tile.nyxTransmutationAltarBroken.name=Broken Transfusion Altar
 tile.nyxAltarExperience.name=Experience Altar
 
 itemGroup.IaSBlocks=Nyxian Blocks

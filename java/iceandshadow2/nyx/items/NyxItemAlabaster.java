@@ -25,8 +25,10 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSOnDeathDrop {
 
@@ -71,6 +73,8 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 					break;
 				else if (target.getItem() == Item.getItemFromBlock(Blocks.redstone_block))
 					break;
+				else if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian))
+					break;
 				else
 					return 0;
 			} while (false);
@@ -94,6 +98,9 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			} else if (tem == Item.getItemFromBlock(Blocks.redstone_block)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxItems.cortra, 27, 1));
+			} if (tem == Item.getItemFromBlock(Blocks.obsidian)) {
+				target.stackSize -= 1;
+				retval.add(new ItemStack(NyxBlocks.sanctifiedObsidian, 1));
 			}
 		}
 		return retval;
@@ -135,7 +142,9 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		return false;
+		IaSFxManager.spawnParticle(world, "cloudSmall", ent.posX, ent.posY-world.rand.nextFloat()+0.25, ent.posZ,
+				0.0, 0.0, 0.0, false, false);
+		return true;
 	}
 
 }

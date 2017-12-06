@@ -16,7 +16,8 @@ public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickPale, brickPaleCracked, hookClimbing, transmutationAltar,
-			examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing, air;
+			examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing, air, transmutationAltarBroken,
+			sanctifiedObsidian;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -28,10 +29,11 @@ public class NyxBlocks {
 
 	public static void init() {
 		NyxBlocks.stone = new NyxBlockStone("Stone").register();
+		NyxBlocks.gravel = new NyxBlockGravel("Gravel").register();
 		NyxBlocks.unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		NyxBlocks.permafrost = new NyxBlockPermafrost("Permafrost").register();
 		NyxBlocks.dirt = new NyxBlockDirt("Dirt").register();
-		NyxBlocks.cryingObsidian = new NyxBlockCryingObsidian("CryingObsidian").register();
+		NyxBlocks.cryingObsidian = new NyxBlockObsidianSanguine("CryingObsidian").register();
 		NyxBlocks.thornyVines = new NyxBlockThornyVines("ThornyVines").register();
 		NyxBlocks.exousicIce = new NyxBlockIce("ExousicIce").register();
 		NyxBlocks.poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();
@@ -63,8 +65,10 @@ public class NyxBlocks {
 		NyxBlocks.brickPale = new NyxBlockBrickPale("PaleBrick").register();
 		NyxBlocks.brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked").register();
 		NyxBlocks.gatestone = new NyxBlockGatestone("Gatestone").register();
+		NyxBlocks.sanctifiedObsidian = new NyxBlockObsidianSanctified("SanctifiedObsidian").register();
 
 		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
+		NyxBlocks.transmutationAltarBroken = new NyxBlockAltarTransmutationBroken("TransmutationAltarBroken").register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 
 		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
@@ -77,8 +81,6 @@ public class NyxBlocks {
 		NyxBlocks.hardShadow = new NyxBlockHardShadow("HardShadow").register();
 		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
 		NyxBlocks.air = new NyxBlockAir("Air").register();
-
-		NyxBlocks.gravel = new NyxBlockGravel("Gravel").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class, "nyxTeTransmutationAltar");
 

@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.blocks.utility;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,10 +10,13 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
+import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,13 +36,26 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 
 	public NyxBlockAltarTransmutation(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
-		setLightLevel(0.4F);
 		setResistance(Blocks.obsidian.getExplosionResistance(null));
 		setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0));
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
 		setLightOpacity(7);
 		setStepSound(Block.soundTypeStone);
 		setTickRandomly(false);
+	}
+	
+	@Override
+	public int getLightValue() {
+		return 6;
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		ArrayList<ItemStack> arl = new ArrayList<ItemStack>(2);
+		arl.add(new ItemStack(NyxBlocks.transmutationAltarBroken.getItem(world, x, y, z)));
+		fortune = Math.min(4, fortune);
+		arl.add(new ItemStack(NyxItems.cortra, 4+fortune+world.rand.nextInt(5-fortune)));
+		return arl;
 	}
 
 	@Override
@@ -128,11 +145,16 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		}
 		return getIcon(side, 0);
 	}
+	
+	@Override
+	public int getMixedBrightnessForBlock(IBlockAccess p_149677_1_, int p_149677_2_, int p_149677_3_, int p_149677_4_) {
+		return p_149677_1_.getLightBrightnessForSkyBlocks(p_149677_2_, p_149677_3_, p_149677_4_, 15);
+	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0)
-			return this.bot;
+			return NyxBlocks.sanctifiedObsidian.getIcon(side, meta);
 		if (side == 1)
 			return this.blockIcon;
 		return this.side;
@@ -147,7 +169,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer ep, int side, float xl, float yl,
 			float zl) {
 		final Block check = w.getBlock(x, y + 1, z);
-		if (check != null && check.getMaterial() != Material.air) {
+		if (check != null && !(check.getMaterial() instanceof MaterialTransparent)) {
 			IaSPlayerHelper.messagePlayer(ep, "That altar needs an empty space above it to work.");
 			return false;
 		}
@@ -182,7 +204,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
 		final Block check = w.getBlock(x, y + 1, z);
-		if (check != null && check.getMaterial() != Material.air) {
+		if (check != null && !(check.getMaterial() instanceof MaterialTransparent)) {
 			final TileEntity te = w.getTileEntity(x, y, z);
 			if (!(te instanceof NyxTeTransmutationAltar))
 				return;
@@ -201,7 +223,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			return;
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 		if (tte.handler != null && tte.canAttemptTransmutation())
-			Blocks.ender_chest.randomDisplayTick(w, x, y, z, r);
+			Blocks.ender_chest.randomDisplayTick(w, x, y+1, z, r);
 	}
 
 	@Override
@@ -209,7 +231,6 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	public void registerBlockIcons(IIconRegister reg) {
 		this.blockIcon = reg.registerIcon(getTexName() + "Top");
 		this.side = reg.registerIcon(getTexName() + "Side");
-		this.bot = reg.registerIcon(getTexName() + "Bottom");
 	}
 
 }

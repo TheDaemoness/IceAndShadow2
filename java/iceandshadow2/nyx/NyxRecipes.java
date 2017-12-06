@@ -60,9 +60,9 @@ public class NyxRecipes {
 				new ItemStack(NyxBlocks.hookClimbing), 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 'r',
 				new ItemStack(NyxItems.rope));
 
-		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar), " d ", "coc", 'd',
-				new ItemStack(NyxItems.draconium), 'c', new ItemStack(NyxItems.cortra), 'o',
-				new ItemStack(Blocks.obsidian));
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar), "cdc", "coc", 'd',
+				new ItemStack(NyxItems.draconium), 'c', new ItemStack(NyxItems.cortra, 1, 1), 'o',
+				new ItemStack(NyxBlocks.sanctifiedObsidian));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 2), new ItemStack(NyxItems.heat, 1, 3));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 1), new ItemStack(NyxItems.heat, 1, 2));

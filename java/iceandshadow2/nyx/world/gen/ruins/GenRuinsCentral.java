@@ -45,7 +45,8 @@ public class GenRuinsCentral extends GenRuins {
 		Sculptor.cube(w, x - 1, y + 4, z - 7, x + 1, y + 4, z + 7, Blocks.obsidian, 0);
 
 		// Condom
-		Sculptor.cube(w, x - 1, y + 1, z - 1, x + 1, y + 1, z + 1, Blocks.obsidian, 0);
+		Sculptor.cube(w, x - 2, y, z - 2, x + 2, y + 1, z + 2, Blocks.obsidian, 0);
+		Sculptor.cube(w, x - 1, y + 1, z - 1, x + 1, y + 1, z + 1, Blocks.air, 0);
 
 		// Condom Lubricant
 		w.setBlock(x, y + 1, z, Blocks.crafting_table);
@@ -87,6 +88,11 @@ public class GenRuinsCentral extends GenRuins {
 		for (int xit = -4; xit <= 4; xit += 8) {
 			for (int zit = -4; zit <= 4; zit += 8)
 				Sculptor.cube(w, x + xit, y, z + zit, x + xit, y + 4, z + zit, Blocks.obsidian, 0);
+		}
+		// Broken transmutation altars.
+		for (int xit = -5; xit <= 5; xit += 5) {
+			for (int zit = -5; zit <= 5; zit += 5)
+				w.setBlock(x+xit, y+2, z+zit, NyxBlocks.transmutationAltarBroken);
 		}
 	}
 
