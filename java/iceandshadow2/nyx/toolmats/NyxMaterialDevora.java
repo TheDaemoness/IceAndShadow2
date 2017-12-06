@@ -45,7 +45,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 1;
+		return 2;
 	}
 
 	@Override

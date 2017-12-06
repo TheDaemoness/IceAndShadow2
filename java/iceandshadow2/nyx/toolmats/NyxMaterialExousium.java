@@ -31,7 +31,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 2;
+		return 4;
 	}
 
 	@Override

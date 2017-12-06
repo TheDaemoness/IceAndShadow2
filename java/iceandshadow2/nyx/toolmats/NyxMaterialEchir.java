@@ -14,7 +14,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 
 	@Override
 	public int getBaseLevel() {
-		return 2;
+		return 3;
 	}
 
 	@Override
