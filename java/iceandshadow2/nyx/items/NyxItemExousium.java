@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
@@ -162,6 +163,11 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
 	}
 
 }

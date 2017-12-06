@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.entities.projectile;
 
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.render.fx.IaSFxManager;
@@ -16,7 +18,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityPoisonBall extends EntityThrowable {
+public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
+	}
 
 	public EntityPoisonBall(World par1World) {
 		super(par1World);

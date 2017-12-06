@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
@@ -429,5 +430,10 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters,
 		wt.setThrowableHeading(-d0, -d1, -d2, 0.5F, 20.0F);
 		this.worldObj.spawnEntityInWorld(wt);
 		setDead();
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
 	}
 }

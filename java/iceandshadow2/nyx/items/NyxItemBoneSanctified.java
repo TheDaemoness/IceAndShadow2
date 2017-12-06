@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -87,5 +88,10 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.PURE;
 	}
 }

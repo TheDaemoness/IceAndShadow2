@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
@@ -23,6 +24,11 @@ public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements IIaSNo
 		super(EnumIaSModule.NYX, texName);
 		setLightLevel(0.1F);
 		setLightOpacity(4);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 
 	@Override

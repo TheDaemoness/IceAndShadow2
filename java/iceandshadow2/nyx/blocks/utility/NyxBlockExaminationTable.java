@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
@@ -18,6 +19,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
+	}
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon iconTop, iconSide, iconBottom;

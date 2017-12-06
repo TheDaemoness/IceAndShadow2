@@ -1,6 +1,8 @@
 package iceandshadow2.nyx.entities.projectile;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.render.fx.IaSFxManager;
 
@@ -20,7 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityShadowBall extends EntityThrowable {
+public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 
 	public EntityShadowBall(World par1World) {
 		super(par1World);
@@ -162,5 +164,10 @@ public class EntityShadowBall extends EntityThrowable {
 	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
 		getDataWatcher().updateObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 		return this;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NYX;
 	}
 }

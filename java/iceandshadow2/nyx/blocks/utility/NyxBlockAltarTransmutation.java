@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
@@ -30,6 +31,11 @@ import net.minecraft.world.World;
 
 //See, this is why we need some form of MI in Java, be it mixins or traits.
 public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
+	}
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon side, bot;

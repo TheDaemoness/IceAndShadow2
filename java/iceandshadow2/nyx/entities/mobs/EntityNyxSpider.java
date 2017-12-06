@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.NyxBiomes;
@@ -21,7 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityNyxSpider extends EntitySpider {
+public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 
 	public EntityNyxSpider(World par1World) {
 		super(par1World);
@@ -235,5 +237,10 @@ public class EntityNyxSpider extends EntitySpider {
 			doUncloakSound();
 			setInvisible(false);
 		}
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 }

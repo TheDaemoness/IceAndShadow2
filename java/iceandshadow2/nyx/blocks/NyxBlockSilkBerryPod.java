@@ -3,6 +3,8 @@ package iceandshadow2.nyx.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.util.IaSRegistration;
@@ -22,7 +24,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
+public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIaSAspect {
 
 	protected IIcon[] icons;
 
@@ -132,5 +134,10 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (par5Random.nextBoolean())
 			super.updateTick(par1World, par2, par3, par4, par5Random);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 }

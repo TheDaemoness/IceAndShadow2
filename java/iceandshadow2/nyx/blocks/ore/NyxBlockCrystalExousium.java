@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
 
@@ -65,5 +66,10 @@ public class NyxBlockCrystalExousium extends IaSBlockDeco {
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity ent) {
 		if (ent instanceof EntityLivingBase && !(ent instanceof EntityMob))
 			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 41, 2));
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
@@ -67,5 +68,10 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 }

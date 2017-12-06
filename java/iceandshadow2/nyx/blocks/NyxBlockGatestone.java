@@ -2,6 +2,7 @@ package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.NyxBlocks;
@@ -41,6 +42,11 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.35F, 0.9F);
 		setLightColor(1.0F, 0.60F, 0.80F);
 		setLuminescence(0.2F);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
 	}
 
 	public void doTPFX(World theWorld, double posX, double posY, double posZ, int modX, int modZ) {

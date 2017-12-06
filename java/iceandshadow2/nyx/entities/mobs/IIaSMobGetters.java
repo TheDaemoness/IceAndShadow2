@@ -1,8 +1,9 @@
 package iceandshadow2.nyx.entities.mobs;
 
+import iceandshadow2.api.IIaSAspect;
 import net.minecraft.entity.EntityLivingBase;
 
-public interface IIaSMobGetters {
+public interface IIaSMobGetters extends IIaSAspect {
 	/***
 	 * Whether or not this mob has pseduo-flight. Used by anything that normally
 	 * checks for boots on an entity. If true, the entity is treated as if their

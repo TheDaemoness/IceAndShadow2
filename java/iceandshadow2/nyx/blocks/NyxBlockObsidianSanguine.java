@@ -136,8 +136,7 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		// TODO Auto-generated method stub
-		return null;
+		return EnumIaSAspect.BLOOD;
 	}
 
 }

@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxItems;
@@ -16,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
+public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest  {
 
 	private static Random r = new Random();
 
@@ -50,6 +51,11 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 		ArrayList<ItemStack> islist = super.onSheared(item, world, x, y, z, fortune);
 		islist.add(new ItemStack(Items.stick, 1));
 		return islist;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
 	}
 
 }

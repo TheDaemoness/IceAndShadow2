@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -92,5 +93,10 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
 	}
 }

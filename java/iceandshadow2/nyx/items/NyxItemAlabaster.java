@@ -22,6 +22,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
@@ -39,6 +40,11 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		super(EnumIaSModule.NYX, texName, 2);
 		setMaxStackSize(4);
 		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.PURE;
 	}
 
 	@Override

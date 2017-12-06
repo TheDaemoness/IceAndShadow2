@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
@@ -43,5 +44,10 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 	public void registerBlockIcons(IIconRegister reg) {
 		this.iconTop = reg.registerIcon(getTexName() + "Top");
 		this.iconSide = reg.registerIcon(getTexName() + "Side");
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 }

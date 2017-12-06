@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import net.minecraft.block.material.Material;
 
@@ -12,4 +13,10 @@ public class NyxBlockBrickFrozen extends IaSBaseBlockSingle {
 		this.setHarvestLevel("pickaxe", 0);
 		setLightOpacity(12);
 	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
+	}
+
 }

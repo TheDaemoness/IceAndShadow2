@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.IaSDamageSources;
@@ -56,6 +57,11 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		setHardness(NyxBlockStone.RESISTANCE);
 		this.setHarvestLevel("pickaxe", 1);
 		GameRegistry.addSmelting(this, new ItemStack(Blocks.cobblestone), 0);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.LAND;
 	}
 
 	@Override

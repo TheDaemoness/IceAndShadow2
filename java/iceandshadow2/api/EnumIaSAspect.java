@@ -1,6 +1,7 @@
 package iceandshadow2.api;
 
 public enum EnumIaSAspect {
+	CREATIVE,
 	LAND,
 	FROZEN,
 	NYX,
@@ -9,5 +10,12 @@ public enum EnumIaSAspect {
 	EXOUSIUM,
 	NAVISTRA,
 	ANCIENT,
-	BLOOD
+	BLOOD,
+	PURE;
+	
+	EnumIaSAspect getAspect(Object o) {
+		if(o instanceof IIaSAspect)
+			return ((IIaSAspect)o).getAspect();
+		return null;
+	}
 }

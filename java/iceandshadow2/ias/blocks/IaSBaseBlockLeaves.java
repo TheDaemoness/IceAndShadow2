@@ -3,6 +3,7 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.util.IaSRegistration;
 
@@ -23,7 +24,7 @@ import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaSModName, IShearable {
+public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaSModName, IShearable, IIaSAspect {
 
 	int[] field_150128_a; // Dammit Mojo.
 

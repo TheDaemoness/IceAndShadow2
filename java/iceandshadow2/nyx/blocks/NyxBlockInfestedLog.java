@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
@@ -26,6 +27,11 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 		setResistance(3.0F);
 		setStepSound(Block.soundTypeWood);
 		setTickRandomly(true);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 
 	/**

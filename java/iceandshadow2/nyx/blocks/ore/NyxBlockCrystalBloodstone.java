@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
@@ -60,5 +61,10 @@ public class NyxBlockCrystalBloodstone extends IaSBlockDeco {
 		if (!worldObj.isRemote)
 			worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, x + 0.5, y + 0.25, z + 0.5, 5));
 		super.onBlockDestroyedByPlayer(worldObj, x, y, z, q);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.BLOOD;
 	}
 }

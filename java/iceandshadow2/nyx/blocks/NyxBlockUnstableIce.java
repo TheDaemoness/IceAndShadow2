@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 
 import java.util.Random;
@@ -64,5 +65,10 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 			else
 				par1World.setBlock(par2, par3, par4, Blocks.water);
 		}
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 }

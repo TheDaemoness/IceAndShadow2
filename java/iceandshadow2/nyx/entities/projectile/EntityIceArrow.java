@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.entities.projectile;
 
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSEntityHelper;
@@ -34,7 +36,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityIceArrow extends Entity implements IProjectile {
+public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 	private int xTile = -1;
 	private int yTile = -1;
 	private int zTile = -1;
@@ -555,5 +557,10 @@ public class EntityIceArrow extends Entity implements IProjectile {
 		par1NBTTagCompound.setByte("inData", (byte) this.inData);
 		par1NBTTagCompound.setByte("shake", (byte) this.arrowShake);
 		par1NBTTagCompound.setDouble("damage", this.damage);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NYX;
 	}
 }

@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
@@ -24,6 +25,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfest {
+
 	@SideOnly(Side.CLIENT)
 	IIcon ringsIcon, barkIcon;
 
@@ -35,6 +37,11 @@ public class NyxBlockPoisonLog extends IaSBlockDirectional implements IIaSNoInfe
 		setResistance(5.0F);
 		this.setHarvestLevel("axe", 0);
 		setStepSound(Block.soundTypeWood);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
 	}
 
 	/**

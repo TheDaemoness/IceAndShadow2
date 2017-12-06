@@ -5,6 +5,8 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
@@ -313,5 +315,10 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void setSearchTarget(EntityLivingBase ent) {
 		this.searched = ent;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 }

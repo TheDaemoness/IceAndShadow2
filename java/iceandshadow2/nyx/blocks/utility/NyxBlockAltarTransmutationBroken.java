@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.IIaSModName;
@@ -29,6 +30,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
+	}
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon side0, side1, side2, bot;

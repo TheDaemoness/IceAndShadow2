@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBlockDirectional;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
@@ -52,6 +53,11 @@ public class NyxBlockObsidianSanctified extends IaSBlockDirectional {
 	@Override
 	public int getMobilityFlag() {
 		return 2;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.PURE;
 	}
 
 }

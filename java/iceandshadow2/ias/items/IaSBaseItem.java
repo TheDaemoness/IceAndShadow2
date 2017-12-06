@@ -2,12 +2,14 @@ package iceandshadow2.ias.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.util.IaSRegistration;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public abstract class IaSBaseItem extends Item implements IIaSModName {
+public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspect {
 	private final EnumIaSModule MODULE;
 
 	protected IaSBaseItem(EnumIaSModule mod) {
@@ -28,6 +30,11 @@ public abstract class IaSBaseItem extends Item implements IIaSModName {
 	public final IaSBaseItem register() {
 		IaSRegistration.register(this);
 		return this;
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
 	}
 
 }
