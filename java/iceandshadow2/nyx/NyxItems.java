@@ -11,16 +11,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class NyxItems {
-	public static Item teleportCrystal, seedObsidian, bloodstone, echirIngot, cortraIngot, draconiumIngot,
+	public static Item teleportCrystal, bloodstone,
 			nifelhiumPowder, navistraShard, devora, cortra, exousium, draconium, exousicIceShard, toughGossamer,
 			poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort, frostBowLong, frostSword, boneCursed,
 			boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle, page, rope, kitTightrope, echirShears,
-			crystalVial, extractorPoison, magicRepo, toxicCore, echirDust;
+			crystalVial, extractorPoison, magicRepo, toxicCore, echirDust, alabasterShard;
+	
+	public static Item echirIngot, cortraIngot, draconiumIngot;
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
-		NyxItems.seedObsidian = new NyxItemSeedObsidian("SeedObsidian").register().setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.resin = new NyxItemPhantomResin("PhantomResin").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.bloodstone = new NyxItemBloodstone("Bloodstone").register().setCreativeTab(IaSCreativeTabs.resources);
@@ -29,13 +31,15 @@ public class NyxItems {
 		NyxItems.cortra = new NyxItemCortra("Cortra").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.exousium = new NyxItemExousium("Exousium").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.devora = new NyxItemDevora("Devora").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.alabaster = new NyxItemAlabaster("Alabaster").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.alabasterShard = new NyxItemAlabasterShard("AlabasterShard").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.exousicIceShard = new NyxItemExousicIce("ExousicIceShard").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconium = new NyxItemDraconium("Draconium").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.echirIngot = new NyxItemIngot("EchirIngot").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot").setTransmutation(NyxItems.cortra, 1).register()
+		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot").setTransmutation(NyxItems.draconium, 2).register()
+		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
@@ -67,8 +71,6 @@ public class NyxItems {
 		NyxItems.crystalVial = new NyxItemCrystalVial("CrystalVial").register().setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.resin = new NyxItemPhantomResin("PhantomResin").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.alabaster = new NyxItemAlabaster("Alabaster").register().setCreativeTab(IaSCreativeTabs.resources);
 		// NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 		// .setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register().setCreativeTab(IaSCreativeTabs.resources);

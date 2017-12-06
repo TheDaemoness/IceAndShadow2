@@ -4,13 +4,13 @@ import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderNyxGhoul extends RenderZombie {
+public class RenderNyxWightSanctified extends RenderZombie {
 
-	private static final ResourceLocation ghoul_body = new ResourceLocation(
-			"iceandshadow2:textures/mob/whiteghoul.png");
+	private static final ResourceLocation wight_body = new ResourceLocation(
+			"iceandshadow2:textures/mob/wightsanctified.png");
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return RenderNyxGhoul.ghoul_body;
+		return RenderNyxWightSanctified.wight_body;
 	}
 }

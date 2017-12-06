@@ -14,6 +14,7 @@ import iceandshadow2.nyx.entities.ai.senses.*;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
+import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
@@ -41,7 +42,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
+public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGetters {
 
 	protected static double moveSpeed = 0.25;
 
@@ -51,7 +52,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	
 	protected IaSSetSenses senses;
 
-	public EntityNyxGhoul(World par1World) {
+	public EntityNyxWightSanctified(World par1World) {
 		super(par1World);
 
 		this.experienceValue = 25;
@@ -62,10 +63,10 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, true));
-		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxGhoul.moveSpeed + 0.5));
+		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxWightSanctified.moveSpeed + 0.5));
 		// this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this,
 		// 1.0D));
-		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxGhoul.moveSpeed));
+		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxWightSanctified.moveSpeed));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
@@ -86,7 +87,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getScaledMaxHealth());
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.66D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EntityNyxGhoul.moveSpeed);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EntityNyxWightSanctified.moveSpeed);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0);
 		getEntityAttribute(EntityZombie.field_110186_bp).setBaseValue(0.0);
 	}
@@ -164,19 +165,18 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1 || this.worldObj.isRemote)
 			return;
+		
+		dropItem(NyxItems.resin, 1+this.worldObj.rand.nextInt(2+par2));
 
-		if (this.rand.nextInt(4 - (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 1 : 0)) == 0)
-			dropItem(NyxItems.boneSanctified, 1);
-		else if (IaSWorldHelper.getDifficulty(this.worldObj) < 3)
-			dropItem(NyxItems.alabaster, 1);
-		if (IaSWorldHelper.getDifficulty(this.worldObj) >= 3)
-			dropItem(NyxItems.alabaster, 1);
+		if (this.rand.nextInt(4 - (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 1 : 0)) <= 0)
+			dropItem(NyxItems.alabasterShard, 1);
 
 		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 7));
 	}
 
 	@Override
 	protected void dropRareDrop(int par1) {
+		dropItem(NyxItems.alabaster, 1);
 	}
 
 	@Override
@@ -251,7 +251,7 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public double getMoveSpeed() {
-		return EntityNyxGhoul.moveSpeed;
+		return EntityNyxWightSanctified.moveSpeed;
 	}
 
 	@Override
@@ -278,8 +278,13 @@ public class EntityNyxGhoul extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.worldObj.isRemote)
+		if (this.worldObj.isRemote) {
+			if(!this.isInvisible())
+				IaSFxManager.spawnParticle(this.worldObj, rand.nextBoolean() ? "cloudSmall" : "shadowSmokeSmall",
+					this.posX - (0.5 - rand.nextDouble()) / 4, this.posY + rand.nextDouble(),
+					this.posZ - (0.5 - rand.nextDouble()) / 4, 0.0, 0.0, 0.0, false, true);
 			return;
+		}
 		final boolean attacking = getAttackTarget() != null;
 		if (--this.regenDelay <= 0) {
 			if (IaSWorldHelper.getDifficulty(this.worldObj) <= 1) {

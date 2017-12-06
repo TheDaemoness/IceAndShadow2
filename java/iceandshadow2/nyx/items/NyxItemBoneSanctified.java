@@ -79,8 +79,10 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaS
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
 			else if (dmg > 0) {
-				if (stack.attemptDamageItem(1, par2World.rand))
-					stack.func_150996_a(Items.bone);
+				if (stack.attemptDamageItem(1, par2World.rand)) {
+					stack.setItemDamage(15);
+					stack.func_150996_a(Items.dye);
+				}
 			}
 		}
 	}

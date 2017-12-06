@@ -23,21 +23,16 @@ public class NyxEntities {
 
 	public static void init(IceAndShadow2 owner) {
 		NyxEntities.startEntityId = IaSFlags.entity_id_start;
-		// Set up Spider Wisps.
 		EntityRegistry.registerModEntity(EntityNyxSpider.class, "nyxMobSpiderWisp", 1, owner, 60, 1, true);
 		NyxEntities.registerEntityEgg(EntityNyxSpider.class, 0x77ffdd, 0xff4444);
 
-		// Set up Winter Skeletons.
 		EntityRegistry.registerModEntity(EntityNyxSkeleton.class, "nyxMobWinterSkeleton", 2, owner, 80, 1, true);
 		NyxEntities.registerEntityEgg(EntityNyxSkeleton.class, 0x112222, 0xccffff);
 
-		// Set up Ice Arrows
 		EntityRegistry.registerModEntity(EntityIceArrow.class, "nyxProjectileIceArrow", 3, owner, 120, 2, true);
 
-		// Set up Shadow Balls
 		EntityRegistry.registerModEntity(EntityShadowBall.class, "nyxProjectileShadowBall", 4, owner, 80, 2, true);
 
-		// Set up Throwing Knives
 		EntityRegistry.registerModEntity(EntityThrowingKnife.class, "nyxProjectileThrowingKnife", 5, owner, 80, 2,
 				true);
 
@@ -45,11 +40,9 @@ public class NyxEntities {
 		EntityRegistry.registerModEntity(EntityTransmutationCountdown.class, "nyxTechnicalTransmutationCountdown", 6,
 				owner, 160, 1, false);
 
-		// Set up White Ghouls
-		EntityRegistry.registerModEntity(EntityNyxGhoul.class, "nyxMobWhiteGhoul", 7, owner, 60, 1, true);
-		NyxEntities.registerEntityEgg(EntityNyxGhoul.class, 0xccccdd, 0x220011);
+		EntityRegistry.registerModEntity(EntityNyxWightSanctified.class, "nyxMobWightSanctified", 7, owner, 60, 1, true);
+		NyxEntities.registerEntityEgg(EntityNyxWightSanctified.class, 0xccccdd, 0x220011);
 
-		// Set up Withered Necromancers
 		EntityRegistry.registerModEntity(EntityNyxNecromancer.class, "nyxMobWitheredNecromancer", 8, owner, 60, 1,
 				true);
 		NyxEntities.registerEntityEgg(EntityNyxNecromancer.class, 0x331111, 0xffcccc);

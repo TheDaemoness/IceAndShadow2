@@ -1,12 +1,16 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,15 +26,11 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	@SideOnly(Side.CLIENT)
 	protected IIcon active, invisible;
 
-	private int yield;
-	private Item trans;
-
 	public NyxItemIngot(String texName) {
 		super(EnumIaSModule.NYX, texName);
 		setHasSubtypes(true);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
 		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
-		this.yield = 0;
 	}
 
 	@Override
@@ -87,11 +87,5 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		super.registerIcons(reg);
 		this.active = reg.registerIcon(getTexName() + "Active");
 		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
-	}
-
-	public IaSBaseItem setTransmutation(Item catalyst, int ret) {
-		this.yield = ret;
-		this.trans = catalyst;
-		return this;
 	}
 }

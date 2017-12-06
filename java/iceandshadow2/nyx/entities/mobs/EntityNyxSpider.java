@@ -111,7 +111,7 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	@Override
 	protected void dropRareDrop(int par1) {
 		if (this.rand.nextBoolean())
-			dropItem(NyxItems.exousium, 1);
+			dropItem(NyxItems.alabasterShard, 1);
 	}
 
 	@Override

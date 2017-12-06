@@ -32,12 +32,9 @@ import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSOnDeathDrop {
-
-	@SideOnly(Side.CLIENT)
-	protected IIcon burned;
-
+	
 	public NyxItemAlabaster(String texName) {
-		super(EnumIaSModule.NYX, texName, 2);
+		super(EnumIaSModule.NYX, texName, 1);
 		setMaxStackSize(4);
 		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
 	}
@@ -57,8 +54,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		if (dmg == 1)
-			return this.burned;
 		return this.itemIcon;
 	}
 
@@ -85,7 +80,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 					return 0;
 			} while (false);
 			return 240;
-		}
+		} else {} //No-op for now.
 		return 0;
 	}
 
@@ -93,7 +88,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final ArrayList<ItemStack> retval = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
-		if (catalyst.getItemDamage() == 0) {
+		if (catalyst.getItem() == this && catalyst.getItemDamage() == 0) {
 			final Item tem = target.getItem(); // No Undertale.
 			if (tem == Item.getItemFromBlock(Blocks.coal_block)) {
 				target.stackSize -= 1;
@@ -143,7 +138,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	@Override
 	public void registerIcons(IIconRegister ir) {
 		this.itemIcon = ir.registerIcon(getTexName() + '0');
-		this.burned = ir.registerIcon(getTexName() + '1');
 	}
 
 	@Override

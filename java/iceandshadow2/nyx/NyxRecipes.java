@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
+import iceandshadow2.ias.items.IaSBaseItemMulti;
 
 public class NyxRecipes {
 
@@ -85,6 +86,9 @@ public class NyxRecipes {
 
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt, 1, 1), new ItemStack(NyxBlocks.dirt), 0);
+		
+		for(int i = 0; i < ((IaSBaseItemMulti)NyxItems.alabaster).getSubtypeCount(); ++i)
+			GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.alabasterShard, 9, i), new ItemStack(NyxItems.alabaster, 1, i));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.toxicCore, 1, 1), new ItemStack(NyxItems.poisonFruit));
 	}
