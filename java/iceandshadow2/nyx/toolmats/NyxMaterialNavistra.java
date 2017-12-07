@@ -9,6 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -40,6 +42,11 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 
 	@Override
 	public int getDurability(ItemStack is) {
+		return 16;
+	}
+	
+	@Override
+	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World, EntityLivingBase elb) {
 		return 16;
 	}
 
@@ -78,8 +85,24 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 			else
 				target.attackEntityFrom(DamageSource.causeMobDamage(user).setDamageBypassesArmor(),
 						getToolDamage(is, user, target));
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 25, 0));
 		}
+		final float force = (3+Math.abs(user.getEyeHeight()))/(1+Math.abs(target.getEyeHeight()));
+		target.addVelocity(user.motionX*force, 0.2, user.motionZ*force);
 		return damageToolOnAttack(is, user, target);
+	}
+	
+	
+
+	@Override
+	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
+		if(knife.worldObj.isRemote)
+			return false;
+		final float force = 4/(1+Math.abs(2*target.getEyeHeight()));
+		if(target instanceof EntityLivingBase)
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 25, 0));
+		target.addVelocity(knife.motionX*force, 0.1, knife.motionZ*force);
+		return super.onKnifeHit(user, knife, target);
 	}
 
 	@Override

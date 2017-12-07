@@ -166,6 +166,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 
 				if (getEquipmentInSlot(j) == null) {
 					final ItemStack arm = IaSTools.getArmorForSlot(j, i);
+					arm.setItemDamage(3*arm.getMaxDamage()/4+this.rand.nextInt(arm.getMaxDamage()/4)-1);
 
 					if (arm != null)
 						setCurrentItemOrArmor(j, arm);

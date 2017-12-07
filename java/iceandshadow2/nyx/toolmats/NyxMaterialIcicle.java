@@ -5,6 +5,7 @@ import java.util.List;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -26,7 +27,7 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 3;
+		return 2;
 	}
 
 	@Override
@@ -88,15 +89,13 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (!target.worldObj.isRemote) {
 			if (target instanceof EntityLivingBase)
-				((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 65, 1));
+				((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 25, 3));
 		}
 		return super.onAttack(is, user, target);
 	}
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
-		if (knife.worldObj.isRemote)
-			return false;
 		final List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
 				AxisAlignedBB.getBoundingBox(knife.posX - 1.5F, knife.posY - 2.0F, knife.posZ - 1.5F, knife.posX + 1.5F,
 						knife.posY + 1.0F, knife.posZ + 1.5F));
@@ -108,7 +107,6 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 				if (o instanceof EntityMob && user instanceof EntityMob)
 					continue;
 				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
-				elb.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 45, 0));
 			}
 		}
 		knife.setDead();
@@ -120,21 +118,7 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 		if (knife.worldObj.isRemote)
 			return false;
 		if (target instanceof EntityLivingBase)
-			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 65, 1));
-		final List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
-				AxisAlignedBB.getBoundingBox(knife.posX - 1.5F, knife.posY - 2.0F, knife.posZ - 1.5F, knife.posX + 1.5F,
-						knife.posY + 1.0F, knife.posZ + 1.5F));
-		for (final Object o : ents) {
-			if (o instanceof EntityLivingBase) {
-				final EntityLivingBase elb = (EntityLivingBase) o;
-				if (o instanceof EntityPlayer && !(user instanceof EntityPlayer))
-					continue;
-				if (o instanceof EntityMob && user instanceof EntityMob)
-					continue;
-				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
-				elb.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 45, 0));
-			}
-		}
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 25, 3));
 		knife.setDead();
 		return false;
 	}

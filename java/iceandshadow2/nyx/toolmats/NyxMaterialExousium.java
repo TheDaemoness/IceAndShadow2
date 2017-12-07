@@ -28,7 +28,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public float getBaseDamage() {
-		return 4;
+		return 1;
 	}
 
 	@Override
@@ -110,7 +110,17 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {
-			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+			final EntityLivingBase elb = ((EntityLivingBase) target);
+			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+			for(int i = 1; i < 5; ++i) {
+				ItemStack eqi = elb.getEquipmentInSlot(i);
+				if(eqi != null) {
+					final int severity = (int)(
+							16*this.getToolDamage(is, user, target)+Math.cbrt(eqi.getMaxDamage()));
+					if(eqi.attemptDamageItem(severity, user.getRNG()))
+						elb.setCurrentItemOrArmor(i, null);
+				}
+			}
 			if (user instanceof EntityPlayer)
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user).setDamageBypassesArmor()
 						.setDamageIsAbsolute(), getToolDamage(is, user, target));
@@ -130,9 +140,21 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
-		if (target instanceof EntityLivingBase)
-			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
-		return super.onKnifeHit(user, knife, target);
+		if (!target.worldObj.isRemote && target instanceof EntityLivingBase) {
+			final EntityLivingBase elb = ((EntityLivingBase) target);
+			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+			for(int i = 1; i < 5; ++i) {
+				ItemStack eqi = elb.getEquipmentInSlot(i);
+				if(eqi != null) {
+					final int severity = (int)(
+							16*this.getKnifeDamage(knife, user, target)+Math.cbrt(eqi.getMaxDamage()));
+					if(eqi.attemptDamageItem(severity, user.getRNG()))
+						elb.setCurrentItemOrArmor(i, null);
+				}
+			}
+			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
+		}
+		return false;
 	}
 
 	@Override
