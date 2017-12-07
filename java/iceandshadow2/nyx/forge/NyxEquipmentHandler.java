@@ -5,6 +5,7 @@ import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import iceandshadow2.util.IaSPlayerHelper;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,9 +14,51 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import java.util.Map;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NyxEquipmentHandler {
+	
+	@SubscribeEvent
+	public void drainEnchantments(LivingHurtEvent e) {
+		if(!(e.entityLiving instanceof EntityPlayer))
+			return;
+		if(!e.source.isMagicDamage())
+			return;
+		EntityPlayer victim = (EntityPlayer)e.entityLiving;
+		int severity = ((int)e.ammount-victim.worldObj.rand.nextInt(2+victim.experienceLevel))/2;
+		if(severity <= 0)
+			return;
+		Map[] enchmaps = new Map[5];
+		for(int i = 0; i < 5; ++i) {
+			if(victim.getEquipmentInSlot(i) != null)
+				enchmaps[i] = EnchantmentHelper.getEnchantments(victim.getEquipmentInSlot(i));
+		}
+		while(severity > 0) {
+			for(int i = 0; i < 5; ++i) {
+				if(enchmaps[i] == null)
+					continue;
+				if(i != 0 && victim.worldObj.rand.nextInt(2+severity) >= severity-1)
+					continue;
+				Object[] enchkeys = enchmaps[i].keySet().toArray();
+				if(enchkeys.length == 0)
+					continue;
+				Integer selected = (Integer)enchkeys[victim.worldObj.rand.nextInt(enchkeys.length)];
+				Integer strength = (Integer)enchmaps[i].get(selected);
+				if(strength.intValue() <= 1) { //More paranoia.
+					enchmaps[i].remove(selected);
+				} else
+					enchmaps[i].put(selected, Integer.valueOf(strength.intValue()-1));
+			}
+			--severity;
+		}
+		for(int i = 0; i < 5; ++i) {
+			if(enchmaps[i] != null)
+				EnchantmentHelper.setEnchantments(enchmaps[i], victim.getEquipmentInSlot(i));
+		}
+	}
 
 	@SubscribeEvent
 	public void handleGeneral(LivingHurtEvent e) {
