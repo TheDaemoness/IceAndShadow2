@@ -14,19 +14,23 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 	public static ArmorMaterial MATERIAL_ECHIR = EnumHelper.addArmorMaterial("Echir", 44, new int[] { 3, 8, 6, 3 }, 16);
 
 	public static ArmorMaterial MATERIAL_NAVISTRA = EnumHelper.addArmorMaterial("Navistra", 88,
-			new int[] { 4, 8, 6, 3 }, 8);
+			new int[] { 4, 9, 7, 3 }, 4);
 
 	public static ArmorMaterial MATERIAL_CORTRA = EnumHelper.addArmorMaterial("Cortra", 33, new int[] { 3, 7, 5, 3 },
-			24);
+			20);
 
 	public static ArmorMaterial MATERIAL_SPIDERSILK = EnumHelper.addArmorMaterial("NyxSpiderSilk", 22,
-			new int[] { 2, 7, 5, 2 }, 16);
+			new int[] { 2, 6, 4, 2 }, 12);
+	
+	public static ArmorMaterial MATERIAL_ALABASTER = EnumHelper.addArmorMaterial("Alabaster", 22,
+			new int[] { 3, 7, 5, 3 }, 24);
 
 	static {
 		IaSItemArmor.MATERIAL_ECHIR.customCraftingMaterial = NyxItems.echirIngot;
 		IaSItemArmor.MATERIAL_NAVISTRA.customCraftingMaterial = NyxItems.navistraShard;
 		IaSItemArmor.MATERIAL_CORTRA.customCraftingMaterial = NyxItems.cortraIngot;
 		IaSItemArmor.MATERIAL_SPIDERSILK.customCraftingMaterial = NyxItems.toughGossamer;
+		IaSItemArmor.MATERIAL_ALABASTER.customCraftingMaterial = NyxItems.alabasterShard;
 	}
 
 	protected String armorTexString;

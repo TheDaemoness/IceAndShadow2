@@ -43,7 +43,7 @@ public class IaSTools {
 	public static IaSItemWeapon sword;
 	public static IaSItemThrowingKnife knife;
 
-	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[], armorSpiderSilk[];
+	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[], armorSpiderSilk[], armorAlabaster[];
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
@@ -124,6 +124,9 @@ public class IaSTools {
 		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
 		IaSTools.initArmor(IaSTools.armorSpiderSilk, IaSItemArmor.MATERIAL_SPIDERSILK,
 				"IceAndShadow2:textures/armor/spidersilk");
+		IaSTools.armorAlabaster = new IaSItemArmor[4];
+		IaSTools.initArmor(IaSTools.armorAlabaster, IaSItemArmor.MATERIAL_ALABASTER,
+				"IceAndShadow2:textures/armor/alabaster");
 
 		IaSTools.makeEchirArmorRecipe("eee", "e e", 0);
 		IaSTools.makeEchirArmorRecipe("e e", "eee", "eee", 1);
