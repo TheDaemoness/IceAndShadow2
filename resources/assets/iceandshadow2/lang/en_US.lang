@@ -82,6 +82,11 @@ item.iasToolExousiumSpade.name=Exousic Spade
 item.iasToolExousiumSword.name=Exousic Sword
 item.iasToolExousiumKnife.name=Exousic Throwing Knife
 item.iasToolExousiumAxe.name=Exousic Axe
+item.iasToolAlabasterPickaxe.name=Alabaster Pickaxe
+item.iasToolAlabasterSpade.name=Alabaster Spade
+item.iasToolAlabasterSword.name=Alabaster Sword
+item.iasToolAlabasterKnife.name=Alabaster Throwing Knife
+item.iasToolAlabasterAxe.name=Alabaster Axe
 
 item.iasArmorEchir0.name=Echir Helmet
 item.iasArmorEchir1.name=Echir Chestplate
