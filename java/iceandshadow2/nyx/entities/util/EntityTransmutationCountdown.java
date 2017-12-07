@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.util;
 
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.nyx.blocks.utility.NyxBlockAltarTransmutation;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 import iceandshadow2.render.fx.IaSFxManager;
@@ -97,8 +98,11 @@ public class EntityTransmutationCountdown extends Entity {
 				zposMod = 0.4 + this.worldObj.rand.nextDouble() / 5;
 		if (this.age % 3 == 0)
 			return;
-		if (this.worldObj.isRemote && tte.handler != null) {
-			if (!tte.handler.spawnTransmuteParticles(tte.target, tte.catalyst, this.worldObj, this))
+		final IIaSApiTransmute particleHandler =
+				(tte.catalyst != null && tte.catalyst.getItem() instanceof IIaSApiTransmute)?
+						(IIaSApiTransmute)tte.catalyst.getItem():tte.handler;
+		if (this.worldObj.isRemote && particleHandler != null) {
+			if (!particleHandler.spawnTransmuteParticles(tte.target, tte.catalyst, this.worldObj, this))
 				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst, this.posX - 0.5 + xposMod,
 						this.posY + this.worldObj.rand.nextDouble() / 2, this.posZ - 0.5 + zposMod,
 						(0.5 - xposMod) / 10, -0.05 - this.worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10,
