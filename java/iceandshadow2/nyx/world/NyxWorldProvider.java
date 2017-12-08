@@ -1,6 +1,8 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
+import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
@@ -17,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxWorldProvider extends WorldProvider {
 
-	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.0, 0.05F);
+	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.02F, 0.05F);
 
 	public NyxWorldProvider() {
 		this.isHellWorld = false;
@@ -132,7 +134,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public ChunkCoordinates getSpawnPoint() {
-		return new ChunkCoordinates(0, this.worldObj.getPrecipitationHeight(0, 0), 0);
+		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(this.worldObj, 0, 0), 0);
 	}
 
 	@Override
