@@ -39,13 +39,13 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 		final ArrayList<ItemStack> li = new ArrayList<ItemStack>();
 		int quant = Math.min(target.stackSize, catalyst.stackSize);
 		if (target.getItem() instanceof ItemBlock) {
-			if (((ItemBlock) target.getItem()).field_150939_a == NyxBlocks.brickPaleCracked) {
+			if (((ItemBlock) target.getItem()).field_150939_a == NyxBlocks.brickExousicCracked) {
 				catalyst.stackSize -= 1 * quant;
-				li.add(new ItemStack(NyxBlocks.brickPale, quant));
+				li.add(new ItemStack(NyxBlocks.brickExousic, quant));
 			} else {
 				quant = Math.min(target.stackSize, catalyst.stackSize / 3);
 				catalyst.stackSize -= 3 * quant;
-				li.add(new ItemStack(NyxBlocks.brickPale, quant * 2));
+				li.add(new ItemStack(NyxBlocks.brickExousic, quant * 2));
 			}
 			target.stackSize -= 1 * quant;
 		}
@@ -59,7 +59,7 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 		if (bl == NyxBlocks.stone || bl == NyxBlocks.stoneGrowing) {
 			is.stackSize -= 1;
 			IaSBlockHelper.breakBlock(w, x, y, z);
-			w.setBlock(x, y, z, NyxBlocks.brickPale);
+			w.setBlock(x, y, z, NyxBlocks.brickExousic);
 			return true;
 		}
 		return false;

@@ -31,12 +31,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 		Sculptor.cube(world, x - 2, y - 2, z - 2, x + 2, y - 2, z + 2, world.getBiomeGenForCoords(x, z).fillerBlock, 0);
 		Sculptor.walls(world, x - 3, y - 1, z - 3, x + 3, y - 1, z + 3, world.getBiomeGenForCoords(x, z).fillerBlock,
 				0);
-		Sculptor.cube(world, x - 2, y - 1, z - 2, x + 2, y, z + 2, NyxBlocks.brickPale, 0);
+		Sculptor.cube(world, x - 2, y - 1, z - 2, x + 2, y, z + 2, NyxBlocks.brickExousic, 0);
 		Sculptor.cube(world, x - 4, y, z - 4, x + 4, y + 13, z + 4, Blocks.air, 0);
 
-		Sculptor.walls(world, x - 2, y, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickPale, 0);
-		Sculptor.walls(world, x - 3, y + 11, z - 3, x + 3, y + 11, z + 3, NyxBlocks.brickPale, 0);
-		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickPale, 0);
+		Sculptor.walls(world, x - 2, y, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickExousic, 0);
+		Sculptor.walls(world, x - 3, y + 11, z - 3, x + 3, y + 11, z + 3, NyxBlocks.brickExousic, 0);
+		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickExousic, 0);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		for (int xdelta = -36; xdelta <= 36; ++xdelta) {
 			for (int zdelta = -36; zdelta <= 36; ++zdelta)
 				for (int ydelta = -4; ydelta <= 8; ++ydelta) {
-					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickPale)
+					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickExousic)
 						return false;
 				}
 		}
@@ -86,7 +86,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 							if (var2.nextInt(5) == 0)
 								var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
 							else if (var2.nextInt(3) == 0)
-								var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickPaleCracked);
+								var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
 						}
 					}
 				}

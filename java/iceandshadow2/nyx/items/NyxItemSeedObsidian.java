@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -14,7 +13,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class NyxItemSeedObsidian extends IaSBaseItemSingle implements IIaSOnDeathKeep {
+public class NyxItemSeedObsidian extends IaSBaseItemSingle {
 
 	public NyxItemSeedObsidian(String texName) {
 		super(EnumIaSModule.NYX, texName);

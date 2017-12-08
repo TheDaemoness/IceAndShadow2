@@ -3,7 +3,6 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
@@ -25,7 +24,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSOnDeathDrop, IIaSApiTransmute {
+public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSApiTransmute {
 
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -20, 0.0F, false);

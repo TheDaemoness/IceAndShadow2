@@ -73,7 +73,7 @@ public class IaSArmorMaterial {
 	/**
 	 * Gets the rarity to display.
 	 */
-	public EnumRarity getRarity(ItemStack is) {
+	public EnumRarity getRarity() {
 		return EnumRarity.common;
 	}
 }

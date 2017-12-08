@@ -3,7 +3,6 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
@@ -17,7 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow implements IIaSOnDeathDrop {
+public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 
 	public NyxItemBoneSanctified(String texName) {
 		super(EnumIaSModule.NYX, texName);

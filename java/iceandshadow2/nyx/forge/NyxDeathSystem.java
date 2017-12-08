@@ -1,10 +1,8 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import iceandshadow2.util.IaSEntityHelper;
 import iceandshadow2.util.IaSPlayerHelper;
@@ -14,7 +12,9 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -43,25 +43,32 @@ public class NyxDeathSystem {
 		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
 			if (plai_inv.mainInventory[i] != null) {
 				final Item it = plai_inv.mainInventory[i].getItem();
-				if (do_drop && it instanceof IIaSOnDeathDrop) {
+				if (it instanceof IIaSOnDeathRuin) {
+					plai_inv.mainInventory[i] = null;
+					continue;
+				}
+				final EnumRarity rarity = it.getRarity(plai_inv.mainInventory[i]);
+				if (rarity == EnumRarity.uncommon || rarity == EnumRarity.epic) {
 					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 					plai_inv.mainInventory[i] = null;
 					continue;
 				}
+				if(rarity == EnumRarity.rare || it instanceof ItemBook) {
+					if(i < 9)
+						continue;
+					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
+					plai_inv.mainInventory[i] = null;
+				}
 				if (!drop_main)
 					continue;
-				if (it instanceof IIaSOnDeathKeep)
-					continue;
 				if (i < 9) {
-					if(it instanceof ItemTool || it instanceof ItemSword)
-						continue;
-					if(it instanceof ItemBow)
-						continue;
-					if(it == Items.arrow)
+					if(it == Items.arrow
+							|| it instanceof ItemSword
+							|| it instanceof ItemBow
+							|| it instanceof ItemTool)
 						continue;
 				}
-				if (do_drop && !(it instanceof IIaSOnDeathRuin))
-					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
+				plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 				plai_inv.mainInventory[i] = null;
 			}
 		}

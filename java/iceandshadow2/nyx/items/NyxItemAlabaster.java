@@ -24,14 +24,13 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
-public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSOnDeathDrop {
+public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
 	
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);

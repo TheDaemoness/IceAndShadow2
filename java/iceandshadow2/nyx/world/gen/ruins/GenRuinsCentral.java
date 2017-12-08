@@ -38,7 +38,7 @@ public class GenRuinsCentral extends GenRuins {
 		for (int i = 3; i <= 30; ++i)
 			Sculptor.cylinder(w, x, Math.max(0, y - i), z, 16 - i / 2, 1, NyxBlocks.stone, 0);
 		Sculptor.dome(w, x, y + 1, z, 16, Blocks.air, 0);
-		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickPale, 0);
+		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickExousic, 0);
 
 		// Walkways
 		Sculptor.cube(w, x - 7, y + 4, z - 1, x + 7, y + 4, z + 1, Blocks.obsidian, 0);

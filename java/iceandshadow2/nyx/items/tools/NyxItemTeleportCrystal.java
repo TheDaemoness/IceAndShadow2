@@ -2,7 +2,6 @@ package iceandshadow2.nyx.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSOnDeathKeep;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxTeleporter;
@@ -24,7 +23,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemTeleportCrystal extends IaSBaseItemSingle implements IIaSOnDeathKeep {
+public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon empty;

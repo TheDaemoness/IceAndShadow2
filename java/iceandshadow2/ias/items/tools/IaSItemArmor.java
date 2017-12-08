@@ -68,7 +68,7 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 
 	@Override
 	public EnumRarity getRarity(ItemStack is) {
-		return mat.getRarity(is);
+		return mat.getRarity();
 	}
 
 	@Override

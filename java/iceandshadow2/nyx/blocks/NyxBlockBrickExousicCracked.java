@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class NyxBlockBrickPaleCracked extends NyxBlockBrickPale {
-	public NyxBlockBrickPaleCracked(String id) {
+public class NyxBlockBrickExousicCracked extends NyxBlockBrickExousic {
+	public NyxBlockBrickExousicCracked(String id) {
 		super(id);
 		setResistance(NyxBlockStone.RESISTANCE / 2);
 		setHardness(NyxBlockStone.HARDNESS / 2);

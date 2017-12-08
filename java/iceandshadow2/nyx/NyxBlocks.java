@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.Fluid;
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
-			poisonLog, brickFrozen, planks, gatestone, brickPale, brickPaleCracked, hookClimbing, transmutationAltar,
+			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing, transmutationAltar,
 			examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing, air, transmutationAltarBroken,
 			sanctifiedObsidian;
 
@@ -62,8 +62,8 @@ public class NyxBlocks {
 		NyxBlocks.exousicWater = new NyxBlockWater("ExousicWater", NyxBlocks.fluidExousia).register();
 
 		NyxBlocks.brickFrozen = new NyxBlockBrickFrozen("FrozenBrick").register();
-		NyxBlocks.brickPale = new NyxBlockBrickPale("PaleBrick").register();
-		NyxBlocks.brickPaleCracked = new NyxBlockBrickPaleCracked("PaleBrickCracked").register();
+		NyxBlocks.brickExousic = new NyxBlockBrickExousic("PaleBrick").register();
+		NyxBlocks.brickExousicCracked = new NyxBlockBrickExousicCracked("PaleBrickCracked").register();
 		NyxBlocks.gatestone = new NyxBlockGatestone("Gatestone").register();
 		NyxBlocks.sanctifiedObsidian = new NyxBlockObsidianSanctified("SanctifiedObsidian").register();
 

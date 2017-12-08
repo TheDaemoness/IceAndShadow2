@@ -2,7 +2,6 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
@@ -16,7 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing, IIaSOnDeathDrop {
+public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon glow;

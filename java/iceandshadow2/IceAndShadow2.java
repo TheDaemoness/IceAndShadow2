@@ -77,7 +77,7 @@ public class IceAndShadow2 {
 		IceAndShadow2.toPreRegister.add(new NyxMaterialNavistra());
 		IceAndShadow2.toPreRegister.add(new NyxMaterialExousium());
 		IceAndShadow2.toPreRegister.add(new NyxMaterialIcicle());
-		IceAndShadow2.toPreRegister.add(new NyxMaterialAlabaster());
+		IceAndShadow2.toPreRegister.add(new NyxMaterialSanctified());
 	}
 
 	@EventHandler

@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -23,10 +24,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class NyxMaterialAlabaster extends IaSToolMaterial {
+public class NyxMaterialSanctified extends IaSToolMaterial {
 
 	private static ResourceLocation knife_tex = new ResourceLocation(
-			"iceandshadow2:textures/entity/nyxknife_alabaster.png");
+			"iceandshadow2:textures/entity/nyxknife_sanctified.png");
 
 	@Override
 	public float getBaseDamage() {
@@ -50,7 +51,12 @@ public class NyxMaterialAlabaster extends IaSToolMaterial {
 
 	@Override
 	public ResourceLocation getKnifeTexture(IaSEntityKnifeBase knife) {
-		return NyxMaterialAlabaster.knife_tex;
+		return NyxMaterialSanctified.knife_tex;
+	}
+	
+	@Override
+	public EnumRarity getRarity() {
+		return EnumRarity.uncommon;
 	}
 
 	@Override
@@ -60,7 +66,7 @@ public class NyxMaterialAlabaster extends IaSToolMaterial {
 
 	@Override
 	public String getMaterialName() {
-		return "Alabaster";
+		return "Sanctified";
 	}
 
 	@Override

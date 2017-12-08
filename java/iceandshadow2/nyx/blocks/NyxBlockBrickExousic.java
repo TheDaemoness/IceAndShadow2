@@ -21,9 +21,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPathDesirability {
+public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBlockPathDesirability {
 
-	public NyxBlockBrickPale(String id) {
+	public NyxBlockBrickExousic(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setResistance(NyxBlockStone.RESISTANCE);
 		setHardness(NyxBlockStone.HARDNESS);
@@ -36,14 +36,14 @@ public class NyxBlockBrickPale extends IaSBaseBlockSingle implements IIaSBlockPa
 			Explosion p_149723_5_) {
 		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
 		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
-				p_149723_1_.rand.nextBoolean() ? NyxBlocks.gravel : NyxBlocks.brickPaleCracked);
+				p_149723_1_.rand.nextBoolean() ? NyxBlocks.gravel : NyxBlocks.brickExousicCracked);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
 			int p_149664_5_) {
 		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
-		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.brickPaleCracked);
+		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.brickExousicCracked);
 	}
 
 	@Override

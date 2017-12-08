@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSOnDeathDrop;
 import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.NyxBlocks;
