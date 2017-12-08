@@ -361,9 +361,25 @@ public class NyxChunkProvider implements IChunkProvider {
 		this.rand.setSeed(z * 341873128712L + x * 132897987541L);
 		final Block[] ablock = new Block[65536];
 		final byte[] abyte = new byte[65536];
+		class DoNoiseGen implements Runnable {
+			final private NyxChunkProvider parent;
+			final int x, z;
+			DoNoiseGen(NyxChunkProvider dis, int X, int Z) {parent = dis; x = X; z = Z;}
+			public void run() {
+				final double d0 = 0.03125D;
+				parent.stoneNoise = parent.noiseGenStone.func_151599_a(parent.stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D,
+						d0 * 2.0D, 1.0D);
+			}
+		}
+		Thread t = new Thread(new DoNoiseGen(this, x, z));
+		t.run();
 		genTerrain(x, z, ablock);
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration,
 				x * 16, z * 16, 16, 16);
+		while(t.isAlive()) {
+			try {t.join();}
+			catch (InterruptedException e) {}
+		}
 		replaceBlocksForBiome(x, z, ablock, abyte, this.biomesForGeneration);
 
 		final Chunk chunk = new Chunk(this.worldObj, ablock, abyte, x, z);
@@ -381,6 +397,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		for (int k = 0; k < abyte1.length; ++k)
 			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
 
+		chunk.resetRelightChecks();
 		return chunk;
 	}
 
@@ -388,10 +405,7 @@ public class NyxChunkProvider implements IChunkProvider {
 	public void recreateStructures(int xchunk, int zchunk) {
 	}
 
-	public void replaceBlocksForBiome(int x, int z, Block[] blockArr, byte[] metaArr, BiomeGenBase[] biomeArr) {
-		final double d0 = 0.03125D;
-		this.stoneNoise = this.noiseGenStone.func_151599_a(this.stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D,
-				d0 * 2.0D, 1.0D);
+	protected void replaceBlocksForBiome(int x, int z, Block[] blockArr, byte[] metaArr, BiomeGenBase[] biomeArr) {
 
 		for (int k = 0; k < 16; ++k) {
 			for (int l = 0; l < 16; ++l) {

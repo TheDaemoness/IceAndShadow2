@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -36,7 +37,7 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 			Explosion p_149723_5_) {
 		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
 		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
-				p_149723_1_.rand.nextBoolean() ? NyxBlocks.gravel : NyxBlocks.brickExousicCracked);
+				p_149723_1_.rand.nextBoolean() ? Blocks.air : NyxBlocks.brickExousicCracked);
 	}
 
 	@Override

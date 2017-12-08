@@ -42,7 +42,7 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if (dir == ForgeDirection.DOWN && y <= ATMOS_HEIGHT)
 				continue;
-			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ).getMaterial() == Material.air)
+			if (w.isAirBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ))
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, this);
 		}
 	}

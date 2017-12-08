@@ -35,11 +35,17 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void buildPass(World w, Random r, int x, int y, int z) {
-		if(y >= 128) {
-			for(int i = 2; i <= 6; ++i) {
-				final ForgeDirection dir = ForgeDirection.getOrientation(i);
-				for(int j = 14; j <= 128 && IaSBlockHelper.isTransient(w, x+j*dir.offsetX, y, z+j*dir.offsetZ); ++j) {
-					Sculptor.dome(w, x+j*dir.offsetX-1+r.nextInt(3), y, z+j*dir.offsetZ-1+r.nextInt(3), 2+r.nextInt(2), Blocks.air, 0);
+		for(int i = 2; i <= 6; ++i) {
+			final ForgeDirection dir = ForgeDirection.getOrientation(i);
+			int distance = 0;
+			for(int j = 15; j <= 96 && !IaSBlockHelper.isTransient(w, x+j*dir.offsetX, y+1, z+j*dir.offsetZ); ++j) {
+				++distance;
+			}
+			if(distance >= 2 && distance < 96) {
+				for(int j = 0; j < distance; ++j) {
+					w.setBlock(x+j*dir.offsetX, y, z+j*dir.offsetZ, NyxBlocks.brickExousic);
+					w.setBlockToAir(x+j*dir.offsetX, y+1, z+j*dir.offsetZ);
+					w.setBlockToAir(x+j*dir.offsetX, y+2, z+j*dir.offsetZ);
 				}
 			}
 		}
@@ -141,7 +147,7 @@ public class GenRuinsCentral extends GenRuins {
 	public void rewardPass(World w, Random r, int x, int y, int z) {
 		final int ropechest = r.nextInt(4);
 		final int hookchest = r.nextInt(4);
-		final int rarechest = r.nextInt(4);
+		final int cortrachest = r.nextInt(4);
 		final int bootchest = r.nextInt(4);
 		final int tightropeA = r.nextInt(5); // Deliberate, may not spawn.
 		final int tightropeB = r.nextInt(6); // Deliberate, may not spawn.
@@ -181,9 +187,9 @@ public class GenRuinsCentral extends GenRuins {
 					itemz = new ItemStack(NyxItems.echirIngot, 8-r.nextInt(5)/2, 1);
 				}
 
-				// Cortra, for kickstarting altar repair.
+				// Devora
 				else if (rewardid < 35) {
-					itemz = new ItemStack(NyxItems.cortra, 1 + r.nextInt(3));
+					itemz = new ItemStack(NyxItems.devora, 2 + r.nextInt(3));
 				}
 
 				// Sanctified Bone
@@ -206,9 +212,9 @@ public class GenRuinsCentral extends GenRuins {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.kitTightrope));
 			}
-			if (chestpos == rarechest && r.nextInt(20) == 0) {
+			if (chestpos == cortrachest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
-						new ItemStack(NyxItems.draconium));
+						new ItemStack(NyxItems.cortra, 2+r.nextInt(2)));
 			}
 			if (chestpos == hookchest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
