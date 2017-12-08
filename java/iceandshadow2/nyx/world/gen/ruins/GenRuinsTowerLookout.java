@@ -1,8 +1,10 @@
 package iceandshadow2.nyx.world.gen.ruins;
 
+import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.util.IaSWorldHelper;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -10,6 +12,7 @@ import java.util.Random;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
@@ -134,7 +137,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	 */
 	@Override
 	public void rewardPass(World var1, Random var2, int x, int y, int z) {
-		if (var2.nextInt(3) == 0)
+		if (var2.nextInt(2+(int)Math.max(0, 2-IaSWorldHelper.getRegionLevel(var1, x, y, z))) == 0)
 			return;
 		final int chestpos = var2.nextInt(4);
 
@@ -168,7 +171,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 		boolean boneflag = true;
 		for (byte i = 0; i < chestcontentamount; ++i) {
 			final int rewardid = var2.nextInt(100);
-			ItemStack itemz = new ItemStack(NyxItems.resin, 2 + var2.nextInt(2), 0);
+			ItemStack itemz = new ItemStack(NyxItems.resin, 4 + var2.nextInt(3), 0);
 
 			// Bow.
 			if (rewardid < 2 && rareflag) {
@@ -193,42 +196,23 @@ public class GenRuinsTowerLookout extends GenRuins {
 
 			// Sword or armor!
 			else if (rewardid < 10) {
-				if (var2.nextInt(3) == 0) {
-					itemz = new ItemStack(Items.diamond_sword);
-					itemz.addEnchantment(Enchantment.smite, 1 + var2.nextInt(2));
-				} else {
-					switch (var2.nextInt(6)) {
-					case 0:
-					case 1:
-						itemz = new ItemStack(Items.diamond_chestplate);
-						break;
-					case 2:
-					case 3:
-						itemz = new ItemStack(Items.diamond_leggings);
-						break;
-					case 4:
-						itemz = new ItemStack(Items.diamond_helmet);
-						itemz.addEnchantment(Enchantment.thorns, 1 + var2.nextInt(2));
-						break;
-					case 5:
-						itemz = new ItemStack(Items.diamond_boots);
-						itemz.addEnchantment(Enchantment.featherFalling, 1 + var2.nextInt(2));
-						break;
-					}
-					itemz.addEnchantment(Enchantment.protection, 1 + var2.nextInt(2));
-				}
+				final int what = var2.nextInt(12);
+				boolean activated = what%3==0;
+				Item[] armors = (activated?IaSTools.armorActiveEchir:IaSTools.armorEchir);
+				Item which = armors[what/3];
+				itemz = new ItemStack(which, 1, activated?0:(which.getMaxDamage()/5+var2.nextInt(which.getMaxDamage()/2)));
 			}
 
 			// Cortra.
 			else if (rewardid < 20)
-				itemz = new ItemStack(NyxItems.cortra, 2 + var2.nextInt(3));
+				itemz = new ItemStack(NyxItems.cortra, 1 + var2.nextInt(3));
 
 			// Bones.
 			else if (rewardid < 35)
 				itemz = new ItemStack(NyxItems.boneCursed, 1);
 
 			// Experience bottles and food.
-			else if (rewardid < 50) {
+			else if (rewardid < 55) {
 				final int foodtype = var2.nextInt(20);
 				if (foodtype < 6)
 					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
@@ -241,14 +225,17 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Sanctified Bone
-			else if (rewardid < 55 && boneflag) {
+			else if (rewardid < 60 && boneflag) {
 				itemz = new ItemStack(NyxItems.boneSanctified);
 				boneflag = false;
 			}
 
-			// Ender pearls
+			// Ingots.
 			else if (rewardid < 70)
-				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(3));
+				itemz = new ItemStack(NyxItems.echirIngot, 2 + var2.nextInt(3), 1);
+			
+			else if (rewardid < 80)
+				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(4), 1);
 
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}

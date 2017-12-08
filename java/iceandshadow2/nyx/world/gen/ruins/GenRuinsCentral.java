@@ -2,8 +2,10 @@ package iceandshadow2.nyx.world.gen.ruins;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
@@ -14,6 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class GenRuinsCentral extends GenRuins {
 
@@ -32,6 +35,15 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void buildPass(World w, Random r, int x, int y, int z) {
+		if(y >= 128) {
+			for(int i = 2; i <= 6; ++i) {
+				final ForgeDirection dir = ForgeDirection.getOrientation(i);
+				for(int j = 14; j <= 128 && IaSBlockHelper.isTransient(w, x+j*dir.offsetX, y, z+j*dir.offsetZ); ++j) {
+					Sculptor.dome(w, x+j*dir.offsetX-1+r.nextInt(3), y, z+j*dir.offsetZ-1+r.nextInt(3), 2+r.nextInt(2), Blocks.air, 0);
+				}
+			}
+		}
+		
 		Sculptor.cylinder(w, x, y, z, 16, 1, Blocks.snow, 0);
 		Sculptor.cylinder(w, x, y - 1, z, 16, 1, NyxBlocks.permafrost, 0);
 		Sculptor.cylinder(w, x, y - 2, z, 15, 1, NyxBlocks.permafrost, 0);
@@ -131,7 +143,7 @@ public class GenRuinsCentral extends GenRuins {
 		final int hookchest = r.nextInt(4);
 		final int rarechest = r.nextInt(4);
 		final int bootchest = r.nextInt(4);
-		final int tightropeA = r.nextInt(6); // Deliberate, may not spawn.
+		final int tightropeA = r.nextInt(5); // Deliberate, may not spawn.
 		final int tightropeB = r.nextInt(6); // Deliberate, may not spawn.
 		final int lorepages = r.nextInt(4);
 		y += 5;
@@ -164,34 +176,14 @@ public class GenRuinsCentral extends GenRuins {
 				ItemStack itemz = new ItemStack(Items.ender_pearl, 2 + r.nextInt(4));
 				final int rewardid = r.nextInt(100);
 
-				// Sword or armor!
+				// Primed Ingots!
 				if (rewardid < 20) {
-					if (r.nextInt(4) == 0) {
-						itemz = new ItemStack(Items.diamond_sword);
-						itemz.addEnchantment(Enchantment.smite, 1 + r.nextInt(2));
-					} else {
-						switch (r.nextInt(5)) {
-						case 0:
-						case 1:
-							itemz = new ItemStack(Items.diamond_chestplate);
-							break;
-						case 2:
-						case 3:
-							itemz = new ItemStack(Items.diamond_leggings);
-							break;
-						case 4:
-							itemz = new ItemStack(Items.diamond_boots);
-							break;
-						}
-						itemz.addEnchantment(Enchantment.unbreaking, 1);
-						if (r.nextBoolean())
-							itemz.addEnchantment(Enchantment.protection, 1);
-					}
+					itemz = new ItemStack(NyxItems.echirIngot, 8-r.nextInt(5)/2, 1);
 				}
 
-				// Echir Ingots
+				// Cortra, for kickstarting altar repair.
 				else if (rewardid < 35) {
-					itemz = new ItemStack(NyxItems.echirIngot, 3 + r.nextInt(5));
+					itemz = new ItemStack(NyxItems.cortra, 1 + r.nextInt(3));
 				}
 
 				// Sanctified Bone
@@ -199,9 +191,9 @@ public class GenRuinsCentral extends GenRuins {
 					itemz = new ItemStack(NyxItems.boneSanctified);
 				}
 
-				// Berries!
-				else if (rewardid < 75) {
-					itemz = new ItemStack(NyxItems.silkBerries, 4 + r.nextInt(8));
+				// Experience!
+				else if (rewardid < 70) {
+					itemz = new ItemStack(Items.experience_bottle, 2 + r.nextInt(4));
 				}
 
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1), itemz);
@@ -216,7 +208,7 @@ public class GenRuinsCentral extends GenRuins {
 			}
 			if (chestpos == rarechest && r.nextInt(20) == 0) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
-						new ItemStack(NyxItems.bloodstone));
+						new ItemStack(NyxItems.draconium));
 			}
 			if (chestpos == hookchest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
@@ -224,16 +216,14 @@ public class GenRuinsCentral extends GenRuins {
 			}
 			if (chestpos == ropechest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
-						new ItemStack(NyxItems.rope));
+						new ItemStack(NyxItems.rope, 2));
 			}
 			if (chestpos == lorepages) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.page));
 			}
 			if (chestpos == bootchest) {
-				final ItemStack is = new ItemStack(Items.diamond_boots);
-				is.addEnchantment(Enchantment.featherFalling, 2 + r.nextInt(2));
-				is.addEnchantment(Enchantment.unbreaking, 1 + r.nextInt(2));
+				final ItemStack is = new ItemStack(IaSTools.armorNavistra[3]);
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1), is);
 			}
 		}
