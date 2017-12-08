@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.forge;
 
+import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSPassiveEffectItem;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.tools.IaSArmorMaterial;
@@ -30,6 +31,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class NyxEquipmentHandler {
 
 	public void doDrainEnchantments(EntityPlayer victim, float amount) {
+		if(victim.dimension != IaSFlags.dim_nyx_id)
+			return;
 		int severity = ((int) amount - victim.worldObj.rand.nextInt(2 + victim.experienceLevel)) / 2;
 		if (severity <= 0)
 			return;
@@ -77,19 +80,6 @@ public class NyxEquipmentHandler {
 		if (elb == null)
 			return;
 		
-		class Entry implements Comparable {
-			Entry() {
-				//Probably redundant, but C++ paranoia persists.
-				coverage = 0;
-			}
-			public IaSArmorMaterial material;
-			public double coverage;
-			
-			@Override
-			public int compareTo(Object o) {
-				return Double.compare(coverage, ((Entry)o).coverage);
-			}
-		};
 		ArmorMaterialInstance[] materialMap = ArmorMaterialInstance.getEquipmentData(elb);
 		boolean major = true;
 		for(ArmorMaterialInstance mat : materialMap) {
