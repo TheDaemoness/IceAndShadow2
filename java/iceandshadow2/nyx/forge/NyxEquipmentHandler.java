@@ -1,9 +1,13 @@
 package iceandshadow2.nyx.forge;
 
+import iceandshadow2.api.IIaSPassiveEffectItem;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.items.tools.IaSArmorMaterial;
+import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
+import iceandshadow2.util.ArmorMaterialInstance;
 import iceandshadow2.util.IaSPlayerHelper;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -13,91 +17,120 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import scala.actors.threadpool.Arrays;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NyxEquipmentHandler {
-	
-	@SubscribeEvent
-	public void drainEnchantments(LivingHurtEvent e) {
-		if(!(e.entityLiving instanceof EntityPlayer))
-			return;
-		if(!e.source.isMagicDamage())
-			return;
-		EntityPlayer victim = (EntityPlayer)e.entityLiving;
-		int severity = ((int)e.ammount-victim.worldObj.rand.nextInt(2+victim.experienceLevel))/2;
-		if(severity <= 0)
+
+	public void doDrainEnchantments(EntityPlayer victim, float amount) {
+		int severity = ((int) amount - victim.worldObj.rand.nextInt(2 + victim.experienceLevel)) / 2;
+		if (severity <= 0)
 			return;
 		Map[] enchmaps = new Map[5];
-		for(int i = 0; i < 5; ++i) {
-			if(victim.getEquipmentInSlot(i) != null)
+		for (int i = 0; i < 5; ++i) {
+			if (victim.getEquipmentInSlot(i) != null)
 				enchmaps[i] = EnchantmentHelper.getEnchantments(victim.getEquipmentInSlot(i));
 		}
-		while(severity > 0) {
-			for(int i = 0; i < 5; ++i) {
-				if(enchmaps[i] == null)
+		while (severity > 0) {
+			for (int i = 0; i < 5; ++i) {
+				if (enchmaps[i] == null)
 					continue;
-				if(i != 0 && victim.worldObj.rand.nextInt(2+severity) >= severity-1)
+				if (i != 0 && victim.worldObj.rand.nextInt(2 + severity) >= severity - 1)
 					continue;
 				Object[] enchkeys = enchmaps[i].keySet().toArray();
-				if(enchkeys.length == 0)
+				if (enchkeys.length == 0)
 					continue;
-				Integer selected = (Integer)enchkeys[victim.worldObj.rand.nextInt(enchkeys.length)];
-				Integer strength = (Integer)enchmaps[i].get(selected);
-				if(strength.intValue() <= 1) { //More paranoia.
+				Integer selected = (Integer) enchkeys[victim.worldObj.rand.nextInt(enchkeys.length)];
+				Integer strength = (Integer) enchmaps[i].get(selected);
+				if (strength.intValue() <= 1) { // More paranoia.
 					enchmaps[i].remove(selected);
 				} else
-					enchmaps[i].put(selected, Integer.valueOf(strength.intValue()-1));
+					enchmaps[i].put(selected, Integer.valueOf(strength.intValue() - 1));
 			}
 			--severity;
 		}
-		for(int i = 0; i < 5; ++i) {
-			if(enchmaps[i] != null)
+		for (int i = 0; i < 5; ++i) {
+			if (enchmaps[i] != null)
 				EnchantmentHelper.setEnchantments(enchmaps[i], victim.getEquipmentInSlot(i));
 		}
 	}
 
 	@SubscribeEvent
-	public void handleGeneral(LivingHurtEvent e) {
-		if (e.entity.worldObj.isRemote)
-			return;
+	public void handleArmor(LivingHurtEvent e) {
+		if ((e.entityLiving instanceof EntityPlayer)) {
+			EntityPlayer victim = (EntityPlayer) e.entityLiving;
+			if (e.source != IaSDamageSources.dmgDrain) {
+				if (victim.inventory.hasItem(NyxItems.bloodstone))
+					IaSPlayerHelper.drainXP(victim, (int) (1 + e.ammount), null, true);
+			}
+			if (e.source.isMagicDamage())
+				doDrainEnchantments(victim, e.ammount);
+		}
 		final EntityLivingBase elb = e.entityLiving;
 		if (elb == null)
 			return;
-		if (elb instanceof EntityPlayer && e.source != IaSDamageSources.dmgDrain) {
-			if (((EntityPlayer) elb).inventory.hasItem(NyxItems.bloodstone))
-				IaSPlayerHelper.drainXP(((EntityPlayer) elb), (int) (1 + e.ammount), null, true);
+		
+		class Entry implements Comparable {
+			Entry() {
+				//Probably redundant, but C++ paranoia persists.
+				coverage = 0;
+			}
+			public IaSArmorMaterial material;
+			public double coverage;
+			
+			@Override
+			public int compareTo(Object o) {
+				return Double.compare(coverage, ((Entry)o).coverage);
+			}
+		};
+		ArmorMaterialInstance[] materialMap = ArmorMaterialInstance.getEquipmentData(elb);
+		boolean major = true;
+		for(ArmorMaterialInstance mat : materialMap) {
+			if(mat.material == null)
+				break;
+			float neo = mat.material.onHurt(elb, e.source, e.ammount, mat.coverage, major && mat.coverage>=4.125);
+			if(!e.source.isDamageAbsolute())
+				e.ammount = neo;
+			major = false;
 		}
-		if (e.source.isDamageAbsolute())
-			return;
-		if (e.source.getSourceOfDamage() == null && !e.source.isMagicDamage())
-			return;
-		int protection = 0;
-		if (elb.getEquipmentInSlot(1) != null && elb.getEquipmentInSlot(1).getItem() == IaSTools.armorSpiderSilk[3]) {
-			protection += 1;
-			elb.getEquipmentInSlot(1).damageItem(1, elb);
+		if(e.ammount <= 0) {
+			e.ammount = 0;
+			e.setCanceled(true);
 		}
-		if (elb.getEquipmentInSlot(2) != null && elb.getEquipmentInSlot(2).getItem() == IaSTools.armorSpiderSilk[2]) {
-			protection += 3;
-			elb.getEquipmentInSlot(2).damageItem(3, elb);
-		}
-		if (elb.getEquipmentInSlot(3) != null && elb.getEquipmentInSlot(3).getItem() == IaSTools.armorSpiderSilk[1]) {
-			protection += 2;
-			elb.getEquipmentInSlot(3).damageItem(2, elb);
-		}
-		if (elb.getEquipmentInSlot(4) != null && elb.getEquipmentInSlot(4).getItem() == IaSTools.armorSpiderSilk[0]) {
-			protection += 2;
-			elb.getEquipmentInSlot(4).damageItem(1, elb);
-		}
-		if (e.source.isMagicDamage())
-			e.ammount = Math.max(1, e.ammount - protection);
-		if (protection > 0)
-			elb.addPotionEffect(new PotionEffect(Potion.invisibility.id, 5 + protection * 10));
 	}
 	
+	@SubscribeEvent
+	public void handleItemTick(LivingUpdateEvent e) {
+		if(e.entityLiving instanceof EntityPlayer) {
+			final EntityPlayer owner = (EntityPlayer)e.entityLiving;
+			for(int i = 0; i < owner.inventory.mainInventory.length; ++i) {
+				final ItemStack is = owner.inventory.mainInventory[i];
+				if(is != null && is.getItem() instanceof IIaSPassiveEffectItem)
+					((IIaSPassiveEffectItem)is.getItem()).
+					onItemUpdateTick(e.entityLiving, is, i == owner.inventory.currentItem);
+			}
+		} else {
+			final ItemStack held = e.entityLiving.getEquipmentInSlot(0);
+			if(held != null && held.getItem() instanceof IIaSPassiveEffectItem)
+				((IIaSPassiveEffectItem)held.getItem()).onItemUpdateTick(e.entityLiving, held, true);
+		}
+		ArmorMaterialInstance[] materialMap = ArmorMaterialInstance.getEquipmentData(e.entityLiving);
+		boolean major = true;
+		for(ArmorMaterialInstance mat : materialMap) {
+			if(mat.material == null)
+				break;
+			mat.material.onTick(e.entityLiving, mat.coverage, major && mat.coverage>=4.125);
+			major = false;
+		}
+	}
+
 	@SubscribeEvent
 	public void handleFrostSword(LivingHurtEvent e) {
 		if (e.entityLiving.worldObj.isRemote)

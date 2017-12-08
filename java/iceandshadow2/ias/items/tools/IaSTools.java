@@ -5,6 +5,7 @@ import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItem;
+import iceandshadow2.nyx.toolmats.*;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -44,6 +45,7 @@ public class IaSTools {
 	public static IaSItemThrowingKnife knife;
 
 	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[], armorSpiderSilk[], armorAlabaster[];
+	public static IaSArmorMaterial armorMatEchir, armorMatNavistra, armorMatCortra, armorMatSpiderSilk, armorMatAlabaster;
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
@@ -114,19 +116,24 @@ public class IaSTools {
 		IaSTools.makeEchirWeaponRecipe(0, " e ", " e ", " s ", Items.stick);
 		IaSTools.makeEchirWeaponRecipe(1, " e", "s ", Items.stick);
 
+		IaSTools.armorMatEchir = new NyxArmorMaterialEchir();
+		IaSTools.armorMatCortra = new NyxArmorMaterialCortra();
+		IaSTools.armorMatNavistra = new NyxArmorMaterialNavistra();
+		IaSTools.armorMatSpiderSilk = new NyxArmorMaterialSpiderSilk();
+		IaSTools.armorMatAlabaster = new NyxArmorMaterialAlabaster();
+		
 		IaSTools.armorEchir = new IaSItemArmor[4];
-		IaSTools.initArmor(IaSTools.armorEchir, IaSItemArmor.MATERIAL_ECHIR, "IceAndShadow2:textures/armor/echir");
 		IaSTools.armorCortra = new IaSItemArmor[4];
-		IaSTools.initArmor(IaSTools.armorCortra, IaSItemArmor.MATERIAL_CORTRA, "IceAndShadow2:textures/armor/cortra");
 		IaSTools.armorNavistra = new IaSItemArmor[4];
-		IaSTools.initArmor(IaSTools.armorNavistra, IaSItemArmor.MATERIAL_NAVISTRA,
-				"IceAndShadow2:textures/armor/navistra");
 		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
-		IaSTools.initArmor(IaSTools.armorSpiderSilk, IaSItemArmor.MATERIAL_SPIDERSILK,
-				"IceAndShadow2:textures/armor/spidersilk");
 		IaSTools.armorAlabaster = new IaSItemArmor[4];
-		IaSTools.initArmor(IaSTools.armorAlabaster, IaSItemArmor.MATERIAL_ALABASTER,
-				"IceAndShadow2:textures/armor/alabaster");
+		
+		IaSTools.initArmor(IaSTools.armorEchir, IaSTools.armorMatEchir);
+		IaSTools.initArmor(IaSTools.armorCortra, IaSTools.armorMatCortra);
+		IaSTools.initArmor(IaSTools.armorNavistra, IaSTools.armorMatNavistra);
+		IaSTools.initArmor(IaSTools.armorSpiderSilk, IaSTools.armorMatSpiderSilk);
+		IaSTools.armorMatEchir = new NyxArmorMaterialEchir();
+		IaSTools.initArmor(IaSTools.armorAlabaster, IaSTools.armorMatAlabaster);
 
 		IaSTools.makeEchirArmorRecipe("eee", "e e", 0);
 		IaSTools.makeEchirArmorRecipe("e e", "eee", "eee", 1);
@@ -160,9 +167,9 @@ public class IaSTools {
 				new ItemStack(NyxItems.icicle, 1), 's', new ItemStack(Items.stick));
 	}
 
-	protected static void initArmor(IaSItemArmor[] arm, ItemArmor.ArmorMaterial mat, String tex) {
+	protected static void initArmor(IaSItemArmor[] arm, IaSArmorMaterial mat) {
 		for (int i = 0; i < 4; ++i) {
-			arm[i] = new IaSItemArmor(mat, 3, i, tex);
+			arm[i] = new IaSItemArmor(mat, 3, i, "IceAndShadow2:textures/armor/"+mat.getArmorStats().name().toLowerCase());
 			GameRegistry.registerItem(arm[i], arm[i].getModName());
 			arm[i].setCreativeTab(IaSCreativeTabs.tools);
 		}
