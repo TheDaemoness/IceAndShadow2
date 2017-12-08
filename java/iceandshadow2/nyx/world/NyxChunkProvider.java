@@ -5,6 +5,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockAir;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Random;
 
@@ -27,10 +28,7 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 public class NyxChunkProvider implements IChunkProvider {
 
 	private final Random rand;
-	private final NoiseGeneratorOctaves noiseGen1;
-	private final NoiseGeneratorOctaves noiseGen2;
-	private final NoiseGeneratorOctaves noiseGen3;
-	private final NoiseGeneratorOctaves noiseGen4;
+	private NoiseGeneratorOctaves[] noiseGen;
 	private final NoiseGeneratorPerlin noiseGenStone;
 	// public NoiseGeneratorOctaves noiseGenPublic;
 	/**
@@ -44,20 +42,19 @@ public class NyxChunkProvider implements IChunkProvider {
 	private double[] stoneNoise = new double[256];
 
 	private BiomeGenBase[] biomesForGeneration;
-	double[] noiseArr3;
-	double[] noiseArr1;
-	double[] noiseArr2;
-	double[] noiseArr4;
+	double[][] noiseArr;
 	int[][] field_73219_j = new int[32][32];
 
 	public NyxChunkProvider(World par1World, long par2, boolean par4) {
+		noiseArr = new double[][]{null, null, null, null};
 		this.worldObj = par1World;
 		this.wt = WorldType.DEFAULT;
 		this.rand = new Random(par2);
-		this.noiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
-		this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen = new NoiseGeneratorOctaves[4];
+		this.noiseGen[0] = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen[1] = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGen[2] = new NoiseGeneratorOctaves(this.rand, 8);
+		this.noiseGen[3] = new NoiseGeneratorOctaves(this.rand, 16);
 		this.noiseGenStone = new NoiseGeneratorPerlin(this.rand, 4);
 		// this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10);
 		this.enigmaArray = new double[825];
@@ -171,13 +168,50 @@ public class NyxChunkProvider implements IChunkProvider {
 	}
 
 	private void initNoiseField(int x, int y, int z) {
-		this.noiseArr4 = this.noiseGen4.generateNoiseOctaves(this.noiseArr4, x, z, 5, 5, 200.0D, 200.0D, 0.5D);
-		this.noiseArr3 = this.noiseGen3.generateNoiseOctaves(this.noiseArr3, x, y, z, 5, 33, 5, 8.555150000000001D,
-				4.277575000000001D, 8.555150000000001D);
-		this.noiseArr1 = this.noiseGen1.generateNoiseOctaves(this.noiseArr1, x, y, z, 5, 33, 5, 684.412D, 684.412D,
-				684.412D);
-		this.noiseArr2 = this.noiseGen2.generateNoiseOctaves(this.noiseArr2, x, y, z, 5, 33, 5, 684.412D, 684.412D,
-				684.412D);
+		class NoiseOctaveInit implements Runnable {
+			final NyxChunkProvider parent;
+			final public int which;
+			final public int x, y, z, q;
+			int r, s;
+			final public double a, b, c;
+			boolean usefull;
+			
+			NoiseOctaveInit(NyxChunkProvider parent, int which, int x, int y, int z, int q, double a, double b, double c) {
+				usefull = false;
+				this.parent = parent;
+				this.which = which;
+				this.x = x;
+				this.y = y;
+				this.z = z;
+				this.q = q;
+				this.a = a;
+				this.b = b;
+				this.c = c;
+			}
+			NoiseOctaveInit(NyxChunkProvider parent, int which, int x, int y, int z, int q, int r, int s, double a, double b, double c) {
+				this(parent, which, x, y, z, q, a, b, c);
+				usefull = true;
+				this.r = r;
+				this.s = s;
+			}
+			
+			@Override
+			public void run() {
+				parent.noiseArr[which]=(usefull?
+					parent.noiseGen[which].generateNoiseOctaves(parent.noiseArr[which], x, y, z, q, r, s, a, b, c):
+					parent.noiseGen[which].generateNoiseOctaves(parent.noiseArr[which], x, y, z, q, a, b, c));
+			}
+		}
+		Thread[] pool = new Thread[4];
+		pool[3] = new Thread(new NoiseOctaveInit(this, 3, x, z, 5, 5, 200, 200, 0.5));
+		pool[2] = new Thread(new NoiseOctaveInit(this, 2, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D));
+		pool[0] = new Thread(new NoiseOctaveInit(this, 0, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D));
+		pool[1] = new Thread(new NoiseOctaveInit(this, 1, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D));
+		
+		for(Thread t : pool) {
+			t.run();
+		}
+		
 		int l = 0;
 		int i1 = 0;
 		for (int j1 = 0; j1 < 5; ++j1) {
@@ -209,7 +243,12 @@ public class NyxChunkProvider implements IChunkProvider {
 				f1 /= f2;
 				f = f * 0.9F + 0.1F;
 				f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-				double d13 = this.noiseArr4[i1] / 8000.0D;
+				
+				while(pool[3].isAlive()) {
+					try {pool[3].join();}
+					catch (InterruptedException e) {}
+				}
+				double d13 = this.noiseArr[3][i1] / 8000.0D;
 
 				if (d13 < 0.0D)
 					d13 = -d13 * 0.3D;
@@ -233,16 +272,20 @@ public class NyxChunkProvider implements IChunkProvider {
 				d12 += d13 * 0.2D;
 				d12 = d12 * 8.5D / 8.0D;
 				final double d5 = 8.5D + d12 * 4.0D;
-
+				
+				for(int i = 0; i < 3; ++i) {
+					try {pool[i].join();}
+					catch (InterruptedException e) {--i;}
+				}
 				for (int j2 = 0; j2 < 33; ++j2) {
 					double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
 
 					if (d6 < 0.0D)
 						d6 *= 4.0D;
 
-					final double d7 = this.noiseArr1[l] / 512.0D;
-					final double d8 = this.noiseArr2[l] / 512.0D;
-					final double d9 = (this.noiseArr3[l] / 10.0D + 1.0D) / 2.0D;
+					final double d7 = this.noiseArr[0][l] / 512.0D;
+					final double d8 = this.noiseArr[1][l] / 512.0D;
+					final double d9 = (this.noiseArr[2][l] / 10.0D + 1.0D) / 2.0D;
 					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
 
 					if (j2 > 29) {
@@ -290,7 +333,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		}
 
 		biomegenbase.decorate(this.worldObj, this.rand, k, l);
-		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
+		//SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
 		k += 8;
 		l += 8;
 

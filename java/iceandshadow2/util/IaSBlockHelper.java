@@ -42,13 +42,7 @@ public class IaSBlockHelper {
 	}
 
 	public static int getHeight(World w, int x, int z) {
-		int y = 255;
-		for (; y > 0; --y) {
-			final Block bl = w.getBlock(x, y, z);
-			if (bl.getBlocksMovement(w, x, y, z))
-				break;
-		}
-		return y;
+		return w.getTopSolidOrLiquidBlock(x, z);
 	}
 
 	public static boolean isAdjacent(IBlockAccess w, int x, int y, int z, Block bl) {

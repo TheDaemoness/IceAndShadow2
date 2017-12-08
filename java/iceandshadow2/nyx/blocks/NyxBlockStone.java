@@ -116,4 +116,11 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	public Block onThaw(World w, int x, int y, int z) {
 		return Blocks.stone;
 	}
+	
+	// Apparently this stops updates during chunk generation, which should speed
+	// things up.
+	@Override
+	public boolean func_149698_L() {
+		return false;
+	}
 }

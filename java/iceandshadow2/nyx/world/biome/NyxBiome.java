@@ -91,9 +91,9 @@ public class NyxBiome extends BiomeGenBase {
 					boolean inair = false;
 					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit)
 							- 1; yit > 0; --yit) {
-						if (!inair && par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
+						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
 							inair = true;
-						} else if (inair && !par1World.isAirBlock(xchunk + xit, yit, zchunk + zit)) {
+						} else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
 							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
 									&& par2Random.nextBoolean()) {
 								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
