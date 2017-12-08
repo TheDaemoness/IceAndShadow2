@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
@@ -68,8 +69,8 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 		this.regenDelay = 15;
 
 		this.senses = new IaSSetSenses(this);
-		this.senses.add(new IaSSenseMovement(this, 24.0));
-		this.senses.add(new IaSSenseActions(this, 16.0));
+		this.senses.add(new IaSSenseMovement(this, 16.0));
+		this.senses.add(new IaSSenseActions(this, 24.0));
 		this.senses.add(new IaSSenseTouch(this));
 		this.senses.add(new IaSSenseAura(this, 5.0F));
 		this.senses.add(new IaSSensePoisoned(this, 9.0F));
@@ -271,7 +272,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 	}
 
 	@Override
-	public IaSSense getSense() {
+	public IaSSenseOld getSense() {
 		return this.senses;
 	}
 

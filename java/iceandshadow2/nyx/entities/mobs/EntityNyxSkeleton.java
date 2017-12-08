@@ -8,6 +8,7 @@ import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
@@ -113,7 +114,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		this.maxHurtResistantTime /= 2;
 
 		this.senses = new IaSSetSenses(this);
-		this.senses.add(new IaSSenseMovement(this, 12.0));
+		this.senses.add(new IaSSenseMovement(this, 8.0));
 		this.senses.add(new IaSSenseTouch(this));
 		this.senses.add(new IaSSenseVision(this, 32.0F));
 
@@ -469,7 +470,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 	}
 
 	@Override
-	public IaSSense getSense() {
+	public IaSSenseOld getSense() {
 		return this.senses;
 	}
 

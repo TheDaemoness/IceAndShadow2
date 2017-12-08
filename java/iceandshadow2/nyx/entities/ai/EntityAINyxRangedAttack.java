@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.entities.ai;
 
+import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -103,7 +104,12 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	public void updateTask() {
 		final double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.boundingBox.minY,
 				this.attackTarget.posZ);
-		final boolean flag = !this.reqLOS || this.entityHost.getEntitySenses().canSee(this.attackTarget);
+		boolean flag;
+		if(this.entityHost instanceof IIaSSensateOld)
+			flag = ((IIaSSensateOld)this.entityHost).getSense().canSense(this.attackTarget);
+		else 
+			flag = true;
+		flag &= !this.reqLOS || this.entityHost.getEntitySenses().canSee(this.attackTarget);
 
 		if (flag) {
 			if (this.stopMovingDelay < 10)

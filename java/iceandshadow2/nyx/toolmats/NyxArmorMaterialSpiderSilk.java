@@ -16,7 +16,7 @@ public class NyxArmorMaterialSpiderSilk extends IaSArmorMaterial {
 
 	@Override
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
-		if(!major || wearer.getHealth()<wearer.getMaxHealth()-0.5 || wearer.getEquipmentInSlot(0) != null)
+		if(!major || wearer.getHealth()<wearer.getMaxHealth()-0.5 || wearer.isSprinting())
 			return;
 		wearer.addPotionEffect(new PotionEffect(Potion.invisibility.id,3,0));
 	}
@@ -24,7 +24,7 @@ public class NyxArmorMaterialSpiderSilk extends IaSArmorMaterial {
 	@Override
 	public float onHurt(EntityLivingBase wearer, DamageSource dmg, float amount, double coverage, boolean major) {
 		if(dmg.getSourceOfDamage() != null)
-			wearer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, (int)(30+18*coverage/2), 2));
+			wearer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, (int)(50+18*coverage/2), 2));
 		return super.onHurt(wearer, dmg, amount, coverage, major);
 	}
 	

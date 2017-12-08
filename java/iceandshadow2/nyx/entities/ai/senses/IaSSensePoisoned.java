@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.potion.Potion;
 
-public class IaSSensePoisoned extends IaSSense {
+public class IaSSensePoisoned extends IaSSenseOld {
 
 	public IaSSensePoisoned(EntityMob elb, double range) {
 		super(elb, range);

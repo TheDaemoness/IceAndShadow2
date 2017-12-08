@@ -4,8 +4,8 @@ import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;

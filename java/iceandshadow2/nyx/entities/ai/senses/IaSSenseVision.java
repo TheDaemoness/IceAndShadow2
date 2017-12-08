@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 
-public class IaSSenseVision extends IaSSense {
+public class IaSSenseVision extends IaSSenseOld {
 
 	public static boolean isTargetInvisible(Entity ent) {
 		if (ent.isInvisible()) {
@@ -40,7 +40,7 @@ public class IaSSenseVision extends IaSSense {
 			return false;
 
 		if (this.owner instanceof EntityMob) {
-			if (((EntityMob) this.owner).getAttackTarget() == ent)
+			if (((EntityMob)this.owner).getAttackTarget() == ent)
 				return this.owner.canEntityBeSeen(ent);
 		}
 		if (!IaSEntityHelper.isInFrontOf(this.owner, ent))

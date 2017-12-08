@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class IaSSenseActions extends IaSSense {
+public class IaSSenseActions extends IaSSenseOld {
 
 	public IaSSenseActions(EntityLivingBase elb, double range) {
 		super(elb, range);

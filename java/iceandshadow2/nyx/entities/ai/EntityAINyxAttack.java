@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.entities.ai;
 
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
-import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 import iceandshadow2.util.IaSWorldHelper;
 
 import java.util.Iterator;
@@ -19,12 +19,29 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 
 public class EntityAINyxAttack extends EntityAITarget {
-
+	
 	protected int lastSeen;
 
 	public EntityAINyxAttack(EntityMob par1EntityCreature) {
 		super(par1EntityCreature, false, false);
-		this.lastSeen = 0;
+		lastSeen = 0;
+	}
+	
+	@Override
+	public void updateTask() {
+		final EntityLivingBase elb = this.taskOwner.getAttackTarget();
+		if(elb == null)
+			return;
+		if(!((IIaSSensateOld)this.taskOwner).getSense().canSense(elb)) {
+			++lastSeen;
+			if(lastSeen > 85) {
+				this.taskOwner.setAttackTarget(null);
+				this.taskOwner.getNavigator().clearPathEntity();
+				this.taskOwner.getNavigator().tryMoveToXYZ(elb.posX, elb.posY, elb.posZ, this.taskOwner.getAIMoveSpeed());
+			}
+		}
+		else
+			lastSeen = 0;
 	}
 
 	/**
@@ -38,17 +55,11 @@ public class EntityAINyxAttack extends EntityAITarget {
 		} else if (!elb.isEntityAlive()) {
 			return false;
 		} else if (elb instanceof EntityPlayer) {
-			if (((EntityPlayer) elb).capabilities.isCreativeMode)
-				return false;
-		} else if (!((IIaSSensate) this.taskOwner).getSense().canSense(elb)) {
-			++this.lastSeen;
-			if (this.lastSeen > 30) {
-				((IIaSMobGetters) this.taskOwner).setSearchTarget(elb);
+			if (((EntityPlayer) elb).capabilities.isCreativeMode) {
+				this.taskOwner.setAttackTarget(null);
 				return false;
 			}
-			return true;
-		} 
-		this.lastSeen = 0;
+		}
 		return true;
 	}
 
@@ -60,13 +71,12 @@ public class EntityAINyxAttack extends EntityAITarget {
 		if (IaSWorldHelper.getDifficulty(this.taskOwner.worldObj) >= 3 &&
 				EnumIaSAspect.getAspect(candi) == EnumIaSAspect.getAspect(this.taskOwner))
 			return false;
-		return ((IIaSSensate) this.taskOwner).getSense().canSense(candi);
+		return ((IIaSSensateOld) this.taskOwner).getSense().canSense(candi);
 	}
 
 	@Override
 	public void resetTask() {
 		this.taskOwner.setAttackTarget(null);
-		this.lastSeen = 0;
 		super.resetTask();
 	}
 
@@ -77,7 +87,7 @@ public class EntityAINyxAttack extends EntityAITarget {
 	public boolean shouldExecute() {
 		if (this.taskOwner.isPotionActive(Potion.confusion.id))
 			return false;
-		final double d0 = ((IIaSSensate) this.taskOwner).getSense().getRange();
+		final double d0 = ((IIaSSensateOld) this.taskOwner).getSense().getRange();
 		final List<Entity> list = this.taskOwner.worldObj.getEntitiesWithinAABBExcludingEntity(this.taskOwner,
 				this.taskOwner.boundingBox.expand(d0, d0, d0));
 

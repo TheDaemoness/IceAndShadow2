@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.ai;
 
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
-import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -14,23 +14,22 @@ public class EntityAINyxSearch extends EntityAIBase {
 
 	public EntityAINyxSearch(EntityMob b) {
 		this.taskOwner = b;
+		seen = 0;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		++this.seen;
-		return this.seen < 125 && !((IIaSSensate) this.taskOwner).getSense().canSense(this.target);
+		if(this.seen > 125 || ((IIaSSensateOld) this.taskOwner).getSense().canSense(this.target)) {
+			((IIaSMobGetters) this.taskOwner).setSearchTarget(null);
+			this.taskOwner.getNavigator().clearPathEntity();
+			seen = 0;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean isInterruptible() {
-		return false;
-	}
-
-	@Override
-	public void resetTask() {
-		((IIaSMobGetters) this.taskOwner).setSearchTarget(null);
-		super.resetTask();
+		return true;
 	}
 
 	@Override
@@ -49,6 +48,7 @@ public class EntityAINyxSearch extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
+		++this.seen;
 	}
 
 }

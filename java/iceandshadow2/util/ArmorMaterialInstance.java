@@ -35,9 +35,11 @@ public class ArmorMaterialInstance implements Comparable {
 			if(mat == null)
 				continue;
 			int index = 0;
-			while(materialMap[index].material != null && materialMap[index].material != mat) {
+			while(index < materialMap.length && materialMap[index].material != null && materialMap[index].material != mat) {
 				++index;
 			}
+			if(index >= materialMap.length)
+				continue;
 			materialMap[index].material = mat;
 			final double maxDmg = Math.max(1, armor.getMaxDamage());
 			final double curDmg = Math.max(0, armor.getItemDamage());

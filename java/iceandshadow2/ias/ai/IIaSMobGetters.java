@@ -1,11 +1,11 @@
-package iceandshadow2.nyx.entities.mobs;
+package iceandshadow2.ias.ai;
 
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
-import iceandshadow2.nyx.entities.ai.senses.IIaSSensate;
+import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 import net.minecraft.entity.EntityLivingBase;
 
-public interface IIaSMobGetters extends IIaSAspect, IIaSSensate {
+public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
 	/***
 	 * Whether or not this mob has pseduo-flight. Used by anything that normally
 	 * checks for boots on an entity. If true, the entity is treated as if their

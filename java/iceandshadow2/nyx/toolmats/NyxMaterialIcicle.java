@@ -5,7 +5,7 @@ import java.util.List;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import iceandshadow2.ias.ai.IIaSMobGetters;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;

@@ -1,13 +1,20 @@
 package iceandshadow2.util;
 
-import iceandshadow2.nyx.entities.mobs.IIaSMobGetters;
+import java.util.List;
+
+import iceandshadow2.ias.ai.EnumIaSSenses;
+import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.ias.ai.IIaSSensate;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -142,7 +149,7 @@ public class IaSEntityHelper {
 		final double xdif = b.posX - a.posX;
 		final double zdif = b.posZ - a.posZ;
 		final double range = Math.sqrt(xdif * xdif + zdif * zdif);
-		if (1 + 2 * range < Math.abs(b.posY - a.posY))
+		if (1 + 2 * range < b.posY - a.posY)
 			return false;
 
 		// NOTE: Using the notation for polar coordinates I'm used to, z in MC
@@ -154,6 +161,33 @@ public class IaSEntityHelper {
 
 		double delta = Math.abs(ang - Math.abs(a.rotationYaw));
 		return delta <= 75;
+	}
+	
+	public static int getMagicLevel(EntityLivingBase elb) {
+		if(elb instanceof EntityPlayer)
+			return ((EntityPlayer)elb).experienceLevel;
+		if(elb instanceof EntityMob) {
+			int maxhealth = (int)elb.getMaxHealth();
+			return (maxhealth*maxhealth/200);
+		}
+		return 0;
+	}
+	
+	public static void sensesEvent(EnumIaSSenses sense, Entity what, float range) {
+		if(what.worldObj.isRemote)
+			return;
+		List l = what.worldObj.getEntitiesWithinAABB(IIaSSensate.class,
+				AxisAlignedBB.getBoundingBox(
+						what.posX-range, what.posY-range, what.posZ-range,
+						what.posX+range, what.posY+range, what.posZ+range));
+		for(Object o : l) {
+			final Entity ent = (Entity)o;
+			final IIaSSensate senses = (IIaSSensate)o;
+			range = Math.min(range, senses.getMaxSenseRange(sense));
+			if(ent.getDistanceSq(what.posX, what.posY, what.posZ) > range*range)
+				continue;
+			senses.notice(what, sense);
+		}
 	}
 
 	public static boolean isTouchingGround(EntityLivingBase ent) {

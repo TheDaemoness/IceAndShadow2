@@ -8,29 +8,29 @@ import java.util.Set;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
-public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
+public class IaSSetSenses extends IaSSenseOld implements Set<IaSSenseOld> {
 
-	private final ArrayList<IaSSense> senses;
+	private final ArrayList<IaSSenseOld> senses;
 
 	public IaSSetSenses(EntityLivingBase elb) {
 		super(elb, 0.0);
-		this.senses = new ArrayList<IaSSense>();
+		this.senses = new ArrayList<IaSSenseOld>();
 	}
 
 	@Override
-	public boolean add(IaSSense sense) {
+	public boolean add(IaSSenseOld sense) {
 		this.dist = Math.max(this.dist, sense.getRange());
 		return this.senses.add(sense);
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends IaSSense> c) {
+	public boolean addAll(Collection<? extends IaSSenseOld> c) {
 		return this.senses.addAll(c);
 	}
 
 	@Override
 	public boolean canSense(Entity ent) {
-		for (final IaSSense s : this.senses) {
+		for (final IaSSenseOld s : this.senses) {
 			if (s.canSense(ent))
 				return true;
 		}
@@ -58,7 +58,7 @@ public class IaSSetSenses extends IaSSense implements Set<IaSSense> {
 	}
 
 	@Override
-	public Iterator<IaSSense> iterator() {
+	public Iterator<IaSSenseOld> iterator() {
 		return this.senses.iterator();
 	}
 
