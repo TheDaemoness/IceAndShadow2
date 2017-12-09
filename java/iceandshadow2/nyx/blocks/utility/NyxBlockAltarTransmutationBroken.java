@@ -91,6 +91,7 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 		final ItemStack is = ep.getCurrentEquippedItem();
 		if (is != null && is.getItem() == NyxItems.cortra) {
 			final int meta = w.getBlockMetadata(x, y, z);
+			is.stackSize -= 1;
 			if (meta == 7)
 				w.setBlock(x, y, z, NyxBlocks.transmutationAltar);
 			else
