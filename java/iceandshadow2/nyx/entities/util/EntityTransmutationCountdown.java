@@ -101,7 +101,7 @@ public class EntityTransmutationCountdown extends Entity {
 		final IIaSApiTransmute particleHandler =
 				(tte.catalyst != null && tte.catalyst.getItem() instanceof IIaSApiTransmute)?
 						(IIaSApiTransmute)tte.catalyst.getItem():tte.handler;
-		if (this.worldObj.isRemote && particleHandler != null) {
+		if (this.worldObj.isRemote && particleHandler != null && tte.handler != null) {
 			if (!particleHandler.spawnTransmuteParticles(tte.target, tte.catalyst, this.worldObj, this))
 				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst, this.posX - 0.5 + xposMod,
 						this.posY + this.worldObj.rand.nextDouble() / 2, this.posZ - 0.5 + zposMod,

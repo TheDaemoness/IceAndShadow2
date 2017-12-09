@@ -72,13 +72,15 @@ public class NyxRecipes {
 		GameRegistry.addRecipe(new ItemStack(NyxItems.crystalVial, 1, 0), "c", "c", 'c',
 				new ItemStack(NyxItems.cortra, 1, 1));
 
+		/*
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial, 1, 1),
 				new ItemStack(NyxItems.crystalVial, 1), new ItemStack(NyxItems.draconium),
 				new ItemStack(NyxItems.echirIngot, 1, 1));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial, 1, 1),
 				new ItemStack(NyxItems.extractorPoison, 1, 13));
-
+		*/
+		
 		// GameRegistry.addRecipe(new ItemStack(NyxItems.magicRepo,1,0), " c ",
 		// "cac", " c ",
 		// 'a', new ItemStack(NyxItems.alabaster),
@@ -91,5 +93,8 @@ public class NyxRecipes {
 			GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.alabasterShard, 9, i), new ItemStack(NyxItems.alabaster, 1, i));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.toxicCore, 1, 1), new ItemStack(NyxItems.poisonFruit));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4),
+				new ItemStack(NyxItems.leaf), new ItemStack(NyxItems.icicle), new ItemStack(Items.stick));
 	}
 }

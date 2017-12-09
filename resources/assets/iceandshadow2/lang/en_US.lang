@@ -48,6 +48,10 @@ item.nyxPhantomResin.name=Ethereal Resin
 item.nyxAlabaster0.name=Ethereal Alabaster
 item.nyxAlabasterShard0.name=Ethereal Alabaster Shard
 item.nyxMagicRepo.name=Magic Repository
+item.nyxToxicCore0.name=Toxic Core
+item.nyxToxicCore1.name=Toxic Lump
+item.nyxShapedLeaf.name=Shaped Leaf
+item.nyxCurativeResin.name=Curative Resin
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 
@@ -118,8 +122,6 @@ item.iasArmorEchir0Active.name=Primed Echir Helmet
 item.iasArmorEchir1Active.name=Primed Echir Chestplate
 item.iasArmorEchir2Active.name=Primed Echir Greaves
 item.iasArmorEchir3Active.name=Primed Echir Boots
-item.nyxToxicCore0.name=Toxic Core
-item.nyxToxicCore1.name=Toxic Lump
 
 tile.nyxStone.name=Nyxian Stone
 tile.nyxGravel.name=Nyxian Gravel

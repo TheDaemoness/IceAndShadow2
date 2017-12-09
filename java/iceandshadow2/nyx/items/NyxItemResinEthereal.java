@@ -10,12 +10,14 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
+public class NyxItemResinEthereal extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmute {
 
-	public NyxItemPhantomResin(String texName) {
+	public NyxItemResinEthereal(String texName) {
 		super(EnumIaSModule.NYX, texName);
 	}
 
@@ -33,19 +35,27 @@ public class NyxItemPhantomResin extends IaSBaseItemSingle implements IIaSGlowin
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (catalyst.getItem() == this && target.getItem() == NyxItems.boneCursed)
 			return catalyst.stackSize >= 9 ? 420 : 0; //Blaze it.
+		if (catalyst.getItem() == this && target.getItem() == NyxItems.leaf)
+			return 42; //The answer.
 		return 0;
 	}
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
-		int ss = 0;
-		while (catalyst.stackSize >= 9) {
-			catalyst.stackSize -= 9;
-			++ss;
-		}
-		target.stackSize -= 1;
 		final List<ItemStack> retval = new ArrayList<ItemStack>(1);
-		retval.add(new ItemStack(NyxBlocks.hardShadow, ss));
+		target.stackSize -= 1;
+		if(target.getItem() == NyxItems.boneCursed) {
+			int ss = 0;
+			while (catalyst.stackSize >= 9) {
+				catalyst.stackSize -= 9;
+				++ss;
+			}
+			retval.add(new ItemStack(NyxBlocks.hardShadow, ss));
+		}
+		else {
+			catalyst.stackSize -= 1;
+			retval.add(new ItemStack(NyxItems.resinCurative, 1));
+		}
 		return retval;
 	}
 

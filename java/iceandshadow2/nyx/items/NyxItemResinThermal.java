@@ -18,12 +18,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemHeat extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
+public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon icons[];
 
-	public NyxItemHeat(String texName) {
+	public NyxItemResinThermal(String texName) {
 		super(EnumIaSModule.NYX, texName, 4);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 8, 1), new ItemStack(this, 1, 0));
 	}

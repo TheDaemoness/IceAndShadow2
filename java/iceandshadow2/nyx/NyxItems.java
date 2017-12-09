@@ -15,14 +15,14 @@ public class NyxItems {
 			nifelhiumPowder, navistraShard, devora, cortra, exousium, draconium, exousicIceShard, toughGossamer,
 			poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort, frostBowLong, frostSword, boneCursed,
 			boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle, page, rope, kitTightrope, echirShears,
-			crystalVial, extractorPoison, magicRepo, toxicCore, echirDust, alabasterShard;
+			crystalVial, extractorPoison, magicRepo, toxicCore, echirDust, alabasterShard, leaf, resinCurative;
 	
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
-		NyxItems.resin = new NyxItemPhantomResin("PhantomResin").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.resin = new NyxItemResinEthereal("PhantomResin").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.bloodstone = new NyxItemBloodstone("Bloodstone").register().setCreativeTab(IaSCreativeTabs.resources);
@@ -67,14 +67,18 @@ public class NyxItems {
 		NyxItems.rope = new NyxItemRope("Rope").register().setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.kitTightrope = new NyxItemKitTightrope("KitTightrope").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.heat = new NyxItemHeat("Heat").register().setCreativeTab(IaSCreativeTabs.misc);
-		NyxItems.crystalVial = new NyxItemCrystalVial("CrystalVial").register().setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
-				.setCreativeTab(IaSCreativeTabs.tools);
+		NyxItems.heat = new NyxItemResinThermal("Heat").register().setCreativeTab(IaSCreativeTabs.misc);
+		//NyxItems.crystalVial = new NyxItemCrystalVial("CrystalVial").register().setCreativeTab(IaSCreativeTabs.tools);
+		//NyxItems.extractorPoison = new NyxItemExtractorPoison("ExtractorPoison").register()
+				//.setCreativeTab(IaSCreativeTabs.tools);
 		// NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 		// .setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.leaf = new IaSBaseItemSingle(EnumIaSModule.NYX, "ShapedLeaf").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.resinCurative = new NyxItemResinCurative("CurativeResin").register()
+				.setCreativeTab(IaSCreativeTabs.misc);
 	}
 }
