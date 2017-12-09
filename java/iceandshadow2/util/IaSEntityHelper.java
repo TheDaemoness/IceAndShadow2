@@ -158,19 +158,23 @@ public class IaSEntityHelper {
 	public static boolean isInFrontOf(Entity a, Entity b) {
 		final double xdif = b.posX - a.posX;
 		final double zdif = b.posZ - a.posZ;
-		final double range = Math.sqrt(xdif * xdif + zdif * zdif);
-		if (1 + 2 * range < b.posY - a.posY)
+		double ratio;
+
+		if (1 + 2*Math.sqrt(xdif * xdif + zdif * zdif) < (b.posY - a.posY))
 			return false;
 
-		// NOTE: Using the notation for polar coordinates I'm used to, z in MC
-		// is x, and x in MC is y.
-		final double ratio = xdif == 0 ? 0 : Math.abs(xdif / zdif);
-		double ang = Math.atan(ratio) * 180.0 / Math.PI;
-		if (zdif < 0)
-			ang = 180 - ang;
+		if (xdif == 0.0)
+			ratio = zdif / xdif;
+		else
+			ratio = 0;
 
-		final double delta = Math.abs(ang - Math.abs(a.rotationYaw));
-		return delta <= 75;
+		double ang = Math.atan(ratio) * 180.0 / Math.PI;
+		if (xdif < 0)
+			ang += 180.0;
+		else if (zdif < 0)
+			ang += 360.0;
+
+		return ((ang - a.rotationYaw)%360 <= 180);
 	}
 
 	public static boolean isTouchingGround(EntityLivingBase ent) {

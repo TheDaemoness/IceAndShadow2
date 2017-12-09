@@ -271,12 +271,16 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		final int slowstr = IaSWorldHelper.getDifficulty(worldObj) + (longe ? 1 : -1);
 		final int dif = IaSWorldHelper.getDifficulty(worldObj);
 		EntityIceArrow var2;
-		if (longe) {
-			var2 = new EntityIceArrow(worldObj, this, 2.4F, slowstr, slowtime);
-			final double ydelta = par1EntityLiving.posY - posY + par1EntityLiving.getEyeHeight() - getEyeHeight();
-			var2.setThrowableHeading(par1EntityLiving.posX - posX, ydelta, par1EntityLiving.posZ - posZ, 3.2F, 2.0F);
-		} else
-			var2 = new EntityIceArrow(worldObj, this, par1EntityLiving, 1.8F, 5.0F, slowstr, slowtime);
+		final double xdelta = par1EntityLiving.posX - posX;
+		final double zdelta = par1EntityLiving.posZ - posZ;
+		final double range = Math.sqrt(xdelta * xdelta + zdelta * zdelta)/20;
+		final float velocity = longe?3.2F:1.6F;
+		final double xbias = 0;
+		final double zbias = 0;
+		final double ydelta = par1EntityLiving.posY-posY+ (par1EntityLiving.getEyeHeight() - getEyeHeight());
+		final double ybias = range*range*5.5/velocity;
+		var2 = new EntityIceArrow(worldObj, this, 0F, slowstr, slowtime);
+		var2.setThrowableHeading(xdelta+xbias, ydelta+ybias, zdelta+zbias, velocity, 5F/velocity);
 		var2.setIsCritical(longe);
 		int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, getHeldItem());
 		final int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, getHeldItem());
