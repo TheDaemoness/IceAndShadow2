@@ -25,6 +25,8 @@ import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 public class IaSEntityHelper {
 
 	public static EntityItem dropItem(Entity ent, ItemStack par1ItemStack) {
+		if(par1ItemStack == null || ent == null)
+			return null;
 		if (par1ItemStack.stackSize == 0) {
 			return null;
 		} else {

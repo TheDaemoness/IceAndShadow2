@@ -239,10 +239,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		float var26;
 		
 		boolean shouldKill = true;
+		final IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
 		if (var4 != null) {
-
-			final IaSToolMaterial mat = IaSRegistry.getToolMaterial(this.dataWatcher.getWatchableObjectString(16));
-
 			if (var4.entityHit != null && var4.entityHit != this.shootingEntity) {
 				this.worldObj.playSoundAtEntity(this, "game.hostile.hurt.fall.small",
 						(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F : var4.hitVec.lengthVector() / 5.0F),
@@ -252,8 +250,6 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 						this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 
 				float basedmg = mat.getKnifeDamage(this, this.shootingEntity, var4.entityHit);
-				
-
 				
 				Entity target = var4.entityHit;
 				Item equip = null;
@@ -272,6 +268,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 										: var4.hitVec.lengthVector() / 5.0F),
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						this.shootingEntity = null;
 						shouldKill = false;
 				}
 				
@@ -357,7 +354,7 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 									(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
 											: var4.hitVec.lengthVector() / 5.0F),
 									1.6F / (this.rand.nextFloat() * 0.2F + 0.4F));
-
+					
 					if (mat.onKnifeHit(this.shootingEntity, this,
 							new ChunkCoordinates(this.xTile, this.yTile, this.zTile)))
 						doDrop(mat);

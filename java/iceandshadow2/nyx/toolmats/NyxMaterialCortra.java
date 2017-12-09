@@ -3,18 +3,27 @@ package iceandshadow2.nyx.toolmats;
 import java.util.HashMap;
 import java.util.Map;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemWeapon;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.NyxBlockStone;
+import iceandshadow2.util.IaSBlockHelper;
+import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -40,7 +49,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 256;
+		return 128;
 	}
 
 	@Override
@@ -59,59 +68,39 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
+	public void onKnifeThrow(ItemStack is, EntityLivingBase user, IaSEntityKnifeBase knife) {
+		Entity victim = user.worldObj.findNearestEntityWithinAABB(EntityLivingBase.class,
+				AxisAlignedBB.getBoundingBox(
+						user.posX-12, user.posY-16, user.posZ-12,
+						user.posX+12, user.posY+8, user.posZ+12)
+				, user);
+		if(victim != null && EnumIaSAspect.getAspect(victim) != EnumIaSAspect.getAspect(user)) {
+			knife.setThrowableHeading(
+					victim.posX-user.posX,
+					victim.posY-user.posY+victim.getEyeHeight()-user.getEyeHeight()+0.5,
+					victim.posZ-user.posZ, 2F, 0.0F);
+		}
+	}
+
+	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.cortraIngot && mat.getItemDamage() == 1;
 	}
 
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if (target instanceof EntityLivingBase && is.getItem() instanceof IaSItemWeapon) {
-			final EntityLivingBase elb = (EntityLivingBase) target;
-			final Map<Integer, Integer> nu = new HashMap<Integer, Integer>();
-			final int shlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.sharpness.effectId, is);
-			final int smlvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, is);
-			if (!user.worldObj.isRemote) {
-				if (elb.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
-					nu.remove(Enchantment.sharpness.effectId);
-					if (smlvl < 5 && user.worldObj.rand.nextInt(64 + smlvl * 12) == 0)
-						nu.put(Enchantment.smite.effectId, smlvl + 1);
-					else if (smlvl > 0)
-						nu.put(Enchantment.smite.effectId, smlvl);
-				} else {
-					nu.remove(Enchantment.smite.effectId);
-					if (shlvl < 5 && user.worldObj.rand.nextInt(48 + shlvl * 8) == 0)
-						nu.put(Enchantment.sharpness.effectId, shlvl + 1);
-					else if (shlvl > 0)
-						nu.put(Enchantment.sharpness.effectId, shlvl);
-				}
-				EnchantmentHelper.setEnchantments(nu, is);
-			}
-		}
+		if(user instanceof EntityPlayer &&
+				target instanceof EntityLivingBase &&
+				IaSEntityHelper.getMagicLevel((EntityLivingBase)target) > 0)
+			((EntityPlayer)user).addExperience(target.isEntityInvulnerable()?0:1);
 		return super.onAttack(is, user, target);
 	}
 
 	@Override
-	public int onPostHarvest(ItemStack is, EntityLivingBase user, World w, int x, int y, int z, Block bl) {
-		if (!(is.getItem() instanceof IaSItemWeapon)) {
-			final int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, is);
-			if (!user.worldObj.isRemote && user.worldObj.rand.nextInt(48 + 16 * lvl) == 0) {
-				final Map<Integer, Integer> nu = new HashMap<Integer, Integer>();
-				nu.put(Enchantment.efficiency.effectId, Math.min(5, lvl + 1));
-				final int flvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, is);
-				final int ulvl = EnchantmentHelper.getEnchantmentLevel(Enchantment.unbreaking.effectId, is);
-				if (flvl < 3 && lvl >= 3 && user.worldObj.rand.nextInt(5) == 0)
-					nu.put(Enchantment.fortune.effectId, Math.min(3, flvl + 1));
-				else {
-					if (flvl > 0)
-						nu.put(Enchantment.fortune.effectId, flvl);
-					if (ulvl < 5 && lvl >= 1 && user.worldObj.rand.nextInt(4) == 0)
-						nu.put(Enchantment.unbreaking.effectId, Math.min(5, ulvl + 1));
-					else if (ulvl > 0)
-						nu.put(Enchantment.unbreaking.effectId, ulvl);
-				}
-				EnchantmentHelper.setEnchantments(nu, is);
-			}
-		}
-		return super.onPostHarvest(is, user, w, x, y, z, bl);
+	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z, Block bl) {
+		final int metadata = w.getBlockMetadata(x, y, z);
+		final boolean getXP = bl.canHarvestBlock(user, metadata) && bl.getHarvestLevel(metadata) >= 1;
+		user.addExperience(getXP?1:0);
+		return super.onPreHarvest(is, user, w, x, y, z, bl);
 	}
 }

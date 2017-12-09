@@ -3,10 +3,13 @@ package iceandshadow2.nyx.toolmats;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -47,7 +50,7 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	
 	@Override
 	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World, EntityLivingBase elb) {
-		return 16;
+		return 24;
 	}
 
 	@Override
@@ -99,8 +102,16 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 		if(knife.worldObj.isRemote)
 			return false;
 		final float force = 4/(1+Math.abs(2*target.getEyeHeight()));
-		if(target instanceof EntityLivingBase)
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 25, 0));
+		if(target instanceof EntityLivingBase) {
+			EntityLivingBase victim = (EntityLivingBase)target;
+			final boolean isMob = victim instanceof EntityMob;
+			if(victim.isPotionActive(Potion.confusion.id) || (isMob && ((EntityMob)target).getAttackTarget() != user)) {
+				if(!isMob || (victim.getEquipmentInSlot(0) != null && victim.getEquipmentInSlot(0).getRarity() == EnumRarity.common))
+					IaSEntityHelper.dropItem(victim, victim.getEquipmentInSlot(0));
+				victim.setCurrentItemOrArmor(0, null);
+			}
+			victim.addPotionEffect(new PotionEffect(Potion.confusion.id, 35, 0));
+		}
 		target.addVelocity(knife.motionX*force, 0.1, knife.motionZ*force);
 		return super.onKnifeHit(user, knife, target);
 	}

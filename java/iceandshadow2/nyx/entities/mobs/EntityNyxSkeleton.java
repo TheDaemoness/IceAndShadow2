@@ -237,6 +237,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 			return super.attackEntityFrom(par1DamageSource, Math.max(1, dmg - IaSWorldHelper.getRegionArmorMod(this)));
 		if (par1DamageSource.isProjectile())
 			return super.attackEntityFrom(par1DamageSource, dmg);
+		if (getEquipmentInSlot(0) == null)
+			return super.attackEntityFrom(par1DamageSource, dmg);
 		if (getEquipmentInSlot(0).getItem() == NyxItems.frostSword) {
 			final Entity attacker = par1DamageSource.getEntity();
 			if(attacker != null) {

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -364,6 +365,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return If the knife should drop as an item or not.
 	 */
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
+		if(user instanceof EntityMob)
+			return false;
+		if(user instanceof EntityPlayer)
+			return !((EntityPlayer)user).capabilities.isCreativeMode;
 		return true;
 	}
 
@@ -379,6 +384,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return If the knife should drop as an item or not.
 	 */
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
+		if(user instanceof EntityMob)
+			return false;
+		if(user instanceof EntityPlayer)
+			return !((EntityPlayer)user).capabilities.isCreativeMode;
 		return true;
 	}
 
