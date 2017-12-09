@@ -25,7 +25,7 @@ public class NyxBlockInfestedLeaves extends IaSBaseBlockLeaves implements IIaSNo
 		setLightLevel(0.1F);
 		setLightOpacity(4);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.INFESTATION;

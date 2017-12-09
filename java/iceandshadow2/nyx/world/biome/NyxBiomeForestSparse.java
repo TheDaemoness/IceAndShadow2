@@ -17,7 +17,7 @@ public class NyxBiomeForestSparse extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(Blocks.snow, NyxBlocks.permafrost);
 
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
 	}
 
 	@Override

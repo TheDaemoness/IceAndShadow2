@@ -27,11 +27,16 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
+	}
+
+	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0 || side == 1)
-			return this.iconTop;
+			return iconTop;
 		else
-			return this.iconSide;
+			return iconSide;
 	}
 
 	@Override
@@ -42,12 +47,7 @@ public class NyxBlockPermafrost extends IaSBaseBlockSingle implements IIaSBlockT
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = reg.registerIcon(getTexName() + "Top");
-		this.iconSide = reg.registerIcon(getTexName() + "Side");
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
+		iconTop = reg.registerIcon(getTexName() + "Top");
+		iconSide = reg.registerIcon(getTexName() + "Side");
 	}
 }

@@ -39,7 +39,7 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		ArrayList<ItemStack> ises = new ArrayList<ItemStack>(1);
+		final ArrayList<ItemStack> ises = new ArrayList<ItemStack>(1);
 		ises.add(new ItemStack(NyxItems.devora));
 		return ises;
 	}

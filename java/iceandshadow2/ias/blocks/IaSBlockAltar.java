@@ -27,12 +27,7 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2) {
-		return par1 == 0 ? this.iconBottom : par1 == 1 ? this.iconTop : this.blockIcon;
-	}
-	
-	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return side == ForgeDirection.DOWN;
+		return par1 == 0 ? iconBottom : par1 == 1 ? iconTop : blockIcon;
 	}
 
 	@Override
@@ -46,11 +41,16 @@ public class IaSBlockAltar extends IaSBaseBlockSingle {
 	}
 
 	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side == ForgeDirection.DOWN;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = reg.registerIcon("IceAndShadow2:" + getModName() + "Top");
-		this.iconSide = reg.registerIcon("IceAndShadow2:" + getModName() + "Side");
-		this.iconBottom = reg.registerIcon("IceAndShadow2:" + getModName() + "Bottom");
-		this.blockIcon = this.iconSide;
+		iconTop = reg.registerIcon("IceAndShadow2:" + getModName() + "Top");
+		iconSide = reg.registerIcon("IceAndShadow2:" + getModName() + "Side");
+		iconBottom = reg.registerIcon("IceAndShadow2:" + getModName() + "Bottom");
+		blockIcon = iconSide;
 	}
 }

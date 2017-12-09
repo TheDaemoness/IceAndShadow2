@@ -73,12 +73,11 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 		else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
 			w.setBlock(x, y, z + dir.offsetZ, NyxBlocks.hookTightropeZ);
 
-		for (int i = 2; i < ilen; ++i) {
+		for (int i = 2; i < ilen; ++i)
 			if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
 				w.setBlock(x + i * dir.offsetX, y, z, NyxBlocks.ropeX);
 			else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
 				w.setBlock(x, y, z + i * dir.offsetZ, NyxBlocks.ropeZ);
-		}
 		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
 			w.setBlock(x + (ilen - 1) * dir.offsetX, y, z, NyxBlocks.hookTightropeX);
 		else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
@@ -110,12 +109,10 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 						dir = ForgeDirection.EAST;
 					else
 						dir = ForgeDirection.WEST;
-				} else {
-					if (v.zCoord > 0)
-						dir = ForgeDirection.SOUTH;
-					else
-						dir = ForgeDirection.NORTH;
-				}
+				} else if (v.zCoord > 0)
+					dir = ForgeDirection.SOUTH;
+				else
+					dir = ForgeDirection.NORTH;
 				int modX = 0, modZ = 0;
 				if (el.posX < 0)
 					modX = -1;

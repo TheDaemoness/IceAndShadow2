@@ -33,8 +33,8 @@ public class NyxBlockFunctionsInfested {
 	}
 
 	public static void updateTick(World w, int x, int y, int z, Random r) {
-		for (int xit = -1; xit <= 1; ++xit) {
-			for (int yit = -1; yit <= 1; ++yit) {
+		for (int xit = -1; xit <= 1; ++xit)
+			for (int yit = -1; yit <= 1; ++yit)
 				for (int zit = -1; zit <= 1; ++zit) {
 					if (r.nextBoolean())
 						continue;
@@ -42,19 +42,16 @@ public class NyxBlockFunctionsInfested {
 					// TODO: Exclusion.
 					if (b instanceof IIaSNoInfest)
 						continue;
-					if (b.isLeaves(w, x + xit, y + yit, z + zit)) {
+					if (b.isLeaves(w, x + xit, y + yit, z + zit))
 						w.setBlock(x + xit, y + yit, z + zit, NyxBlocks.infestLeaves);
-					} else if (b.isWood(w, x + xit, y + yit, z + zit)) {
+					else if (b.isWood(w, x + xit, y + yit, z + zit)) {
 						final int meta = w.getBlockMetadata(x + xit, y + yit, z + zit) & 12;
 						w.setBlock(x + xit, y + yit, z + zit, NyxBlocks.infestLog, meta, 0x2);
-					} else if (b.isFoliage(w, x + xit, y + yit, z + zit)) {
+					} else if (b.isFoliage(w, x + xit, y + yit, z + zit))
 						w.setBlockToAir(x + xit, y + yit, z + zit);
-					} else if (b.getMaterial() == Material.wood) {
+					else if (b.getMaterial() == Material.wood)
 						w.setBlockToAir(x + xit, y + yit, z + zit); // TODO:
 																	// Fix.
-					}
 				}
-			}
-		}
 	}
 }

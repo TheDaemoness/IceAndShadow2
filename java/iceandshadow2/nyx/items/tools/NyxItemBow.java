@@ -35,8 +35,8 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public NyxItemBow(String par1) {
 		super(EnumIaSModule.NYX, par1);
 		setMaxStackSize(1);
-		this.bFull3D = false;
-		this.inuse = false;
+		bFull3D = false;
+		inuse = false;
 	}
 
 	@Override
@@ -57,18 +57,18 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 
 		if (usingItem != stack)
-			this.inuse = false;
+			inuse = false;
 
 		if (!((NyxItemBow) stack.getItem()).inuse)
-			return renderPass > 0 ? this.glow : this.itemIcon;
+			return renderPass > 0 ? glow : itemIcon;
 
 		final int j = getMaxItemUseDuration(stack) - useRemaining;
 
 		if (j >= getTimeForIcon(getSpeedModifier(stack), 2))
-			return this.iconArray[2][renderPass];
+			return iconArray[2][renderPass];
 		if (j >= getTimeForIcon(getSpeedModifier(stack), 1))
-			return this.iconArray[1][renderPass];
-		return this.iconArray[0][renderPass];
+			return iconArray[1][renderPass];
+		return iconArray[0][renderPass];
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 
 		if (getDamage(par1ItemStack) < this.getMaxDamage() - 1) {
-			this.inuse = true;
+			inuse = true;
 			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 		}
 
@@ -147,12 +147,12 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.glow = reg.registerIcon(getTexName() + "Glow");
-		this.iconArray = new IIcon[3][2];
-		for (int i = 0; i < this.iconArray.length; ++i) {
-			this.iconArray[i][0] = reg.registerIcon(getTexName() + "Anim" + (i + 1));
-			this.iconArray[i][1] = reg.registerIcon(getTexName() + "GlowAnim" + (i + 1));
+		itemIcon = reg.registerIcon(getTexName());
+		glow = reg.registerIcon(getTexName() + "Glow");
+		iconArray = new IIcon[3][2];
+		for (int i = 0; i < iconArray.length; ++i) {
+			iconArray[i][0] = reg.registerIcon(getTexName() + "Anim" + (i + 1));
+			iconArray[i][1] = reg.registerIcon(getTexName() + "GlowAnim" + (i + 1));
 		}
 	}
 

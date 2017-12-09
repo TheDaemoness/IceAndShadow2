@@ -29,7 +29,8 @@ public class IaSRenderers {
 		// Mobs.
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSkeleton.class, new RenderNyxSkeleton());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class, new RenderNyxSpider());
-		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightSanctified.class, new RenderNyxWightSanctified());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightSanctified.class,
+				new RenderNyxWightSanctified());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class, new RenderNyxWightToxic());
 
 		// Projectiles.
@@ -45,16 +46,14 @@ public class IaSRenderers {
 		RenderingRegistry.registerEntityRenderingHandler(EntityOrbNourishment.class, new RenderOrbNourishment());
 
 		// Items
-		for (final Field f : NyxItems.class.getFields()) {
+		for (final Field f : NyxItems.class.getFields())
 			try {
 				final Object o = f.get(null);
-				if (o instanceof IIaSGlowing && o instanceof Item) {
+				if (o instanceof IIaSGlowing && o instanceof Item)
 					if (((IIaSGlowing) o).usesDefaultGlowRenderer())
 						MinecraftForgeClient.registerItemRenderer((Item) o, new RenderItemVanillaGlowing());
-				}
 			} catch (final Exception e) {
 			}
-		}
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
 

@@ -22,8 +22,8 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 
 	public IaSItemEchirToolActive(String texName, int tab, boolean isWeapon) {
 		super(EnumIaSModule.IAS, texName);
-		this.slot = tab; // FtM sex change, wot?
-		this.wep = isWeapon;
+		slot = tab; // FtM sex change, wot?
+		wep = isWeapon;
 		setMaxStackSize(1);
 		setFull3D();
 	}
@@ -36,7 +36,7 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 
 	@Override
 	public int getMaxDamage() {
-		return IaSRegistry.getDefaultMaterial().getDurability(new ItemStack(IaSTools.tools[this.slot]));
+		return IaSRegistry.getDefaultMaterial().getDurability(new ItemStack(IaSTools.tools[slot]));
 	}
 
 	@Override
@@ -52,10 +52,10 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final IaSToolMaterial mat = IaSRegistry.getTransmutationMaterial(catalyst);
 		catalyst.stackSize -= 3;
-		if (this.wep)
-			target.func_150996_a(IaSTools.weapons[this.slot]);
+		if (wep)
+			target.func_150996_a(IaSTools.weapons[slot]);
 		else
-			target.func_150996_a(IaSTools.tools[this.slot]);
+			target.func_150996_a(IaSTools.tools[slot]);
 		if (target.stackTagCompound == null)
 			target.setTagCompound(new NBTTagCompound());
 		final NBTTagCompound nbt = target.stackTagCompound;
@@ -65,13 +65,12 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer ninja) {
-		if (ninja.isSneaking()) { // Do NOT remove this if statement, it
+		if (ninja.isSneaking())
 			// actually isn't redundant.
-			if (this.wep)
-				par1 = new ItemStack(IaSTools.weapons[this.slot], 1, par1.getItemDamage());
+			if (wep)
+				par1 = new ItemStack(IaSTools.weapons[slot], 1, par1.getItemDamage());
 			else
-				par1 = new ItemStack(IaSTools.tools[this.slot], 1, par1.getItemDamage());
-		}
+				par1 = new ItemStack(IaSTools.tools[slot], 1, par1.getItemDamage());
 		return par1;
 	}
 

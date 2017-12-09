@@ -20,8 +20,8 @@ public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
 
 	public EntityLivingBase getSearchTarget();
 
-	public void setSearchTarget(EntityLivingBase ent);
-
-	//Whether or not the entity should attack entities bearing this aspect.
+	// Whether or not the entity should attack entities bearing this aspect.
 	public boolean hates(EnumIaSAspect aspect);
+
+	public void setSearchTarget(EntityLivingBase ent);
 }

@@ -19,18 +19,16 @@ public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {
 		if (!target.isItemDamaged())
 			return 0;
 		final Item it = target.getItem();
-		if (it instanceof ItemArmor) {
+		if (it instanceof ItemArmor)
 			if (catalyst.getItem() == ((ItemArmor) it).getArmorMaterial().customCraftingMaterial) {
 				if (catalyst.getItem() instanceof NyxItemIngot && catalyst.getItemDamage() == 0)
 					return 0;
 				return 850;
 			}
-		}
 		if (it instanceof IIaSTool) {
-			if (((IIaSTool) it).canRepair()) {
+			if (((IIaSTool) it).canRepair())
 				if (IaSToolMaterial.extractMaterial(target).isRepairable(target, catalyst))
 					return 450;
-			}
 			return 0;
 		}
 		if (it.getIsRepairable(target, catalyst))

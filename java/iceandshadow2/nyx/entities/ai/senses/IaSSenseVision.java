@@ -12,14 +12,13 @@ public class IaSSenseVision extends IaSSenseOld {
 		if (ent.isInvisible()) {
 			if (ent instanceof EntityLivingBase) {
 				final EntityLivingBase seekable = (EntityLivingBase) ent;
-				for (int i = 0; i <= 4; ++i) {
+				for (int i = 0; i <= 4; ++i)
 					if (seekable.getEquipmentInSlot(i) != null) {
 						if (i == 0)
 							return false;
 						if (i >= 2 && !(seekable.getEquipmentInSlot(i).getItem() instanceof IaSItemArmor))
 							return false;
 					}
-				}
 			}
 			return !ent.isBurning();
 		}
@@ -39,12 +38,11 @@ public class IaSSenseVision extends IaSSenseOld {
 		if (IaSSenseVision.isTargetInvisible(ent))
 			return false;
 
-		if (this.owner instanceof EntityMob) {
-			if (((EntityMob)this.owner).getAttackTarget() == ent)
-				return this.owner.canEntityBeSeen(ent);
-		}
-		if (!IaSEntityHelper.isInFrontOf(this.owner, ent))
+		if (owner instanceof EntityMob)
+			if (((EntityMob) owner).getAttackTarget() == ent)
+				return owner.canEntityBeSeen(ent);
+		if (!IaSEntityHelper.isInFrontOf(owner, ent))
 			return false;
-		return this.owner.canEntityBeSeen(ent);
+		return owner.canEntityBeSeen(ent);
 	}
 }

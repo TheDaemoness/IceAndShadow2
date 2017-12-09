@@ -38,7 +38,7 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 
 	public NyxItemSwordFrost(String par1) {
 		super(EnumIaSModule.NYX, par1);
-		this.bFull3D = true;
+		bFull3D = true;
 		setMaxStackSize(1);
 		setMaxDamage(512);
 	}
@@ -67,7 +67,7 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-		return renderPass > 0 ? this.glow : this.itemIcon;
+		return renderPass > 0 ? glow : itemIcon;
 	}
 
 	@Override
@@ -139,8 +139,8 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.glow = reg.registerIcon(getTexName() + "Glow");
+		itemIcon = reg.registerIcon(getTexName());
+		glow = reg.registerIcon(getTexName() + "Glow");
 	}
 
 	@Override

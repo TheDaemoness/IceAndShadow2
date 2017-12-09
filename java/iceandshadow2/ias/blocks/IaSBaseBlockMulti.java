@@ -25,14 +25,14 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	public IaSBaseBlockMulti(EnumIaSModule mod, String id, Material mat, int subtypes) {
 		super(mod, mat);
 		setBlockName(mod.prefix + id);
-		this.subtypeCount = (byte) Math.min(subtypes, 16);
+		subtypeCount = (byte) Math.min(subtypes, 16);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		if (meta >= this.subtypeCount)
-			return this.icons[0];
-		return this.icons[meta];
+		if (meta >= subtypeCount)
+			return icons[0];
+		return icons[meta];
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs p_149666_2_, List list) {
-		for (int meta = 0; meta < this.subtypeCount; ++meta)
+		for (int meta = 0; meta < subtypeCount; ++meta)
 			list.add(new ItemStack(par1, 1, meta));
 	}
 
@@ -58,9 +58,9 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.icons = new IIcon[this.subtypeCount];
-		for (byte i = 0; i < this.subtypeCount; ++i)
-			this.icons[i] = reg.registerIcon(getTexName() + i);
+		icons = new IIcon[subtypeCount];
+		for (byte i = 0; i < subtypeCount; ++i)
+			icons[i] = reg.registerIcon(getTexName() + i);
 	}
 
 }

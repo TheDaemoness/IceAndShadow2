@@ -29,14 +29,12 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle {
 	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld, int ehx, int uay, int zee, int metuh,
 			float pex, float pay, float pez) {
 		boolean trans = true;
-		for (int xit = -2; xit <= 2; ++xit) {
-			for (int zit = -2; zit <= 2; ++zit) {
+		for (int xit = -2; xit <= 2; ++xit)
+			for (int zit = -2; zit <= 2; ++zit)
 				if (wurld.getBlock(ehx + xit, uay, zee + zit) != NyxBlocks.stone)
 					trans = false;
-			}
-		}
 		if (trans) {
-			for (int xit = -2; xit <= 2; ++xit) {
+			for (int xit = -2; xit <= 2; ++xit)
 				for (int zit = -2; zit <= 2; ++zit) {
 					if (Math.abs(xit) == 2 || Math.abs(zit) == 2)
 						wurld.setBlock(ehx + xit, uay, zee + zit, Blocks.obsidian);
@@ -49,7 +47,6 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle {
 						wurld.func_147480_a(ehx + xit, uay + 2, zee + zit, true);
 					wurld.func_147480_a(ehx + xit, uay + 1, zee + zit, true);
 				}
-			}
 			staq.stackSize -= 1;
 			wurld.spawnEntityInWorld(new EntityLightningBolt(wurld, ehx, uay, zee));
 			IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian.");

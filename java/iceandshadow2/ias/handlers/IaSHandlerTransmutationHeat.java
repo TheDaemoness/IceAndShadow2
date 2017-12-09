@@ -46,7 +46,7 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 		int resinCredit = 0;
 		for (int i = 0; i < 4 && target.stackSize > 0; ++i) {
 			int time = timeInit;
-			while (time >= 200 && (catalyst.stackSize > 0 || resinCredit > 0)) {
+			while (time >= 200 && (catalyst.stackSize > 0 || resinCredit > 0))
 				if (time >= 12800 && catalyst.stackSize >= 16) {
 					catalyst.stackSize -= 16;
 					is.add(new ItemStack(NyxItems.heat, 1, 3));
@@ -71,7 +71,6 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 						time -= 200 * count;
 					}
 				}
-			}
 			if (time < timeInit)
 				--target.stackSize;
 		}

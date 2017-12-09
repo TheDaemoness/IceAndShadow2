@@ -46,19 +46,19 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 
 	public EntityAINyxRangedAttack(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, int par5, float par6,
 			boolean los) {
-		this.rangedAttackTime = -1;
+		rangedAttackTime = -1;
 
-		if (!(par1IRangedAttackMob instanceof EntityLivingBase)) {
+		if (!(par1IRangedAttackMob instanceof EntityLivingBase))
 			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
-		} else {
-			this.rangedAttackEntityHost = par1IRangedAttackMob;
-			this.entityHost = (EntityLiving) par1IRangedAttackMob;
-			this.entityMoveSpeed = par2;
-			this.minRangedAttackTime = par4;
-			this.maxRangedAttackTime = par5;
-			this.range = par6;
-			this.rangeSq = par6 * par6;
-			this.reqLOS = los;
+		else {
+			rangedAttackEntityHost = par1IRangedAttackMob;
+			entityHost = (EntityLiving) par1IRangedAttackMob;
+			entityMoveSpeed = par2;
+			minRangedAttackTime = par4;
+			maxRangedAttackTime = par5;
+			range = par6;
+			rangeSq = par6 * par6;
+			reqLOS = los;
 			setMutexBits(3);
 		}
 	}
@@ -68,7 +68,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public boolean continueExecuting() {
-		return shouldExecute() || !this.entityHost.getNavigator().noPath();
+		return shouldExecute() || !entityHost.getNavigator().noPath();
 	}
 
 	/**
@@ -76,10 +76,10 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public void resetTask() {
-		this.attackTarget = null;
-		this.stopMovingDelay = 0;
-		this.rangedAttackTime = -1;
-		this.reflexDelay = false;
+		attackTarget = null;
+		stopMovingDelay = 0;
+		rangedAttackTime = -1;
+		reflexDelay = false;
 	}
 
 	/**
@@ -87,12 +87,12 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		final EntityLivingBase entitylivingbase = this.entityHost.getAttackTarget();
+		final EntityLivingBase entitylivingbase = entityHost.getAttackTarget();
 
-		if (entitylivingbase == null || entitylivingbase.isDead) {
+		if (entitylivingbase == null || entitylivingbase.isDead)
 			return false;
-		} else {
-			this.attackTarget = entitylivingbase;
+		else {
+			attackTarget = entitylivingbase;
 			return true;
 		}
 	}
@@ -102,53 +102,48 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	 */
 	@Override
 	public void updateTask() {
-		final double d0 = this.entityHost.getDistanceSq(this.attackTarget.posX, this.attackTarget.boundingBox.minY,
-				this.attackTarget.posZ);
+		final double d0 = entityHost.getDistanceSq(attackTarget.posX, attackTarget.boundingBox.minY, attackTarget.posZ);
 		boolean flag;
-		if(this.entityHost instanceof IIaSSensateOld)
-			flag = ((IIaSSensateOld)this.entityHost).getSense().canSense(this.attackTarget);
-		else 
+		if (entityHost instanceof IIaSSensateOld)
+			flag = ((IIaSSensateOld) entityHost).getSense().canSense(attackTarget);
+		else
 			flag = true;
-		flag &= !this.reqLOS || this.entityHost.getEntitySenses().canSee(this.attackTarget);
+		flag &= !reqLOS || entityHost.getEntitySenses().canSee(attackTarget);
 
 		if (flag) {
-			if (this.stopMovingDelay < 10)
-				++this.stopMovingDelay;
+			if (stopMovingDelay < 10)
+				++stopMovingDelay;
 		} else
-			this.stopMovingDelay = 0;
+			stopMovingDelay = 0;
 
-		if (d0 > this.rangeSq || this.stopMovingDelay < 10) {
-			this.entityHost.getNavigator().tryMoveToEntityLiving(this.attackTarget, this.entityMoveSpeed);
-		} else {
-			this.entityHost.getNavigator().clearPathEntity();
-		}
+		if (d0 > rangeSq || stopMovingDelay < 10)
+			entityHost.getNavigator().tryMoveToEntityLiving(attackTarget, entityMoveSpeed);
+		else
+			entityHost.getNavigator().clearPathEntity();
 
 		float f;
-		this.entityHost.getLookHelper().setLookPositionWithEntity(this.attackTarget, 30.0F, 30.0F);
+		entityHost.getLookHelper().setLookPositionWithEntity(attackTarget, 30.0F, 30.0F);
 
-		if (--this.rangedAttackTime <= 0) {
-			if (d0 > this.rangeSq || !flag) {
+		if (--rangedAttackTime <= 0) {
+			if (d0 > rangeSq || !flag)
 				return;
-			}
 
-			f = MathHelper.sqrt_double(d0) / this.range;
+			f = MathHelper.sqrt_double(d0) / range;
 			float f1 = f;
 
-			if (f < 0.05F) {
+			if (f < 0.05F)
 				f1 = 0.05F;
-			}
 
-			if (f1 > 1.1F) {
+			if (f1 > 1.1F)
 				f1 = 1.1F;
-			}
 
-			this.rangedAttackTime = MathHelper
-					.floor_float(f * (this.maxRangedAttackTime - this.minRangedAttackTime) + this.minRangedAttackTime);
-			if (this.reflexDelay)
-				this.rangedAttackEntityHost.attackEntityWithRangedAttack(this.attackTarget, f1);
+			rangedAttackTime = MathHelper
+					.floor_float(f * (maxRangedAttackTime - minRangedAttackTime) + minRangedAttackTime);
+			if (reflexDelay)
+				rangedAttackEntityHost.attackEntityWithRangedAttack(attackTarget, f1);
 			else {
-				this.reflexDelay = true;
-				this.rangedAttackTime /= 2;
+				reflexDelay = true;
+				rangedAttackTime /= 2;
 			}
 
 		}

@@ -63,10 +63,9 @@ public class IaSBlockHelper {
 	}
 
 	public static boolean isOneOf(World wld, Block bl, Block... bls) {
-		for (final Block blcmp : bls) {
+		for (final Block blcmp : bls)
 			if (blcmp == bl)
 				return true;
-		}
 		return false;
 	}
 
@@ -81,7 +80,7 @@ public class IaSBlockHelper {
 
 	public static void makeSpawner(World w, int x, int y, int z, String entityName) {
 		w.setBlock(x, y, z, Blocks.mob_spawner);
-		TileEntityMobSpawner tes = (TileEntityMobSpawner) w.getTileEntity(x, y, z);
+		final TileEntityMobSpawner tes = (TileEntityMobSpawner) w.getTileEntity(x, y, z);
 		tes.func_145881_a().setEntityName(entityName);
 	}
 }

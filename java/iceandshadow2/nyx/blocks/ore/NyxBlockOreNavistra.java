@@ -17,16 +17,21 @@ public class NyxBlockOreNavistra extends NyxBlockOre implements IIaSAspect {
 	public NyxBlockOreNavistra(String texName) {
 		super(texName);
 		this.setHarvestLevel("pickaxe", 3);
-		setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0)*2);
+		setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0) * 2);
 		setResistance(120.0F);
 		GameRegistry.addSmelting(this, new ItemStack(NyxItems.navistraShard, 2), 2);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NAVISTRA;
 	}
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		is.add(new ItemStack(NyxItems.navistraShard, world.rand.nextInt(1 + fortune) >= 2 ? 2 : 1));
-		if(world.rand.nextInt(3) == 0)
+		if (world.rand.nextInt(3) == 0)
 			is.add(new ItemStack(NyxItems.navistraShard, 1));
 		return is;
 	}
@@ -34,10 +39,5 @@ public class NyxBlockOreNavistra extends NyxBlockOre implements IIaSAspect {
 	@Override
 	public int getExpDrop(IBlockAccess world, int metadata, int fortune) {
 		return 5;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NAVISTRA;
 	}
 }

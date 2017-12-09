@@ -16,12 +16,12 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 		super();
 		setUnlocalizedName(mod.prefix + texName);
 		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		this.MODULE = mod;
+		MODULE = mod;
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class IaSItemShears extends ItemShears implements IIaSModName {
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + this.MODULE.prefix + getModName();
+		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
 	}
 
 	public final Item register() {

@@ -9,7 +9,6 @@ import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,81 +24,40 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /***
- * Parent class of all Nyxian air blocks.
- * Note that isAirBlock is NOT set. This is deliberate.
- * Also used to implement virtual ladders.
- * WARNING: Bit 8 of metadata is pinned and will frequently be set or unset. DO NOT RELY ON THIS NOT BEING THE CASE.
+ * Parent class of all Nyxian air blocks. Note that isAirBlock is NOT set. This
+ * is deliberate. Also used to implement virtual ladders. WARNING: Bit 8 of
+ * metadata is pinned and will frequently be set or unset. DO NOT RELY ON THIS
+ * NOT BEING THE CASE.
  */
 public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
-	
-	public static boolean testClimbable(IBlockAccess w, int x, int y, int z) {
-		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			if(w.getBlock(x+dir.offsetX, y, z+dir.offsetZ) instanceof IIaSBlockClimbable)
-				return true;
-		}
-		return false;
-	}
 
 	public static void makeClimbable(World w, int x, int y, int z) {
 		final Block bl = w.getBlock(x, y, z);
-		if(bl == Blocks.air)
+		if (bl == Blocks.air)
 			w.setBlock(x, y, z, NyxBlocks.virtualLadder);
 		else if (bl instanceof IaSBaseBlockAirlike)
-			((IaSBaseBlockAirlike)bl).setClimbable(w, x, y, z, true);
+			((IaSBaseBlockAirlike) bl).setClimbable(w, x, y, z, true);
 	}
-	
+
 	public static void spreadClimbable(World w, int x, int y, int z) {
-		for(int xit = -1; xit <= 1; ++xit) {
-			for(int yit = -1; yit <= 1; ++yit) {
-				for(int zit = -1; zit <= 1; ++zit) {
-					if(testClimbable(w, x+xit, y+yit, z+zit))
-						makeClimbable(w, x+xit, y+yit, z+zit);
-				}
-			}
-		}
+		for (int xit = -1; xit <= 1; ++xit)
+			for (int yit = -1; yit <= 1; ++yit)
+				for (int zit = -1; zit <= 1; ++zit)
+					if (testClimbable(w, x + xit, y + yit, z + zit))
+						makeClimbable(w, x + xit, y + yit, z + zit);
 	}
-	
+
+	public static boolean testClimbable(IBlockAccess w, int x, int y, int z) {
+		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+			if (w.getBlock(x + dir.offsetX, y, z + dir.offsetZ) instanceof IIaSBlockClimbable)
+				return true;
+		return false;
+	}
+
 	public IaSBaseBlockAirlike(EnumIaSModule mod, String texName) {
 		super(mod, texName, new MaterialTransparent(MapColor.airColor));
-		this.setBlockBounds(0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
-        this.disableStats();   
-	}
-
-	@Override
-	public void updateTick(World w, int x, int y, int z, Random r) {
-		if(w.getBlockMetadata(x, y, z)<8)
-			return;
-		boolean byClimbable = testClimbable(w, x, y, z);
-		boolean isUsed = w.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(x-1, y-1, z-1, x+2, y+2, z+2)).size() > 0;
-		if(byClimbable && isUsed)
-			w.scheduleBlockUpdateWithPriority(x, y, z, this, tickRate(w), 2);
-		else
-			this.setClimbable(w, x, y, z, false);
-	}
-	
-	@Override
-	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
-		if(w.getBlockMetadata(x, y, z) < 8)
-			return;
-		if(e instanceof EntityPlayer) {
-			spreadClimbable(w, x, y, z);
-		}
-	}
-	
-	@Override
-	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
-		if(world.getBlockMetadata(x, y, z)<8)
-			return false;
-		if(!(entity instanceof EntityPlayer) && (entity.isCollidedHorizontally || entity.isSneaking()))
-			return false;
-		return testClimbable(world, x, y, z);
-	}
-
-	//Override if the block needs to do something special upon changing climbability.
-	public void setClimbable(World w, int x, int y, int z, boolean yes) {
-		w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, x)&7 | (yes?8:0), 2);
-		if(yes)
-			w.scheduleBlockUpdateWithPriority(x, y, z, this, 3, 2);
+		setBlockBounds(0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
+		disableStats();
 	}
 
 	@Override
@@ -148,6 +106,15 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	}
 
 	@Override
+	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
+		if (world.getBlockMetadata(x, y, z) < 8)
+			return false;
+		if (!(entity instanceof EntityPlayer) && (entity.isCollidedHorizontally || entity.isSneaking()))
+			return false;
+		return testClimbable(world, x, y, z);
+	}
+
+	@Override
 	public boolean isNormalCube(IBlockAccess world, int x, int y, int z) {
 		return false;
 	}
@@ -168,8 +135,37 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	}
 
 	@Override
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
+		if (w.getBlockMetadata(x, y, z) < 8)
+			return;
+		if (e instanceof EntityPlayer)
+			spreadClimbable(w, x, y, z);
+	}
+
+	// Override if the block needs to do something special upon changing
+	// climbability.
+	public void setClimbable(World w, int x, int y, int z, boolean yes) {
+		w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, x) & 7 | (yes ? 8 : 0), 2);
+		if (yes)
+			w.scheduleBlockUpdateWithPriority(x, y, z, this, 3, 2);
+	}
+
+	@Override
 	public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_,
 			int p_149646_5_) {
 		return false;
+	}
+
+	@Override
+	public void updateTick(World w, int x, int y, int z, Random r) {
+		if (w.getBlockMetadata(x, y, z) < 8)
+			return;
+		final boolean byClimbable = testClimbable(w, x, y, z);
+		final boolean isUsed = w.getEntitiesWithinAABB(EntityPlayer.class,
+				AxisAlignedBB.getBoundingBox(x - 1, y - 1, z - 1, x + 2, y + 2, z + 2)).size() > 0;
+		if (byClimbable && isUsed)
+			w.scheduleBlockUpdateWithPriority(x, y, z, this, tickRate(w), 2);
+		else
+			setClimbable(w, x, y, z, false);
 	}
 }

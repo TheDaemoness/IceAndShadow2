@@ -20,17 +20,17 @@ public class EntityFxBloodDroplet extends EntityFX {
 	public EntityFxBloodDroplet(World par1World, double par2, double par4, double par6) {
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
 
-		this.particleRed = 0.5F;
-		this.particleGreen = 0.0F;
-		this.particleBlue = 0.0F;
+		particleRed = 0.5F;
+		particleGreen = 0.0F;
+		particleBlue = 0.0F;
 
 		setParticleTextureIndex(113);
 		setSize(0.01F, 0.01F);
-		this.particleGravity = 0.06F;
-		this.materialType = Material.water;
-		this.bobTimer = 40;
-		this.particleMaxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
-		this.motionX = this.motionY = this.motionZ = 0.0D;
+		particleGravity = 0.06F;
+		materialType = Material.water;
+		bobTimer = 40;
+		particleMaxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
+		motionX = motionY = motionZ = 0.0D;
 	}
 
 	/**
@@ -38,48 +38,45 @@ public class EntityFxBloodDroplet extends EntityFX {
 	 */
 	@Override
 	public void onUpdate() {
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
 
-		this.motionY -= this.particleGravity;
+		motionY -= particleGravity;
 
-		if (this.bobTimer-- > 0) {
-			this.motionX *= 0.02D;
-			this.motionY *= 0.02D;
-			this.motionZ *= 0.02D;
+		if (bobTimer-- > 0) {
+			motionX *= 0.02D;
+			motionY *= 0.02D;
+			motionZ *= 0.02D;
 			setParticleTextureIndex(113);
-		} else {
+		} else
 			setParticleTextureIndex(112);
-		}
 
-		moveEntity(this.motionX, this.motionY, this.motionZ);
-		this.motionX *= 0.9800000190734863D;
-		this.motionY *= 0.9800000190734863D;
-		this.motionZ *= 0.9800000190734863D;
+		moveEntity(motionX, motionY, motionZ);
+		motionX *= 0.9800000190734863D;
+		motionY *= 0.9800000190734863D;
+		motionZ *= 0.9800000190734863D;
 
-		if (this.particleMaxAge-- <= 0) {
+		if (particleMaxAge-- <= 0)
 			setDead();
-		}
 
-		if (this.isCollidedVertically && this.onGround) {
+		if (isCollidedVertically && onGround) {
 			setParticleTextureIndex(114);
-			this.motionX *= 0.699999988079071D;
-			this.motionZ *= 0.699999988079071D;
+			motionX *= 0.699999988079071D;
+			motionZ *= 0.699999988079071D;
 		}
 
-		final Material material = this.worldObj.getBlock(MathHelper.floor_double(this.posX),
-				MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)).getMaterial();
+		final Material material = worldObj.getBlock(MathHelper.floor_double(posX),
+				MathHelper.floor_double(posY), MathHelper.floor_double(posZ)).getMaterial();
 
 		if (material.isLiquid() || material.isSolid()) {
-			final double d0 = MathHelper.floor_double(this.posY) + 1
+			final double d0 = MathHelper.floor_double(posY) + 1
 					- BlockLiquid
-							.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX),
-									MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
+							.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
+									MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
 
-			if (this.posY < d0) {
+			if (posY < d0)
 				setDead();
-			}
 		}
 	}
 }

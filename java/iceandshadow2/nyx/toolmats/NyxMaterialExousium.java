@@ -1,7 +1,5 @@
 package iceandshadow2.nyx.toolmats;
 
-import java.util.Set;
-
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSAspect;
@@ -53,10 +51,9 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public float getHarvestSpeed(ItemStack is, Block target) {
-		if(target instanceof IIaSAspect) {
-			if(((IIaSAspect)target).getAspect() == EnumIaSAspect.NAVISTRA)
+		if (target instanceof IIaSAspect)
+			if (((IIaSAspect) target).getAspect() == EnumIaSAspect.NAVISTRA)
 				return 0.5F;
-		}
 		return getBaseSpeed();
 	}
 
@@ -112,12 +109,11 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 		if (target instanceof EntityLivingBase) {
 			final EntityLivingBase elb = ((EntityLivingBase) target);
 			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
-			for(int i = 1; i < 5; ++i) {
-				ItemStack eqi = elb.getEquipmentInSlot(i);
-				if(eqi != null) {
-					final int severity = (int)(
-							16*this.getToolDamage(is, user, target)+Math.cbrt(eqi.getMaxDamage()));
-					if(eqi.attemptDamageItem(severity, user.getRNG()))
+			for (int i = 1; i < 5; ++i) {
+				final ItemStack eqi = elb.getEquipmentInSlot(i);
+				if (eqi != null) {
+					final int severity = (int) (16 * getToolDamage(is, user, target) + Math.cbrt(eqi.getMaxDamage()));
+					if (eqi.attemptDamageItem(severity, user.getRNG()))
 						elb.setCurrentItemOrArmor(i, null);
 				}
 			}
@@ -143,12 +139,12 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 		if (!target.worldObj.isRemote && target instanceof EntityLivingBase) {
 			final EntityLivingBase elb = ((EntityLivingBase) target);
 			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
-			for(int i = 1; i < 5; ++i) {
-				ItemStack eqi = elb.getEquipmentInSlot(i);
-				if(eqi != null) {
-					final int severity = (int)(
-							16*this.getKnifeDamage(knife, user, target)+Math.cbrt(eqi.getMaxDamage()));
-					if(eqi.attemptDamageItem(severity, user.getRNG()))
+			for (int i = 1; i < 5; ++i) {
+				final ItemStack eqi = elb.getEquipmentInSlot(i);
+				if (eqi != null) {
+					final int severity = (int) (16 * getKnifeDamage(knife, user, target)
+							+ Math.cbrt(eqi.getMaxDamage()));
+					if (eqi.attemptDamageItem(severity, user.getRNG()))
 						elb.setCurrentItemOrArmor(i, null);
 				}
 			}

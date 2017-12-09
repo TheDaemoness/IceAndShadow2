@@ -79,7 +79,7 @@ public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName, IIa
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer,
 			int par4) {
 		final int var6 = getMaxItemUseDuration(par1ItemStack) - par4;
-		this.inuse = false;
+		inuse = false;
 
 		float var7 = var6 / (20.0F - getSpeedModifier(par1ItemStack));
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -106,8 +106,7 @@ public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName, IIa
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 				1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
-		if (!par2World.isRemote) {
+		if (!par2World.isRemote)
 			par2World.spawnEntityInWorld(var8);
-		}
 	}
 }

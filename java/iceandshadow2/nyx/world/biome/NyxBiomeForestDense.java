@@ -17,8 +17,8 @@ public class NyxBiomeForestDense extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(Blocks.snow, Blocks.snow);
 
-		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
+		spawnableMonsterList.clear();
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
 
 		setColor(0 << 16 | 96 << 8 | 96);
 	}

@@ -24,12 +24,12 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 
 	public NyxItemLens(String id, boolean altar) {
 		super(EnumIaSModule.NYX, id);
-		this.overrideAltar = altar;
+		overrideAltar = altar;
 	}
 
 	@Override
 	public IIcon getAltarTopTexture(ItemStack lens) {
-		return this.altaricon;
+		return altaricon;
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass) {
 		if (pass == 1)
-			return this.lensicon;
-		return this.itemIcon;
+			return lensicon;
+		return itemIcon;
 	}
 
 	public abstract EnumIaSLenses getLensType();
@@ -61,10 +61,10 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.lensicon = reg.registerIcon(getTexName() + "Glow");
-		if (this.overrideAltar)
-			this.altaricon = reg.registerIcon(getTexName() + "Altar");
+		itemIcon = reg.registerIcon(getTexName());
+		lensicon = reg.registerIcon(getTexName() + "Glow");
+		if (overrideAltar)
+			altaricon = reg.registerIcon(getTexName() + "Altar");
 	}
 
 	@Override

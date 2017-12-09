@@ -15,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public NyxBlockGravel(String par1) {
@@ -45,7 +44,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
 		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
-			w.scheduleBlockUpdate(x, y, z, this, this.tickRate(w));
+			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
 	}
 
 	@Override
@@ -79,14 +78,14 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public void onFallenUpon(World woild, int x, int y, int z, Entity theEntity, float height) {
 		super.onFallenUpon(woild, x, y, z, theEntity, height);
 
-		int dmg = 1 + theEntity.worldObj.difficultySetting.getDifficultyId();
+		final int dmg = 1 + theEntity.worldObj.difficultySetting.getDifficultyId();
 		NyxBlockStone.doDamage(woild, x, y, z, theEntity, dmg);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
 		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
-			w.scheduleBlockUpdate(x, y, z, this, this.tickRate(w));
+			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
 
 	}
 

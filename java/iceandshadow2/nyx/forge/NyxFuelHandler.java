@@ -8,15 +8,13 @@ import cpw.mods.fml.common.IFuelHandler;
 public class NyxFuelHandler implements IFuelHandler {
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel.getItem() == NyxItems.devora) {
+		if (fuel.getItem() == NyxItems.devora)
 			if (fuel.getItemDamage() == 1)
 				return 200;
 			else
 				return 2400;
-		}
-		if (fuel.getItem() == NyxItems.heat) {
+		if (fuel.getItem() == NyxItems.heat)
 			return 200 * (int) Math.round(Math.pow(4, fuel.getItemDamage() - 1));
-		}
 		if (fuel.getItem() instanceof ItemBlock) {
 			// Fukkit.
 		}

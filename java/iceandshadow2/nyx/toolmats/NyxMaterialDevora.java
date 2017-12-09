@@ -96,7 +96,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		final List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(user,
 				AxisAlignedBB.getBoundingBox(target.posX - 3.5F, target.posY - 4.0F, target.posZ - 3.5F,
 						target.posX + 3.5F, target.posY + 3.0F, target.posZ + 3.5F));
-		for (final Object o : ents) {
+		for (final Object o : ents)
 			if (o != target && o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) o;
 				if (o instanceof EntityPlayer && !(target instanceof EntityPlayer))
@@ -105,7 +105,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getToolDamage(is, user, target));
 			}
-		}
 		return super.onAttack(is, user, target);
 	}
 
@@ -120,7 +119,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		final List ents = knife.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
 				AxisAlignedBB.getBoundingBox(knife.posX - 2.5F, knife.posY - 3.0F, knife.posZ - 2.5F, knife.posX + 2.5F,
 						knife.posY + 2.0F, knife.posZ + 2.5F));
-		for (final Object o : ents) {
+		for (final Object o : ents)
 			if (o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) o;
 				if (o instanceof EntityPlayer && !(user instanceof EntityPlayer))
@@ -129,7 +128,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
 			}
-		}
 		knife.setDead();
 		return false;
 	}
@@ -142,7 +140,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 		final List ents = target.worldObj.getEntitiesWithinAABBExcludingEntity(knife,
 				AxisAlignedBB.getBoundingBox(target.posX - 2.5F, target.posY - 3.0F, target.posZ - 2.5F,
 						target.posX + 2.5F, target.posY + 2.0F, target.posZ + 2.5F));
-		for (final Object o : ents) {
+		for (final Object o : ents)
 			if (o != target && o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) o;
 				if (o instanceof EntityPlayer && !(target instanceof EntityPlayer))
@@ -151,7 +149,6 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 					continue;
 				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
 			}
-		}
 		knife.setDead();
 		return false;
 	}
@@ -167,7 +164,7 @@ public class NyxMaterialDevora extends IaSToolMaterial {
 			return super.onPreHarvest(is, user, w, x, y, z, bl);
 		final Block origin = w.getBlock(x, y, z);
 		final float hardness = origin.getBlockHardness(w, x, y, z);
-		Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
+		final Explosion ex = w.createExplosion(user, x + 0.5, y + 0.5, z + 0.5, 0.5F, false);
 		for (int i = 1; i < 9; i += 2) {
 			final int xit = i % 3 - 1;
 			final int zit = i / 3 - 1;

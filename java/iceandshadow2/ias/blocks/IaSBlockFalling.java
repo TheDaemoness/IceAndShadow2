@@ -20,11 +20,11 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	public static boolean canFallBelow(World par0World, int par1, int par2, int par3) {
 		final Block l = par0World.getBlock(par1, par2, par3);
 
-		if (par0World.isAirBlock(par1, par2, par3)) {
+		if (par0World.isAirBlock(par1, par2, par3))
 			return true;
-		} else if (l == Blocks.fire) {
+		else if (l == Blocks.fire)
 			return true;
-		} else {
+		else {
 			final Material material = l.getMaterial();
 			return material == Material.water ? true : material == Material.lava;
 		}
@@ -34,7 +34,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 
 	public IaSBlockFalling(EnumIaSModule mod, String id, Material par2Material) {
 		super(mod, id, par2Material);
-		this.tryFalling = false;
+		tryFalling = false;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 */
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		this.tryFalling = true;
+		tryFalling = true;
 		par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World));
 	}
 
@@ -59,7 +59,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	 * neighbor blockID
 	 */
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-		this.tryFalling = true;
+		tryFalling = true;
 		par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World));
 	}
 
@@ -95,13 +95,11 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 
-				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0) {
+				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0)
 					--par3;
-				}
 
-				if (par3 > 0) {
+				if (par3 > 0)
 					par1World.setBlock(par2, par3, par4, this);
-				}
 			}
 		}
 	}
@@ -113,7 +111,7 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (!par1World.isRemote) {
 			tryToFall(par1World, par2, par3, par4);
-			this.tryFalling = false;
+			tryFalling = false;
 		}
 	}
 }

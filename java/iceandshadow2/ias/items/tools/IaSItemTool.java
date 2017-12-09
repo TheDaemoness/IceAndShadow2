@@ -43,7 +43,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	public IaSItemTool(EnumIaSToolClass cl) {
 		super(cl.getBaseDamage(), ToolMaterial.EMERALD, new HashSet<Material>());
 		setUnlocalizedName("iasTool");
-		this.classe = cl;
+		classe = cl;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 		if (!s.contains(bl.getHarvestTool(0)))
 			return false;
 		final int harvestEffectiveness = m.getHarvestEffectiveness(bl, is);
-		if(harvestEffectiveness > 0)
+		if (harvestEffectiveness > 0)
 			return true;
 		return harvestEffectiveness == 0 && bl.getHarvestLevel(0) <= m.getHarvestLevel(is, bl.getHarvestTool(0));
 	}
@@ -112,14 +112,14 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 
 	@Override
 	public EnumIaSToolClass getIaSToolClass() {
-		return this.classe;
+		return classe;
 	}
 
 	@Override
 	public IIcon getIcon(ItemStack is, int renderPass) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (renderPass == 1 && !m.glows(getIaSToolClass()))
-			return this.invisible;
+			return invisible;
 		return m.getIcon(is);
 	}
 
@@ -127,7 +127,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (renderPass == 1 && !m.glows(getIaSToolClass()))
-			return this.invisible;
+			return invisible;
 		return m.getIcon(is);
 	}
 
@@ -243,7 +243,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 		// See IaSRegistry.
 	}
 

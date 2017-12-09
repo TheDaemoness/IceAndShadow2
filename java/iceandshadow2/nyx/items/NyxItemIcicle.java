@@ -18,6 +18,11 @@ public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmute
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
+	}
+
+	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (!target.isItemDamaged())
 			return 0;
@@ -45,10 +50,5 @@ public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmute
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity pos) {
 		return false;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
 	}
 }

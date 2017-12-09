@@ -15,15 +15,15 @@ import net.minecraftforge.fluids.Fluid;
 public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
-			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing, transmutationAltar,
-			examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing, air, transmutationAltarBroken,
-			sanctifiedObsidian;
+			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
+			transmutationAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
+			air, transmutationAltarBroken, sanctifiedObsidian;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
 
-	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace,
-	stoneMemory, virtualLadder;
+	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace, stoneMemory,
+			virtualLadder;
 
 	public static Fluid fluidExousia;
 
@@ -68,7 +68,8 @@ public class NyxBlocks {
 		NyxBlocks.sanctifiedObsidian = new NyxBlockObsidianSanctified("SanctifiedObsidian").register();
 
 		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
-		NyxBlocks.transmutationAltarBroken = new NyxBlockAltarTransmutationBroken("TransmutationAltarBroken").register();
+		NyxBlocks.transmutationAltarBroken = new NyxBlockAltarTransmutationBroken("TransmutationAltarBroken")
+				.register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 
 		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();

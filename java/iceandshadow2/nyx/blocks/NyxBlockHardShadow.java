@@ -34,7 +34,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	public NyxBlockHardShadow(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.portal);
 		setBlockUnbreakable();
-		this.slipperiness = 0.99F;
+		slipperiness = 0.99F;
 		setTickRandomly(true);
 	}
 
@@ -79,7 +79,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return meta > 0 ? this.openIcon : this.blockIcon;
+		return meta > 0 ? openIcon : blockIcon;
 	}
 
 	@Override
@@ -110,13 +110,12 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer ep, int side, float p_149727_7_,
 			float p_149727_8_, float p_149727_9_) {
-		if (ep.getCurrentEquippedItem() != null) {
+		if (ep.getCurrentEquippedItem() != null)
 			if (ep.getCurrentEquippedItem().getItem() instanceof NyxItemExousium) {
 				w.playSound(x + 0.5, y + 0.5, z + 0.5, "random.fizz", 0.2F, 0.95F + w.rand.nextFloat() / 10.0F, true);
 				w.setBlockToAir(x, y, z);
 				return true;
 			}
-		}
 		return false;
 	}
 
@@ -128,34 +127,32 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
 		final boolean iselb = e instanceof EntityLivingBase;
-		if(w.getBlockMetadata(x, y, z) != 0) {
+		if (w.getBlockMetadata(x, y, z) != 0) {
 			if (iselb)
-				((EntityLivingBase)e).addPotionEffect(new PotionEffect(Potion.blindness.id,22,0));
+				((EntityLivingBase) e).addPotionEffect(new PotionEffect(Potion.blindness.id, 22, 0));
 			e.motionX *= 0.1;
 			e.motionY *= 0.3;
 			e.motionZ *= 0.1;
 		}
-		if(iselb && w.rand.nextBoolean())
+		if (iselb && w.rand.nextBoolean())
 			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + w.rand.nextDouble(),
-				z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
+					z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
 	}
 
 	@Override
 	public void onFallenUpon(World w, int x, int y, int z, Entity e, float vel) {
-		if (w.isRemote) {
+		if (w.isRemote)
 			if (e instanceof EntityLivingBase)
-				for (int i = 0; i < 2 + vel * 4; ++i) {
-					IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + 1 - w.rand.nextFloat()*1.5, z + w.rand.nextDouble(),
-							0.0, 0.0, 0.0, false, true);
-				}
-		}
+				for (int i = 0; i < 2 + vel * 4; ++i)
+					IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(),
+							y + 1 - w.rand.nextFloat() * 1.5, z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
 		int power = w.getBlockPowerInput(x, y, z);
-		for (int xit = -1; xit <= 1; ++xit) {
-			for (int zit = -1; zit <= 1; ++zit) {
+		for (int xit = -1; xit <= 1; ++xit)
+			for (int zit = -1; zit <= 1; ++zit)
 				for (int yit = -1; yit <= 1; ++yit) {
 					if (((xit == 0 ? 1 : 0) + (yit == 0 ? 1 : 0) + (zit == 0 ? 1 : 0)) != 2)
 						continue;
@@ -169,8 +166,6 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 					power = Math.max(power, bl.isProvidingWeakPower(w, x + xit, y + yit, z + zit,
 							w.getBlockMetadata(x + xit, y + yit, z + zit)));
 				}
-			}
-		}
 		final int oldmeta = w.getBlockMetadata(x, y, z);
 		if (power != oldmeta)
 			w.setBlockMetadataWithNotify(x, y, z, power, 0x3);
@@ -189,7 +184,7 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		super.registerBlockIcons(reg);
-		this.openIcon = reg.registerIcon(IceAndShadow2.MODID + ':' + EnumIaSModule.IAS.prefix + "Invisible");
+		openIcon = reg.registerIcon(IceAndShadow2.MODID + ':' + EnumIaSModule.IAS.prefix + "Invisible");
 	}
 
 	@SideOnly(Side.CLIENT)

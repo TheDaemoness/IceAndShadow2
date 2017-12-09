@@ -14,18 +14,19 @@ public class NyxItemPlumPoison extends IaSItemFood {
 
 	public NyxItemPlumPoison(String texName) {
 		super(EnumIaSModule.NYX, texName, 4, 14.4F, false);
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
 	}
 
 	@Override
 	public ItemStack onEaten(ItemStack p_77654_1_, World p_77654_2_, EntityPlayer pwai) {
 		pwai.removePotionEffect(Potion.poison.id);
-		pwai.addPotionEffect(new PotionEffect(Potion.poison.id, 69, 1)); // Lol, 69.
+		pwai.addPotionEffect(new PotionEffect(Potion.poison.id, 69, 1)); // Lol,
+																			// 69.
 		return super.onEaten(p_77654_1_, p_77654_2_, pwai);
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.POISONWOOD;
 	}
 }

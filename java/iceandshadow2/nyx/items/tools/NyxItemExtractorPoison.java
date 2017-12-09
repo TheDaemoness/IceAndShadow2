@@ -30,10 +30,10 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 0)
-			return this.itemIcon;
+			return itemIcon;
 		if (dmg >= 13)
-			return this.fillIcons[6];
-		return this.fillIcons[(dmg - 1) / 2];
+			return fillIcons[6];
+		return fillIcons[(dmg - 1) / 2];
 	}
 
 	@Override
@@ -72,10 +72,10 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(getTexName() + "0");
-		this.fillIcons = new IIcon[7];
+		itemIcon = r.registerIcon(getTexName() + "0");
+		fillIcons = new IIcon[7];
 		for (int i = 1; i <= 7; ++i)
-			this.fillIcons[i - 1] = r.registerIcon(getTexName() + i);
+			fillIcons[i - 1] = r.registerIcon(getTexName() + i);
 	}
 
 	@Override

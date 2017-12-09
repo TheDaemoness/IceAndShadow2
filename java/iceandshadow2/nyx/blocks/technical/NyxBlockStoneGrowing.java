@@ -20,8 +20,8 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 
 	public NyxBlockStoneGrowing(String id) {
 		super(id);
-		this.setTickRandomly(true);
-		this.setLuminescence(0.1F);
+		setTickRandomly(true);
+		setLuminescence(0.1F);
 	}
 
 	@Override
@@ -36,10 +36,10 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		if (!w.isRemote) {
+		if (!w.isRemote)
 			if (w.getBlockMetadata(x, y, z) > 0) {
 				boolean finished = true;
-				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+				for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 					// TODO: Pushing mechanics.
 					final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
 					final Block bl = w.getBlock(i, j, k);
@@ -56,7 +56,6 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					w.setBlock(x, y, z, NyxBlocks.stone);
 			} else
 				w.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		}
 		super.updateTick(w, x, y, z, r);
 	}
 

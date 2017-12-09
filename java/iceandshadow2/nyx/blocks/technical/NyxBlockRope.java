@@ -33,13 +33,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
-		if(e instanceof EntityPlayer) {
-			IaSBaseBlockAirlike.spreadClimbable(w, x, y, z);
-		}
-	}
-
-	@Override
 	public boolean canDropFromExplosion(Explosion p_149659_1_) {
 		return false;
 	}
@@ -115,6 +108,12 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
+	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
+		if (e instanceof EntityPlayer)
+			IaSBaseBlockAirlike.spreadClimbable(w, x, y, z);
+	}
+
+	@Override
 	public abstract void onNeighborBlockChange(World w, int x, int y, int z, Block bl);
 
 	@Override
@@ -134,6 +133,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(getTexName());
+		blockIcon = reg.registerIcon(getTexName());
 	}
 }

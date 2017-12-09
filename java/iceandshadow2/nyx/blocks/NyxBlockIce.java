@@ -28,12 +28,12 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 		setResistance(5.0F);
 		setTickRandomly(true);
 		setStepSound(Block.soundTypeGlass);
-		this.slipperiness = 0.99F;
+		slipperiness = 0.99F;
 	}
-	
+
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return true;
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 
 	@Override
@@ -55,6 +55,11 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 		return false;
 	}
 
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return true;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int s) {
@@ -65,21 +70,13 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		for (int xit = -1; xit <= 1; ++xit) {
+		for (int xit = -1; xit <= 1; ++xit)
 			for (int zit = -1; zit <= 1; ++zit) {
 				if (xit != 0 && zit != 0)
 					continue;
-				if (w.isAirBlock(x + xit, y, z + zit) && r.nextInt(3) != 0) {
-					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater) {
+				if (w.isAirBlock(x + xit, y, z + zit) && r.nextInt(3) != 0)
+					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater)
 						w.setBlock(x + xit, y, z + zit, this);
-					}
-				}
 			}
-		}
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
 	}
 }

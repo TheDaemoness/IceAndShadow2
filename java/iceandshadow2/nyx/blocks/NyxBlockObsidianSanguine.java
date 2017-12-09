@@ -4,7 +4,6 @@ import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.render.fx.IaSFxManager;
 import iceandshadow2.util.IaSBlockHelper;
@@ -42,10 +41,10 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 	public int damageDropped(int par1) {
 		return 0;
 	}
-	
+
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return side != ForgeDirection.UP;
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.BLOOD;
 	}
 
 	@Override
@@ -78,6 +77,11 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 	}
 
 	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side != ForgeDirection.UP;
+	}
+
+	@Override
 	public void onEntityCollidedWithBlock(World par1World, int x, int y, int z, Entity par5Entity) {
 		if (par5Entity instanceof EntityLivingBase && !(par5Entity instanceof EntityMob)) {
 			final EntityLivingBase elb = (EntityLivingBase) par5Entity;
@@ -92,17 +96,15 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 			if (elb instanceof EntityPlayer) {
 				if (par1World.rand.nextBoolean())
 					IaSPlayerHelper.regen((EntityPlayer) elb, 1);
-				if (elb.isSneaking()) {
+				if (elb.isSneaking())
 					if (elb.isPotionActive(Potion.confusion))
 						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));
 					else {
 						final EntityPlayer playuh = (EntityPlayer) elb;
-						for (int xit = -1; xit <= 1; ++xit) {
-							for (int zit = -1; zit <= 1; ++zit) {
+						for (int xit = -1; xit <= 1; ++xit)
+							for (int zit = -1; zit <= 1; ++zit)
 								if (par1World.getBlock(x + xit, y, z + zit) != this)
 									return;
-							}
-						}
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 1, z))
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
@@ -112,10 +114,8 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 							;
 						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
 					}
-				}
-			} else {
+			} else
 				elb.heal(0.5F);
-			}
 		}
 	}
 
@@ -138,11 +138,6 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 		final double var7 = par2 + 0.5D + 0.25D * var19;
 		var13 = par5Random.nextFloat() * 1.0F * var19;
 		IaSFxManager.spawnParticle(par1World, "vanilla_portal", var7, var9, var11, var13, var15, var17, false, true);
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.BLOOD;
 	}
 
 }

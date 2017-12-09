@@ -58,6 +58,11 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 		return -20.0F;
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NYX;
+	}
+
 	/**
 	 * Gets the amount of gravity to apply to the thrown entity with each tick.
 	 */
@@ -88,7 +93,7 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 		final float basepower = strong ? 6.0F : 4.0F;
 
 		if (par1MovingObjectPosition.typeOfHit == MovingObjectType.ENTITY) {
-			if (this.worldObj.isRemote)
+			if (worldObj.isRemote)
 				return;
 			if (par1MovingObjectPosition.entityHit instanceof EntityNyxSkeleton
 					&& getThrower() instanceof EntityNyxNecromancer) {
@@ -100,9 +105,9 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 			}
 		}
 
-		if (!this.worldObj.isRemote) {
-			final AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
-			final List list1 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+		if (!worldObj.isRemote) {
+			final AxisAlignedBB axisalignedbb = boundingBox.expand(4.0D, 2.0D, 4.0D);
+			final List list1 = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 
 			if (list1 != null && !list1.isEmpty()) {
 				final Iterator iterator = list1.iterator();
@@ -141,11 +146,11 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 
 		final String id = strong ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		for (int i = 0; i < 48; ++i) {
-			IaSFxManager.spawnParticle(this.worldObj, "blackMagic", this.posX - 3.5F + 7.0F * this.rand.nextDouble(),
-					this.posY - 1.5F + 3.0F * this.rand.nextDouble(), this.posZ - 3.5F + 7.0F * this.rand.nextDouble(),
+			IaSFxManager.spawnParticle(worldObj, "blackMagic", posX - 3.5F + 7.0F * rand.nextDouble(),
+					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(),
 					0.0, -0.01, 0.0, false, true);
-			IaSFxManager.spawnParticle(this.worldObj, id, this.posX - 3.5F + 7.0F * this.rand.nextDouble(),
-					this.posY - 1.5F + 3.0F * this.rand.nextDouble(), this.posZ - 3.5F + 7.0F * this.rand.nextDouble(),
+			IaSFxManager.spawnParticle(worldObj, id, posX - 3.5F + 7.0F * rand.nextDouble(),
+					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(),
 					0.0, -0.01, 0.0, false, false);
 		}
 
@@ -156,18 +161,13 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 	public void onUpdate() {
 		super.onUpdate();
 		final String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX, this.posY, this.posZ, true);
-		IaSFxManager.spawnParticle(this.worldObj, id, this.posX + this.motionX, this.posY + this.motionY,
-				this.posZ + this.motionZ, true);
+		IaSFxManager.spawnParticle(worldObj, id, posX, posY, posZ, true);
+		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY,
+				posZ + motionZ, true);
 	}
 
 	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {
 		getDataWatcher().updateObject(16, (byte) ((strong ? 0x1 : 0x0) | (harmUndead ? 0x2 : 0x0)));
 		return this;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NYX;
 	}
 }

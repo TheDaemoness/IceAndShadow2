@@ -35,7 +35,7 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 
 	public IaSBaseBlockLeaves(EnumIaSModule mod, String texName) {
 		super(Material.leaves, false);
-		this.MODULE = mod;
+		MODULE = mod;
 		setBlockName(mod.prefix + texName);
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		setTickRandomly(true);
@@ -50,9 +50,8 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 
 		final int i2 = world.getBlockMetadata(x, y, z);
 
-		if ((i2 & 8) == 0) {
+		if ((i2 & 8) == 0)
 			world.setBlockMetadataWithNotify(x, y, z, i2 | 8, 4);
-		}
 		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 4);
 	}
 
@@ -61,18 +60,14 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 		final byte b0 = 1;
 		final int i1 = b0 + 1;
 
-		if (w.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
-			for (int j1 = -b0; j1 <= b0; ++j1) {
-				for (int k1 = -b0; k1 <= b0; ++k1) {
+		if (w.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1))
+			for (int j1 = -b0; j1 <= b0; ++j1)
+				for (int k1 = -b0; k1 <= b0; ++k1)
 					for (int l1 = -b0; l1 <= b0; ++l1) {
 						final Block block = w.getBlock(x + j1, y + k1, z + l1);
-						if (block.isLeaves(w, x + j1, y + k1, z + l1)) {
+						if (block.isLeaves(w, x + j1, y + k1, z + l1))
 							block.beginLeavesDecay(w, x + j1, y + k1, z + l1);
-						}
 					}
-				}
-			}
-		}
 	}
 
 	@Override
@@ -92,7 +87,7 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -100,9 +95,9 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 	public IIcon getIcon(int par1, int par2) {
 		Minecraft.getMinecraft();
 		if (Minecraft.isFancyGraphicsEnabled())
-			return this.iconFancy;
+			return iconFancy;
 		else
-			return this.iconFast;
+			return iconFast;
 	}
 
 	@Override
@@ -158,9 +153,9 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconFancy = reg.registerIcon(getTexName() + "Fancy");
-		this.iconFast = reg.registerIcon(getTexName() + "Fast");
-		this.blockIcon = this.iconFast;
+		iconFancy = reg.registerIcon(getTexName() + "Fancy");
+		iconFast = reg.registerIcon(getTexName() + "Fast");
+		blockIcon = iconFast;
 	}
 
 	private void removeLeaves(World p_150126_1_, int p_150126_2_, int p_150126_3_, int p_150126_4_) {
@@ -184,9 +179,8 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 				final int j1 = b1 * b1;
 				final int k1 = b1 / 2;
 
-				if (this.field_150128_a == null) {
-					this.field_150128_a = new int[b1 * b1 * b1];
-				}
+				if (field_150128_a == null)
+					field_150128_a = new int[b1 * b1 * b1];
 
 				int l1;
 
@@ -194,66 +188,51 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 					int i2;
 					int j2;
 
-					for (l1 = -b0; l1 <= b0; ++l1) {
-						for (i2 = -b0; i2 <= b0; ++i2) {
+					for (l1 = -b0; l1 <= b0; ++l1)
+						for (i2 = -b0; i2 <= b0; ++i2)
 							for (j2 = -b0; j2 <= b0; ++j2) {
 								final Block block = w.getBlock(x + l1, y + i2, z + j2);
 
 								if (!block.canSustainLeaves(w, x + l1, y + i2, z + j2)) {
-									if (block.isLeaves(w, x + l1, y + i2, z + j2)) {
-										this.field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
-									} else {
-										this.field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
-									}
-								} else {
-									this.field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
-								}
+									if (block.isLeaves(w, x + l1, y + i2, z + j2))
+										field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
+									else
+										field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
+								} else
+									field_150128_a[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
 							}
-						}
-					}
 
-					for (l1 = 1; l1 <= 4; ++l1) {
-						for (i2 = -b0; i2 <= b0; ++i2) {
-							for (j2 = -b0; j2 <= b0; ++j2) {
-								for (int k2 = -b0; k2 <= b0; ++k2) {
-									if (this.field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
-										if (this.field_150128_a[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
-											this.field_150128_a[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-										}
+					for (l1 = 1; l1 <= 4; ++l1)
+						for (i2 = -b0; i2 <= b0; ++i2)
+							for (j2 = -b0; j2 <= b0; ++j2)
+								for (int k2 = -b0; k2 <= b0; ++k2)
+									if (field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
+										if (field_150128_a[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
+											field_150128_a[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
 
-										if (this.field_150128_a[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2) {
-											this.field_150128_a[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-										}
+										if (field_150128_a[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
+											field_150128_a[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
 
-										if (this.field_150128_a[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2) {
-											this.field_150128_a[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
-										}
+										if (field_150128_a[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2)
+											field_150128_a[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
 
-										if (this.field_150128_a[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2) {
-											this.field_150128_a[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
-										}
+										if (field_150128_a[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2)
+											field_150128_a[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
 
-										if (this.field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] == -2) {
-											this.field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] = l1;
-										}
+										if (field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] == -2)
+											field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] = l1;
 
-										if (this.field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2) {
-											this.field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
-										}
+										if (field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2)
+											field_150128_a[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
 									}
-								}
-							}
-						}
-					}
 				}
 
-				l1 = this.field_150128_a[k1 * j1 + k1 * b1 + k1];
+				l1 = field_150128_a[k1 * j1 + k1 * b1 + k1];
 
-				if (l1 >= 0) {
+				if (l1 >= 0)
 					w.setBlockMetadataWithNotify(x, y, z, l & -9, 4);
-				} else {
+				else
 					removeLeaves(w, x, y, z);
-				}
 			}
 		}
 	}

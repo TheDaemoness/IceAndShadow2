@@ -35,9 +35,9 @@ public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing
 
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
-		if (meta < this.icons.length)
-			return this.icons[meta];
-		return this.icons[1];
+		if (meta < icons.length)
+			return icons[meta];
+		return icons[1];
 	}
 
 	@Override
@@ -76,9 +76,9 @@ public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.icons = new IIcon[4];
-		for (int i = 0; i < this.icons.length; ++i)
-			this.icons[i] = reg.registerIcon(getTexName() + i);
+		icons = new IIcon[4];
+		for (int i = 0; i < icons.length; ++i)
+			icons[i] = reg.registerIcon(getTexName() + i);
 	}
 
 	@Override

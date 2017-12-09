@@ -36,20 +36,24 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		setXpAltarMinimumValue(2);
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return this.matureIcon;
-		return this.itemIcon;
+			return matureIcon;
+		return itemIcon;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for (int meta = 0; meta <= 1; ++meta) {
+		for (int meta = 0; meta <= 1; ++meta)
 			par3List.add(new ItemStack(par1, 1, meta));
-		}
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		final MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
 				true);
 
-		if (movingobjectposition != null) {
+		if (movingobjectposition != null)
 			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK && par1ItemStack.getItemDamage() == 1) {
 				int i = movingobjectposition.blockX;
 				final int j = movingobjectposition.blockY;
@@ -121,7 +125,6 @@ public class NyxItemSilkBerries extends IaSItemFood {
 					}
 				}
 			}
-		}
 		if (par3EntityPlayer.canEat(true))
 			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 
@@ -131,12 +134,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.matureIcon = reg.registerIcon(getTexName() + "Mature");
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.INFESTATION;
+		itemIcon = reg.registerIcon(getTexName());
+		matureIcon = reg.registerIcon(getTexName() + "Mature");
 	}
 }

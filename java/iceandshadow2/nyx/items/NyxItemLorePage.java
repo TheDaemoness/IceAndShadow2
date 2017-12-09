@@ -18,15 +18,15 @@ public class NyxItemLorePage extends IaSBaseItemMulti {
 
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		if (dmg >= this.pages.length)
-			return this.pages[0];
-		return this.pages[dmg];
+		if (dmg >= pages.length)
+			return pages[0];
+		return pages[dmg];
 	}
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.pages = new IIcon[getSubtypeCount()];
-		for (int i = 0; i < this.pages.length; ++i)
-			this.pages[i] = reg.registerIcon(getTexName() + i);
+		pages = new IIcon[getSubtypeCount()];
+		for (int i = 0; i < pages.length; ++i)
+			pages[i] = reg.registerIcon(getTexName() + i);
 	}
 }

@@ -35,8 +35,8 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return this.smallIcon;
-		return this.itemIcon;
+			return smallIcon;
+		return itemIcon;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 		final MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer,
 				true);
 
-		if (movingobjectposition != null) {
+		if (movingobjectposition != null)
 			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK && par1ItemStack.getItemDamage() == 0) {
 				int i = movingobjectposition.blockX;
 				int j = movingobjectposition.blockY;
@@ -75,15 +75,14 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 						--par1ItemStack.stackSize;
 				}
 			}
-		}
 		return par1ItemStack;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.smallIcon = reg.registerIcon(getTexName() + "Small");
+		itemIcon = reg.registerIcon(getTexName());
+		smallIcon = reg.registerIcon(getTexName() + "Small");
 	}
 
 	@Override

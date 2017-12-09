@@ -9,7 +9,6 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,12 +18,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -35,7 +30,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 
 	public static void doDamage(World theWorld, int x, int y, int z, Entity theEntity, int dmg) {
 		if (!(theEntity instanceof EntityMob)) {
-			if (theEntity instanceof EntityLivingBase) {
+			if (theEntity instanceof EntityLivingBase)
 				if (((EntityLivingBase) theEntity).getEquipmentInSlot(1) != null) {
 					final Item it = ((EntityLivingBase) theEntity).getEquipmentInSlot(1).getItem();
 					if (it instanceof ItemArmor) {
@@ -46,7 +41,6 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 					}
 					return;
 				}
-			}
 			theEntity.attackEntityFrom(IaSDamageSources.dmgStone, dmg);
 		}
 	}
@@ -58,7 +52,14 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		this.setHarvestLevel("pickaxe", 1);
 		GameRegistry.addSmelting(this, new ItemStack(Blocks.cobblestone), 0);
 	}
-	
+
+	// Apparently this stops updates during chunk generation, which should speed
+	// things up.
+	@Override
+	public boolean func_149698_L() {
+		return false;
+	}
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.LAND;
@@ -82,11 +83,10 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World w, int x, int y, int z,
-			Explosion ex) {
+	public void onBlockDestroyedByExplosion(World w, int x, int y, int z, Explosion ex) {
 		super.onBlockDestroyedByExplosion(w, x, y, z, ex);
-		w.setBlock(x, y, z,
-				IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stoneMemory) ? NyxBlocks.gravel : NyxBlocks.stoneMemory);
+		w.setBlock(x, y, z, IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stoneMemory) ? NyxBlocks.gravel
+				: NyxBlocks.stoneMemory);
 	}
 
 	@Override
@@ -115,12 +115,5 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	@Override
 	public Block onThaw(World w, int x, int y, int z) {
 		return Blocks.stone;
-	}
-	
-	// Apparently this stops updates during chunk generation, which should speed
-	// things up.
-	@Override
-	public boolean func_149698_L() {
-		return false;
 	}
 }

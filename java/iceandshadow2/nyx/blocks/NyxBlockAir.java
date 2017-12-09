@@ -1,17 +1,14 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 import iceandshadow2.util.IaSPlayerHelper;
 import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -23,7 +20,7 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 
 	public NyxBlockAir(String id) {
 		super(EnumIaSModule.NYX, id);
-		this.setLightOpacity(1);
+		setLightOpacity(1);
 	}
 
 	@Override
@@ -39,7 +36,7 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if (dir == ForgeDirection.DOWN && y <= ATMOS_HEIGHT)
 				continue;
 			if (w.isAirBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ))

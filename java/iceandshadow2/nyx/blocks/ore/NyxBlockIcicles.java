@@ -1,18 +1,11 @@
 package iceandshadow2.nyx.blocks.ore;
 
-import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.IaSDamageSources;
-import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSBlockHelper;
-
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -24,7 +17,12 @@ public class NyxBlockIcicles extends NyxBlockCrystal {
 		setLuminescence(0.1F);
 		setLightColor(0.8F, 0.8F, 1.0F);
 		setResistance(1.5F);
-		this.slipperiness = 2.0F;
+		slipperiness = 2.0F;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 
 	@Override
@@ -51,7 +49,7 @@ public class NyxBlockIcicles extends NyxBlockCrystal {
 
 	@Override
 	public void onEntityWalking(World w, int x, int y, int z, Entity e) {
-		this.onFallenUpon(w, x, y, z, e, 0);
+		onFallenUpon(w, x, y, z, e, 0);
 	}
 
 	@Override
@@ -59,10 +57,5 @@ public class NyxBlockIcicles extends NyxBlockCrystal {
 		e.attackEntityFrom(IaSDamageSources.dmgStalagmite,
 				3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
 		super.onFallenUpon(world, x, y, z, e, 3 + 2 * world.difficultySetting.getDifficultyId() + distance * 2);
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
 	}
 }

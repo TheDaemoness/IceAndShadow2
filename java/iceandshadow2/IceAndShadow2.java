@@ -34,7 +34,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies = "required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
 	public static final String MODID = "IceAndShadow2";
-	public static final String VERSION = "Pre-Alpha 15";
+	public static final String VERSION = "Pre-Alpha 16";
 	public static final int CONFIG_MAJ = 2;
 	public static final int CONFIG_MIN = 1;
 

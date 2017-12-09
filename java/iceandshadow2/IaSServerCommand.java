@@ -20,9 +20,9 @@ public class IaSServerCommand implements ICommand {
 	private final List aliases;
 
 	public IaSServerCommand() {
-		this.aliases = new ArrayList();
-		this.aliases.add("ias");
-		this.aliases.add("iceandshadow");
+		aliases = new ArrayList();
+		aliases.add("ias");
+		aliases.add("iceandshadow");
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class IaSServerCommand implements ICommand {
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender snd) {
-		if (snd instanceof EntityPlayerMP) {
+		if (snd instanceof EntityPlayerMP)
 			return snd.canCommandSenderUseCommand(3, "ban");
-		} else if (snd instanceof MinecraftServer)
+		else if (snd instanceof MinecraftServer)
 			return true;
 		return false;
 	}
@@ -58,7 +58,7 @@ public class IaSServerCommand implements ICommand {
 
 	@Override
 	public List getCommandAliases() {
-		return this.aliases;
+		return aliases;
 	}
 
 	@Override
@@ -117,12 +117,10 @@ public class IaSServerCommand implements ICommand {
 				}
 				plai.mcServer.getConfigurationManager().transferPlayerToDimension(plai, dim,
 						new NyxTeleporter(plai.mcServer.worldServerForDimension(dim)));
-			} else {
+			} else
 				IaSServerCommand.send(snder, "Insufficient arguments, expected 'goto <overworld|nyx>'");
-			}
-		} else {
+		} else
 			IaSServerCommand.send(snder, "Unknown operation.");
-		}
 	}
 
 }

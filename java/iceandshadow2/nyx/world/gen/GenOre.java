@@ -30,22 +30,17 @@ public class GenOre {
 		int ybest = 0, ytarget = 64;
 		boolean foundtop = false;
 
-		for (int y = 255; y >= ytarget; --y) {
-			if (par1World.getBlock(x, y, z) == NyxBlocks.stone) {
+		for (int y = 255; y >= ytarget; --y)
+			if (par1World.getBlock(x, y, z) == NyxBlocks.stone)
 				if (!foundtop) {
 					foundtop = true;
 					ybest = y;
 					ytarget = par1World.rand.nextInt(y - 63) + 64;
-				} else {
-					// Check for bordering air.
-					if (par1World.isAirBlock(x + 1, y, z) || par1World.isAirBlock(x - 1, y, z)
-							|| par1World.isAirBlock(x, y, z + 1) || par1World.isAirBlock(x, y, z - 1)
-							|| par1World.isAirBlock(x, y + 1, z) || par1World.isAirBlock(x, y - 1, z)) {
-						ybest = y;
-					}
-				}
-			}
-		}
+				} else // Check for bordering air.
+				if (par1World.isAirBlock(x + 1, y, z) || par1World.isAirBlock(x - 1, y, z)
+						|| par1World.isAirBlock(x, y, z + 1) || par1World.isAirBlock(x, y, z - 1)
+						|| par1World.isAirBlock(x, y + 1, z) || par1World.isAirBlock(x, y - 1, z))
+					ybest = y;
 		if (foundtop)
 			par1World.setBlock(x, ybest, z, bloque);
 
@@ -56,11 +51,9 @@ public class GenOre {
 
 			final int x = xchunk + par1World.rand.nextInt(16);
 			final int z = zchunk + par1World.rand.nextInt(16);
-			for (int y = 60; y > 0; --y) {
-
+			for (int y = 60; y > 0; --y)
 				// Check for a Nyx Stone block.
-				if (par1World.getBlock(x, y, z) == NyxBlocks.stone) {
-
+				if (par1World.getBlock(x, y, z) == NyxBlocks.stone)
 					// Check for bordering water.
 					if (par1World.getBlock(x + 1, y, z).getMaterial() == Material.water
 							|| par1World.getBlock(x - 1, y, z).getMaterial() == Material.water
@@ -70,8 +63,6 @@ public class GenOre {
 						if (par1World.rand.nextInt(3) == 0)
 							return;
 					}
-				}
-			}
 		}
 	}
 

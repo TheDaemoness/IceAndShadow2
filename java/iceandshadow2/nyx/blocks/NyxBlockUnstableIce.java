@@ -24,8 +24,13 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 		setResistance(0.5F);
 		setLightOpacity(4);
 		setTickRandomly(true);
-		this.slipperiness = 1.08F;
+		slipperiness = 1.08F;
 		this.setHarvestLevel("spade", 0);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 
 	@Override
@@ -59,16 +64,10 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
-		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) >= 14) {
+		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) >= 14)
 			if (par1World.provider.isHellWorld)
 				par1World.setBlockToAir(par2, par3, par4);
 			else
 				par1World.setBlock(par2, par3, par4, Blocks.water);
-		}
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
 	}
 }

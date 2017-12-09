@@ -9,7 +9,7 @@ public class NyxItemNavistraShard extends IaSBaseItemSingle {
 	public NyxItemNavistraShard(String texName) {
 		super(EnumIaSModule.NYX, texName);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.NAVISTRA;

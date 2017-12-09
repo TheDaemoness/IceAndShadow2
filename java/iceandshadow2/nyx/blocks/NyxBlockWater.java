@@ -23,7 +23,7 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 		super(EnumIaSModule.NYX, id, fluid);
 		setLightOpacity(4);
 		setResistance(300F);
-		this.setTickRandomly(true);
+		setTickRandomly(true);
 	}
 
 	@Override

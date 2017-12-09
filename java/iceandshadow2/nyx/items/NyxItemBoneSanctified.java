@@ -27,6 +27,11 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.PURE;
+	}
+
+	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
 		return EnumRarity.uncommon;
 	}
@@ -74,25 +79,18 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 			return;
 		}
 		final int dmg = stack.getItemDamage();
-		if (stack.isItemDamaged()) {
+		if (stack.isItemDamaged())
 			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
 				stack.setItemDamage(0);
-			else if (dmg > 0) {
+			else if (dmg > 0)
 				if (stack.attemptDamageItem(1, par2World.rand)) {
 					stack.setItemDamage(15);
 					stack.func_150996_a(Items.dye);
 				}
-			}
-		}
 	}
 
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.PURE;
 	}
 }

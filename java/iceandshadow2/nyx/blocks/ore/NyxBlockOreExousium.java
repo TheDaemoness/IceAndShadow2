@@ -53,8 +53,8 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 			return NyxBlocks.stone.getIcon(side, m);
 		else {
 			if (m != 0)
-				return this.iconEmpty;
-			return this.blockIcon;
+				return iconEmpty;
+			return blockIcon;
 		}
 	}
 
@@ -87,15 +87,15 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(getTexName());
-		this.iconEmpty = reg.registerIcon(getTexName() + "Empty");
+		blockIcon = reg.registerIcon(getTexName());
+		iconEmpty = reg.registerIcon(getTexName() + "Empty");
 	}
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (!w.isRemote) {
 			boolean wasted = false;
-			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN)
 					continue;
 				final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;

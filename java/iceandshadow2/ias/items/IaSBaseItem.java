@@ -14,12 +14,17 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 
 	protected IaSBaseItem(EnumIaSModule mod) {
 		super();
-		this.MODULE = mod;
+		MODULE = mod;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -30,11 +35,6 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 	public final IaSBaseItem register() {
 		IaSRegistration.register(this);
 		return this;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return null;
 	}
 
 }

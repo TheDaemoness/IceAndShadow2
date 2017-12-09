@@ -29,7 +29,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 
 	public RenderNyxSkeleton() {
 		super(new ModelSkeleton(), 0.5F);
-		this.renderPassModel = new ModelSkeleton();
+		renderPassModel = new ModelSkeleton();
 	}
 
 	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving) {
@@ -47,9 +47,8 @@ public class RenderNyxSkeleton extends RenderBiped {
 	}
 
 	protected void func_82438_a(EntitySkeleton par1EntitySkeleton, float par2) {
-		if (par1EntitySkeleton.getSkeletonType() == 1) {
+		if (par1EntitySkeleton.getSkeletonType() == 1)
 			GL11.glScalef(1.1F, 1.2F, 1.1F);
-		}
 	}
 
 	@Override
@@ -93,7 +92,7 @@ public class RenderNyxSkeleton extends RenderBiped {
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
 			GL11.glScalef(1.01F, 1.01F, 1.01F);
-			this.modelBipedMain.bipedHead.renderWithRotation(par3);
+			modelBipedMain.bipedHead.renderWithRotation(par3);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 		}

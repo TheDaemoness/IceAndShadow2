@@ -50,7 +50,7 @@ public class NyxBlockHookClimbing extends BlockFence {
 
 	@Override
 	public String getItemIconName() {
-		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix + this.texName;
+		return IceAndShadow2.MODID + ':' + EnumIaSModule.NYX.prefix + texName;
 	}
 
 	@Override
@@ -61,14 +61,12 @@ public class NyxBlockHookClimbing extends BlockFence {
 	@Override
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer pl, int p_149727_6_, float p_149727_7_,
 			float p_149727_8_, float p_149727_9_) {
-		if (w.getBlock(x, y - 1, z) == NyxBlocks.ropeY) {
-			if (pl.getEquipmentInSlot(0) != null) {
+		if (w.getBlock(x, y - 1, z) == NyxBlocks.ropeY)
+			if (pl.getEquipmentInSlot(0) != null)
 				if (pl.getEquipmentInSlot(0).getItem() != NyxItems.rope) {
 					w.func_147480_a(x, y - 1, z, false);
 					IaSPlayerHelper.giveItem(pl, new ItemStack(NyxItems.rope));
 				}
-			}
-		}
 		return super.onBlockActivated(w, x, y, z, pl, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
 	}
 

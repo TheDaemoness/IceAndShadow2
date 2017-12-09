@@ -47,7 +47,7 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	public int getDurability(ItemStack is) {
 		return 16;
 	}
-	
+
 	@Override
 	public int getKnifeCooldown(ItemStack par1ItemStack, World par2World, EntityLivingBase elb) {
 		return 24;
@@ -88,31 +88,31 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 			else
 				target.attackEntityFrom(DamageSource.causeMobDamage(user).setDamageBypassesArmor(),
 						getToolDamage(is, user, target));
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 25, 0));
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.confusion.id, 55, 0));
 		}
-		final float force = (3+Math.abs(user.getEyeHeight()))/(1+Math.abs(target.getEyeHeight()));
-		target.addVelocity(user.motionX*force, 0.2, user.motionZ*force);
+		final float force = (3 + Math.abs(user.getEyeHeight())) / (1 + Math.abs(target.getEyeHeight()));
+		target.addVelocity(user.motionX * force, 0.2, user.motionZ * force);
 		return damageToolOnAttack(is, user, target);
 	}
-	
-	
 
 	@Override
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
-		if(knife.worldObj.isRemote)
+		if (knife.worldObj.isRemote)
 			return false;
-		final float force = 4/(1+Math.abs(2*target.getEyeHeight()));
-		if(target instanceof EntityLivingBase) {
-			EntityLivingBase victim = (EntityLivingBase)target;
+		final float force = 4 / (1 + Math.abs(2 * target.getEyeHeight()));
+		if (target instanceof EntityLivingBase) {
+			final EntityLivingBase victim = (EntityLivingBase) target;
 			final boolean isMob = victim instanceof EntityMob;
-			if(victim.isPotionActive(Potion.confusion.id) || (isMob && ((EntityMob)target).getAttackTarget() != user)) {
-				if(!isMob || (victim.getEquipmentInSlot(0) != null && victim.getEquipmentInSlot(0).getRarity() == EnumRarity.common))
+			if (victim.isPotionActive(Potion.confusion.id)
+					|| (isMob && ((EntityMob) target).getAttackTarget() != user)) {
+				if (!isMob || (victim.getEquipmentInSlot(0) != null
+						&& victim.getEquipmentInSlot(0).getRarity() == EnumRarity.common))
 					IaSEntityHelper.dropItem(victim, victim.getEquipmentInSlot(0));
 				victim.setCurrentItemOrArmor(0, null);
 			}
 			victim.addPotionEffect(new PotionEffect(Potion.confusion.id, 35, 0));
 		}
-		target.addVelocity(knife.motionX*force, 0.1, knife.motionZ*force);
+		target.addVelocity(knife.motionX * force, 0.1, knife.motionZ * force);
 		return super.onKnifeHit(user, knife, target);
 	}
 

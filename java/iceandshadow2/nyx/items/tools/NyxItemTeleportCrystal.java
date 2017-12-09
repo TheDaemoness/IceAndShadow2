@@ -39,8 +39,8 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if ((dmg & 4) == 4)
-			return this.empty;
-		return this.itemIcon;
+			return empty;
+		return itemIcon;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World wld, EntityPlayer pl) {
-		if ((is.getItemDamage() & 1) == 1) {
+		if ((is.getItemDamage() & 1) == 1)
 			if (pl instanceof EntityPlayerMP) {
 				final EntityPlayerMP plm = (EntityPlayerMP) pl;
 				if (pl.dimension != IaSFlags.dim_nyx_id) {
@@ -89,7 +89,6 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 							new NyxTeleporter(plm.mcServer.worldServerForDimension(0)));
 				}
 			}
-		}
 		return is;
 	}
 
@@ -158,6 +157,6 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		this.empty = reg.registerIcon(getTexName() + "Empty");
+		empty = reg.registerIcon(getTexName() + "Empty");
 	}
 }

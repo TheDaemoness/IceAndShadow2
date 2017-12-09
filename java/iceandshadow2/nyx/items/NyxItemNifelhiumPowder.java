@@ -20,6 +20,11 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NYX;
+	}
+
+	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (catalyst.getItem() != this)
 			return 0;
@@ -44,10 +49,5 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemSingleGlow implements IIa
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NYX;
 	}
 }

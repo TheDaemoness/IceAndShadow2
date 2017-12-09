@@ -23,6 +23,11 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
+	}
+
+	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		return 0;
 		/*
@@ -68,10 +73,5 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
 	}
 }

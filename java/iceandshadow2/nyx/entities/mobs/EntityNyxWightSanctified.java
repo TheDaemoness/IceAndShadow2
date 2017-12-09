@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.ai.IIaSMobGetters;
@@ -26,9 +25,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -50,32 +47,41 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 	private EntityLivingBase searched;
 
 	protected int regenDelay;
-	
+
 	protected IaSSetSenses senses;
 
 	public EntityNyxWightSanctified(World par1World) {
 		super(par1World);
 
-		this.experienceValue = 25;
-		this.regenDelay = 0;
+		experienceValue = 25;
+		regenDelay = 0;
 
-		this.tasks.taskEntries.clear();
-		this.targetTasks.taskEntries.clear();
+		tasks.taskEntries.clear();
+		targetTasks.taskEntries.clear();
 
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, true));
-		this.tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxWightSanctified.moveSpeed + 0.5));
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, true));
+		tasks.addTask(3, new EntityAIFleeSun(this, EntityNyxWightSanctified.moveSpeed + 0.5));
 		// this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this,
 		// 1.0D));
-		this.tasks.addTask(5, new EntityAIWander(this, EntityNyxWightSanctified.moveSpeed));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAINyxRevenge(this));
-		this.targetTasks.addTask(2, new EntityAINyxTargeter(this));
-		
+		tasks.addTask(5, new EntityAIWander(this, EntityNyxWightSanctified.moveSpeed));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAILookIdle(this));
+		targetTasks.addTask(1, new EntityAINyxRevenge(this));
+		targetTasks.addTask(2, new EntityAINyxTargeter(this));
+
 		senses = new IaSSetSenses(this);
 		senses.add(new IaSSenseAura(this, 16F));
 		senses.add(new IaSSenseTouch(this));
+	}
+
+	@Override
+	public void addPotionEffect(PotionEffect pe) {
+		if (pe == null) // Paranoia
+			return;
+		if (pe.getPotionID() == Potion.wither.id || pe.getPotionID() == Potion.moveSlowdown.id)
+			return;
+		super.addPotionEffect(pe);
 	}
 
 	@Override
@@ -105,18 +111,17 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 			if (j > 0)
 				par1Entity.setFire(j * 4);
 
-			if (par1Entity instanceof EntityLivingBase && !this.worldObj.isRemote) {
+			if (par1Entity instanceof EntityLivingBase && !worldObj.isRemote) {
 				final EntityLivingBase armored = (EntityLivingBase) par1Entity;
-				for (int s = 4; s >= 1; --s) {
+				for (int s = 4; s >= 1; --s)
 					if (armored.getEquipmentInSlot(s) != null) {
 						IaSEntityHelper.dropItem(this, armored.getEquipmentInSlot(s));
 						armored.setCurrentItemOrArmor(s, null); // What the
 																// hell.
 						break;
 					}
-				}
 				armored.addPotionEffect(
-						new PotionEffect(Potion.wither.id, 75 + IaSWorldHelper.getDifficulty(this.worldObj) * 30, 0));
+						new PotionEffect(Potion.wither.id, 75 + IaSWorldHelper.getDifficulty(worldObj) * 30, 0));
 			}
 		}
 
@@ -147,15 +152,6 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 		}
 		return flag;
 	}
-	
-	@Override
-	public void addPotionEffect(PotionEffect pe) {
-		if(pe == null) //Paranoia
-			return;
-		if(pe.getPotionID() == Potion.wither.id || pe.getPotionID() == Potion.moveSlowdown.id)
-			return;
-		super.addPotionEffect(pe);
-	}
 
 	@Override
 	public boolean couldFlyFasterWithBoots() {
@@ -164,15 +160,15 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		if (!par1 || this.worldObj.isRemote)
+		if (!par1 || worldObj.isRemote)
 			return;
-		
-		dropItem(NyxItems.resin, 1+this.worldObj.rand.nextInt(2+par2));
 
-		if (this.rand.nextInt(4 - (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 1 : 0)) <= 0)
+		dropItem(NyxItems.resin, 1 + worldObj.rand.nextInt(2 + par2));
+
+		if (rand.nextInt(4 - (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 1 : 0)) <= 0)
 			dropItem(NyxItems.alabasterShard, 1);
 
-		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 7));
+		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 7));
 	}
 
 	@Override
@@ -191,19 +187,23 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 			playSound("step.snow", 1.0F, 1.0F);
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
+	}
+
 	public int getAttackStrength(Entity par1Entity) {
 		final ItemStack var2 = getHeldItem();
 		int var3;
-		if (this.worldObj != null)
-			var3 = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 8 : 9;
+		if (worldObj != null)
+			var3 = IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 8 : 9;
 		else
 			var3 = 8;
 
-		if (var2 != null) {
+		if (var2 != null)
 			if (var2.getItem() instanceof IIaSTool)
 				var3 += MathHelper
 						.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity));
-		}
 		return var3;
 	}
 
@@ -220,7 +220,7 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return this.posY > 48.0F && super.getCanSpawnHere();
+		return posY > 48.0F && super.getCanSpawnHere();
 	}
 
 	@Override
@@ -262,12 +262,22 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	public EntityLivingBase getSearchTarget() {
-		return this.searched;
+		return searched;
+	}
+
+	@Override
+	public IaSSenseOld getSense() {
+		return senses;
 	}
 
 	@Override
 	public int getTotalArmorValue() {
 		return super.getTotalArmorValue() + IaSWorldHelper.getRegionArmorMod(this);
+	}
+
+	@Override
+	public boolean hates(EnumIaSAspect aspect) {
+		return aspect == null || aspect == EnumIaSAspect.NYX;
 	}
 
 	@Override
@@ -279,25 +289,24 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.worldObj.isRemote) {
-			if(!this.isInvisible())
-				IaSFxManager.spawnParticle(this.worldObj, rand.nextBoolean() ? "cloudSmall" : "shadowSmokeSmall",
-					this.posX - (0.5 - rand.nextDouble()) / 4, this.posY + rand.nextDouble(),
-					this.posZ - (0.5 - rand.nextDouble()) / 4, 0.0, 0.0, 0.0, false, true);
+		if (worldObj.isRemote) {
+			if (!isInvisible())
+				IaSFxManager.spawnParticle(worldObj, rand.nextBoolean() ? "cloudSmall" : "shadowSmokeSmall",
+						posX - (0.5 - rand.nextDouble()) / 4, posY + rand.nextDouble(),
+						posZ - (0.5 - rand.nextDouble()) / 4, 0.0, 0.0, 0.0, false, true);
 			return;
 		}
 		final boolean attacking = getAttackTarget() != null;
-		if (--this.regenDelay <= 0) {
-			if (IaSWorldHelper.getDifficulty(this.worldObj) <= 1) {
+		if (--regenDelay <= 0) {
+			if (IaSWorldHelper.getDifficulty(worldObj) <= 1) {
 				setDead();
 				return;
 			}
 			heal(1);
-			this.regenDelay = 15;
+			regenDelay = 15;
 			if (attacking) {
-				final List li = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class,
-						this.boundingBox.expand(18, 18, 18));
-				li.addAll(this.worldObj.getEntitiesWithinAABB(EntityAnimal.class, this.boundingBox.expand(18, 18, 18)));
+				final List li = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(18, 18, 18));
+				li.addAll(worldObj.getEntitiesWithinAABB(EntityAnimal.class, boundingBox.expand(18, 18, 18)));
 				li.add(getAttackTarget());
 				for (final Object ent : li)
 					((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 0));
@@ -315,15 +324,15 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
-		this.equipmentDropChances[0] = 0.0F;
+		equipmentDropChances[0] = 0.0F;
 
-		IaSWorldHelper.getDifficulty(this.worldObj);
+		IaSWorldHelper.getDifficulty(worldObj);
 		return dat;
 	}
 
 	@Override
 	public void setFire(int time) {
-		if (this.dimension != IaSFlags.dim_nyx_id)
+		if (dimension != IaSFlags.dim_nyx_id)
 			super.setFire(time);
 	}
 
@@ -334,21 +343,6 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	public void setSearchTarget(EntityLivingBase ent) {
-		this.searched = ent;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.INFESTATION;
-	}
-	
-	@Override
-	public boolean hates(EnumIaSAspect aspect) {
-		return aspect == null || aspect == EnumIaSAspect.NYX;
-	}
-
-	@Override
-	public IaSSenseOld getSense() {
-		return senses;
+		searched = ent;
 	}
 }

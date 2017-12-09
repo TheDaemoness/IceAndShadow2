@@ -39,8 +39,8 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (pass >= 1)
-			return this.fillIcons[Math.max(6, dmg)];
-		return this.itemIcon;
+			return fillIcons[Math.max(6, dmg)];
+		return itemIcon;
 	}
 
 	@Override
@@ -75,10 +75,10 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		this.itemIcon = r.registerIcon(getTexName());
-		this.fillIcons = new IIcon[7];
+		itemIcon = r.registerIcon(getTexName());
+		fillIcons = new IIcon[7];
 		for (int i = 0; i < 7; ++i)
-			this.fillIcons[i] = r.registerIcon(getTexName() + i);
+			fillIcons[i] = r.registerIcon(getTexName() + i);
 	}
 
 	@Override

@@ -108,6 +108,20 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public abstract int getDurability(ItemStack is);
 
 	/**
+	 * Called to determine harvest effectiveness. In the future, will be used to
+	 * add fortune-like effects to harvesting.
+	 * 
+	 * @param bl
+	 * @param is
+	 * @return -1 if this tool cannot harvest a given block, 0 if the tool
+	 *         should behave as normal, and anything greater than 0 if the tool
+	 *         can harvest the specified block.
+	 */
+	public int getHarvestEffectiveness(Block bl, ItemStack is) {
+		return 0;
+	}
+
+	/**
 	 * Gets the tool's harvest level. This determines what materials it can
 	 * mine. Cheat sheet: -1 = fists, 0 = wood, 1 = stone, 2 = iron, 3 = diamond
 	 * Default implementation mimics vanilla behavior.
@@ -146,9 +160,9 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	public IIcon getIcon(ItemStack is) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
 		if (t.isWeapon())
-			return this.iconWeapon[t.getClassId()];
+			return iconWeapon[t.getClassId()];
 		else
-			return this.iconTool[t.getClassId()];
+			return iconTool[t.getClassId()];
 	}
 
 	/**
@@ -343,13 +357,12 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *         this left-click. This is ignored by throwing knives.
 	 */
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if (target instanceof EntityLivingBase) {
+		if (target instanceof EntityLivingBase)
 			if (user instanceof EntityPlayer)
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user),
 						getToolDamage(is, user, target));
 			else
 				target.attackEntityFrom(DamageSource.causeMobDamage(user), getToolDamage(is, user, target));
-		}
 		return damageToolOnAttack(is, user, target);
 	}
 
@@ -365,10 +378,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return If the knife should drop as an item or not.
 	 */
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, ChunkCoordinates block) {
-		if(user instanceof EntityMob)
+		if (user instanceof EntityMob)
 			return false;
-		if(user instanceof EntityPlayer)
-			return !((EntityPlayer)user).capabilities.isCreativeMode;
+		if (user instanceof EntityPlayer)
+			return !((EntityPlayer) user).capabilities.isCreativeMode;
 		return true;
 	}
 
@@ -384,10 +397,10 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * @return If the knife should drop as an item or not.
 	 */
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
-		if(user instanceof EntityMob)
+		if (user instanceof EntityMob)
 			return false;
-		if(user instanceof EntityPlayer)
-			return !((EntityPlayer)user).capabilities.isCreativeMode;
+		if (user instanceof EntityPlayer)
+			return !((EntityPlayer) user).capabilities.isCreativeMode;
 		return true;
 	}
 
@@ -429,7 +442,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 *            The user of the tool.
 	 * @param w
 	 *            The world object for the block being harvested.
-	 * @param block 
+	 * @param block
 	 * @return The number of points of durability that should be deducted by
 	 *         this harvest.
 	 */
@@ -442,7 +455,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 * 
 	 * @param is
 	 * @param user
-	 * @param block 
+	 * @param block
 	 * @return True if the tool should harvest, false otherwise.
 	 */
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block block) {
@@ -482,34 +495,19 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 */
 	public void registerIcons(IIconRegister reg) {
 		int lTool = 0, lWeapon = 0;
-		for (final EnumIaSToolClass cl : EnumIaSToolClass.values()) {
+		for (final EnumIaSToolClass cl : EnumIaSToolClass.values())
 			if (cl.isWeapon() && cl.getClassId() >= lWeapon)
 				lWeapon = cl.getClassId() + 1;
 			else if (!cl.isWeapon() && cl.getClassId() >= lTool)
 				lTool = cl.getClassId() + 1;
-		}
-		this.iconTool = new IIcon[lTool];
-		this.iconWeapon = new IIcon[lWeapon];
-		for (int i = 0; i < this.iconTool.length; ++i)
-			this.iconTool[i] = reg.registerIcon(
+		iconTool = new IIcon[lTool];
+		iconWeapon = new IIcon[lWeapon];
+		for (int i = 0; i < iconTool.length; ++i)
+			iconTool[i] = reg.registerIcon(
 					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, false).toString());
-		for (int i = 0; i < this.iconWeapon.length; ++i)
-			this.iconWeapon[i] = reg.registerIcon(
+		for (int i = 0; i < iconWeapon.length; ++i)
+			iconWeapon[i] = reg.registerIcon(
 					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, true).toString());
 
-	}
-
-	/**
-	 * Called to determine harvest effectiveness.
-	 * In the future, will be used to add fortune-like effects to harvesting.
-	 * @param bl
-	 * @param is
-	 * @return
-	 * -1 if this tool cannot harvest a given block,
-	 * 0 if the tool should behave as normal, and
-	 * anything greater than 0 if the tool can harvest the specified block.
-	 */
-	public int getHarvestEffectiveness(Block bl, ItemStack is) {
-		return 0;
 	}
 }

@@ -25,10 +25,9 @@ public class NyxItemRope extends IaSBaseItemSingle {
 		if (w.getBlock(x, y, z) == NyxBlocks.hookClimbing) {
 			for (int i = 1; i <= 2; ++i) {
 				final Block bl = w.getBlock(x, y - i, z);
-				if (bl.getMaterial() != Material.air) {
+				if (bl.getMaterial() != Material.air)
 					if (!bl.isReplaceable(w, x, y - 1, z))
 						return false;
-				}
 			}
 			is.stackSize -= 1;
 			w.func_147480_a(x, y - 1, z, true);

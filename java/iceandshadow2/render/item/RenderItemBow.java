@@ -8,7 +8,7 @@ public class RenderItemBow extends RenderItemVanillaGlowing {
 	private final boolean lb;
 
 	public RenderItemBow(boolean isLongbow) {
-		this.lb = isLongbow;
+		lb = isLongbow;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class RenderItemBow extends RenderItemVanillaGlowing {
 			GL11.glTranslatef(-0.25F, -0.1875F, 0.1875F);
 
 			// Standard bow transforms.
-			if (!this.lb) {
+			if (!lb) {
 				GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
 				GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glScalef(0.625F, -0.625F, 0.625F);

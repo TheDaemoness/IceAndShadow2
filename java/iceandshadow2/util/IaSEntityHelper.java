@@ -25,19 +25,18 @@ import net.minecraft.world.biome.BiomeGenBase.TempCategory;
 public class IaSEntityHelper {
 
 	public static EntityItem dropItem(Entity ent, ItemStack par1ItemStack) {
-		if(par1ItemStack == null || ent == null)
+		if (par1ItemStack == null || ent == null)
 			return null;
-		if (par1ItemStack.stackSize == 0) {
+		if (par1ItemStack.stackSize == 0)
 			return null;
-		} else {
+		else {
 			final EntityItem entityitem = new EntityItem(ent.worldObj, ent.posX + ent.width / 2, ent.posY,
 					ent.posZ + ent.width / 2, par1ItemStack);
 			entityitem.delayBeforeCanPickup = 10;
-			if (ent.captureDrops) {
+			if (ent.captureDrops)
 				ent.capturedDrops.add(entityitem);
-			} else {
+			else
 				ent.worldObj.spawnEntityInWorld(entityitem);
-			}
 			return entityitem;
 		}
 	}
@@ -91,6 +90,16 @@ public class IaSEntityHelper {
 		return ent.worldObj.getBlockLightValue(x, y, z);
 	}
 
+	public static int getMagicLevel(EntityLivingBase elb) {
+		if (elb instanceof EntityPlayer)
+			return ((EntityPlayer) elb).experienceLevel;
+		if (elb instanceof EntityMob) {
+			final int maxhealth = (int) elb.getMaxHealth();
+			return (maxhealth * maxhealth / 200);
+		}
+		return 0;
+	}
+
 	public static MovingObjectPosition getObjectPosition(World world, EntityLivingBase ent, boolean flag) {
 		final float f = 1.0F;
 		final float f1 = ent.prevRotationPitch + (ent.rotationPitch - ent.prevRotationPitch) * f;
@@ -115,9 +124,8 @@ public class IaSEntityHelper {
 		final float f7 = f4 * f5;
 		final float f8 = f3 * f5;
 		double d3 = 5.0D;
-		if (ent instanceof EntityPlayerMP) {
+		if (ent instanceof EntityPlayerMP)
 			d3 = ((EntityPlayerMP) ent).theItemInWorldManager.getBlockReachDistance();
-		}
 		final Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
 		return world.func_147447_a(vec3, vec31, flag, !flag, false);
 	}
@@ -156,40 +164,13 @@ public class IaSEntityHelper {
 
 		// NOTE: Using the notation for polar coordinates I'm used to, z in MC
 		// is x, and x in MC is y.
-		double ratio = xdif == 0 ? 0 : Math.abs(xdif / zdif);
+		final double ratio = xdif == 0 ? 0 : Math.abs(xdif / zdif);
 		double ang = Math.atan(ratio) * 180.0 / Math.PI;
 		if (zdif < 0)
 			ang = 180 - ang;
 
-		double delta = Math.abs(ang - Math.abs(a.rotationYaw));
+		final double delta = Math.abs(ang - Math.abs(a.rotationYaw));
 		return delta <= 75;
-	}
-	
-	public static int getMagicLevel(EntityLivingBase elb) {
-		if(elb instanceof EntityPlayer)
-			return ((EntityPlayer)elb).experienceLevel;
-		if(elb instanceof EntityMob) {
-			int maxhealth = (int)elb.getMaxHealth();
-			return (maxhealth*maxhealth/200);
-		}
-		return 0;
-	}
-	
-	public static void sensesEvent(EnumIaSSenses sense, Entity what, float range) {
-		if(what.worldObj.isRemote)
-			return;
-		List l = what.worldObj.getEntitiesWithinAABB(IIaSSensate.class,
-				AxisAlignedBB.getBoundingBox(
-						what.posX-range, what.posY-range, what.posZ-range,
-						what.posX+range, what.posY+range, what.posZ+range));
-		for(Object o : l) {
-			final Entity ent = (Entity)o;
-			final IIaSSensate senses = (IIaSSensate)o;
-			range = Math.min(range, senses.getMaxSenseRange(sense));
-			if(ent.getDistanceSq(what.posX, what.posY, what.posZ) > range*range)
-				continue;
-			senses.notice(what, sense);
-		}
 	}
 
 	public static boolean isTouchingGround(EntityLivingBase ent) {
@@ -200,6 +181,22 @@ public class IaSEntityHelper {
 		if (ent instanceof IIaSMobGetters && ((IIaSMobGetters) ent).couldFlyFasterWithBoots())
 			return false;
 		return ent.getEquipmentInSlot(1) == null;
+	}
+
+	public static void sensesEvent(EnumIaSSenses sense, Entity what, float range) {
+		if (what.worldObj.isRemote)
+			return;
+		final List l = what.worldObj.getEntitiesWithinAABB(IIaSSensate.class,
+				AxisAlignedBB.getBoundingBox(what.posX - range, what.posY - range, what.posZ - range, what.posX + range,
+						what.posY + range, what.posZ + range));
+		for (final Object o : l) {
+			final Entity ent = (Entity) o;
+			final IIaSSensate senses = (IIaSSensate) o;
+			range = Math.min(range, senses.getMaxSenseRange(sense));
+			if (ent.getDistanceSq(what.posX, what.posY, what.posZ) > range * range)
+				continue;
+			senses.notice(what, sense);
+		}
 	}
 
 	public static void spawnNourishment(Entity who, int amount) {

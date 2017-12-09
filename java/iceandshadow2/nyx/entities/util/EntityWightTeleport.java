@@ -66,22 +66,22 @@ public class EntityWightTeleport extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition pom) {
 		if (pom.typeOfHit == MovingObjectType.BLOCK) {
-			final Block bl = this.worldObj.getBlock(pom.blockX, pom.blockY, pom.blockZ);
+			final Block bl = worldObj.getBlock(pom.blockX, pom.blockY, pom.blockZ);
 			if (bl.getMaterial() == Material.leaves)
 				return;
-			if (bl.isReplaceable(this.worldObj, pom.blockX, pom.blockY, pom.blockZ))
+			if (bl.isReplaceable(worldObj, pom.blockX, pom.blockY, pom.blockZ))
 				return;
-			this.worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwight_tele_arrive", 0.8F,
-					this.rand.nextFloat() * 0.1F + 0.9F);
-			if (!this.worldObj.isRemote) {
-				final EntityMob spawn = new EntityNyxWightToxic(this.worldObj);
-				ForgeDirection dir = ForgeDirection.getOrientation(pom.sideHit);
+			worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwight_tele_arrive", 0.8F,
+					rand.nextFloat() * 0.1F + 0.9F);
+			if (!worldObj.isRemote) {
+				final EntityMob spawn = new EntityNyxWightToxic(worldObj);
+				final ForgeDirection dir = ForgeDirection.getOrientation(pom.sideHit);
 				final int posBlockX = pom.blockX + dir.offsetX;
 				final int posBlockY = pom.blockY + (dir.offsetY == 1 ? 0 : -2 + dir.offsetY);
 				final int posBlockZ = pom.blockZ + dir.offsetZ;
-				Block bl0 = this.worldObj.getBlock(posBlockX, posBlockY, posBlockZ);
-				Block bl1 = this.worldObj.getBlock(posBlockX, posBlockY + 1, posBlockZ);
-				Block bl2 = this.worldObj.getBlock(posBlockX, posBlockY + 2, posBlockZ);
+				Block bl0 = worldObj.getBlock(posBlockX, posBlockY, posBlockZ);
+				Block bl1 = worldObj.getBlock(posBlockX, posBlockY + 1, posBlockZ);
+				Block bl2 = worldObj.getBlock(posBlockX, posBlockY + 2, posBlockZ);
 				if (!IaSBlockHelper.isAir(bl0) && IaSBlockHelper.isAir(bl1) && IaSBlockHelper.isAir(bl2)) {
 					pom.blockX = posBlockX;
 					pom.blockY = posBlockY;
@@ -90,9 +90,9 @@ public class EntityWightTeleport extends EntityThrowable {
 					boolean rise = false;
 					if (dir.offsetY == 0) {
 						final int posBlockY2 = posBlockY + 1;
-						bl0 = this.worldObj.getBlock(posBlockX, posBlockY2, posBlockZ);
-						bl1 = this.worldObj.getBlock(posBlockX, posBlockY2 + 1, posBlockZ);
-						bl2 = this.worldObj.getBlock(posBlockX, posBlockY2 + 2, posBlockZ);
+						bl0 = worldObj.getBlock(posBlockX, posBlockY2, posBlockZ);
+						bl1 = worldObj.getBlock(posBlockX, posBlockY2 + 1, posBlockZ);
+						bl2 = worldObj.getBlock(posBlockX, posBlockY2 + 2, posBlockZ);
 						if (!IaSBlockHelper.isAir(bl0) && IaSBlockHelper.isAir(bl1) && IaSBlockHelper.isAir(bl2)) {
 							rise = true;
 							pom.blockX = posBlockX;
@@ -101,20 +101,20 @@ public class EntityWightTeleport extends EntityThrowable {
 						}
 					}
 					if (rise) {
-						bl1 = this.worldObj.getBlock(pom.blockX, pom.blockY + 1, pom.blockZ);
-						bl2 = this.worldObj.getBlock(pom.blockX, pom.blockY + 2, pom.blockZ);
+						bl1 = worldObj.getBlock(pom.blockX, pom.blockY + 1, pom.blockZ);
+						bl2 = worldObj.getBlock(pom.blockX, pom.blockY + 2, pom.blockZ);
 						while (!IaSBlockHelper.isAir(bl1) && !IaSBlockHelper.isAir(bl2)) {
 							pom.blockY += 1;
-							bl1 = this.worldObj.getBlock(pom.blockX, pom.blockY + 1, pom.blockZ);
-							bl2 = this.worldObj.getBlock(pom.blockX, pom.blockY + 2, pom.blockZ);
+							bl1 = worldObj.getBlock(pom.blockX, pom.blockY + 1, pom.blockZ);
+							bl2 = worldObj.getBlock(pom.blockX, pom.blockY + 2, pom.blockZ);
 						}
 					}
 				}
 				spawn.setPositionAndRotation(pom.blockX + 0.5, pom.blockY + 1, pom.blockZ + 0.5,
-						this.worldObj.rand.nextFloat() * 360F, 0.0F);
-				if (this.target != null && !this.target.isDead)
-					spawn.setTarget(this.target);
-				this.worldObj.spawnEntityInWorld(spawn);
+						worldObj.rand.nextFloat() * 360F, 0.0F);
+				if (target != null && !target.isDead)
+					spawn.setTarget(target);
+				worldObj.spawnEntityInWorld(spawn);
 			}
 			setDead();
 		}
@@ -123,15 +123,15 @@ public class EntityWightTeleport extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		if (target != null) {
-			final double cDeltaX = Math.abs(target.posX - this.posX);
-			final double cDeltaZ = Math.abs(target.posZ - this.posZ);
+			final double cDeltaX = Math.abs(target.posX - posX);
+			final double cDeltaZ = Math.abs(target.posZ - posZ);
 			deltaX = Math.min(deltaX, cDeltaX);
 			deltaZ = Math.min(deltaZ, cDeltaZ);
 			if (cDeltaX - deltaX > 3.0 || cDeltaZ - deltaZ > 3.0) {
-				final double vel = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-				this.motionY = Math.min(0, this.motionY) - vel;
-				this.motionX = 0;
-				this.motionZ = 0;
+				final double vel = Math.sqrt(motionX * motionX + motionZ * motionZ);
+				motionY = Math.min(0, motionY) - vel;
+				motionX = 0;
+				motionZ = 0;
 			}
 		}
 		super.onUpdate();

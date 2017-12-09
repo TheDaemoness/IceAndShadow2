@@ -8,17 +8,17 @@ public class BlockSelectOne extends BlockSelect {
 	protected int met;
 
 	public BlockSelectOne(Block ock, int ro) {
-		this.bl = ock;
-		this.met = ro;
+		bl = ock;
+		met = ro;
 	}
 
 	@Override
 	public Block getBlock(World w, int x, int y, int z) {
-		return this.bl;
+		return bl;
 	}
 
 	@Override
 	public int getMeta(World w, int x, int y, int z) {
-		return this.met;
+		return met;
 	}
 }

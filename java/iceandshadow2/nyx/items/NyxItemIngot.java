@@ -1,16 +1,12 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,23 +31,22 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 1) {
+		if (s.getItemDamage() == 1)
 			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "Sneak and Use Item to finalize.");
-		} else {
+		else
 			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "This needs to be heated up...");
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (dmg > 0)
-			return this.active;
+			return active;
 		if (pass == 1)
-			return this.invisible;
-		return this.itemIcon;
+			return invisible;
+		return itemIcon;
 	}
 
 	@Override
@@ -85,7 +80,7 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		this.active = reg.registerIcon(getTexName() + "Active");
-		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		active = reg.registerIcon(getTexName() + "Active");
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 	}
 }

@@ -40,7 +40,7 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 	public IaSItemWeapon(EnumIaSToolClass cl) {
 		super(ToolMaterial.EMERALD);
 		setUnlocalizedName("iasTool");
-		this.classe = cl;
+		classe = cl;
 	}
 
 	@Override
@@ -79,14 +79,14 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 
 	@Override
 	public EnumIaSToolClass getIaSToolClass() {
-		return this.classe;
+		return classe;
 	}
 
 	@Override
 	public IIcon getIcon(ItemStack is, int renderPass) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (renderPass == 1 && !m.glows(getIaSToolClass()))
-			return this.invisible;
+			return invisible;
 		return m.getIcon(is);
 	}
 
@@ -94,7 +94,7 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
 		if (renderPass == 1 && !m.glows(getIaSToolClass()))
-			return this.invisible;
+			return invisible;
 		return m.getIcon(is);
 	}
 
@@ -172,14 +172,6 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 			return null;
 		return m.getUnlocalizedName(is);
 	}
-	
-	@Override
-	public boolean onBlockStartBreak(ItemStack is, int x, int y, int z, EntityPlayer user) {
-		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
-		if (m == null)
-			return false;
-		return !m.onPreHarvest(is, user, user.worldObj, x, y, z, user.worldObj.getBlock(x, y, z));
-	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World w, Block bl, int x, int y, int z, EntityLivingBase user) {
@@ -188,6 +180,14 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 			return false;
 		is.damageItem(m.onPostHarvest(is, user, w, x, y, z, bl), user);
 		return true;
+	}
+
+	@Override
+	public boolean onBlockStartBreak(ItemStack is, int x, int y, int z, EntityPlayer user) {
+		final IaSToolMaterial m = IaSToolMaterial.extractMaterial(is);
+		if (m == null)
+			return false;
+		return !m.onPreHarvest(is, user, user.worldObj, x, y, z, user.worldObj.getBlock(x, y, z));
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 		// See IaSRegistry.
 	}
 

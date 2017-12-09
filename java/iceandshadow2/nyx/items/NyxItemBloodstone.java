@@ -39,6 +39,11 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.BLOOD;
+	}
+
+	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -75,13 +80,12 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		--catalyst.stackSize;
 		int i = 0;
-		for (; i < 3; ++i) {
+		for (; i < 3; ++i)
 			if (target.stackSize > 0)
 				--target.stackSize;
 			else
 				break;
-		}
-		List<ItemStack> retval = new ArrayList<ItemStack>();
+		final List<ItemStack> retval = new ArrayList<ItemStack>();
 		retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
 		return retval;
 	}
@@ -109,10 +113,5 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.BLOOD;
 	}
 }

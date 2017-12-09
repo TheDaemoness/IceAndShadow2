@@ -12,14 +12,13 @@ public class IaSSenseActions extends IaSSenseOld {
 
 	@Override
 	public boolean canSense(Entity ent) {
-		if (isInRange(ent)) {
+		if (isInRange(ent))
 			if (ent instanceof EntityLivingBase) {
 				if (((EntityLivingBase) ent).isSwingInProgress)
 					return true;
 				if (ent instanceof EntityPlayer)
 					return ((EntityPlayer) ent).isUsingItem();
 			}
-		}
 		return false;
 	}
 }

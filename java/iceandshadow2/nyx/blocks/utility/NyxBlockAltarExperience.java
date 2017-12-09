@@ -15,11 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class NyxBlockAltarExperience extends IaSBlockAltar {
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.ANCIENT;
-	}
 
 	public NyxBlockAltarExperience(String id) {
 		super(EnumIaSModule.NYX, id);
@@ -30,18 +25,23 @@ public class NyxBlockAltarExperience extends IaSBlockAltar {
 	}
 
 	public boolean burnItem(World wd, int x, int y, int z, ItemStack is) {
-		float xpgain = IaSRegistry.getSacrificeXpYield(is) * is.stackSize;
+		final float xpgain = IaSRegistry.getSacrificeXpYield(is) * is.stackSize;
 		if ((int) xpgain <= 0) // Note: may make altar use seem a bit awkward
 								// for smaller stacks.
 			return false;
 		int xperience /* Do not sue */ = (int) xpgain;
 		xperience += wd.rand.nextFloat() < (xpgain - Math.floor(xpgain)) ? 1 : 0;
 		while (xperience > 0) {
-			int i1 = EntityXPOrb.getXPSplit(xperience);
+			final int i1 = EntityXPOrb.getXPSplit(xperience);
 			xperience -= i1;
 			wd.spawnEntityInWorld(new EntityXPOrb(wd, x + 0.5D, y + 0.8D, z + 0.5D, i1));
 		}
 		return true;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
 	}
 
 	@Override

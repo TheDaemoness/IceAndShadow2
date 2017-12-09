@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest  {
+public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoInfest {
 
 	private static Random r = new Random();
 
@@ -26,10 +26,15 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
+	}
+
+	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if (!world.isRemote) {
-			is.add(new ItemStack(Items.stick, 1+world.rand.nextInt(2+fortune)));
+			is.add(new ItemStack(Items.stick, 1 + world.rand.nextInt(2 + fortune)));
 			if (world.rand.nextInt(20) == 0)
 				is.add(new ItemStack(NyxItems.poisonFruit));
 		}
@@ -48,14 +53,9 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-		ArrayList<ItemStack> islist = new ArrayList<ItemStack>(1);
+		final ArrayList<ItemStack> islist = new ArrayList<ItemStack>(1);
 		islist.add(new ItemStack(NyxItems.leaf, 1));
 		return islist;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.POISONWOOD;
 	}
 
 }

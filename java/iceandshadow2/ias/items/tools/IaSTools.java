@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -45,7 +44,8 @@ public class IaSTools {
 	public static IaSItemThrowingKnife knife;
 
 	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[], armorSpiderSilk[], armorAlabaster[];
-	public static IaSArmorMaterial armorMatEchir, armorMatNavistra, armorMatCortra, armorMatSpiderSilk, armorMatAlabaster;
+	public static IaSArmorMaterial armorMatEchir, armorMatNavistra, armorMatCortra, armorMatSpiderSilk,
+			armorMatAlabaster;
 
 	public static ItemStack getArmorForSlot(int slot, int tier) {
 		if (tier == 0)
@@ -121,13 +121,13 @@ public class IaSTools {
 		IaSTools.armorMatNavistra = new NyxArmorMaterialNavistra();
 		IaSTools.armorMatSpiderSilk = new NyxArmorMaterialSpiderSilk();
 		IaSTools.armorMatAlabaster = new NyxArmorMaterialSanctified();
-		
+
 		IaSTools.armorEchir = new IaSItemArmor[4];
 		IaSTools.armorCortra = new IaSItemArmor[4];
 		IaSTools.armorNavistra = new IaSItemArmor[4];
 		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
 		IaSTools.armorAlabaster = new IaSItemArmor[4];
-		
+
 		IaSTools.initArmor(IaSTools.armorEchir, IaSTools.armorMatEchir);
 		IaSTools.initArmor(IaSTools.armorCortra, IaSTools.armorMatCortra);
 		IaSTools.initArmor(IaSTools.armorNavistra, IaSTools.armorMatNavistra);
@@ -169,7 +169,8 @@ public class IaSTools {
 
 	protected static void initArmor(IaSItemArmor[] arm, IaSArmorMaterial mat) {
 		for (int i = 0; i < 4; ++i) {
-			arm[i] = new IaSItemArmor(mat, 3, i, "IceAndShadow2:textures/armor/"+mat.getArmorStats().name().toLowerCase());
+			arm[i] = new IaSItemArmor(mat, 3, i,
+					"IceAndShadow2:textures/armor/" + mat.getArmorStats().name().toLowerCase());
 			GameRegistry.registerItem(arm[i], arm[i].getModName());
 			arm[i].setCreativeTab(IaSCreativeTabs.tools);
 		}

@@ -31,8 +31,8 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return this.crystalIcon;
-		return this.itemIcon;
+			return crystalIcon;
+		return itemIcon;
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName() + "Dust");
-		this.crystalIcon = reg.registerIcon(getTexName() + "Crystal");
+		itemIcon = reg.registerIcon(getTexName() + "Dust");
+		crystalIcon = reg.registerIcon(getTexName() + "Crystal");
 	}
 
 	@Override

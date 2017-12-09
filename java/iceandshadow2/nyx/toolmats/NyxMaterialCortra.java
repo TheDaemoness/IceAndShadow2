@@ -1,29 +1,17 @@
 package iceandshadow2.nyx.toolmats;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.ias.items.tools.IaSItemWeapon;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.blocks.NyxBlockStone;
-import iceandshadow2.util.IaSBlockHelper;
 import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockOre;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -68,39 +56,35 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	}
 
 	@Override
-	public void onKnifeThrow(ItemStack is, EntityLivingBase user, IaSEntityKnifeBase knife) {
-		Entity victim = user.worldObj.findNearestEntityWithinAABB(EntityLivingBase.class,
-				AxisAlignedBB.getBoundingBox(
-						user.posX-12, user.posY-16, user.posZ-12,
-						user.posX+12, user.posY+8, user.posZ+12)
-				, user);
-		if(victim != null && EnumIaSAspect.getAspect(victim) != EnumIaSAspect.getAspect(user)) {
-			knife.setThrowableHeading(
-					victim.posX-user.posX,
-					victim.posY-user.posY+victim.getEyeHeight()-user.getEyeHeight()+0.5,
-					victim.posZ-user.posZ, 2F, 0.0F);
-		}
-	}
-
-	@Override
 	public boolean isRepairable(ItemStack tool, ItemStack mat) {
 		return mat.getItem() == NyxItems.cortraIngot && mat.getItemDamage() == 1;
 	}
 
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
-		if(user instanceof EntityPlayer &&
-				target instanceof EntityLivingBase &&
-				IaSEntityHelper.getMagicLevel((EntityLivingBase)target) > 0)
-			((EntityPlayer)user).addExperience(target.isEntityInvulnerable()?0:1);
+		if (user instanceof EntityPlayer && target instanceof EntityLivingBase
+				&& IaSEntityHelper.getMagicLevel((EntityLivingBase) target) > 0)
+			((EntityPlayer) user).addExperience(target.isEntityInvulnerable() ? 0 : 1);
 		return super.onAttack(is, user, target);
+	}
+
+	@Override
+	public void onKnifeThrow(ItemStack is, EntityLivingBase user, IaSEntityKnifeBase knife) {
+		final Entity victim = user.worldObj.findNearestEntityWithinAABB(EntityLivingBase.class,
+				AxisAlignedBB.getBoundingBox(user.posX - 12, user.posY - 16, user.posZ - 12, user.posX + 12,
+						user.posY + 8, user.posZ + 12),
+				user);
+		if (victim != null && EnumIaSAspect.getAspect(victim) != EnumIaSAspect.getAspect(user))
+			knife.setThrowableHeading(victim.posX - user.posX,
+					victim.posY - user.posY + victim.getEyeHeight() - user.getEyeHeight() + 0.5,
+					victim.posZ - user.posZ, 2F, 0.0F);
 	}
 
 	@Override
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z, Block bl) {
 		final int metadata = w.getBlockMetadata(x, y, z);
 		final boolean getXP = bl.canHarvestBlock(user, metadata) && bl.getHarvestLevel(metadata) >= 1;
-		user.addExperience(getXP?1:0);
+		user.addExperience(getXP ? 1 : 0);
 		return super.onPreHarvest(is, user, w, x, y, z, bl);
 	}
 }

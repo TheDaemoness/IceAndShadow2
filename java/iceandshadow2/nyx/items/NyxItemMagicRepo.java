@@ -32,10 +32,9 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 			final Object mat = IaSToolMaterial.extractMaterial(catalyst);
 			final NBTTagCompound tg = catalyst.getTagCompound();
 			if (tg.hasKey("ench") && mat != IaSRegistry.getToolMaterial("Cortra")) {
-				for (int i = 0; i < 4; ++i) {
+				for (int i = 0; i < 4; ++i)
 					if (catalyst.getItem() == IaSTools.armorCortra[i])
 						return 0;
-				}
 				return 120;
 			}
 		} else if (catalyst.getItem() == this && catalyst.getItemDamage() == 1 && target.isItemEnchantable())
@@ -49,12 +48,11 @@ public class NyxItemMagicRepo extends IaSBaseItemSingle implements IIaSApiTransm
 			target.setItemDamage(1);
 			synchronized (catalyst) { // Dodge concurrent access issues?
 				final Map<Integer, Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
-				for (final Integer i : ench.keySet()) {
+				for (final Integer i : ench.keySet())
 					if (ench.get(i).intValue() <= 1)
 						ench.remove(i);
 					else
 						ench.put(i, ench.get(i) - 1);
-				}
 				EnchantmentHelper.setEnchantments(ench, target);
 				EnchantmentHelper.setEnchantments(ench, catalyst);
 				if (ench.isEmpty())

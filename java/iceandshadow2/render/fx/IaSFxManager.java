@@ -78,9 +78,9 @@ public class IaSFxManager {
 			return new EntityFlameFX(woild, x, y, z, velX, velY, velZ);
 		else if (name == "vanilla_smoke")
 			return new EntitySmokeFX(woild, x, y, z, velX, velY, velZ);
-		else if (name == "poisonSmoke") {
+		else if (name == "poisonSmoke")
 			efx = new EntityFxToxicMist(woild, x, y, z);
-		} else if (name == "shadowSmokeSmall") {
+		else if (name == "shadowSmokeSmall") {
 			efx = new EntityReddustFX(woild, x, y, z, 2.0F, 0.005F, 0.0F, 0.0F);
 			efx.setRBGColorF(0.005F, 0.0F, 0.0F);
 		} else if (name == "shadowSmokeLarge") {

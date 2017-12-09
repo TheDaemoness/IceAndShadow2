@@ -11,7 +11,7 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 	EntityNyxSkeleton skel;
 
 	public EntityAINyxSkeletonWeaponSwitch(EntityNyxSkeleton skello) {
-		this.skel = skello;
+		skel = skello;
 		setMutexBits(1);
 	}
 
@@ -24,26 +24,25 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		final EntityLivingBase entityliving = this.skel.getAttackTarget();
+		final EntityLivingBase entityliving = skel.getAttackTarget();
 		if (entityliving != null) {
-			if (this.skel.getHeldItem() == null && this.skel.getReserveWeapon() != null)
+			if (skel.getHeldItem() == null && skel.getReserveWeapon() != null)
 				return true;
-			if (this.skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
-				if (this.skel.isUsingAlternateWeapon()) {
-					if (this.skel.isPotionActive(Potion.moveSlowdown.id)
-							&& this.skel.getDistanceSqToEntity(entityliving) > 9)
+			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT)
+				if (skel.isUsingAlternateWeapon()) {
+					if (skel.isPotionActive(Potion.moveSlowdown.id)
+							&& skel.getDistanceSqToEntity(entityliving) > 9)
 						return true;
-					if (this.skel.getDistanceSqToEntity(entityliving) > 25)
+					if (skel.getDistanceSqToEntity(entityliving) > 25)
 						return true;
 				} else {
-					if (this.skel.isPotionActive(Potion.moveSlowdown.id)
-							&& this.skel.getDistanceSqToEntity(entityliving) < 4)
+					if (skel.isPotionActive(Potion.moveSlowdown.id)
+							&& skel.getDistanceSqToEntity(entityliving) < 4)
 						return true;
-					if (!this.skel.isPotionActive(Potion.moveSlowdown.id)
-							&& this.skel.getDistanceSqToEntity(entityliving) < 16)
+					if (!skel.isPotionActive(Potion.moveSlowdown.id)
+							&& skel.getDistanceSqToEntity(entityliving) < 16)
 						return true;
 				}
-			}
 		}
 		return false;
 	}
@@ -53,19 +52,17 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 	 */
 	@Override
 	public void startExecuting() {
-		final EntityLivingBase entityliving = this.skel.getAttackTarget();
-		if (entityliving != null) {
-			if (this.skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
-				if (this.skel.isUsingAlternateWeapon())
-					this.skel.useAlternateWeapon(false);
+		final EntityLivingBase entityliving = skel.getAttackTarget();
+		if (entityliving != null)
+			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
+				if (skel.isUsingAlternateWeapon())
+					skel.useAlternateWeapon(false);
 				else
-					this.skel.useAlternateWeapon(true);
-			} else if (this.skel.getHeldItem() == null) {
-				if (this.skel.isUsingAlternateWeapon())
-					this.skel.useAlternateWeapon(false);
+					skel.useAlternateWeapon(true);
+			} else if (skel.getHeldItem() == null)
+				if (skel.isUsingAlternateWeapon())
+					skel.useAlternateWeapon(false);
 				else
-					this.skel.useAlternateWeapon(true);
-			}
-		}
+					skel.useAlternateWeapon(true);
 	}
 }

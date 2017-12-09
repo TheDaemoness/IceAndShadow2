@@ -2,7 +2,6 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
-import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
@@ -22,8 +21,8 @@ public class NyxWorldProvider extends WorldProvider {
 	public static final Vec3 NYX_COLOR = Vec3.createVectorHelper(0.0, 0.02F, 0.05F);
 
 	public NyxWorldProvider() {
-		this.isHellWorld = false;
-		this.hasNoSky = true;
+		isHellWorld = false;
+		hasNoSky = true;
 		registerWorldChunkManager();
 	}
 
@@ -34,8 +33,8 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public void calculateInitialWeather() {
-		this.worldObj.getWorldInfo().setRaining(false);
-		this.worldObj.getWorldInfo().setThundering(false);
+		worldObj.getWorldInfo().setRaining(false);
+		worldObj.getWorldInfo().setThundering(false);
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public IChunkProvider createChunkGenerator() {
-		return new NyxChunkProvider(this.worldObj, this.worldObj.getSeed(), true);
+		return new NyxChunkProvider(worldObj, worldObj.getSeed(), true);
 	}
 
 	@Override
@@ -74,13 +73,13 @@ public class NyxWorldProvider extends WorldProvider {
 		final float f = 0.005F;
 		for (int i = 0; i <= 15; ++i) {
 			final float var3 = 1.0F - i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F) * (1.0F - f) + f;
+			lightBrightnessTable[i] = (1.0F - var3) / (var3 * 2.0F + 2.0F) * (1.0F - f) + f;
 		}
 	}
 
 	@Override
 	public BiomeGenBase getBiomeGenForCoords(int x, int z) {
-		return this.worldChunkMgr.getBiomeGenAt(x, z);
+		return worldChunkMgr.getBiomeGenAt(x, z);
 	}
 
 	@Override
@@ -134,7 +133,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public ChunkCoordinates getSpawnPoint() {
-		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(this.worldObj, 0, 0), 0);
+		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(worldObj, 0, 0), 0);
 	}
 
 	@Override
@@ -162,9 +161,9 @@ public class NyxWorldProvider extends WorldProvider {
 		GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
 		biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
 
-		this.worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer, biomesIndexLayer, this.worldObj);
-		this.dimensionId = IaSFlags.dim_nyx_id;
-		this.hasNoSky = true;
+		worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer, biomesIndexLayer, worldObj);
+		dimensionId = IaSFlags.dim_nyx_id;
+		hasNoSky = true;
 	}
 
 	@Override

@@ -8,23 +8,23 @@ public abstract class IaSSenseOld {
 	protected double dist;
 
 	public IaSSenseOld(EntityLivingBase elb, double range) {
-		this.owner = elb;
-		this.dist = range;
+		owner = elb;
+		dist = range;
 	}
 
 	public abstract boolean canSense(Entity ent);
 
 	public double getRange() {
-		return this.dist;
+		return dist;
 	}
 
 	protected boolean isInRange(Entity ent) {
 		final double range = getRange();
-		return this.owner.getDistanceSqToEntity(ent) < range * range;
+		return owner.getDistanceSqToEntity(ent) < range * range;
 	}
-	
+
 	protected boolean isInRange(Entity ent, float mod) {
-		final double range = getRange()*mod;
-		return this.owner.getDistanceSqToEntity(ent) < range * range;
+		final double range = getRange() * mod;
+		return owner.getDistanceSqToEntity(ent) < range * range;
 	}
 }

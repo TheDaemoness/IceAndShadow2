@@ -13,24 +13,24 @@ public class IaSConfigManager {
 	private final int exp_maj, exp_min;
 
 	public IaSConfigManager(File cfgFile, int maj, int min) {
-		this.config = cfgFile;
-		this.exp_maj = maj;
-		this.exp_min = min;
-		this.needs_write = !cfgFile.exists();
-		if (!this.needs_write)
-			this.needs_write = read();
-		if (this.needs_write)
+		config = cfgFile;
+		exp_maj = maj;
+		exp_min = min;
+		needs_write = !cfgFile.exists();
+		if (!needs_write)
+			needs_write = read();
+		if (needs_write)
 			write();
 	}
 
 	public boolean needsWrite() {
-		return this.needs_write;
+		return needs_write;
 	}
 
 	public boolean read() {
 		Scanner lis;
 		try {
-			lis = new Scanner(this.config);
+			lis = new Scanner(config);
 		} catch (final FileNotFoundException e) {
 			IceAndShadow2.getLogger().warn("Could not open config file for reading");
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class IaSConfigManager {
 			lis.close();
 			return true;
 		}
-		if (Integer.parseInt(config_ver[1]) != this.exp_maj) {
+		if (Integer.parseInt(config_ver[1]) != exp_maj) {
 			IceAndShadow2.getLogger().error("Incompatible configuration file version (will overwrite)");
 			lis.close();
 			return true;
@@ -147,19 +147,19 @@ public class IaSConfigManager {
 			}
 		}
 		lis.close();
-		return Integer.parseInt(config_ver[2]) < this.exp_min;
+		return Integer.parseInt(config_ver[2]) < exp_min;
 	}
 
 	public void write() {
 		PrintWriter ecris;
 		try {
-			ecris = new PrintWriter(this.config);
+			ecris = new PrintWriter(config);
 		} catch (final FileNotFoundException e) {
 			IceAndShadow2.getLogger().warn("Could not open config file for writing");
 			e.printStackTrace();
 			return;
 		}
-		ecris.println("version " + this.exp_maj + ' ' + this.exp_min);
+		ecris.println("version " + exp_maj + ' ' + exp_min);
 		ecris.println("#https://github.com/TheRabbitologist/IceAndShadow2/wiki/Configuration-File-Settings");
 		ecris.println();
 		for (final Field f : IaSFlags.class.getFields()) {

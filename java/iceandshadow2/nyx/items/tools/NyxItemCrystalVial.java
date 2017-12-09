@@ -28,18 +28,17 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return this.extractor;
-		return this.itemIcon;
+			return extractor;
+		return itemIcon;
 	}
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this)
 			return 0;
-		if (target.getItemDamage() == 1) {
+		if (target.getItemDamage() == 1)
 			if (catalyst.getItem() == NyxItems.toxicCore && catalyst.getItemDamage() == 0)
 				return 160;
-		}
 		return 0;
 	}
 
@@ -58,8 +57,8 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.extractor = reg.registerIcon(getTexName() + "Extractor");
+		itemIcon = reg.registerIcon(getTexName());
+		extractor = reg.registerIcon(getTexName() + "Extractor");
 	}
 
 	@Override

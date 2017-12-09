@@ -7,7 +7,6 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
 import iceandshadow2.util.IaSEntityHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,21 +32,6 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
-			Explosion p_149723_5_) {
-		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
-				p_149723_1_.rand.nextBoolean() ? Blocks.air : NyxBlocks.brickExousicCracked);
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
-			int p_149664_5_) {
-		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
-		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.brickExousicCracked);
-	}
-
-	@Override
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
 		return false;
 	}
@@ -65,6 +49,21 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return null;
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
+			Explosion p_149723_5_) {
+		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
+		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_,
+				p_149723_1_.rand.nextBoolean() ? Blocks.air : NyxBlocks.brickExousicCracked);
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
+			int p_149664_5_) {
+		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
+		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.brickExousicCracked);
 	}
 
 	@Override

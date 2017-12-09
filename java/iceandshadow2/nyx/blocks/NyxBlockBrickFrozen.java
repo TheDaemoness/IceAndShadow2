@@ -13,7 +13,7 @@ public class NyxBlockBrickFrozen extends IaSBaseBlockSingle {
 		this.setHarvestLevel("pickaxe", 0);
 		setLightOpacity(12);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.FROZEN;

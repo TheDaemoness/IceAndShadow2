@@ -28,8 +28,8 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	public EntityNyxSpider(World par1World) {
 		super(par1World);
 		setSize(0.7F, 0.5F);
-		this.experienceValue = 4;
-		this.maxHurtResistantTime /= 2;
+		experienceValue = 4;
+		maxHurtResistantTime /= 2;
 		setInvisible(true);
 	}
 
@@ -53,7 +53,7 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		setInvisible(false);
 
-		final float dmg = (IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 2 : 1)
+		final float dmg = (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 2 : 1)
 				+ IaSWorldHelper.getRegionArmorMod(this);
 
 		final DamageSource dmgsrc = DamageSource.causeMobDamage(this);
@@ -62,8 +62,8 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 
 		if (flag) {
 			if (par1Entity instanceof EntityLivingBase) {
-				final int lvl = IaSWorldHelper.getDifficulty(this.worldObj) - 1;
-				int mod = IaSWorldHelper.getDifficulty(this.worldObj) >= 3 ? 225 : 275;
+				final int lvl = IaSWorldHelper.getDifficulty(worldObj) - 1;
+				int mod = IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 225 : 275;
 				final EntityLivingBase elb = (EntityLivingBase) par1Entity;
 				final boolean hometurf = IaSEntityHelper.getBiome(elb) == NyxBiomes.nyxInfested;
 				if (!elb.isPotionActive(Potion.poison))
@@ -74,14 +74,13 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 				elb.addPotionEffect(new PotionEffect(Potion.weakness.id, mod + 90, lvl + (hometurf ? 1 : 0)));
 			}
 			return true;
-		} else {
+		} else
 			return false;
-		}
 	}
 
 	protected void doUncloakSound() {
-		this.worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwisp_materialize",
-				1.0F - IaSWorldHelper.getDifficulty(this.worldObj) * 0.10F, this.rand.nextFloat() * 0.2F + 0.9F);
+		worldObj.playSoundAtEntity(this, "IceAndShadow2:mob_nyxwisp_materialize",
+				1.0F - IaSWorldHelper.getDifficulty(worldObj) * 0.10F, rand.nextFloat() * 0.2F + 0.9F);
 	}
 
 	/**
@@ -95,22 +94,22 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 			return;
 
 		if (isInvisible())
-			dropItem(Items.experience_bottle, 1 + this.rand.nextInt(2 + par2));
+			dropItem(Items.experience_bottle, 1 + rand.nextInt(2 + par2));
 
-		final int diff = IaSWorldHelper.getDifficulty(this.worldObj);
-		final int baite = this.rand.nextInt(Math.max(1, 8 - diff) + par2) - par2;
+		final int diff = IaSWorldHelper.getDifficulty(worldObj);
+		final int baite = rand.nextInt(Math.max(1, 8 - diff) + par2) - par2;
 		if (baite <= 0)
 			dropItem(NyxItems.toughGossamer, 1);
 
-		if (this.rand.nextInt(5) < 2 + diff)
-			dropItem(NyxItems.resin, this.rand.nextInt(3) < par2 - 1 ? 2 : 1);
+		if (rand.nextInt(5) < 2 + diff)
+			dropItem(NyxItems.resin, rand.nextInt(3) < par2 - 1 ? 2 : 1);
 
-		this.worldObj.spawnEntityInWorld(new EntityOrbNourishment(this.worldObj, this.posX, this.posY, this.posZ, 1));
+		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 1));
 	}
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		if (this.rand.nextBoolean())
+		if (rand.nextBoolean())
 			dropItem(NyxItems.alabasterShard, 1);
 	}
 
@@ -121,7 +120,7 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	@Override
 	protected Entity findPlayerToAttack() {
 		final double range = this.isPotionActive(Potion.blindness.id) ? 2.0D : 12.0D;
-		final EntityPlayer plai = this.worldObj.getClosestVulnerablePlayerToEntity(this, range);
+		final EntityPlayer plai = worldObj.getClosestVulnerablePlayerToEntity(this, range);
 
 		if (plai != null && !plai.isInvisible()) {
 			if (isInvisible()) {
@@ -140,6 +139,11 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 			playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
+	}
+
 	public float getAttackStrength(Entity par1Entity) {
 		return 5.0F;
 	}
@@ -148,7 +152,7 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	public float getBlockPathWeight(int i, int j, int k) {
 		if (getAttackTarget() != null)
 			return 1;
-		final int lightb = this.worldObj.getBlockLightValue(i, j, k);
+		final int lightb = worldObj.getBlockLightValue(i, j, k);
 		return lightb > 7 ? 0 : 1;
 	}
 
@@ -168,7 +172,7 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 		final int wl = IaSWorldHelper.getRegionLevel(this);
 		if (wl < 1)
 			return false;
-		return this.posY > 64.0F && super.getCanSpawnHere();
+		return posY > 64.0F && super.getCanSpawnHere();
 	}
 
 	@Override
@@ -202,9 +206,9 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	}
 
 	public double getScaledMaxHealth() {
-		if (this.worldObj == null)
+		if (worldObj == null)
 			return 16.0;
-		final double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(this.worldObj);
+		final double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(worldObj);
 		return hp;
 	}
 
@@ -218,9 +222,8 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 		final Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
 
 		// No spider wisp jokeys.
-		if (this.riddenByEntity != null) {
-			this.riddenByEntity.setDead();
-		}
+		if (riddenByEntity != null)
+			riddenByEntity.setDead();
 
 		return (IEntityLivingData) par1EntityLivingData1;
 	}
@@ -237,10 +240,5 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 			doUncloakSound();
 			setInvisible(false);
 		}
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.INFESTATION;
 	}
 }

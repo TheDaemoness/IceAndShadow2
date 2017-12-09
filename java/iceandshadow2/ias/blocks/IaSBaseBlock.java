@@ -18,14 +18,19 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
-		this.MODULE = mod;
+		MODULE = mod;
 		if (mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock))
 			setCreativeTab(IaSCreativeTabs.blocks);
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
+	}
+
+	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -39,9 +44,9 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 	}
 
 	public IaSBaseBlock setLightColor(float r, float g, float b) {
-		this.lightRed = r;
-		this.lightGreen = g;
-		this.lightBlue = b;
+		lightRed = r;
+		lightGreen = g;
+		lightBlue = b;
 		return this;
 	}
 
@@ -51,10 +56,5 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 			setLightOpacity(14);
 		setLightLevel(lum);
 		return this;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return null;
 	}
 }

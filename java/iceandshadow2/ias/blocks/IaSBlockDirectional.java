@@ -28,36 +28,29 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	public IIcon getIcon(int side, int meta) {
 
 		// Connector
-		if ((meta & 0xB) == 0xB) {
-			return this.blockIcon;
-		}
-
-		// East-West
+		if ((meta & 0xB) == 0xB)
+			return blockIcon;
 		else if ((meta & 0x4) == 0x4) {
 			if (side == 4 || side == 5)
-				return this.blockIcon;
+				return blockIcon;
 			else if (side == 0 || side == 1)
-				return this.iconSide;
+				return iconSide;
 			else
-				return this.iconSide;
+				return iconSide;
 		}
 
 		// North-South
 		else if ((meta & 0x8) == 0x8) {
 			if (side == 2 || side == 3)
-				return this.blockIcon;
+				return blockIcon;
 			else if (side == 0 || side == 1)
-				return this.iconSide;
+				return iconSide;
 			else
-				return this.iconSide;
-		}
-		// Up-down
-		else {
-			if (side == 0 || side == 1)
-				return this.blockIcon;
-			else
-				return this.iconSide;
-		}
+				return iconSide;
+		} else if (side == 0 || side == 1)
+			return blockIcon;
+		else
+			return iconSide;
 	}
 
 	@Override
@@ -91,7 +84,7 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(getTexName() + "Top");
-		this.iconSide = reg.registerIcon(getTexName() + "Side");
+		blockIcon = reg.registerIcon(getTexName() + "Top");
+		iconSide = reg.registerIcon(getTexName() + "Side");
 	}
 }

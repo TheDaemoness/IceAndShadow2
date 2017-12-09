@@ -23,71 +23,70 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public IIaSApiTransmute handler;
 
 	public boolean canAttemptTransmutation() {
-		return this.catalyst != null && this.target != null;
+		return catalyst != null && target != null;
+	}
+
+	public boolean canPlace(ItemStack is) {
+		final EnumIaSAspect a = EnumIaSAspect.getAspect(is);
+		return a != EnumIaSAspect.DRACONIUM && a != EnumIaSAspect.BLOOD;
 	}
 
 	public void dropItems() {
-		if (!this.worldObj.isRemote) {
-			if (this.catalyst != null) {
-				final EntityItem cat = new EntityItem(this.worldObj, this.xCoord + 0.5F, this.yCoord + 0.80F,
-						this.zCoord + 0.5F, this.catalyst);
-				this.worldObj.spawnEntityInWorld(cat);
+		if (!worldObj.isRemote) {
+			if (catalyst != null) {
+				final EntityItem cat = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F,
+						zCoord + 0.5F, catalyst);
+				worldObj.spawnEntityInWorld(cat);
 			}
-			if (this.target != null) {
-				final EntityItem tar = new EntityItem(this.worldObj, this.xCoord + 0.5F, this.yCoord + 0.80F,
-						this.zCoord + 0.5F, this.target);
-				this.worldObj.spawnEntityInWorld(tar);
+			if (target != null) {
+				final EntityItem tar = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F,
+						zCoord + 0.5F, target);
+				worldObj.spawnEntityInWorld(tar);
 			}
 		}
-		this.target = null;
-		this.catalyst = null;
+		target = null;
+		catalyst = null;
 	}
 
 	@Override
 	public Packet getDescriptionPacket() {
 		final NBTTagCompound syncData = new NBTTagCompound();
 		writeToNBT(syncData);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, syncData);
 	}
 
 	public boolean handlePlace(EntityPlayer ep, ItemStack is) {
-		if (!(is.getItem() instanceof IIaSApiTransmuteLens)) {
-			if (this.catalyst == null) {
-				this.catalyst = is;
+		if (!(is.getItem() instanceof IIaSApiTransmuteLens))
+			if (catalyst == null) {
+				catalyst = is;
 				return true;
 			}
-		}
-		if (this.target == null) {
-			if(!canPlace(is)) {
+		if (target == null) {
+			if (!canPlace(is)) {
 				IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
 				return false;
 			}
-			this.target = is;
+			target = is;
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean canPlace(ItemStack is) {
-		final EnumIaSAspect a = EnumIaSAspect.getAspect(is);
-		return a != EnumIaSAspect.DRACONIUM && a != EnumIaSAspect.BLOOD;
-	}
 
 	public ItemStack handleRemove(boolean isSneaking) {
 		final boolean lensFlag;
-		if (this.target != null)
-			lensFlag = this.target.getItem() instanceof IIaSApiTransmuteLens;
+		if (target != null)
+			lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
 		else
 			lensFlag = false;
 		ItemStack temp;
-		if (this.target != null && (!lensFlag || isSneaking)) {
-			temp = this.target;
-			this.target = null;
+		if (target != null && (!lensFlag || isSneaking)) {
+			temp = target;
+			target = null;
 			return temp;
 		}
-		if (this.catalyst != null) {
-			temp = this.catalyst;
-			this.catalyst = null;
+		if (catalyst != null) {
+			temp = catalyst;
+			catalyst = null;
 			return temp;
 		}
 		return null;
@@ -101,26 +100,26 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound par1) {
 		super.readFromNBT(par1);
-		this.target = new ItemStack(Items.egg);
-		this.catalyst = new ItemStack(Items.feather);
+		target = new ItemStack(Items.egg);
+		catalyst = new ItemStack(Items.feather);
 
 		if (par1.hasKey("nyxItemTarget"))
-			this.target.readFromNBT(par1.getCompoundTag("nyxItemTarget"));
+			target.readFromNBT(par1.getCompoundTag("nyxItemTarget"));
 		else
-			this.target = null;
+			target = null;
 
 		if (par1.hasKey("nyxItemCatalyst"))
-			this.catalyst.readFromNBT(par1.getCompoundTag("nyxItemCatalyst"));
+			catalyst.readFromNBT(par1.getCompoundTag("nyxItemCatalyst"));
 		else
-			this.catalyst = null;
+			catalyst = null;
 
 		if (canAttemptTransmutation())
-			this.handler = IaSRegistry.getHandlerTransmutation(this.target, this.catalyst);
+			handler = IaSRegistry.getHandlerTransmutation(target, catalyst);
 	}
 
 	public void scheduleUpdate(int x, int y, int z, int time) {
-		final Entity cd = new EntityTransmutationCountdown(this.worldObj, x, y, z, time);
-		this.worldObj.spawnEntityInWorld(cd);
+		final Entity cd = new EntityTransmutationCountdown(worldObj, x, y, z, time);
+		worldObj.spawnEntityInWorld(cd);
 	}
 
 	@Override
@@ -128,14 +127,14 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		super.writeToNBT(par1);
 
 		NBTTagCompound eyetemme;
-		if (this.target != null) {
+		if (target != null) {
 			eyetemme = par1.getCompoundTag("nyxItemTarget");
-			this.target.writeToNBT(eyetemme);
+			target.writeToNBT(eyetemme);
 			par1.setTag("nyxItemTarget", eyetemme);
 		}
-		if (this.catalyst != null) {
+		if (catalyst != null) {
 			eyetemme = par1.getCompoundTag("nyxItemCatalyst");
-			this.catalyst.writeToNBT(eyetemme);
+			catalyst.writeToNBT(eyetemme);
 			par1.setTag("nyxItemCatalyst", eyetemme);
 		}
 	}

@@ -43,11 +43,6 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		setLightColor(1.0F, 0.60F, 0.80F);
 		setLuminescence(0.2F);
 	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.ANCIENT;
-	}
 
 	public void doTPFX(World theWorld, double posX, double posY, double posZ, int modX, int modZ) {
 		theWorld.playSoundEffect(posX, posY, posZ, "mob.endermen.portal", 1.0F,
@@ -58,12 +53,17 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					theWorld.rand.nextGaussian() * (modZ / NyxBlockGatestone.RANGE));
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.ANCIENT;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2) {
 		if (par2 > 2)
 			par2 = 2;
-		return par1 == 1 ? this.iconTop[par2] : this.blockIcon;
+		return par1 == 1 ? iconTop[par2] : blockIcon;
 	}
 
 	@Override
@@ -95,12 +95,10 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 				if (!par5EntityPlayer.capabilities.isCreativeMode)
 					par5EntityPlayer.getEquipmentInSlot(0).stackSize -= 1;
 				if (par1World.getBlockMetadata(x, y, z) == 0) {
-					for (int xit = -1; xit <= 1; ++xit) {
-						for (int zit = -1; zit <= 1; ++zit) {
+					for (int xit = -1; xit <= 1; ++xit)
+						for (int zit = -1; zit <= 1; ++zit)
 							if (par1World.getBlock(x + xit, y - 1, z + zit) == Blocks.obsidian)
 								par1World.setBlock(x + xit, y - 1, z + zit, NyxBlocks.cryingObsidian, 0, 0x2);
-						}
-					}
 					par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, x, y, z));
 				}
 			}
@@ -115,7 +113,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 			return;
 		if (theEntity.dimension != IaSFlags.dim_nyx_id)
 			return;
-		if (!(theEntity instanceof EntityMob)) {
+		if (!(theEntity instanceof EntityMob))
 			if (theEntity instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) theEntity;
 				if (!elb.isSprinting())
@@ -127,21 +125,18 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 						dir = ForgeDirection.EAST;
 					else
 						dir = ForgeDirection.WEST;
-				} else {
-					if (v.zCoord > 0)
-						dir = ForgeDirection.SOUTH;
-					else
-						dir = ForgeDirection.NORTH;
-				}
+				} else if (v.zCoord > 0)
+					dir = ForgeDirection.SOUTH;
+				else
+					dir = ForgeDirection.NORTH;
 				final int posXMod = NyxBlockGatestone.RANGE * dir.offsetX;
 				final int posZMod = NyxBlockGatestone.RANGE * dir.offsetZ;
 				int posYNew = theWorld.getTopSolidOrLiquidBlock(x + posXMod, z + posZMod) + 1;
-				for (int gateY = posYNew; gateY >= 0; --gateY) {
+				for (int gateY = posYNew; gateY >= 0; --gateY)
 					if (theWorld.getBlock(x + posXMod, gateY, z + posZMod) == this) {
 						posYNew = gateY;
 						break;
 					}
-				}
 				doTPFX(theWorld, elb.posX, elb.posY, elb.posZ, posXMod, posZMod);
 				if (!theWorld.isRemote)
 					elb.setPositionAndUpdate(x + 0.5 + posXMod, posYNew, x + 0.5 + posZMod);
@@ -149,7 +144,6 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 						3.0F + 2.0F * IaSWorldHelper.getDifficulty(theWorld));
 				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod, posXMod, posZMod);
 			}
-		}
 	}
 
 	@Override
@@ -176,10 +170,10 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.iconTop = new IIcon[3];
+		iconTop = new IIcon[3];
 		for (int i = 0; i <= 2; ++i)
-			this.iconTop[i] = reg.registerIcon(getTexName() + "Top" + i);
-		this.blockIcon = reg.registerIcon(getTexName() + "Side");
+			iconTop[i] = reg.registerIcon(getTexName() + "Top" + i);
+		blockIcon = reg.registerIcon(getTexName() + "Side");
 	}
 
 	/**

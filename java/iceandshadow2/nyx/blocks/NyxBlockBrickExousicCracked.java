@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.nyx.NyxBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -10,7 +9,8 @@ public class NyxBlockBrickExousicCracked extends NyxBlockBrickExousic {
 		super(id);
 		setResistance(NyxBlockStone.RESISTANCE / 2);
 		setHardness(NyxBlockStone.HARDNESS / 2);
-		//Note: these break to stone memories as a form of opportunism by Nyx's stone. Nyx hates exousium.
+		// Note: these break to stone memories as a form of opportunism by Nyx's
+		// stone. Nyx hates exousium.
 	}
 
 	@Override

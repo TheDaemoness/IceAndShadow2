@@ -46,6 +46,11 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
+	}
+
+	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -54,12 +59,12 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (dmg == 2)
-			return this.crystalIcon[pass];
+			return crystalIcon[pass];
 		if (dmg == 1)
-			return this.rockIcon[pass];
+			return rockIcon[pass];
 		if (pass == 0)
-			return this.dustIconGlow;
-		return this.itemIcon;
+			return dustIconGlow;
+		return itemIcon;
 	}
 
 	@Override
@@ -137,16 +142,16 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.rockIcon = new IIcon[2];
-		this.crystalIcon = new IIcon[2];
+		rockIcon = new IIcon[2];
+		crystalIcon = new IIcon[2];
 
-		this.itemIcon = reg.registerIcon(getTexName() + "Dust");
-		this.rockIcon[1] = reg.registerIcon(getTexName() + "Rock");
-		this.crystalIcon[1] = reg.registerIcon(getTexName() + "Crystal");
+		itemIcon = reg.registerIcon(getTexName() + "Dust");
+		rockIcon[1] = reg.registerIcon(getTexName() + "Rock");
+		crystalIcon[1] = reg.registerIcon(getTexName() + "Crystal");
 
-		this.dustIconGlow = reg.registerIcon(getTexName() + "DustGlow");
-		this.rockIcon[0] = reg.registerIcon(getTexName() + "RockGlow");
-		this.crystalIcon[0] = reg.registerIcon(getTexName() + "CrystalGlow");
+		dustIconGlow = reg.registerIcon(getTexName() + "DustGlow");
+		rockIcon[0] = reg.registerIcon(getTexName() + "RockGlow");
+		crystalIcon[0] = reg.registerIcon(getTexName() + "CrystalGlow");
 	}
 
 	@Override
@@ -163,11 +168,6 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.EXOUSIUM;
 	}
 
 }

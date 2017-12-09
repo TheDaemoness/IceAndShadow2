@@ -19,13 +19,18 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, II
 		super(mat);
 		setBlockName(mod.prefix + texName);
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		this.MODULE = mod;
-		this.setCreativeTab(IaSCreativeTabs.blocks);
+		MODULE = mod;
+		setCreativeTab(IaSCreativeTabs.blocks);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -35,22 +40,17 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, II
 
 	@Override
 	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + this.MODULE.prefix + getModName();
+		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side == ForgeDirection.UP;
 	}
 
 	public final IaSBaseBlockFalling register() {
 		IaSRegistration.register(this);
 		return this;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return null;
-	}
-	
-	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return side == ForgeDirection.UP;
 	}
 
 }

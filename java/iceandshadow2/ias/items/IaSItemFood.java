@@ -23,17 +23,22 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 		setEatTime(32);
 		setUnlocalizedName(mod.prefix + texName);
 		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		this.MODULE = mod;
+		MODULE = mod;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return null;
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return this.consume;
+		return consume;
 	}
 
 	@Override
@@ -53,7 +58,7 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 
 	@Override
 	public float getXpValue(ItemStack is, Random rand) {
-		return this.xpAltarValue;
+		return xpAltarValue;
 	}
 
 	public final IaSItemFood register() {
@@ -62,18 +67,13 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	}
 
 	public IaSItemFood setEatTime(int eat) {
-		this.consume = eat;
+		consume = eat;
 		return this;
 	}
 
 	public IaSItemFood setXpAltarMinimumValue(int val) {
-		this.xpAltarValue = val;
+		xpAltarValue = val;
 		return this;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return null;
 	}
 
 }

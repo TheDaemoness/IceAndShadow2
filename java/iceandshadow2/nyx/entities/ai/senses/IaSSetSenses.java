@@ -14,42 +14,41 @@ public class IaSSetSenses extends IaSSenseOld implements Set<IaSSenseOld> {
 
 	public IaSSetSenses(EntityLivingBase elb) {
 		super(elb, 0.0);
-		this.senses = new ArrayList<IaSSenseOld>();
+		senses = new ArrayList<IaSSenseOld>();
 	}
 
 	@Override
 	public boolean add(IaSSenseOld sense) {
-		this.dist = Math.max(this.dist, sense.getRange());
-		return this.senses.add(sense);
+		dist = Math.max(dist, sense.getRange());
+		return senses.add(sense);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends IaSSenseOld> c) {
-		return this.senses.addAll(c);
+		return senses.addAll(c);
 	}
 
 	@Override
 	public boolean canSense(Entity ent) {
-		for (final IaSSenseOld s : this.senses) {
+		for (final IaSSenseOld s : senses)
 			if (s.canSense(ent))
 				return true;
-		}
 		return false;
 	}
 
 	@Override
 	public void clear() {
-		this.senses.clear();
+		senses.clear();
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		return this.senses.contains(o);
+		return senses.contains(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return this.senses.containsAll(c);
+		return senses.containsAll(c);
 	}
 
 	@Override
@@ -59,36 +58,36 @@ public class IaSSetSenses extends IaSSenseOld implements Set<IaSSenseOld> {
 
 	@Override
 	public Iterator<IaSSenseOld> iterator() {
-		return this.senses.iterator();
+		return senses.iterator();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return this.senses.remove(o);
+		return senses.remove(o);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return this.senses.removeAll(c);
+		return senses.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return this.senses.retainAll(c);
+		return senses.retainAll(c);
 	}
 
 	@Override
 	public int size() {
-		return this.senses.size();
+		return senses.size();
 	}
 
 	@Override
 	public Object[] toArray() {
-		return this.senses.toArray();
+		return senses.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return this.senses.toArray(a);
+		return senses.toArray(a);
 	}
 }

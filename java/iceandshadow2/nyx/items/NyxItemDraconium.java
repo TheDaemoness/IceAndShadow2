@@ -31,6 +31,11 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.DRACONIUM;
+	}
+
+	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -39,8 +44,8 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 1)
-			return this.smallIcon;
-		return this.itemIcon;
+			return smallIcon;
+		return itemIcon;
 	}
 
 	@Override
@@ -69,8 +74,8 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.smallIcon = reg.registerIcon(getTexName() + "Small");
+		itemIcon = reg.registerIcon(getTexName());
+		smallIcon = reg.registerIcon(getTexName() + "Small");
 	}
 
 	@Override
@@ -87,11 +92,6 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.DRACONIUM;
 	}
 
 }

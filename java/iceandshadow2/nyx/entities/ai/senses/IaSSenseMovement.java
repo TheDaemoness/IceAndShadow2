@@ -17,12 +17,12 @@ public class IaSSenseMovement extends IaSSenseOld {
 			return false;
 		if (ent.fallDistance > 3.25F)
 			return isInRange(ent, 2F);
-		if(ent instanceof EntityLivingBase) {
-			EntityLivingBase elb = (EntityLivingBase)ent;
-			double speed = Math.min(elb.moveStrafing, elb.moveForward);
-			double mod = speed>0?(elb.motionX*elb.motionX + elb.motionZ*elb.motionZ)/speed:1;
-			if(mod > 0.5)
-				return isInRange(ent, (float)mod+(ent.isSprinting()?1:0));
+		if (ent instanceof EntityLivingBase) {
+			final EntityLivingBase elb = (EntityLivingBase) ent;
+			final double speed = Math.min(elb.moveStrafing, elb.moveForward);
+			final double mod = speed > 0 ? (elb.motionX * elb.motionX + elb.motionZ * elb.motionZ) / speed : 1;
+			if (mod > 0.5)
+				return isInRange(ent, (float) mod + (ent.isSprinting() ? 1 : 0));
 		}
 		return false;
 	}

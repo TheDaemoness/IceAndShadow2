@@ -9,7 +9,6 @@ import iceandshadow2.util.gen.Sculptor;
 
 import java.util.Random;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -48,13 +47,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 	 */
 	@Override
 	public boolean canGenerateHere(World var1, Random var2, int x, int y, int z) {
-		for (int xdelta = -36; xdelta <= 36; ++xdelta) {
+		for (int xdelta = -36; xdelta <= 36; ++xdelta)
 			for (int zdelta = -36; zdelta <= 36; ++zdelta)
-				for (int ydelta = -4; ydelta <= 8; ++ydelta) {
+				for (int ydelta = -4; ydelta <= 8; ++ydelta)
 					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickExousic)
 						return false;
-				}
-		}
 		return Math.abs(x) > 16 || Math.abs(z) > 16;
 	}
 
@@ -78,24 +75,21 @@ public class GenRuinsTowerLookout extends GenRuins {
 		}
 
 		final int f = var2.nextInt(4);
-		for (int xdim = -2; xdim <= 2; ++xdim) {
+		for (int xdim = -2; xdim <= 2; ++xdim)
 			for (int zdim = -2; zdim <= 2; ++zdim) {
 
 				// Check to make sure we're dealing with a wall.
-				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2) {
+				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2)
 					// Swiss cheese pass.
-					for (int ydim = 1; ydim < 10; ++ydim) {
-						if (!var1.isAirBlock(x + xdim, y + ydim, z + zdim)) {
-							if (var2.nextInt(5) == 0)
-								var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
-							else if (var2.nextInt(3) == 0)
-								var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
-						}
-					}
-				}
+					for (int ydim = 1; ydim < 10; ++ydim)
+					if (!var1.isAirBlock(x + xdim, y + ydim, z + zdim))
+					if (var2.nextInt(5) == 0)
+					var1.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
+					else if (var2.nextInt(3) == 0)
+					var1.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
 
 				// LADDER!
-				for (int ydim = 10; ydim > -1; --ydim) {
+				for (int ydim = 10; ydim > -1; --ydim)
 					if (f == 0) {
 						if (!var1.isAirBlock(x, y + ydim, z - 2))
 							var1.setBlock(x, y + ydim, z - 1, Blocks.ladder, 0x3, 0x2);
@@ -105,14 +99,12 @@ public class GenRuinsTowerLookout extends GenRuins {
 					} else if (f == 2) {
 						if (!var1.isAirBlock(x, y + ydim, z + 2))
 							var1.setBlock(x, y + ydim, z + 1, Blocks.ladder, 0x2, 0x2);
-					} else if (f == 3) {
+					} else if (f == 3)
 						if (!var1.isAirBlock(x - 2, y + ydim, z))
 							var1.setBlock(x - 1, y + ydim, z, Blocks.ladder, 0x5, 0x2);
-					}
-				}
 
 				// Add an entrance to the tower.
-				for (int ydim = 0; ydim < 2; ++ydim) {
+				for (int ydim = 0; ydim < 2; ++ydim)
 					if (f == 0)
 						var1.setBlockToAir(x, y + ydim, z + 2);
 					else if (f == 1)
@@ -121,9 +113,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 						var1.setBlockToAir(x, y + ydim, z - 2);
 					else
 						var1.setBlockToAir(x + 2, y + ydim, z);
-				}
 			}
-		}
 	}
 
 	@Override
@@ -137,7 +127,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	 */
 	@Override
 	public void rewardPass(World var1, Random var2, int x, int y, int z) {
-		if (var2.nextInt(2+(int)Math.max(0, 2-IaSWorldHelper.getRegionLevel(var1, x, y, z))) == 0)
+		if (var2.nextInt(2 + Math.max(0, 2 - IaSWorldHelper.getRegionLevel(var1, x, y, z))) == 0)
 			return;
 		final int chestpos = var2.nextInt(4);
 
@@ -197,10 +187,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 			// Sword or armor!
 			else if (rewardid < 10) {
 				final int what = var2.nextInt(12);
-				boolean activated = what%3==0;
-				Item[] armors = (activated?IaSTools.armorActiveEchir:IaSTools.armorEchir);
-				Item which = armors[what/3];
-				itemz = new ItemStack(which, 1, activated?0:(which.getMaxDamage()/5+var2.nextInt(which.getMaxDamage()/2)));
+				final boolean activated = what % 3 == 0;
+				final Item[] armors = (activated ? IaSTools.armorActiveEchir : IaSTools.armorEchir);
+				final Item which = armors[what / 3];
+				itemz = new ItemStack(which, 1,
+						activated ? 0 : (which.getMaxDamage() / 5 + var2.nextInt(which.getMaxDamage() / 2)));
 			}
 
 			// Cortra.
@@ -233,7 +224,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			// Ingots.
 			else if (rewardid < 70)
 				itemz = new ItemStack(NyxItems.echirIngot, 2 + var2.nextInt(3), 1);
-			
+
 			else if (rewardid < 80)
 				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(4), 1);
 

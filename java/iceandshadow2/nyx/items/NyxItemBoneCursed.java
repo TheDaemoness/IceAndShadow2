@@ -27,6 +27,11 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	}
 
 	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NYX;
+	}
+
+	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -39,8 +44,8 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (pass == 1)
-			return this.glow;
-		return this.itemIcon;
+			return glow;
+		return itemIcon;
 	}
 
 	@Override
@@ -69,8 +74,8 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
-		this.itemIcon = reg.registerIcon(getTexName());
-		this.glow = reg.registerIcon(getTexName() + "Glow");
+		itemIcon = reg.registerIcon(getTexName());
+		glow = reg.registerIcon(getTexName() + "Glow");
 	}
 
 	@Override
@@ -82,10 +87,5 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NYX;
 	}
 }

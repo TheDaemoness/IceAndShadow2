@@ -2,8 +2,6 @@ package iceandshadow2.nyx.entities.projectile;
 
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
-import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -19,11 +17,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.POISONWOOD;
-	}
 
 	public EntityPoisonBall(World par1World) {
 		super(par1World);
@@ -48,6 +41,11 @@ public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
 		return 0.2F;
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.POISONWOOD;
+	}
+
 	/**
 	 * Gets the amount of gravity to apply to the thrown entity with each tick.
 	 */
@@ -59,7 +57,7 @@ public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
-		IaSFxManager.spawnParticle(this.worldObj, "poisonSmoke", this.posX, this.posY, this.posZ, false, false);
+		IaSFxManager.spawnParticle(worldObj, "poisonSmoke", posX, posY, posZ, false, false);
 	}
 
 	/**
@@ -70,11 +68,12 @@ public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
 
 		if (par1MovingObjectPosition.typeOfHit == MovingObjectType.ENTITY) {
 			final EntityLivingBase victim = (EntityLivingBase) (par1MovingObjectPosition.entityHit);
-			if (this.worldObj.isRemote) {
+			if (worldObj.isRemote) {
 				setDead();
 				return;
 			}
-			if (EnumIaSAspect.getAspect(victim) == EnumIaSAspect.POISONWOOD) {} //NO-OP.
+			if (EnumIaSAspect.getAspect(victim) == EnumIaSAspect.POISONWOOD) {
+			} // NO-OP.
 			else if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase) {
 				if (EnumIaSAspect.getAspect(victim) == EnumIaSAspect.INFESTATION) {
 					victim.attackEntityFrom(DamageSource.wither, 16);
@@ -87,7 +86,7 @@ public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
 						victim.attackEntityFrom(DamageSource.magic, 1);
 					if (victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 						victim.addPotionEffect(new PotionEffect(Potion.wither.id, 165, 1));
-					else if (this.getThrower() instanceof EntityMob) {
+					else if (getThrower() instanceof EntityMob) {
 						final PotionEffect pot = victim.getActivePotionEffect(Potion.poison);
 						if (pot != null)
 							victim.addPotionEffect(new PotionEffect(Potion.poison.id, 125, 1 + pot.getAmplifier()));

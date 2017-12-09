@@ -13,15 +13,15 @@ public class EntityAINyxSearch extends EntityAIBase {
 	protected int seen;
 
 	public EntityAINyxSearch(EntityMob b) {
-		this.taskOwner = b;
+		taskOwner = b;
 		seen = 0;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		if(this.seen > 125 || ((IIaSSensateOld) this.taskOwner).getSense().canSense(this.target)) {
-			((IIaSMobGetters) this.taskOwner).setSearchTarget(null);
-			this.taskOwner.getNavigator().clearPathEntity();
+		if (seen > 125 || ((IIaSSensateOld) taskOwner).getSense().canSense(target)) {
+			((IIaSMobGetters) taskOwner).setSearchTarget(null);
+			taskOwner.getNavigator().clearPathEntity();
 			seen = 0;
 		}
 		return true;
@@ -34,21 +34,21 @@ public class EntityAINyxSearch extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return ((IIaSMobGetters) this.taskOwner).getSearchTarget() != null;
+		return ((IIaSMobGetters) taskOwner).getSearchTarget() != null;
 	}
 
 	@Override
 	public void startExecuting() {
-		this.target = ((IIaSMobGetters) this.taskOwner).getSearchTarget();
-		this.seen = 0;
-		this.taskOwner.getNavigator().clearPathEntity();
-		this.taskOwner.getNavigator().tryMoveToEntityLiving(this.target,
-				((IIaSMobGetters) this.taskOwner).getMoveSpeed());
+		target = ((IIaSMobGetters) taskOwner).getSearchTarget();
+		seen = 0;
+		taskOwner.getNavigator().clearPathEntity();
+		taskOwner.getNavigator().tryMoveToEntityLiving(target,
+				((IIaSMobGetters) taskOwner).getMoveSpeed());
 	}
 
 	@Override
 	public void updateTask() {
-		++this.seen;
+		++seen;
 	}
 
 }

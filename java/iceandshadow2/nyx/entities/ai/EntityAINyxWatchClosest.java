@@ -9,18 +9,18 @@ public class EntityAINyxWatchClosest extends EntityAIWatchClosest {
 
 	public EntityAINyxWatchClosest(EntityLiving owner, Class target, float range) {
 		super(owner, target, range);
-		this.taskOwner = owner;
+		taskOwner = owner;
 	}
 
 	public EntityAINyxWatchClosest(EntityLiving owner, Class target, float range, float chance) {
 		super(owner, target, range, chance);
-		this.taskOwner = owner;
+		taskOwner = owner;
 	}
 
 	@Override
 	public boolean shouldExecute() {
 		if (super.shouldExecute())
-			return !this.closestEntity.isSneaking() || this.taskOwner.getAttackTarget() == this.closestEntity;
+			return !closestEntity.isSneaking() || taskOwner.getAttackTarget() == closestEntity;
 		return false;
 	}
 

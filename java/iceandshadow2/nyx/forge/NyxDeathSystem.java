@@ -33,14 +33,13 @@ public class NyxDeathSystem {
 
 	public static InventoryPlayer determineRespawnInventory(InventoryPlayer plai_inv, boolean do_drop) {
 		boolean drop_main = true;
-		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
+		for (int i = 0; i < plai_inv.mainInventory.length; ++i)
 			if (plai_inv.mainInventory[i] != null) {
 				final ItemStack is = plai_inv.mainInventory[i];
 				if (is.getItem() instanceof NyxItemBoneSanctified && is.isItemDamaged())
 					drop_main = false;
 			}
-		}
-		for (int i = 0; i < plai_inv.mainInventory.length; ++i) {
+		for (int i = 0; i < plai_inv.mainInventory.length; ++i)
 			if (plai_inv.mainInventory[i] != null) {
 				final Item it = plai_inv.mainInventory[i].getItem();
 				if (it instanceof IIaSOnDeathRuin) {
@@ -53,25 +52,20 @@ public class NyxDeathSystem {
 					plai_inv.mainInventory[i] = null;
 					continue;
 				}
-				if(rarity == EnumRarity.rare || it instanceof ItemBook) {
-					if(i < 9)
+				if (rarity == EnumRarity.rare || it instanceof ItemBook) {
+					if (i < 9)
 						continue;
 					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 					plai_inv.mainInventory[i] = null;
 				}
 				if (!drop_main)
 					continue;
-				if (i < 9) {
-					if(it == Items.arrow
-							|| it instanceof ItemSword
-							|| it instanceof ItemBow
-							|| it instanceof ItemTool)
+				if (i < 9)
+					if (it == Items.arrow || it instanceof ItemSword || it instanceof ItemBow || it instanceof ItemTool)
 						continue;
-				}
 				plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 				plai_inv.mainInventory[i] = null;
 			}
-		}
 		return plai_inv;
 	}
 

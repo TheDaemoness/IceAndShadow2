@@ -15,9 +15,9 @@ public class NyxEntities {
 	public static int startEntityId;
 
 	public static int getUniqueEntityId() {
-		do {
+		do
 			NyxEntities.startEntityId++;
-		} while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
+		while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
 		return NyxEntities.startEntityId;
 	}
 
@@ -40,7 +40,8 @@ public class NyxEntities {
 		EntityRegistry.registerModEntity(EntityTransmutationCountdown.class, "nyxTechnicalTransmutationCountdown", 6,
 				owner, 160, 1, false);
 
-		EntityRegistry.registerModEntity(EntityNyxWightSanctified.class, "nyxMobWightSanctified", 7, owner, 60, 1, true);
+		EntityRegistry.registerModEntity(EntityNyxWightSanctified.class, "nyxMobWightSanctified", 7, owner, 60, 1,
+				true);
 		NyxEntities.registerEntityEgg(EntityNyxWightSanctified.class, 0xccccdd, 0x220011);
 
 		EntityRegistry.registerModEntity(EntityNyxNecromancer.class, "nyxMobWitheredNecromancer", 8, owner, 60, 1,

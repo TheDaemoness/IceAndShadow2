@@ -22,7 +22,7 @@ public class EntityTransmutationCountdown extends Entity {
 	public EntityTransmutationCountdown(World w, int x, int y, int z, int time) {
 		this(w);
 		setPosition(x + 0.5, y + 1.25, z + 0.5);
-		this.dataWatcher.updateObject(16, time);
+		dataWatcher.updateObject(16, time);
 	}
 
 	@Override
@@ -52,30 +52,30 @@ public class EntityTransmutationCountdown extends Entity {
 
 	@Override
 	protected void entityInit() {
-		this.dataWatcher.addObject(16, 0);
+		dataWatcher.addObject(16, 0);
 	}
 
 	public int getAge() {
-		return this.age;
+		return age;
 	}
 
 	public int getTransmutationTime() {
-		return this.dataWatcher.getWatchableObjectInt(16);
+		return dataWatcher.getWatchableObjectInt(16);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		final int x = (int) (this.posX - 0.5);
-		final int y = (int) (this.posY - 0.5);
-		final int z = (int) (this.posZ - 0.5);
-		final TileEntity te = this.worldObj.getTileEntity(x, y, z);
+		final int x = (int) (posX - 0.5);
+		final int y = (int) (posY - 0.5);
+		final int z = (int) (posZ - 0.5);
+		final TileEntity te = worldObj.getTileEntity(x, y, z);
 		if (!(te instanceof NyxTeTransmutationAltar)) {
 			setDead();
 			return;
 		}
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
-		if (this.worldObj.getBlock(x, y + 1, z).getMaterial() != Material.air) {
+		if (worldObj.getBlock(x, y + 1, z).getMaterial() != Material.air) {
 			setDead();
 			return;
 		}
@@ -83,42 +83,40 @@ public class EntityTransmutationCountdown extends Entity {
 			setDead();
 			return;
 		}
-		++this.age;
-		if (this.age >= this.dataWatcher.getWatchableObjectInt(16) && !this.worldObj.isRemote) {
-			if (this.worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
-				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) this.worldObj.getBlock(x, y, z);
-				bl.doTransmutation(this.worldObj, x, y, z, this.worldObj.rand);
-				this.worldObj.markBlockForUpdate(x, y, z);
-				this.worldObj.markTileEntityChunkModified(x, y, z, tte);
+		++age;
+		if (age >= dataWatcher.getWatchableObjectInt(16) && !worldObj.isRemote)
+			if (worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
+				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) worldObj.getBlock(x, y, z);
+				bl.doTransmutation(worldObj, x, y, z, worldObj.rand);
+				worldObj.markBlockForUpdate(x, y, z);
+				worldObj.markTileEntityChunkModified(x, y, z, tte);
 				setDead();
 				return;
 			}
-		}
-		final double xposMod = 0.4 + this.worldObj.rand.nextDouble() / 5,
-				zposMod = 0.4 + this.worldObj.rand.nextDouble() / 5;
-		if (this.age % 3 == 0)
+		final double xposMod = 0.4 + worldObj.rand.nextDouble() / 5,
+				zposMod = 0.4 + worldObj.rand.nextDouble() / 5;
+		if (age % 3 == 0)
 			return;
-		final IIaSApiTransmute particleHandler =
-				(tte.catalyst != null && tte.catalyst.getItem() instanceof IIaSApiTransmute)?
-						(IIaSApiTransmute)tte.catalyst.getItem():tte.handler;
-		if (this.worldObj.isRemote && particleHandler != null && tte.handler != null) {
-			if (!particleHandler.spawnTransmuteParticles(tte.target, tte.catalyst, this.worldObj, this))
-				IaSFxManager.spawnItemParticle(this.worldObj, tte.catalyst, this.posX - 0.5 + xposMod,
-						this.posY + this.worldObj.rand.nextDouble() / 2, this.posZ - 0.5 + zposMod,
-						(0.5 - xposMod) / 10, -0.05 - this.worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10,
+		final IIaSApiTransmute particleHandler = (tte.catalyst != null
+				&& tte.catalyst.getItem() instanceof IIaSApiTransmute) ? (IIaSApiTransmute) tte.catalyst.getItem()
+						: tte.handler;
+		if (worldObj.isRemote && particleHandler != null && tte.handler != null)
+			if (!particleHandler.spawnTransmuteParticles(tte.target, tte.catalyst, worldObj, this))
+				IaSFxManager.spawnItemParticle(worldObj, tte.catalyst, posX - 0.5 + xposMod,
+						posY + worldObj.rand.nextDouble() / 2, posZ - 0.5 + zposMod,
+						(0.5 - xposMod) / 10, -0.05 - worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10,
 						false, false);
-		}
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound dat) {
-		dat.setInteger("nyxTimeLived", this.age);
+		dat.setInteger("nyxTimeLived", age);
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound dat) {
 		if (dat.hasKey("nyxTimeLived"))
-			this.age = dat.getInteger("nyxTimeLived");
+			age = dat.getInteger("nyxTimeLived");
 	}
 
 }

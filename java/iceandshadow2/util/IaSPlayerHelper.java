@@ -37,10 +37,9 @@ public class IaSPlayerHelper {
 		pl.addPotionEffect(new PotionEffect(Potion.confusion.id, 45, 0));
 		int original = (int) (pl.experience * pl.xpBarCap());
 		pl.experience = 0;
-		int originalLevel = pl.experienceLevel;
-		for (pl.experienceLevel = 0; pl.experienceLevel < originalLevel; ++pl.experienceLevel) {
+		final int originalLevel = pl.experienceLevel;
+		for (pl.experienceLevel = 0; pl.experienceLevel < originalLevel; ++pl.experienceLevel)
 			original += pl.xpBarCap();
-		}
 		pl.experienceLevel = 0;
 		pl.experienceTotal = Math.max(0, original - amount);
 		int xpPool = pl.experienceTotal;
@@ -90,7 +89,7 @@ public class IaSPlayerHelper {
 			pl.heal(delta);
 			if (overflow) {
 				int time = (int) ((heals - delta) * 25);
-				PotionEffect pe = pl.getActivePotionEffect(Potion.regeneration);
+				final PotionEffect pe = pl.getActivePotionEffect(Potion.regeneration);
 				if (pe != null && pe.getAmplifier() >= 0)
 					time += pe.getDuration() / (pe.getAmplifier() + 1);
 				pl.addPotionEffect(new PotionEffect(Potion.regeneration.id, time, 1));

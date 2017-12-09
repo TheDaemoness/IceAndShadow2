@@ -31,29 +31,28 @@ import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
-	
+
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);
 		setMaxStackSize(4);
 		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
 	}
-	
+
+	@Override
+	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
+		if (s.getItemDamage() == 0)
+			l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "They are coming.");
+	}
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.PURE;
 	}
 
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 0) {
-			l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "They are coming.");
-		}
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
-		return this.itemIcon;
+		return itemIcon;
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		if (catalyst.getItem() != this)
 			return 0;
 		if (catalyst.getItemDamage() == 0) {
-			do {
+			do
 				if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
 					break;
 				else if (target.getItem() == Item.getItemFromBlock(Blocks.gold_ore))
@@ -77,9 +76,10 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 					break;
 				else
 					return 0;
-			} while (false);
+			while (false);
 			return 240;
-		} else {} //No-op for now.
+		} else {
+		} // No-op for now.
 		return 0;
 	}
 
@@ -98,7 +98,8 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			} else if (tem == Item.getItemFromBlock(Blocks.redstone_block)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxItems.cortra, 27, 1));
-			} if (tem == Item.getItemFromBlock(Blocks.obsidian)) {
+			}
+			if (tem == Item.getItemFromBlock(Blocks.obsidian)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxBlocks.sanctifiedObsidian, 1));
 			}
@@ -112,36 +113,33 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			return;
 		if (e instanceof EntityLivingBase) {
 			final EntityLivingBase sucker = (EntityLivingBase) e;
-			if ((sucker.getAge() & 127) == 0) {
+			if ((sucker.getAge() & 127) == 0)
 				if (sucker.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
 					final List li = w.getEntitiesWithinAABBExcludingEntity(sucker,
 							AxisAlignedBB.getBoundingBox(sucker.posX - 32, sucker.posY - 8, sucker.posZ - 32,
 									sucker.posX + 32, sucker.posY + 24, sucker.posZ + 32));
-					for (final Object ent : li) {
+					for (final Object ent : li)
 						if (ent instanceof EntityMob) {
 							final EntityMob joker = (EntityMob) ent;
-							if (joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+							if (joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 								if (ent instanceof IIaSMobGetters)
 									((IIaSMobGetters) ent).setSearchTarget(sucker);
 								else if (!joker.isInvisible() && joker.getAttackTarget() == null)
 									joker.setTarget(sucker);
-							}
 						}
-					}
 				}
-			}
 		}
 		super.onUpdate(is, w, e, i, isHeld);
 	}
 
 	@Override
 	public void registerIcons(IIconRegister ir) {
-		this.itemIcon = ir.registerIcon(getTexName() + '0');
+		itemIcon = ir.registerIcon(getTexName() + '0');
 	}
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		IaSFxManager.spawnParticle(world, "cloudSmall", ent.posX, ent.posY-world.rand.nextFloat()+0.25, ent.posZ,
+		IaSFxManager.spawnParticle(world, "cloudSmall", ent.posX, ent.posY - world.rand.nextFloat() + 0.25, ent.posZ,
 				0.0, 0.0, 0.0, false, false);
 		return true;
 	}

@@ -23,7 +23,7 @@ public class RenderNyxSpider extends RenderLiving {
 	public RenderNyxSpider() {
 		super(new ModelSpider(), 1.0F);
 		setRenderPassModel(new ModelSpider());
-		this.shadowSize *= 0.8;
+		shadowSize *= 0.8;
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class RenderNyxSpider extends RenderLiving {
 	 */
 	protected int setSpiderEyeBrightness(EntityNyxSpider par1EntitySpider, int par2, float par3) {
 
-		if (par2 != 0 || par1EntitySpider.isInvisible()) {
+		if (par2 != 0 || par1EntitySpider.isInvisible())
 			return -1;
-		} else {
+		else {
 			bindTexture(RenderNyxSpider.skin_glow);
 			final float f1 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);

@@ -28,11 +28,6 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 		setStepSound(Block.soundTypeWood);
 		setTickRandomly(true);
 	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.INFESTATION;
-	}
 
 	/**
 	 * ejects contained items into the world, and notifies neighbours of an
@@ -42,18 +37,15 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 		final byte var7 = 4;
 		final int var8 = var7 + 1;
 
-		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8)) {
-			for (int var9 = -var7; var9 <= var7; ++var9) {
-				for (int var10 = -var7; var10 <= var7; ++var10) {
+		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
+			for (int var9 = -var7; var9 <= var7; ++var9)
+				for (int var10 = -var7; var10 <= var7; ++var10)
 					for (int var11 = -var7; var11 <= var7; ++var11) {
 						final Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
 
 						if (var12 != null)
 							var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
 					}
-				}
-			}
-		}
 	}
 
 	@Override
@@ -79,6 +71,11 @@ public class NyxBlockInfestedLog extends IaSBlockDirectional implements IIaSNoIn
 	@Override
 	public int damageDropped(int par1) {
 		return 0;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
 	}
 
 	@Override

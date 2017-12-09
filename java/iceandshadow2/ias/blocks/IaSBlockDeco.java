@@ -22,11 +22,6 @@ public class IaSBlockDeco extends IaSBaseBlockSingle {
 	public int getRenderType() {
 		return 1;
 	}
-	
-	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return false;
-	}
 
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether
@@ -36,6 +31,11 @@ public class IaSBlockDeco extends IaSBaseBlockSingle {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
 

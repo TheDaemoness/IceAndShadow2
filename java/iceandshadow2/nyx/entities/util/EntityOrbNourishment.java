@@ -20,22 +20,21 @@ public class EntityOrbNourishment extends EntityXPOrb {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getTextureByXP() {
-		return Math.max(0, Math.min(this.xpValue / 3, 10));
+		return Math.max(0, Math.min(xpValue / 3, 10));
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer pl) {
-		if (!this.worldObj.isRemote) {
-			if (this.field_70532_c == 0 && pl.xpCooldown == 0) {
+		if (!worldObj.isRemote)
+			if (field_70532_c == 0 && pl.xpCooldown == 0) {
 				pl.xpCooldown = 5;
-				final float intensity = Math.min(1.0F, 0.5F + this.xpValue / 20.0F);
-				this.worldObj.playSoundAtEntity(pl, "mob.zombie.unfect", intensity,
-						1.0F - intensity - 0.1F + 0.2F * this.rand.nextFloat());
+				final float intensity = Math.min(1.0F, 0.5F + xpValue / 20.0F);
+				worldObj.playSoundAtEntity(pl, "mob.zombie.unfect", intensity,
+						1.0F - intensity - 0.1F + 0.2F * rand.nextFloat());
 				pl.onItemPickup(this, 1);
-				IaSPlayerHelper.feed(pl, this.xpValue);
-				this.setDead();
+				IaSPlayerHelper.feed(pl, xpValue);
+				setDead();
 			}
-		}
 	}
 
 }

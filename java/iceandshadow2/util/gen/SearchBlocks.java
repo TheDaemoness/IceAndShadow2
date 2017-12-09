@@ -11,14 +11,11 @@ public class SearchBlocks {
 
 	public static boolean cube(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh,
 			BlockTest bl) {
-		for (int yit = yLow; yit <= yHigh; ++yit) {
-			for (int xit = xLow; xit <= xHigh; ++xit) {
-				for (int zit = zLow; zit <= zHigh; ++zit) {
+		for (int yit = yLow; yit <= yHigh; ++yit)
+			for (int xit = xLow; xit <= xHigh; ++xit)
+				for (int zit = zLow; zit <= zHigh; ++zit)
 					if (bl.test(world, xit, yit, zit, world.getBlock(xit, yit, zit)))
 						return true;
-				}
-			}
-		}
 		return false;
 	}
 
@@ -34,14 +31,11 @@ public class SearchBlocks {
 	 * @param height
 	 */
 	public static void cylinder(World world, int x, int y, int z, int radius, int height, Block bl, int meta) {
-		for (int yit = 0; yit <= height; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit) {
+		for (int yit = 0; yit <= height; ++yit)
+			for (int xit = -radius; xit <= radius; ++xit)
+				for (int zit = -radius; zit <= radius; ++zit)
 					if (Math.sqrt(xit * xit + zit * zit) < radius)
 						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-				}
-			}
-		}
 	}
 
 	/**
@@ -54,14 +48,11 @@ public class SearchBlocks {
 	 * @param radius
 	 */
 	public static void dome(World world, int x, int y, int z, int radius, Block bl, int meta) {
-		for (int yit = 0; yit <= radius; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit) {
+		for (int yit = 0; yit <= radius; ++yit)
+			for (int xit = -radius; xit <= radius; ++xit)
+				for (int zit = -radius; zit <= radius; ++zit)
 					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < radius)
 						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-				}
-			}
-		}
 	}
 
 	/**
@@ -74,14 +65,11 @@ public class SearchBlocks {
 	 * @param radius
 	 */
 	public static void sphere(World world, int x, int y, int z, int radius, Block bl, int meta) {
-		for (int yit = -radius; yit <= radius; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit) {
+		for (int yit = -radius; yit <= radius; ++yit)
+			for (int xit = -radius; xit <= radius; ++xit)
+				for (int zit = -radius; zit <= radius; ++zit)
 					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < radius)
 						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-				}
-			}
-		}
 	}
 
 	/**

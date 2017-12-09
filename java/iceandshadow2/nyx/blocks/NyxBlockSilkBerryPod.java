@@ -51,13 +51,18 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 		return i1 == NyxBlocks.infestLog;
 	}
 
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.INFESTATION;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getCocoaIcon(int par1) {
-		if (par1 < 0 || par1 >= this.icons.length)
-			par1 = this.icons.length - 1;
+		if (par1 < 0 || par1 >= icons.length)
+			par1 = icons.length - 1;
 
-		return this.icons[par1];
+		return icons[par1];
 	}
 
 	/**
@@ -98,7 +103,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2) {
-		return this.blockIcon;
+		return blockIcon;
 	}
 
 	@Override
@@ -124,20 +129,15 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		this.icons = new IIcon[3];
+		icons = new IIcon[3];
 		for (int i = 0; i < 3; ++i)
-			this.icons[i] = reg.registerIcon(getTexName() + (i + 1));
-		this.blockIcon = this.icons[2];
+			icons[i] = reg.registerIcon(getTexName() + (i + 1));
+		blockIcon = icons[2];
 	}
 
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (par5Random.nextBoolean())
 			super.updateTick(par1World, par2, par3, par4, par5Random);
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.INFESTATION;
 	}
 }

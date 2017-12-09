@@ -15,11 +15,11 @@ public class IaSCoordsBlock {
 	}
 
 	public IaSCoordsBlock(long x, int y, long z) {
-		this.chunkX = (int) (x >> 4);
-		this.chunkZ = (int) (z >> 4);
-		this.subX = (byte) (x & 16);
-		this.subY = (byte) (Math.min(y, 255));
-		this.subZ = (byte) (z & 16);
+		chunkX = (int) (x >> 4);
+		chunkZ = (int) (z >> 4);
+		subX = (byte) (x & 16);
+		subY = (byte) (Math.min(y, 255));
+		subZ = (byte) (z & 16);
 	}
 
 	public int getX() {
@@ -27,11 +27,11 @@ public class IaSCoordsBlock {
 	}
 
 	public long getXL() {
-		return (this.chunkX << 4) + this.subX;
+		return (chunkX << 4) + subX;
 	}
 
 	public byte getY() {
-		return this.subY;
+		return subY;
 	}
 
 	public int getZ() {
@@ -39,6 +39,6 @@ public class IaSCoordsBlock {
 	}
 
 	public long getZL() {
-		return (this.chunkZ << 4) + this.subZ;
+		return (chunkZ << 4) + subZ;
 	}
 }

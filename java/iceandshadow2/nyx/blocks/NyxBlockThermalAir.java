@@ -97,8 +97,8 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		int highestsource = 0;
 		final int lvl = w.getBlockMetadata(x, y, z);
-		for (int xit = -1; xit <= 1; ++xit) {
-			for (int yit = -1; yit <= 1; ++yit) {
+		for (int xit = -1; xit <= 1; ++xit)
+			for (int yit = -1; yit <= 1; ++yit)
 				for (int zit = -1; zit <= 1; ++zit) {
 					final Block bl = w.getBlock(x + xit, y + yit, z + zit);
 					if (bl == this)
@@ -113,17 +113,11 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 					} else if (lvl > 1 && NyxBlockThermalAir.canReplace(w, x + xit, y + yit, z + zit))
 						w.setBlock(x + xit, y + yit, z + zit, this, lvl - 1, 0x2);
 				}
-			}
-		}
-		if (highestsource <= lvl) {
-			for (int xit = -2; xit <= 2; ++xit) {
-				for (int yit = -2; yit <= 2; ++yit) {
-					for (int zit = -2; zit <= 2; ++zit) {
+		if (highestsource <= lvl)
+			for (int xit = -2; xit <= 2; ++xit)
+				for (int yit = -2; yit <= 2; ++yit)
+					for (int zit = -2; zit <= 2; ++zit)
 						if (w.getBlock(x + xit, y + yit, z + zit) == this)
 							w.setBlock(x + xit, y + yit, z + zit, Blocks.air, 0, 0x3);
-					}
-				}
-			}
-		}
 	}
 }

@@ -27,13 +27,13 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 		super(fluid, Material.water);
 		setBlockName(mod.prefix + texName);
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
-		this.MODULE = mod;
-		this.setQuantaPerBlock(16);
+		MODULE = mod;
+		setQuantaPerBlock(16);
 	}
 
 	@Override
 	public EnumIaSModule getIaSModule() {
-		return this.MODULE;
+		return MODULE;
 	}
 
 	@Override
@@ -42,9 +42,9 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 		case UP:
 		case DOWN:
 		case UNKNOWN:
-			return this.stillIcon;
+			return stillIcon;
 		default:
-			return this.flowingIcon;
+			return flowingIcon;
 		}
 	}
 
@@ -66,14 +66,14 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		this.stillIcon = register.registerIcon(getTexName() + "Still");
-		this.flowingIcon = register.registerIcon(getTexName() + "Flowing");
-		this.getFluid().setIcons(this.stillIcon, this.flowingIcon);
+		stillIcon = register.registerIcon(getTexName() + "Still");
+		flowingIcon = register.registerIcon(getTexName() + "Flowing");
+		getFluid().setIcons(stillIcon, flowingIcon);
 	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(x, y, z);
 		if (block != this)
 			return block.shouldSideBeRendered(world, x, y, z, side);
 		final ForgeDirection dir = ForgeDirection.getOrientation(side);

@@ -34,23 +34,21 @@ public class NyxEventHandlerCold {
 
 	@SubscribeEvent
 	public void onBlockPlaced(PlaceEvent e) {
-		if (e.player.dimension == IaSFlags.dim_nyx_id) {
+		if (e.player.dimension == IaSFlags.dim_nyx_id)
 			if (e.block == Blocks.furnace || e.block == Blocks.lit_furnace) {
 				e.setCanceled(true);
 				IaSPlayerHelper.messagePlayer(e.player, "There's no point in placing one of those here.");
 			}
-		}
 	}
 
 	@SubscribeEvent
 	public void onFireball(EntityJoinWorldEvent e) {
 		if (e.entity == null)
 			return;
-		if (e.entity.dimension == IaSFlags.dim_nyx_id) {
+		if (e.entity.dimension == IaSFlags.dim_nyx_id)
 			if (e.entity instanceof EntitySmallFireball || e.entity instanceof EntityFireball
 					|| e.entity instanceof EntityLargeFireball)
 				e.setCanceled(true);
-		}
 	}
 
 	@SubscribeEvent
@@ -162,10 +160,9 @@ public class NyxEventHandlerCold {
 				return;
 			if (ite.getItem() instanceof IPlantable)
 				isplant = true;
-			else if (ite.getItem() instanceof ItemBlock) {
+			else if (ite.getItem() instanceof ItemBlock)
 				if (((ItemBlock) ite.getItem()).field_150939_a instanceof IPlantable)
 					isplant = true;
-			}
 
 			// DO NOT SIMPLIFY!
 			if (isplant && !e.isCanceled()) {
@@ -199,13 +196,12 @@ public class NyxEventHandlerCold {
 					e.setCanceled(true);
 					IaSPlayerHelper.messagePlayer(e.entityPlayer, "The milk has frozen solid.");
 				}
-			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood)) {
+			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood))
 				if (!e.isCanceled()) {
 					e.setCanceled(true);
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 							"It's been frozen solid. Eating it would be dangerous.");
 				}
-			}
 		}
 	}
 }

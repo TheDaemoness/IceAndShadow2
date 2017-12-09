@@ -18,9 +18,9 @@ public class NyxBiomeInfested extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(Blocks.snow, Blocks.snow);
 
-		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 65, 2, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightSanctified.class, 5, 1, 1));
+		spawnableMonsterList.clear();
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 65, 2, 4));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightSanctified.class, 5, 1, 1));
 
 		setColor(64 << 16 | 255 << 8 | 192);
 	}
@@ -40,9 +40,8 @@ public class NyxBiomeInfested extends NyxBiome {
 					++y;
 					break;
 				}
-				if (bid == Blocks.snow_layer) {
+				if (bid == Blocks.snow_layer)
 					break;
-				}
 				if (!bid.isAir(par1World, x, y, z)) {
 					y = 0;
 					break;

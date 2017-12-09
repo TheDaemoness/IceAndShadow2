@@ -30,8 +30,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 	protected Minecraft mc;
 
 	public RenderItemVanillaGlowing() {
-		this.rend = new RenderItem();
-		this.mc = Minecraft.getMinecraft();
+		rend = new RenderItem();
+		mc = Minecraft.getMinecraft();
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			final int k = 0;
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 		}
-		final TextureManager texturemanager = this.mc.getTextureManager();
+		final TextureManager texturemanager = mc.getTextureManager();
 		texturemanager.bindTexture(texturemanager.getResourceLocation(item.getItemSpriteNumber()));
 		final Tessellator tessellator = Tessellator.instance;
 		final float f = icon.getMinU();
@@ -98,7 +98,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
 
 		if (doGlowTransforms) {
-			if(!blendWasEnabled)
+			if (!blendWasEnabled)
 				GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
@@ -136,9 +136,8 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 		}
 
-		if (type != ItemRenderType.ENTITY) {
+		if (type != ItemRenderType.ENTITY)
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-		}
 		GL11.glPopMatrix();
 	}
 
@@ -154,18 +153,17 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 			doGlowTransforms = ((IIaSGlowing) item.getItem()).getFirstGlowPass(item) <= 0;
 
-		renderItem(entity, item, 0, this.mc.entityRenderer.itemRenderer, doGlowTransforms, type);
+		renderItem(entity, item, 0, mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 
-		if (item.getItem().requiresMultipleRenderPasses()) {
+		if (item.getItem().requiresMultipleRenderPasses())
 			for (int x = 1; x < item.getItem().getRenderPasses(item.getItemDamage()); x++) {
 				if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
 					doGlowTransforms = x >= ((IIaSGlowing) item.getItem()).getFirstGlowPass(item);
-				renderItem(entity, item, x, this.mc.entityRenderer.itemRenderer, doGlowTransforms, type);
+				renderItem(entity, item, x, mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 				if (doGlowTransforms && x == item.getItem().getRenderPasses(item.getItemDamage()) - 1)
 					;
 				GL11.glDisable(GL11.GL_BLEND);
 			}
-		}
 
 		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED)
 			GL11.glPushMatrix();

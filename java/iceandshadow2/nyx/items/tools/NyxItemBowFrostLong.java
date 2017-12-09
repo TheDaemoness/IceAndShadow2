@@ -76,7 +76,7 @@ public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName, IIaS
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer,
 			int par4) {
 		final int var6 = getMaxItemUseDuration(par1ItemStack) - par4;
-		this.inuse = false;
+		inuse = false;
 
 		float var7 = var6 / (35.0F - getSpeedModifier(par1ItemStack) * 2);
 		var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -94,13 +94,11 @@ public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName, IIaS
 		final EntityIceArrow var8 = new EntityIceArrow(par2World, par3EntityPlayer, var7 * 3.5F, var10 + 3,
 				var9 * 30 + 70);
 
-		if (var7 > 0.95F) {
+		if (var7 > 0.95F)
 			var8.setIsCritical(true);
-		}
 
-		if (var9 > 0) {
+		if (var9 > 0)
 			var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
-		}
 
 		var8.setKnockbackStrength(var10);
 
@@ -110,8 +108,7 @@ public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName, IIaS
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 				1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
-		if (!par2World.isRemote) {
+		if (!par2World.isRemote)
 			par2World.spawnEntityInWorld(var8);
-		}
 	}
 }

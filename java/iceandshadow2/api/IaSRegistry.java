@@ -81,10 +81,9 @@ public final class IaSRegistry {
 				return trans;
 		}
 
-		for (int i = 0; i < IaSRegistry.handlersTransmutable.size(); ++i) {
+		for (int i = 0; i < IaSRegistry.handlersTransmutable.size(); ++i)
 			if (IaSRegistry.handlersTransmutable.get(i).getTransmuteTime(target, catalyst) > 0)
 				return IaSRegistry.handlersTransmutable.get(i);
-		}
 		return null;
 	}
 
@@ -125,10 +124,9 @@ public final class IaSRegistry {
 	}
 
 	public static IaSToolMaterial getTransmutationMaterial(ItemStack catalyst) {
-		for (final IaSToolMaterial mat : IaSRegistry.toolMaterials.values()) {
+		for (final IaSToolMaterial mat : IaSRegistry.toolMaterials.values())
 			if (mat.getTransmutationCatalyst().isItemEqual(catalyst))
 				return mat;
-		}
 		return null;
 	}
 
@@ -142,14 +140,12 @@ public final class IaSRegistry {
 	}
 
 	public static void postInit() {
-		for (final Object o : IceAndShadow2.getPostRegistrationHandlers()) {
+		for (final Object o : IceAndShadow2.getPostRegistrationHandlers())
 			IaSRegistry.doAdd(o);
-		}
 	}
 
 	public static void preInit() {
-		for (final Object o : IceAndShadow2.getPreRegistrationHandlers()) {
+		for (final Object o : IceAndShadow2.getPreRegistrationHandlers())
 			IaSRegistry.doAdd(o);
-		}
 	}
 }

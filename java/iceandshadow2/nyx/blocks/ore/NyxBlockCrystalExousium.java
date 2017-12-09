@@ -1,18 +1,12 @@
 package iceandshadow2.nyx.blocks.ore;
 
-import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.ias.blocks.IaSBlockDeco;
 import iceandshadow2.nyx.NyxItems;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -27,6 +21,11 @@ public class NyxBlockCrystalExousium extends NyxBlockCrystal {
 		setLuminescence(0.2F);
 		setLightColor(0.0F, 0.5F, 0.4F);
 		setResistance(1.5F);
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
 	}
 
 	@Override
@@ -51,10 +50,5 @@ public class NyxBlockCrystalExousium extends NyxBlockCrystal {
 		if (ent instanceof EntityLivingBase)
 			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 81, 2));
 		super.onEntityCollidedWithBlock(w, x, y, z, ent);
-	}
-	
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.EXOUSIUM;
 	}
 }
