@@ -196,7 +196,7 @@ public class GenRuinsCentral extends GenRuins {
 						new ItemStack(NyxItems.kitTightrope));
 			if (chestpos == cortrachest)
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
-						new ItemStack(NyxItems.cortra, 2 + r.nextInt(2)));
+						new ItemStack(NyxItems.cortra, 1 + r.nextInt(2)));
 			if (chestpos == hookchest)
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxBlocks.hookClimbing));

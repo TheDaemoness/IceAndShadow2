@@ -194,31 +194,27 @@ public class GenRuinsTowerLookout extends GenRuins {
 						activated ? 0 : (which.getMaxDamage() / 5 + var2.nextInt(which.getMaxDamage() / 2)));
 			}
 
-			// Cortra.
+			// Rope.
 			else if (rewardid < 20)
-				itemz = new ItemStack(NyxItems.cortra, 1 + var2.nextInt(3));
+				itemz = new ItemStack(NyxItems.rope);
 
 			// Bones.
-			else if (rewardid < 35)
+			else if (rewardid < 35 && boneflag) {
 				itemz = new ItemStack(NyxItems.boneCursed, 1);
+				boneflag = false;
+			}
 
 			// Experience bottles and food.
-			else if (rewardid < 55) {
+			else if (rewardid < 60) {
 				final int foodtype = var2.nextInt(20);
 				if (foodtype < 6)
 					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
-				else if (foodtype < 12)
+				else if (foodtype < 14)
 					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
-				else if (foodtype < 16)
+				else if (foodtype < 18)
 					itemz = new ItemStack(NyxItems.cookie, 3 + var2.nextInt(5));
 				else
 					itemz = new ItemStack(NyxItems.silkBerries, 3 + var2.nextInt(3));
-			}
-
-			// Sanctified Bone
-			else if (rewardid < 60 && boneflag) {
-				itemz = new ItemStack(NyxItems.boneSanctified);
-				boneflag = false;
 			}
 
 			// Ingots.
@@ -236,7 +232,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 					new ItemStack(NyxItems.boneSanctified));
 		if (var2.nextInt(3) != 0)
 			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
-					new ItemStack(NyxItems.rope));
+					new ItemStack(NyxItems.cortra));
 		chestent.setInventorySlotContents(0, new ItemStack(NyxItems.page, 1, 0));
 	}
 
