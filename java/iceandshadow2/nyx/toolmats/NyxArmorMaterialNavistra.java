@@ -27,7 +27,10 @@ public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
 
 	@Override
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
-		wearer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 3, 0));
+		wearer.motionX *= 1 - 0.01*coverage;
+		wearer.motionZ *= 1 - 0.01*coverage;
+		if(wearer.motionY > 0 && wearer.isOnLadder())
+			wearer.motionY *= 1 - 0.01*coverage;
 		if(wearer.isSprinting() && major)
 			wearer.setSprinting(false);
 		super.onTick(wearer, coverage, major);
