@@ -11,7 +11,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class NyxBlockHandler {
 	@SubscribeEvent
 	public void onTryToStartClimbingOrSomething(LivingJumpEvent e) {
-		if (e.entityLiving instanceof EntityPlayer) {
+		if (e.entityLiving instanceof EntityPlayer && e.entityLiving.isSneaking()) {
 			final World w = e.entityLiving.worldObj;
 			final int x = (int) (e.entityLiving.posX - (e.entityLiving.posX < 0 ? 1 : 0));
 			final int y = (int) (e.entityLiving.posY);

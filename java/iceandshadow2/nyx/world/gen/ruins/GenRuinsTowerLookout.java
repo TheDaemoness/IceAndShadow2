@@ -184,7 +184,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 				rareflag = false;
 			}
 
-			// Sword or armor!
+			// Armor!
 			else if (rewardid < 10) {
 				final int what = var2.nextInt(12);
 				final boolean activated = what % 3 == 0;
@@ -199,13 +199,13 @@ public class GenRuinsTowerLookout extends GenRuins {
 				itemz = new ItemStack(NyxItems.rope);
 
 			// Bones.
-			else if (rewardid < 35 && boneflag) {
+			else if (rewardid < 30 && boneflag) {
 				itemz = new ItemStack(NyxItems.boneCursed, 1);
 				boneflag = false;
 			}
 
 			// Experience bottles and food.
-			else if (rewardid < 60) {
+			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(20);
 				if (foodtype < 6)
 					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
@@ -218,7 +218,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Ingots.
-			else if (rewardid < 70)
+			else if (rewardid < 65)
 				itemz = new ItemStack(NyxItems.echirIngot, 2 + var2.nextInt(3), 1);
 
 			else if (rewardid < 80)
