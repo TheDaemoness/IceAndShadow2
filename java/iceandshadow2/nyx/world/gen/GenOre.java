@@ -59,9 +59,9 @@ public class GenOre {
 							|| par1World.getBlock(x - 1, y, z).getMaterial() == Material.water
 							|| par1World.getBlock(x, y, z + 1).getMaterial() == Material.water
 							|| par1World.getBlock(x, y, z - 1).getMaterial() == Material.water) {
-						par1World.setBlock(x, y, z, bloque);
-						if (par1World.rand.nextInt(3) == 0)
-							return;
+					par1World.setBlock(x, y, z, bloque);
+					if (par1World.rand.nextInt(3) == 0)
+					return;
 					}
 		}
 	}

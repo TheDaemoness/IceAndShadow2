@@ -3,13 +3,14 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -28,14 +29,25 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
-		if (!(ent instanceof EntityFX)) {
-			if (ent.worldObj.isRemote && ent.worldObj.rand.nextBoolean())
+		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(ent);
+		if (aspect != EnumIaSAspect.VIRTUAL && aspect != EnumIaSAspect.NAVISTRA && aspect != EnumIaSAspect.EXOUSIUM)
+			if (!ent.worldObj.isRemote) {
+				ent.attackEntityFrom(DamageSource.wither, 2);
+				if (ent instanceof EntityLivingBase) {
+					((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
+					for (int i = 0; i <= 4; ++i) {
+						final ItemStack is = ((EntityLivingBase) ent).getEquipmentInSlot(i);
+						if (is == null)
+							continue;
+						if (EnumIaSAspect.getAspect(is) == EnumIaSAspect.NAVISTRA)
+							continue;
+						if (is.attemptDamageItem(2, world.rand))
+							((EntityLivingBase) ent).setCurrentItemOrArmor(i, null);
+					}
+				}
+			} else if (world.rand.nextBoolean())
 				IaSFxManager.spawnParticle(ent.worldObj, "shadowSmokeLarge", ent.posX, ent.posY, ent.posZ, 0, 0, 0,
 						false, true);
-			ent.attackEntityFrom(DamageSource.wither, 2);
-			if (ent instanceof EntityLivingBase)
-				((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
-		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
 

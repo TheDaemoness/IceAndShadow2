@@ -99,10 +99,10 @@ public class GenRuinsCentral extends GenRuins {
 			Sculptor.blast(w, x - 7 + i * 5 + r.nextInt(3), y + 5 + r.nextInt(4), z + 8 - r.nextInt(3),
 					2 + r.nextInt(maxradi));
 		}
-		
+
 		// Protection
 		Sculptor.cube(w, x - 1, y + 5, z - 1, x + 1, y + 7, z + 1, Styx.reserved, 0);
-		
+
 		// Podiums
 		for (int xit = -4; xit <= 4; xit += 8)
 			for (int zit = -4; zit <= 4; zit += 8)

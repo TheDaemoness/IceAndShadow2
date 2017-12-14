@@ -44,7 +44,7 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.BLOOD;
+		return EnumIaSAspect.STYX;
 	}
 
 	@Override

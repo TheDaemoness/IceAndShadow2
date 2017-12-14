@@ -120,7 +120,7 @@ public class IceAndShadow2 {
 
 		InitNyx.init(this);
 		IaSDamageSources.init();
-		
+
 		Styx.init(this);
 
 		IceAndShadow2.toPreRegister = new ArrayList<Object>();

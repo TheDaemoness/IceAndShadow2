@@ -28,19 +28,17 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 
 	public boolean canPlace(ItemStack is) {
 		final EnumIaSAspect a = EnumIaSAspect.getAspect(is);
-		return a != EnumIaSAspect.DRACONIUM && a != EnumIaSAspect.BLOOD;
+		return a != EnumIaSAspect.STYX;
 	}
 
 	public void dropItems() {
 		if (!worldObj.isRemote) {
 			if (catalyst != null) {
-				final EntityItem cat = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F,
-						zCoord + 0.5F, catalyst);
+				final EntityItem cat = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F, zCoord + 0.5F, catalyst);
 				worldObj.spawnEntityInWorld(cat);
 			}
 			if (target != null) {
-				final EntityItem tar = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F,
-						zCoord + 0.5F, target);
+				final EntityItem tar = new EntityItem(worldObj, xCoord + 0.5F, yCoord + 0.80F, zCoord + 0.5F, target);
 				worldObj.spawnEntityInWorld(tar);
 			}
 		}

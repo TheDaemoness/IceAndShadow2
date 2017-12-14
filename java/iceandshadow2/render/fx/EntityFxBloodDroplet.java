@@ -66,14 +66,14 @@ public class EntityFxBloodDroplet extends EntityFX {
 			motionZ *= 0.699999988079071D;
 		}
 
-		final Material material = worldObj.getBlock(MathHelper.floor_double(posX),
-				MathHelper.floor_double(posY), MathHelper.floor_double(posZ)).getMaterial();
+		final Material material = worldObj
+				.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))
+				.getMaterial();
 
 		if (material.isLiquid() || material.isSolid()) {
 			final double d0 = MathHelper.floor_double(posY) + 1
-					- BlockLiquid
-							.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
-									MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
+					- BlockLiquid.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
+							MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
 
 			if (posY < d0)
 				setDead();

@@ -83,8 +83,7 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 				if (obj instanceof EntityNyxSkeleton) {
 					final EntityThrowable entityball = new EntityShadowBall(worldObj, this, false, true);
 					final Entity target = (Entity) obj;
-					entityball.setPosition(target.posX, target.posY + 32 + worldObj.rand.nextFloat() * 32,
-							target.posZ);
+					entityball.setPosition(target.posX, target.posY + 32 + worldObj.rand.nextFloat() * 32, target.posZ);
 					entityball.setThrowableHeading(0, -1, 0, 0.40F, 0F);
 					worldObj.spawnEntityInWorld(entityball);
 				}
@@ -128,15 +127,14 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 		if (!this.isPotionActive(Potion.hunger) && getAttackTarget() != null) {
 			int count = 0;
 			final Entity sucker = getAttackTarget();
-			final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(posX - 12.0, posY - 16.0, posZ - 12.0,
-					posX + 12.0, posY + 16.0, posZ + 12.0);
+			final AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(posX - 12.0, posY - 16.0, posZ - 12.0, posX + 12.0,
+					posY + 16.0, posZ + 12.0);
 			final boolean threat = sucker instanceof EntityPlayer && sucker.getDistanceSqToEntity(this) < 256;
 			final boolean alone = worldObj.getEntitiesWithinAABB(EntityNyxSkeleton.class, bb).size() == 1;
 			if (threat || alone) {
 				final List li = worldObj.getEntitiesWithinAABB(EntityPlayer.class, bb);
 				li.add(sucker);
-				for (; count < IaSWorldHelper.getDifficulty(worldObj) && getHealth() > 6
-						&& !li.isEmpty(); ++count) {
+				for (; count < IaSWorldHelper.getDifficulty(worldObj) && getHealth() > 6 && !li.isEmpty(); ++count) {
 					EntityMob summon;
 					if (rand.nextInt(3) == 0)
 						summon = new EntityNyxSkeleton(worldObj, EnumNyxSkeletonType.MAGIC_SHADOW);
@@ -145,8 +143,7 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 					summon.setPosition(posX, posY, posZ);
 					summon.setAttackTarget((EntityLivingBase) li.get(0));
 					li.remove(0);
-					worldObj.playSoundAtEntity(this, "mob.wither.shoot", 0.5F,
-							0.33F + 0.33F * rand.nextFloat());
+					worldObj.playSoundAtEntity(this, "mob.wither.shoot", 0.5F, 0.33F + 0.33F * rand.nextFloat());
 
 					if (worldObj.spawnEntityInWorld(summon))
 						worldObj.playSoundAtEntity(summon, "mob.silverfish.kill", 0.7F,

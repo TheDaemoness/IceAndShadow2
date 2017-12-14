@@ -68,9 +68,9 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 		if (ninja.isSneaking())
 			// actually isn't redundant.
 			if (wep)
-				par1 = new ItemStack(IaSTools.weapons[slot], 1, par1.getItemDamage());
+			par1 = new ItemStack(IaSTools.weapons[slot], 1, par1.getItemDamage());
 			else
-				par1 = new ItemStack(IaSTools.tools[slot], 1, par1.getItemDamage());
+			par1 = new ItemStack(IaSTools.tools[slot], 1, par1.getItemDamage());
 		return par1;
 	}
 

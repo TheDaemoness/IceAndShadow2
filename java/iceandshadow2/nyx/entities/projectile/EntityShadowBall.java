@@ -147,11 +147,11 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 		final String id = strong ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		for (int i = 0; i < 48; ++i) {
 			IaSFxManager.spawnParticle(worldObj, "blackMagic", posX - 3.5F + 7.0F * rand.nextDouble(),
-					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(),
-					0.0, -0.01, 0.0, false, true);
+					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(), 0.0, -0.01, 0.0,
+					false, true);
 			IaSFxManager.spawnParticle(worldObj, id, posX - 3.5F + 7.0F * rand.nextDouble(),
-					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(),
-					0.0, -0.01, 0.0, false, false);
+					posY - 1.5F + 3.0F * rand.nextDouble(), posZ - 3.5F + 7.0F * rand.nextDouble(), 0.0, -0.01, 0.0,
+					false, false);
 		}
 
 		setDead();
@@ -162,8 +162,7 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 		super.onUpdate();
 		final String id = isStrong() ? "shadowSmokeLarge" : "shadowSmokeSmall";
 		IaSFxManager.spawnParticle(worldObj, id, posX, posY, posZ, true);
-		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY,
-				posZ + motionZ, true);
+		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY, posZ + motionZ, true);
 	}
 
 	public EntityShadowBall setFlags(boolean strong, boolean harmUndead) {

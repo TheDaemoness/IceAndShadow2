@@ -15,6 +15,24 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NyxBlockHandler {
 	@SubscribeEvent
+	public void onTryToReplaceNoReplace(PlayerInteractEvent e) {
+		final ItemStack is = e.entityPlayer.getEquipmentInSlot(0);
+		if (is == null || !(is.getItem() instanceof ItemBlock))
+			return;
+		switch (e.action) {
+		case RIGHT_CLICK_BLOCK:
+			final ForgeDirection dir = ForgeDirection.getOrientation(e.face);
+			final Block bl = e.world.getBlock(e.x + dir.offsetY, e.y + dir.offsetY, e.z + dir.offsetZ);
+			if (!bl.isReplaceable(e.world, e.x + dir.offsetY, e.y + dir.offsetY, e.z + dir.offsetZ)) {
+				IaSPlayerHelper.messagePlayer(e.entityPlayer, "Something stops you from placing a block there.");
+				e.setCanceled(true);
+			}
+		default:
+			break;
+		}
+	}
+
+	@SubscribeEvent
 	public void onTryToStartClimbingOrSomething(LivingJumpEvent e) {
 		if (e.entityLiving instanceof EntityPlayer && e.entityLiving.isSneaking()) {
 			final World w = e.entityLiving.worldObj;
@@ -27,24 +45,6 @@ public class NyxBlockHandler {
 					IaSBaseBlockAirlike.makeClimbable(w, x, y + 1, z);
 					break;
 				}
-		}
-	}
-	
-	@SubscribeEvent
-	public void onTryToReplaceNoReplace(PlayerInteractEvent e) {
-		final ItemStack is = e.entityPlayer.getEquipmentInSlot(0);
-		if(is == null || !(is.getItem() instanceof ItemBlock))
-			return;
-		switch (e.action) {
-		case RIGHT_CLICK_BLOCK:
-			ForgeDirection dir = ForgeDirection.getOrientation(e.face);
-			final Block bl = e.world.getBlock(e.x+dir.offsetY, e.y+dir.offsetY, e.z+dir.offsetZ);
-			if(!bl.isReplaceable(e.world, e.x+dir.offsetY, e.y+dir.offsetY, e.z+dir.offsetZ)) {
-				IaSPlayerHelper.messagePlayer(e.entityPlayer, "Something stops you from placing a block there.");
-				e.setCanceled(true);
-			}
-		default:
-		break;
 		}
 	}
 }

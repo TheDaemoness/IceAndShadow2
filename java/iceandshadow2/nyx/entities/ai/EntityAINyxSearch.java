@@ -42,8 +42,7 @@ public class EntityAINyxSearch extends EntityAIBase {
 		target = ((IIaSMobGetters) taskOwner).getSearchTarget();
 		seen = 0;
 		taskOwner.getNavigator().clearPathEntity();
-		taskOwner.getNavigator().tryMoveToEntityLiving(target,
-				((IIaSMobGetters) taskOwner).getMoveSpeed());
+		taskOwner.getNavigator().tryMoveToEntityLiving(target, ((IIaSMobGetters) taskOwner).getMoveSpeed());
 	}
 
 	@Override

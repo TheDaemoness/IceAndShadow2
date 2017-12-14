@@ -1,5 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -8,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class IaSArmorMaterial {
+public class IaSArmorMaterial implements IIaSAspect {
 
 	public static IaSArmorMaterial getArmorMaterial(ItemStack is) {
 		if (is == null || !(is.getItem() instanceof IaSItemArmor))
@@ -31,6 +33,11 @@ public class IaSArmorMaterial {
 	 */
 	public ArmorMaterial getArmorStats() {
 		return m;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.getAspect(getArmorStats().customCraftingMaterial);
 	}
 
 	/**

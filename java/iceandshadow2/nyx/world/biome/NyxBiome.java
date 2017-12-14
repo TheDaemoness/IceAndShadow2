@@ -2,7 +2,6 @@ package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
-import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.world.gen.GenOre;
@@ -148,33 +147,32 @@ public class NyxBiome extends BiomeGenBase {
 
 	@Override
 	public void genTerrainBlocks(World world, Random rand, Block[] blocks, byte[] meta, int a, int b, double c) {
-		//byte b0 = (byte) (field_150604_aj & 255);
+		// byte b0 = (byte) (field_150604_aj & 255);
 		int k = 0;
-		//final int l = (int) (c / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+		// final int l = (int) (c / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 		final int i1 = a & 15;
 		final int j1 = b & 15;
 		final int k1 = blocks.length / 256;
-		
+
 		final int xzmod = (j1 * 16 + i1) * k1;
 		blocks[xzmod + 0] = Styx.ground;
 		blocks[xzmod + 1] = Styx.air;
 		blocks[xzmod + 2] = Styx.air;
 		blocks[xzmod + 3] = Styx.ground;
 		blocks[xzmod + 4] = Blocks.bedrock;
-		if(rand.nextBoolean())
+		if (rand.nextBoolean())
 			blocks[xzmod + 5] = Blocks.bedrock;
-		if(blocks[xzmod + 64] == null ||
-				blocks[xzmod + 64].getMaterial() == Material.air) {
+		if (blocks[xzmod + 64] == null || blocks[xzmod + 64].getMaterial() == Material.air) {
 			blocks[xzmod + 63] = NyxBlocks.exousicIce;
 			blocks[xzmod + 62] = NyxBlocks.exousicWater;
-			meta[xzmod+62] = 15;
+			meta[xzmod + 62] = 15;
 		}
 
 		for (int yit = 255; yit >= 63; --yit) {
 			final int index = xzmod + yit;
 			final Block current = blocks[index];
 			if (current == NyxBlocks.stone) {
-				switch(k) {
+				switch (k) {
 				case 0:
 					blocks[index] = topBlock;
 					break;
@@ -183,9 +181,9 @@ public class NyxBiome extends BiomeGenBase {
 					break;
 				case -2:
 				case -3:
-					if(rand.nextInt(5+k) != 0)
+					if (rand.nextInt(5 + k) != 0)
 						blocks[index] = fillerBlock;
-					//PRESERVE FALLTHROUGH;
+					// PRESERVE FALLTHROUGH;
 				default:
 					k = -4;
 					break;
@@ -193,7 +191,7 @@ public class NyxBiome extends BiomeGenBase {
 				--k;
 			} else
 				k = Math.max(k, -1);
-		} 
+		}
 	}
 
 	protected boolean hasTowers() {

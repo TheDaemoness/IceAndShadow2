@@ -1,6 +1,5 @@
 package iceandshadow2.nyx.world;
 
-import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockAir;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
@@ -17,18 +16,16 @@ import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 public class NyxChunkProvider implements IChunkProvider {
 
 	private final Random rand;
 	private final NoiseGeneratorOctaves[] noiseGen;
-	//private final NoiseGeneratorPerlin noiseGenStone;
+	// private final NoiseGeneratorPerlin noiseGenStone;
 	// public NoiseGeneratorOctaves noiseGenPublic;
 	/**
 	 * Reference to the World object.
@@ -37,7 +34,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
 	private final double[] enigmaArray;
 	private final float[] parabolicField;
-	private double[] stoneNoise = new double[256];
+	private final double[] stoneNoise = new double[256];
 
 	private final Block[] ablock;
 	private final byte[] abyte;
@@ -57,7 +54,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		noiseGen[1] = new NoiseGeneratorOctaves(rand, 16);
 		noiseGen[2] = new NoiseGeneratorOctaves(rand, 8);
 		noiseGen[3] = new NoiseGeneratorOctaves(rand, 16);
-		//noiseGenStone = new NoiseGeneratorPerlin(rand, 4);
+		// noiseGenStone = new NoiseGeneratorPerlin(rand, 4);
 		// this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10);
 		enigmaArray = new double[825];
 		parabolicField = new float[25];
@@ -130,7 +127,7 @@ public class NyxChunkProvider implements IChunkProvider {
 									blockArr[arrIndex += 256] = NyxBlocks.stone;
 
 								else if (yit * 8 + l2 < levelWater) {
-									metaArr[arrIndex+256] = 15;
+									metaArr[arrIndex + 256] = 15;
 									blockArr[arrIndex += 256] = NyxBlocks.exousicWater;
 								} else if (yit * 8 + l2 < NyxBlockAir.ATMOS_HEIGHT)
 									blockArr[arrIndex += 256] = Blocks.air;
@@ -173,8 +170,7 @@ public class NyxChunkProvider implements IChunkProvider {
 			final public double a, b, c;
 			boolean usefull;
 
-			NoiseOctaveInit(int which, int x, int y, int z, int q, double a, double b,
-					double c) {
+			NoiseOctaveInit(int which, int x, int y, int z, int q, double a, double b, double c) {
 				usefull = false;
 				this.which = which;
 				this.x = x;
@@ -186,8 +182,7 @@ public class NyxChunkProvider implements IChunkProvider {
 				this.c = c;
 			}
 
-			NoiseOctaveInit(int which, int x, int y, int z, int q, int r, int s, double a,
-					double b, double c) {
+			NoiseOctaveInit(int which, int x, int y, int z, int q, int r, int s, double a, double b, double c) {
 				this(which, x, y, z, q, a, b, c);
 				usefull = true;
 				this.r = r;
@@ -203,8 +198,8 @@ public class NyxChunkProvider implements IChunkProvider {
 		}
 		final Thread[] pool = new Thread[4];
 		pool[3] = new Thread(new NoiseOctaveInit(3, x, z, 5, 5, 200, 200, 0.5));
-		pool[2] = new Thread(new NoiseOctaveInit(2, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D,
-				8.555150000000001D));
+		pool[2] = new Thread(
+				new NoiseOctaveInit(2, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D));
 		pool[0] = new Thread(new NoiseOctaveInit(0, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D));
 		pool[1] = new Thread(new NoiseOctaveInit(1, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D));
 
@@ -214,9 +209,9 @@ public class NyxChunkProvider implements IChunkProvider {
 		int l = 0;
 		int i1 = 0;
 
-		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, x - 2,
-				z - 2, 10, 10);
-		
+		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, x - 2, z - 2,
+				10, 10);
+
 		for (int j1 = 0; j1 < 5; ++j1)
 			for (int k1 = 0; k1 < 5; ++k1) {
 				float f = 0.0F;
@@ -365,20 +360,22 @@ public class NyxChunkProvider implements IChunkProvider {
 			@Override
 			public void run() {
 				/*
-				final double d0 = 0.03125D;
-				stoneNoise = noiseGenStone.func_151599_a(stoneNoise, x * 16, z * 16, 16, 16,
-						d0 * 2.0D, d0 * 2.0D, 1.0D);
-				*/
+				 * final double d0 = 0.03125D; stoneNoise =
+				 * noiseGenStone.func_151599_a(stoneNoise, x * 16, z * 16, 16,
+				 * 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+				 */
 				Arrays.fill(ablock, Blocks.air);
 				Arrays.fill(abyte, (byte) 0);
 			}
 		});
 		t.run();
-		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16,
+				z * 16, 16, 16);
 		while (t.isAlive())
-			try {t.join();}
-			catch (final InterruptedException e) {
-		}
+			try {
+				t.join();
+			} catch (final InterruptedException e) {
+			}
 		genTerrain(x, z, ablock, abyte);
 		replaceBlocksForBiome(x, z, ablock, abyte, biomesForGeneration);
 

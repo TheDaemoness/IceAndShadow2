@@ -361,8 +361,7 @@ public class GenInfestedTrees extends WorldGenerator {
 	}
 
 	float leafSize(int par1) {
-		return par1 >= 0 && par1 < leafDistanceLimit
-				? par1 != 0 && par1 != leafDistanceLimit - 1 ? 3.0F : 2.0F : -1.0F;
+		return par1 >= 0 && par1 < leafDistanceLimit ? par1 != 0 && par1 != leafDistanceLimit - 1 ? 3.0F : 2.0F : -1.0F;
 	}
 
 	/**

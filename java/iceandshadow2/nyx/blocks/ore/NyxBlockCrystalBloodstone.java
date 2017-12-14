@@ -25,7 +25,7 @@ public class NyxBlockCrystalBloodstone extends NyxBlockCrystal {
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.BLOOD;
+		return EnumIaSAspect.STYX;
 	}
 
 	@Override

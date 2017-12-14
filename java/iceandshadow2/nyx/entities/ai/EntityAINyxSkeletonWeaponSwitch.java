@@ -30,17 +30,14 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 				return true;
 			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT)
 				if (skel.isUsingAlternateWeapon()) {
-					if (skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) > 9)
+					if (skel.isPotionActive(Potion.moveSlowdown.id) && skel.getDistanceSqToEntity(entityliving) > 9)
 						return true;
 					if (skel.getDistanceSqToEntity(entityliving) > 25)
 						return true;
 				} else {
-					if (skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) < 4)
+					if (skel.isPotionActive(Potion.moveSlowdown.id) && skel.getDistanceSqToEntity(entityliving) < 4)
 						return true;
-					if (!skel.isPotionActive(Potion.moveSlowdown.id)
-							&& skel.getDistanceSqToEntity(entityliving) < 16)
+					if (!skel.isPotionActive(Potion.moveSlowdown.id) && skel.getDistanceSqToEntity(entityliving) < 16)
 						return true;
 				}
 		}

@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * Ice and Shadow 2's own tool material for rapid, modular, and flexible tool
  * creation! Yaaaay!
  */
-public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
+public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect {
 
 	public static IaSToolMaterial extractMaterial(ItemStack is) {
 		if (is == null)
@@ -53,6 +53,11 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp {
 	 */
 	public int damageToolOnAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		return 1;
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.getAspect(getMaterialItem());
 	}
 
 	/**

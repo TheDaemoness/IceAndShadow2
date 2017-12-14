@@ -61,8 +61,7 @@ public class EntityCosmeticShadowRiser extends EntityThrowable {
 			setDead();
 		final String id = "shadowSmokeLarge";
 		IaSFxManager.spawnParticle(worldObj, id, posX, posY, posZ, false, false);
-		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY,
-				posZ + motionZ, false, false);
+		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY, posZ + motionZ, false, false);
 	}
 
 	public EntityCosmeticShadowRiser setFlags(boolean strong, boolean harmUndead) {

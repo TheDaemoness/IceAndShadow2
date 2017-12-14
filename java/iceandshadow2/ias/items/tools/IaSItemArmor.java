@@ -2,6 +2,8 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +12,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class IaSItemArmor extends ItemArmor implements IIaSModName {
+public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect {
 
 	protected IaSArmorMaterial mat;
 	protected String armorTexString;
@@ -30,6 +32,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName {
 		if (slot == 2)
 			return armorTexString + "_2.png";
 		return armorTexString + "_1.png";
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return mat.getAspect();
 	}
 
 	@Override

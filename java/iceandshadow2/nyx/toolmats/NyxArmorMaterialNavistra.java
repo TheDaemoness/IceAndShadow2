@@ -3,8 +3,6 @@ package iceandshadow2.nyx.toolmats;
 import iceandshadow2.ias.items.tools.IaSArmorMaterial;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 
 public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
@@ -27,11 +25,11 @@ public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
 
 	@Override
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
-		wearer.motionX *= 1 - 0.01*coverage;
-		wearer.motionZ *= 1 - 0.01*coverage;
-		if(wearer.motionY > 0 && wearer.isOnLadder())
-			wearer.motionY *= 1 - 0.01*coverage;
-		if(wearer.isSprinting() && major)
+		wearer.motionX *= 1 - 0.01 * coverage;
+		wearer.motionZ *= 1 - 0.01 * coverage;
+		if (wearer.motionY > 0 && wearer.isOnLadder())
+			wearer.motionY *= 1 - 0.01 * coverage;
+		if (wearer.isSprinting() && major)
 			wearer.setSprinting(false);
 		super.onTick(wearer, coverage, major);
 	}

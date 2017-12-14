@@ -188,8 +188,7 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F) {
 			final float var1 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
-			prevRotationYaw = rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D
-					/ Math.PI);
+			prevRotationYaw = rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 			prevRotationPitch = rotationPitch = (float) (Math.atan2(motionY, var1) * 180.0D / Math.PI);
 		}
 
@@ -197,8 +196,7 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 		if (blockIn != null) {
 			blockIn.setBlockBoundsBasedOnState(worldObj, xTile, yTile, zTile);
-			final AxisAlignedBB blockBB = blockIn.getCollisionBoundingBoxFromPool(worldObj, xTile, yTile,
-					zTile);
+			final AxisAlignedBB blockBB = blockIn.getCollisionBoundingBoxFromPool(worldObj, xTile, yTile, zTile);
 
 			if (blockBB != null && blockBB.isVecInside(Vec3.createVectorHelper(posX, posY, posZ))) {
 
@@ -216,8 +214,7 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 		++ticksInAir;
 		Vec3 var17 = Vec3.createVectorHelper(posX, posY, posZ);
-		Vec3 var3 = Vec3.createVectorHelper(posX + motionX, posY + motionY,
-				posZ + motionZ);
+		Vec3 var3 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ);
 		MovingObjectPosition var4 = worldObj.rayTraceBlocks(var17, var3);
 		var17 = Vec3.createVectorHelper(posX, posY, posZ);
 		var3 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ);
@@ -261,8 +258,7 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 		if (var4 != null)
 			if (var4.entityHit != null) {
-				var20 = MathHelper.sqrt_double(
-						motionX * motionX + motionY * motionY + motionZ * motionZ);
+				var20 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
 				int var23 = MathHelper.ceiling_double_int(var20 * damage);
 
 				if (getIsCritical())
@@ -282,25 +278,22 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 				// Slow enemies it hits.
 				if (var4.entityHit instanceof EntityLivingBase && freezeTime > 0)
-					((EntityLivingBase) var4.entityHit).addPotionEffect(
-							new PotionEffect(Potion.moveSlowdown.id, freezeTime, freezeLevel));
+					((EntityLivingBase) var4.entityHit)
+							.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, freezeTime, freezeLevel));
 
 				if (var4.entityHit.attackEntityFrom(dmgSrc, var23)) {
 					if (var4.entityHit instanceof EntityLiving) {
 						if (knockbackStrength > 0) {
-							var26 = MathHelper
-									.sqrt_double(motionX * motionX + motionZ * motionZ);
+							var26 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
 
 							if (var26 > 0.0F)
-								var4.entityHit.addVelocity(
-										motionX * knockbackStrength * 0.6000000238418579D / var26,
+								var4.entityHit.addVelocity(motionX * knockbackStrength * 0.6000000238418579D / var26,
 										0.1D * knockbackStrength,
 										motionZ * knockbackStrength * 0.6000000238418579D / var26);
 						}
 
 						if (shootingEntity != null && var4.entityHit != shootingEntity
-								&& var4.entityHit instanceof EntityPlayer
-								&& shootingEntity instanceof EntityPlayerMP)
+								&& var4.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP)
 							((EntityPlayerMP) shootingEntity).playerNetServerHandler
 									.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
 					}
@@ -309,10 +302,8 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 					if (shouldKill && !(var4.entityHit instanceof EntityEnderman) && !getIsCritical())
 						setDead();
 					if (!isEntityAlive())
-						worldObj.playSoundAtEntity(this, "dig.glass",
-								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-										: var4.hitVec.lengthVector() / 5.0F),
-								1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+						worldObj.playSoundAtEntity(this, "dig.glass", (float) (var4.hitVec.lengthVector() / 5.0F > 1.0
+								? 1.0F : var4.hitVec.lengthVector() / 5.0F), 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 				}
 			} else {
 				xTile = var4.blockX;
@@ -340,8 +331,7 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 
 					boolean die = inTile.isCollidable();
 					if (inTile.getMaterial() == Material.glass) {
-						die &= !(getIsCritical()
-								|| !(inTile.renderAsNormalBlock() || (inTile instanceof BlockGlass)));
+						die &= !(getIsCritical() || !(inTile.renderAsNormalBlock() || (inTile instanceof BlockGlass)));
 						if (!worldObj.isRemote)
 							worldObj.func_147480_a(xTile, yTile, zTile, false);
 					} else if (inTile.getMaterial() == Material.ice) {
@@ -359,13 +349,10 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 					}
 
 					if (die) {
-						worldObj.playSoundAtEntity(this, "dig.glass",
-								(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
-										: var4.hitVec.lengthVector() / 5.0F),
-								1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+						worldObj.playSoundAtEntity(this, "dig.glass", (float) (var4.hitVec.lengthVector() / 5.0F > 1.0
+								? 1.0F : var4.hitVec.lengthVector() / 5.0F), 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 						for (int i = 0; i < 8; ++i)
-							worldObj.spawnParticle("snowballpoof", posX, posY, posZ, 0.0D, 0.0D,
-									0.0D);
+							worldObj.spawnParticle("snowballpoof", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 						setDead();
 					}
 				}
@@ -400,17 +387,16 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 		isInWater()) {
 			for (int var25 = 0; var25 < (getIsCritical() ? 6 : 4); ++var25) {
 				var26 = 0.25F;
-				worldObj.spawnParticle("bubble", posX - motionX * var26,
-						posY - motionY * var26, posZ - motionZ * var26, motionX, motionY,
-						motionZ);
+				worldObj.spawnParticle("bubble", posX - motionX * var26, posY - motionY * var26, posZ - motionZ * var26,
+						motionX, motionY, motionZ);
 			}
 
 			var22 = 0.8F;
 		} else
 			for (var9 = 0; var9 < (getIsCritical() ? 5 : 3); ++var9)
 				IaSFxManager.spawnParticle(worldObj, getIsCritical() ? "cloud" : "cloudSmall",
-						posX + motionX * var9 / 4.0D, posY + motionY * var9 / 4.0D,
-						posZ + motionZ * var9 / 4.0D, 0.0D, 0.05D, 0.0D, true, !getIsCritical());
+						posX + motionX * var9 / 4.0D, posY + motionY * var9 / 4.0D, posZ + motionZ * var9 / 4.0D, 0.0D,
+						0.05D, 0.0D, true, !getIsCritical());
 
 		motionX *= var22;
 		motionY *= var22;

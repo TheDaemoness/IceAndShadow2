@@ -1,9 +1,7 @@
 package iceandshadow2.nyx.world;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.world.ChunkPosition;
@@ -19,30 +17,25 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxChunkManager extends WorldChunkManager {
 	public BiomeGenBase[] biomeGenList;
-	//private final GenLayer genBiomes;
+	// private final GenLayer genBiomes;
 
 	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
 	private final GenLayer biomeIndexLayer;
 
 	/** The BiomeCache object for this world. */
 	private final BiomeCache biomeCache;
-	
+
 	public NyxChunkManager(BiomeGenBase[] biomesToGen, GenLayer genBiomes, GenLayer biomeIndexLayer, World par1World) {
 		biomeGenList = new BiomeGenBase[256];
 
 		for (int i = 0; i < biomesToGen.length; ++i)
 			biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
 
-		//this.genBiomes = genBiomes;
+		// this.genBiomes = genBiomes;
 		this.biomeIndexLayer = biomeIndexLayer;
 		biomeCache = new BiomeCache(this);
 	}
-	
-	protected int[] getInts(int x, int z, int xlim, int zlim) {
-		IntCache.resetIntCache();
-		return biomeIndexLayer.getInts(x, z, xlim, zlim);
-	}
-	
+
 	/**
 	 * checks given Chunk's Biomes against List of allowed ones
 	 */
@@ -148,8 +141,7 @@ public class NyxChunkManager extends WorldChunkManager {
 	 * Returns an array of biomes for the location input.
 	 */
 	@Override
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] biomes, int x, int z, int xlim,
-			int zlim) {
+	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
 
 		if (biomes == null || biomes.length < xlim * zlim)
 			biomes = new BiomeGenBase[xlim * zlim];
@@ -165,6 +157,11 @@ public class NyxChunkManager extends WorldChunkManager {
 	@Override
 	public List getBiomesToSpawnIn() {
 		return new ArrayList<BiomeGenBase>();
+	}
+
+	protected int[] getInts(int x, int z, int xlim, int zlim) {
+		IntCache.resetIntCache();
+		return biomeIndexLayer.getInts(x, z, xlim, zlim);
 	}
 
 	@Override

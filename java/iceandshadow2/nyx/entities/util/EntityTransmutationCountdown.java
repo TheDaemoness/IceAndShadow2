@@ -93,8 +93,7 @@ public class EntityTransmutationCountdown extends Entity {
 				setDead();
 				return;
 			}
-		final double xposMod = 0.4 + worldObj.rand.nextDouble() / 5,
-				zposMod = 0.4 + worldObj.rand.nextDouble() / 5;
+		final double xposMod = 0.4 + worldObj.rand.nextDouble() / 5, zposMod = 0.4 + worldObj.rand.nextDouble() / 5;
 		if (age % 3 == 0)
 			return;
 		final IIaSApiTransmute particleHandler = (tte.catalyst != null
@@ -103,9 +102,8 @@ public class EntityTransmutationCountdown extends Entity {
 		if (worldObj.isRemote && particleHandler != null && tte.handler != null)
 			if (!particleHandler.spawnTransmuteParticles(tte.target, tte.catalyst, worldObj, this))
 				IaSFxManager.spawnItemParticle(worldObj, tte.catalyst, posX - 0.5 + xposMod,
-						posY + worldObj.rand.nextDouble() / 2, posZ - 0.5 + zposMod,
-						(0.5 - xposMod) / 10, -0.05 - worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10,
-						false, false);
+						posY + worldObj.rand.nextDouble() / 2, posZ - 0.5 + zposMod, (0.5 - xposMod) / 10,
+						-0.05 - worldObj.rand.nextDouble() * 0.1, (0.5 - zposMod) / 10, false, false);
 	}
 
 	@Override

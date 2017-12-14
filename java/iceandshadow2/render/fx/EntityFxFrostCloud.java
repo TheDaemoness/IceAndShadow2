@@ -18,8 +18,7 @@ public class EntityFxFrostCloud extends EntityFX {
 		motionX += velX;
 		motionY += velY;
 		motionZ += velZ;
-		particleRed = particleGreen = particleBlue = 1.0F
-				- (float) (Math.random() * 0.30000001192092896D);
+		particleRed = particleGreen = particleBlue = 1.0F - (float) (Math.random() * 0.30000001192092896D);
 		particleScale *= size;
 		particleScale *= f;
 		field_70569_a = particleScale;

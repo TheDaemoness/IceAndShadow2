@@ -40,7 +40,7 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.BLOOD;
+		return EnumIaSAspect.STYX;
 	}
 
 	@Override

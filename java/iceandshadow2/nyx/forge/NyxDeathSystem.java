@@ -79,7 +79,7 @@ public class NyxDeathSystem {
 			final EntityPlayerMP playNoMore = (EntityPlayerMP) e.entityLiving;
 			if (e.source != IaSDamageSources.dmgDrain)
 				IaSPlayerHelper.drainXP(playNoMore, playNoMore.experienceTotal / 2, null, true);
-			IaSEntityHelper.spawnNourishment(playNoMore, playNoMore.getFoodStats().getPrevFoodLevel());
+			IaSEntityHelper.spawnNourishment(playNoMore, playNoMore.getFoodStats().getFoodLevel());
 			NyxDeathSystem.plai_inv = new InventoryPlayer(playNoMore);
 			NyxDeathSystem.plai_inv.copyInventory(playNoMore.inventory);
 		}

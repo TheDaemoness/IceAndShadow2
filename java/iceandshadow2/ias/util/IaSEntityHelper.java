@@ -160,7 +160,7 @@ public class IaSEntityHelper {
 		final double zdif = b.posZ - a.posZ;
 		double ratio;
 
-		if (1 + 2*Math.sqrt(xdif * xdif + zdif * zdif) < (b.posY - a.posY))
+		if (1 + 2 * Math.sqrt(xdif * xdif + zdif * zdif) < (b.posY - a.posY))
 			return false;
 
 		if (xdif == 0.0)
@@ -174,7 +174,7 @@ public class IaSEntityHelper {
 		else if (zdif < 0)
 			ang += 360.0;
 
-		return ((ang - a.rotationYaw)%360 <= 180);
+		return ((ang - a.rotationYaw) % 360 <= 180);
 	}
 
 	public static boolean isTouchingGround(EntityLivingBase ent) {
