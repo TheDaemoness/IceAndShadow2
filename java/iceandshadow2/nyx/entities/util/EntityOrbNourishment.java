@@ -2,7 +2,7 @@ package iceandshadow2.nyx.entities.util;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

@@ -1,4 +1,4 @@
-package iceandshadow2.util;
+package iceandshadow2.ias.util;
 
 import net.minecraft.entity.Entity;
 

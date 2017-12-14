@@ -4,7 +4,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
-import iceandshadow2.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSBlockHelper;
 
 import java.util.Random;
 

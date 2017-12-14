@@ -2,9 +2,14 @@ package iceandshadow2.nyx.forge;
 
 import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
+import iceandshadow2.ias.util.IaSPlayerHelper;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -22,6 +27,24 @@ public class NyxBlockHandler {
 					IaSBaseBlockAirlike.makeClimbable(w, x, y + 1, z);
 					break;
 				}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onTryToReplaceNoReplace(PlayerInteractEvent e) {
+		final ItemStack is = e.entityPlayer.getEquipmentInSlot(0);
+		if(is == null || !(is.getItem() instanceof ItemBlock))
+			return;
+		switch (e.action) {
+		case RIGHT_CLICK_BLOCK:
+			ForgeDirection dir = ForgeDirection.getOrientation(e.face);
+			final Block bl = e.world.getBlock(e.x+dir.offsetY, e.y+dir.offsetY, e.z+dir.offsetZ);
+			if(!bl.isReplaceable(e.world, e.x+dir.offsetY, e.y+dir.offsetY, e.z+dir.offsetZ)) {
+				IaSPlayerHelper.messagePlayer(e.entityPlayer, "Something stops you from placing a block there.");
+				e.setCanceled(true);
+			}
+		default:
+		break;
 		}
 	}
 }

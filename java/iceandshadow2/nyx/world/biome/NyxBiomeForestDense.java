@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
-import iceandshadow2.util.IaSBlockHelper;
 
 import java.util.Random;
 

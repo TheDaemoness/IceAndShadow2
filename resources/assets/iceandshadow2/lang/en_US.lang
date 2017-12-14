@@ -173,6 +173,9 @@ tile.nyxTransmutationAltar.name=Transfusion Altar
 tile.nyxTransmutationAltarBroken.name=Broken Transfusion Altar
 tile.nyxAltarExperience.name=Experience Altar
 
+tile.nyxcosmosBarrier.name=???
+tile.nyxcosmosGatestone.name=???
+
 itemGroup.IaSBlocks=Nyxian Blocks
 itemGroup.IaSMisc=Nyxian Uncategorized
 itemGroup.IaSMaterials=Nyxian Resources

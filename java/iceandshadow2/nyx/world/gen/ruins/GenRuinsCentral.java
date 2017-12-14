@@ -3,10 +3,11 @@ package iceandshadow2.nyx.world.gen.ruins;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.items.tools.IaSTools;
+import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.gen.Sculptor;
+import iceandshadow2.styx.Styx;
 
 import java.util.Random;
 
@@ -98,6 +99,10 @@ public class GenRuinsCentral extends GenRuins {
 			Sculptor.blast(w, x - 7 + i * 5 + r.nextInt(3), y + 5 + r.nextInt(4), z + 8 - r.nextInt(3),
 					2 + r.nextInt(maxradi));
 		}
+		
+		// Protection
+		Sculptor.cube(w, x - 1, y + 5, z - 1, x + 1, y + 7, z + 1, Styx.reserved, 0);
+		
 		// Podiums
 		for (int xit = -4; xit <= 4; xit += 8)
 			for (int zit = -4; zit <= 4; zit += 8)

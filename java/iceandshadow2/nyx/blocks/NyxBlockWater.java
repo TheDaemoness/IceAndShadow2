@@ -4,8 +4,8 @@ import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockFluid;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;

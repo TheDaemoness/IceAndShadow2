@@ -16,6 +16,7 @@ import iceandshadow2.nyx.forge.*;
 import iceandshadow2.nyx.toolmats.*;
 import iceandshadow2.nyx.world.NyxBiomes;
 import iceandshadow2.render.IaSRenderers;
+import iceandshadow2.styx.Styx;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.Logger;
@@ -119,6 +120,8 @@ public class IceAndShadow2 {
 
 		InitNyx.init(this);
 		IaSDamageSources.init();
+		
+		Styx.init(this);
 
 		IceAndShadow2.toPreRegister = new ArrayList<Object>();
 		addToolMaterials();

@@ -4,9 +4,9 @@ import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
+import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
-import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

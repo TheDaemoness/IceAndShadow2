@@ -14,10 +14,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.util.IaSPlayerHelper;
+import iceandshadow2.ias.util.IaSRegistration;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSPlayerHelper;
-import iceandshadow2.util.IaSRegistration;
 
 public class NyxBlockHookClimbing extends BlockFence {
 

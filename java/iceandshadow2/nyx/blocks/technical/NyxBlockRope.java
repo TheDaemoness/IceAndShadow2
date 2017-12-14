@@ -18,8 +18,8 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSPlayerHelper;
 
 public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 

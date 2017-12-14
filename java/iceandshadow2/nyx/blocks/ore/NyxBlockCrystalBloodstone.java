@@ -1,9 +1,9 @@
 package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
-import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;
 

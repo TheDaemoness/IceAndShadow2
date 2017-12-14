@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.ai.senses;
 
 import iceandshadow2.ias.items.tools.IaSItemArmor;
-import iceandshadow2.util.IaSEntityHelper;
+import iceandshadow2.ias.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;

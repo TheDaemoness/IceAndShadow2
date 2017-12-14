@@ -4,7 +4,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

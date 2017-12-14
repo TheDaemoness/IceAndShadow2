@@ -1,4 +1,4 @@
-package iceandshadow2.util;
+package iceandshadow2.ias.util;
 
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;

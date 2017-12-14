@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
+import iceandshadow2.styx.Styx;
 
 import java.util.Random;
 
@@ -24,7 +25,7 @@ public class NyxTeleporter extends Teleporter {
 	private void placeInNyx(Entity par1Entity, int x, int z) {
 		for (int i = 0; i < 16; ++i)
 			world.getChunkProvider().loadChunk((i >> 4) - 3, (i & 4) - 3);
-		final int y = GenRuinsCentral.getGenHeight(world, 0, 0) + 3;
+		final int y = GenRuinsCentral.getGenHeight(world, 0, 0) + 1;
 		par1Entity.setLocationAndAngles(0.5, y + 1, 0.5, world.rand.nextFloat() * 360.0F, 0.0F);
 	}
 
@@ -85,8 +86,8 @@ public class NyxTeleporter extends Teleporter {
 						if (bid == NyxBlocks.cryingObsidian && bmet == 1) {
 							bid = world.getBlock(xvalue, yvalue + 1, zvalue);
 							final Block bid2 = world.getBlock(xvalue, yvalue + 2, zvalue);
-							if (bid == Blocks.air && bid2 == Blocks.air) {
-								par1Entity.setLocationAndAngles(xvalue, yvalue + 1, zvalue, par1Entity.rotationYaw,
+							if (bid == Styx.reserved && bid2 == Styx.reserved) {
+								par1Entity.setLocationAndAngles(xvalue, yvalue + 1.1, zvalue, par1Entity.rotationYaw,
 										0.0F);
 								return true;
 							}

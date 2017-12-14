@@ -4,8 +4,8 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.util.IaSRegistration;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSRegistration;
 
 import java.util.ArrayList;
 

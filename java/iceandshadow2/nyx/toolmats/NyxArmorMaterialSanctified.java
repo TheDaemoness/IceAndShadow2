@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.toolmats;
 
 import iceandshadow2.ias.items.tools.IaSArmorMaterial;
+import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSEntityHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.DamageSource;

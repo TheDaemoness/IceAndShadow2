@@ -12,10 +12,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
+import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.IaSPlayerHelper;
 
 public class NyxItemKitTightrope extends IaSBaseItemSingle {
 

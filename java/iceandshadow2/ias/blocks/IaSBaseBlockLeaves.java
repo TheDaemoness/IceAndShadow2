@@ -5,7 +5,7 @@ import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
-import iceandshadow2.util.IaSRegistration;
+import iceandshadow2.ias.util.IaSRegistration;
 
 import java.util.ArrayList;
 import java.util.Random;

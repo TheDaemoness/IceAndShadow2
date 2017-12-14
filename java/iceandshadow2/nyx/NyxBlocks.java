@@ -2,12 +2,12 @@ package iceandshadow2.nyx;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
+import iceandshadow2.ias.util.IaSRegistration;
 import iceandshadow2.nyx.blocks.*;
 import iceandshadow2.nyx.blocks.ore.*;
 import iceandshadow2.nyx.blocks.technical.*;
 import iceandshadow2.nyx.blocks.utility.*;
 import iceandshadow2.nyx.tileentities.*;
-import iceandshadow2.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;

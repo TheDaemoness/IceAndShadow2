@@ -1,4 +1,4 @@
-package iceandshadow2.util.gen;
+package iceandshadow2.ias.util.gen;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

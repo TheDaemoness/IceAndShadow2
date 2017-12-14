@@ -2,6 +2,7 @@ package iceandshadow2.nyx.entities.mobs;
 
 import java.util.List;
 
+import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.senses.IaSSenseMovement;
 import iceandshadow2.nyx.entities.ai.senses.IaSSenseTouch;
@@ -9,7 +10,6 @@ import iceandshadow2.nyx.entities.ai.senses.IaSSenseVision;
 import iceandshadow2.nyx.entities.cosmetic.EntityCosmeticShadowRiser;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
-import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;

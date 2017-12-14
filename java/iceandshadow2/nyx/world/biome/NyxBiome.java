@@ -1,14 +1,16 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
+import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsGatestone;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
-import iceandshadow2.util.IaSBlockHelper;
-import iceandshadow2.util.IaSWorldHelper;
-import iceandshadow2.util.gen.Sculptor;
+import iceandshadow2.styx.Styx;
 
 import java.util.Random; //Fuck you, Scala.
 
@@ -66,7 +68,7 @@ public class NyxBiome extends BiomeGenBase {
 		// Unstable ice.
 		if (doGenUnstableIce) {
 			genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 36);
-			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 0, 128, 10);
+			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 48, 128, 10);
 		}
 
 		if (doGenDevora)
@@ -89,8 +91,7 @@ public class NyxBiome extends BiomeGenBase {
 			for (int zit = 0; zit < 16; ++zit)
 				if (par2Random.nextInt(24) == 0) {
 					boolean inair = false;
-					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit)
-							- 1; yit > 0; --yit)
+					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 63; --yit)
 						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit))
 							inair = true;
 						else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
@@ -130,16 +131,7 @@ public class NyxBiome extends BiomeGenBase {
 			final int x = xchunk + 8;
 			final int z = zchunk + 8;
 			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
-			for (int xit = -1; xit <= 1; ++xit)
-				for (int zit = -1; zit <= 1; ++zit) {
-					par1World.setBlock(x + xit, y - 1, z + zit, Blocks.obsidian);
-					for (int yit = y + 3; yit > y; --yit)
-						par1World.setBlockToAir(x + xit, yit, z + zit);
-
-				}
-			par1World.setBlock(x, y - 1, z, Blocks.bedrock);
-			Sculptor.terrainFlatten(par1World, x - 1, y - 2, z - 1, x + 1, 4, z + 1);
-			par1World.setBlock(x, y, z, NyxBlocks.gatestone, 1 + par1World.rand.nextInt(2), 0x2);
+			(new GenRuinsGatestone()).generate(par1World, par2Random, x, y, z);
 		} else {
 			final int x = xchunk + 8;
 			final int z = zchunk + 8;
@@ -156,68 +148,52 @@ public class NyxBiome extends BiomeGenBase {
 
 	@Override
 	public void genTerrainBlocks(World world, Random rand, Block[] blocks, byte[] meta, int a, int b, double c) {
-		Block block = topBlock;
-		byte b0 = (byte) (field_150604_aj & 255);
-		Block block1 = fillerBlock;
-		int k = -1;
-		final int l = (int) (c / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+		//byte b0 = (byte) (field_150604_aj & 255);
+		int k = 0;
+		//final int l = (int) (c / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 		final int i1 = a & 15;
 		final int j1 = b & 15;
 		final int k1 = blocks.length / 256;
-
-		for (int l1 = 255; l1 >= 0; --l1) {
-			final int i2 = (j1 * 16 + i1) * k1 + l1;
-
-			if (l1 <= 0 + rand.nextInt(3))
-				blocks[i2] = Blocks.bedrock;
-			else if (l1 < 63 && blocks[i2].getMaterial() != Material.air
-					&& blocks[i2].getMaterial() != Material.water)
-				blocks[i2] = NyxBlocks.stone;
-			else if (l1 == 63 && (blocks[i2] == null || blocks[i2].getMaterial() == Material.air
-					|| blocks[i2] == Blocks.snow_layer)) {
-				blocks[i2] = NyxBlocks.exousicIce;
-				blocks[i2 - 1] = NyxBlocks.exousicWater;
-			} else {
-				final Block block2 = blocks[i2];
-
-				if (block2 != null && block2.getMaterial() != Material.air) {
-					if (block2 == NyxBlocks.stone)
-						if (k == -1) {
-							if (l <= 0) {
-								block = null;
-								b0 = 0;
-								block1 = NyxBlocks.stone;
-							} else if (l1 >= 59 && l1 <= 64) {
-								block = topBlock;
-								b0 = (byte) (field_150604_aj & 255);
-								block1 = fillerBlock;
-							}
-
-							if (l1 < 63 && (block == null || block.getMaterial() == Material.air
-									|| block == Blocks.snow_layer)) {
-								block = NyxBlocks.exousicIce;
-								b0 = 0;
-							}
-
-							k = l;
-
-							if (l1 >= 62) {
-								blocks[i2] = block;
-								meta[i2] = b0;
-							} else if (l1 < 56 - l) {
-								block = null;
-								block1 = NyxBlocks.stone;
-								blocks[i2] = NyxBlocks.unstableIce;
-							} else
-								blocks[i2] = block1;
-						} else if (k > 0) {
-							--k;
-							blocks[i2] = block1;
-						}
-				} else
-					k = -1;
-			}
+		
+		final int xzmod = (j1 * 16 + i1) * k1;
+		blocks[xzmod + 0] = Styx.ground;
+		blocks[xzmod + 1] = Styx.air;
+		blocks[xzmod + 2] = Styx.air;
+		blocks[xzmod + 3] = Styx.ground;
+		blocks[xzmod + 4] = Blocks.bedrock;
+		if(rand.nextBoolean())
+			blocks[xzmod + 5] = Blocks.bedrock;
+		if(blocks[xzmod + 64] == null ||
+				blocks[xzmod + 64].getMaterial() == Material.air) {
+			blocks[xzmod + 63] = NyxBlocks.exousicIce;
+			blocks[xzmod + 62] = NyxBlocks.exousicWater;
+			meta[xzmod+62] = 15;
 		}
+
+		for (int yit = 255; yit >= 63; --yit) {
+			final int index = xzmod + yit;
+			final Block current = blocks[index];
+			if (current == NyxBlocks.stone) {
+				switch(k) {
+				case 0:
+					blocks[index] = topBlock;
+					break;
+				case -1:
+					blocks[index] = fillerBlock;
+					break;
+				case -2:
+				case -3:
+					if(rand.nextInt(5+k) != 0)
+						blocks[index] = fillerBlock;
+					//PRESERVE FALLTHROUGH;
+				default:
+					k = -4;
+					break;
+				}
+				--k;
+			} else
+				k = Math.max(k, -1);
+		} 
 	}
 
 	protected boolean hasTowers() {

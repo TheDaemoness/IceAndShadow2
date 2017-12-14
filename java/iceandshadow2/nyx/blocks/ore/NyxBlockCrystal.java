@@ -2,8 +2,7 @@ package iceandshadow2.nyx.blocks.ore;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBlockDeco;
-import iceandshadow2.util.IaSBlockHelper;
-
+import iceandshadow2.ias.util.IaSBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

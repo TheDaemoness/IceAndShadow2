@@ -2,11 +2,11 @@ package iceandshadow2.nyx.entities.mobs;
 
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.util.IaSEntityHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.NyxBiomes;
-import iceandshadow2.util.IaSEntityHelper;
-import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

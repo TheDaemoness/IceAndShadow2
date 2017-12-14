@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.blocks.ore;
 
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.util.IaSPlayerHelper;
 
 import java.util.ArrayList;
 import java.util.Random;

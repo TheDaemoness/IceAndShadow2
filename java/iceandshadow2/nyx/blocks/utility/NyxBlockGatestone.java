@@ -1,15 +1,15 @@
-package iceandshadow2.nyx.blocks;
+package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
+import iceandshadow2.ias.util.IaSPlayerHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
-import iceandshadow2.util.IaSPlayerHelper;
-import iceandshadow2.util.IaSWorldHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;

@@ -10,7 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
-import iceandshadow2.util.IaSPlayerHelper;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 
 public class NyxBlockFakeFurnace extends IaSBaseBlockTechnical {
 

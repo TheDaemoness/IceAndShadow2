@@ -1,4 +1,4 @@
-package iceandshadow2.util;
+package iceandshadow2.ias.util;
 
 import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;

@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.world;
 
-import iceandshadow2.util.IaSWorldHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
