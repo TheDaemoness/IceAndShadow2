@@ -36,7 +36,7 @@ public class NyxBlockCrystal extends IaSBlockDeco {
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World w, int x, int y, int z) {
-		return super.getSelectedBoundingBoxFromPool(w, x, y, z).contract(0.0, 0.2, 0.0);
+		return super.getCollisionBoundingBoxFromPool(w, x, y, z).contract(0.0, 0.2, 0.0);
 	}
 
 	@Override

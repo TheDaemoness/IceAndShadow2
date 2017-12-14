@@ -1,7 +1,9 @@
 package iceandshadow2.nyx.world;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.world.ChunkPosition;
@@ -17,40 +19,44 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxChunkManager extends WorldChunkManager {
 	public BiomeGenBase[] biomeGenList;
-	private final GenLayer genBiomes;
+	//private final GenLayer genBiomes;
 
 	/** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
 	private final GenLayer biomeIndexLayer;
 
 	/** The BiomeCache object for this world. */
 	private final BiomeCache biomeCache;
-
+	
 	public NyxChunkManager(BiomeGenBase[] biomesToGen, GenLayer genBiomes, GenLayer biomeIndexLayer, World par1World) {
 		biomeGenList = new BiomeGenBase[256];
 
 		for (int i = 0; i < biomesToGen.length; ++i)
 			biomeGenList[biomesToGen[i].biomeID] = biomesToGen[i];
 
-		this.genBiomes = genBiomes;
+		//this.genBiomes = genBiomes;
 		this.biomeIndexLayer = biomeIndexLayer;
 		biomeCache = new BiomeCache(this);
 	}
-
+	
+	protected int[] getInts(int x, int z, int xlim, int zlim) {
+		IntCache.resetIntCache();
+		return biomeIndexLayer.getInts(x, z, xlim, zlim);
+	}
+	
 	/**
 	 * checks given Chunk's Biomes against List of allowed ones
 	 */
 	@Override
-	public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
-		IntCache.resetIntCache();
-		final int var5 = par1 - par3 >> 2;
-		final int var6 = par2 - par3 >> 2;
-		final int var7 = par1 + par3 >> 2;
-		final int var8 = par2 + par3 >> 2;
-		final int var9 = var7 - var5 + 1;
-		final int var10 = var8 - var6 + 1;
-		final int[] var11 = genBiomes.getInts(var5, var6, var9, var10);
+	public boolean areBiomesViable(int x, int z, int width, List par4List) {
+		final int var5 = x - width >> 2;
+		final int var6 = z - width >> 2;
+		final int var7 = x + width >> 2;
+		final int var8 = z + width >> 2;
+		final int xlim = var7 - var5 + 1;
+		final int zlim = var8 - var6 + 1;
+		final int[] var11 = getInts(var5, var6, xlim, zlim);
 
-		for (int var12 = 0; var12 < var9 * var10; ++var12) {
+		for (int var12 = 0; var12 < xlim * zlim; ++var12) {
 			final BiomeGenBase var13 = biomeGenList[var11[var12]];
 
 			if (!par4List.contains(var13))
@@ -74,24 +80,23 @@ public class NyxChunkManager extends WorldChunkManager {
 	 * positions.
 	 */
 	@Override
-	public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
+	public ChunkPosition findBiomePosition(int x, int z, int width, List par4List, Random par5Random) {
 		if (par4List == null)
 			return null;
 
-		IntCache.resetIntCache();
-		final int var6 = par1 - par3 >> 2;
-		final int var7 = par2 - par3 >> 2;
-		final int var8 = par1 + par3 >> 2;
-		final int var9 = par2 + par3 >> 2;
-		final int var10 = var8 - var6 + 1;
-		final int var11 = var9 - var7 + 1;
-		final int[] var12 = genBiomes.getInts(var6, var7, var10, var11);
+		final int var6 = x - width >> 2;
+		final int var7 = z - width >> 2;
+		final int var8 = x + width >> 2;
+		final int var9 = z + width >> 2;
+		final int xlim = var8 - var6 + 1;
+		final int zlim = var9 - var7 + 1;
+		final int[] var12 = getInts(var6, var7, xlim, zlim);
 		ChunkPosition var13 = null;
 		int var14 = 0;
 
-		for (int var15 = 0; var15 < var10 * var11; ++var15) {
-			final int var16 = var6 + var15 % var10 << 2;
-			final int var17 = var7 + var15 / var10 << 2;
+		for (int var15 = 0; var15 < xlim * zlim; ++var15) {
+			final int var16 = var6 + var15 % xlim << 2;
+			final int var17 = var7 + var15 / xlim << 2;
 			final BiomeGenBase var18 = biomeGenList[var12[var15]];
 			if (var18 == null)
 				continue;
@@ -111,24 +116,23 @@ public class NyxChunkManager extends WorldChunkManager {
 	 * infinite loop in BiomeCacheBlock)
 	 */
 	@Override
-	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5,
-			boolean par6) {
-		IntCache.resetIntCache();
+	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] biomeArray, int x, int z, int xwidth, int zwidth,
+			boolean useCache) {
 
-		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
-			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
+		if (biomeArray == null || biomeArray.length < xwidth * zwidth)
+			biomeArray = new BiomeGenBase[xwidth * zwidth];
 
-		if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0) {
-			final BiomeGenBase[] var9 = biomeCache.getCachedBiomes(par2, par3);
-			System.arraycopy(var9, 0, par1ArrayOfBiomeGenBase, 0, par4 * par5);
-			return par1ArrayOfBiomeGenBase;
+		if (useCache && xwidth == 16 && zwidth == 16 && (x & 15) == 0 && (z & 15) == 0) {
+			final BiomeGenBase[] var9 = biomeCache.getCachedBiomes(x, z);
+			System.arraycopy(var9, 0, biomeArray, 0, xwidth * zwidth);
+			return biomeArray;
 		} else {
-			final int[] var7 = biomeIndexLayer.getInts(par2, par3, par4, par5);
+			final int[] biomes = getInts(x, z, xwidth, zwidth);
 
-			for (int var8 = 0; var8 < par4 * par5; ++var8)
-				par1ArrayOfBiomeGenBase[var8] = biomeGenList[var7[var8]];
+			for (int i = 0; i < xwidth * zwidth; ++i)
+				biomeArray[i] = biomeGenList[biomes[i]];
 
-			return par1ArrayOfBiomeGenBase;
+			return biomeArray;
 		}
 	}
 
@@ -144,19 +148,18 @@ public class NyxChunkManager extends WorldChunkManager {
 	 * Returns an array of biomes for the location input.
 	 */
 	@Override
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int x, int z, int xlim,
+	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] biomes, int x, int z, int xlim,
 			int zlim) {
-		IntCache.resetIntCache();
 
-		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < xlim * zlim)
-			par1ArrayOfBiomeGenBase = new BiomeGenBase[xlim * zlim];
+		if (biomes == null || biomes.length < xlim * zlim)
+			biomes = new BiomeGenBase[xlim * zlim];
 
-		final int[] var6 = genBiomes.getInts(x, z, xlim, zlim);
+		final int[] biomeInts = getInts(x, z, xlim, zlim);
 
-		for (int var7 = 0; var7 < xlim * zlim; ++var7)
-			par1ArrayOfBiomeGenBase[var7] = biomeGenList[var6[var7]];
+		for (int i = 0; i < xlim * zlim; ++i)
+			biomes[i] = biomeGenList[biomeInts[i]];
 
-		return par1ArrayOfBiomeGenBase;
+		return biomes;
 	}
 
 	@Override
@@ -175,12 +178,11 @@ public class NyxChunkManager extends WorldChunkManager {
 	 */
 	@Override
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
-		IntCache.resetIntCache();
 
 		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
 			par1ArrayOfFloat = new float[par4 * par5];
 
-		final int[] var6 = biomeIndexLayer.getInts(par2, par3, par4, par5);
+		final int[] var6 = getInts(par2, par3, par4, par5);
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7) {
 			float var8 = biomeGenList[var6[var7]].getIntRainfall() / 65536.0F;
@@ -200,7 +202,7 @@ public class NyxChunkManager extends WorldChunkManager {
 	 */
 	@Override
 	public float getTemperatureAtHeight(float par1, int par2) {
-		return par1;
+		return 0;
 	}
 
 	/**

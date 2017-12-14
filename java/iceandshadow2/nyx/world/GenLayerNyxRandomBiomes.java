@@ -21,28 +21,37 @@ public class GenLayerNyxRandomBiomes extends GenLayer {
 	 */
 	@Override
 	public int[] getInts(int x, int z, int xlim, int zlim) {
-		final int[] var6 = IntCache.getIntCache(xlim * zlim);
+		final int[] var6 = IntCache.getIntCache(xlim*zlim);
 		final int rl = IaSWorldHelper.getRegionLevel(null, x * 16, -1, z * 16);
 		for (int zit = 0; zit < zlim; ++zit)
 			for (int xit = 0; xit < xlim; ++xit) {
-				initChunkSeed(xit + x, zit + z);
+				initChunkSeed(x+xit, z+zit);
 				int nb = nextInt(allowedBiomes.length);
 				if (allowedBiomes[nb] == NyxBiomes.nyxInfested) {
-					if (rl < 1)
-						nb = NyxBiomes.nyxHillForest.biomeID;
-					else if (rl < 3)
-						nb = NyxBiomes.nyxMesaForest.biomeID;
-					else
-						nb = allowedBiomes[nb].biomeID;
+					switch(rl) {
+					case 0:
+						nb = NyxBiomes.nyxHillForest.biomeID; break;
+					case 1:
+					case 2:
+						nb = NyxBiomes.nyxMesaForest.biomeID; break;
+					default:
+						nb = allowedBiomes[nb].biomeID; break;
+					}
 				} else if (allowedBiomes[nb] == NyxBiomes.nyxRugged) {
-					if (rl < 1)
-						nb = NyxBiomes.nyxHills.biomeID;
-					else if (rl < 2)
-						nb = NyxBiomes.nyxHighMountains.biomeID;
-					else if (rl < 5)
-						nb = NyxBiomes.nyxMesas.biomeID;
-					else
+					switch(rl) {
+					case 0:
+					case 1:
+						nb = NyxBiomes.nyxHills.biomeID; break;
+					case 2:
+						nb = NyxBiomes.nyxHighMountains.biomeID; break;
+					case 3:
+					case 4:
+						nb = NyxBiomes.nyxMesas.biomeID; break;
+					default:
 						nb = allowedBiomes[nb].biomeID;
+					}
+				} else if (allowedBiomes[nb] == NyxBiomes.nyxHighMountains && rl <= 0) {
+					nb = NyxBiomes.nyxLowMountains.biomeID;
 				} else
 					nb = allowedBiomes[nb].biomeID;
 				var6[xit + zit * xlim] = nb;

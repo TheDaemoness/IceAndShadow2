@@ -7,6 +7,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.layer.GenLayer;
@@ -150,6 +151,17 @@ public class NyxWorldProvider extends WorldProvider {
 	public boolean isSurfaceWorld() {
 		return true;
 	}
+	
+	@Override
+	public boolean shouldMapSpin(String entity, double x, double y, double z) {
+		return y < 5;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+    public boolean getWorldHasVoidParticles() {
+        return true;
+    }
 
 	@Override
 	public void registerWorldChunkManager() {

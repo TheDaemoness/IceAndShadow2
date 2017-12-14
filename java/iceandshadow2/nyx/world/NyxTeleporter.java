@@ -24,7 +24,7 @@ public class NyxTeleporter extends Teleporter {
 
 	private void placeInNyx(Entity par1Entity, int x, int z) {
 		for (int i = 0; i < 16; ++i)
-			world.getChunkProvider().loadChunk((i >> 4) - 3, (i & 4) - 3);
+			world.getChunkProvider().loadChunk((i >> 2) - 2, (i & 2) - 2);
 		final int y = GenRuinsCentral.getGenHeight(world, 0, 0) + 1;
 		par1Entity.setLocationAndAngles(0.5, y + 1, 0.5, world.rand.nextFloat() * 360.0F, 0.0F);
 	}
