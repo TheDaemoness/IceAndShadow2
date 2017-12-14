@@ -276,13 +276,13 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 				else
 					dmgSrc = DamageSource.causeThrownDamage(this, shootingEntity);
 
-				// Slow enemies it hits.
-				if (var4.entityHit instanceof EntityLivingBase && freezeTime > 0)
-					((EntityLivingBase) var4.entityHit)
-							.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, freezeTime, freezeLevel));
-
 				if (var4.entityHit.attackEntityFrom(dmgSrc, var23)) {
-					if (var4.entityHit instanceof EntityLiving) {
+					if (var4.entityHit instanceof EntityLivingBase) {
+						// Slow enemies it hits.
+						if (freezeTime > 0 && !this.worldObj.isRemote)
+							((EntityLivingBase) var4.entityHit)
+									.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, freezeTime, freezeLevel));
+						
 						if (knockbackStrength > 0) {
 							var26 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
 
