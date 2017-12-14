@@ -21,15 +21,17 @@ public class IaSFxManager {
 	protected static void doParticleSpawn(World woild, String name, double x, double y, double z, double velX,
 			double velY, double velZ, Object extra, boolean unbounded, boolean isDecorative) {
 
-		Minecraft.getMinecraft();
-		Minecraft.getMinecraft();
+		int range = 24*24;
 		if (!Minecraft.isFancyGraphicsEnabled() || IaSFlags.flag_low_particles) {
 			if (isDecorative)
 				return;
+			if(!unbounded)
+				range = 16*16;
 			unbounded = false;
 		}
+		
 
-		if (!unbounded && Minecraft.getMinecraft().renderViewEntity.getDistanceSq(x, y, z) > 576.0F)
+		if (!unbounded && Minecraft.getMinecraft().renderViewEntity.getDistanceSq(x, y, z) > range)
 			return;
 
 		final EntityFX effex = IaSFxManager.getParticleInstanceByName(woild, name, x, y, z, velX, velY, velZ, extra);
@@ -44,17 +46,11 @@ public class IaSFxManager {
 
 		EntityFX efx = null;
 
-		Minecraft.getMinecraft();
-		Minecraft.getMinecraft();
-		if (Minecraft.isFancyGraphicsEnabled()) {
-			if (name == "dripPoison")
-				efx = new EntityFxPoisonDroplet(woild, x, y, z);
-			else if (name == "dripBlood")
-				efx = new EntityFxBloodDroplet(woild, x, y, z);
-			if (efx != null)
-				return efx;
-		}
-		if (name == "blackMagic") {
+		if (name == "dripPoison")
+			efx = new EntityFxPoisonDroplet(woild, x, y, z);
+		else if (name == "dripBlood")
+			efx = new EntityFxBloodDroplet(woild, x, y, z);
+		else if (name == "blackMagic") {
 			efx = new EntitySpellParticleFX(woild, x, y, z, velX, velY, velZ);
 			efx.setRBGColorF(0.01F * woild.rand.nextFloat(), 0.01F * woild.rand.nextFloat(),
 					0.01F * woild.rand.nextFloat());

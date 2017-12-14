@@ -6,6 +6,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
 import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsPoisonwood;
+import iceandshadow2.render.fx.IaSFxManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -56,6 +57,13 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 		final ArrayList<ItemStack> islist = new ArrayList<ItemStack>(1);
 		islist.add(new ItemStack(NyxItems.leaf, 1));
 		return islist;
+	}
+
+	@Override
+	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
+		if(r.nextInt(16) == 0 && w.getBlock(x, y-1, z) != this)
+			IaSFxManager.spawnParticle(w, "dripPoison", x+r.nextDouble(), y, z+r.nextDouble(), 0, 0, 0, false, true);
+		super.randomDisplayTick(w, x, y, z, r);
 	}
 
 }

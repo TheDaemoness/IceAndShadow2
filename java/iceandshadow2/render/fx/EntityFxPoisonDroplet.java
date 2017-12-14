@@ -33,6 +33,11 @@ public class EntityFxPoisonDroplet extends EntityFX {
 		motionX = motionY = motionZ = 0.0D;
 	}
 
+	@Override
+	public int getBrightnessForRender(float par1) {
+		return this.worldObj.getLightBrightnessForSkyBlocks((int)this.posX, (int)this.posY, (int)this.posZ, 3);
+	}
+
 	/**
 	 * Called to update the entity's position/logic.
 	 */
