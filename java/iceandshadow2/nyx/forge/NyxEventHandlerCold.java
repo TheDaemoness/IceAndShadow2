@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
@@ -45,10 +46,13 @@ public class NyxEventHandlerCold {
 	public void onFireball(EntityJoinWorldEvent e) {
 		if (e.entity == null)
 			return;
-		if (e.entity.dimension == IaSFlags.dim_nyx_id)
+		
+		if (e.entity.dimension == IaSFlags.dim_nyx_id) {
 			if (e.entity instanceof EntitySmallFireball || e.entity instanceof EntityFireball
 					|| e.entity instanceof EntityLargeFireball)
 				e.setCanceled(true);
+			e.entity.extinguish();
+		}
 	}
 
 	@SubscribeEvent
@@ -202,6 +206,14 @@ public class NyxEventHandlerCold {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer,
 							"It's been frozen solid. Eating it would be dangerous.");
 				}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityBurning(LivingHurtEvent e) {
+		if(e.entity.dimension == IaSFlags.dim_nyx_id && e.source.isFireDamage()) {
+			e.ammount = Math.max(0, e.ammount-1);
+			e.entityLiving.extinguish();
 		}
 	}
 }

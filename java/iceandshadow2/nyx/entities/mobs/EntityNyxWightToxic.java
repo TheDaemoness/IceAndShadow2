@@ -372,12 +372,6 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 	}
 
 	@Override
-	public void setFire(int time) {
-		if (dimension != IaSFlags.dim_nyx_id)
-			super.setFire(time);
-	}
-
-	@Override
 	public void setInWeb() {
 		// Nope.
 	}
