@@ -15,13 +15,13 @@ public class StyxBlockAir extends StyxBlockNoReplace {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		if (ent instanceof EntityPlayer)
-			IaSPlayerHelper.drainXP((EntityPlayer) ent, ((EntityPlayer) ent).xpBarCap(), "Your life is being erased.",
+			IaSPlayerHelper.drainXP((EntityPlayer) ent, 1+((EntityPlayer) ent).xpBarCap()/2, "Your life is being erased.",
 					false);
 		else if (!world.isRemote)
-			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 10);
+			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 5);
 		if (ent.isSprinting()) {
-			ent.motionX *= 1.02;
-			ent.motionZ *= 1.02;
+			ent.motionX *= 1.03;
+			ent.motionZ *= 1.03;
 		} else if (ent.isSneaking()) {
 			ent.motionX = 0;
 			ent.motionZ = 0;

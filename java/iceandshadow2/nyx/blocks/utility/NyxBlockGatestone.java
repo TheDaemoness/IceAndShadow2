@@ -10,6 +10,7 @@ import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
+import iceandshadow2.styx.Styx;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -68,7 +69,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 
 	@Override
 	public int getMobilityFlag() {
-		return 0;
+		return 2;
 	}
 
 	/**
@@ -95,10 +96,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 				if (!par5EntityPlayer.capabilities.isCreativeMode)
 					par5EntityPlayer.getEquipmentInSlot(0).stackSize -= 1;
 				if (par1World.getBlockMetadata(x, y, z) == 0) {
-					for (int xit = -1; xit <= 1; ++xit)
-						for (int zit = -1; zit <= 1; ++zit)
-							if (par1World.getBlock(x + xit, y - 1, z + zit) == Blocks.obsidian)
-								par1World.setBlock(x + xit, y - 1, z + zit, NyxBlocks.cryingObsidian, 0, 0x2);
+					par1World.setBlock(x, y - 1, z, NyxBlocks.cryingObsidian, 1, 0x2);
 					par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, x, y, z));
 				}
 			}
@@ -131,15 +129,15 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					dir = ForgeDirection.NORTH;
 				final int posXMod = NyxBlockGatestone.RANGE * dir.offsetX;
 				final int posZMod = NyxBlockGatestone.RANGE * dir.offsetZ;
-				int posYNew = theWorld.getTopSolidOrLiquidBlock(x + posXMod, z + posZMod) + 1;
-				for (int gateY = posYNew; gateY >= 0; --gateY)
-					if (theWorld.getBlock(x + posXMod, gateY, z + posZMod) == this) {
+				int posYNew = 255;
+				for (int gateY = posYNew; gateY >= 4; --gateY)
+					if (theWorld.getBlock(x + posXMod, gateY, z + posZMod) == Styx.gatestone) {
 						posYNew = gateY;
 						break;
 					}
 				doTPFX(theWorld, elb.posX, elb.posY, elb.posZ, posXMod, posZMod);
 				if (!theWorld.isRemote)
-					elb.setPositionAndUpdate(x + 0.5 + posXMod, posYNew, x + 0.5 + posZMod);
+					elb.setPositionAndUpdate(x + 0.5 + posXMod, posYNew+1, z + 0.5 + posZMod);
 				elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
 						3.0F + 2.0F * IaSWorldHelper.getDifficulty(theWorld));
 				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod, posXMod, posZMod);
