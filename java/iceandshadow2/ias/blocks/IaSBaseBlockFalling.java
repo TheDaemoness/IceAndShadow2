@@ -25,7 +25,7 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, II
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return null;
+		return MODULE.aspect;
 	}
 
 	@Override

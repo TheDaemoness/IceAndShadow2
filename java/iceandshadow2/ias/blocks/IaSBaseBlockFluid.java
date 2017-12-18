@@ -3,6 +3,8 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +18,7 @@ import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
+public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, IIaSAspect {
 
 	private final EnumIaSModule MODULE;
 
@@ -29,6 +31,11 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 		setBlockTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		MODULE = mod;
 		setQuantaPerBlock(16);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return MODULE.aspect;
 	}
 
 	@Override
@@ -80,5 +87,4 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName {
 		final Block bl = world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 		return dir == ForgeDirection.UP || (!bl.isOpaqueCube() && bl != this);
 	}
-
 }

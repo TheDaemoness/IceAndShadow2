@@ -28,7 +28,7 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return null;
+		return MODULE.aspect;
 	}
 
 	@Override

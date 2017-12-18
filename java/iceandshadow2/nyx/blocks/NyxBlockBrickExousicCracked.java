@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.blocks;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;

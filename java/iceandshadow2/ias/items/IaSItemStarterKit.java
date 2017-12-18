@@ -67,7 +67,6 @@ public class IaSItemStarterKit extends IaSBaseItemSingle implements IIaSOnDeathR
 		it.addEnchantment(Enchantment.punch, 1);
 		it.addEnchantment(Enchantment.infinity, 1);
 		IaSPlayerHelper.giveItem(pwai, it);
-		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.cooked_porkchop, 64));
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.shears));
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Blocks.cobblestone, 64));
 		IaSPlayerHelper.giveItem(pwai, new ItemStack(Items.arrow, 16));

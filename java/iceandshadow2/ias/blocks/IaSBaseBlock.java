@@ -25,7 +25,7 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return null;
+		return MODULE.aspect;
 	}
 
 	@Override

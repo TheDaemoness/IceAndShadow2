@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks.technical;
 import java.util.Random;
 
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
@@ -46,8 +47,10 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					if (bl instanceof NyxBlockStone)
 						continue;
 					finished = false;
-					if (bl.isReplaceable(w, i, j, k)
-							|| (bl.getMaterial().getMaterialMobility() == 0 && !(bl instanceof NyxBlockGravel))) {
+					EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
+					if (aspect == EnumIaSAspect.EXOUSIUM || aspect == EnumIaSAspect.LAND)
+						continue;
+					if (bl.isReplaceable(w, i, j, k) || bl.getBlockHardness(w, i, j, k) < NyxBlockStone.HARDNESS) {
 						IaSBlockHelper.breakBlock(w, i, j, k, true);
 						w.setBlock(i, j, k, NyxBlocks.gravel);
 					}

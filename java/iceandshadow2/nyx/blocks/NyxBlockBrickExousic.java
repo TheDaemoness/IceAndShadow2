@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.nyx.NyxBlocks;
@@ -29,6 +30,11 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 		setHardness(NyxBlockStone.HARDNESS);
 		this.setHarvestLevel("pickaxe", 0);
 		setLuminescence(0.3F);
+	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
 	}
 
 	@Override

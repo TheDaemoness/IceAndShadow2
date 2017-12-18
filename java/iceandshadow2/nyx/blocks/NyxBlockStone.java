@@ -67,7 +67,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		return new ArrayList<ItemStack>();
+		return NyxBlocks.gravel.getDrops(world, x, y, z, metadata, fortune);
 	}
 
 	public boolean isGenMineableReplaceable(World world, int x, int y, int z) {

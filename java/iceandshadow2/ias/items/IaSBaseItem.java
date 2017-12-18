@@ -19,7 +19,7 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return null;
+		return MODULE.aspect;
 	}
 
 	@Override
