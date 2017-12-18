@@ -16,26 +16,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NyxBlockHandler {
-	
-	/*
-	@SubscribeEvent
-	public void onTryToReplaceNoReplace(PlayerInteractEvent e) {
-		final ItemStack is = e.entityPlayer.getEquipmentInSlot(0);
-		if (e.entity.dimension != IaSFlags.dim_nyx_id || is == null || !(is.getItem() instanceof ItemBlock))
-			return;
-		switch (e.action) {
-		case RIGHT_CLICK_BLOCK:
-			final ForgeDirection dir = ForgeDirection.getOrientation(e.face);
-			final Block bl = e.world.getBlock(e.x + dir.offsetX, e.y + dir.offsetY, e.z + dir.offsetZ);
-			if (!bl.isReplaceable(e.world, e.x + dir.offsetX, e.y + dir.offsetY, e.z + dir.offsetZ)) {
-				IaSPlayerHelper.messagePlayer(e.entityPlayer, "Something stops you from placing a block there.");
-				e.setCanceled(true);
-			}
-		default:
-			break;
-		}
-	}
-	*/
 
 	@SubscribeEvent
 	public void onTryToStartClimbingOrSomething(LivingJumpEvent e) {

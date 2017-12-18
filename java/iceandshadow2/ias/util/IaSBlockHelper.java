@@ -1,6 +1,8 @@
 package iceandshadow2.ias.util;
 
 import java.util.Random;
+
+import iceandshadow2.api.EnumIaSAspect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -49,6 +51,15 @@ public class IaSBlockHelper {
 		for (int i = 0; i < ForgeDirection.values().length; ++i) {
 			final ForgeDirection dir = ForgeDirection.getOrientation(i);
 			if (bl.getClass().isInstance(w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)))
+				return true;
+		}
+		return false;
+	}
+	
+	public static boolean isAdjacent(IBlockAccess w, int x, int y, int z, EnumIaSAspect aspect) {
+		for (int i = 0; i < ForgeDirection.values().length; ++i) {
+			final ForgeDirection dir = ForgeDirection.getOrientation(i);
+			if (EnumIaSAspect.getAspect(w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)) == aspect)
 				return true;
 		}
 		return false;

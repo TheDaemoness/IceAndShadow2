@@ -17,6 +17,6 @@ public class IaSDamageSources {
 				.setDamageIsAbsolute();
 		IaSDamageSources.dmgFreezing = new IaSDamageSource("IceAndShadow2.nyxFreezingDamage", 0.0F, true);
 		IaSDamageSources.dmgDrain = new IaSDamageSource("IceAndShadow2.nyxDrainDamage", 0.0F, true)
-				.setDamageBypassesArmor().setDamageIsAbsolute();
+				.setMagicDamage().setDamageBypassesArmor().setDamageIsAbsolute();
 	}
 }

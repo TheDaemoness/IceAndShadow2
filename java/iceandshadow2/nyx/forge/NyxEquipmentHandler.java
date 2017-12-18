@@ -59,11 +59,12 @@ public class NyxEquipmentHandler {
 	public void handleArmor(LivingHurtEvent e) {
 		if ((e.entityLiving instanceof EntityPlayer)) {
 			final EntityPlayer victim = (EntityPlayer) e.entityLiving;
-			if (e.source != IaSDamageSources.dmgDrain)
+			final boolean isDrain = e.source == IaSDamageSources.dmgDrain;
+			if (!isDrain)
 				if (victim.inventory.hasItem(NyxItems.bloodstone))
 					IaSPlayerHelper.drainXP(victim, (int) (1 + e.ammount), null, true);
 			if (e.source.isMagicDamage())
-				doDrainEnchantments(victim, e.ammount);
+				doDrainEnchantments(victim, e.ammount*(isDrain?4:0));
 		}
 		final EntityLivingBase elb = e.entityLiving;
 		if (elb == null)

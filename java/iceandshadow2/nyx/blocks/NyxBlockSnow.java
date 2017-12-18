@@ -20,12 +20,14 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSBlockThawable;
+import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxChunkManager;
 
-public class NyxBlockSnow extends IaSBaseBlockSingle {
+public class NyxBlockSnow extends IaSBaseBlockFalling {
 
 	public NyxBlockSnow(String texName) {
 		super(EnumIaSModule.NYX, texName, Material.snow);
@@ -37,6 +39,9 @@ public class NyxBlockSnow extends IaSBaseBlockSingle {
 	}
 	
 	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {}
+
+	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return side != ForgeDirection.DOWN;
 	}
@@ -46,9 +51,17 @@ public class NyxBlockSnow extends IaSBaseBlockSingle {
 		return EnumIaSAspect.FROZEN;
 	}
 	
+	// Apparently this stops updates during chunk generation, which should speed
+	// things up.
+	@Override
+	public boolean func_149698_L() {
+		return false;
+	}
+	
 	@Override
 	public void onFallenUpon(World w, int x, int y, int z, Entity e,
 			float f) {
 		e.fallDistance /= 2f;
+		w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
 	}
 }

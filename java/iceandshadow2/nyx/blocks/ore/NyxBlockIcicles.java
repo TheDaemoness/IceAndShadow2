@@ -15,6 +15,7 @@ public class NyxBlockIcicles extends NyxBlockCrystal {
 	public NyxBlockIcicles(String texName) {
 		super(texName);
 		setLuminescence(0.1F);
+		setLightOpacity(1);
 		setLightColor(0.8F, 0.8F, 1.0F);
 		setResistance(1.5F);
 		slipperiness = 2.0F;
