@@ -3,9 +3,19 @@ package iceandshadow2.ias.util;
 import iceandshadow2.IaSFlags;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class IaSWorldHelper {
 
+	/**
+	 * Loads a chunk at the specified block coordinates.
+	 */
+	public static Chunk loadChunk(World w, int x, int z) {
+		return w.getChunkProvider().loadChunk(
+				x/16-(x<0?1:0),
+				z/16-(z<0?1:0));
+	}
+	
 	public static int getDifficulty(World w) {
 		return w.difficultySetting.getDifficultyId();
 	}

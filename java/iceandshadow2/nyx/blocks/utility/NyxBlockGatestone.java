@@ -22,6 +22,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
@@ -49,9 +50,11 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		theWorld.playSoundEffect(posX, posY, posZ, "mob.endermen.portal", 1.0F,
 				0.8F + theWorld.rand.nextFloat() * 0.1F);
 		if (theWorld.isRemote)
-			theWorld.spawnParticle("portal", posX, posY + theWorld.rand.nextDouble() * 2.0D, posZ,
+			for(int i = 0; i < 8; ++i)
+				IaSFxManager.spawnParticle(theWorld, "vanilla_portal", posX, posY + theWorld.rand.nextDouble() * 2.0D, posZ,
 					theWorld.rand.nextGaussian() * (modX / NyxBlockGatestone.RANGE), 0.0D,
-					theWorld.rand.nextGaussian() * (modZ / NyxBlockGatestone.RANGE));
+					theWorld.rand.nextGaussian() * (modZ / NyxBlockGatestone.RANGE),
+					false, true);
 	}
 
 	@Override
@@ -104,18 +107,18 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 		}
 		return false;
 	}
-
+	
 	@Override
-	public void onEntityWalking(World theWorld, int x, int y, int z, Entity theEntity) {
+	public void onEntityCollidedWithBlock(World theWorld, int x, int y, int z, Entity theEntity) {
 		if (theWorld.getBlockMetadata(x, y, z) != 0)
 			return;
 		if (theEntity.dimension != IaSFlags.dim_nyx_id)
 			return;
+		if (!theEntity.isSneaking())
+			return;
 		if (!(theEntity instanceof EntityMob))
 			if (theEntity instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) theEntity;
-				if (!elb.isSprinting())
-					return;
 				ForgeDirection dir;
 				final Vec3 v = elb.getLookVec();
 				if (Math.abs(v.xCoord) > Math.abs(v.zCoord)) {
@@ -129,15 +132,20 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					dir = ForgeDirection.NORTH;
 				final int posXMod = NyxBlockGatestone.RANGE * dir.offsetX;
 				final int posZMod = NyxBlockGatestone.RANGE * dir.offsetZ;
+				final int newX = x + posXMod;
+				final int newZ = z + posZMod;
+				Chunk ck = IaSWorldHelper.loadChunk(theWorld, newX, newZ);
+				if(ck == null || !ck.isChunkLoaded || ck.isEmpty())
+					return;
 				int posYNew = 255;
 				for (int gateY = posYNew; gateY >= 4; --gateY)
-					if (theWorld.getBlock(x + posXMod, gateY, z + posZMod) == Styx.gatestone) {
+					if (ck.getBlock(newX&15, gateY, newZ&15) == Styx.gatestone) {
 						posYNew = gateY;
 						break;
 					}
 				doTPFX(theWorld, elb.posX, elb.posY, elb.posZ, posXMod, posZMod);
-				if (!theWorld.isRemote)
-					elb.setPositionAndUpdate(x + 0.5 + posXMod, posYNew+1, z + 0.5 + posZMod);
+				elb.setSneaking(false);
+				elb.setPositionAndUpdate(newX + 0.5 , posYNew+1, newZ + 0.5);
 				elb.attackEntityFrom(IaSDamageSources.dmgGatestone,
 						3.0F + 2.0F * IaSWorldHelper.getDifficulty(theWorld));
 				doTPFX(theWorld, elb.posX + posXMod, posYNew, elb.posZ + posZMod, posXMod, posZMod);

@@ -24,7 +24,7 @@ public class GenRuinsGatestone extends GenRuins {
 		var1.setBlock(x, 2, z, Styx.reserved);
 		Sculptor.cube(var1, x - 1, y, z - 1, x + 1, y + 5, z + 1, Styx.reserved, 0);
 		Sculptor.cube(var1, x - 1, y - 2, z - 1, x + 1, y - 1, z + 1, Blocks.bedrock, 0);
-		var1.setBlock(x, y, z, NyxBlocks.gatestone, var2.nextInt(2), 2);
+		var1.setBlock(x, y, z, NyxBlocks.gatestone, 1+var2.nextInt(2), 2);
 		var1.setBlock(x, y + 3, z, Styx.gatestone, 0, 2);
 		Sculptor.cube(var1, x - 1, 0, z - 1, x + 1, 0, z + 1, Blocks.bedrock, 0);
 	}
