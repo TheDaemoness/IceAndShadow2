@@ -37,7 +37,7 @@ public class NyxBiome extends BiomeGenBase {
 		spawnableCaveCreatureList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
-		topBlock = Blocks.snow;
+		topBlock = NyxBlocks.snow;
 		fillerBlock = NyxBlocks.permafrost;
 
 		doGenDevora = true;

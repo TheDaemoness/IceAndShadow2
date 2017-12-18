@@ -22,9 +22,9 @@ public class NyxBiomes {
 
 	public static void init() {
 		NyxBiomes.nyxLowMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxLowMountains, true, 1.0F, 2.5F, false)
-				.setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost).setBiomeName("NyxLowMountains");
-		NyxBiomes.nyxHighMountains = new NyxBiome(IaSFlags.biome_id_nyxHighMountains, true, 0.5F, 4.0F, false)
-				.setBlocks(Blocks.snow_layer, NyxBlocks.permafrost).setBiomeName("NyxHighMountains");
+				.setBiomeName("NyxLowMountains");
+		NyxBiomes.nyxHighMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxHighMountains, true, 0.5F, 4.0F, false)
+				.setBiomeName("NyxHighMountains");
 
 		NyxBiomes.nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 1.5F, 0.1F, false).setBiomeName("NyxHills");
 		NyxBiomes.nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 2.5F, 1.0F, false).setBiomeName("NyxMesas");

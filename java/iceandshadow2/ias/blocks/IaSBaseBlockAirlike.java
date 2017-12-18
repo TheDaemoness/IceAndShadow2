@@ -133,6 +133,18 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World w, int x, int y, int z,
+			Explosion e) {
+		w.setBlock(x, y, z, this);
+	}
+	
+	@Override
+	public void onBlockExploded(World w, int x, int y, int z,
+			Explosion e) {
+		w.setBlock(x, y, z, this);
+	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {

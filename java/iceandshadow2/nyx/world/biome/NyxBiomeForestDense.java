@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 
@@ -15,7 +16,7 @@ public class NyxBiomeForestDense extends NyxBiome {
 
 	public NyxBiomeForestDense(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		setBlocks(Blocks.snow, Blocks.snow);
+		setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost);
 
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));

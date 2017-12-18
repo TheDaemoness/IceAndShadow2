@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.world.biome;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightSanctified;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
@@ -16,7 +17,7 @@ public class NyxBiomeInfested extends NyxBiome {
 
 	public NyxBiomeInfested(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
-		setBlocks(Blocks.snow, Blocks.snow);
+		setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost);
 
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 65, 2, 4));

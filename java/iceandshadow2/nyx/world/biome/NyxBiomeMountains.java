@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenThornyVines;
 
@@ -12,6 +13,7 @@ public class NyxBiomeMountains extends NyxBiome {
 
 	public NyxBiomeMountains(int par1, boolean register, float heightRoot, float heightVari, boolean isRare) {
 		super(par1, register, heightRoot, heightVari, isRare);
+		setBlocks(NyxBlocks.snow, NyxBlocks.stone);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 10, 2, 3));
 	}

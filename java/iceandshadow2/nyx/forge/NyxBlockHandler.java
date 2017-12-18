@@ -11,10 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class NyxBlockHandler {
+	
+	/*
 	@SubscribeEvent
 	public void onTryToReplaceNoReplace(PlayerInteractEvent e) {
 		final ItemStack is = e.entityPlayer.getEquipmentInSlot(0);
@@ -32,6 +35,7 @@ public class NyxBlockHandler {
 			break;
 		}
 	}
+	*/
 
 	@SubscribeEvent
 	public void onTryToStartClimbingOrSomething(LivingJumpEvent e) {
