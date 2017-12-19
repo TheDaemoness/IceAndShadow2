@@ -38,7 +38,7 @@ public class NyxBlockSalt extends IaSBaseBlockMulti {
 		setHardness(1.5F);
 		setResistance(10F);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLightOpacity(9);
+		this.setLightOpacity(5);
 	}
 	
 	@Override

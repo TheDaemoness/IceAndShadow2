@@ -24,7 +24,7 @@ public class NyxBiome extends BiomeGenBase {
 
 	private final boolean rare;
 
-	WorldGenNyxOre genDevora, genEchir, genCortra, genDraconium, genGemstone, genUnstableIce;
+	WorldGenNyxOre genSalt, genDevora, genEchir, genGemstone, genUnstableIce;
 
 	protected boolean doGenNifelhium;
 	protected boolean doGenDevora;
@@ -57,17 +57,31 @@ public class NyxBiome extends BiomeGenBase {
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
-		genCortra = new WorldGenNyxOre(NyxBlocks.oreCortra, 10);
-		genDraconium = new WorldGenNyxOre(NyxBlocks.oreDraconium, 8);
+		genSalt = new WorldGenNyxOre(NyxBlocks.salt, 48);
 		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
+		
+		GenOre.genOreStandard(genSalt, par1World, xchunk, zchunk, 8, 64, 5);
+		
+		final int randx = par2Random.nextInt(16),
+				randz = par2Random.nextInt(16);
+		boolean prevsalt = false;
+		for(int i = 7; i < 64; ++i) {
+			if(par1World.getBlock(xchunk+randx, i, zchunk+randz) == NyxBlocks.salt) {
+				if(prevsalt) {
+					par1World.setBlock(xchunk+randx, i, zchunk+randz, NyxBlocks.oreCortra);
+					break;
+				}
+				prevsalt = true;
+			}
+		}
 
 		if (doGenDevora)
 			genDevora = new WorldGenNyxOre(NyxBlocks.oreDevora, 8);
 
 		// Unstable ice.
 		if (doGenUnstableIce) {
-			genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 36);
-			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 48, 128, 10);
+			genUnstableIce = new WorldGenNyxOre(NyxBlocks.unstableIce, 24);
+			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 64, 156, 10);
 		}
 
 		if (doGenDevora)
@@ -75,8 +89,6 @@ public class NyxBiome extends BiomeGenBase {
 
 		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 160, 255, 4);
 		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 128, 255, 6);
-		GenOre.genOreStandard(genCortra, par1World, xchunk, zchunk, 128, 225, 8);
-		GenOre.genOreStandard(genDraconium, par1World, xchunk, zchunk, 225, 255, 3);
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 
 		if (doGenNifelhium)
