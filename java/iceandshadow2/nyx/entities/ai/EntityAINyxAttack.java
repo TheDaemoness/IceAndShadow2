@@ -121,7 +121,8 @@ public class EntityAINyxAttack extends EntityAITarget {
 		while (iterator.hasNext()) {
 			final EntityCreature ally = (EntityCreature) iterator.next();
 
-			if (taskOwner != ally && ally.getAttackTarget() == null && !ally.isOnSameTeam(taskOwner.getAttackTarget()))
+			final boolean isFriends = taskOwner.getAttackTarget() != null && ally.isOnSameTeam(taskOwner.getAttackTarget());
+			if (taskOwner != ally && ally.getAttackTarget() == null && !isFriends)
 				ally.setAttackTarget(taskOwner.getAttackTarget());
 		}
 		super.startExecuting();

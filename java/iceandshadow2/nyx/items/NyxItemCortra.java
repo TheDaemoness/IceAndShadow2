@@ -14,25 +14,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
+import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute {
-
-	@SideOnly(Side.CLIENT)
-	protected IIcon crystalIcon;
+public class NyxItemCortra extends IaSBaseItemMultiTexturedGlow implements IIaSApiTransmute {
 
 	public NyxItemCortra(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIconFromDamage(int dmg) {
-		if (dmg == 1)
-			return crystalIcon;
-		return itemIcon;
 	}
 
 	@Override
@@ -50,13 +40,6 @@ public class NyxItemCortra extends IaSBaseItemMulti implements IIaSApiTransmute 
 		it.add(new ItemStack(NyxItems.cortraIngot, Math.min(2, target.stackSize), 1));
 		target.stackSize -= Math.min(2, target.stackSize);
 		return it;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName() + "Dust");
-		crystalIcon = reg.registerIcon(getTexName() + "Crystal");
 	}
 
 	@Override

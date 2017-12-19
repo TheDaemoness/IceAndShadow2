@@ -16,12 +16,10 @@ import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
+import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.nyx.NyxItems;
 
-public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
-
-	@SideOnly(Side.CLIENT)
-	protected IIcon smallIcon;
+public class NyxItemDraconium extends IaSBaseItemMultiTexturedGlow implements IIaSApiTransmute {
 
 	public NyxItemDraconium(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
@@ -33,25 +31,6 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.STYX;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIconFromDamage(int dmg) {
-		if (dmg == 1)
-			return smallIcon;
-		return itemIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
 	}
 
 	@Override
@@ -71,27 +50,9 @@ public class NyxItemDraconium extends IaSBaseItemMulti implements IIaSGlowing, I
 		return it;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		smallIcon = reg.registerIcon(getTexName() + "Small");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
-	}
-
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
 	}
 
 }

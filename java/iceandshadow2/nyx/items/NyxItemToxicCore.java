@@ -3,6 +3,7 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
+import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,7 +22,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
+public class NyxItemToxicCore extends IaSBaseItemMultiTexturedGlow {
 
 	public static void doToxicWave(World w, Entity caster) {
 		final List<Entity> l = w.getEntitiesWithinAABBExcludingEntity(caster,
@@ -41,9 +42,6 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 			}
 	}
 
-	@SideOnly(Side.CLIENT)
-	protected IIcon smallIcon;
-
 	public NyxItemToxicCore(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		setMaxStackSize(4);
@@ -59,25 +57,6 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIconFromDamage(int dmg) {
-		if (dmg == 1)
-			return smallIcon;
-		return itemIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
-	}
-
-	@Override
 	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World, EntityPlayer player) {
 		if (!par2World.isRemote) {
 			par2World.spawnEntityInWorld(new EntityPoisonBall(par2World, player));
@@ -88,23 +67,5 @@ public class NyxItemToxicCore extends IaSBaseItemMultiGlow {
 			par1Stack.stackSize -= 1;
 		}
 		return par1Stack;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		smallIcon = reg.registerIcon(getTexName() + "Small");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
 	}
 }
