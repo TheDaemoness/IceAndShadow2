@@ -95,6 +95,8 @@ public class NyxRecipes {
 					new ItemStack(NyxItems.alabaster, 1, i));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.toxicCore, 1, 1), new ItemStack(NyxItems.poisonFruit));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxBlocks.salt, 1, 1), new ItemStack(NyxItems.salt),
+				new ItemStack(NyxItems.salt), new ItemStack(NyxItems.salt), new ItemStack(NyxItems.salt));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
 				new ItemStack(NyxItems.icicle), new ItemStack(Items.stick));

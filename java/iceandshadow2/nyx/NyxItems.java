@@ -15,7 +15,7 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative;
+			alabasterShard, leaf, resinCurative, salt;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
@@ -37,6 +37,7 @@ public class NyxItems {
 		NyxItems.exousicIceShard = new NyxItemExousicIce("ExousicIceShard").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconium = new NyxItemDraconium("Draconium").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.salt = new NyxItemSalt("Salt").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.echirIngot = new NyxItemIngot("EchirIngot").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot").register()
@@ -54,9 +55,9 @@ public class NyxItems {
 		NyxItems.frostBowLong = new NyxItemBowFrostLong("FrostLongBow").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.frostSword = new NyxItemSwordFrost("FrostSword").register().setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.boneCursed = new NyxItemBoneCursed("CursedBone").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.boneCursed = new NyxItemBoneCursed("CursedBone").register().setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.boneSanctified = new NyxItemBoneSanctified("SanctifiedBone").register()
-				.setCreativeTab(IaSCreativeTabs.resources);
+				.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.vineBundle = new NyxItemVineBundle("VineBundle").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.bread = new NyxItemFoodBread("Bread").register().setCreativeTab(CreativeTabs.tabFood);
 		NyxItems.cookie = new NyxItemFoodCookie("Cookie").register().setCreativeTab(CreativeTabs.tabFood);

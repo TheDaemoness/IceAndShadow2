@@ -17,7 +17,7 @@ public class NyxBlocks {
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transmutationAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			air, transmutationAltarBroken, sanctifiedObsidian, snow;
+			air, transmutationAltarBroken, sanctifiedObsidian, snow, salt;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -33,6 +33,7 @@ public class NyxBlocks {
 		NyxBlocks.snow = new NyxBlockSnow("Snow").register();
 		NyxBlocks.unstableIce = new NyxBlockUnstableIce("UnstableIce").register();
 		NyxBlocks.permafrost = new NyxBlockPermafrost("Permafrost").register();
+		NyxBlocks.salt = new NyxBlockSalt("SaltBlock").register();
 		NyxBlocks.dirt = new NyxBlockDirt("Dirt").register();
 		NyxBlocks.cryingObsidian = new NyxBlockObsidianSanguine("CryingObsidian").register();
 		NyxBlocks.thornyVines = new NyxBlockThornyVines("ThornyVines").register();

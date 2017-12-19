@@ -52,6 +52,8 @@ item.nyxToxicCore0.name=Toxic Core
 item.nyxToxicCore1.name=Toxic Lump
 item.nyxShapedLeaf.name=Shaped Leaf
 item.nyxCurativeResin.name=Curative Resin
+item.nyxSalt0.name=Nyxian Salt Rock
+item.nyxSalt1.name=Nyxian Salt Pile
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 
@@ -126,6 +128,8 @@ item.iasArmorEchir3Active.name=Primed Echir Boots
 tile.nyxStone.name=Nyxian Stone
 tile.nyxGravel.name=Nyxian Gravel
 tile.nyxSnow.name=Nyxian Snow
+tile.nyxSaltBlock0.name=Nyxian Salt Block
+tile.nyxSaltBlock1.name=Nyxian Salt Brick
 tile.nyxCryingObsidian.name=Sanguine Obsidian
 tile.nyxSanctifiedObsidian.name=Sanctified Obsidian
 tile.nyxUnstableIce.name=Unstable Ice
