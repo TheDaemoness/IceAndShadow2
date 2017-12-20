@@ -105,5 +105,8 @@ public class NyxRecipes {
 				new ItemStack(NyxItems.salt, 1, 1), new ItemStack(Items.feather));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
 				new ItemStack(Items.flint), new ItemStack(Items.stick));
+
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.flask, 3), "s s", " s ", 's', new ItemStack(NyxItems.salt, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.salt, 1, 1), new ItemStack(NyxItems.flask));
 	}
 }

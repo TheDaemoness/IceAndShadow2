@@ -82,32 +82,7 @@ public class IceAndShadow2 {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		if (IaSFlags.flag_death_system)
-			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
-
-		NyxBiomes.registerBiomes();
-		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
-		MinecraftForge.EVENT_BUS.register(new NyxBlockHandler());
-		MinecraftForge.EVENT_BUS.register(new NyxEquipmentHandler());
-		GameRegistry.registerFuelHandler(new NyxFuelHandler());
-
-		// Be nice, Thaumcraft.
-		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", "" + IaSFlags.dim_nyx_id + ":0");
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		IceAndShadow2.acceptRegistration = false;
-		IceAndShadow2.toPostRegister = new ArrayList<Object>();
-		addPostInitHandlers();
-		IaSRegistry.postInit();
-		IceAndShadow2.toPostRegister.clear();
-		InitNyx.lateInit(this);
-	}
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void init1(FMLPreInitializationEvent event) {
 		event.getModLog().info("Ice and Shadow 2, version " + IceAndShadow2.VERSION + ".");
 		IceAndShadow2.logger = event.getModLog();
 		if (event.getSide() == Side.SERVER)
@@ -134,6 +109,31 @@ public class IceAndShadow2 {
 		if (event.getSide() == Side.CLIENT)
 			IaSRenderers.init();
 		IceAndShadow2.acceptRegistration = true;
+	}
+
+	@EventHandler
+	public void init2(FMLInitializationEvent event) {
+		if (IaSFlags.flag_death_system)
+			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
+
+		NyxBiomes.registerBiomes();
+		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
+		MinecraftForge.EVENT_BUS.register(new NyxBlockHandler());
+		MinecraftForge.EVENT_BUS.register(new NyxEquipmentHandler());
+		GameRegistry.registerFuelHandler(new NyxFuelHandler());
+
+		// Be nice, Thaumcraft.
+		FMLInterModComms.sendMessage("Thaumcraft", "dimensionBlacklist", "" + IaSFlags.dim_nyx_id + ":0");
+	}
+
+	@EventHandler
+	public void init3(FMLPostInitializationEvent event) {
+		IceAndShadow2.acceptRegistration = false;
+		IceAndShadow2.toPostRegister = new ArrayList<Object>();
+		addPostInitHandlers();
+		IaSRegistry.postInit();
+		IceAndShadow2.toPostRegister.clear();
+		InitNyx.lateInit(this);
 	}
 
 	@EventHandler

@@ -55,7 +55,7 @@ item.nyxCurativeResin.name=Curative Resin
 item.nyxSalt0.name=Nyxian Salt Rock
 item.nyxSalt1.name=Nyxian Salt Shard
 item.nyxSalt2.name=Nyxian Salt Pile
-item.nyxSalt3.name=Saline Flask
+item.nyxFlask0.name=Saline Flask
 item.nyxPotion.name=Saline Potion
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit

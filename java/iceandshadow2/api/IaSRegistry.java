@@ -1,15 +1,35 @@
 package iceandshadow2.api;
 
 import iceandshadow2.IceAndShadow2;
+import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
+import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;
+import iceandshadow2.ias.items.tools.IaSItemEchirToolActive;
+import iceandshadow2.ias.items.tools.IaSItemToolBroken;
+import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.nyx.items.tools.NyxItemFlask;
+import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+
+import net.minecraft.block.BlockObsidian;
+import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemFishingRod;
+import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 
 public final class IaSRegistry {
 
@@ -18,6 +38,7 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiExaminable> handlersExaminable = new ArrayList<IIaSApiExaminable>();
 	private static ArrayList<IIaSApiTransmute> handlersTransmutable = new ArrayList<IIaSApiTransmute>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
+	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
 
 	public static void add(Object o) {
 		if (IceAndShadow2.isRegistrationPublic())
@@ -55,6 +76,25 @@ public final class IaSRegistry {
 
 	public static IaSToolMaterial getDefaultMaterial() {
 		return IaSRegistry.defaultMaterial;
+	}
+	
+	public static boolean isPrimarilyTransfusionTarget(ItemStack is) {
+		if(is == null)
+			return false;
+		final Object item = is.getItem() instanceof ItemBlock?
+				((ItemBlock)is.getItem()).field_150939_a:
+					is.getItem();
+		if(transfusionTargetFirstClasses.contains(item.getClass()))
+			return true;
+		for(Class c : transfusionTargetFirstClasses) {
+			if(c.isInstance(item))
+				return true;
+		}
+		return false;
+	}
+	
+	public static void setPrimarilyTransfusionTarget(Class c) {
+		transfusionTargetFirstClasses.add(c);
 	}
 
 	public static IIaSApiTransmute getHandlerTransmutation(ItemStack target, ItemStack catalyst) {
@@ -147,5 +187,20 @@ public final class IaSRegistry {
 	public static void preInit() {
 		for (final Object o : IceAndShadow2.getPreRegistrationHandlers())
 			IaSRegistry.doAdd(o);
+		setPrimarilyTransfusionTarget(ItemArmor.class);
+		setPrimarilyTransfusionTarget(ItemTool.class);
+		setPrimarilyTransfusionTarget(ItemSword.class);
+		setPrimarilyTransfusionTarget(ItemHoe.class);
+		setPrimarilyTransfusionTarget(ItemShears.class);
+		setPrimarilyTransfusionTarget(ItemFlintAndSteel.class);
+		setPrimarilyTransfusionTarget(ItemBow.class);
+		setPrimarilyTransfusionTarget(ItemFishingRod.class);
+		setPrimarilyTransfusionTarget(IaSItemEchirArmorActive.class);
+		setPrimarilyTransfusionTarget(IaSItemEchirKnifeActive.class);
+		setPrimarilyTransfusionTarget(IaSItemEchirToolActive.class);
+		setPrimarilyTransfusionTarget(IaSItemToolBroken.class);
+		setPrimarilyTransfusionTarget(NyxItemBow.class);
+		setPrimarilyTransfusionTarget(NyxItemFlask.class);
+		setPrimarilyTransfusionTarget(NyxItemSwordFrost.class);
 	}
 }

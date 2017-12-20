@@ -190,7 +190,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 		final ItemStack is = ep.getEquipmentInSlot(0);
 		if (is == null) {
-			final ItemStack its = tte.handleRemove(ep.isSneaking());
+			final ItemStack its = tte.handleRemove(ep, ep.isSneaking());
 			if (its != null)
 				IaSPlayerHelper.giveItem(ep, its);
 			w.markBlockForUpdate(x, y, z);

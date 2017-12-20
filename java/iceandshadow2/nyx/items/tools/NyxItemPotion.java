@@ -77,9 +77,7 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 
 	public NyxItemPotion(String id) {
 		super(EnumIaSModule.NYX, id, 4);
-		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-        this.setMaxDamage(0);
 	}
 
 	@Override
@@ -179,7 +177,7 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 	public IIcon getIconFromDamageForRenderPass(int dmg, int pass) {
 		if (pass == 0)
 			return liquidIcons[dmg & 3];
-		return NyxItems.salt.getIconFromDamage(3);
+		return NyxItems.flask.getIconFromDamage(0);
 	}
 
 	@SideOnly(Side.CLIENT)

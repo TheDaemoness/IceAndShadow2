@@ -54,14 +54,15 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	}
 
 	public boolean handlePlace(EntityPlayer ep, ItemStack is) {
-		if (!(is.getItem() instanceof IIaSApiTransmuteLens))
+		if (!(IaSRegistry.isPrimarilyTransfusionTarget(is)) || target != null)
 			if (catalyst == null) {
 				catalyst = is;
 				return true;
 			}
 		if (target == null) {
 			if (!canPlace(is)) {
-				IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
+				if(ep != null)
+					IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
 				return false;
 			}
 			target = is;
@@ -70,14 +71,19 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		return false;
 	}
 
-	public ItemStack handleRemove(boolean isSneaking) {
-		final boolean lensFlag;
-		if (target != null)
-			lensFlag = target.getItem() instanceof IIaSApiTransmuteLens;
-		else
-			lensFlag = false;
+	public ItemStack handleRemove(EntityPlayer ep, boolean isSneaking) {
+		if ((target != null ^ catalyst != null) && isSneaking) {
+			final boolean which = target != null;
+			if(handlePlace(ep, (which?target:catalyst))) {
+				if(which)
+					target = null;
+				else
+					catalyst = null;
+			}
+			return null;
+		}
 		ItemStack temp;
-		if (target != null && (!lensFlag || isSneaking)) {
+		if (target != null && !isSneaking) {
 			temp = target;
 			target = null;
 			return temp;

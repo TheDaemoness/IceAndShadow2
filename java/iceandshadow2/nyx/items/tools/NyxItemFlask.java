@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.items;
+package iceandshadow2.nyx.items.tools;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,15 +33,31 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class NyxItemSalt extends IaSBaseItemMultiTextured {
+public class NyxItemFlask extends IaSBaseItemMultiTextured implements IIaSApiTransmute {
 
-	public NyxItemSalt(String id) {
-		super(EnumIaSModule.NYX, id, 3);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 2, 1), new ItemStack(this, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 2), new ItemStack(this, 1, 1));
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.quartz, 3), new ItemStack(this, 1, 1), new ItemStack(Items.quartz),
-				new ItemStack(this, 1, 1), new ItemStack(Items.quartz));
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.redstone, 4), new ItemStack(this, 1, 2), new ItemStack(Items.redstone),
-				new ItemStack(this, 1, 2), new ItemStack(Items.redstone));
+	public NyxItemFlask(String id) {
+		super(EnumIaSModule.NYX, id, 1);
+	}
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if(target.getItem() == this && target.getItemDamage() == 0 && catalyst.getItem() instanceof ItemPotion) {
+			return (NyxItemPotion.convertVanilla(catalyst.getItemDamage()) >= 0)?80:0;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final int whatpot = catalyst.getItemDamage();
+		catalyst.func_150996_a(Items.glass_bottle);
+		catalyst.setItemDamage(0);
+		target.stackSize -= 1;
+		return Arrays.asList(new ItemStack(NyxItems.potion, 1, NyxItemPotion.convertVanilla(whatpot)));
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
+		return false;
 	}
 }

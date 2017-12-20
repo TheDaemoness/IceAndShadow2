@@ -15,7 +15,7 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt;
+			alabasterShard, leaf, resinCurative, salt, flask;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 	
@@ -85,6 +85,8 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.resinCurative = new NyxItemResinCurative("CurativeResin").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.flask = new NyxItemFlask("Flask").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
 	}
 	
 	public static void lateInit() {
