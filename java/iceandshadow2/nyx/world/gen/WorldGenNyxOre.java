@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.world.gen;
 
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 
 import java.util.Random;
@@ -16,6 +18,7 @@ public class WorldGenNyxOre extends WorldGenerator {
 	private final int numberOfBlocks;
 	private final Block target;
 	private int mineableBlockMeta;
+	private final EnumIaSAspect oreAspect;
 
 	public WorldGenNyxOre(Block ore, int count) {
 		this(ore, count, NyxBlocks.stone);
@@ -25,6 +28,7 @@ public class WorldGenNyxOre extends WorldGenerator {
 		this.ore = ore;
 		numberOfBlocks = count;
 		this.target = target;
+		oreAspect = EnumIaSAspect.getAspect(ore);
 	}
 
 	public WorldGenNyxOre(Block ore, int count, int meta) {
@@ -72,12 +76,16 @@ public class WorldGenNyxOre extends WorldGenerator {
 							for (int zit = z1; zit <= z2; ++zit) {
 								final double d14 = (zit + 0.5D - d8) / (d10 / 2.0D);
 
-								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D)
-									if (w.getBlock(xit, yit, zit).isReplaceableOreGen(w, xit, yit, zit, target)) {
-										w.setBlock(xit, yit, zit, ore, mineableBlockMeta, 2);
-										w.updateLightByType(EnumSkyBlock.Block, xit, yit, zit);
-										w.updateLightByType(EnumSkyBlock.Sky, xit, yit, zit);
-									}
+								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
+									if (oreAspect == EnumIaSAspect.EXOUSIUM ||
+										oreAspect == EnumIaSAspect.NAVISTRA ||
+										!IaSBlockHelper.isAdjacent(w, xit, yit, zit, EnumIaSAspect.EXOUSIUM))
+										if (w.getBlock(xit, yit, zit).isReplaceableOreGen(w, xit, yit, zit, target)) {
+											w.setBlock(xit, yit, zit, ore, mineableBlockMeta, 2);
+											w.updateLightByType(EnumSkyBlock.Block, xit, yit, zit);
+											w.updateLightByType(EnumSkyBlock.Sky, xit, yit, zit);
+										}
+								}
 							}
 					}
 			}

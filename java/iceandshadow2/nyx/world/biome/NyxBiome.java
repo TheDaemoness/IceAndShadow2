@@ -3,6 +3,7 @@ package iceandshadow2.nyx.world.biome;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.blocks.NyxBlockStone;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
@@ -11,10 +12,11 @@ import iceandshadow2.nyx.world.gen.ruins.GenRuinsGatestone;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsTowerLookout;
 import iceandshadow2.styx.Styx;
 
-import java.util.Random; //Fuck you, Scala.
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -59,9 +61,12 @@ public class NyxBiome extends BiomeGenBase {
 		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
 		genSalt = new WorldGenNyxOre(NyxBlocks.salt, 48);
 		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
+
+		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk, 1 + par2Random.nextInt(3));
 		
 		GenOre.genOreStandard(genSalt, par1World, xchunk, zchunk, 8, 64, 5);
 		
+		{
 		final int randx = par2Random.nextInt(16),
 				randz = par2Random.nextInt(16);
 		boolean prevsalt = false;
@@ -73,10 +78,32 @@ public class NyxBiome extends BiomeGenBase {
 				}
 				prevsalt = true;
 			}
+		 }
 		}
 
-		if (doGenDevora)
-			genDevora = new WorldGenNyxOre(NyxBlocks.oreDevora, 8);
+		do {
+			final int randx = par2Random.nextInt(16),
+					randz = par2Random.nextInt(16);
+			boolean prevair = false;
+			for(int i = 64; i < 192; ++i) {
+				final Block bl = par1World.getBlock(xchunk+randx, i, zchunk+randz);
+				if(prevair) {
+					if(bl instanceof NyxBlockStone) {
+						for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+							if(par2Random.nextBoolean())
+								par1World.setBlock(xchunk+randx+dir.offsetX, i+dir.offsetY, zchunk+randz+dir.offsetZ, NyxBlocks.oreDevora);
+						}
+						par1World.setBlock(xchunk+randx, i, zchunk+randz, NyxBlocks.oreDevora);
+						break;
+					}
+				} else
+					prevair = (bl == null || bl.getMaterial() instanceof MaterialTransparent);
+			}
+			if(doGenDevora)
+				doGenDevora = false;
+			else
+				break;
+		} while (true);
 
 		// Unstable ice.
 		if (doGenUnstableIce) {
@@ -84,17 +111,12 @@ public class NyxBiome extends BiomeGenBase {
 			GenOre.genOreStandard(genUnstableIce, par1World, xchunk, zchunk, 64, 156, 10);
 		}
 
-		if (doGenDevora)
-			GenOre.genOreStandard(genDevora, par1World, xchunk, zchunk, 96, 255, 20);
-
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 160, 255, 4);
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 128, 255, 6);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 156, 225, 4);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 192, 8);
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 
 		if (doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
-
-		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk, 1 + par2Random.nextInt(3));
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
 

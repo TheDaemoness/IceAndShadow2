@@ -8,6 +8,8 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,21 +74,22 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 			final Block bl = ((ItemBlock) target.getItem()).field_150939_a;
 			if (bl == Blocks.obsidian)
 				return 160;
-		}
+		} else if (target.getItem() == NyxItems.cortra && target.getItemDamage() == 0)
+			return 80;
 		return 0;
 	}
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		--catalyst.stackSize;
-		int i = 0;
-		for (; i < 3; ++i)
-			if (target.stackSize > 0)
-				--target.stackSize;
-			else
-				break;
 		final List<ItemStack> retval = new ArrayList<ItemStack>();
-		retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
+		int i = 0;
+		for (; i < 3 && target.stackSize > 0; ++i)
+			--target.stackSize;
+		if(target.getItem() == NyxItems.cortra)
+			retval.add(new ItemStack(NyxItems.draconium, i*2, 1));
+		else
+			retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
 		return retval;
 	}
 
@@ -107,7 +110,9 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		return false;
+		if(world.rand.nextBoolean())
+			IaSFxManager.spawnParticle(world, "dripBlood", ent.posX+0.05+world.rand.nextFloat()/10, ent.posY+0.125+world.rand.nextFloat()/4, ent.posZ+0.05+world.rand.nextFloat()/10, false, false);
+		return true;
 	}
 
 	@Override

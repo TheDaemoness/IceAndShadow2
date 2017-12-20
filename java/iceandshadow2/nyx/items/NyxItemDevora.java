@@ -1,10 +1,12 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -12,11 +14,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
+public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaSApiTransmute {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon smallIcon;
@@ -94,6 +100,39 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing {
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+
+	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if(target.getItem() == catalyst.getItem() && catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
+			final int total = catalyst.stackSize+(target.getItemDamage() == 1?target.stackSize:0);
+			if(total > 8)
+				return total*8;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
+		if(target.getItemDamage() == 0) {
+			int count = catalyst.stackSize/8;
+			catalyst.stackSize -= count*8;
+			ret.add(new ItemStack(this, count+target.stackSize));
+			target.stackSize = 0;
+		} else {
+			int totalstack = target.stackSize + catalyst.stackSize;
+			catalyst.stackSize = 0;
+			int count = totalstack/8;
+			ret.add(new ItemStack(this, count));
+			target.stackSize = totalstack%8;
+		}
+		return ret;
+	}
+
+	@Override
+	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
+		return false;
 	}
 
 }

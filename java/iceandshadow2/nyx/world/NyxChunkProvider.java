@@ -34,7 +34,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
 	private final double[] enigmaArray;
 	private final float[] parabolicField;
-	private final double[] stoneNoise = new double[256];
+	//private final double[] stoneNoise = new double[256];
 
 	private final Block[] ablock;
 	private final byte[] abyte;
@@ -385,8 +385,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		for (int k = 0; k < abyte1.length; ++k)
 			abyte1[k] = (byte) biomesForGeneration[k].biomeID;
 
-		chunk.generateSkylightMap();
-		chunk.resetRelightChecks();
+		chunk.isLightPopulated = false;
 		return chunk;
 	}
 
@@ -399,7 +398,7 @@ public class NyxChunkProvider implements IChunkProvider {
 			for (int l = 0; l < 16; ++l) {
 				final BiomeGenBase biomegenbase = biomeArr[l + k * 16];
 				biomegenbase.genTerrainBlocks(worldObj, rand, blockArr, metaArr, x * 16 + k, z * 16 + l,
-						stoneNoise[l + k * 16]);
+						/*stoneNoise[l + k * 16]*/ 0);
 			}
 	}
 
