@@ -2,6 +2,7 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -10,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class IaSArmorMaterial implements IIaSAspect {
+public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 
 	public static IaSArmorMaterial getArmorMaterial(ItemStack is) {
 		if (is == null || !(is.getItem() instanceof IaSItemArmor))
@@ -110,5 +111,19 @@ public class IaSArmorMaterial implements IIaSAspect {
 	 */
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
 
+	}
+	
+	public int getRenderPasses() {
+		return 2;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

@@ -1,6 +1,7 @@
 package iceandshadow2.render;
 
 import iceandshadow2.ias.interfaces.IIaSGlowing;
+import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.cosmetic.*;
@@ -67,6 +68,11 @@ public class IaSRenderers {
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
 		for (final Item item : IaSTools.armorActiveEchir)
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		for (final IaSItemArmor[] armors : IaSTools.armor) {
+			for(final Item armor : armors)
+				MinecraftForgeClient.registerItemRenderer(armor, new RenderItemVanillaGlowing());
+		}
+			
 
 		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransmutationAltar.class,
 				new RenderNyxTeTransmutationAltar());

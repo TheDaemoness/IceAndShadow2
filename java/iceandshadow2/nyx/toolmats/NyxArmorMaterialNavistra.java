@@ -33,4 +33,9 @@ public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
 			wearer.setSprinting(false);
 		super.onTick(wearer, coverage, major);
 	}
+	
+	@Override
+	public int getRenderPasses() {
+		return 1;
+	}
 }

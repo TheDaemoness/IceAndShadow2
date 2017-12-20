@@ -8,12 +8,13 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect {
+public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect, IIaSGlowing {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;
@@ -74,6 +75,16 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	public IaSItemFood setXpAltarMinimumValue(int val) {
 		xpAltarValue = val;
 		return this;
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 
 }

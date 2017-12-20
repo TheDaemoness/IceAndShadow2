@@ -44,6 +44,7 @@ public class IaSTools {
 	public static IaSItemThrowingKnife knife;
 
 	public static IaSItemArmor armorEchir[], armorNavistra[], armorCortra[], armorSpiderSilk[], armorAlabaster[];
+	public static IaSItemArmor[][] armor;
 	public static IaSArmorMaterial armorMatEchir, armorMatNavistra, armorMatCortra, armorMatSpiderSilk,
 			armorMatAlabaster;
 
@@ -122,11 +123,19 @@ public class IaSTools {
 		IaSTools.armorMatSpiderSilk = new NyxArmorMaterialSpiderSilk();
 		IaSTools.armorMatAlabaster = new NyxArmorMaterialSanctified();
 
+		
 		IaSTools.armorEchir = new IaSItemArmor[4];
 		IaSTools.armorCortra = new IaSItemArmor[4];
 		IaSTools.armorNavistra = new IaSItemArmor[4];
 		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
 		IaSTools.armorAlabaster = new IaSItemArmor[4];
+		
+		IaSTools.armor = new IaSItemArmor[5][];
+		armor[0] = armorEchir;
+		armor[1] = armorCortra;
+		armor[2] = armorNavistra;
+		armor[3] = armorSpiderSilk;
+		armor[4] = armorAlabaster;
 
 		IaSTools.initArmor(IaSTools.armorEchir, IaSTools.armorMatEchir);
 		IaSTools.initArmor(IaSTools.armorCortra, IaSTools.armorMatCortra);

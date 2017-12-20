@@ -1,17 +1,20 @@
 package iceandshadow2.ias.items;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 
-public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect {
+public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect, IIaSGlowing {
 	public final EnumIaSModule MODULE;
 
 	public IaSItemShears(EnumIaSModule mod, String texName) {
@@ -51,4 +54,24 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 		return this;
 	}
 
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
 }

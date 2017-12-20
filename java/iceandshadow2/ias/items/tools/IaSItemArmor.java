@@ -4,15 +4,17 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect {
+public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, IIaSGlowing {
 
 	protected IaSArmorMaterial mat;
 	protected String armorTexString;
@@ -32,6 +34,23 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect {
 		if (slot == 2)
 			return armorTexString + "_2.png";
 		return armorTexString + "_1.png";
+	}
+
+	@Override
+	public boolean requiresMultipleRenderPasses() {
+		return mat.getRenderPasses()>1;
+	}
+	
+	
+	
+	@Override
+	public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_) {
+		return itemIcon;
+	}
+
+	@Override
+	public int getRenderPasses(int metadata) {
+		return mat.getRenderPasses();
 	}
 
 	@Override
@@ -80,12 +99,6 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect {
 	}
 
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		// TODO Auto-generated method stub
-		super.onArmorTick(world, player, itemStack);
-	}
-
-	@Override
 	public void onUpdate(ItemStack is, World w, Entity e, int i, boolean isHeld) {
 		if (w.isRemote || !(e instanceof EntityLivingBase))
 			return;
@@ -95,5 +108,15 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect {
 			return;
 		mat.onTick(elb, 1, false);
 		super.onUpdate(is, w, e, i, isHeld);
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return mat.getFirstGlowPass(is);
+	}
+
+	@Override
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 }

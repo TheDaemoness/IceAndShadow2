@@ -11,10 +11,14 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+
+import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -37,24 +41,24 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED
-				|| type == ItemRenderType.ENTITY;
+				|| (type == ItemRenderType.ENTITY && Minecraft.isFancyGraphicsEnabled());
 	}
 
-	public void renderItem(Entity entity, ItemStack item, int pass, ItemRenderer rendr, boolean doGlowTransforms,
+	public void renderItem(Entity entity, ItemStack is, int pass, ItemRenderer rendr, boolean doGlowTransforms,
 			ItemRenderType type) {
 
 		GL11.glPushMatrix();
 
 		IIcon icon;
 		if (entity instanceof EntityLivingBase)
-			icon = ((EntityLivingBase) entity).getItemIcon(item, pass);
+			icon = ((EntityLivingBase) entity).getItemIcon(is, pass);
 		else
-			icon = item.getItem().getIcon(item, pass);
+			icon = is.getItem().getIcon(is, pass);
 
 		if (icon == null) {
-			if (item.getItem() instanceof IIaSTool) {
-				final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(item);
-				icon = mat.getIcon(item);
+			if (is.getItem() instanceof IIaSTool) {
+				final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
+				icon = mat.getIcon(is);
 			}
 			if (icon == null) {
 				GL11.glPopMatrix();
@@ -63,6 +67,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		}
 
 		final boolean blendWasEnabled = GL11.glIsEnabled(GL11.GL_BLEND);
+		final boolean lightingWasEnabled = GL11.glIsEnabled(GL11.GL_LIGHTING);
 		if (doGlowTransforms) {
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -72,16 +77,14 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 		}
 		final TextureManager texturemanager = mc.getTextureManager();
-		texturemanager.bindTexture(texturemanager.getResourceLocation(item.getItemSpriteNumber()));
+		texturemanager.bindTexture(texturemanager.getResourceLocation(is.getItemSpriteNumber()));
 		final Tessellator tessellator = Tessellator.instance;
-		final float f = icon.getMinU();
-		final float f1 = icon.getMaxU();
-		final float f2 = icon.getMinV();
-		final float f3 = icon.getMaxV();
-		final float f4 = 0.0F;
-		final float f5 = 0.3F;
+		final float minU = icon.getMinU();
+		final float maxU = icon.getMaxU();
+		final float minV = icon.getMinV();
+		final float maxV = icon.getMaxV();
 		if (type != ItemRenderType.ENTITY) {
-			GL11.glTranslatef(-f4, -f5, 0.0F);
+			GL11.glTranslatef(-0.0F, -0.3F, 0.0F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			final float f6 = 1.5F;
 			GL11.glScalef(f6, f6, f6);
@@ -90,27 +93,54 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
 		} else {
 			GL11.glTranslatef(-0.5F, 0.0F, 0.0F);
-			if (RenderItem.renderInFrame) {
+			if(RenderItem.renderInFrame) {
+				GL11.glTranslatef(0.0F, -0.25F, 0.0F);
+				/*
 				GL11.glTranslatef(0.0F, 0.70F, 0.0F);
-				GL11.glRotatef(90.0F, 0.0F, 0.0F, -1.0F);
+				GL11.glRotatef(90f, 0, 0, -1f);
+				*/
 			}
 		}
-		ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+        final float width = 0.0625F;
+        final float zshift = -width/8;
+		int count = 1;
+		if(type == ItemRenderType.ENTITY)
+			count += MathHelper.calculateLogBaseTwo(is.stackSize);
+
+        Random random = new Random(Item.getIdFromItem(is.getItem()));
+        GL11.glTranslatef(0, 0, (((width+zshift)/2)*(count)));
+		
+        final int chroma = is.getItem().getColorFromItemStack(is, pass);
+    	final float r = (float)(chroma >> 16 & 255) / 255.0F;
+    	final float g = (float)(chroma >> 8 & 255) / 255.0F;
+    	final float b= (float)(chroma & 255) / 255.0F;
+    	GL11.glColor4f(r, g, b, 1.0F);
+    	
+        for(int i = 0; i < count; ++i) {
+    		final float x = (random.nextFloat() * 2.0F - 1.0F) * 0.2F * (1 + is.stackSize/64);
+    		final float y = (random.nextFloat() * 2.0F - 1.0F) * 0.1F * (1 + is.stackSize/64);
+    		final float z = (random.nextFloat() * 2.0F - 1.0F) * 0.2F * (1 + is.stackSize/64);
+        	if(i > 0)
+        		GL11.glTranslatef(x, -y, -(width+zshift));
+        	ItemRenderer.renderItemIn2D(tessellator, maxU, minV, minU, maxV, icon.getIconWidth(), icon.getIconHeight(),
+				width);
+        	if(i > 0)
+        		GL11.glTranslatef(-x, y, 0);
+        }
 
 		if (doGlowTransforms) {
 			if (!blendWasEnabled)
 				GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			if (lightingWasEnabled)
+				GL11.glEnable(GL11.GL_LIGHTING);
 		}
 
-		if (item.hasEffect(pass)) {
+		if (is.hasEffect(pass)) {
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			texturemanager.bindTexture(new ResourceLocation("textures/misc/enchanted_item_glint.png"));
-			if (!doGlowTransforms) {
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-			}
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 			final float f7 = 0.76F;
 			GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -130,9 +160,10 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			if (!doGlowTransforms)
+			if(!blendWasEnabled)
 				GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			if (lightingWasEnabled)
+				GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 		}
 
@@ -162,7 +193,7 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 				renderItem(entity, item, x, mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 				if (doGlowTransforms && x == item.getItem().getRenderPasses(item.getItemDamage()) - 1)
 					;
-				GL11.glDisable(GL11.GL_BLEND);
+				//GL11.glDisable(GL11.GL_BLEND);
 			}
 
 		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED)
