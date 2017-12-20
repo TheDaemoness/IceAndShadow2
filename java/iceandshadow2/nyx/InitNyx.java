@@ -21,4 +21,8 @@ public class InitNyx {
 		DimensionManager.registerProviderType(IaSFlags.dim_nyx_id, NyxWorldProvider.class, false);
 		DimensionManager.registerDimension(IaSFlags.dim_nyx_id, IaSFlags.dim_nyx_id);
 	}
+
+	public static void lateInit(IceAndShadow2 iceAndShadow2) {
+		NyxItems.lateInit();
+	}
 }

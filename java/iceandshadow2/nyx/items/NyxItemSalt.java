@@ -38,6 +38,6 @@ public class NyxItemSalt extends IaSBaseItemMultiTextured {
 				new ItemStack(this, 1, 1), new ItemStack(Items.quartz));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.redstone, 4), new ItemStack(this, 1, 2), new ItemStack(Items.redstone),
 				new ItemStack(this, 1, 2), new ItemStack(Items.redstone));
-		GameRegistry.addRecipe(new ItemStack(this, 2, 3), "s", "s", 's', new ItemStack(this, 1, 0));
+		GameRegistry.addRecipe(new ItemStack(this, 3, 3), "s s", " s ", 's', new ItemStack(this, 1, 0));
 	}
 }

@@ -18,6 +18,8 @@ public class NyxItems {
 			alabasterShard, leaf, resinCurative, salt;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
+	
+	public static Item potion; //NOTE: Initialized during postinit.
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
@@ -83,5 +85,9 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.resinCurative = new NyxItemResinCurative("CurativeResin").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
+	}
+	
+	public static void lateInit() {
+		potion = new NyxItemPotion("Potion").register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 }

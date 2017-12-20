@@ -103,6 +103,7 @@ public class IceAndShadow2 {
 		addPostInitHandlers();
 		IaSRegistry.postInit();
 		IceAndShadow2.toPostRegister.clear();
+		InitNyx.lateInit(this);
 	}
 
 	@EventHandler
