@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -59,13 +60,14 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 					|| (p.getDuration() >= (int) (9600 * what.getEffectiveness()))) {
 				for (int i = 0; i < validPotions.size(); ++i) {
 					if (validPotions.get(i).id == what.id)
-						return (i << 2) | 3;
+						return freshEffect(i);
 				}
 			}
 
 		}
 		return -1;
 	}
+	
 	public static int getEffect(int damage) {
 		return damage >> 2;
 	}
