@@ -32,12 +32,12 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public float getBaseSpeed() {
-		return 6;
+		return 8;
 	}
 
 	@Override
 	public int getDurability(ItemStack is) {
-		return 128;
+		return 256;
 	}
 
 	@Override

@@ -69,9 +69,6 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 1), new ItemStack(NyxItems.heat, 1, 2));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 0), new ItemStack(NyxItems.heat, 1, 1));
 
-		GameRegistry.addRecipe(new ItemStack(NyxItems.crystalVial, 1, 0), "c", "c", 'c',
-				new ItemStack(NyxItems.cortra, 1, 1));
-
 		/*
 		 * GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,
 		 * 1, 1), new ItemStack(NyxItems.crystalVial, 1), new
@@ -100,5 +97,13 @@ public class NyxRecipes {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
 				new ItemStack(NyxItems.icicle), new ItemStack(Items.stick));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
+				new ItemStack(NyxItems.salt, 1, 1), new ItemStack(Items.stick));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
+				new ItemStack(NyxItems.icicle), new ItemStack(Items.feather));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
+				new ItemStack(NyxItems.salt, 1, 1), new ItemStack(Items.feather));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 4), new ItemStack(NyxItems.leaf),
+				new ItemStack(Items.flint), new ItemStack(Items.stick));
 	}
 }
