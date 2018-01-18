@@ -159,14 +159,16 @@ public class NyxBiome extends BiomeGenBase {
 
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 		// Gatestone generation.
-		final int x = xchunk + 8;
-		final int z = zchunk + 8;
+		final int x = xchunk - 4 + par2Random.nextInt(20);
+		final int z = zchunk - 4 + par2Random.nextInt(20);
 		final int y = Math.max(64, par1World.getTopSolidOrLiquidBlock(x, z));
 		if ((xchunk & 127) == 0 && (zchunk & 127) == 0) {
-			(new GenRuinsGatestone()).generate(par1World, par2Random, x, y, z);
+			(new GenRuinsGatestone()).generate(par1World, par2Random, xchunk+8, y, zchunk+8);
 		} else {
+			if((xchunk/16)%2 != 1 || ((zchunk)/16)%2 != 1)
+				return;
 			GenRuins gengen = null;
-			if (hasTowers() && par2Random.nextInt(16) == 0)
+			if (hasTowers() && par2Random.nextInt(4) == 0)
 				gengen = new GenRuinsTowerLookout();
 			if (gengen == null)
 				gengen = supplyRuins();

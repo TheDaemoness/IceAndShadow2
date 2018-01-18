@@ -94,12 +94,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 	 */
 	@Override
 	public boolean canGenerateHere(World var1, Random var2, int x, int y, int z) {
-		for (int xdelta = -36; xdelta <= 36; ++xdelta)
-			for (int zdelta = -36; zdelta <= 36; ++zdelta)
-				for (int ydelta = -4; ydelta <= 8; ++ydelta)
-					if (var1.getBlock(x + xdelta, y + ydelta, z + zdelta) == NyxBlocks.brickExousic)
-						return false;
-		return Math.abs(x) > 16 || Math.abs(z) > 16;
+		return y < 225;
 	}
 
 	/**

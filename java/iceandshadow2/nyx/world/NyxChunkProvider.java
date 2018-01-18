@@ -2,6 +2,7 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSExecutor;
 import iceandshadow2.IaSFuture;
+import iceandshadow2.ias.util.ChunkRandom;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockAir;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
@@ -29,8 +30,8 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
 public class NyxChunkProvider implements IChunkProvider {
 
-	private final Random rand;
 	private final NoiseGeneratorOctaves[] noiseGen;
+	private final double[][] noiseArr = {null, null, null, null};
 	// private final NoiseGeneratorPerlin noiseGenStone;
 	// public NoiseGeneratorOctaves noiseGenPublic;
 	/**
@@ -38,44 +39,46 @@ public class NyxChunkProvider implements IChunkProvider {
 	 */
 	private final World worldObj;
 
-	private final double[] heightmap;
+	private final double[] densitymap;
 	private final float[] parabolicField;
 	final byte magic = 5; //DO NOT CHANGE.
 	final int radius = 7;
+	private final long seed;
 	//private final double[] stoneNoise = new double[256];
 
 	private final Block[] ablock;
 	private final byte[] abyte;
 
 	//private BiomeGenBase[] biomesForGeneration;
-	private final double[][] noiseArr;
 
-	public NyxChunkProvider(World par1World, long par2, boolean par4) {
-		noiseArr = new double[][] { null, null, null, null };
+	public NyxChunkProvider(World par1World, long seed, boolean par4) {
+		this.seed = seed;
+		ChunkRandom rand[] = {null, null, null, null};
+		for(int i = 0; i < rand.length; ++i)
+			rand[i] = new ChunkRandom(seed, 3814, 4+(i*i), i+1);
 		ablock = new Block[1 << 16];
 		abyte = new byte[1 << 16];
 		worldObj = par1World;
-		rand = new Random(par2);
 		noiseGen = new NoiseGeneratorOctaves[4];
-		noiseGen[0] = new NoiseGeneratorOctaves(rand, 16);
-		noiseGen[1] = new NoiseGeneratorOctaves(rand, 16);
-		noiseGen[2] = new NoiseGeneratorOctaves(rand, 8);
-		noiseGen[3] = new NoiseGeneratorOctaves(rand, 16);
+		noiseGen[0] = new NoiseGeneratorOctaves(rand[0], 16);
+		noiseGen[1] = new NoiseGeneratorOctaves(rand[1], 16);
+		noiseGen[2] = new NoiseGeneratorOctaves(rand[2], 8);
+		noiseGen[3] = new NoiseGeneratorOctaves(rand[3], 16);
 		// noiseGenStone = new NoiseGeneratorPerlin(rand, 4);
 		// this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10);
-		heightmap = new double[(int)magic*magic*33];
+		densitymap = new double[(int)magic*magic*33];
 		
 		parabolicField = new float[(int)radius*radius*4];
 		for (int j = -radius; j <= radius; ++j)
 			for (int k = -radius; k <= radius; ++k) {
-				final float f = 1f / MathHelper.sqrt_float(j * j + k * k + 1);
+				final float f = 1f / MathHelper.sqrt_float(j * j + k * k + 0.5f);
 				parabolicField[j + radius + (k + radius) * radius] = f;
 			}
 	}
 
 	@Override
 	public boolean canSave() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -91,12 +94,12 @@ public class NyxChunkProvider implements IChunkProvider {
 		return null;
 	}
 
-	public BiomeGenBase[] genTerrain(final int x, final int z, final Block[] blockArr, final byte[] metaArr) {
+	private BiomeGenBase[] genTerrain(final int xChunk, final int zChunk, final Block[] blockArr, final byte[] metaArr) {
 		final byte levelWater = 63;
 		final double heightmapScale = 0.125D;
 		final double hmdeltaScale = 0.25D;
 		
-		final BiomeGenBase[] biomes = initNoiseField(x, z);
+		final BiomeGenBase[] biomes = initNoiseField(xChunk, zChunk);
 
 		class DoGenTerrain implements Runnable {
 			final int xit, zit;
@@ -114,14 +117,14 @@ public class NyxChunkProvider implements IChunkProvider {
 				final int i2 = (i1 + zit) * 33;
 				final int j2 = (i1 + zit + 1) * 33;
 				for (int yi = 0; yi < 32; ++yi) {
-					double d1 = heightmap[k1 + yi];
-					double d2 = heightmap[l1 + yi];
-					double d3 = heightmap[i2 + yi];
-					double d4 = heightmap[j2 + yi];
-					final double d5 = (heightmap[k1 + yi + 1] - d1) * heightmapScale;
-					final double d6 = (heightmap[l1 + yi + 1] - d2) * heightmapScale;
-					final double d7 = (heightmap[i2 + yi + 1] - d3) * heightmapScale;
-					final double d8 = (heightmap[j2 + yi + 1] - d4) * heightmapScale;
+					double d1 = densitymap[k1 + yi];
+					double d2 = densitymap[l1 + yi];
+					double d3 = densitymap[i2 + yi];
+					double d4 = densitymap[j2 + yi];
+					final double d5 = (densitymap[k1 + yi + 1] - d1) * heightmapScale;
+					final double d6 = (densitymap[l1 + yi + 1] - d2) * heightmapScale;
+					final double d7 = (densitymap[i2 + yi + 1] - d3) * heightmapScale;
+					final double d8 = (densitymap[j2 + yi + 1] - d4) * heightmapScale;
 					for (int yj = 0; yj < 8; ++yj) {
 						double d10 = d1;
 						double d11 = d2;
@@ -181,8 +184,8 @@ public class NyxChunkProvider implements IChunkProvider {
 		return biomegenbase.getSpawnableList(p_73155_1_);
 	}
 
-	private BiomeGenBase[] initNoiseField(final int x, final int z) {
-		class DoNoiseOctaveInit implements Runnable {
+	private BiomeGenBase[] initNoiseField(final int xChunk, final int zChunk) {
+		class DoNoiseOctaveInit implements Callable<double[]> {
 			final private int which;
 			final private int p, q, r;
 			final public double a, b, c;
@@ -206,91 +209,74 @@ public class NyxChunkProvider implements IChunkProvider {
 				this(which, p, q, a, b, c, r);
 				useFull = true;
 			}
-
+			
 			@Override
-			public void run() {
-				noiseArr[which] = (useFull
-						? noiseGen[which].generateNoiseOctaves(noiseArr[which], x*4, 0, z*4, p, q, r, a, b, c)
-						: noiseGen[which].generateNoiseOctaves(noiseArr[which], x*4, z*4, p, q, a, b, c));
+			public double[] call() throws Exception {
+				noiseArr[which] = useFull
+						? noiseGen[which].generateNoiseOctaves(noiseArr[which], xChunk*4, 0, zChunk*4, p, q, r, a, b, c)
+						: noiseGen[which].generateNoiseOctaves(noiseArr[which], xChunk*4, zChunk*4, p, q, a, b, c);
+				return noiseArr[which];
 			}
 		}
-		IaSFuture
+		IaSFuture<double[]>
 		ngi3 = IaSExecutor.push(new DoNoiseOctaveInit(3, 5, 5, 200, 200, 0.5)),
 		ngi2 = IaSExecutor.push(new DoNoiseOctaveInit(2, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D)),
 		ngi1 = IaSExecutor.push(new DoNoiseOctaveInit(1, 5, 33, 5, 684.412D, 684.412D, 684.412D)),
 		ngi0 = IaSExecutor.push(new DoNoiseOctaveInit(0, 5, 33, 5, 684.412D, 684.412D, 684.412D));
 
-		int heightmapIndex = 0;
+		int densitymapIndex = 0;
 		int noiseArr3Index = 0;
 
 		//biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, x - 2, z - 2, 10, 10);
 
-		//BiomeGenBase[] biomes = NyxBiomeProvider.instance().getBiomeArray(null, x, z);
-		class DoBiomeGen implements Callable<BiomeGenBase[]> {
-			private final int offset;
-			
-			public DoBiomeGen(int i) {
-				offset = i;
-			}
-			
-			@Override
-			public BiomeGenBase[] call() throws Exception {
-				return NyxBiomeProvider.instance().getBiomeArray(null, x-1+(offset%3), z-1+(offset/3));
-			}
-			
-		};
 		IaSFuture<BiomeGenBase[]>[] biomes = new IaSFuture[9];
 		for(int i = 0; i < 9; ++i)
-			biomes[i] = IaSExecutor.push(new DoBiomeGen(i));
+			biomes[i] = NyxBiomeProvider.instance().getBiomeArray(xChunk-1+i%3, zChunk-1+i/3);
 		for (int xi = 0; xi < magic; ++xi)
 			for (int zi = 0; zi < magic; ++zi) {
-				float
-				f = 0.0F,
-				f1 = 0.0F,
-				f2 = 0.0F;
-				
 				final int
-				xshift = xi==(magic/2)?((zi&1)==0?-1:0):(xi<radius?0:-1),
-				zshift = zi==(magic/2)?((xi&1)==0?-1:0):(zi<radius?0:-1);
-				
-				//final BiomeGenBase biome = biomes[(3*xi+radius+xshift)+((3*zi+radius+zshift)<<4)];
-				for (int xj = -radius; xj <= radius; ++xj)
+				xshift = xi==(magic/2)?((zi&1)==0?-1:0):(xi<radius?-1:0),
+				zshift = zi==(magic/2)?((xi&1)==0?-1:0):(zi<radius?-1:0);
+
+				float
+				avgVari = 0.0F,
+				avgBase = 0.0F,
+				totalWeight = 0.0F;
+				for (int xj = -radius; xj <= radius; ++xj) {
 					for (int zj = -radius; zj <= radius; ++zj) {
 						final int
-						xReal = 3*xi+xj+xshift,
-						zReal = 3*zi+zj+zshift;
-						final BiomeGenBase biomeAdjacent =
-								biomes[4+(xReal>>4)+(zReal>>4)*3]
-								.get()[(xReal&15)|((zReal&15)<<4)];
+							xReal = 4*xi+xshift+xj,
+							zReal = 4*zi+zshift+zj;
+						final BiomeGenBase
+							biomeAdjacent = NyxBiomeProvider.getBiomeAt(
+								biomes[4+(xReal>>4)+(zReal>>4)*3].get(),
+								xReal, zReal);
 						final float
-						hBase = biomeAdjacent.rootHeight,
-						hVari = biomeAdjacent.heightVariation;
+							hBase = biomeAdjacent.rootHeight,
+							hVari = biomeAdjacent.heightVariation,
+							hWeight = parabolicField[(xj+radius) + (zj+radius)*radius]
+								/ (hBase + 2);
 						
-						float hMod = parabolicField[(xj+radius) + (zj+radius)*radius] / (hBase + 2.0F);
-
-						f += hVari * hMod;
-						f1 += hBase * hMod;
-						f2 += hMod;
+						avgVari += hVari * hWeight;
+						avgBase += hBase * hWeight;
+						totalWeight += hWeight;
 					}
+				}
+				avgVari /= totalWeight;
+				avgBase /= totalWeight;
+				avgVari = avgVari * 0.9F + 0.1F;
+				avgBase = (avgBase * 4.0F - 1.0F) / 8.0F;
 
-				f /= f2;
-				f1 /= f2;
-				f = f * 0.9F + 0.1F;
-				f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-
-				ngi3.get();
-				double noiseValue = noiseArr[3][noiseArr3Index] / 8000.0D;
+				double noiseValue = ngi3.get()[noiseArr3Index] / 8000.0D;
 				++noiseArr3Index;
 
 				if (noiseValue < 0.0D)
 					noiseValue = -noiseValue * 0.3D;
-
 				noiseValue = noiseValue * 3.0D - 2.0D;
 
 				if (noiseValue < 0.0D) {
 					noiseValue /= 2.0D;
 					noiseValue = Math.max(-1.0D, noiseValue);
-
 					noiseValue /= 1.4D;
 					noiseValue /= 2.0D;
 				} else {
@@ -298,34 +284,29 @@ public class NyxChunkProvider implements IChunkProvider {
 					noiseValue /= 8.0D;
 				}
 
-				double d12 = f1;
-				final double d14 = f;
+				double d12 = avgBase;
 				d12 += noiseValue * 0.2D;
 				d12 *= 8.5D / 2.0D;
 				final double d5 = 8.5D + d12;
-
-				ngi0.get();
-				ngi1.get();
-				ngi2.get();
 				
 				for (int j2 = 0; j2 < 33; ++j2) {
-					double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
+					double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / avgVari;
 
 					if (d6 < 0.0D)
 						d6 *= 4.0D;
 
-					final double d7 = noiseArr[0][heightmapIndex] / 512.0D;
-					final double d8 = noiseArr[1][heightmapIndex] / 512.0D;
-					final double d9 = (noiseArr[2][heightmapIndex] / 10.0D + 1.0D) / 2.0D;
-					double height = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+					final double d7 = ngi0.get()[densitymapIndex] / 512.0D;
+					final double d8 = ngi1.get()[densitymapIndex] / 512.0D;
+					final double d9 = (ngi2.get()[densitymapIndex] / 10.0D + 1.0D) / 2.0D;
+					double density = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
 
 					if (j2 > 29) {
 						final double d11 = (j2 - 29) / 3.0F;
-						height = -10.0D * d11 + height * (1.0D - d11);
+						density = -10.0D * d11 + density * (1.0D - d11);
 					}
 
-					heightmap[heightmapIndex] = height;
-					++heightmapIndex;
+					densitymap[densitymapIndex] = density;
+					++densitymapIndex;
 				}
 			}
 		return biomes[4].get(); //Center.
@@ -352,11 +333,8 @@ public class NyxChunkProvider implements IChunkProvider {
 		BlockFalling.fallInstantly = true;
 		int k = xchunk * 16;
 		int l = zchunk * 16;
-		final BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
-		rand.setSeed(worldObj.getSeed());
-		final long i1 = rand.nextLong() / 2L * 2L + 1L;
-		final long j1 = rand.nextLong() / 2L * 2L + 1L;
-		rand.setSeed(xchunk * i1 + zchunk * j1 ^ worldObj.getSeed());
+		ChunkRandom rand = new ChunkRandom(worldObj.getSeed(), 957256, xchunk, zchunk);
+		final BiomeGenBase biomegenbase = NyxBiomeProvider.instance().getBiomeAt(k+rand.nextInt(16), l+rand.nextInt(16));
 		int xit, zit, yval;
 
 		if (xchunk == 0 && zchunk == 0)
@@ -373,8 +351,7 @@ public class NyxChunkProvider implements IChunkProvider {
 				yval = worldObj.getPrecipitationHeight(k + xit, l + zit);
 				if (worldObj.func_147478_e(xit + k, yval, zit + l, true)) {
 					if (worldObj.getBlock(xit + k, yval - 1, zit + l) != NyxBlocks.stone)
-						;
-					worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
+						worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
 				}
 			}
 
@@ -387,26 +364,22 @@ public class NyxChunkProvider implements IChunkProvider {
 	 * and chunk seed
 	 */
 	@Override
-	public Chunk provideChunk(final int x, final int z) {
-		//TODO: This really should be made thread-safe.
-		try {
-			Arrays.fill(ablock, Blocks.air);
-			Arrays.fill(abyte, (byte) 0);
-			//biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
-			BiomeGenBase biomesForGeneration[] = genTerrain(x, z, ablock, abyte);
-			replaceBlocksForBiome(x, z, ablock, abyte, biomesForGeneration);
+	public Chunk provideChunk(final int xChunk, final int zChunk) {
+		Arrays.fill(ablock, Blocks.air);
+		Arrays.fill(abyte, (byte) 0);
+		//biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		BiomeGenBase biomesForGeneration[] = genTerrain(xChunk, zChunk, ablock, abyte);
+		replaceBlocksForBiome(xChunk, zChunk, ablock, abyte, biomesForGeneration);
 
-			final Chunk chunk = new Chunk(worldObj, ablock, abyte, x, z);
+		final Chunk chunk = new Chunk(worldObj, ablock, abyte, xChunk, zChunk);
 
-			final byte[] abyte1 = chunk.getBiomeArray();
-			for (int k = 0; k < abyte1.length; ++k)
-				abyte1[k] = (byte) biomesForGeneration[k].biomeID;
+		final byte[] abyte1 = chunk.getBiomeArray();
+		for (int k = 0; k < abyte1.length; ++k)
+			abyte1[k] = (byte)biomesForGeneration[k].biomeID;
 
-			chunk.isLightPopulated = false;
-			return chunk;
-		} finally {
-			//TODO: Mutex unlocking, to make NyxChunkProvider mt-safe.
-		}
+		chunk.generateSkylightMap();
+		chunk.enqueueRelightChecks();
+		return chunk;
 	}
 
 	@Override
@@ -417,7 +390,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l) {
 				final BiomeGenBase biomegenbase = biomeArr[k+(l<<4)];
-				biomegenbase.genTerrainBlocks(worldObj, rand, blockArr, metaArr, x * 16 + k, z * 16 + l,
+				biomegenbase.genTerrainBlocks(worldObj, new ChunkRandom(worldObj.getSeed(), 84792, x, z), blockArr, metaArr, x * 16 + k, z * 16 + l,
 						/*stoneNoise[l + k * 16]*/ 0);
 			}
 	}

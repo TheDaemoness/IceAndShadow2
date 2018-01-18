@@ -12,16 +12,21 @@ public class ChunkRandom extends Random {
 	public static long calculateSeed(long tempseed, int modifier, int x, int z) {
 		x = (int)Double.doubleToLongBits(Math.expm1(x));
 		z = (int)Double.doubleToLongBits(Math.expm1(z));
-		modifier = (int)Double.doubleToLongBits(Math.exp(modifier));
+		modifier = new Random((long)modifier+(long)(x*z)+x+z).nextInt();
 		tempseed = (tempseed >>> (modifier & 63)) | (tempseed << (64-(modifier & 63)));
-		tempseed ^= (modifier ^ x) | ((~modifier ^ z) << 32);
+		tempseed ^= (modifier ^ x) | ((long)(~modifier ^ z) << 32);
 		return tempseed;
 	}
-	
+	public ChunkRandom() {
+		super(0);
+	}
 	public ChunkRandom(World w, int modifier, int x, int z) {
 		this(w.getSeed(), modifier, x, z);
 	}
 	public ChunkRandom(long seed, int modifier, int x, int z) {
 		super(calculateSeed(seed, modifier, x, z));
+	}
+	public void setSeed(long seed, int modifier, int x, int z) {
+		this.setSeed(calculateSeed(seed, modifier, x, z));
 	}
 }

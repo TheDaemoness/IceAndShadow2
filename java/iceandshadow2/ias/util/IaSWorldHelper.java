@@ -32,9 +32,19 @@ public class IaSWorldHelper {
 		final int lvl = IaSWorldHelper.getRegionLevel(ent.worldObj, (int) ent.posX, (int) ent.posY, (int) ent.posZ);
 		return lvl + (IaSWorldHelper.getDifficulty(ent.worldObj) >= 3 ? 1 : 0);
 	}
+	
+	/**
+	 * IaS's screwy in-house distance formula. Do not feed to infants.
+	 * Values returned are approximately double what they should be.
+	 */
+	public static long distance2(long x, long z) {
+		x = Math.abs(x);
+		z = Math.abs(z);
+		return Math.max(x, z)*2+Math.min(x,z);
+	}
 
 	public static int getRegionLevel(World w, int x, int y, int z) {
-		final int dist = Math.max(x, z) + Math.min(x, z)/2;
+		final int dist = (int)distance2(x, z)/2;
 		if (dist < 96)
 			return 0;
 		if (dist < 192)

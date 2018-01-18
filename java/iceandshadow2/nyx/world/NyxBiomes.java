@@ -26,16 +26,16 @@ public class NyxBiomes {
 		NyxBiomes.nyxHighMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxHighMountains, true, 0.5F, 4.0F, false)
 				.setBiomeName("NyxHighMountains");
 
-		NyxBiomes.nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 1.5F, 0.1F, false).setBiomeName("NyxHills");
-		NyxBiomes.nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 2.5F, 1.0F, false).setBiomeName("NyxMesas");
-		NyxBiomes.nyxHillForest = new NyxBiomeForestDense(IaSFlags.biome_id_nyxHillForest, true, 0.8F, 1.8F, false)
+		NyxBiomes.nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 0.25F, 0.6F, false).setBiomeName("NyxHills");
+		NyxBiomes.nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 1.5F, 0.1F, false).setBiomeName("NyxMesas");
+		NyxBiomes.nyxHillForest = new NyxBiomeForestDense(IaSFlags.biome_id_nyxHillForest, true, 0.4F, 0.5F, false)
 				.setBiomeName("NyxHillForest");
-		NyxBiomes.nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesaForest, true, 2.5F, 1.0F, false)
+		NyxBiomes.nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesaForest, true, 1F, 0.25F, false)
 				.setBiomeName("NyxMesaForest");
 
 		NyxBiomes.nyxExousic = new NyxBiomeExousic(IaSFlags.biome_id_nyxRugged, true, 1.0F, 1.2F, false)
 				.setBiomeName("NyxRugged");
-		NyxBiomes.nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.5F, 0.1F, false)
+		NyxBiomes.nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.25F, 0.3F, false)
 				.setBiomeName("NyxInfested");
 	}
 

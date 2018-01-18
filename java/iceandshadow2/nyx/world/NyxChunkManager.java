@@ -119,12 +119,12 @@ public class NyxChunkManager extends WorldChunkManager {
 
 	protected BiomeGenBase[] getBiomes(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
 		if((x&15)==0 && (z&15)==0 && xlim==16 && zlim==16)
-			return NyxBiomeProvider.instance().getBiomeArray(null, x>>4, z>>4);
+			return NyxBiomeProvider.instance().getBiomeArray(x>>4, z>>4).get();
 		if(biomes == null || biomes.length < xlim*zlim)
 			biomes = new BiomeGenBase[xlim*zlim];
 		for(int xi = 0; xi < xlim; ++xi) {
 			for(int zi = 0; zi < zlim; ++zi) {
-				biomes[xi|(zi<<4)] = NyxBiomeProvider.instance().getBiomeAt(x+xi, z+zi);
+				biomes[xi|(zi<<4)] = NyxBiomeProvider.instance().getBiomeAt((long)x+xi, (long)z+zi);
 			}
 		}
 		return biomes;
