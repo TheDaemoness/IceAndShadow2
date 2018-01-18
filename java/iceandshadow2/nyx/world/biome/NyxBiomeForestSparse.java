@@ -18,6 +18,8 @@ public class NyxBiomeForestSparse extends NyxBiome {
 		setBlocks(NyxBlocks.permafrost, NyxBlocks.stone);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
+		
+		setColor(127 << 16 | 32 << 8 | 127);
 	}
 
 	@Override

@@ -159,15 +159,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		final BiomeGenBase[] nyxBiomes = { NyxBiomes.nyxHighMountains, NyxBiomes.nyxLowMountains, NyxBiomes.nyxMesas,
-				NyxBiomes.nyxHills, NyxBiomes.nyxMesaForest, NyxBiomes.nyxHillForest, NyxBiomes.nyxRugged,
-				NyxBiomes.nyxInfested };
-		GenLayer biomesGenLayer = new GenLayerNyxRandomBiomes(nyxBiomes, 200L);
-		biomesGenLayer = GenLayerZoom.magnify(1000L, biomesGenLayer, 2);
-		GenLayer biomesIndexLayer = new GenLayerVoronoiZoom(10L, biomesGenLayer);
-		biomesIndexLayer = GenLayerZoom.magnify(1000L, biomesIndexLayer, 1);
-
-		worldChunkMgr = new NyxChunkManager(nyxBiomes, biomesGenLayer, biomesIndexLayer, worldObj);
+		worldChunkMgr = new NyxChunkManager();
 		dimensionId = IaSFlags.dim_nyx_id;
 		hasNoSky = true;
 	}

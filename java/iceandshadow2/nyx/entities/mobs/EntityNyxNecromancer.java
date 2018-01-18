@@ -95,6 +95,11 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	}
 
 	@Override
+	public boolean getCanSpawnHere() {
+		return IaSWorldHelper.getRegionLevel(this) >= 6 && super.getCanSpawnHere();
+	}
+
+	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (!par1 || worldObj.isRemote)
 			return;

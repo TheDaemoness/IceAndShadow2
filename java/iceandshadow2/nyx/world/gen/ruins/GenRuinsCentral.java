@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class GenRuinsCentral extends GenRuins {
+	
+	public static final int PLATFORM_OFFSET = 4;
 
 	public static int getGenHeight(World w, int x, int z) {
 		int y = 156;
@@ -68,7 +70,7 @@ public class GenRuinsCentral extends GenRuins {
 
 		// Platform
 		Sculptor.cube(w, x - 2, y + 4, z - 2, x + 2, y + 4, z + 2, Blocks.obsidian, 0);
-		Sculptor.cube(w, x - 1, y + 4, z - 1, x + 1, y + 4, z + 1, NyxBlocks.cryingObsidian, 1);
+		Sculptor.cube(w, x - 1, y + PLATFORM_OFFSET, z - 1, x + 1, y + PLATFORM_OFFSET, z + 1, NyxBlocks.cryingObsidian, 1);
 
 		// Walls
 		Sculptor.walls(w, x - 7, y, z - 7, x + 7, y + 9, z + 7, Blocks.obsidian, 0);

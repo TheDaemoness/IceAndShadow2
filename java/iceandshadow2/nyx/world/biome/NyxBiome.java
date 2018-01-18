@@ -4,6 +4,7 @@ import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
+import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
@@ -23,8 +24,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBiome extends BiomeGenBase {
-
-	private final boolean rare;
 
 	WorldGenNyxOre genSalt, genDevora, genEchir, genGemstone, genUnstableIce;
 
@@ -48,9 +47,9 @@ public class NyxBiome extends BiomeGenBase {
 
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 50, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 2, 1, 1));
 
 		setBiomeName("Nyx");
-		rare = isRare;
 
 		setColor(255 << 16 | 255 << 8 | 255);
 	}
@@ -160,15 +159,12 @@ public class NyxBiome extends BiomeGenBase {
 
 	protected void genStructures(World par1World, Random par2Random, int xchunk, int zchunk) {
 		// Gatestone generation.
-		if (xchunk % 128 == 0 && zchunk % 128 == 0) {
-			final int x = xchunk + 8;
-			final int z = zchunk + 8;
-			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
+		final int x = xchunk + 8;
+		final int z = zchunk + 8;
+		final int y = Math.max(64, par1World.getTopSolidOrLiquidBlock(x, z));
+		if ((xchunk & 127) == 0 && (zchunk & 127) == 0) {
 			(new GenRuinsGatestone()).generate(par1World, par2Random, x, y, z);
 		} else {
-			final int x = xchunk + 8;
-			final int z = zchunk + 8;
-			final int y = par1World.getTopSolidOrLiquidBlock(x, z);
 			GenRuins gengen = null;
 			if (hasTowers() && par2Random.nextInt(16) == 0)
 				gengen = new GenRuinsTowerLookout();
@@ -196,13 +192,17 @@ public class NyxBiome extends BiomeGenBase {
 		blocks[xzmod + 4] = Blocks.bedrock;
 		if (rand.nextBoolean())
 			blocks[xzmod + 5] = Blocks.bedrock;
-		if (blocks[xzmod + 64] == null || blocks[xzmod + 64].getMaterial() == Material.air) {
-			blocks[xzmod + 63] = NyxBlocks.exousicIce;
+		if (blocks[xzmod + 64] == null || blocks[xzmod + 64].isAir(world, a, 64, b)) {
+			final boolean iced =
+					blocks[xzmod + 61] != NyxBlocks.exousicWater
+					|| blocks[xzmod + 60] != NyxBlocks.exousicWater
+					|| blocks[xzmod + 59] != NyxBlocks.exousicWater;
+			blocks[xzmod + 63] = iced?NyxBlocks.exousicIce:Blocks.air;
 			blocks[xzmod + 62] = NyxBlocks.exousicWater;
 			meta[xzmod + 62] = 15;
 		}
 
-		for (int yit = 255; yit >= 63; --yit) {
+		for (int yit = 255; yit >= 64; --yit) {
 			final int index = xzmod + yit;
 			final Block current = blocks[index];
 			if (current == NyxBlocks.stone) {
@@ -230,10 +230,6 @@ public class NyxBiome extends BiomeGenBase {
 
 	protected boolean hasTowers() {
 		return true;
-	}
-
-	public boolean isRare() {
-		return rare;
 	}
 
 	public NyxBiome setBlocks(Block top, Block filler) {

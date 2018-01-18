@@ -12,6 +12,8 @@ public enum EnumIaSAspect {
 	VIRTUAL, NATIVE, LAND, FROZEN, NYX, POISONWOOD, INFESTATION, EXOUSIUM, NAVISTRA, ANCIENT, STYX, PURE;
 
 	public static EnumIaSAspect getAspect(Object o) {
+		if (o == null)
+			return VIRTUAL;
 		if (o instanceof IIaSAspect)
 			return ((IIaSAspect) o).getAspect();
 		if (o instanceof EntityItem)

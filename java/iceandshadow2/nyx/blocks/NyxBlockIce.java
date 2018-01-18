@@ -75,7 +75,8 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 				if (xit != 0 && zit != 0)
 					continue;
 				if (w.isAirBlock(x + xit, y, z + zit) && r.nextInt(3) != 0)
-					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater)
+					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater
+						&& w.getBlock(x + xit, y - 2, z + zit) != NyxBlocks.exousicWater)
 						w.setBlock(x + xit, y, z + zit, this);
 			}
 	}

@@ -4,6 +4,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -56,8 +57,7 @@ public class GenInfestedTrees extends WorldGenerator {
 
 	/**
 	 * Checks a line of blocks in the world from the first coordinate to triplet
-	 * to the second, returning the distance (in blocks) before a non-air,
-	 * non-leaf block is encountered and/or the end is encountered.
+	 * to the second, returning the distance (in blocks) before an invalid block is encountered.
 	 */
 	int checkBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger) {
 		final int[] aint2 = new int[] { 0, 0, 0 };
@@ -95,9 +95,12 @@ public class GenInfestedTrees extends WorldGenerator {
 				aint3[b3] = MathHelper.floor_double(par1ArrayOfInteger[b3] + i * d1);
 				final Block block = worldObj.getBlock(aint3[0], aint3[1], aint3[2]);
 
-				if (block != null && !block.isAir(worldObj, aint3[0], aint3[1], aint3[2])
-						&& !block.isLeaves(worldObj, aint3[0], aint3[1], aint3[2]) && !(block != Blocks.snow)
-						&& !(block != Blocks.snow_layer))
+				if (block != null
+						&& !block.isAir(worldObj, aint3[0], aint3[1], aint3[2])
+						&& !block.isLeaves(worldObj, aint3[0], aint3[1], aint3[2])
+						&& block != NyxBlocks.permafrost
+						&& block.getMaterial() != Material.snow
+						&& !(block.isReplaceable(this.worldObj, aint3[0], aint3[1], aint3[2])))
 					break;
 			}
 
@@ -438,7 +441,7 @@ public class GenInfestedTrees extends WorldGenerator {
 		final int[] aint1 = new int[] { basePos[0], basePos[1] + heightLimit - 1, basePos[2] };
 
 		final Block soil = worldObj.getBlock(basePos[0], basePos[1] - 1, basePos[2]);
-		final boolean isValidSoil = soil != null && soil == Blocks.snow;
+		final boolean isValidSoil = soil == NyxBlocks.permafrost;
 		if (!isValidSoil)
 			return false;
 		else {

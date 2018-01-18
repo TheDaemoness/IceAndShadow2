@@ -43,6 +43,9 @@ public class IaSBlockHelper {
 		return Vec3.createVectorHelper(x - 0.05 + 1.10 * xN, y - 0.05 + 1.10 * yN, z - 0.05 + 1.10 * zN);
 	}
 
+	/**
+	 * Get the terrain height at a certain location.
+	 */
 	public static int getHeight(World w, int x, int z) {
 		return w.getTopSolidOrLiquidBlock(x, z);
 	}

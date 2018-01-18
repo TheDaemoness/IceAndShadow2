@@ -1,0 +1,27 @@
+package iceandshadow2.ias.util;
+
+import java.util.Random;
+
+import net.minecraft.world.World;
+
+/**
+ * Implements a wrapper for a PRNG designed for providing random numbers at certain coordinates.
+ * Extends Java's Random class, which is an LCG.
+ */
+public class ChunkRandom extends Random {
+	public static long calculateSeed(long tempseed, int modifier, int x, int z) {
+		x = (int)Double.doubleToLongBits(Math.expm1(x));
+		z = (int)Double.doubleToLongBits(Math.expm1(z));
+		modifier = (int)Double.doubleToLongBits(Math.exp(modifier));
+		tempseed = (tempseed >>> (modifier & 63)) | (tempseed << (64-(modifier & 63)));
+		tempseed ^= (modifier ^ x) | ((~modifier ^ z) << 32);
+		return tempseed;
+	}
+	
+	public ChunkRandom(World w, int modifier, int x, int z) {
+		this(w.getSeed(), modifier, x, z);
+	}
+	public ChunkRandom(long seed, int modifier, int x, int z) {
+		super(calculateSeed(seed, modifier, x, z));
+	}
+}

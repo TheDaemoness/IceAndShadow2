@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public abstract class GenRuins extends WorldGenerator {
+	protected int damage = 1;
 
 	/**
 	 * Generates the basic structure of the building. May also even out terrain
@@ -30,16 +31,17 @@ public abstract class GenRuins extends WorldGenerator {
 
 	@Override
 	public boolean generate(World var1, Random var2, int x, int y, int z) {
-		if (canGenerateHere(var1, var2, x, y, z)) {
+		final boolean cGH = canGenerateHere(var1, var2, x, y, z); 
+		if(cGH) {
 			if (IaSFlags.flag_report_ruins_gen)
 				IceAndShadow2.getLogger()
-						.info("[DEV] Generating " + getLowercaseName() + " @ (" + x + "," + y + "," + z + ").");
+					.info("[DEV] Generating " + getLowercaseName() + " @ (" + x + "," + y + "," + z + ").");
 			buildPass(var1, var2, x, y, z);
-			damagePass(var1, var2, x, y, z);
+			for(int i = 0; i < damage; ++i)
+				damagePass(var1, var2, x, y, z);
 			rewardPass(var1, var2, x, y, z);
-			return true;
 		}
-		return false;
+		return cGH;
 	}
 
 	public abstract String getLowercaseName();

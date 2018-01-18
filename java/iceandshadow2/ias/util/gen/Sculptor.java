@@ -29,9 +29,9 @@ public class Sculptor {
 	 * corners).
 	 *
 	 * @param world
-	 * @param x
+	 * @param xSub
 	 * @param y
-	 * @param z
+	 * @param zSub
 	 * @param xdelta
 	 *            The number of blocks to remove before or after the specified x
 	 *            coordinate.
@@ -130,9 +130,9 @@ public class Sculptor {
 	 * Extrudes the terrain below a certain region.
 	 *
 	 * @param world
-	 * @param x
+	 * @param xSub
 	 * @param y
-	 * @param z
+	 * @param zSub
 	 * @param xdelta
 	 *            The number of blocks to extrude before or after the specified
 	 *            x coordinate.
@@ -159,9 +159,9 @@ public class Sculptor {
 	 * Create the walls of a cube centered at x, y, and z (no corners).
 	 *
 	 * @param world
-	 * @param x
+	 * @param xSub
 	 * @param y
-	 * @param z
+	 * @param zSub
 	 * @param xdelta
 	 *            The number of blocks to remove before or after the specified x
 	 *            coordinate.
