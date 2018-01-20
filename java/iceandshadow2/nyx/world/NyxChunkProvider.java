@@ -53,17 +53,15 @@ public class NyxChunkProvider implements IChunkProvider {
 
 	public NyxChunkProvider(World par1World, long seed, boolean par4) {
 		this.seed = seed;
-		ChunkRandom rand[] = {null, null, null, null};
-		for(int i = 0; i < rand.length; ++i)
-			rand[i] = new ChunkRandom(seed, 3814, 4+(i*i), i+1);
+		Random rand = new Random(~seed);
 		ablock = new Block[1 << 16];
 		abyte = new byte[1 << 16];
 		worldObj = par1World;
 		noiseGen = new NoiseGeneratorOctaves[4];
-		noiseGen[0] = new NoiseGeneratorOctaves(rand[0], 16);
-		noiseGen[1] = new NoiseGeneratorOctaves(rand[1], 16);
-		noiseGen[2] = new NoiseGeneratorOctaves(rand[2], 8);
-		noiseGen[3] = new NoiseGeneratorOctaves(rand[3], 16);
+		noiseGen[0] = new NoiseGeneratorOctaves(rand, 16);
+		noiseGen[1] = new NoiseGeneratorOctaves(rand, 16);
+		noiseGen[2] = new NoiseGeneratorOctaves(rand, 8);
+		noiseGen[3] = new NoiseGeneratorOctaves(rand, 16);
 		// noiseGenStone = new NoiseGeneratorPerlin(rand, 4);
 		// this.noiseGenPublic = new NoiseGeneratorOctaves(this.rand, 10);
 		densitymap = new double[(int)magic*magic*33];
@@ -71,7 +69,8 @@ public class NyxChunkProvider implements IChunkProvider {
 		parabolicField = new float[(int)radius*radius*4];
 		for (int j = -radius; j <= radius; ++j)
 			for (int k = -radius; k <= radius; ++k) {
-				final float f = 1f / MathHelper.sqrt_float(j * j + k * k + 0.5f);
+				final boolean corner = Math.abs(j) >= radius-1 && Math.abs(k) >= radius-1;
+				final float f = corner?0:1f / MathHelper.sqrt_float(j * j + k * k + 0.5f);
 				parabolicField[j + radius + (k + radius) * radius] = f;
 			}
 	}

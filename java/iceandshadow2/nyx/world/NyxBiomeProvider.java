@@ -27,7 +27,7 @@ public class NyxBiomeProvider {
 		return biomes[(int)(x&15) | (int)((z&15)<<4)];
 	}
 	protected static long key(final int xchunk, final int zchunk) {
-		return (long)xchunk | ((long)zchunk << 32);
+		return Integer.toUnsignedLong(xchunk) | (Integer.toUnsignedLong(zchunk) << 32);
 	}
 
 	public NyxBiomeProvider clean() {

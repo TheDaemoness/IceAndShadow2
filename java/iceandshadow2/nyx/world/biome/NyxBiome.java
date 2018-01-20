@@ -168,7 +168,7 @@ public class NyxBiome extends BiomeGenBase {
 			if((xchunk/16)%2 != 1 || ((zchunk)/16)%2 != 1)
 				return;
 			GenRuins gengen = null;
-			if (hasTowers() && par2Random.nextInt(4) == 0)
+			if (hasTowers() && par2Random.nextInt(3) == 0)
 				gengen = new GenRuinsTowerLookout();
 			if (gengen == null)
 				gengen = supplyRuins();
