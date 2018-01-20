@@ -168,12 +168,13 @@ public class NyxBiome extends BiomeGenBase {
 			if((xchunk/16)%2 != 1 || ((zchunk)/16)%2 != 1)
 				return;
 			GenRuins gengen = null;
+			int i = 0;
 			if (hasTowers() && par2Random.nextInt(3) == 0)
 				gengen = new GenRuinsTowerLookout();
-			if (gengen == null)
-				gengen = supplyRuins();
-			if (gengen != null)
-				gengen.generate(par1World, par2Random, x, y, z);
+			else
+				gengen = supplyRuins(i++);
+			while(gengen != null && !gengen.generate(par1World, par2Random, x, y, z))
+				gengen = supplyRuins(i++);
 		}
 	}
 
@@ -240,7 +241,7 @@ public class NyxBiome extends BiomeGenBase {
 		return this;
 	}
 
-	protected GenRuins supplyRuins() {
+	protected GenRuins supplyRuins(int i) {
 		return null;
 	}
 

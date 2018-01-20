@@ -64,10 +64,4 @@ public class NyxBiomeInfested extends NyxBiome {
 	protected boolean hasTowers() {
 		return false;
 	}
-
-	@Override
-	protected GenRuins supplyRuins() {
-		return null;
-	}
-
 }

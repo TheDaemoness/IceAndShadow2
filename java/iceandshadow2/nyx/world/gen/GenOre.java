@@ -51,7 +51,7 @@ public class GenOre {
 
 			final int x = xchunk + par1World.rand.nextInt(16);
 			final int z = zchunk + par1World.rand.nextInt(16);
-			for (int y = 60; y > 0; --y)
+			for (int y = 60; y > 4; --y)
 				// Check for a Nyx Stone block.
 				if (par1World.getBlock(x, y, z) == NyxBlocks.stone)
 					// Check for bordering water.

@@ -39,7 +39,8 @@ public abstract class GenRuins extends WorldGenerator {
 			buildPass(var1, var2, x, y, z);
 			for(int i = 0; i < damage; ++i)
 				damagePass(var1, var2, x, y, z);
-			rewardPass(var1, var2, x, y, z);
+			if(damage <= 1)
+				rewardPass(var1, var2, x, y, z);
 		}
 		return cGH;
 	}

@@ -41,6 +41,11 @@ public class NyxWorldProvider extends WorldProvider {
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater) {
 		return true;
 	}
+	
+	@Override
+	public boolean canCoordinateBeSpawn(int x, int z) {
+		return x == 0 && z == 0;
+	}
 
 	@Override
 	public boolean canDoLightning(Chunk chunk) {
@@ -133,7 +138,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public ChunkCoordinates getSpawnPoint() {
-		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(worldObj, 0, 0), 0);
+		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(worldObj, 0, 0)-GenRuinsCentral.PLATFORM_OFFSET, 0);
 	}
 
 	@Override

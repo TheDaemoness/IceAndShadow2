@@ -1,5 +1,7 @@
 package iceandshadow2.nyx.world;
 
+import iceandshadow2.IaSFlags;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 import iceandshadow2.styx.Styx;
@@ -20,13 +22,6 @@ public class NyxTeleporter extends Teleporter {
 		super(par1WorldServer);
 		world = par1WorldServer;
 		random = new Random(par1WorldServer.getSeed());
-	}
-
-	private void placeInNyx(Entity par1Entity, int x, int z) {
-		for (int i = 0; i < 16; ++i)
-			world.getChunkProvider().loadChunk((i >> 2) - 2, (i & 2) - 2);
-		final int y = GenRuinsCentral.getGenHeight(world, 0, 0) + 1;
-		par1Entity.setLocationAndAngles(0.5, y + 1, 0.5, world.rand.nextFloat() * 360.0F, 0.0F);
 	}
 
 	private void placeInOverworld(Entity par1Entity, int x, int z) {
@@ -55,44 +50,29 @@ public class NyxTeleporter extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity par1Entity, double x, double y, double z, float par8) {
-
-		if (world.provider.dimensionId == 0)
+		if (world.provider.dimensionId == IaSFlags.dim_nyx_id)
+			placeInCentralNyx(par1Entity, 0, world.getPrecipitationHeight((int) 0, (int) 0), 0);
+		else
 			placeInOverworld(par1Entity, (int) x, (int) z);
-		else if (!placeOnExistingPlatform(par1Entity, (int) x, (int) y, (int) z))
-			if (!placeOnExistingPlatform(par1Entity, 0, world.getPrecipitationHeight((int) x, (int) z), 0))
-				placeInNyx(par1Entity, (int) x, (int) z);
 		par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	}
 
-	public boolean placeOnExistingPlatform(Entity par1Entity, int x, int y, int z) {
-		for (int xi = 0; xi < 32; ++xi)
-			for (int yi = 0; yi < 32; ++yi)
-				for (int zi = 0; zi < 32; ++zi)
-					for (byte flip = 0; flip < 8; ++flip) {
-						final int xfactor = (flip & 0x1) > 0 ? -1 : 1;
-						final int yfactor = (flip & 0x2) > 0 ? -1 : 1;
-						final int zfactor = (flip & 0x4) > 0 ? -1 : 1;
+	private void placeInCentralNyx(Entity par1Entity, int x, int y, int z) {
+		final int yMax = Math.min(156, y)+GenRuinsCentral.PLATFORM_OFFSET;
+		for(int i = 0; i < 16; ++i) 
+			world.getChunkProvider().loadChunk((i&3)-2, (i>>2)-2);
+		for(y = 64; y < yMax; ++y) {
+			Block bid = world.getBlock(x, y, z);
+			final int bmet = world.getBlockMetadata(x, y, z);
 
-						int ycalc = y + yi * yfactor;
-						ycalc = ycalc > 255 ? 255 : ycalc;
-						ycalc = ycalc < 1 ? 1 : ycalc;
-
-						final int xvalue = x + xi * xfactor;
-						final int yvalue = ycalc;
-						final int zvalue = z + zi * zfactor;
-						Block bid = world.getBlock(xvalue, yvalue, zvalue);
-						final int bmet = world.getBlockMetadata(xvalue, yvalue, zvalue);
-
-						if (bid == NyxBlocks.cryingObsidian && bmet == 1) {
-							bid = world.getBlock(xvalue, yvalue + 1, zvalue);
-							final Block bid2 = world.getBlock(xvalue, yvalue + 2, zvalue);
-							if (bid == Styx.reserved && bid2 == Styx.reserved) {
-								par1Entity.setLocationAndAngles(xvalue, yvalue + 1.1, zvalue, par1Entity.rotationYaw,
-										0.0F);
-								return true;
-							}
-						}
-					}
-		return false;
+			if (bid == NyxBlocks.cryingObsidian && bmet == 1) {
+				bid = world.getBlock(x, y + 1, z);
+				final Block bid2 = world.getBlock(x, y + 2, z);
+				if (bid == Styx.reserved && bid2 == Styx.reserved)
+					break;
+			}
+		}
+		par1Entity.setLocationAndAngles(x+0.5, y + 1.1, z+0.5, par1Entity.rotationYaw,
+				0.0F);
 	}
 }

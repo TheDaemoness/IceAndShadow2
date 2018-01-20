@@ -54,11 +54,11 @@ public class GenRuinsTowerLookout extends GenRuins {
 				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2)
 					// Swiss cheese pass.
 					for (int ydim = 1; ydim < 10; ++ydim)
-					if (!world.isAirBlock(x + xdim, y + ydim, z + zdim))
-					if (var2.nextInt(5) == 0)
-					world.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
-					else if (var2.nextInt(3) == 0)
-					world.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
+						if (!world.isAirBlock(x + xdim, y + ydim, z + zdim))
+							if (var2.nextInt(5) == 0)
+								world.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
+							else if (var2.nextInt(3) == 0)
+								world.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
 
 				// LADDER!
 				for (int ydim = 10; ydim > -1; --ydim)
