@@ -6,6 +6,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsMines;
 
 import java.util.Random;
 
@@ -64,4 +65,13 @@ public class NyxBiomeInfested extends NyxBiome {
 	protected boolean hasTowers() {
 		return false;
 	}
+
+	@Override
+	protected GenRuins supplyRuins(int i) {
+		if(i == 0)
+			return new GenRuinsMines();
+		return null;
+	}
+	
+	
 }
