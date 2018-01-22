@@ -42,6 +42,7 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 
 	static {
 		validPotions.add(Potion.heal);
+		validPotions.add(Potion.regeneration);
 		validPotions.add(Potion.harm);
 		for (Potion p : Potion.potionTypes) {
 			if (p == null)
