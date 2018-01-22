@@ -30,6 +30,7 @@ public class IaSRenderers {
 		// Mobs.
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSkeleton.class, new RenderNyxSkeleton());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpider.class, new RenderNyxSpider());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxSpiderBaby.class, new RenderNyxSpiderBaby());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightSanctified.class,
 				new RenderNyxWightSanctified());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class, new RenderNyxWightToxic());

@@ -157,11 +157,19 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 		final int baite = rand.nextInt(8 + par2) - par2 - diff;
 
 		if (baite <= 0)
-			IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.toughGossamer, 1, 0));
+			IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.salt, 1, 1));
 
-		dropItem(NyxItems.salt, (rand.nextInt(diff + par2) > 1 ? 2 : 1));
+		IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.toughGossamer));
 
-		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 4));
+		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 3));
+		
+		final int spiders = rand.nextInt(3+IaSWorldHelper.getDifficulty(worldObj)*2)/2;
+		for(int i = 0; i < spiders; ++i) {
+			worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 1));
+			EntityNyxSpiderBaby kiddo = new EntityNyxSpiderBaby(worldObj);
+			kiddo.setPosition(this.posX-0.25+rand.nextDouble()/2, this.posY+rand.nextDouble()/2, this.posZ-0.25+rand.nextDouble()/2);
+			worldObj.spawnEntityInWorld(kiddo);
+		}
 	}
 
 	@Override

@@ -206,6 +206,7 @@ death.attack.IceAndShadow2.nyxHeadshotDamage=%1$s lost their head
 
 entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
 entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
+entity.IceAndShadow2.nyxMobSpiderWispBaby.name=Spiderling Wisp
 entity.IceAndShadow2.nyxMobWightSanctified.name=Sanctified Wight
 entity.IceAndShadow2.nyxProjectileIceArrow.name=Ice Arrow
 entity.IceAndShadow2.nyxProjectileShadowBall.name=Shadow Ball

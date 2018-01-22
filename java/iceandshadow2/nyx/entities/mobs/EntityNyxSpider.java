@@ -4,6 +4,7 @@ import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.NyxBiomes;
@@ -16,6 +17,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -94,23 +96,24 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 			return;
 
 		if (isInvisible())
-			dropItem(Items.experience_bottle, 1 + rand.nextInt(2 + par2));
+			dropItem(NyxItems.silkBerries, 1 + rand.nextInt(2 + par2));
 
 		final int diff = IaSWorldHelper.getDifficulty(worldObj);
 		final int baite = rand.nextInt(Math.max(1, 8 - diff) + par2) - par2;
 		if (baite <= 0)
 			dropItem(NyxItems.toughGossamer, 1);
 
-		if (rand.nextInt(5) < 2 + diff)
-			dropItem(NyxItems.resin, rand.nextInt(3) < par2 - 1 ? 2 : 1);
+		dropItem(NyxItems.resin, rand.nextInt(5) < par2 - 1 ? 2 : 1);
 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 1));
 	}
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		if (rand.nextBoolean())
-			dropItem(NyxItems.alabasterShard, 1);
+		IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.silkBerries, 1, 1));
+		EntityNyxSpiderBaby bab = new EntityNyxSpiderBaby(worldObj);
+		bab.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+		worldObj.spawnEntityInWorld(bab);
 	}
 
 	@Override
@@ -206,8 +209,6 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	}
 
 	public double getScaledMaxHealth() {
-		if (worldObj == null)
-			return 16.0;
 		final double hp = 12.0 + 4.0 * IaSWorldHelper.getDifficulty(worldObj);
 		return hp;
 	}
