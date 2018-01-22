@@ -46,7 +46,7 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 		for (Potion p : Potion.potionTypes) {
 			if (p == null)
 				continue;
-			if (!p.isBadEffect() && !p.isInstant())
+			if (p.getEffectiveness() > 0.5 && !p.isInstant())
 				validPotions.add(p);
 		}
 	}
