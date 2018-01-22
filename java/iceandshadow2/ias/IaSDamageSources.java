@@ -4,7 +4,7 @@ import net.minecraft.util.DamageSource;
 
 public class IaSDamageSources {
 	public static DamageSource dmgStone, dmgVines, dmgPoisonwood, dmgStalagmite, dmgGatestone, dmgXpAltar, dmgFreezing,
-			dmgDrain;
+			dmgDrain, dmgHeadshot;
 
 	public static void init() {
 		IaSDamageSources.dmgStone = new IaSDamageSource("IceAndShadow2.nyxStoneDamage", 0.5F, true);
@@ -18,5 +18,7 @@ public class IaSDamageSources {
 		IaSDamageSources.dmgFreezing = new IaSDamageSource("IceAndShadow2.nyxFreezingDamage", 0.0F, true);
 		IaSDamageSources.dmgDrain = new IaSDamageSource("IceAndShadow2.nyxDrainDamage", 0.0F, true)
 				.setMagicDamage().setDamageBypassesArmor().setDamageIsAbsolute();
+		IaSDamageSources.dmgHeadshot = new IaSDamageSource("IceAndShadow2.nyxHeadshotDamage", 0.9F, true)
+				.setDamageBypassesArmor();
 	}
 }

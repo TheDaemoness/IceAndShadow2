@@ -17,7 +17,7 @@ public class NyxBlocks {
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transmutationAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			air, transmutationAltarBroken, sanctifiedObsidian, snow, salt;
+			air, transmutationAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -73,6 +73,7 @@ public class NyxBlocks {
 		NyxBlocks.transmutationAltarBroken = new NyxBlockAltarTransmutationBroken("TransmutationAltarBroken")
 				.register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
+		NyxBlocks.infestSpawner = new NyxBlockInfestedSpawner("InfestedSpawner").register();
 
 		NyxBlocks.hookClimbing = new NyxBlockHookClimbing("ClimbingHook").register();
 		NyxBlocks.hookTightropeX = new NyxBlockHookTightropeX("HookTightropeX").register();

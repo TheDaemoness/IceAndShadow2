@@ -23,7 +23,7 @@ public class GenRuinsMines extends GenRuins {
 		if(y <= 6)
 			return false;
 		final int xO = x, yO = y, zO = z;
-		int length = 16+r.nextInt(12);
+		int length = 24+r.nextInt(16);
 		
 		//Generate the arm itself.
 		switch(dir) {
@@ -31,10 +31,14 @@ public class GenRuinsMines extends GenRuins {
 			if(r.nextBoolean() || y < SHAFT_FLOOR)
 				break;
 			final boolean hellend = r.nextInt(100) == 0;
-			Sculptor.blast(w, x, y, z, 5);
+			if(hellend)
+				Sculptor.blast(w, x, y, z, 5);
+			else
+				Sculptor.sphere(w, x, y, z, 5, Blocks.web, 0);
+			Sculptor.sphere(w, x, y, z, 3, Blocks.air, 0);
 			y -= 2;
 			Sculptor.cube(w, x-1, y-3, z-1, x+1, y, z+1, Blocks.obsidian, 0);
-			IaSBlockHelper.makeSpawner(w, x, y-1, z, hellend?"nyxMobWightSanctified":"nyxMobSpiderWisp");
+			w.setBlock(x, y-1, z, NyxBlocks.infestSpawner, hellend?2:1, 2);
 			genRewardsChest(w, r, x, y-2, z, hellend?EnumRarity.epic:EnumRarity.rare);
 			return false;
 		case DOWN:
@@ -64,11 +68,16 @@ public class GenRuinsMines extends GenRuins {
 							if(bl == Blocks.bedrock) {
 								++y;
 								slope[slopeIndex] = 0;
+							} else if(bl == NyxBlocks.infestSpawner && w.getBlockMetadata(x+xi, y+yi, z+zi) == 0) {
+								w.setBlock(x+xi, y-2, z+zi, NyxBlocks.infestSpawner);
+								w.setBlockToAir(x+xi, y+yi, z+zi);
 							}
 						}
 					}
 				}
 				Sculptor.dome(w, x-1+r.nextInt(3), y, z-1+r.nextInt(3), r.nextInt(3)==0?4:3, Blocks.air, 0);
+				if(r.nextInt(14) == 0)
+					w.setBlock(x, y-2, z, NyxBlocks.infestSpawner);
 				final ForgeDirection
 					slantMod = dir.getRotation(slant[slantIndex]<0?ForgeDirection.DOWN:ForgeDirection.UP);	
 				x += dir.offsetX + slantMod.offsetX*(r.nextInt(1+Math.abs(slant[slantIndex])));
@@ -90,10 +99,12 @@ public class GenRuinsMines extends GenRuins {
 		}
 		if(dir == dir.UNKNOWN)
 			genRewardsChest(w, r, xO, yO, zO, EnumRarity.uncommon);
-		else if(ndir != dir.UP && dir == dir.DOWN)
-			genRewardsChest(w, r, x, y, z, EnumRarity.uncommon);
-		else
-			; //NO-OP for now. Implement a pseudo-spawner for Infested Walkers later.
+		else if(ndir != dir.UP) {
+			if(dir == dir.DOWN)
+				genRewardsChest(w, r, x, y, z, EnumRarity.uncommon);
+			else
+				w.setBlock(x, y-3, z, NyxBlocks.infestSpawner);
+		}
 		return true;
 	}
 	

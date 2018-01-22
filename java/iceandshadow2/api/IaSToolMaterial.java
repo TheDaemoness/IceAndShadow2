@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.ias.ai.IIaSMobGetters;
 
 /**
  * Ice and Shadow 2's own tool material for rapid, modular, and flexible tool
@@ -296,6 +297,8 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 	public float getToolDamage(ItemStack is, EntityLivingBase user, Entity target) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
 		float baseDmg = getBaseDamage();
+		if (user instanceof IIaSMobGetters)
+			baseDmg += ((IIaSMobGetters)user).getAttackStrength(target);
 		if (target instanceof EntityLivingBase)
 			baseDmg += EnchantmentHelper.getEnchantmentModifierLiving(user, (EntityLivingBase) target);
 		if (t == EnumIaSToolClass.AXE)

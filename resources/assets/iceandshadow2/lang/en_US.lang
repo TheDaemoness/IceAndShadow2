@@ -164,6 +164,9 @@ tile.nyxHardShadow.name=Hard Shadow
 tile.nyxDirt0.name=Nyxian Soil
 tile.nyxDirt1.name=Icy Dirt
 tile.nyxUnstableDevora.name=Unstable Devora
+tile.nyxInfestedSpawner0.name=Infested Phylactery (Miner)
+tile.nyxInfestedSpawner1.name=Infested Phylactery (Spider)
+tile.nyxInfestedSpawner2.name=Infested Phylactery (Wight)
 
 tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore
@@ -199,6 +202,7 @@ death.attack.IceAndShadow2.nyxGatestoneDamage=%1$s didn't survive the gatestones
 death.attack.IceAndShadow2.nyxXpAltarDamage=%1$s was converted into experience
 death.attack.IceAndShadow2.nyxFreezingDamage=%1$s froze to death
 death.attack.IceAndShadow2.nyxDrainDamage=%1$s was drained of life
+death.attack.IceAndShadow2.nyxHeadshotDamage=%1$s lost their head
 
 entity.IceAndShadow2.nyxMobWinterSkeleton.name=Winter Skeleton
 entity.IceAndShadow2.nyxMobSpiderWisp.name=Spider Wisp
@@ -208,3 +212,4 @@ entity.IceAndShadow2.nyxProjectileShadowBall.name=Shadow Ball
 entity.IceAndShadow2.nyxMobWitheredNecromancer.name=Withered Necromancer
 entity.IceAndShadow2.nyxMobWightToxic.name=Toxic Wight
 entity.IceAndShadow2.nyxProjectilePoisonBall.name=Toxic Bolt
+entity.IceAndShadow2.nyxMobWalkerInfested.name=Infested Walker

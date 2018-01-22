@@ -17,6 +17,8 @@ public class IaSWorldHelper {
 	}
 	
 	public static int getDifficulty(World w) {
+		if(w == null)
+			return 2;
 		return w.difficultySetting.getDifficultyId();
 	}
 

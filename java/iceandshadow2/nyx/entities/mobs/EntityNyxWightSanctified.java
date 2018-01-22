@@ -192,7 +192,8 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 		return EnumIaSAspect.INFESTATION;
 	}
 
-	public int getAttackStrength(Entity par1Entity) {
+	@Override
+	public float getAttackStrength(Entity par1Entity) {
 		final ItemStack var2 = getHeldItem();
 		int var3;
 		if (worldObj != null)

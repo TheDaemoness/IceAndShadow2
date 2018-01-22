@@ -369,7 +369,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		return EnumIaSAspect.NYX;
 	}
 
-	public int getAttackStrength(Entity par1Entity) {
+	@Override
+	public float getAttackStrength(Entity par1Entity) {
 		getHeldItem();
 		int var3;
 		if (worldObj != null)

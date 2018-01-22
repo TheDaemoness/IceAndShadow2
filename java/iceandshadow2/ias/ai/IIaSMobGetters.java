@@ -3,6 +3,7 @@ package iceandshadow2.ias.ai;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
 public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
@@ -17,6 +18,8 @@ public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
 	public double getMoveSpeed();
 
 	public double getScaledMaxHealth();
+	
+	public float getAttackStrength(Entity target);
 
 	public EntityLivingBase getSearchTarget();
 

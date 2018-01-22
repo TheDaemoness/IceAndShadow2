@@ -418,4 +418,9 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 		worldObj.spawnEntityInWorld(wt);
 		setDead();
 	}
+
+	@Override
+	public float getAttackStrength(Entity target) {
+		return 1;
+	}
 }

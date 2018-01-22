@@ -33,6 +33,7 @@ public class IaSRenderers {
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightSanctified.class,
 				new RenderNyxWightSanctified());
 		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWightToxic.class, new RenderNyxWightToxic());
+		RenderingRegistry.registerEntityRenderingHandler(EntityNyxWalker.class, new RenderNyxWalker());
 
 		// Projectiles.
 		RenderingRegistry.registerEntityRenderingHandler(EntityIceArrow.class, new RenderIceArrow());
