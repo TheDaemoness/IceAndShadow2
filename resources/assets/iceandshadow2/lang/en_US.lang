@@ -47,7 +47,6 @@ item.nyxExtractorPoison.name=Poison Extractor
 item.nyxPhantomResin.name=Ethereal Resin
 item.nyxAlabaster0.name=Ethereal Alabaster
 item.nyxAlabasterShard0.name=Ethereal Alabaster Shard
-item.nyxMagicRepo.name=Magic Repository
 item.nyxToxicCore0.name=Toxic Core
 item.nyxToxicCore1.name=Toxic Lump
 item.nyxShapedLeaf.name=Shaped Leaf
@@ -57,6 +56,7 @@ item.nyxSalt1.name=Nyxian Salt Shard
 item.nyxSalt2.name=Nyxian Salt Pile
 item.nyxFlask0.name=Saline Flask
 item.nyxPotion.name=Saline Potion
+item.nyxAmber.name=Blood Amber
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 item.nyxEchirShears.name=Echir Shears
