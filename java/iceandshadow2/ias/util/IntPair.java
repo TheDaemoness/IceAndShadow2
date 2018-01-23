@@ -8,6 +8,15 @@ public class IntPair implements Comparable {
 		zValue = z;
 	}
 	
+	public IntPair() {
+		xValue = 0;
+		zValue = 0;
+	}
+
+	public boolean nonzero() {
+		return xValue != 0 || zValue != 0;
+	}
+	
 	public int x(int newX) {
 		final int temp = x();
 		xValue = newX;

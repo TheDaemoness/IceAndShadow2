@@ -1,10 +1,13 @@
 package iceandshadow2.render.tileentity;
 
+import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.block.BlockBush;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -63,13 +66,20 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			tar.hoverStart = 0.0F;
 			RenderItem.renderInFrame = true;
 			GL11.glPushMatrix();
+			final float height = (float)NyxBlocks.transmutationAltar.getBlockBoundsMaxY();
+			float bias = 0;
+			boolean asitem = false;
 			if (alt.target.getItem() instanceof ItemBlock) {
-				GL11.glRotatef(180.F, 0, 0, 1);
-				GL11.glTranslatef(0.0F, -1.0F, 0.0F);
-			} else {
-				GL11.glTranslatef(0.0F, 0.8F, -0.225F);
+				ItemBlock ib = (ItemBlock)alt.target.getItem();
+				bias = (float)ib.field_150939_a.getBlockBoundsMaxY()/10;
+				asitem = !RenderBlocks.renderItemIn3d(ib.field_150939_a.getRenderType());
+			} else
+				asitem = true;
+			if (asitem) {
+				GL11.glTranslatef(0.0F, height+0.025f, -0.225F);
 				GL11.glRotatef(180.F, 0, 1, 1);
-			}
+			} else
+				GL11.glTranslatef(0.0F, height-bias, 0);
 			RenderManager.instance.renderEntityWithPosYaw(tar, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			GL11.glPopMatrix();
 			RenderItem.renderInFrame = false;

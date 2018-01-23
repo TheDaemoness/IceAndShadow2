@@ -70,6 +70,7 @@ public class IceAndShadow2 {
 	private void addPostInitHandlers() {
 		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationRepair());
 		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationHeat());
+		IceAndShadow2.toPostRegister.add(new IaSHandlerTransmutationCraft());
 	}
 
 	private void addToolMaterials() {

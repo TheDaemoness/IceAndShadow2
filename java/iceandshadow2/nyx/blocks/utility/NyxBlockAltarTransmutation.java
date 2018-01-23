@@ -56,7 +56,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World w, int p_149915_2_) {
 		return new NyxTeTransmutationAltar();
 	}
 
@@ -77,17 +77,52 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (tte.catalyst.stackSize <= 0)
 			tte.catalyst = null;
 		if (l_ist != null) {
+			final ArrayList<ItemStack> newList = new ArrayList<ItemStack>(l_ist.size());
+			for(ItemStack yield : l_ist) {
+				if(yield == null)
+					continue;
+				if(yield.hasTagCompound()) {
+					newList.add(yield);
+					continue;
+				}
+				int j = 0;
+				for(; j < newList.size(); ++j) {
+					final ItemStack slot = newList.get(j);
+					if(slot.hasTagCompound())
+						continue;
+					if(slot.isItemEqual(yield)) {
+						final int delta = Math.min(slot.getMaxStackSize()-slot.stackSize, yield.stackSize);
+						yield.stackSize -= delta;
+						slot.stackSize += delta;
+					}
+				}
+				if(j == newList.size() && yield.stackSize > 0)
+					newList.add(yield);
+			}
 			TileEntityHopper teh = null;
 			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper)
 				teh = (TileEntityHopper) w.getTileEntity(x, y - 1, z);
 			int item = 0;
-			if (tte.target == null && tte.canPlace(l_ist.get(0)))
-				if (teh == null || w.isBlockIndirectlyGettingPowered(x, y - 1, z)) {
-					tte.target = l_ist.get(0);
+			int swap = 1;
+			if (tte.target == null) {
+				ItemStack other = newList.get(0);
+				boolean canPlace = tte.canPlace(other);
+				while(!canPlace && swap < newList.size()) {
+					ItemStack temp = newList.get(swap);
+					newList.set(swap, other);
+					newList.set(0, temp);
+					++swap;
+					other = newList.get(0);
+					canPlace = tte.canPlace(other);
+				}
+				if (canPlace
+						&& (teh == null || w.isBlockIndirectlyGettingPowered(x, y - 1, z))) {
+					tte.target = other;
 					++item;
 				}
-			for (; item < l_ist.size(); ++item) {
-				final ItemStack is = l_ist.get(item);
+			}
+			for (; item < newList.size(); ++item) {
+				final ItemStack is = newList.get(item);
 				if (teh != null && !w.isBlockIndirectlyGettingPowered(x, y - 1, z)) {
 					int i;
 					for (i = 0; i < teh.getSizeInventory(); ++i)
@@ -193,22 +228,18 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			final ItemStack its = tte.handleRemove(ep, ep.isSneaking());
 			if (its != null)
 				IaSPlayerHelper.giveItem(ep, its);
-			w.markBlockForUpdate(x, y, z);
 			return true;
 		}
-		if (!tte.handlePlace(ep, is.copy()))
-			return false;
+		if (!tte.handlePlace(ep, is))
+			return true;
 		else
-			is.stackSize = 0;
+			ep.setCurrentItemOrArmor(0, null);
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 			if (tte.handler != null)
 				tte.scheduleUpdate(x, y, z, tte.handler.getTransmuteTime(tte.target, tte.catalyst));
-			w.markBlockForUpdate(x, y, z);
-			return true;
 		}
-		w.markBlockForUpdate(x, y, z);
-		return false;
+		return true;
 	}
 
 	@Override

@@ -7,21 +7,25 @@ import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 
 public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public ItemStack target;
 	public ItemStack catalyst;
 	public IIaSApiTransmute handler;
-
+	
 	public boolean canAttemptTransmutation() {
 		return catalyst != null && target != null;
 	}
@@ -46,17 +50,11 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		catalyst = null;
 	}
 
-	@Override
-	public Packet getDescriptionPacket() {
-		final NBTTagCompound syncData = new NBTTagCompound();
-		writeToNBT(syncData);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, syncData);
-	}
-
 	public boolean handlePlace(EntityPlayer ep, ItemStack is) {
 		if (!(IaSRegistry.isPrimarilyTransfusionTarget(is)) || target != null)
 			if (catalyst == null) {
 				catalyst = is;
+				markUpdate();
 				return true;
 			}
 		if (target == null) {
@@ -65,7 +63,8 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 					IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
 				return false;
 			}
-			target = is;
+			target = is.copy();
+			markUpdate();
 			return true;
 		}
 		return false;
@@ -82,23 +81,17 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 			}
 			return null;
 		}
-		ItemStack temp;
+		ItemStack temp = null;
 		if (target != null && !isSneaking) {
 			temp = target;
 			target = null;
-			return temp;
-		}
-		if (catalyst != null) {
+			markUpdate();
+		} else if (catalyst != null) {
 			temp = catalyst;
 			catalyst = null;
-			return temp;
+			markUpdate();
 		}
-		return null;
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.func_148857_g());
+		return temp;
 	}
 
 	@Override
@@ -130,16 +123,9 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 	public void writeToNBT(NBTTagCompound par1) {
 		super.writeToNBT(par1);
 
-		NBTTagCompound eyetemme;
-		if (target != null) {
-			eyetemme = par1.getCompoundTag("nyxItemTarget");
-			target.writeToNBT(eyetemme);
-			par1.setTag("nyxItemTarget", eyetemme);
-		}
-		if (catalyst != null) {
-			eyetemme = par1.getCompoundTag("nyxItemCatalyst");
-			catalyst.writeToNBT(eyetemme);
-			par1.setTag("nyxItemCatalyst", eyetemme);
-		}
+		if (target != null)
+			par1.setTag("nyxItemTarget", target.writeToNBT(par1.getCompoundTag("nyxItemTarget")));
+		if (catalyst != null)
+			par1.setTag("nyxItemCatalyst", catalyst.writeToNBT(par1.getCompoundTag("nyxItemCatalyst")));
 	}
 }
