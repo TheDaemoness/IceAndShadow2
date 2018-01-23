@@ -22,6 +22,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSTool;
@@ -32,16 +33,17 @@ import iceandshadow2.nyx.items.NyxItemIngot;
 /**
  * Handles any shapeless crafting recipes as a fallback.
  */
-public class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
+public abstract class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
+	
+	protected abstract List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe);
 	
 	protected IntPair costs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
+		List l = getInputs(recipe, target, catalyst, orerecipe);
+		if(l == null)
+			return new IntPair();
 		int
 			catacount = 0,
 			targcount = 0;
-		boolean
-			catamatch = false,
-			targmatch = false;
-		List l = orerecipe?((ShapelessOreRecipe)recipe).getInput():((ShapelessRecipes)recipe).recipeItems;
 		for(Object input : l) {
 			List<ItemStack> isl = null;
 			if(input instanceof ItemStack)
@@ -60,37 +62,33 @@ public class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 				if(is.getItem() == target.getItem()
 						&& target.stackSize-targcount > 0
 						&& (noDmgCheck || is.getItemDamage() == target.getItemDamage())) {
-					if(!matched) {
-						++targcount;
-						matched = true;
-					}
-					targmatch = true;
+					++targcount;
+					matched = true;
+					break;
 				}
-				if(is.getItem() == catalyst.getItem()
+				else if(is.getItem() == catalyst.getItem()
 						&& catalyst.stackSize-catacount > 0
 						&& (noDmgCheck || is.getItemDamage() == catalyst.getItemDamage())) {
-					if(!matched) {
-						++catacount;
-						matched = true;
-					}
-					catamatch = true;
-				}
-				if(matched && catamatch && targmatch)
+					++catacount;
+					matched = true;
 					break;
+				}
 			}
+			if(!matched)
+				return new IntPair();
 		}
-		if(catacount+targcount < l.size() || !catamatch || !targmatch)
-			return new IntPair();
 		return new IntPair(targcount, catacount);
 	}
 
+	public abstract Class getRecipeClass(boolean ore);
+	
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		final List l = CraftingManager.getInstance().getRecipeList();
 		for(Object o : l) {
 			Class recipeClass = o.getClass();
-			final boolean orerecipe = recipeClass == ShapelessOreRecipe.class;
-			if(orerecipe || recipeClass == ShapelessRecipes.class) {
+			final boolean orerecipe = recipeClass == getRecipeClass(true);
+			if(orerecipe || recipeClass == getRecipeClass(false)) {
 				if(costs((IRecipe)o, target, catalyst, orerecipe).nonzero())
 					return 15;
 			}
@@ -107,8 +105,8 @@ public class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 		IntPair cost = null;
 		for(Object o : l) {
 			Class recipeClass = o.getClass();
-			final boolean orerecipe = recipeClass == ShapelessOreRecipe.class;
-			if(orerecipe || recipeClass == ShapelessRecipes.class) {
+			final boolean orerecipe = recipeClass == getRecipeClass(true);
+			if(orerecipe || recipeClass == getRecipeClass(false)) {
 				IRecipe recipe = (IRecipe)o;
 				IntPair costTemp = costs(recipe, target, catalyst, orerecipe);
 				if(costTemp.nonzero()
@@ -118,6 +116,7 @@ public class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 				}
 			}
 		}
+		final boolean orerecipe = largest.getClass() == getRecipeClass(true);
 		boolean equal = target.isItemEqual(catalyst);
 		while(cost.nonzero()) {
 			target.stackSize -= cost.x();
@@ -128,12 +127,16 @@ public class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 				catalyst.stackSize -= delta;
 			}
 			ret.add(largest.getRecipeOutput().copy());
-			cost = costs(largest, target, catalyst, largest instanceof ShapelessOreRecipe);
+			cost = costs(largest, target, catalyst, orerecipe);
 		}
 		if(equal) {
 			final int delta = Math.min(target.stackSize, catalyst.getMaxStackSize()-catalyst.stackSize);
 			catalyst.stackSize += delta;
 			target.stackSize -= delta;
+		}
+		if (largest.getRecipeOutput().isItemEqual(catalyst)) {
+			ret.add(catalyst.copy());
+			catalyst.stackSize = 0;
 		}
 		return ret;
 	}
