@@ -16,8 +16,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxChunkManager extends WorldChunkManager {
-
-	public NyxChunkManager() {}
+	private final World w;
+	public NyxChunkManager(World w) {
+		this.w = w;
+	}
 
 	/**
 	 * checks given Chunk's Biomes against List of allowed ones
@@ -47,7 +49,7 @@ public class NyxChunkManager extends WorldChunkManager {
 	 */
 	@Override
 	public void cleanupCache() {
-		NyxBiomeProvider.instance().clean();
+		NyxBiomeManager.instance().clean();
 	}
 
 	/**
@@ -101,7 +103,7 @@ public class NyxChunkManager extends WorldChunkManager {
 	 */
 	@Override
 	public BiomeGenBase getBiomeGenAt(int x, int z) {
-		return NyxBiomeProvider.instance().getBiomeAt(x, z);
+		return NyxBiomeManager.instance().getBiomeAt(w.getSeed(), x, z);
 	}
 
 	/**
@@ -119,12 +121,12 @@ public class NyxChunkManager extends WorldChunkManager {
 
 	protected BiomeGenBase[] getBiomes(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
 		if((x&15)==0 && (z&15)==0 && xlim==16 && zlim==16)
-			return NyxBiomeProvider.instance().getBiomeArray(x>>4, z>>4).get();
+			return NyxBiomeManager.instance().getBiomeArray(w.getSeed(), x>>4, z>>4).get();
 		if(biomes == null || biomes.length < xlim*zlim)
 			biomes = new BiomeGenBase[xlim*zlim];
 		for(int xi = 0; xi < xlim; ++xi) {
 			for(int zi = 0; zi < zlim; ++zi) {
-				biomes[xi|(zi<<4)] = NyxBiomeProvider.instance().getBiomeAt((long)x+xi, (long)z+zi);
+				biomes[xi|(zi<<4)] = NyxBiomeManager.instance().getBiomeAt(w.getSeed(), (long)x+xi, (long)z+zi);
 			}
 		}
 		return biomes;

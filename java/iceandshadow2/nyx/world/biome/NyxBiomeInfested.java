@@ -4,8 +4,10 @@ import iceandshadow2.nyx.entities.mobs.EntityNyxWightSanctified;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
+import iceandshadow2.nyx.entities.mobs.EntityNyxSpiderBaby;
 import iceandshadow2.nyx.world.gen.GenInfestedTrees;
 import iceandshadow2.nyx.world.gen.ruins.GenRuins;
+import iceandshadow2.nyx.world.gen.ruins.GenRuinsInfestedPhylactery;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsMines;
 
 import java.util.Random;
@@ -22,7 +24,8 @@ public class NyxBiomeInfested extends NyxBiome {
 		setBlocks(NyxBlocks.permafrost, NyxBlocks.permafrost);
 
 		spawnableMonsterList.clear();
-		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 65, 2, 4));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 50, 2, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpiderBaby.class, 45, 3, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightSanctified.class, 5, 1, 1));
 
 		setColor(32 << 16 | 255 << 8 | 255);
@@ -70,6 +73,8 @@ public class NyxBiomeInfested extends NyxBiome {
 	protected GenRuins supplyRuins(int i) {
 		if(i == 0)
 			return new GenRuinsMines();
+		if(i == 1)
+			return new GenRuinsInfestedPhylactery();
 		return null;
 	}
 	

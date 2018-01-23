@@ -143,7 +143,7 @@ public class GenRuinsMines extends GenRuins {
 				}
 			}
 		}
-		return var2.nextBoolean();
+		return var2.nextInt(4) == 0;
 	}
 
 	@Override

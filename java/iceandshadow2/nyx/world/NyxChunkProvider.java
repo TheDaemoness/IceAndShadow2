@@ -230,7 +230,7 @@ public class NyxChunkProvider implements IChunkProvider {
 
 		IaSFuture<BiomeGenBase[]>[] biomes = new IaSFuture[9];
 		for(int i = 0; i < 9; ++i)
-			biomes[i] = NyxBiomeProvider.instance().getBiomeArray(xChunk-1+i%3, zChunk-1+i/3);
+			biomes[i] = NyxBiomeManager.instance().getBiomeArray(worldObj.getSeed(), xChunk-1+i%3, zChunk-1+i/3);
 		for (int xi = 0; xi < magic; ++xi)
 			for (int zi = 0; zi < magic; ++zi) {
 				final int
@@ -247,7 +247,7 @@ public class NyxChunkProvider implements IChunkProvider {
 							xReal = 4*xi+xshift+xj,
 							zReal = 4*zi+zshift+zj;
 						final BiomeGenBase
-							biomeAdjacent = NyxBiomeProvider.getBiomeAt(
+							biomeAdjacent = NyxBiomeManager.getBiomeAt(
 								biomes[4+(xReal>>4)+(zReal>>4)*3].get(),
 								xReal, zReal);
 						final float
@@ -333,7 +333,7 @@ public class NyxChunkProvider implements IChunkProvider {
 		int k = xchunk * 16;
 		int l = zchunk * 16;
 		ChunkRandom rand = new ChunkRandom(worldObj.getSeed(), 957256, xchunk, zchunk);
-		final BiomeGenBase biomegenbase = NyxBiomeProvider.instance().getBiomeAt(k+rand.nextInt(16), l+rand.nextInt(16));
+		final BiomeGenBase biomegenbase = NyxBiomeManager.instance().getBiomeAt(worldObj.getSeed(), k+rand.nextInt(16), l+rand.nextInt(16));
 		int xit, zit, yval;
 
 		if (xchunk == 0 && zchunk == 0)

@@ -49,7 +49,7 @@ public class GenPoisonTrees extends WorldGenerator {
 			else {
 				final Block bl = par1World.getBlock(x, y - 1, z);
 
-				if ((bl == Blocks.snow || bl == NyxBlocks.permafrost) && y < 256 - var6 - 1) {
+				if (bl == NyxBlocks.permafrost && y < 256 - var6 - 1) {
 					var21 = par2Random.nextInt(2);
 					var13 = 1;
 					byte var22 = 0;

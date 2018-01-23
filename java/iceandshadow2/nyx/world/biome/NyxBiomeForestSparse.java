@@ -24,8 +24,9 @@ public class NyxBiomeForestSparse extends NyxBiome {
 
 	@Override
 	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
-
-		for (int i = 0; i < 7; ++i) {
+		if(par2Random.nextBoolean())
+			return;
+		for (int i = 0; i < 4; ++i) {
 			final int x = xchunk + par2Random.nextInt(16) + 8;
 			final int z = zchunk + par2Random.nextInt(16) + 8;
 			int y;
@@ -35,25 +36,20 @@ public class NyxBiomeForestSparse extends NyxBiome {
 				y = 64;
 			while (y >= 64 && y <= 192) {
 				final Block bid = par1World.getBlock(x, y, z);
-				if (bid == Blocks.snow_layer)
+				if (bid == NyxBlocks.permafrost) {
+					y++;
 					break;
-				if (i % 2 == 0) {
-					if (!IaSBlockHelper.isAir(bid)) {
-						++y;
-						break;
-					}
-					--y;
-				} else {
-					if (IaSBlockHelper.isAir(bid))
-						break;
-					++y;
 				}
+				if (i % 2 == 0)
+					--y;
+				else
+					++y;
 			}
 			if (y == 0)
 				continue;
 			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
 			if (var5.generate(par1World, par2Random, x, y, z))
-				++i;
+				break;
 		}
 	}
 

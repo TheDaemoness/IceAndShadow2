@@ -164,7 +164,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new NyxChunkManager();
+		worldChunkMgr = new NyxChunkManager(this.worldObj);
 		dimensionId = IaSFlags.dim_nyx_id;
 		hasNoSky = true;
 	}

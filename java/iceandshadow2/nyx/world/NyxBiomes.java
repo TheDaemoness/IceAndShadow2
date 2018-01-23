@@ -15,26 +15,22 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class NyxBiomes {
 
-	public static BiomeGenBase nyxLowMountains, nyxHighMountains, nyxHills, nyxMesas, nyxHillForest, nyxMesaForest;
+	public static BiomeGenBase nyxMountains, nyxHillForest, nyxMesaForest;
 
 	public static BiomeGenBase // Special.
 	nyxExousic, nyxInfested;
 
 	public static void init() {
-		NyxBiomes.nyxLowMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxLowMountains, true, 1.0F, 2.5F, false)
-				.setBiomeName("NyxLowMountains");
-		NyxBiomes.nyxHighMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxHighMountains, true, 0.5F, 4.0F, false)
-				.setBiomeName("NyxHighMountains");
+		NyxBiomes.nyxMountains = new NyxBiomeMountains(IaSFlags.biome_id_nyxMountains, true, 1.0F, 2.5F, false)
+				.setBiomeName("NyxMountains");
 
-		NyxBiomes.nyxHills = new NyxBiome(IaSFlags.biome_id_nyxHills, true, 0.25F, 0.6F, false).setBiomeName("NyxHills");
-		NyxBiomes.nyxMesas = new NyxBiome(IaSFlags.biome_id_nyxMesas, true, 1.5F, 0.1F, false).setBiomeName("NyxMesas");
-		NyxBiomes.nyxHillForest = new NyxBiomeForestDense(IaSFlags.biome_id_nyxHillForest, true, 0.4F, 0.5F, false)
-				.setBiomeName("NyxHillForest");
-		NyxBiomes.nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesaForest, true, 1F, 0.25F, false)
-				.setBiomeName("NyxMesaForest");
+		NyxBiomes.nyxHillForest = new NyxBiomeForestDense(IaSFlags.biome_id_nyxForest, true, 0.4F, 0.5F, false)
+				.setBiomeName("NyxForest");
+		NyxBiomes.nyxMesaForest = new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesa, true, 1.5F, 0.15F, false)
+				.setBiomeName("NyxMesa");
 
 		NyxBiomes.nyxExousic = new NyxBiomeExousic(IaSFlags.biome_id_nyxRugged, true, 1.0F, 1.2F, false)
-				.setBiomeName("NyxRugged");
+				.setBiomeName("NyxExousic");
 		NyxBiomes.nyxInfested = new NyxBiomeInfested(IaSFlags.biome_id_nyxInfested, true, 1.25F, 0.3F, false)
 				.setBiomeName("NyxInfested");
 	}
@@ -44,15 +40,8 @@ public class NyxBiomes {
 	}
 
 	public static void registerBiomes() {
-		BiomeDictionary.registerBiomeType(NyxBiomes.nyxLowMountains, Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
+		BiomeDictionary.registerBiomeType(NyxBiomes.nyxMountains, Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
 				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
-		BiomeDictionary.registerBiomeType(NyxBiomes.nyxHighMountains, Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY,
-				Type.SNOWY, Type.WASTELAND, Type.MOUNTAIN);
-
-		BiomeDictionary.registerBiomeType(NyxBiomes.nyxHills, Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY, Type.SNOWY,
-				Type.WASTELAND, Type.MOUNTAIN);
-		BiomeDictionary.registerBiomeType(NyxBiomes.nyxMesas, Type.COLD, Type.SPARSE, Type.DEAD, Type.DRY, Type.SNOWY,
-				Type.WASTELAND, Type.MESA);
 
 		BiomeDictionary.registerBiomeType(NyxBiomes.nyxHillForest, Type.COLD, Type.DENSE, Type.CONIFEROUS, Type.DRY,
 				Type.SNOWY, Type.FOREST, Type.MOUNTAIN);

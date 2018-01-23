@@ -111,8 +111,10 @@ public class NyxBiome extends BiomeGenBase {
 		}
 
 		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 156, 225, 4);
-		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 96, 192, 8);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 64, 192, 8);
+		GenOre.genOreStandard(genEchir, par1World, xchunk, zchunk, 8, 64, 6);
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
+		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 8, 24, 2);
 
 		if (doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
