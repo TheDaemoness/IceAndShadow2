@@ -61,7 +61,7 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
@@ -73,8 +73,8 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		stillIcon = register.registerIcon(getTexName() + "Still");
-		flowingIcon = register.registerIcon(getTexName() + "Flowing");
+		stillIcon = register.registerIcon(getTextureName() + "Still");
+		flowingIcon = register.registerIcon(getTextureName() + "Flowing");
 		getFluid().setIcons(stillIcon, flowingIcon);
 	}
 

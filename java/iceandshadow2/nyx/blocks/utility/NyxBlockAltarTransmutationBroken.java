@@ -76,8 +76,8 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 	}
 
 	@Override
-	public String getTexName() {
-		return ((IIaSModName) NyxBlocks.transmutationAltar).getTexName();
+	public String getTextureName() {
+		return ((IIaSModName) NyxBlocks.transmutationAltar).getTextureName();
 	}
 
 	@Override
@@ -104,9 +104,9 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTexName() + "TopDead");
-		side0 = reg.registerIcon(getTexName() + "SideEmpty");
-		side1 = reg.registerIcon(getTexName() + "SideHalf");
-		side2 = reg.registerIcon(getTexName() + "Side");
+		blockIcon = reg.registerIcon(getTextureName() + "TopDead");
+		side0 = reg.registerIcon(getTextureName() + "SideEmpty");
+		side1 = reg.registerIcon(getTextureName() + "SideHalf");
+		side2 = reg.registerIcon(getTextureName() + "Side");
 	}
 }

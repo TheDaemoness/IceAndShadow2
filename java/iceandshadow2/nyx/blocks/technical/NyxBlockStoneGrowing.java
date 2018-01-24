@@ -31,7 +31,7 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + ((IaSBaseBlockSingle) NyxBlocks.stone).getModName();
 	}
 

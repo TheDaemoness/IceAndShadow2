@@ -1,6 +1,8 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -21,10 +24,13 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active, invisible;
+	
+	protected IaSBaseItem association;
 
-	public NyxItemIngot(String texName) {
+	public NyxItemIngot(String texName, IaSBaseItem associated) {
 		super(EnumIaSModule.NYX, texName);
 		setHasSubtypes(true);
+		association = associated;
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
 		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
 	}
@@ -55,6 +61,16 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 			return 16;
 		return 64;
 	}
+	
+	@Override
+	public EnumIaSAspect getAspect() {
+		return association.getAspect();
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack p_77613_1_) {
+		return association.getRarity(new ItemStack(association));
+	}
 
 	@Override
 	public void getSubItems(Item i, CreativeTabs t, List l) {
@@ -80,7 +96,7 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		active = reg.registerIcon(getTexName() + "Active");
+		active = reg.registerIcon(getTextureName() + "Active");
 		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
 	}
 }

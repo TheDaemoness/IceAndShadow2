@@ -106,6 +106,10 @@ public class NyxRecipes {
 				new ItemStack(Items.flint), new ItemStack(Items.stick));
 
 		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.flask, 3), "s s", " s ", 's', new ItemStack(NyxItems.salt, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.salt, 1, 1), new ItemStack(NyxItems.flask));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.salt, 1, 1), new ItemStack(NyxItems.flask));;
+		
+		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.rail, 24), "e e", "ese", "e e",
+			'e', new ItemStack(NyxItems.echirIngot, 1, 1),
+			's', new ItemStack(Items.stick));
 	}
 }

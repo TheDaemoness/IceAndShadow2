@@ -84,7 +84,7 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 
 	@Override
 	@Deprecated
-	public String getTexName() {
+	public String getTextureName() {
 		return "IceAndShadow2:armor/" + getModName();
 	}
 

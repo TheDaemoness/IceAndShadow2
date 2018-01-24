@@ -87,8 +87,8 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTexName());
-		iconEmpty = reg.registerIcon(getTexName() + "Empty");
+		blockIcon = reg.registerIcon(getTextureName());
+		iconEmpty = reg.registerIcon(getTextureName() + "Empty");
 	}
 
 	@Override

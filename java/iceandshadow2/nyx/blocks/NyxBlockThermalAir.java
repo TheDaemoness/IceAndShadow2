@@ -59,7 +59,7 @@ public class NyxBlockThermalAir extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + EnumIaSModule.IAS.prefix + "Invisible";
 	}
 

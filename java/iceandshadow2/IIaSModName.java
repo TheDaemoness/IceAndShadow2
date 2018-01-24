@@ -5,5 +5,5 @@ public interface IIaSModName {
 
 	public String getModName();
 
-	public String getTexName();
+	public String getTextureName();
 }

@@ -8,6 +8,7 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.item.EnumRarity;
@@ -25,6 +26,7 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 		setUnlocalizedName(mod.prefix + texName);
 		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		MODULE = mod;
+		this.setCreativeTab(IaSCreativeTabs.tools);
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 

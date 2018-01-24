@@ -145,13 +145,13 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 		rockIcon = new IIcon[2];
 		crystalIcon = new IIcon[2];
 
-		itemIcon = reg.registerIcon(getTexName() + "Dust");
-		rockIcon[1] = reg.registerIcon(getTexName() + "Rock");
-		crystalIcon[1] = reg.registerIcon(getTexName() + "Crystal");
+		itemIcon = reg.registerIcon(getTextureName() + "Dust");
+		rockIcon[1] = reg.registerIcon(getTextureName() + "Rock");
+		crystalIcon[1] = reg.registerIcon(getTextureName() + "Crystal");
 
-		dustIconGlow = reg.registerIcon(getTexName() + "DustGlow");
-		rockIcon[0] = reg.registerIcon(getTexName() + "RockGlow");
-		crystalIcon[0] = reg.registerIcon(getTexName() + "CrystalGlow");
+		dustIconGlow = reg.registerIcon(getTextureName() + "DustGlow");
+		rockIcon[0] = reg.registerIcon(getTextureName() + "RockGlow");
+		crystalIcon[0] = reg.registerIcon(getTextureName() + "CrystalGlow");
 	}
 
 	@Override

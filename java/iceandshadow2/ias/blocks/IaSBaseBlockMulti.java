@@ -51,7 +51,7 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
@@ -64,7 +64,7 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[getSubtypeCount()];
 		for (byte i = 0; i < getSubtypeCount(); ++i)
-			icons[i] = reg.registerIcon(getTexName() + i);
+			icons[i] = reg.registerIcon(getTextureName() + i);
 	}
 
 }

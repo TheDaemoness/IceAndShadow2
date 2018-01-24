@@ -39,8 +39,8 @@ public class IaSBaseBlockFalling extends BlockFalling implements IIaSModName, II
 	}
 
 	@Override
-	public String getTexName() {
-		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
+	public String getTextureName() {
+		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
 	@Override

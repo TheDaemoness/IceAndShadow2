@@ -58,7 +58,7 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getIaSModule().prefix + "Rope";
 	}
 
@@ -133,6 +133,6 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTexName());
+		blockIcon = reg.registerIcon(getTextureName());
 	}
 }

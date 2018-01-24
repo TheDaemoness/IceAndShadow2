@@ -32,7 +32,7 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
-		return EnumRarity.common;
+		return EnumIaSAspect.getRarity(getAspect());
 	}
 
 	public final IaSBaseItem register() {

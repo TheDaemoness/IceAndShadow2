@@ -134,7 +134,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 
 	@Override
 	public void registerIcons(IIconRegister ir) {
-		itemIcon = ir.registerIcon(getTexName() + '0');
+		itemIcon = ir.registerIcon(getTextureName() + '0');
 	}
 
 	@Override

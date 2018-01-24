@@ -26,7 +26,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 
 	public NyxBlockThornyVines(String texName) {
 		setBlockName("nyx" + texName);
-		setBlockTextureName(getTexName());
+		setBlockTextureName(getTextureName());
 		setLightLevel(0.1F);
 		setLightOpacity(0);
 		setStepSound(Block.soundTypeGrass);
@@ -61,7 +61,7 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 

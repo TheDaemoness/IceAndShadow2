@@ -78,7 +78,7 @@ public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing
 	public void registerIcons(IIconRegister reg) {
 		icons = new IIcon[4];
 		for (int i = 0; i < icons.length; ++i)
-			icons[i] = reg.registerIcon(getTexName() + i);
+			icons[i] = reg.registerIcon(getTextureName() + i);
 	}
 
 	@Override

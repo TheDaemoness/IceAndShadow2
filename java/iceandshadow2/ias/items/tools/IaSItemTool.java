@@ -189,7 +189,7 @@ public class IaSItemTool extends ItemTool implements IIaSModName, IIaSTool, IIaS
 
 	@Override
 	@Deprecated
-	public String getTexName() {
+	public String getTextureName() {
 		return null;
 	}
 

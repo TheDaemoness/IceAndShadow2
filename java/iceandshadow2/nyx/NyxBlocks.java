@@ -21,6 +21,9 @@ public class NyxBlocks {
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
+	
+
+	public static Block rail;
 
 	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace, stoneMemory,
 			virtualLadder;
@@ -91,5 +94,7 @@ public class NyxBlocks {
 		NyxBlocks.stoneMemory = new NyxBlockStoneMemory("StoneRegen").register();
 		NyxBlocks.stoneGrowing = new NyxBlockStoneGrowing("StoneGrowing").register();
 		NyxBlocks.virtualLadder = new NyxBlockVirtualLadder("StoneVirtualLadder").register();
+		
+		NyxBlocks.rail = new NyxBlockRail("Rail", false, true).register();
 	}
 }

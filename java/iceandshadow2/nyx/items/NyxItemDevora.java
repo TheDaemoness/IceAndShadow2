@@ -87,8 +87,8 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		smallIcon = reg.registerIcon(getTexName() + "Small");
+		itemIcon = reg.registerIcon(getTextureName());
+		smallIcon = reg.registerIcon(getTextureName() + "Small");
 	}
 
 	@Override

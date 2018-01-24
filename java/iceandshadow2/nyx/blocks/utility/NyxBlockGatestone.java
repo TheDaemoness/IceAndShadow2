@@ -178,8 +178,8 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 	public void registerBlockIcons(IIconRegister reg) {
 		iconTop = new IIcon[3];
 		for (int i = 0; i <= 2; ++i)
-			iconTop[i] = reg.registerIcon(getTexName() + "Top" + i);
-		blockIcon = reg.registerIcon(getTexName() + "Side");
+			iconTop[i] = reg.registerIcon(getTextureName() + "Top" + i);
+		blockIcon = reg.registerIcon(getTextureName() + "Side");
 	}
 
 	/**

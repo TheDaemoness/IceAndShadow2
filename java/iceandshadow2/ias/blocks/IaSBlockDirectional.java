@@ -84,7 +84,7 @@ public class IaSBlockDirectional extends IaSBaseBlockSingle {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTexName() + "Top");
-		iconSide = reg.registerIcon(getTexName() + "Side");
+		blockIcon = reg.registerIcon(getTextureName() + "Top");
+		iconSide = reg.registerIcon(getTextureName() + "Side");
 	}
 }

@@ -57,6 +57,6 @@ public class NyxBlockOreCortra extends NyxBlockSalt {
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[getSubtypeCount()];
 		for (byte i = 0; i < getSubtypeCount(); ++i)
-			icons[i] = reg.registerIcon(getTexName());
+			icons[i] = reg.registerIcon(getTextureName());
 	}
 }

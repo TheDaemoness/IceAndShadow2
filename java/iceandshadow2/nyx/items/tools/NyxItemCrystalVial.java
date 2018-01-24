@@ -57,8 +57,8 @@ public class NyxItemCrystalVial extends IaSBaseItemMulti implements IIaSApiTrans
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		extractor = reg.registerIcon(getTexName() + "Extractor");
+		itemIcon = reg.registerIcon(getTextureName());
+		extractor = reg.registerIcon(getTextureName() + "Extractor");
 	}
 
 	@Override

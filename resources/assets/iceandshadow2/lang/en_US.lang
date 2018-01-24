@@ -57,6 +57,9 @@ item.nyxSalt2.name=Nyxian Salt Pile
 item.nyxFlask0.name=Saline Flask
 item.nyxPotion.name=Saline Potion
 item.nyxAmber.name=Blood Amber
+item.nyxClockwork0.name=Advanced Clockwork
+item.nyxClockwork1.name=Advanced Cortra Clockwork
+item.nyxClockwork2.name=Advanced Draconium Clockwork
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 item.nyxEchirShears.name=Echir Shears
@@ -184,6 +187,8 @@ tile.nyxGatestone2.name=Inactive Gatestone
 tile.nyxTransmutationAltar.name=Transfusion Altar
 tile.nyxTransmutationAltarBroken.name=Broken Transfusion Altar
 tile.nyxAltarExperience.name=Experience Altar
+
+tile.nyxRail.name=Echir Rail
 
 tile.nyxcosmosBarrier.name=???
 tile.nyxcosmosGatestone.name=???

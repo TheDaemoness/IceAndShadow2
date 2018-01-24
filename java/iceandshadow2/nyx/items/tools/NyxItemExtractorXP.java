@@ -75,10 +75,10 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		itemIcon = r.registerIcon(getTexName());
+		itemIcon = r.registerIcon(getTextureName());
 		fillIcons = new IIcon[7];
 		for (int i = 0; i < 7; ++i)
-			fillIcons[i] = r.registerIcon(getTexName() + i);
+			fillIcons[i] = r.registerIcon(getTextureName() + i);
 	}
 
 	@Override

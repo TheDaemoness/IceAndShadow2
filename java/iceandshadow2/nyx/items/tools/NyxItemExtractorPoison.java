@@ -72,10 +72,10 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public void registerIcons(IIconRegister r) {
-		itemIcon = r.registerIcon(getTexName() + "0");
+		itemIcon = r.registerIcon(getTextureName() + "0");
 		fillIcons = new IIcon[7];
 		for (int i = 1; i <= 7; ++i)
-			fillIcons[i - 1] = r.registerIcon(getTexName() + i);
+			fillIcons[i - 1] = r.registerIcon(getTextureName() + i);
 	}
 
 	@Override

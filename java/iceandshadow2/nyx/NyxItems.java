@@ -2,6 +2,7 @@ package iceandshadow2.nyx;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.items.IaSItemShears;
@@ -15,7 +16,7 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt, flask, amber;
+			alabasterShard, leaf, resinCurative, salt, flask, amber, clockwork;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 	
@@ -25,6 +26,8 @@ public class NyxItems {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.resin = new NyxItemResinEthereal("PhantomResin").register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.nifelhiumPowder = new NyxItemNifelhiumPowder("NifelhiumPowder").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.bloodstone = new NyxItemBloodstone("Bloodstone").register().setCreativeTab(IaSCreativeTabs.resources);
@@ -40,9 +43,9 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconium = new NyxItemDraconium("Draconium").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.salt = new NyxItemSalt("Salt").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.echirIngot = new NyxItemIngot("EchirIngot").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot").register()
+		NyxItems.echirIngot = new NyxItemIngot("EchirIngot", (IaSBaseItem)NyxItems.echirDust).register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot", (IaSBaseItem)NyxItems.cortra).register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot", (IaSBaseItem)NyxItems.draconium).register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
@@ -79,8 +82,6 @@ public class NyxItems {
 		// NyxItems.magicRepo = new NyxItemMagicRepo("MagicRepo").register()
 		// .setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.toxicCore = new NyxItemToxicCore("ToxicCore").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.echirDust = new IaSBaseItemSingleGlow(EnumIaSModule.NYX, "EchirDust").register()
-				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.leaf = new IaSBaseItemSingle(EnumIaSModule.NYX, "ShapedLeaf").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.resinCurative = new NyxItemResinCurative("CurativeResin").register()
@@ -89,6 +90,8 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.amber = new NyxItemAmber("Amber").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.clockwork = new NyxItemClockwork("Clockwork").register()
+				.setCreativeTab(IaSCreativeTabs.misc);
 	}
 	
 	public static void lateInit() {

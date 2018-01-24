@@ -35,7 +35,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 		setHardness(0.1F);
 		setStepSound(Block.soundTypeCloth);
 		setBlockName("nyx" + par1);
-		setBlockTextureName(getTexName());
+		setBlockTextureName(getTextureName());
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
@@ -131,7 +131,7 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[3];
 		for (int i = 0; i < 3; ++i)
-			icons[i] = reg.registerIcon(getTexName() + (i + 1));
+			icons[i] = reg.registerIcon(getTextureName() + (i + 1));
 		blockIcon = icons[2];
 	}
 

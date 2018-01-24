@@ -106,7 +106,7 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
@@ -153,8 +153,8 @@ public abstract class IaSBaseBlockLeaves extends BlockLeavesBase implements IIaS
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		iconFancy = reg.registerIcon(getTexName() + "Fancy");
-		iconFast = reg.registerIcon(getTexName() + "Fast");
+		iconFancy = reg.registerIcon(getTextureName() + "Fancy");
+		iconFast = reg.registerIcon(getTextureName() + "Fast");
 		blockIcon = iconFast;
 	}
 

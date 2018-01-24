@@ -17,7 +17,7 @@ public class IaSBaseItemSingle extends IaSBaseItem {
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
 }

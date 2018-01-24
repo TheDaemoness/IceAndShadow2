@@ -112,8 +112,8 @@ public class IaSBaseBlockStairs extends BlockStairs implements IIaSModName, IIaS
 	}
 
 	@Override
-	public String getTexName() {
-		return SOURCE.getTexName();
+	public String getTextureName() {
+		return SOURCE.getTextureName();
 	}
 
 	@Override

@@ -269,8 +269,8 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTexName() + "Top");
-		side = reg.registerIcon(getTexName() + "Side");
+		blockIcon = reg.registerIcon(getTextureName() + "Top");
+		side = reg.registerIcon(getTextureName() + "Side");
 	}
 
 }

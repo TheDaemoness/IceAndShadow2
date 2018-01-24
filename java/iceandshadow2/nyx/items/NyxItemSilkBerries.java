@@ -134,7 +134,7 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		matureIcon = reg.registerIcon(getTexName() + "Mature");
+		itemIcon = reg.registerIcon(getTextureName());
+		matureIcon = reg.registerIcon(getTextureName() + "Mature");
 	}
 }

@@ -139,8 +139,8 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		glow = reg.registerIcon(getTexName() + "Glow");
+		itemIcon = reg.registerIcon(getTextureName());
+		glow = reg.registerIcon(getTextureName() + "Glow");
 	}
 
 	@Override

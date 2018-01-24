@@ -199,7 +199,7 @@ public class NyxItemPotion extends IaSBaseItemMulti {
 	public void registerIcons(IIconRegister reg) {
 		liquidIcons = new IIcon[4];
 		for (int i = 0; i < liquidIcons.length; ++i)
-			liquidIcons[i] = reg.registerIcon(getTexName() + i);
+			liquidIcons[i] = reg.registerIcon(getTextureName() + i);
 	}
 
 }

@@ -45,7 +45,7 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 	}
 
 	@Override
-	public String getTexName() {
+	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
 	}
 

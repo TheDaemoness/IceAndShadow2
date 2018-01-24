@@ -74,8 +74,8 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		glow = reg.registerIcon(getTexName() + "Glow");
+		itemIcon = reg.registerIcon(getTextureName());
+		glow = reg.registerIcon(getTextureName() + "Glow");
 	}
 
 	@Override

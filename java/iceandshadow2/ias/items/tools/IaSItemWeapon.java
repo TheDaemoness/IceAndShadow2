@@ -156,7 +156,7 @@ public class IaSItemWeapon extends ItemSword implements IIaSModName, IIaSTool, I
 
 	@Override
 	@Deprecated
-	public String getTexName() {
+	public String getTextureName() {
 		return null;
 	}
 

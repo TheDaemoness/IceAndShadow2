@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -32,5 +33,9 @@ public enum EnumIaSAspect {
 		if (side != null && side.value() == Side.CLIENT)
 			return VIRTUAL;
 		return null;
+	}
+
+	public static EnumRarity getRarity(EnumIaSAspect aspect) {
+		return aspect == EnumIaSAspect.STYX || aspect == EnumIaSAspect.PURE?EnumRarity.uncommon:EnumRarity.common;
 	}
 }

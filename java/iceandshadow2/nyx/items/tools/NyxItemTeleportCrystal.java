@@ -157,6 +157,6 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		super.registerIcons(reg);
-		empty = reg.registerIcon(getTexName() + "Empty");
+		empty = reg.registerIcon(getTextureName() + "Empty");
 	}
 }

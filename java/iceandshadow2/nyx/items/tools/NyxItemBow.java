@@ -147,12 +147,12 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName());
-		glow = reg.registerIcon(getTexName() + "Glow");
+		itemIcon = reg.registerIcon(getTextureName());
+		glow = reg.registerIcon(getTextureName() + "Glow");
 		iconArray = new IIcon[3][2];
 		for (int i = 0; i < iconArray.length; ++i) {
-			iconArray[i][0] = reg.registerIcon(getTexName() + "Anim" + (i + 1));
-			iconArray[i][1] = reg.registerIcon(getTexName() + "GlowAnim" + (i + 1));
+			iconArray[i][0] = reg.registerIcon(getTextureName() + "Anim" + (i + 1));
+			iconArray[i][1] = reg.registerIcon(getTextureName() + "GlowAnim" + (i + 1));
 		}
 	}
 

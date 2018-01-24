@@ -93,9 +93,9 @@ public abstract class NyxBaseBlockSpawner extends IaSBaseBlockMulti {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		icon = reg.registerIcon(getTexName());
+		icon = reg.registerIcon(getTextureName());
 		if(hasDifferentTopIcon())
-			top = reg.registerIcon(getTexName()+"Top");
+			top = reg.registerIcon(getTextureName()+"Top");
 		else
 			top = icon;
 	}

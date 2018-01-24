@@ -34,11 +34,11 @@ public class IaSBaseItemMultiTextured extends IaSBaseItemMulti {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTexName()+"0");
+		itemIcon = reg.registerIcon(getTextureName()+"0");
 		if(this.getSubtypeCount() > 1) {
 		altIcons = new IIcon[this.getSubtypeCount()-1];
 			for(int i = 1; i < getSubtypeCount(); ++i) {
-				altIcons[i-1] = reg.registerIcon(getTexName()+Integer.toString(i));
+				altIcons[i-1] = reg.registerIcon(getTextureName()+Integer.toString(i));
 			}
 		}
 	}

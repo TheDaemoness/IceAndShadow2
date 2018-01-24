@@ -2,6 +2,7 @@ package iceandshadow2.ias.blocks;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
+import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
@@ -31,6 +32,11 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 	@Override
 	public EnumIaSModule getIaSModule() {
 		return MODULE;
+	}
+	
+	@Override
+	public String getTextureName() {
+		return IceAndShadow2.MODID + ':' + getModName();
 	}
 
 	@Override
