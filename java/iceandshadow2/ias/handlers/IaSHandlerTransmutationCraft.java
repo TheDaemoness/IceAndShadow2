@@ -35,6 +35,8 @@ import iceandshadow2.nyx.items.NyxItemIngot;
  */
 public abstract class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 	
+	public static int ANY_METADATA_MAGIC_NUMBER = 32767;
+	
 	protected abstract List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe);
 	
 	protected IntPair costs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
@@ -58,7 +60,7 @@ public abstract class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 			for(ItemStack is : isl) {
 				if(is.getItem() == null)
 					continue;
-				final boolean noDmgCheck = is.getItemDamage() == 32767;
+				final boolean noDmgCheck = is.getItemDamage() == ANY_METADATA_MAGIC_NUMBER;
 				if(is.getItem() == target.getItem()
 						&& target.stackSize-targcount > 0
 						&& (noDmgCheck || is.getItemDamage() == target.getItemDamage())) {

@@ -85,8 +85,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 					newList.add(yield);
 					continue;
 				}
-				int j = 0;
-				for(; j < newList.size(); ++j) {
+				for(int j = 0; j < newList.size() && yield.stackSize > 0; ++j) {
 					final ItemStack slot = newList.get(j);
 					if(slot.hasTagCompound())
 						continue;
@@ -96,7 +95,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 						slot.stackSize += delta;
 					}
 				}
-				if(j == newList.size() && yield.stackSize > 0)
+				if(yield.stackSize > 0)
 					newList.add(yield);
 			}
 			TileEntityHopper teh = null;
@@ -145,12 +144,12 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
 			if (tte.handler == null) {
-				w.markBlockForUpdate(x, y, z);
+				tte.updateEntity();
 				return;
 			}
 			tte.scheduleUpdate(x, y, z, tte.handler.getTransmuteTime(tte.target, tte.catalyst));
 		}
-		w.markBlockForUpdate(x, y, z);
+		tte.updateEntity();
 	}
 
 	@Override

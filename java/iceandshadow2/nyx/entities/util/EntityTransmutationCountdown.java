@@ -19,6 +19,8 @@ public class EntityTransmutationCountdown extends Entity {
 		setSize(0.0F, 0.0F);
 	}
 
+	
+	
 	public EntityTransmutationCountdown(World w, int x, int y, int z, int time) {
 		this(w);
 		setPosition(x + 0.5, y + 1.25, z + 0.5);
@@ -69,6 +71,41 @@ public class EntityTransmutationCountdown extends Entity {
 		final int x = (int) (posX - 0.5);
 		final int y = (int) (posY - 0.5);
 		final int z = (int) (posZ - 0.5);
+		//Do you think I care about code duplication in this project? :P
+		if(age == 0) {
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+0.2+worldObj.rand.nextDouble()/10,
+					y+0.4,
+					z-0.1, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+0.2+worldObj.rand.nextDouble()/10,
+					y+0.4,
+					z+1.1, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x-0.1,
+					y+0.4,
+					z+0.2+worldObj.rand.nextDouble()/10, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+1.1,
+					y+0.4,
+					z+0.2+worldObj.rand.nextDouble()/10, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+0.7+worldObj.rand.nextDouble()/10,
+					y+0.4,
+					z-0.1, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+0.7+worldObj.rand.nextDouble()/10,
+					y+0.4,
+					z+1.1, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x-0.1,
+					y+0.4,
+					z+0.7+worldObj.rand.nextDouble()/10, 0, 0, 0, false, false);
+			IaSFxManager.spawnParticle(worldObj, "cortraSmoke",
+					x+1.1,
+					y+0.4,
+					z+0.7+worldObj.rand.nextDouble()/10, 0, 0, 0, false, false);
+		}
 		final TileEntity te = worldObj.getTileEntity(x, y, z);
 		if (!(te instanceof NyxTeTransmutationAltar)) {
 			setDead();
