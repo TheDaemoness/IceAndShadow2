@@ -1,7 +1,5 @@
 package iceandshadow2.ias.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.api.EnumIaSAspect;
@@ -39,7 +37,7 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 		IaSRegistration.register(this);
 		return this;
 	}
-	
+
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;

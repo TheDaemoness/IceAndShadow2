@@ -20,10 +20,12 @@ public class NyxBlockHookTightropeX extends NyxBlockHookTightrope {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = super.getDrops(world, x, y, z, metadata, fortune);
-		if (world.getBlock(x + 1, y, z) == NyxBlocks.ropeX)
+		if (world.getBlock(x + 1, y, z) == NyxBlocks.ropeX) {
 			is.add(new ItemStack(NyxItems.rope));
-		if (world.getBlock(x - 1, y, z) == NyxBlocks.ropeX)
+		}
+		if (world.getBlock(x - 1, y, z) == NyxBlocks.ropeX) {
 			is.add(new ItemStack(NyxItems.rope));
+		}
 		return is;
 	}
 

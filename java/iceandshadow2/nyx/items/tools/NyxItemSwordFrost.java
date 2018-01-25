@@ -104,8 +104,9 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 		if (!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
 			target.getTagCompound().setInteger(NyxItemSwordFrost.nbtTierID, 1);
-		} else
+		} else {
 			target.getTagCompound().setInteger(NyxItemSwordFrost.nbtTierID, getUpgradeLevel(target) + 1);
+		}
 		catalyst.stackSize -= getUpgradeCost(getUpgradeLevel(target));
 		return null;
 	}
@@ -131,9 +132,10 @@ public class NyxItemSwordFrost extends IaSBaseItemSingle implements IIaSGlowing,
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		super.onLeftClickEntity(stack, player, entity);
-		if (entity instanceof EntityLivingBase)
+		if (entity instanceof EntityLivingBase) {
 			((EntityLivingBase) entity)
 					.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 15 + 4 * getUpgradeLevel(stack), 4));
+		}
 		return false;
 	}
 

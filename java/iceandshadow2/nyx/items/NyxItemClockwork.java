@@ -9,7 +9,7 @@ public class NyxItemClockwork extends IaSBaseItemMultiTexturedGlow {
 
 	public NyxItemClockwork(String id) {
 		super(EnumIaSModule.NYX, id, 3);
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
 	}
 
 	@Override

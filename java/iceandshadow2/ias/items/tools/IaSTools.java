@@ -23,8 +23,9 @@ class IaSMaterialIconGetter extends Item {
 
 	@Override
 	public void registerIcons(IIconRegister i) {
-		for (final IaSToolMaterial m : IaSRegistry.getToolMaterials())
+		for (final IaSToolMaterial m : IaSRegistry.getToolMaterials()) {
 			m.registerIcons(i);
+		}
 		IaSRegistry.getDefaultMaterial().registerIcons(i);
 	}
 }
@@ -55,10 +56,11 @@ public class IaSTools {
 			return new ItemStack(IaSTools.armorEchir[slot], 0);
 		if (tier == 2) {
 			final ItemStack is = new ItemStack(IaSTools.armorCortra[slot], 0);
-			if (slot == 4)
+			if (slot == 4) {
 				is.addEnchantment(Enchantment.featherFalling, 3);
-			else if (slot == 2)
+			} else if (slot == 2) {
 				is.addEnchantment(Enchantment.thorns, 3);
+			}
 			is.addEnchantment(Enchantment.projectileProtection, 3);
 			return is;
 		}
@@ -75,19 +77,21 @@ public class IaSTools {
 		IaSTools.swordsActiveEchir = new IaSBaseItem[EnumIaSToolClass.values().length];
 		IaSTools.armorActiveEchir = new IaSBaseItem[4];
 		for (final EnumIaSToolClass c : EnumIaSToolClass.values()) {
-			if (c == EnumIaSToolClass.KNIFE)
+			if (c == EnumIaSToolClass.KNIFE) {
 				IaSTools.weapons[c.getClassId()] = new IaSItemThrowingKnife();
-			else if (c.isWeapon())
+			} else if (c.isWeapon()) {
 				IaSTools.weapons[c.getClassId()] = new IaSItemWeapon(c);
-			else
+			} else {
 				IaSTools.tools[c.getClassId()] = new IaSItemTool(c);
+			}
 			if (c.isWeapon()) {
-				if (c == EnumIaSToolClass.KNIFE)
+				if (c == EnumIaSToolClass.KNIFE) {
 					IaSTools.swordsActiveEchir[c.getClassId()] = new IaSItemEchirKnifeActive(
 							"ToolEchir" + c.toString() + "Active", c.getClassId());
-				else
+				} else {
 					IaSTools.swordsActiveEchir[c.getClassId()] = new IaSItemEchirToolActive(
 							"ToolEchir" + c.toString() + "Active", c.getClassId(), true);
+				}
 				GameRegistry.registerItem(IaSTools.swordsActiveEchir[c.getClassId()],
 						"iasTool" + c.toString() + "EchirActive");
 				GameRegistry.registerItem(IaSTools.weapons[c.getClassId()], "ias" + c.toString());
@@ -123,13 +127,13 @@ public class IaSTools {
 		IaSTools.armorMatSpiderSilk = new NyxArmorMaterialSpiderSilk();
 		IaSTools.armorMatAlabaster = new NyxArmorMaterialSanctified();
 
-		
+
 		IaSTools.armorEchir = new IaSItemArmor[4];
 		IaSTools.armorCortra = new IaSItemArmor[4];
 		IaSTools.armorNavistra = new IaSItemArmor[4];
 		IaSTools.armorSpiderSilk = new IaSItemArmor[4];
 		IaSTools.armorAlabaster = new IaSItemArmor[4];
-		
+
 		IaSTools.armor = new IaSItemArmor[5][];
 		armor[0] = armorEchir;
 		armor[1] = armorCortra;
@@ -228,8 +232,9 @@ public class IaSTools {
 	}
 
 	public static ItemStack setToolMaterial(ItemStack is, String mat) {
-		if (!is.hasTagCompound())
+		if (!is.hasTagCompound()) {
 			is.setTagCompound(new NBTTagCompound());
+		}
 		is.getTagCompound().setString(IaSTools.NBT_ID, mat);
 		return is;
 	}

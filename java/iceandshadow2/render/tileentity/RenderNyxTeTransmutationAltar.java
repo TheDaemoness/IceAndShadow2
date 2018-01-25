@@ -5,7 +5,6 @@ import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.block.BlockBush;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -27,31 +26,33 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 		GL11.glTranslatef((float) x + 0.5F, (float) y, (float) z + 0.5F);
 		final NyxTeTransmutationAltar alt = (NyxTeTransmutationAltar) te;
 
-		if (cat == null && alt.catalyst != null)
+		if (cat == null && alt.catalyst != null) {
 			cat = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.catalyst);
-		else if (cat != null)
-			if (alt.catalyst == null)
+		} else if (cat != null)
+			if (alt.catalyst == null) {
 				cat = null;
-			else if (alt.catalyst.getItem() != cat.getEntityItem().getItem())
+			} else if (alt.catalyst.getItem() != cat.getEntityItem().getItem()) {
 				cat.setEntityItemStack(alt.catalyst);
-			else if (!alt.catalyst.getItem().isDamageable()
-					&& alt.catalyst.getItemDamage() != cat.getEntityItem().getItemDamage())
+			} else if (!alt.catalyst.getItem().isDamageable()
+					&& alt.catalyst.getItemDamage() != cat.getEntityItem().getItemDamage()) {
 				cat.setEntityItemStack(alt.catalyst);
-			else if (alt.catalyst.stackSize != cat.getEntityItem().stackSize)
+			} else if (alt.catalyst.stackSize != cat.getEntityItem().stackSize) {
 				cat.setEntityItemStack(alt.catalyst);
+			}
 
-		if (tar == null && alt.target != null)
+		if (tar == null && alt.target != null) {
 			tar = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.target);
-		else if (tar != null)
-			if (alt.target == null)
+		} else if (tar != null)
+			if (alt.target == null) {
 				tar = null;
-			else if (alt.target.getItem() != tar.getEntityItem().getItem())
+			} else if (alt.target.getItem() != tar.getEntityItem().getItem()) {
 				tar.setEntityItemStack(alt.target);
-			else if (!alt.target.getItem().isDamageable()
-					&& alt.target.getItemDamage() != tar.getEntityItem().getItemDamage())
+			} else if (!alt.target.getItem().isDamageable()
+					&& alt.target.getItemDamage() != tar.getEntityItem().getItemDamage()) {
 				tar.setEntityItemStack(alt.target);
-			else if (alt.target.stackSize != tar.getEntityItem().stackSize)
+			} else if (alt.target.stackSize != tar.getEntityItem().stackSize) {
 				tar.setEntityItemStack(alt.target);
+			}
 
 		if (cat != null) {
 			cat.hoverStart = 0.0F;
@@ -70,16 +71,18 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			float bias = 0;
 			boolean asitem = false;
 			if (alt.target.getItem() instanceof ItemBlock) {
-				ItemBlock ib = (ItemBlock)alt.target.getItem();
+				final ItemBlock ib = (ItemBlock)alt.target.getItem();
 				bias = (float)ib.field_150939_a.getBlockBoundsMaxY()/10;
 				asitem = !RenderBlocks.renderItemIn3d(ib.field_150939_a.getRenderType());
-			} else
+			} else {
 				asitem = true;
+			}
 			if (asitem) {
 				GL11.glTranslatef(0.0F, height+0.025f, -0.225F);
 				GL11.glRotatef(180.F, 0, 1, 1);
-			} else
+			} else {
 				GL11.glTranslatef(0.0F, height-bias, 0);
+			}
 			RenderManager.instance.renderEntityWithPosYaw(tar, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			GL11.glPopMatrix();
 			RenderItem.renderInFrame = false;

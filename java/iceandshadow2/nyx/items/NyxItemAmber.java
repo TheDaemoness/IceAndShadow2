@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,12 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IaSRegistry;
-import iceandshadow2.api.IaSToolMaterial;
-import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
-import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
@@ -30,7 +24,7 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 		setHasSubtypes(true);
 		setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
 		return stack.getItemDamage()==1;
@@ -50,7 +44,7 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
 		return EnumRarity.uncommon;
 	}
-	
+
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() == this && target.getItemDamage() == 0 && catalyst.hasTagCompound()) {
@@ -68,14 +62,16 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 			final Map<Integer, Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
 			synchronized (ench) { // Dodge concurrent access issues?
 				for (final Integer i : ench.keySet())
-					if (ench.get(i).intValue() <= 1)
+					if (ench.get(i).intValue() <= 1) {
 						ench.remove(i);
-					else
+					} else {
 						ench.put(i, ench.get(i) - 1);
+					}
 				EnchantmentHelper.setEnchantments(ench, target);
 				EnchantmentHelper.setEnchantments(ench, catalyst);
-				if (!ench.isEmpty())
+				if (!ench.isEmpty()) {
 					target.setItemDamage(1);
+				}
 			}
 		} else if (catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
 			final Map<Integer, Integer> ench = new HashMap<Integer, Integer>(
@@ -83,13 +79,15 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 			synchronized (ench) { // Dodge concurrent access issues?
 				EnchantmentHelper.setEnchantments(ench, target);
 				for (final Integer i : ench.keySet())
-					if (ench.get(i).intValue() <= 1)
+					if (ench.get(i).intValue() <= 1) {
 						ench.remove(i);
-					else
+					} else {
 						ench.put(i, ench.get(i) - 1);
+					}
 				EnchantmentHelper.setEnchantments(ench, catalyst);
-				if(ench.isEmpty())
+				if(ench.isEmpty()) {
 					catalyst.setItemDamage(0);
+				}
 			}
 		}
 		return null;
@@ -103,10 +101,11 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity pos) {
-		if(world.rand.nextBoolean())
+		if(world.rand.nextBoolean()) {
 			IaSFxManager.spawnParticle(world, "vanilla_spell", pos.posX - 0.1 + world.rand.nextDouble() / 5,
 				pos.posY - 0.2 - world.rand.nextDouble() / 3, pos.posZ - 0.1 + world.rand.nextDouble() / 5,
 				-0.025 + world.rand.nextDouble() / 20, -0.05F, -0.025 + world.rand.nextDouble() / 20, false, false);
+		}
 		return true;
 	}
 

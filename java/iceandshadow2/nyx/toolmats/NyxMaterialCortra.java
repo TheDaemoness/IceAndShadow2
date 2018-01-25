@@ -63,8 +63,9 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (user instanceof EntityPlayer && target instanceof EntityLivingBase
-				&& IaSEntityHelper.getMagicLevel((EntityLivingBase) target) > 0)
+				&& IaSEntityHelper.getMagicLevel((EntityLivingBase) target) > 0) {
 			((EntityPlayer) user).addExperience(target.isEntityInvulnerable() ? 0 : 1);
+		}
 		return super.onAttack(is, user, target);
 	}
 
@@ -74,10 +75,11 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 				AxisAlignedBB.getBoundingBox(user.posX - 12, user.posY - 16, user.posZ - 12, user.posX + 12,
 						user.posY + 8, user.posZ + 12),
 				user);
-		if (victim != null && EnumIaSAspect.getAspect(victim) != EnumIaSAspect.getAspect(user))
+		if (victim != null && EnumIaSAspect.getAspect(victim) != EnumIaSAspect.getAspect(user)) {
 			knife.setThrowableHeading(victim.posX - user.posX,
 					victim.posY - user.posY + victim.getEyeHeight() - user.getEyeHeight() + 0.5,
 					victim.posZ - user.posZ, 2F, 0.0F);
+		}
 	}
 
 	@Override

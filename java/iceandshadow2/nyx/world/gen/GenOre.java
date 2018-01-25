@@ -39,10 +39,12 @@ public class GenOre {
 				} else // Check for bordering air.
 				if (par1World.isAirBlock(x + 1, y, z) || par1World.isAirBlock(x - 1, y, z)
 						|| par1World.isAirBlock(x, y, z + 1) || par1World.isAirBlock(x, y, z - 1)
-						|| par1World.isAirBlock(x, y + 1, z) || par1World.isAirBlock(x, y - 1, z))
+						|| par1World.isAirBlock(x, y + 1, z) || par1World.isAirBlock(x, y - 1, z)) {
 					ybest = y;
-		if (foundtop)
+				}
+		if (foundtop) {
 			par1World.setBlock(x, ybest, z, bloque);
+		}
 
 	}
 

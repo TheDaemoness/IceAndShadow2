@@ -30,8 +30,9 @@ public class NyxItemAlabasterShard extends NyxItemAlabaster {
 		if (catalyst.getItem() == this) {
 			catalyst.stackSize -= 1;
 			target.stackSize -= 1;
-			if (target.getItem() == Items.bone)
+			if (target.getItem() == Items.bone) {
 				retval.add(new ItemStack(NyxItems.boneSanctified));
+			}
 		}
 		return retval;
 	}

@@ -17,10 +17,12 @@ public class IaSConfigManager {
 		exp_maj = maj;
 		exp_min = min;
 		needs_write = !cfgFile.exists();
-		if (!needs_write)
+		if (!needs_write) {
 			needs_write = read();
-		if (needs_write)
+		}
+		if (needs_write) {
 			write();
+		}
 	}
 
 	public boolean needsWrite() {
@@ -64,10 +66,12 @@ public class IaSConfigManager {
 				IceAndShadow2.getLogger().error("Invalid number of space-separated fields (minimum 2): " + orig);
 				continue;
 			}
-			if (data[0].length() == 0)
+			if (data[0].length() == 0) {
 				continue;
-			if (data[0].charAt(0) == '#')
+			}
+			if (data[0].charAt(0) == '#') {
 				continue;
+			}
 			if (data.length < 2) {
 				IceAndShadow2.getLogger().error("Invalid number of space-separated fields (minimum 2): " + orig);
 				continue;
@@ -98,12 +102,13 @@ public class IaSConfigManager {
 								.error("Invalid number of space-separated fields (expected 2): " + orig);
 						continue;
 					}
-					if (data[0].contentEquals("enable"))
+					if (data[0].contentEquals("enable")) {
 						f.set(null, true);
-					else if (data[0].contentEquals("disable"))
+					} else if (data[0].contentEquals("disable")) {
 						f.set(null, false);
-					else
+					} else {
 						IceAndShadow2.getLogger().error("Invalid prefix (expected 'enable' or 'disable): " + data[2]);
+					}
 					continue;
 				}
 				if (data.length != 3) {
@@ -111,8 +116,9 @@ public class IaSConfigManager {
 					continue;
 				}
 				if (typecheck instanceof Integer) {
-					if (!data[0].contentEquals("set-int"))
+					if (!data[0].contentEquals("set-int")) {
 						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-int'): " + data[0]);
+					}
 					try {
 						f.set(null, Integer.parseInt(data[2]));
 					} catch (final NumberFormatException e) {
@@ -121,8 +127,9 @@ public class IaSConfigManager {
 					}
 				}
 				if (typecheck instanceof Short) {
-					if (!data[0].contentEquals("set-byte"))
+					if (!data[0].contentEquals("set-byte")) {
 						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-byte'): " + data[0]);
+					}
 					try {
 						final short s = Short.parseShort(data[2]);
 						if (s > 255) {
@@ -136,8 +143,9 @@ public class IaSConfigManager {
 					}
 				}
 				if (typecheck instanceof String) {
-					if (!data[0].contentEquals("set-string"))
+					if (!data[0].contentEquals("set-string")) {
 						IceAndShadow2.getLogger().warn("Ambiguous prefix (expected 'set-string'): " + data[0]);
+					}
 					f.set(null, data[2]);
 				}
 			} catch (final IllegalArgumentException e) {
@@ -171,17 +179,19 @@ public class IaSConfigManager {
 			} catch (final IllegalAccessException e) {
 				continue;
 			}
-			if (data instanceof Integer)
+			if (data instanceof Integer) {
 				ecris.println("set-int " + f.getName() + ' ' + data);
-			else if (data instanceof Short)
+			} else if (data instanceof Short) {
 				ecris.println("set-byte " + f.getName() + ' ' + data);
-			else if (data instanceof Boolean) {
-				if (((Boolean) data).booleanValue())
+			} else if (data instanceof Boolean) {
+				if (((Boolean) data).booleanValue()) {
 					ecris.println("enable " + f.getName());
-				else
+				} else {
 					ecris.println("disable " + f.getName());
-			} else if (data instanceof String)
+				}
+			} else if (data instanceof String) {
 				ecris.println("set-string " + f.getName() + ' ' + data);
+			}
 		}
 		ecris.close();
 	}

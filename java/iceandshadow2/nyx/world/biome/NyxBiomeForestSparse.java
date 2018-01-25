@@ -2,15 +2,12 @@ package iceandshadow2.nyx.world.biome;
 
 import java.util.Random;
 
-import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestSparse extends NyxBiome {
@@ -21,7 +18,7 @@ public class NyxBiomeForestSparse extends NyxBiome {
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 2, 1, 1));
-		
+
 		setColor(127 << 16 | 32 << 8 | 127);
 	}
 
@@ -33,26 +30,30 @@ public class NyxBiomeForestSparse extends NyxBiome {
 			final int x = xchunk + par2Random.nextInt(16) + 8;
 			final int z = zchunk + par2Random.nextInt(16) + 8;
 			int y;
-			if (i % 2 == 0)
+			if (i % 2 == 0) {
 				y = 192;
-			else
+			} else {
 				y = 64;
+			}
 			while (y >= 64 && y <= 192) {
 				final Block bid = par1World.getBlock(x, y, z);
 				if (bid == NyxBlocks.permafrost) {
 					y++;
 					break;
 				}
-				if (i % 2 == 0)
+				if (i % 2 == 0) {
 					--y;
-				else
+				} else {
 					++y;
+				}
 			}
-			if (y == 0)
+			if (y == 0) {
 				continue;
+			}
 			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
-			if (var5.generate(par1World, par2Random, x, y, z))
+			if (var5.generate(par1World, par2Random, x, y, z)) {
 				break;
+			}
 		}
 	}
 

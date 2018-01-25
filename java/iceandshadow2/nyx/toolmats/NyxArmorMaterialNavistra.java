@@ -18,8 +18,9 @@ public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
 
 	@Override
 	public float onHurt(EntityLivingBase wearer, DamageSource dmg, float amount, double coverage, boolean major) {
-		if (dmg.isProjectile())
+		if (dmg.isProjectile()) {
 			amount = (float) Math.max(0, amount - (coverage / (major ? 1 : 2)));
+		}
 		return amount;
 	}
 
@@ -27,13 +28,15 @@ public class NyxArmorMaterialNavistra extends IaSArmorMaterial {
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
 		wearer.motionX *= 1 - 0.01 * coverage;
 		wearer.motionZ *= 1 - 0.01 * coverage;
-		if (wearer.motionY > 0 && wearer.isOnLadder())
+		if (wearer.motionY > 0 && wearer.isOnLadder()) {
 			wearer.motionY *= 1 - 0.01 * coverage;
-		if (wearer.isSprinting() && major)
+		}
+		if (wearer.isSprinting() && major) {
 			wearer.setSprinting(false);
+		}
 		super.onTick(wearer, coverage, major);
 	}
-	
+
 	@Override
 	public int getRenderPasses() {
 		return 1;

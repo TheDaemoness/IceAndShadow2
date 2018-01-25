@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -183,8 +182,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 		super.onUpdate();
 
 		// Ice arrows tend to melt.
-		if (isBurning())
+		if (isBurning()) {
 			setDead();
+		}
 
 		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F) {
 			final float var1 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
@@ -209,8 +209,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 			}
 		}
 
-		if (arrowShake > 0)
+		if (arrowShake > 0) {
 			arrowShake = 0;
+		}
 
 		++ticksInAir;
 		Vec3 var17 = Vec3.createVectorHelper(posX, posY, posZ);
@@ -219,8 +220,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 		var17 = Vec3.createVectorHelper(posX, posY, posZ);
 		var3 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ);
 
-		if (var4 != null)
+		if (var4 != null) {
 			var3 = Vec3.createVectorHelper(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+		}
 
 		Entity var5 = null;
 		@SuppressWarnings("rawtypes")
@@ -249,8 +251,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 			}
 		}
 
-		if (var5 != null)
+		if (var5 != null) {
 			var4 = new MovingObjectPosition(var5);
+		}
 
 		float var20;
 		float var26;
@@ -261,49 +264,57 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 				var20 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
 				int var23 = MathHelper.ceiling_double_int(var20 * damage);
 
-				if (getIsCritical())
+				if (getIsCritical()) {
 					var23 += rand.nextInt(var23 / 2 + 1) + var23;
-				else
+				} else {
 					var23 += 2;
+				}
 
-				if (var4.entityHit instanceof EntityBlaze || var4.entityHit instanceof EntityMagmaCube)
+				if (var4.entityHit instanceof EntityBlaze || var4.entityHit instanceof EntityMagmaCube) {
 					var23 += 3;
+				}
 
 				DamageSource dmgSrc = null;
 
-				if (shootingEntity == null)
+				if (shootingEntity == null) {
 					dmgSrc = DamageSource.causeThrownDamage(this, this);
-				else
+				} else {
 					dmgSrc = DamageSource.causeThrownDamage(this, shootingEntity);
+				}
 
 				if (var4.entityHit.attackEntityFrom(dmgSrc, var23)) {
 					if (var4.entityHit instanceof EntityLivingBase) {
 						// Slow enemies it hits.
-						if (freezeTime > 0 && !this.worldObj.isRemote)
+						if (freezeTime > 0 && !worldObj.isRemote) {
 							((EntityLivingBase) var4.entityHit)
 									.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, freezeTime, freezeLevel));
-						
+						}
+
 						if (knockbackStrength > 0) {
 							var26 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
 
-							if (var26 > 0.0F)
+							if (var26 > 0.0F) {
 								var4.entityHit.addVelocity(motionX * knockbackStrength * 0.6000000238418579D / var26,
 										0.1D * knockbackStrength,
 										motionZ * knockbackStrength * 0.6000000238418579D / var26);
+							}
 						}
 
 						if (shootingEntity != null && var4.entityHit != shootingEntity
-								&& var4.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP)
+								&& var4.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP) {
 							((EntityPlayerMP) shootingEntity).playerNetServerHandler
 									.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+						}
 					}
 					// Kill the arrow IF it's non-critical and didn't hit an
 					// enderman.
-					if (shouldKill && !(var4.entityHit instanceof EntityEnderman) && !getIsCritical())
+					if (shouldKill && !(var4.entityHit instanceof EntityEnderman) && !getIsCritical()) {
 						setDead();
-					if (!isEntityAlive())
+					}
+					if (!isEntityAlive()) {
 						worldObj.playSoundAtEntity(this, "dig.glass", (float) (var4.hitVec.lengthVector() / 5.0F > 1.0
 								? 1.0F : var4.hitVec.lengthVector() / 5.0F), 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+					}
 				}
 			} else {
 				xTile = var4.blockX;
@@ -332,18 +343,20 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 					boolean die = inTile.isCollidable();
 					if (inTile.getMaterial() == Material.glass) {
 						die &= !(getIsCritical() || !(inTile.renderAsNormalBlock() || (inTile instanceof BlockGlass)));
-						if (!worldObj.isRemote)
+						if (!worldObj.isRemote) {
 							worldObj.func_147480_a(xTile, yTile, zTile, false);
+						}
 					} else if (inTile.getMaterial() == Material.ice) {
 						die &= !getIsCritical();
 						setIsCritical(false);
-						if (!worldObj.isRemote)
+						if (!worldObj.isRemote) {
 							worldObj.func_147480_a(xTile, yTile, zTile, true);
-					} else if (inTile.getMaterial() == Material.cloth)
+						}
+					} else if (inTile.getMaterial() == Material.cloth) {
 						die = false;
-					else if (inTile.getMaterial() == Material.leaves)
+					} else if (inTile.getMaterial() == Material.leaves) {
 						die &= !(getIsCritical() || rand.nextInt(4) == 0);
-					else if (inTile.getMaterial() == Material.sand) {
+					} else if (inTile.getMaterial() == Material.sand) {
 						die &= !getIsCritical();
 						setIsCritical(false);
 					}
@@ -351,8 +364,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 					if (die) {
 						worldObj.playSoundAtEntity(this, "dig.glass", (float) (var4.hitVec.lengthVector() / 5.0F > 1.0
 								? 1.0F : var4.hitVec.lengthVector() / 5.0F), 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
-						for (int i = 0; i < 8; ++i)
+						for (int i = 0; i < 8; ++i) {
 							worldObj.spawnParticle("snowballpoof", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+						}
 						setDead();
 					}
 				}
@@ -365,17 +379,21 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 		rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
 		for (rotationPitch = (float) (Math.atan2(motionY, var20) * 180.0D / Math.PI); rotationPitch
-				- prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
+				- prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F) {
 			;
+		}
 
-		while (rotationPitch - prevRotationPitch >= 180.0F)
+		while (rotationPitch - prevRotationPitch >= 180.0F) {
 			prevRotationPitch += 360.0F;
+		}
 
-		while (rotationYaw - prevRotationYaw < -180.0F)
+		while (rotationYaw - prevRotationYaw < -180.0F) {
 			prevRotationYaw -= 360.0F;
+		}
 
-		while (rotationYaw - prevRotationYaw >= 180.0F)
+		while (rotationYaw - prevRotationYaw >= 180.0F) {
 			prevRotationYaw += 360.0F;
+		}
 
 		rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
 		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw);
@@ -392,11 +410,13 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 			}
 
 			var22 = 0.8F;
-		} else
-			for (var9 = 0; var9 < (getIsCritical() ? 5 : 3); ++var9)
+		} else {
+			for (var9 = 0; var9 < (getIsCritical() ? 5 : 3); ++var9) {
 				IaSFxManager.spawnParticle(worldObj, getIsCritical() ? "cloud" : "cloudSmall",
 						posX + motionX * var9 / 4.0D, posY + motionY * var9 / 4.0D, posZ + motionZ * var9 / 4.0D, 0.0D,
 						0.05D, 0.0D, true, !getIsCritical());
+			}
+		}
 
 		motionX *= var22;
 		motionY *= var22;
@@ -417,8 +437,9 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 		inData = par1NBTTagCompound.getByte("inData") & 255;
 		arrowShake = par1NBTTagCompound.getByte("shake") & 255;
 
-		if (par1NBTTagCompound.hasKey("damage"))
+		if (par1NBTTagCompound.hasKey("damage")) {
 			damage = par1NBTTagCompound.getDouble("damage");
+		}
 	}
 
 	public void setDamage(double par1) {
@@ -437,10 +458,11 @@ public class EntityIceArrow extends Entity implements IProjectile, IIaSAspect {
 	public void setIsCritical(boolean par1) {
 		final byte var2 = dataWatcher.getWatchableObjectByte(16);
 
-		if (par1)
+		if (par1) {
 			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 | 1)));
-		else
+		} else {
 			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 & -2)));
+		}
 	}
 
 	/**

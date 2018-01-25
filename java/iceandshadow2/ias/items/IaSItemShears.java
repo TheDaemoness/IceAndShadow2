@@ -63,7 +63,8 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 	public boolean usesDefaultGlowRenderer() {
 		return true;
 	}
-	
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderPasses(int metadata) {
 		return 2;

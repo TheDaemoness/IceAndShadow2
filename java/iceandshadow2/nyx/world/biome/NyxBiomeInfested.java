@@ -30,7 +30,7 @@ public class NyxBiomeInfested extends NyxBiome {
 
 		setColor(32 << 16 | 255 << 8 | 255);
 	}
-	
+
 	@Override
 	public float getWeight() {
 		return 2;
@@ -50,18 +50,21 @@ public class NyxBiomeInfested extends NyxBiome {
 					++y;
 					break;
 				}
-				if (bid == Blocks.snow_layer)
+				if (bid == Blocks.snow_layer) {
 					break;
+				}
 				if (!IaSBlockHelper.isAir(bid)) {
 					y = 0;
 					break;
 				}
 			}
-			if (y == 0)
+			if (y == 0) {
 				continue;
+			}
 			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
-			if (var5.generate(par1World, par2Random, x, y, z))
+			if (var5.generate(par1World, par2Random, x, y, z)) {
 				++count;
+			}
 		}
 	}
 
@@ -82,6 +85,6 @@ public class NyxBiomeInfested extends NyxBiome {
 			return new GenRuinsInfestedPhylactery();
 		return null;
 	}
-	
-	
+
+
 }

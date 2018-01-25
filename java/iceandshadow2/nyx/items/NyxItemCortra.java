@@ -3,17 +3,12 @@ package iceandshadow2.nyx.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.nyx.NyxItems;
 

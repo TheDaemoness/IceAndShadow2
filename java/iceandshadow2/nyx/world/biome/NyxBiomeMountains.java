@@ -16,10 +16,10 @@ public class NyxBiomeMountains extends NyxBiome {
 		setBlocks(NyxBlocks.snow, NyxBlocks.stone);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 10, 2, 3));
-		
+
 		setColor(96 << 16 | 96 << 8 | 96);
 	}
-	
+
 	@Override
 	public boolean deepSurfaceLayer() {
 		return true;

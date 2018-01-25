@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 public class BlockPos3 extends BlockPos2 {
 	protected short y;
-	
+
 	public BlockPos3(BlockPos3 other) {
 		this(other, other.y);
 	}
@@ -20,11 +20,11 @@ public class BlockPos3 extends BlockPos2 {
 	}
 	public BlockPos3(Entity e) {
 		super(e);
-		this.y = (short)e.posY;
+		y = (short)e.posY;
 	}
-	
+
 	public int y() {return y;}
-	
+
 	public void plus(BlockPos3 b) {
 		plus((BlockPos2)b);
 		y = (short)(b.y+y);

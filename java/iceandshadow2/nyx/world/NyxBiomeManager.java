@@ -6,8 +6,6 @@ import java.util.concurrent.Callable;
 
 import iceandshadow2.IaSExecutor;
 import iceandshadow2.IaSFuture;
-import iceandshadow2.ias.util.BlockPos2;
-import iceandshadow2.ias.util.IaSWorldHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 
 /**
@@ -21,10 +19,10 @@ public class NyxBiomeManager {
 
 	Map<Long, IaSFuture<BiomeGenBase[]>> pregenerated;
 	private NyxBiomeManager() {
-		pregenerated = new TreeMap<Long, IaSFuture<BiomeGenBase[]>>(); 
+		pregenerated = new TreeMap<Long, IaSFuture<BiomeGenBase[]>>();
 	}
 	public static BiomeGenBase getBiomeAt(BiomeGenBase[] biomes, int x, int z) {
-		return biomes[(int)(x&15) | (int)((z&15)<<4)];
+		return biomes[x&15 | (z&15)<<4];
 	}
 	public static long key(final int xchunk, final int zchunk) {
 		return Integer.toUnsignedLong(xchunk) | (Integer.toUnsignedLong(zchunk) << 32);
@@ -66,7 +64,7 @@ public class NyxBiomeManager {
 		}
 	}
 
-	protected BiomeGenBase[] generateArray(long seed, final BiomeGenBase[] biomeArray, long xChunk, long zChunk) {		
+	protected BiomeGenBase[] generateArray(long seed, final BiomeGenBase[] biomeArray, long xChunk, long zChunk) {
 		NyxBiomeProvider.fillArray(seed, biomeArray, (int)xChunk, (int)zChunk);
 		return biomeArray;
 	}

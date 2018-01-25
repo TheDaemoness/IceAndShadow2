@@ -16,12 +16,12 @@ public class NyxEntities {
 	public static int internalId = 0;
 
 	public static int getUniqueEntityId() {
-		do
+		do {
 			NyxEntities.startEntityId++;
-		while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
+		} while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
 		return NyxEntities.startEntityId;
 	}
-	
+
 	public static void registerModEntity(Class c, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates) {
 		EntityRegistry.registerModEntity(c, name, ++internalId, IceAndShadow2.instance, trackingRange, updateFrequency, sendVelocityUpdates);
 	}
@@ -59,10 +59,10 @@ public class NyxEntities {
 		registerModEntity(EntityPoisonBall.class, "nyxProjectilePoisonBall", 40, 2, true);
 
 		registerModEntity(EntityOrbNourishment.class, "nyxEntityOrbNourishment", 60, 1, true);
-		
+
 		registerModEntity(EntityNyxWalker.class, "nyxMobWalkerInfested", 60, 1, true);
 		NyxEntities.registerEntityEgg(EntityNyxWalker.class, 0xccffdd, 0xccdddd);
-		
+
 		registerModEntity(EntityNyxSpiderBaby.class, "nyxMobSpiderWispBaby", 60, 1, true);
 		NyxEntities.registerEntityEgg(EntityNyxSpiderBaby.class, 0x44ffdd, 0x774444);
 	}

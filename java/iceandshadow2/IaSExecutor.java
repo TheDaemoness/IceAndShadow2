@@ -4,12 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -20,18 +17,18 @@ import java.util.concurrent.TimeoutException;
 public class IaSExecutor implements ExecutorService {
 	private static final IaSExecutor obj = new IaSExecutor();
 	public static IaSExecutor instance() {return obj;}
-	
+
 	ExecutorService executor;
 	protected IaSExecutor() {
 		executor = Executors.newWorkStealingPool(Math.max(1, Runtime.getRuntime().availableProcessors()-1));
 	}
 	public static IaSFuture push(Runnable r) {
-		IaSFuture f = new IaSFuture(r, null);
+		final IaSFuture f = new IaSFuture(r, null);
 		obj.execute(f);
 		return f;
 	}
 	public static IaSFuture push(Callable r) {
-		IaSFuture f = new IaSFuture(r);
+		final IaSFuture f = new IaSFuture(r);
 		obj.execute(f);
 		return f;
 	}

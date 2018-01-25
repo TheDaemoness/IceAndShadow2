@@ -68,8 +68,9 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
-		if (pwai.experienceLevel >= 5 && heap.getItemDamage() > 0)
+		if (pwai.experienceLevel >= 5 && heap.getItemDamage() > 0) {
 			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
+		}
 		return heap;
 	}
 
@@ -77,8 +78,9 @@ public class NyxItemExtractorXP extends IaSBaseItemSingle implements IIaSGlowing
 	public void registerIcons(IIconRegister r) {
 		itemIcon = r.registerIcon(getTextureName());
 		fillIcons = new IIcon[7];
-		for (int i = 0; i < 7; ++i)
+		for (int i = 0; i < 7; ++i) {
 			fillIcons[i] = r.registerIcon(getTextureName() + i);
+		}
 	}
 
 	@Override

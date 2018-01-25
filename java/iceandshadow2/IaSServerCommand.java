@@ -87,9 +87,9 @@ public class IaSServerCommand implements ICommand {
 			if (args.length >= 2) {
 				EntityPlayerMP plai = null;
 				if (args.length == 2) {
-					if (snder instanceof EntityPlayerMP)
+					if (snder instanceof EntityPlayerMP) {
 						plai = (EntityPlayerMP) snder;
-					else {
+					} else {
 						IaSServerCommand.send(snder, "This command can only be used by an opped player.");
 						return;
 					}
@@ -103,11 +103,11 @@ public class IaSServerCommand implements ICommand {
 				 * }
 				 */
 				int dim;
-				if (args[1].contentEquals("overworld"))
+				if (args[1].contentEquals("overworld")) {
 					dim = 0;
-				else if (args[1].contentEquals("nyx"))
+				} else if (args[1].contentEquals("nyx")) {
 					dim = IaSFlags.dim_nyx_id;
-				else {
+				} else {
 					IaSServerCommand.send(snder, "Invalid arguments, expected 'goto <overworld|nyx>'");
 					return;
 				}
@@ -117,10 +117,12 @@ public class IaSServerCommand implements ICommand {
 				}
 				plai.mcServer.getConfigurationManager().transferPlayerToDimension(plai, dim,
 						new NyxTeleporter(plai.mcServer.worldServerForDimension(dim)));
-			} else
+			} else {
 				IaSServerCommand.send(snder, "Insufficient arguments, expected 'goto <overworld|nyx>'");
-		} else
+			}
+		} else {
 			IaSServerCommand.send(snder, "Unknown operation.");
+		}
 	}
 
 }

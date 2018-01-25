@@ -49,8 +49,9 @@ public enum EnumIaSToolClass {
 	public String toString() {
 		final String s = super.toString();
 		String sl = s.substring(0, 1);
-		for (int i = 1; i < s.length(); ++i)
+		for (int i = 1; i < s.length(); ++i) {
 			sl += Character.toLowerCase(s.charAt(i));
+		}
 		return sl;
 	}
 }

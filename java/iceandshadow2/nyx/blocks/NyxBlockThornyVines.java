@@ -74,10 +74,11 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 			movflag |= theEntity.posZ != theEntity.prevPosZ;
 			if (theEntity instanceof EntityMob || !movflag)
 				return;
-			if (theWorld.difficultySetting == EnumDifficulty.HARD)
+			if (theWorld.difficultySetting == EnumDifficulty.HARD) {
 				theEntity.attackEntityFrom(IaSDamageSources.dmgVines, 2);
-			else
+			} else {
 				theEntity.attackEntityFrom(IaSDamageSources.dmgVines, 1);
+			}
 		}
 	}
 

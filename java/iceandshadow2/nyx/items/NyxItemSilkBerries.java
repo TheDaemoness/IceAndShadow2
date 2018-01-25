@@ -52,8 +52,9 @@ public class NyxItemSilkBerries extends IaSItemFood {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for (int meta = 0; meta <= 1; ++meta)
+		for (int meta = 0; meta <= 1; ++meta) {
 			par3List.add(new ItemStack(par1, 1, meta));
+		}
 	}
 
 	@Override
@@ -104,29 +105,35 @@ public class NyxItemSilkBerries extends IaSItemFood {
 							return par1ItemStack;
 						if (s == 1)
 							return par1ItemStack;
-						if (s == 2)
+						if (s == 2) {
 							--k;
-						if (s == 3)
+						}
+						if (s == 3) {
 							++k;
-						if (s == 4)
+						}
+						if (s == 4) {
 							--i;
-						if (s == 5)
+						}
+						if (s == 5) {
 							++i;
+						}
 						if (par2World.isAirBlock(i, j, k)) {
 							final int k1 = NyxBlocks.silkBerryPod.onBlockPlaced(par2World, i, j, k, s, 0.5F, 0.5F, 0.5F,
 									0);
 							par2World.setBlock(i, j, k, NyxBlocks.silkBerryPod, k1, 3);
 
-							if (!par3EntityPlayer.capabilities.isCreativeMode)
+							if (!par3EntityPlayer.capabilities.isCreativeMode) {
 								--par1ItemStack.stackSize;
+							}
 						}
 
 						return par1ItemStack;
 					}
 				}
 			}
-		if (par3EntityPlayer.canEat(true))
+		if (par3EntityPlayer.canEat(true)) {
 			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
+		}
 
 		return par1ItemStack;
 	}

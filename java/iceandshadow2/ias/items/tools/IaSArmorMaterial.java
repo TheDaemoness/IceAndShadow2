@@ -29,7 +29,7 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 
 	/**
 	 * Gets the base stats provided by this piece of armor.
-	 * 
+	 *
 	 * @return
 	 */
 	public ArmorMaterial getArmorStats() {
@@ -44,7 +44,7 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	/**
 	 * Gets the armor coverage as a function of what slot the armor is in and
 	 * its durability.
-	 * 
+	 *
 	 * @param slot
 	 *            The slot the armor is in. Cheat sheet: 1 - Head, 4 - Feet.
 	 * @param durability
@@ -86,7 +86,7 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	/**
 	 * Called by Nyxian armors upon their wearer taking damage. Called one for
 	 * each type of armor the player wears.
-	 * 
+	 *
 	 * @param coverage
 	 *            A value from 1-10 representing how much of that type of armor
 	 *            the player has equipped.
@@ -100,7 +100,7 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 
 	/**
 	 * Called every tick when the wearer is wielding armor.
-	 * 
+	 *
 	 * @param coverage
 	 *            A value from 1-10 representing how much of that type of armor
 	 *            the player has equipped.
@@ -112,7 +112,7 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
 
 	}
-	
+
 	public int getRenderPasses() {
 		return 2;
 	}

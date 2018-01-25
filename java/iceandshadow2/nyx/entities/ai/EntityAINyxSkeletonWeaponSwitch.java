@@ -52,14 +52,16 @@ public class EntityAINyxSkeletonWeaponSwitch extends EntityAIBase {
 		final EntityLivingBase entityliving = skel.getAttackTarget();
 		if (entityliving != null)
 			if (skel.getNyxSkeletonCombatType() == EntityNyxSkeleton.EnumNyxSkeletonType.BOW_FROST_SHORT) {
-				if (skel.isUsingAlternateWeapon())
+				if (skel.isUsingAlternateWeapon()) {
 					skel.useAlternateWeapon(false);
-				else
+				} else {
 					skel.useAlternateWeapon(true);
+				}
 			} else if (skel.getHeldItem() == null)
-				if (skel.isUsingAlternateWeapon())
+				if (skel.isUsingAlternateWeapon()) {
 					skel.useAlternateWeapon(false);
-				else
+				} else {
 					skel.useAlternateWeapon(true);
+				}
 	}
 }

@@ -75,7 +75,7 @@ public class NyxRecipes {
 		 * 1, 1), new ItemStack(NyxItems.crystalVial, 1), new
 		 * ItemStack(NyxItems.draconium), new ItemStack(NyxItems.echirIngot, 1,
 		 * 1));
-		 * 
+		 *
 		 * GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.crystalVial,
 		 * 1, 1), new ItemStack(NyxItems.extractorPoison, 1, 13));
 		 */
@@ -88,9 +88,10 @@ public class NyxRecipes {
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt, 1, 1), new ItemStack(NyxBlocks.dirt), 0);
 
-		for (int i = 0; i < ((IaSBaseItemMulti) NyxItems.alabaster).getSubtypeCount(); ++i)
+		for (int i = 0; i < ((IaSBaseItemMulti) NyxItems.alabaster).getSubtypeCount(); ++i) {
 			GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.alabasterShard, 9, i),
 					new ItemStack(NyxItems.alabaster, 1, i));
+		}
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.toxicCore, 1, 1), new ItemStack(NyxItems.poisonFruit));
 		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.salt, 1, 1), "ss", "ss", 's', new ItemStack(NyxItems.salt, 1, 0));
@@ -108,7 +109,7 @@ public class NyxRecipes {
 
 		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.flask, 3), "s s", " s ", 's', new ItemStack(NyxItems.salt, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.salt, 1, 1), new ItemStack(NyxItems.flask));;
-		
+
 		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.rail, 24), "e e", "ese", "e e",
 			'e', new ItemStack(NyxItems.echirIngot, 1, 1),
 			's', new ItemStack(Items.stick));

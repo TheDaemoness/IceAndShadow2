@@ -65,9 +65,10 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) >= 14)
-			if (par1World.provider.isHellWorld)
+			if (par1World.provider.isHellWorld) {
 				par1World.setBlockToAir(par2, par3, par4);
-			else
+			} else {
 				par1World.setBlock(par2, par3, par4, Blocks.water);
+			}
 	}
 }

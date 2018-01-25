@@ -19,7 +19,7 @@ public class NyxItems {
 			alabasterShard, leaf, resinCurative, salt, flask, amber, clockwork;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
-	
+
 	public static Item potion; //NOTE: Initialized during postinit.
 
 	public static void init() {
@@ -93,7 +93,7 @@ public class NyxItems {
 		NyxItems.clockwork = new NyxItemClockwork("Clockwork").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
 	}
-	
+
 	public static void lateInit() {
 		potion = new NyxItemPotion("Potion").register().setCreativeTab(IaSCreativeTabs.misc);
 	}

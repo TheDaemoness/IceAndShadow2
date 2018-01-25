@@ -26,8 +26,9 @@ public class NyxBlockOreDevora extends NyxBlockOre {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		final int e = 4 + world.rand.nextInt(4 + fortune);
 		is.add(new ItemStack(NyxItems.devora, 1, world.rand.nextInt(1+fortune)==0?1:0));
-		for (int i = 0; i < e; ++i)
+		for (int i = 0; i < e; ++i) {
 			is.add(new ItemStack(NyxItems.devora, 1, 1));
+		}
 		return is;
 	}
 

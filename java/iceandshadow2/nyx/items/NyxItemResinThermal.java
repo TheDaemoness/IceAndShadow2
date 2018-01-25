@@ -57,10 +57,11 @@ public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final List<ItemStack> li = new ArrayList<ItemStack>();
 		int time;
-		if (catalyst.getItemDamage() > 3)
+		if (catalyst.getItemDamage() > 3) {
 			time = 0;
-		else
+		} else {
 			time = catalyst.getItemDamage();
+		}
 		final int finalSize = (int) Math.max(0, target.stackSize - Math.pow(4, time));
 		while (target.stackSize > finalSize) {
 			final ItemStack ret = FurnaceRecipes.smelting().getSmeltingResult(target).copy();
@@ -77,8 +78,9 @@ public class NyxItemResinThermal extends IaSBaseItemMulti implements IIaSGlowing
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		icons = new IIcon[4];
-		for (int i = 0; i < icons.length; ++i)
+		for (int i = 0; i < icons.length; ++i) {
 			icons[i] = reg.registerIcon(getTextureName() + i);
+		}
 	}
 
 	@Override

@@ -68,8 +68,9 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 
 	@Override
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
-		if ((item.getItemDamage() & 1) == 1)
+		if ((item.getItemDamage() & 1) == 1) {
 			item.setItemDamage(item.getItemDamage() - 1);
+		}
 		return true;
 	}
 
@@ -101,12 +102,13 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 			return heap;
 		}
 		if ((heap.getItemDamage() & 1) == 0) {
-			if (pwai.dimension == IaSFlags.dim_nyx_id)
+			if (pwai.dimension == IaSFlags.dim_nyx_id) {
 				IaSPlayerHelper.messagePlayer(pwai,
 						"You find strange thoughts coming to your mind. Something about needing to be standing on sanguine obsidian...");
-			else
+			} else {
 				IaSPlayerHelper.messagePlayer(pwai,
 						"The crystal barely responds. It seems to prefer cold and dark places.");
+			}
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
@@ -117,8 +119,9 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack p_77615_1_, World p_77615_2_, EntityPlayer plai, int time) {
-		if (time > 40)
+		if (time > 40) {
 			plai.removePotionEffect(Potion.confusion.id);
+		}
 		super.onPlayerStoppedUsing(p_77615_1_, p_77615_2_, plai, time);
 	}
 
@@ -129,28 +132,32 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 		boolean active = true;
 		if (tree.dimension != IaSFlags.dim_nyx_id) {
 			active &= IaSEntityHelper.getTemperatureFloat(tree) <= 0.15;
-			if ((pile.getItemDamage() & 1) == 1)
+			if ((pile.getItemDamage() & 1) == 1) {
 				active &= IaSEntityHelper.getLight(tree) <= 6;
-			else
+			} else {
 				active &= IaSEntityHelper.getLight(tree) <= 5;
+			}
 		} else {
 			active = IaSEntityHelper.getBlock(tree, 0, -0.1, 0) == NyxBlocks.cryingObsidian;
 			active &= pile.getItemDamage() < 4;
 		}
-		if (!active & (pile.getItemDamage() & 1) == 1)
+		if (!active & (pile.getItemDamage() & 1) == 1) {
 			pile.setItemDamage(pile.getItemDamage() - 1);
-		else if (active & (pile.getItemDamage() & 1) == 0)
+		} else if (active & (pile.getItemDamage() & 1) == 0) {
 			pile.setItemDamage(pile.getItemDamage() + 1);
+		}
 	}
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		if (count < getMaxItemUseDuration(stack))
+		if (count < getMaxItemUseDuration(stack)) {
 			IaSPlayerHelper.drainXP(player, 2, null, false);
-		if (player.dimension != IaSFlags.dim_nyx_id && count < 50)
+		}
+		if (player.dimension != IaSFlags.dim_nyx_id && count < 50) {
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));
-		else if (count < 40 && player.dimension == IaSFlags.dim_nyx_id)
+		} else if (count < 40 && player.dimension == IaSFlags.dim_nyx_id) {
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, Math.min(50 - count, 25), 0));
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

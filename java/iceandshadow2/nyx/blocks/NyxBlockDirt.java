@@ -54,18 +54,23 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 			return;
 		}
 		final Block bl = w.getBlock(x, y + 1, z);
-		if (bl instanceof IGrowable)
+		if (bl instanceof IGrowable) {
 			((IGrowable) bl).func_149853_b(w, r, x, y + 1, z);
-		else
+		} else {
 			MinecraftForge.EVENT_BUS.post(new BonemealEvent(null, w, bl, x, y + 1, z));
+		}
 		boolean foundThermal = false;
-		for (int xit = -1; xit <= 1; ++xit)
-			for (int yit = -1; yit <= 1; ++yit)
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int yit = -1; yit <= 1; ++yit) {
 				for (int zit = -1; zit <= 1; ++zit)
-					if (w.getBlock(x + xit, y + yit, z + zit).getMaterial() == Material.fire)
+					if (w.getBlock(x + xit, y + yit, z + zit).getMaterial() == Material.fire) {
 						foundThermal = true;
-		if (!foundThermal)
+					}
+			}
+		}
+		if (!foundThermal) {
 			w.setBlockMetadataWithNotify(x, y, z, 1, 0x3);
+		}
 	}
 
 }

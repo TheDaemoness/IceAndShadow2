@@ -65,8 +65,9 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
-		if (pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage() - 1)
+		if (pwai.isPotionActive(Potion.poison) && heap.getItemDamage() < this.getMaxDamage() - 1) {
 			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
+		}
 		return heap;
 	}
 
@@ -74,8 +75,9 @@ public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApi
 	public void registerIcons(IIconRegister r) {
 		itemIcon = r.registerIcon(getTextureName() + "0");
 		fillIcons = new IIcon[7];
-		for (int i = 1; i <= 7; ++i)
+		for (int i = 1; i <= 7; ++i) {
 			fillIcons[i - 1] = r.registerIcon(getTextureName() + i);
+		}
 	}
 
 	@Override

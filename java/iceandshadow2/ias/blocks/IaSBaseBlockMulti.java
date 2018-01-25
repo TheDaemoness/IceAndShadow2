@@ -42,10 +42,11 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs p_149666_2_, List list) {
-		for (int meta = 0; meta < getSubtypeCount(); ++meta)
+		for (int meta = 0; meta < getSubtypeCount(); ++meta) {
 			list.add(new ItemStack(par1, 1, meta));
+		}
 	}
-	
+
 	public int getSubtypeCount() {
 		return subtypeCount;
 	}
@@ -63,8 +64,9 @@ public abstract class IaSBaseBlockMulti extends IaSBaseBlock implements IIaSModN
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[getSubtypeCount()];
-		for (byte i = 0; i < getSubtypeCount(); ++i)
+		for (byte i = 0; i < getSubtypeCount(); ++i) {
 			icons[i] = reg.registerIcon(getTextureName() + i);
+		}
 	}
 
 }

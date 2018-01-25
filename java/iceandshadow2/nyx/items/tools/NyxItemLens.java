@@ -63,8 +63,9 @@ public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowi
 	public void registerIcons(IIconRegister reg) {
 		itemIcon = reg.registerIcon(getTextureName());
 		lensicon = reg.registerIcon(getTextureName() + "Glow");
-		if (overrideAltar)
+		if (overrideAltar) {
 			altaricon = reg.registerIcon(getTextureName() + "Altar");
+		}
 	}
 
 	@Override

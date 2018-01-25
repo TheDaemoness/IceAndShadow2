@@ -1,11 +1,7 @@
 package iceandshadow2.nyx.entities.mobs;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
@@ -14,23 +10,14 @@ import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRevenge;
 import iceandshadow2.nyx.entities.ai.EntityAINyxTargeter;
 import iceandshadow2.nyx.entities.ai.EntityAINyxWatchClosest;
-import iceandshadow2.nyx.entities.ai.IIaSBlockPathDesirability;
 import iceandshadow2.nyx.entities.ai.senses.*;
-import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
-import iceandshadow2.nyx.entities.util.EntityWightTeleport;
-import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
-import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
-import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
-import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -41,16 +28,13 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 
@@ -63,7 +47,7 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 
 	public EntityNyxWalker(World par1World) {
 		super(par1World);
-		this.setSize(0.6f, 0.8f);
+		setSize(0.6f, 0.8f);
 
 		stepHeight = 0.0f;
 
@@ -115,20 +99,21 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public boolean attackEntityAsMob(Entity victim) {
-		final ItemStack is = this.getHeldItem();
+		final ItemStack is = getHeldItem();
 		if(is != null && is.getItem() instanceof IIaSTool) {
-			IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
+			final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
 			if(victim instanceof EntityLivingBase) {
-				EntityLivingBase elb = (EntityLivingBase)victim;
-				final float basedmg = mat.getToolDamage(is, this, elb) + this.getAttackStrength(elb);
+				final EntityLivingBase elb = (EntityLivingBase)victim;
+				final float basedmg = mat.getToolDamage(is, this, elb) + getAttackStrength(elb);
 				int headshotresist = 0;
 				if(elb.getEquipmentInSlot(4) != null && elb.getEquipmentInSlot(4).getItem() instanceof ItemArmor) {
 					headshotresist = Math.max(0, ((ItemArmor)elb.getEquipmentInSlot(4).getItem()).damageReduceAmount);
 					elb.getEquipmentInSlot(4).damageItem((int)(1+basedmg)*2, elb);
 				}
-				if(headshotresist<=2)
+				if(headshotresist<=2) {
 					victim.attackEntityFrom(IaSDamageSources.dmgHeadshot,
 							1 + basedmg + IaSWorldHelper.getDifficulty(worldObj)*elb.getMaxHealth()/(4+headshotresist));
+				}
 			}
 			mat.onAttack(is, this, victim);
 		}
@@ -156,18 +141,19 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 		final int diff = IaSWorldHelper.getDifficulty(worldObj);
 		final int baite = rand.nextInt(8 + par2) - par2 - diff;
 
-		if (baite <= 0)
+		if (baite <= 0) {
 			IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.salt, 1, 1));
+		}
 
 		IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.toughGossamer));
 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 3));
-		
+
 		final int spiders = rand.nextInt(3+IaSWorldHelper.getDifficulty(worldObj)*2)/2;
 		for(int i = 0; i < spiders; ++i) {
 			worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 1));
-			EntityNyxSpiderBaby kiddo = new EntityNyxSpiderBaby(worldObj);
-			kiddo.setPosition(this.posX-0.25+rand.nextDouble()/2, this.posY+rand.nextDouble()/2, this.posZ-0.25+rand.nextDouble()/2);
+			final EntityNyxSpiderBaby kiddo = new EntityNyxSpiderBaby(worldObj);
+			kiddo.setPosition(posX-0.25+rand.nextDouble()/2, posY+rand.nextDouble()/2, posZ-0.25+rand.nextDouble()/2);
 			worldObj.spawnEntityInWorld(kiddo);
 		}
 	}
@@ -198,19 +184,16 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getBrightnessForRender(float par1) {
-        int i = MathHelper.floor_double(this.posX);
-        int j = MathHelper.floor_double(this.posZ);
+        final int i = MathHelper.floor_double(posX);
+        final int j = MathHelper.floor_double(posZ);
 
-        if (this.worldObj.blockExists(i, 0, j))
+        if (worldObj.blockExists(i, 0, j))
         {
-            double d0 = (this.boundingBox.maxY - this.boundingBox.minY) * 0.66D;
-            int k = MathHelper.floor_double(this.posY - (double)this.yOffset + d0);
-            return this.worldObj.getLightBrightnessForSkyBlocks(i, k, j, 3);
-        }
-        else
-        {
-            return 3;
-        }
+            final double d0 = (boundingBox.maxY - boundingBox.minY) * 0.66D;
+            final int k = MathHelper.floor_double(posY - yOffset + d0);
+            return worldObj.getLightBrightnessForSkyBlocks(i, k, j, 3);
+        } else
+			return 3;
 	}
 
 	@Override
@@ -264,7 +247,7 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		this.rotationYawHead+=40*(rand.nextFloat()-0.5f);
+		rotationYawHead+=40*(rand.nextFloat()-0.5f);
 	}
 
 	@Override
@@ -285,7 +268,7 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 			material = "Exousium";
 		}
 		final ItemStack is = IaSTools.setToolMaterial(IaSTools.pickaxe, material);
-		this.setCurrentItemOrArmor(0, is);
+		setCurrentItemOrArmor(0, is);
 		return dat;
 	}
 

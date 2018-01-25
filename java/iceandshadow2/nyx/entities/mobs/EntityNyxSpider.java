@@ -4,7 +4,6 @@ import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
 import iceandshadow2.nyx.world.NyxBiomes;
@@ -16,7 +15,6 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -68,10 +66,12 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 				int mod = IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 225 : 275;
 				final EntityLivingBase elb = (EntityLivingBase) par1Entity;
 				final boolean hometurf = IaSEntityHelper.getBiome(elb) == NyxBiomes.nyxInfested;
-				if (!elb.isPotionActive(Potion.poison))
+				if (!elb.isPotionActive(Potion.poison)) {
 					mod /= 2;
-				if (hometurf)
+				}
+				if (hometurf) {
 					mod /= 2;
+				}
 				elb.addPotionEffect(new PotionEffect(Potion.poison.id, mod + 60, hometurf ? 1 : 0));
 				elb.addPotionEffect(new PotionEffect(Potion.weakness.id, mod + 90, lvl + (hometurf ? 1 : 0)));
 			}
@@ -95,13 +95,15 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 		if (!par1)
 			return;
 
-		if (isInvisible())
+		if (isInvisible()) {
 			dropItem(NyxItems.silkBerries, 1 + rand.nextInt(2 + par2));
+		}
 
 		final int diff = IaSWorldHelper.getDifficulty(worldObj);
 		final int baite = rand.nextInt(Math.max(1, 8 - diff) + par2) - par2;
-		if (baite <= 0)
+		if (baite <= 0) {
 			dropItem(NyxItems.toughGossamer, 1);
+		}
 
 		dropItem(NyxItems.resin, rand.nextInt(5) < par2 - 1 ? 2 : 1);
 
@@ -111,8 +113,8 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 	@Override
 	protected void dropRareDrop(int par1) {
 		IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.silkBerries, 1, 1));
-		EntityNyxSpiderBaby bab = new EntityNyxSpiderBaby(worldObj);
-		bab.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+		final EntityNyxSpiderBaby bab = new EntityNyxSpiderBaby(worldObj);
+		bab.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
 		worldObj.spawnEntityInWorld(bab);
 	}
 
@@ -131,15 +133,17 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 				setInvisible(false);
 			}
 			return plai;
-		} else if (!isInvisible())
+		} else if (!isInvisible()) {
 			setInvisible(true);
+		}
 		return null;
 	}
 
 	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
-		if (!isInvisible())
+		if (!isInvisible()) {
 			playSound("mob.spider.step", 0.15F, 1.0F);
+		}
 	}
 
 	@Override
@@ -223,8 +227,9 @@ public class EntityNyxSpider extends EntitySpider implements IIaSAspect {
 		final Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
 
 		// No spider wisp jokeys.
-		if (riddenByEntity != null)
+		if (riddenByEntity != null) {
 			riddenByEntity.setDead();
+		}
 
 		return (IEntityLivingData) par1EntityLivingData1;
 	}

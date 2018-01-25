@@ -12,9 +12,9 @@ public class IaSItemBlockMulti extends ItemBlock {
 
 	public IaSItemBlockMulti(Block bl) throws Exception {
 		super(bl);
-		if (bl instanceof IaSBaseBlockMulti)
+		if (bl instanceof IaSBaseBlockMulti) {
 			theblock = (IaSBaseBlockMulti) bl;
-		else
+		} else
 			throw new Exception("Block with iconString " + iconString + " is not an IaS Multiblock!");
 		setHasSubtypes(true);
 	}

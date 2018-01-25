@@ -1,9 +1,6 @@
 package iceandshadow2.nyx.world.gen.ruins;
 
-import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.styx.Styx;
-
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
@@ -19,7 +16,7 @@ public class GenRuinsInfestedPhylactery extends GenRuins {
 	public void buildPass(World var1, Random var2, int x, int y, int z) {
 		var1.setBlock(x, y-1, z, Blocks.obsidian);
 		var1.setBlock(x, y, z, NyxBlocks.infestSpawner, 1, 2);
-		
+
 	}
 
 	/**

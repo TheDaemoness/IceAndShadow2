@@ -76,8 +76,9 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
-		if (!w.getBlock(x, y - 1, z).isSideSolid(w, x, y, z, ForgeDirection.UP))
+		if (!w.getBlock(x, y - 1, z).isSideSolid(w, x, y, z, ForgeDirection.UP)) {
 			updateTick(w, x, y, z, w.rand);
+		}
 	}
 
 	@Override

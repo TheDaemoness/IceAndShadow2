@@ -2,25 +2,20 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.projectile.EntityPoisonBall;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxItemToxicCore extends IaSBaseItemMultiTexturedGlow {
 
@@ -31,10 +26,11 @@ public class NyxItemToxicCore extends IaSBaseItemMultiTexturedGlow {
 		for (final Entity ent : l)
 			if (ent instanceof EntityMob && EnumIaSAspect.getAspect(ent) != EnumIaSAspect.POISONWOOD) {
 				EntityPoisonBall pb;
-				if (caster instanceof EntityLivingBase)
+				if (caster instanceof EntityLivingBase) {
 					pb = new EntityPoisonBall(w, (EntityLivingBase) caster);
-				else
+				} else {
 					pb = new EntityPoisonBall(w);
+				}
 				pb.setThrowableHeading(ent.posX - caster.posX,
 						ent.posY - caster.posY + ((EntityMob) ent).getEyeHeight() * 1.25 - caster.getEyeHeight(),
 						ent.posZ - caster.posZ, 1.0F, 1.0F);

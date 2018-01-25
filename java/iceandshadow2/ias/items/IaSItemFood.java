@@ -26,7 +26,7 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 		setUnlocalizedName(mod.prefix + texName);
 		setTextureName(IceAndShadow2.MODID + ':' + mod.prefix + texName);
 		MODULE = mod;
-		this.setCreativeTab(IaSCreativeTabs.tools);
+		setCreativeTab(IaSCreativeTabs.tools);
 	}
 
 	@Override

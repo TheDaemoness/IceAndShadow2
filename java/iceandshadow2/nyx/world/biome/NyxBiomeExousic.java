@@ -3,14 +3,9 @@ package iceandshadow2.nyx.world.biome;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
-import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
-import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
-
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class NyxBiomeExousic extends NyxBiome {
@@ -28,7 +23,7 @@ public class NyxBiomeExousic extends NyxBiome {
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 5, 1, 1));
 		*/
 	}
-	
+
 	@Override
 	protected boolean hasTowers() {
 		return false;
@@ -46,9 +41,9 @@ public class NyxBiomeExousic extends NyxBiome {
 					if(par2Random.nextInt(16) == 0) {
 						par1World.setBlock(x, y, z, NyxBlocks.exousicWater, 15, 3);
 						par1World.setBlock(x, y-1, z, NyxBlocks.oreExousium);
-					}
-					else
+					} else {
 						par1World.setBlock(x, y, z, NyxBlocks.exousicWater, 0, 2);
+					}
 				}
 			}
 		}

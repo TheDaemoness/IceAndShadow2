@@ -77,8 +77,9 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 					return par1ItemStack;
 				if (par2World.getBlock(i, j - 1, k).isSideSolid(par2World, i, j - 1, k, ForgeDirection.UP)) {
 					par2World.setBlock(i, j, k, NyxBlocks.unstableDevora);
-					if (!par3EntityPlayer.capabilities.isCreativeMode)
+					if (!par3EntityPlayer.capabilities.isCreativeMode) {
 						--par1ItemStack.stackSize;
+					}
 				}
 			}
 		return par1ItemStack;
@@ -114,16 +115,16 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
 		if(target.getItemDamage() == 0) {
-			int count = catalyst.stackSize/8;
+			final int count = catalyst.stackSize/8;
 			catalyst.stackSize -= count*8;
 			ret.add(new ItemStack(this, count+target.stackSize));
 			target.stackSize = 0;
 		} else {
-			int totalstack = target.stackSize + catalyst.stackSize;
+			final int totalstack = target.stackSize + catalyst.stackSize;
 			catalyst.stackSize = 0;
-			int count = totalstack/8;
+			final int count = totalstack/8;
 			ret.add(new ItemStack(this, count));
 			target.stackSize = totalstack%8;
 		}

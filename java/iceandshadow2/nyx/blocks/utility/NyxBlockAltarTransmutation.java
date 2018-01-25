@@ -67,47 +67,54 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
 		if (!tte.canAttemptTransmutation())
 			return;
-		if (tte.handler == null)
+		if (tte.handler == null) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
+		}
 		if (tte.handler == null)
 			return;
 		final List<ItemStack> l_ist = tte.handler.getTransmuteYield(tte.target, tte.catalyst, w);
-		if (tte.target.stackSize <= 0)
+		if (tte.target.stackSize <= 0) {
 			tte.target = null;
-		if (tte.catalyst.stackSize <= 0)
+		}
+		if (tte.catalyst.stackSize <= 0) {
 			tte.catalyst = null;
+		}
 		if (l_ist != null) {
 			final ArrayList<ItemStack> newList = new ArrayList<ItemStack>(l_ist.size());
-			for(ItemStack yield : l_ist) {
-				if(yield == null)
+			for(final ItemStack yield : l_ist) {
+				if(yield == null) {
 					continue;
+				}
 				if(yield.hasTagCompound()) {
 					newList.add(yield);
 					continue;
 				}
 				for(int j = 0; j < newList.size() && yield.stackSize > 0; ++j) {
 					final ItemStack slot = newList.get(j);
-					if(slot.hasTagCompound())
+					if(slot.hasTagCompound()) {
 						continue;
+					}
 					if(slot.isItemEqual(yield)) {
 						final int delta = Math.min(slot.getMaxStackSize()-slot.stackSize, yield.stackSize);
 						yield.stackSize -= delta;
 						slot.stackSize += delta;
 					}
 				}
-				if(yield.stackSize > 0)
+				if(yield.stackSize > 0) {
 					newList.add(yield);
+				}
 			}
 			TileEntityHopper teh = null;
-			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper)
+			if (w.getTileEntity(x, y - 1, z) instanceof TileEntityHopper) {
 				teh = (TileEntityHopper) w.getTileEntity(x, y - 1, z);
+			}
 			int item = 0;
 			int swap = 1;
 			if (tte.target == null) {
 				ItemStack other = newList.get(0);
 				boolean canPlace = tte.canPlace(other);
 				while(!canPlace && swap < newList.size()) {
-					ItemStack temp = newList.get(swap);
+					final ItemStack temp = newList.get(swap);
 					newList.set(swap, other);
 					newList.set(0, temp);
 					++swap;
@@ -125,8 +132,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 				if (teh != null && !w.isBlockIndirectlyGettingPowered(x, y - 1, z)) {
 					int i;
 					for (i = 0; i < teh.getSizeInventory(); ++i)
-						if (teh.getStackInSlot(i) == null)
+						if (teh.getStackInSlot(i) == null) {
 							break;
+						}
 					if (i != teh.getSizeInventory()) {
 						teh.setInventorySlotContents(i, is);
 						continue;
@@ -138,8 +146,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 					w.spawnEntityInWorld(ei);
 				}
 			}
-			if (teh != null)
+			if (teh != null) {
 				w.markBlockForUpdate(x, y - 1, z);
+			}
 		}
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
@@ -225,18 +234,21 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		final ItemStack is = ep.getEquipmentInSlot(0);
 		if (is == null) {
 			final ItemStack its = tte.handleRemove(ep, ep.isSneaking());
-			if (its != null)
+			if (its != null) {
 				IaSPlayerHelper.giveItem(ep, its);
+			}
 			return true;
 		}
 		if (!tte.handlePlace(ep, is))
 			return true;
-		else
+		else {
 			ep.setCurrentItemOrArmor(0, null);
+		}
 		if (tte.canAttemptTransmutation()) {
 			tte.handler = IaSRegistry.getHandlerTransmutation(tte.target, tte.catalyst);
-			if (tte.handler != null)
+			if (tte.handler != null) {
 				tte.scheduleUpdate(x, y, z, tte.handler.getTransmuteTime(tte.target, tte.catalyst));
+			}
 		}
 		return true;
 	}
@@ -262,8 +274,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		if (!(te instanceof NyxTeTransmutationAltar))
 			return;
 		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
-		if (tte.handler != null && tte.canAttemptTransmutation())
+		if (tte.handler != null && tte.canAttemptTransmutation()) {
 			Blocks.ender_chest.randomDisplayTick(w, x, y + 1, z, r);
+		}
 	}
 
 	@Override

@@ -40,8 +40,9 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 0)
+		if (s.getItemDamage() == 0) {
 			l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "They are coming.");
+		}
 	}
 
 	@Override
@@ -66,15 +67,15 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			return 0;
 		if (catalyst.getItemDamage() == 0) {
 			do
-				if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block))
+				if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
 					break;
-				else if (target.getItem() == Item.getItemFromBlock(Blocks.gold_ore))
+				} else if (target.getItem() == Item.getItemFromBlock(Blocks.gold_ore)) {
 					break;
-				else if (target.getItem() == Item.getItemFromBlock(Blocks.redstone_block))
+				} else if (target.getItem() == Item.getItemFromBlock(Blocks.redstone_block)) {
 					break;
-				else if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian))
+				} else if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
 					break;
-				else
+				} else
 					return 0;
 			while (false);
 			return 240;
@@ -122,10 +123,11 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 						if (ent instanceof EntityMob) {
 							final EntityMob joker = (EntityMob) ent;
 							if (joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-								if (ent instanceof IIaSMobGetters)
+								if (ent instanceof IIaSMobGetters) {
 									((IIaSMobGetters) ent).setSearchTarget(sucker);
-								else if (!joker.isInvisible() && joker.getAttackTarget() == null)
+								} else if (!joker.isInvisible() && joker.getAttackTarget() == null) {
 									joker.setTarget(sucker);
+								}
 						}
 				}
 		}

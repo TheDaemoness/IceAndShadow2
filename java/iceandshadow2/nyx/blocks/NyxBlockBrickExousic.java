@@ -31,7 +31,7 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 		this.setHarvestLevel("pickaxe", 0);
 		setLuminescence(0.3F);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.EXOUSIUM;

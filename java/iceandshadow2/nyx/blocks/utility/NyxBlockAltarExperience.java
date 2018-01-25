@@ -49,8 +49,9 @@ public class NyxBlockAltarExperience extends IaSBlockAltar {
 			float par7, float par8, float par9) {
 		if (!par1World.isRemote) {
 			final boolean f = burnItem(par1World, x, y, z, par5EntityPlayer.getCurrentEquippedItem());
-			if (f)
+			if (f) {
 				par5EntityPlayer.setCurrentItemOrArmor(0, null);
+			}
 		}
 		return super.onBlockActivated(par1World, x, y, z, par5EntityPlayer, par6, par7, par8, par9);
 	}
@@ -64,11 +65,13 @@ public class NyxBlockAltarExperience extends IaSBlockAltar {
 				theEnt.setDead();
 			} else {
 				final int e = (int) Math.sqrt(staque.stackSize);
-				for (int i = 0; i < e; ++i)
+				for (int i = 0; i < e; ++i) {
 					IaSFxManager.spawnParticle(par1World, "vanilla_lava", x + 0.5, y + 0.5, z + 0.5, 0, 0.1, 0, false,
 							true);
+				}
 			}
-		} else
+		} else {
 			theEnt.attackEntityFrom(IaSDamageSources.dmgXpAltar, 1);
+		}
 	}
 }

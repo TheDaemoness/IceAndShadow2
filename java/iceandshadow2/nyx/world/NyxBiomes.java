@@ -1,14 +1,12 @@
 package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.biome.NyxBiome;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestDense;
 import iceandshadow2.nyx.world.biome.NyxBiomeForestSparse;
 import iceandshadow2.nyx.world.biome.NyxBiomeInfested;
 import iceandshadow2.nyx.world.biome.NyxBiomeMountains;
 import iceandshadow2.nyx.world.biome.NyxBiomeExousic;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;

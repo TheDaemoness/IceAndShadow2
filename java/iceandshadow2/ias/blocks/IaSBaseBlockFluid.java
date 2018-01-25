@@ -32,7 +32,7 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 		MODULE = mod;
 		setQuantaPerBlock(16);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return MODULE.aspect;

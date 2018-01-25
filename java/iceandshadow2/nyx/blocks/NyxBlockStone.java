@@ -34,10 +34,12 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 				if (((EntityLivingBase) theEntity).getEquipmentInSlot(1) != null) {
 					final Item it = ((EntityLivingBase) theEntity).getEquipmentInSlot(1).getItem();
 					if (it instanceof ItemArmor) {
-						if (((ItemArmor) it).getArmorMaterial().getDamageReductionAmount(3) == 1)
+						if (((ItemArmor) it).getArmorMaterial().getDamageReductionAmount(3) == 1) {
 							theEntity.attackEntityFrom(IaSDamageSources.dmgStone, dmg / 2 + 1);
-						if (((EntityLivingBase) theEntity).getEquipmentInSlot(1).attemptDamageItem(1, theWorld.rand))
+						}
+						if (((EntityLivingBase) theEntity).getEquipmentInSlot(1).attemptDamageItem(1, theWorld.rand)) {
 							((EntityLivingBase) theEntity).setCurrentItemOrArmor(1, null);
+						}
 					}
 					return;
 				}
@@ -77,9 +79,10 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null
-				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0)
+				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0) {
 			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
 					par5EntityPlayer.worldObj.difficultySetting.getDifficultyId());
+		}
 	}
 
 	@Override
@@ -107,8 +110,9 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		super.onFallenUpon(woild, x, y, z, theEntity, height);
 
 		int dmg = 2 * theEntity.worldObj.difficultySetting.getDifficultyId();
-		if (dmg == 0)
+		if (dmg == 0) {
 			dmg = 1;
+		}
 		NyxBlockStone.doDamage(woild, x, y, z, theEntity, dmg);
 	}
 

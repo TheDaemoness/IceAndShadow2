@@ -4,11 +4,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import iceandshadow2.ias.util.BlockPos2;
 import iceandshadow2.ias.util.ChunkRandom;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.world.biome.NyxBiome;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 class BiomePoint {
@@ -23,26 +21,27 @@ class BiomePoint {
 public class NyxBiomeProvider {
 	public static final int SCALE=96;
 	private static final Map<Long, BiomePoint> points = new TreeMap<Long, BiomePoint>();
-	
+
 	public static void clean() {
 		synchronized(points) {
 			points.clear();
 		}
 	}
-	
+
 	/**
 	 * Precondition: array.length = 256.
 	 */
 	public static void fillArray(long seed, BiomeGenBase[] biomeArray, int xchunk, int zchunk) {
-		BiomePoint[] points = new BiomePoint[16];
+		final BiomePoint[] points = new BiomePoint[16];
 		final long
 			x = ((long)xchunk<<4),
 			z = ((long)zchunk<<4);
 		final int
 			xBoxBase = (int)((x+SCALE/2)/SCALE),
 			zBoxBase = (int)((z+SCALE/2)/SCALE);
-		for(int i = 0; i < 16; ++i)
+		for(int i = 0; i < 16; ++i) {
 			points[i] = getBiomePoint(seed, xBoxBase-1+(i&3), zBoxBase-1+(i>>2));
+		}
 		for(int i = 0; i < 256; ++i) {
 			final long
 				xFull = x+(i&15),
@@ -53,13 +52,13 @@ public class NyxBiomeProvider {
 			biomeArray[i] = getBiomeAtPoint(seed, xFull, zFull, points, xBox-xBoxBase, zBox-zBoxBase);
 		}
 	}
-	
+
 	protected static BiomeGenBase getBiomeAtPoint(long seed, long x, long z, BiomePoint[] points, int xDelta, int zDelta) {
 		BiomePoint bp = points[(xDelta+1)+(zDelta+1)*4];
 		long closestDistance = (long)(IaSWorldHelper.distance2(bp.x-x, bp.z-z)/bp.biome.getWeight());
 		BiomeGenBase retval = bp.biome;
 		final int[] indices = {0, 1, 2, 3, 5, 6, 7, 8}; //Skip i = 4.
-		for(int i : indices) {
+		for(final int i : indices) {
 			bp  = points[(xDelta+i%3)+(zDelta+i/3)*4];
 			final long newDistance = (long)(IaSWorldHelper.distance2(bp.x-x, bp.z-z)/bp.biome.getWeight());
 			if(newDistance < closestDistance) {

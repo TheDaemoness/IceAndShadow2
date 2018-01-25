@@ -92,12 +92,14 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 		if (is != null && is.getItem() == NyxItems.cortra) {
 			final int meta = w.getBlockMetadata(x, y, z);
 			is.stackSize -= 1;
-			if (meta == 7)
+			if (meta == 7) {
 				w.setBlock(x, y, z, NyxBlocks.transmutationAltar);
-			else
+			} else {
 				w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, z) + 1, 2);
-		} else
+			}
+		} else {
 			IaSPlayerHelper.messagePlayer(ep, "It appears to be broken. The sides are covered in an aquamarine dust.");
+		}
 		return true;
 	}
 

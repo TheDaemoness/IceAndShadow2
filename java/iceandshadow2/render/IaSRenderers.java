@@ -49,32 +49,40 @@ public class IaSRenderers {
 		RenderingRegistry.registerEntityRenderingHandler(EntityOrbNourishment.class, new RenderOrbNourishment());
 
 		// Items
-		for (final Field f : NyxItems.class.getFields())
+		for (final Field f : NyxItems.class.getFields()) {
 			try {
 				final Object o = f.get(null);
 				if (o instanceof IIaSGlowing && o instanceof Item)
-					if (((IIaSGlowing) o).usesDefaultGlowRenderer())
+					if (((IIaSGlowing) o).usesDefaultGlowRenderer()) {
 						MinecraftForgeClient.registerItemRenderer((Item) o, new RenderItemVanillaGlowing());
+					}
 			} catch (final Exception e) {
 			}
+		}
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowShort, new RenderItemBow(false));
 		MinecraftForgeClient.registerItemRenderer(NyxItems.frostBowLong, new RenderItemBow(true));
 
-		for (final Item item : IaSTools.tools)
+		for (final Item item : IaSTools.tools) {
 			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for (final Item item : IaSTools.toolsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for (final Item item : IaSTools.weapons)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for (final Item item : IaSTools.swordsActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for (final Item item : IaSTools.armorActiveEchir)
-			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
-		for (final IaSItemArmor[] armors : IaSTools.armor) {
-			for(final Item armor : armors)
-				MinecraftForgeClient.registerItemRenderer(armor, new RenderItemVanillaGlowing());
 		}
-			
+		for (final Item item : IaSTools.toolsActiveEchir) {
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		}
+		for (final Item item : IaSTools.weapons) {
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		}
+		for (final Item item : IaSTools.swordsActiveEchir) {
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		}
+		for (final Item item : IaSTools.armorActiveEchir) {
+			MinecraftForgeClient.registerItemRenderer(item, new RenderItemVanillaGlowing());
+		}
+		for (final IaSItemArmor[] armors : IaSTools.armor) {
+			for(final Item armor : armors) {
+				MinecraftForgeClient.registerItemRenderer(armor, new RenderItemVanillaGlowing());
+			}
+		}
+
 
 		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransmutationAltar.class,
 				new RenderNyxTeTransmutationAltar());

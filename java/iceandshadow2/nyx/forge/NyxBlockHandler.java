@@ -1,17 +1,10 @@
 package iceandshadow2.nyx.forge;
 
-import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSBlockClimbable;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
-import iceandshadow2.ias.util.IaSPlayerHelper;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

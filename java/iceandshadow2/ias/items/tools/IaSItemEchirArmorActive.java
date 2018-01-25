@@ -39,7 +39,7 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if (target.getItem() != this || target.isItemDamaged())
 			return 0;
-		if (catalyst.getItem() == NyxItems.cortra || catalyst.getItem() == NyxItems.navistraShard)
+		if (catalyst.getItem() == NyxItems.cortra || catalyst.getItem() == NyxItems.navistraShard) {
 			switch (slot) {
 			case 0:
 				return catalyst.stackSize >= 5 ? 375 : 0;
@@ -50,16 +50,19 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 			case 3:
 				return catalyst.stackSize >= 4 ? 300 : 0;
 			}
+		}
 		return 0;
 	}
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final double percentage = 0.5 + (0.5 * target.getItemDamage() / target.getMaxDamage());
-		if (catalyst.getItem() == NyxItems.cortra)
+		if (catalyst.getItem() == NyxItems.cortra) {
 			target.func_150996_a(IaSTools.armorCortra[slot]);
-		if (catalyst.getItem() == NyxItems.navistraShard)
+		}
+		if (catalyst.getItem() == NyxItems.navistraShard) {
 			target.func_150996_a(IaSTools.armorNavistra[slot]);
+		}
 		target.setItemDamage((int) (target.getMaxDamage() * percentage) - 1);
 		switch (slot) {
 		case 0:
@@ -80,11 +83,12 @@ public class IaSItemEchirArmorActive extends IaSBaseItemSingleGlow implements II
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer hulk) {
-		if (hulk.isSneaking()) // Does not always evaluate to false, see that
+		if (hulk.isSneaking()) {
 			// one jumpscare in The Avengers.
 			par1 = new ItemStack(IaSTools.armorEchir[slot], 1, par1.getItemDamage());
-		else
+		} else {
 			IaSPlayerHelper.messagePlayer(hulk, "It's probably not safe to wear this while it's primed.");
+		}
 		return par1;
 	}
 

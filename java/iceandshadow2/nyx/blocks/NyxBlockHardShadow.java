@@ -128,57 +128,69 @@ public class NyxBlockHardShadow extends IaSBaseBlockSingle {
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
 		final boolean iselb = e instanceof EntityLivingBase;
 		if (w.getBlockMetadata(x, y, z) != 0) {
-			if (iselb)
+			if (iselb) {
 				((EntityLivingBase) e).addPotionEffect(new PotionEffect(Potion.blindness.id, 22, 0));
+			}
 			e.motionX *= 0.1;
 			e.motionY *= 0.3;
 			e.motionZ *= 0.1;
 		}
-		if (iselb && w.rand.nextBoolean())
+		if (iselb && w.rand.nextBoolean()) {
 			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(), y + w.rand.nextDouble(),
 					z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
+		}
 	}
 
 	@Override
 	public void onFallenUpon(World w, int x, int y, int z, Entity e, float vel) {
 		if (w.isRemote)
-			if (e instanceof EntityLivingBase)
-				for (int i = 0; i < 2 + vel * 4; ++i)
+			if (e instanceof EntityLivingBase) {
+				for (int i = 0; i < 2 + vel * 4; ++i) {
 					IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + w.rand.nextDouble(),
 							y + 1 - w.rand.nextFloat() * 1.5, z + w.rand.nextDouble(), 0.0, 0.0, 0.0, false, true);
+				}
+			}
 	}
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
 		int power = w.getBlockPowerInput(x, y, z);
-		for (int xit = -1; xit <= 1; ++xit)
-			for (int zit = -1; zit <= 1; ++zit)
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int zit = -1; zit <= 1; ++zit) {
 				for (int yit = -1; yit <= 1; ++yit) {
-					if (((xit == 0 ? 1 : 0) + (yit == 0 ? 1 : 0) + (zit == 0 ? 1 : 0)) != 2)
+					if (((xit == 0 ? 1 : 0) + (yit == 0 ? 1 : 0) + (zit == 0 ? 1 : 0)) != 2) {
 						continue;
+					}
 					final Block bl = w.getBlock(x + xit, y + yit, z + zit);
-					if (bl instanceof NyxBlockHardShadow)
+					if (bl instanceof NyxBlockHardShadow) {
 						power = Math.max(power, Math.max(0, w.getBlockMetadata(x + xit, y + yit, z + zit) - 1));
-					if (w.isBlockIndirectlyGettingPowered(x + xit, y + yit, z + zit))
+					}
+					if (w.isBlockIndirectlyGettingPowered(x + xit, y + yit, z + zit)) {
 						power = Math.max(power, w.getBlockPowerInput(x + xit, y + yit, z + zit));
+					}
 					power = Math.max(power, bl.isProvidingStrongPower(w, x + xit, y + yit, z + zit,
 							w.getBlockMetadata(x + xit, y + yit, z + zit)));
 					power = Math.max(power, bl.isProvidingWeakPower(w, x + xit, y + yit, z + zit,
 							w.getBlockMetadata(x + xit, y + yit, z + zit)));
 				}
+			}
+		}
 		final int oldmeta = w.getBlockMetadata(x, y, z);
-		if (power != oldmeta)
+		if (power != oldmeta) {
 			w.setBlockMetadataWithNotify(x, y, z, power, 0x3);
+		}
 	}
 
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
 		int chance = 8;
-		if (w.getBlockMetadata(x, y, z) != 0)
+		if (w.getBlockMetadata(x, y, z) != 0) {
 			chance = 2;
-		if (r.nextInt(chance) == 0)
+		}
+		if (r.nextInt(chance) == 0) {
 			IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x + r.nextFloat(), y + r.nextFloat(), z + r.nextFloat(),
 					0.0, 0.0, 0.0, false, w.rand.nextBoolean());
+		}
 	}
 
 	@Override

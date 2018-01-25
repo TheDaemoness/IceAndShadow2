@@ -5,7 +5,6 @@ import java.util.Random;
 import iceandshadow2.api.EnumIaSAspect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityMobSpawner;
@@ -33,14 +32,17 @@ public class IaSBlockHelper {
 
 	public static Vec3 getBlockSideCoords(int x, int y, int z, ForgeDirection dir, Random r, float size) {
 		double xN = 0.5 + 0.5 * dir.offsetX;
-		if (dir.offsetX == 0)
+		if (dir.offsetX == 0) {
 			xN += r.nextDouble() * size - size / 2.0;
+		}
 		double yN = 0.5 + 0.5 * dir.offsetY;
-		if (dir.offsetY == 0)
+		if (dir.offsetY == 0) {
 			yN += r.nextDouble() * size - size / 2.0;
+		}
 		double zN = 0.5 + 0.5 * dir.offsetZ;
-		if (dir.offsetZ == 0)
+		if (dir.offsetZ == 0) {
 			zN += r.nextDouble() * size - size / 2.0;
+		}
 		return Vec3.createVectorHelper(x - 0.05 + 1.10 * xN, y - 0.05 + 1.10 * yN, z - 0.05 + 1.10 * zN);
 	}
 
@@ -59,7 +61,7 @@ public class IaSBlockHelper {
 		}
 		return false;
 	}
-	
+
 	public static boolean isAdjacent(IBlockAccess w, int x, int y, int z, EnumIaSAspect aspect) {
 		for (int i = 0; i < ForgeDirection.values().length; ++i) {
 			final ForgeDirection dir = ForgeDirection.getOrientation(i);

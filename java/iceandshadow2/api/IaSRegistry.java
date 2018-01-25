@@ -16,10 +16,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.block.BlockObsidian;
-import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBow;
@@ -41,8 +38,9 @@ public final class IaSRegistry {
 	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
 
 	public static void add(Object o) {
-		if (IceAndShadow2.isRegistrationPublic())
+		if (IceAndShadow2.isRegistrationPublic()) {
 			IaSRegistry.doAdd(o);
+		}
 	}
 
 	private static void addHandler(IIaSApiExaminable handler) {
@@ -64,20 +62,24 @@ public final class IaSRegistry {
 	}
 
 	private static void doAdd(Object o) {
-		if (o instanceof IIaSApiExaminable)
+		if (o instanceof IIaSApiExaminable) {
 			IaSRegistry.addHandler((IIaSApiExaminable) o);
-		if (o instanceof IIaSApiSacrificeXp)
+		}
+		if (o instanceof IIaSApiSacrificeXp) {
 			IaSRegistry.addHandler((IIaSApiSacrificeXp) o);
-		if (o instanceof IIaSApiTransmute)
+		}
+		if (o instanceof IIaSApiTransmute) {
 			IaSRegistry.addHandler((IIaSApiTransmute) o);
-		if (o instanceof IaSToolMaterial)
+		}
+		if (o instanceof IaSToolMaterial) {
 			IaSRegistry.addToolMaterial((IaSToolMaterial) o);
+		}
 	}
 
 	public static IaSToolMaterial getDefaultMaterial() {
 		return IaSRegistry.defaultMaterial;
 	}
-	
+
 	public static boolean isPrimarilyTransfusionTarget(ItemStack is) {
 		if(is == null)
 			return false;
@@ -86,13 +88,13 @@ public final class IaSRegistry {
 					is.getItem();
 		if(transfusionTargetFirstClasses.contains(item.getClass()))
 			return true;
-		for(Class c : transfusionTargetFirstClasses) {
+		for(final Class c : transfusionTargetFirstClasses) {
 			if(c.isInstance(item))
 				return true;
 		}
 		return false;
 	}
-	
+
 	public static void setPrimarilyTransfusionTarget(Class c) {
 		transfusionTargetFirstClasses.add(c);
 	}
@@ -104,8 +106,9 @@ public final class IaSRegistry {
 		IIaSApiTransmute trans;
 
 		obj = target.getItem();
-		if (obj instanceof ItemBlock)
+		if (obj instanceof ItemBlock) {
 			obj = ((ItemBlock) obj).field_150939_a;
+		}
 		if (obj instanceof IIaSApiTransmute) {
 			trans = (IIaSApiTransmute) obj;
 			if (trans.getTransmuteTime(target, catalyst) > 0)
@@ -113,8 +116,9 @@ public final class IaSRegistry {
 		}
 
 		obj = catalyst.getItem();
-		if (obj instanceof ItemBlock)
+		if (obj instanceof ItemBlock) {
 			obj = ((ItemBlock) obj).field_150939_a;
+		}
 		if (obj instanceof IIaSApiTransmute) {
 			trans = (IIaSApiTransmute) obj;
 			if (trans.getTransmuteTime(target, catalyst) > 0)
@@ -135,8 +139,9 @@ public final class IaSRegistry {
 		final Random r = new Random();
 
 		obj = target.getItem();
-		if (obj instanceof ItemBlock)
+		if (obj instanceof ItemBlock) {
 			obj = ((ItemBlock) obj).field_150939_a;
+		}
 		if (obj instanceof IIaSApiSacrificeXp) {
 			sac = (IIaSApiSacrificeXp) obj;
 			return Math.max(0, sac.getXpValue(target, r));
@@ -180,13 +185,15 @@ public final class IaSRegistry {
 	}
 
 	public static void postInit() {
-		for (final Object o : IceAndShadow2.getPostRegistrationHandlers())
+		for (final Object o : IceAndShadow2.getPostRegistrationHandlers()) {
 			IaSRegistry.doAdd(o);
+		}
 	}
 
 	public static void preInit() {
-		for (final Object o : IceAndShadow2.getPreRegistrationHandlers())
+		for (final Object o : IceAndShadow2.getPreRegistrationHandlers()) {
 			IaSRegistry.doAdd(o);
+		}
 		setPrimarilyTransfusionTarget(ItemArmor.class);
 		setPrimarilyTransfusionTarget(ItemTool.class);
 		setPrimarilyTransfusionTarget(ItemSword.class);

@@ -23,8 +23,9 @@ public class NyxBlockOreGemstone extends NyxBlockOre {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		is.add(new ItemStack(Items.diamond, world.rand.nextInt(fortune + 5) >= 5 ? 2 : 1));
-		if (world.rand.nextInt(fortune + 6) >= 5)
+		if (world.rand.nextInt(fortune + 6) >= 5) {
 			is.add(new ItemStack(Items.emerald, 1));
+		}
 		return is;
 	}
 

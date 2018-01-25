@@ -7,7 +7,6 @@ import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -40,9 +39,9 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	public boolean requiresMultipleRenderPasses() {
 		return mat.getRenderPasses()>1;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_) {
 		return itemIcon;

@@ -11,9 +11,6 @@ import net.minecraft.world.World;
  */
 public class EntityFxBloodDroplet extends EntityFX {
 
-	/** the material type for dropped items/blocks */
-	private final Material materialType;
-
 	/** The height of the current bob */
 	private int bobTimer;
 
@@ -27,7 +24,6 @@ public class EntityFxBloodDroplet extends EntityFX {
 		setParticleTextureIndex(113);
 		setSize(0.01F, 0.01F);
 		particleGravity = 0.06F;
-		materialType = Material.water;
 		bobTimer = 40;
 		particleMaxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
 		motionX = motionY = motionZ = 0.0D;
@@ -49,16 +45,18 @@ public class EntityFxBloodDroplet extends EntityFX {
 			motionY *= 0.02D;
 			motionZ *= 0.02D;
 			setParticleTextureIndex(113);
-		} else
+		} else {
 			setParticleTextureIndex(112);
+		}
 
 		moveEntity(motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
 
-		if (particleMaxAge-- <= 0)
+		if (particleMaxAge-- <= 0) {
 			setDead();
+		}
 
 		if (isCollidedVertically && onGround) {
 			setParticleTextureIndex(114);
@@ -75,8 +73,9 @@ public class EntityFxBloodDroplet extends EntityFX {
 					- BlockLiquid.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
 							MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
 
-			if (posY < d0)
+			if (posY < d0) {
 				setDead();
+			}
 		}
 	}
 }

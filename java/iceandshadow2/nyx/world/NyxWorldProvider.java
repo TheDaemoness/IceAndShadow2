@@ -9,9 +9,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraftforge.client.IRenderHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,7 +38,7 @@ public class NyxWorldProvider extends WorldProvider {
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z) {
 		return x == 0 && z == 0;
@@ -164,7 +161,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new NyxChunkManager(this.worldObj);
+		worldChunkMgr = new NyxChunkManager(worldObj);
 		dimensionId = IaSFlags.dim_nyx_id;
 		hasNoSky = true;
 	}

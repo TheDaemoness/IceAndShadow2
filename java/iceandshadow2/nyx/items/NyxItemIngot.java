@@ -24,7 +24,7 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active, invisible;
-	
+
 	protected IaSBaseItem association;
 
 	public NyxItemIngot(String texName, IaSBaseItem associated) {
@@ -37,12 +37,13 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@Override
 	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 1)
+		if (s.getItemDamage() == 1) {
 			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "Sneak and Use Item to finalize.");
-		else
+		} else {
 			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
 					+ "This needs to be heated up...");
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -61,7 +62,7 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 			return 16;
 		return 64;
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return association.getAspect();
@@ -87,8 +88,9 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
-		if (pwai.isSneaking())
+		if (pwai.isSneaking()) {
 			heap.setItemDamage(0);
+		}
 		return heap;
 	}
 

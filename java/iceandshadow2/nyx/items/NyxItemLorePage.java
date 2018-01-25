@@ -26,7 +26,8 @@ public class NyxItemLorePage extends IaSBaseItemMulti {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		pages = new IIcon[getSubtypeCount()];
-		for (int i = 0; i < pages.length; ++i)
+		for (int i = 0; i < pages.length; ++i) {
 			pages[i] = reg.registerIcon(getTextureName() + i);
+		}
 	}
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.IaSFlags;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSTool;
 import iceandshadow2.api.IaSToolMaterial;
@@ -108,8 +107,9 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 			final int j = EnchantmentHelper.getFireAspectModifier(this);
 
-			if (j > 0)
+			if (j > 0) {
 				par1Entity.setFire(j * 4);
+			}
 
 			if (par1Entity instanceof EntityLivingBase && !worldObj.isRemote) {
 				final EntityLivingBase armored = (EntityLivingBase) par1Entity;
@@ -137,18 +137,21 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 				|| par1DamageSource == DamageSource.wither)
 			return false;
 		boolean flag;
-		if (par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute())
+		if (par1DamageSource.isMagicDamage() && !par1DamageSource.isDamageAbsolute()) {
 			par2 -= IaSWorldHelper.getRegionArmorMod(this);
-		if (par1DamageSource.isDamageAbsolute() && !isInvisible())
+		}
+		if (par1DamageSource.isDamageAbsolute() && !isInvisible()) {
 			flag = super.attackEntityFrom(par1DamageSource, par2);
-		else
+		} else {
 			flag = super.attackEntityFrom(par1DamageSource, par2 / 2);
+		}
 		if (par1DamageSource instanceof EntityDamageSource && !par1DamageSource.isProjectile()
 				&& !par1DamageSource.isMagicDamage() && !par1DamageSource.isExplosion()
 				&& !par1DamageSource.isFireDamage()) {
 			final Entity ent = ((EntityDamageSource) par1DamageSource).getEntity();
-			if (ent instanceof EntityPlayer)
+			if (ent instanceof EntityPlayer) {
 				((EntityPlayer) ent).dropOneItem(false);
+			}
 		}
 		return flag;
 	}
@@ -165,8 +168,9 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 		dropItem(NyxItems.resin, 1 + worldObj.rand.nextInt(2 + par2));
 
-		if (rand.nextInt(4 - (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 1 : 0)) <= 0)
+		if (rand.nextInt(4 - (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 1 : 0)) <= 0) {
 			dropItem(NyxItems.alabasterShard, 1);
+		}
 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 7));
 	}
@@ -183,8 +187,9 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
-		if (!isInvisible())
+		if (!isInvisible()) {
 			playSound("step.snow", 1.0F, 1.0F);
+		}
 	}
 
 	@Override
@@ -196,15 +201,17 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 	public float getAttackStrength(Entity par1Entity) {
 		final ItemStack var2 = getHeldItem();
 		int var3;
-		if (worldObj != null)
+		if (worldObj != null) {
 			var3 = IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 8 : 9;
-		else
+		} else {
 			var3 = 8;
+		}
 
 		if (var2 != null)
-			if (var2.getItem() instanceof IIaSTool)
+			if (var2.getItem() instanceof IIaSTool) {
 				var3 += MathHelper
 						.ceiling_float_int(IaSToolMaterial.extractMaterial(var2).getToolDamage(var2, this, par1Entity));
+			}
 		return var3;
 	}
 
@@ -291,10 +298,11 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (worldObj.isRemote) {
-			if (!isInvisible())
+			if (!isInvisible()) {
 				IaSFxManager.spawnParticle(worldObj, rand.nextBoolean() ? "cloudSmall" : "shadowSmokeSmall",
 						posX - (0.5 - rand.nextDouble()) / 4, posY + rand.nextDouble(),
 						posZ - (0.5 - rand.nextDouble()) / 4, 0.0, 0.0, 0.0, false, true);
+			}
 			return;
 		}
 		final boolean attacking = getAttackTarget() != null;
@@ -309,18 +317,21 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 				final List li = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(18, 18, 18));
 				li.addAll(worldObj.getEntitiesWithinAABB(EntityAnimal.class, boundingBox.expand(18, 18, 18)));
 				li.add(getAttackTarget());
-				for (final Object ent : li)
+				for (final Object ent : li) {
 					((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 0));
+				}
 			}
 		}
 		if (attacking) {
 			final double dist = getDistanceSqToEntity(getAttackTarget());
-			if (isInvisible() && dist < 9.0)
+			if (isInvisible() && dist < 9.0) {
 				setInvisible(false);
-			else if (!isInvisible() && dist > 16.0)
+			} else if (!isInvisible() && dist > 16.0) {
 				setInvisible(true);
-		} else
+			}
+		} else {
 			setInvisible(true);
+		}
 	}
 
 	@Override

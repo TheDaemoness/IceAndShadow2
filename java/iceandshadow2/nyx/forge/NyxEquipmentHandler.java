@@ -30,29 +30,35 @@ public class NyxEquipmentHandler {
 			return;
 		final Map[] enchmaps = new Map[5];
 		for (int i = 0; i < 5; ++i)
-			if (victim.getEquipmentInSlot(i) != null)
+			if (victim.getEquipmentInSlot(i) != null) {
 				enchmaps[i] = EnchantmentHelper.getEnchantments(victim.getEquipmentInSlot(i));
+			}
 		while (severity > 0) {
 			for (int i = 0; i < 5; ++i) {
-				if (enchmaps[i] == null)
+				if (enchmaps[i] == null) {
 					continue;
-				if (i != 0 && victim.worldObj.rand.nextInt(2 + severity) >= severity - 1)
+				}
+				if (i != 0 && victim.worldObj.rand.nextInt(2 + severity) >= severity - 1) {
 					continue;
+				}
 				final Object[] enchkeys = enchmaps[i].keySet().toArray();
-				if (enchkeys.length == 0)
+				if (enchkeys.length == 0) {
 					continue;
+				}
 				final Integer selected = (Integer) enchkeys[victim.worldObj.rand.nextInt(enchkeys.length)];
 				final Integer strength = (Integer) enchmaps[i].get(selected);
-				if (strength.intValue() <= 1)
+				if (strength.intValue() <= 1) {
 					enchmaps[i].remove(selected);
-				else
+				} else {
 					enchmaps[i].put(selected, Integer.valueOf(strength.intValue() - 1));
+				}
 			}
 			--severity;
 		}
 		for (int i = 0; i < 5; ++i)
-			if (enchmaps[i] != null)
+			if (enchmaps[i] != null) {
 				EnchantmentHelper.setEnchantments(enchmaps[i], victim.getEquipmentInSlot(i));
+			}
 	}
 
 	@SubscribeEvent
@@ -61,10 +67,12 @@ public class NyxEquipmentHandler {
 			final EntityPlayer victim = (EntityPlayer) e.entityLiving;
 			final boolean isDrain = e.source == IaSDamageSources.dmgDrain;
 			if (!isDrain)
-				if (victim.inventory.hasItem(NyxItems.bloodstone))
+				if (victim.inventory.hasItem(NyxItems.bloodstone)) {
 					IaSPlayerHelper.drainXP(victim, (int) (1 + e.ammount), null, true);
-			if (e.source.isMagicDamage())
+				}
+			if (e.source.isMagicDamage()) {
 				doDrainEnchantments(victim, e.ammount*(isDrain?4:0));
+			}
 		}
 		final EntityLivingBase elb = e.entityLiving;
 		if (elb == null)
@@ -73,12 +81,14 @@ public class NyxEquipmentHandler {
 		final ArmorMaterialInstance[] materialMap = ArmorMaterialInstance.getEquipmentData(elb);
 		boolean major = true;
 		for (final ArmorMaterialInstance mat : materialMap) {
-			if (mat.material == null)
+			if (mat.material == null) {
 				break;
+			}
 			final float neo = mat.material.onHurt(elb, e.source, e.ammount, mat.coverage,
 					major && mat.coverage >= 4.125);
-			if (!e.source.isDamageAbsolute())
+			if (!e.source.isDamageAbsolute()) {
 				e.ammount = neo;
+			}
 			major = false;
 		}
 		if (e.ammount <= 0) {
@@ -101,8 +111,9 @@ public class NyxEquipmentHandler {
 				if (e.source.isFireDamage() && !e.source.isDamageAbsolute()) {
 				pwai.extinguish();
 				e.setCanceled(true);
-				} else
-				e.ammount = e.ammount / 2;
+				} else {
+					e.ammount = e.ammount / 2;
+				}
 				is.damageItem((int) (e.ammount + 1), pwai);
 				} else if (e.source.isMagicDamage() || e.source.isExplosion())
 				return;
@@ -111,8 +122,9 @@ public class NyxEquipmentHandler {
 				if (e.source.isFireDamage()) {
 				pwai.extinguish();
 				e.setCanceled(true);
-				} else
-				e.ammount = e.ammount / 2;
+				} else {
+					e.ammount = e.ammount / 2;
+				}
 				final Entity attacker = ((EntityDamageSource) e.source).getEntity();
 				if (attacker instanceof EntityLivingBase) {
 				final int ulevel = ((NyxItemSwordFrost) NyxItems.frostSword).getUpgradeLevel(is);
@@ -130,20 +142,23 @@ public class NyxEquipmentHandler {
 			final EntityPlayer owner = (EntityPlayer) e.entityLiving;
 			for (int i = 0; i < owner.inventory.mainInventory.length; ++i) {
 				final ItemStack is = owner.inventory.mainInventory[i];
-				if (is != null && is.getItem() instanceof IIaSPassiveEffectItem)
+				if (is != null && is.getItem() instanceof IIaSPassiveEffectItem) {
 					((IIaSPassiveEffectItem) is.getItem()).onItemUpdateTick(e.entityLiving, is,
 							i == owner.inventory.currentItem);
+				}
 			}
 		} else {
 			final ItemStack held = e.entityLiving.getEquipmentInSlot(0);
-			if (held != null && held.getItem() instanceof IIaSPassiveEffectItem)
+			if (held != null && held.getItem() instanceof IIaSPassiveEffectItem) {
 				((IIaSPassiveEffectItem) held.getItem()).onItemUpdateTick(e.entityLiving, held, true);
+			}
 		}
 		final ArmorMaterialInstance[] materialMap = ArmorMaterialInstance.getEquipmentData(e.entityLiving);
 		boolean major = true;
 		for (final ArmorMaterialInstance mat : materialMap) {
-			if (mat.material == null)
+			if (mat.material == null) {
 				break;
+			}
 			mat.material.onTick(e.entityLiving, mat.coverage, major && mat.coverage >= 4.125);
 			major = false;
 		}

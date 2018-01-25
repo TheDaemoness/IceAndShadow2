@@ -13,7 +13,7 @@ public interface IIaSApiDeathHook {
 	/**
 	 * Called if the relevant item function returned one of the ALTER actions.
 	 * If ALTER_BOTH had been returned, willDrop will be false.
-	 * 
+	 *
 	 * @param willDrop
 	 *            Indicates if this item stack will be dropped or not.
 	 * @param pwai
@@ -26,7 +26,7 @@ public interface IIaSApiDeathHook {
 	/**
 	 * Called when the handler is processing an item stack that the player has
 	 * equipped.
-	 * 
+	 *
 	 * @param pwai
 	 *            The player.
 	 * @param is
@@ -38,7 +38,7 @@ public interface IIaSApiDeathHook {
 
 	/**
 	 * Called when the handler is processing an item stack on the hotbar.
-	 * 
+	 *
 	 * @param pwai
 	 *            The player.
 	 * @param is
@@ -51,7 +51,7 @@ public interface IIaSApiDeathHook {
 	/**
 	 * Called when the handler is processing an item stack in the player's
 	 * inventory.
-	 * 
+	 *
 	 * @param pwai
 	 *            The player.
 	 * @param is
@@ -63,7 +63,7 @@ public interface IIaSApiDeathHook {
 
 	/**
 	 * Called before alterItemStack if ALTER_BOTH was returned.
-	 * 
+	 *
 	 * @param pwai
 	 *            The player.
 	 * @param is

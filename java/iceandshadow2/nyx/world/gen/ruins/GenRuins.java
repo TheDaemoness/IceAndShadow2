@@ -31,16 +31,19 @@ public abstract class GenRuins extends WorldGenerator {
 
 	@Override
 	public boolean generate(World w, Random r, int x, int y, int z) {
-		final boolean cGH = canGenerateHere(w, r, x, y, z); 
+		final boolean cGH = canGenerateHere(w, r, x, y, z);
 		if(cGH) {
-			if (IaSFlags.flag_report_ruins_gen)
+			if (IaSFlags.flag_report_ruins_gen) {
 				IceAndShadow2.getLogger()
 					.info("[DEV] Generating " + getLowercaseName() + " @ <" + x + " " + y + " " + z + ">.");
+			}
 			buildPass(w, r, x, y, z);
-			for(int i = 0; i < damage; ++i)
+			for(int i = 0; i < damage; ++i) {
 				damagePass(w, r, x, y, z);
-			if(damage <= 1)
+			}
+			if(damage <= 1) {
 				rewardPass(w, r, x, y, z);
+			}
 		}
 		return cGH;
 	}

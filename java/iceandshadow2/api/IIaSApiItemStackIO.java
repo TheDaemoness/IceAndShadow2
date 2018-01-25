@@ -20,7 +20,7 @@ public interface IIaSApiItemStackIO {
 	/**
 	 * Indicates whether this handler can handle extracting items from the given
 	 * block.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block from which items will be extracted.
 	 * @param tx
@@ -31,7 +31,7 @@ public interface IIaSApiItemStackIO {
 	/**
 	 * Indicates whether this handler can handle placing items into the given
 	 * block.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block into which items will be inserted.
 	 * @param tx
@@ -43,7 +43,7 @@ public interface IIaSApiItemStackIO {
 	 * For output handlers, indicates whether or not this handler is for a block
 	 * that actively extracts items. For example, a hopper or powered wooden
 	 * BuildCraft pipe actively extracts items, but a chest does not.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block into which items will be inserted.
 	 * @param tx
@@ -55,7 +55,7 @@ public interface IIaSApiItemStackIO {
 	 * For input handlers, indicates whether or not this handler is for a block
 	 * that actively inserts items. For example, a hopper or BuildCraft pipe
 	 * actively inserts items into other blocks, but a chest does not.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block from which items will be extracted.
 	 * @param tx
@@ -68,7 +68,7 @@ public interface IIaSApiItemStackIO {
 	 * responsible from clearing any inventory slots. This method should NOT
 	 * affect the block at <tx, ty, tz> in any way. May be called multiple
 	 * times.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block from which items will be extracted.
 	 * @param tx
@@ -88,7 +88,7 @@ public interface IIaSApiItemStackIO {
 	 * Does the actual work of placing item stacks into a This method is
 	 * responsible for merging item stacks where possible. This method should
 	 * NOT affect the block at <tx, ty, tz> in any way.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate of the block into which items will be inserted.
 	 * @param tx

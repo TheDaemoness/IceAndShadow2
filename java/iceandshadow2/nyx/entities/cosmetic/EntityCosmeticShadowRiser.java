@@ -50,15 +50,17 @@ public class EntityCosmeticShadowRiser extends EntityThrowable {
 	 */
 	@Override
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
-		if (par1MovingObjectPosition.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY)
+		if (par1MovingObjectPosition.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY) {
 			setDead();
+		}
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (ticksExisted > 50 && motionY < 0)
+		if (ticksExisted > 50 && motionY < 0) {
 			setDead();
+		}
 		final String id = "shadowSmokeLarge";
 		IaSFxManager.spawnParticle(worldObj, id, posX, posY, posZ, false, false);
 		IaSFxManager.spawnParticle(worldObj, id, posX + motionX, posY + motionY, posZ + motionZ, false, false);

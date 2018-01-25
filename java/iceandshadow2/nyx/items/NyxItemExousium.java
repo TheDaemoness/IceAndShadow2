@@ -111,8 +111,9 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 			}
 			if (converted) {
 				is.stackSize -= 1;
-				if (is.getItemDamage() >= 2)
+				if (is.getItemDamage() >= 2) {
 					IaSPlayerHelper.giveItem(p, new ItemStack(NyxItems.exousium, 3, 1));
+				}
 			}
 			return converted;
 		} else if (is.getItemDamage() >= 2 && w.getBlock(x, y, z) instanceof NyxBlockStone) {
@@ -133,8 +134,9 @@ public class NyxItemExousium extends IaSBaseItemMulti implements IIaSGlowing, II
 				return;
 			else if (el.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 				return;
-			else if (!el.isPotionActive(Potion.wither.id))
+			else if (!el.isPotionActive(Potion.wither.id)) {
 				el.addPotionEffect(new PotionEffect(Potion.wither.id, 41, 0));
+			}
 		}
 		super.onUpdate(is, w, ent, time, holding);
 	}

@@ -50,10 +50,11 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 		GL11.glPushMatrix();
 
 		IIcon icon;
-		if (entity instanceof EntityLivingBase)
+		if (entity instanceof EntityLivingBase) {
 			icon = ((EntityLivingBase) entity).getItemIcon(is, pass);
-		else
+		} else {
 			icon = is.getItem().getIcon(is, pass);
+		}
 
 		if (icon == null) {
 			if (is.getItem() instanceof IIaSTool) {
@@ -104,35 +105,40 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
         final float width = 0.0625F;
         final float zshift = -width/8;
 		int count = 1;
-		if(type == ItemRenderType.ENTITY)
+		if(type == ItemRenderType.ENTITY) {
 			count += MathHelper.calculateLogBaseTwo(is.stackSize);
+		}
 
-        Random random = new Random(Item.getIdFromItem(is.getItem()));
+        final Random random = new Random(Item.getIdFromItem(is.getItem()));
         GL11.glTranslatef(0, 0, (((width+zshift)/2)*(count)));
-		
+
         final int chroma = is.getItem().getColorFromItemStack(is, pass);
-    	final float r = (float)(chroma >> 16 & 255) / 255.0F;
-    	final float g = (float)(chroma >> 8 & 255) / 255.0F;
-    	final float b= (float)(chroma & 255) / 255.0F;
+    	final float r = (chroma >> 16 & 255) / 255.0F;
+    	final float g = (chroma >> 8 & 255) / 255.0F;
+    	final float b= (chroma & 255) / 255.0F;
     	GL11.glColor4f(r, g, b, 1.0F);
-    	
+
         for(int i = 0; i < count; ++i) {
     		final float x = (random.nextFloat() * 2.0F - 1.0F) * 0.2F * (1 + is.stackSize/64);
     		final float y = (random.nextFloat() * 2.0F - 1.0F) * 0.1F * (1 + is.stackSize/64);
-    		final float z = (random.nextFloat() * 2.0F - 1.0F) * 0.2F * (1 + is.stackSize/64);
-        	if(i > 0)
-        		GL11.glTranslatef(x, -y, -(width+zshift));
+    		random.nextFloat();
+        	if(i > 0) {
+				GL11.glTranslatef(x, -y, -(width+zshift));
+			}
         	ItemRenderer.renderItemIn2D(tessellator, maxU, minV, minU, maxV, icon.getIconWidth(), icon.getIconHeight(),
 				width);
-        	if(i > 0)
-        		GL11.glTranslatef(-x, y, 0);
+        	if(i > 0) {
+				GL11.glTranslatef(-x, y, 0);
+			}
         }
 
 		if (doGlowTransforms) {
-			if (!blendWasEnabled)
+			if (!blendWasEnabled) {
 				GL11.glDisable(GL11.GL_BLEND);
-			if (lightingWasEnabled)
+			}
+			if (lightingWasEnabled) {
 				GL11.glEnable(GL11.GL_LIGHTING);
+			}
 		}
 
 		if (is.hasEffect(pass)) {
@@ -160,44 +166,54 @@ public class RenderItemVanillaGlowing implements IItemRenderer {
 			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			if(!blendWasEnabled)
+			if(!blendWasEnabled) {
 				GL11.glDisable(GL11.GL_BLEND);
-			if (lightingWasEnabled)
+			}
+			if (lightingWasEnabled) {
 				GL11.glEnable(GL11.GL_LIGHTING);
+			}
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 		}
 
-		if (type != ItemRenderType.ENTITY)
+		if (type != ItemRenderType.ENTITY) {
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		}
 		GL11.glPopMatrix();
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
-		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED)
+		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
 			GL11.glPopMatrix();
+		}
 
 		final Entity entity = (Entity) data[1];
 
 		boolean doGlowTransforms = false;
-		if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
+		if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms) {
 			doGlowTransforms = ((IIaSGlowing) item.getItem()).getFirstGlowPass(item) <= 0;
+		}
 
 		renderItem(entity, item, 0, mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 
-		if (item.getItem().requiresMultipleRenderPasses())
+		if (item.getItem().requiresMultipleRenderPasses()) {
 			for (int x = 1; x < item.getItem().getRenderPasses(item.getItemDamage()); x++) {
-				if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms)
+				if (item.getItem() instanceof IIaSGlowing && !doGlowTransforms) {
 					doGlowTransforms = x >= ((IIaSGlowing) item.getItem()).getFirstGlowPass(item);
+				}
 				renderItem(entity, item, x, mc.entityRenderer.itemRenderer, doGlowTransforms, type);
 				if (doGlowTransforms && x == item.getItem().getRenderPasses(item.getItemDamage()) - 1)
+				 {
 					;
 				//GL11.glDisable(GL11.GL_BLEND);
+				}
 			}
+		}
 
-		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED)
+		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
 			GL11.glPushMatrix();
+		}
 	}
 
 	@Override

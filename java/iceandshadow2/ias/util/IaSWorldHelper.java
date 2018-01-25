@@ -15,7 +15,7 @@ public class IaSWorldHelper {
 				x/16-(x<0?1:0),
 				z/16-(z<0?1:0));
 	}
-	
+
 	public static int getDifficulty(World w) {
 		if(w == null)
 			return 2;
@@ -34,7 +34,7 @@ public class IaSWorldHelper {
 		final int lvl = IaSWorldHelper.getRegionLevel(ent.worldObj, (int) ent.posX, (int) ent.posY, (int) ent.posZ);
 		return lvl + (IaSWorldHelper.getDifficulty(ent.worldObj) >= 3 ? 1 : 0);
 	}
-	
+
 	/**
 	 * IaS's screwy in-house distance formula. Do not feed to infants.
 	 * Values returned are approximately double what they should be.

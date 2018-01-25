@@ -8,7 +8,6 @@ import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.blocks.NyxBlockGravel;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,21 +43,25 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					// TODO: Pushing mechanics.
 					final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
 					final Block bl = w.getBlock(i, j, k);
-					if (bl instanceof NyxBlockStone)
+					if (bl instanceof NyxBlockStone) {
 						continue;
+					}
 					finished = false;
-					EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
-					if (aspect == EnumIaSAspect.EXOUSIUM || aspect == EnumIaSAspect.LAND)
+					final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
+					if (aspect == EnumIaSAspect.EXOUSIUM || aspect == EnumIaSAspect.LAND) {
 						continue;
+					}
 					if (bl.isReplaceable(w, i, j, k) || bl.getBlockHardness(w, i, j, k) < NyxBlockStone.HARDNESS) {
 						IaSBlockHelper.breakBlock(w, i, j, k, true);
 						w.setBlock(i, j, k, NyxBlocks.gravel);
 					}
 				}
-				if (finished)
+				if (finished) {
 					w.setBlock(x, y, z, NyxBlocks.stone);
-			} else
+				}
+			} else {
 				w.setBlockMetadataWithNotify(x, y, z, 1, 2);
+			}
 		super.updateTick(w, x, y, z, r);
 	}
 

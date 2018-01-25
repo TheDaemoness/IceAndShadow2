@@ -47,15 +47,17 @@ public class NyxBlockCrystalBloodstone extends NyxBlockCrystal {
 
 	@Override
 	public void onBlockDestroyedByPlayer(World worldObj, int x, int y, int z, int q) {
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote) {
 			worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, x + 0.5, y + 0.25, z + 0.5, 5));
+		}
 		super.onBlockDestroyedByPlayer(worldObj, x, y, z, q);
 	}
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity e, float distance) {
-		if (e instanceof EntityPlayer)
+		if (e instanceof EntityPlayer) {
 			IaSPlayerHelper.drainXP((EntityPlayer) e, 20, "The bloodstone drains you.", true);
+		}
 		super.onFallenUpon(world, x, y, z, e, distance);
 	}
 }

@@ -7,11 +7,9 @@ import java.util.Random;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -76,8 +74,9 @@ public class NyxChunkManager extends WorldChunkManager {
 			final int var16 = var6 + var15 % xlim << 2;
 			final int var17 = var7 + var15 / xlim << 2;
 			final BiomeGenBase var18 = var12[var15];
-			if (var18 == null)
+			if (var18 == null) {
 				continue;
+			}
 
 			if (par4List.contains(var18) && (var13 == null || par5Random.nextInt(var14 + 1) == 0)) {
 				var13 = new ChunkPosition(var16, 0, var17);
@@ -122,8 +121,9 @@ public class NyxChunkManager extends WorldChunkManager {
 	protected BiomeGenBase[] getBiomes(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
 		if((x&15)==0 && (z&15)==0 && xlim==16 && zlim==16)
 			return NyxBiomeManager.instance().getBiomeArray(w.getSeed(), x>>4, z>>4).get();
-		if(biomes == null || biomes.length < xlim*zlim)
+		if(biomes == null || biomes.length < xlim*zlim) {
 			biomes = new BiomeGenBase[xlim*zlim];
+		}
 		for(int xi = 0; xi < xlim; ++xi) {
 			for(int zi = 0; zi < zlim; ++zi) {
 				biomes[xi|(zi<<4)] = NyxBiomeManager.instance().getBiomeAt(w.getSeed(), (long)x+xi, (long)z+zi);
@@ -144,16 +144,18 @@ public class NyxChunkManager extends WorldChunkManager {
 	@Override
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
 
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
+		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5) {
 			par1ArrayOfFloat = new float[par4 * par5];
+		}
 
 		final BiomeGenBase[] var6 = getBiomes(null, par2, par3, par4, par5);
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7) {
 			float var8 = var6[var7].getIntRainfall() / 65536.0F;
 
-			if (var8 > 1.0F)
+			if (var8 > 1.0F) {
 				var8 = 1.0F;
+			}
 
 			par1ArrayOfFloat[var7] = var8;
 		}

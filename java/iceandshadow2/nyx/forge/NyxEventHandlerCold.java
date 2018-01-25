@@ -46,11 +46,12 @@ public class NyxEventHandlerCold {
 	public void onFireball(EntityJoinWorldEvent e) {
 		if (e.entity == null)
 			return;
-		
+
 		if (e.entity.dimension == IaSFlags.dim_nyx_id) {
 			if (e.entity instanceof EntitySmallFireball || e.entity instanceof EntityFireball
-					|| e.entity instanceof EntityLargeFireball)
+					|| e.entity instanceof EntityLargeFireball) {
 				e.setCanceled(true);
+			}
 			e.entity.extinguish();
 		}
 	}
@@ -99,8 +100,9 @@ public class NyxEventHandlerCold {
 				e.entityPlayer.worldObj.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F
 						+ (e.entityPlayer.worldObj.rand.nextFloat() - e.entityPlayer.worldObj.rand.nextFloat()) * 0.8F);
 				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.obsidian, 0, 0x2);
-			} else if (itid == Items.water_bucket)
+			} else if (itid == Items.water_bucket) {
 				e.entityPlayer.worldObj.setBlock(x, y, z, Blocks.ice, 0, 0x2);
+			}
 		}
 	}
 
@@ -115,25 +117,27 @@ public class NyxEventHandlerCold {
 				return;
 
 			Object id = e.entityPlayer.getEquipmentInSlot(0).getItem();
-			if (id == Items.flint_and_steel)
+			if (id == Items.flint_and_steel) {
 				flaque = true;
-			else if (id == Items.fire_charge)
+			} else if (id == Items.fire_charge) {
 				flaque = true;
-			else if (id instanceof ItemBlock) {
+			} else if (id instanceof ItemBlock) {
 				id = ((ItemBlock) id).field_150939_a;
-				if (id == Blocks.fire)
+				if (id == Blocks.fire) {
 					flaque = true;
-				else if (id == Blocks.torch)
+				} else if (id == Blocks.torch) {
 					flaque = true;
+				}
 			}
 
 			// DO NOT SIMPLIFY!
 			if (flaque && !e.isCanceled()) {
 				e.setCanceled(true);
-				if (id == Blocks.torch)
+				if (id == Blocks.torch) {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer, "It's far too cold to light a torch in Nyx.");
-				else
+				} else {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer, "It's far too cold to start a fire that way in Nyx.");
+				}
 			}
 		}
 
@@ -162,19 +166,21 @@ public class NyxEventHandlerCold {
 			final ItemStack ite = e.entityPlayer.getEquipmentInSlot(0);
 			if (ite == null)
 				return;
-			if (ite.getItem() instanceof IPlantable)
+			if (ite.getItem() instanceof IPlantable) {
 				isplant = true;
-			else if (ite.getItem() instanceof ItemBlock)
-				if (((ItemBlock) ite.getItem()).field_150939_a instanceof IPlantable)
+			} else if (ite.getItem() instanceof ItemBlock)
+				if (((ItemBlock) ite.getItem()).field_150939_a instanceof IPlantable) {
 					isplant = true;
+				}
 
 			// DO NOT SIMPLIFY!
 			if (isplant && !e.isCanceled()) {
 				final boolean dirt = e.world.getBlock(e.x, e.y, e.z) == NyxBlocks.dirt;
 				ForgeDirection.getOrientation(e.face);
 				e.setCanceled(!dirt);
-				if (!dirt)
+				if (!dirt) {
 					IaSPlayerHelper.messagePlayer(e.entityPlayer, "There's no way that this will grow in this realm.");
+				}
 			}
 		}
 	}
@@ -208,7 +214,7 @@ public class NyxEventHandlerCold {
 				}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onEntityBurning(LivingHurtEvent e) {
 		if(e.entity.dimension == IaSFlags.dim_nyx_id && e.source.isFireDamage()) {

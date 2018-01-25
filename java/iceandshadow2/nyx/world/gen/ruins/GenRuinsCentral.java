@@ -19,17 +19,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class GenRuinsCentral extends GenRuins {
-	
+
 	public static final int PLATFORM_OFFSET = 4;
 
 	public static int getGenHeight(World w, int x, int z) {
 		int y = 156;
-		for (int xit = -1; xit <= 1; ++xit)
-			for (int zit = -4; zit <= 4; ++zit)
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int zit = -4; zit <= 4; ++zit) {
 				y = Math.min(w.getTopSolidOrLiquidBlock(x + xit, z + zit), y);
-		for (int xit = -4; xit <= 4; ++xit)
-			for (int zit = -1; zit <= 1; ++zit)
+			}
+		}
+		for (int xit = -4; xit <= 4; ++xit) {
+			for (int zit = -1; zit <= 1; ++zit) {
 				y = Math.min(w.getTopSolidOrLiquidBlock(x + xit, z + zit), y);
+			}
+		}
 		return y;
 	}
 
@@ -39,21 +43,24 @@ public class GenRuinsCentral extends GenRuins {
 			final ForgeDirection dir = ForgeDirection.getOrientation(i);
 			int distance = 0;
 			for (int j = 15; j <= 96
-					&& !IaSBlockHelper.isTransient(w, x + j * dir.offsetX, y + 1, z + j * dir.offsetZ); ++j)
+					&& !IaSBlockHelper.isTransient(w, x + j * dir.offsetX, y + 1, z + j * dir.offsetZ); ++j) {
 				++distance;
-			if (distance >= 2 && distance < 96)
+			}
+			if (distance >= 2 && distance < 96) {
 				for (int j = 0; j < distance; ++j) {
 					w.setBlock(x + j * dir.offsetX, y, z + j * dir.offsetZ, NyxBlocks.brickExousic);
 					w.setBlockToAir(x + j * dir.offsetX, y + 1, z + j * dir.offsetZ);
 					w.setBlockToAir(x + j * dir.offsetX, y + 2, z + j * dir.offsetZ);
 				}
+			}
 		}
 
 		Sculptor.cylinder(w, x, y, z, 16, 1, Blocks.snow, 0);
 		Sculptor.cylinder(w, x, y - 1, z, 16, 1, NyxBlocks.permafrost, 0);
 		Sculptor.cylinder(w, x, y - 2, z, 15, 1, NyxBlocks.permafrost, 0);
-		for (int i = 3; i <= 30; ++i)
+		for (int i = 3; i <= 30; ++i) {
 			Sculptor.cylinder(w, x, Math.max(0, y - i), z, 16 - i / 2, 1, NyxBlocks.stone, 0);
+		}
 		Sculptor.dome(w, x, y + 1, z, 16, Blocks.air, 0);
 		Sculptor.cylinder(w, x, y, z, 12, 1, NyxBlocks.brickExousic, 0);
 
@@ -106,13 +113,17 @@ public class GenRuinsCentral extends GenRuins {
 		Sculptor.cube(w, x - 1, y + 5, z - 1, x + 1, y + 7, z + 1, Styx.reserved, 0);
 
 		// Podiums
-		for (int xit = -4; xit <= 4; xit += 8)
-			for (int zit = -4; zit <= 4; zit += 8)
+		for (int xit = -4; xit <= 4; xit += 8) {
+			for (int zit = -4; zit <= 4; zit += 8) {
 				Sculptor.cube(w, x + xit, y, z + zit, x + xit, y + 4, z + zit, Blocks.obsidian, 0);
+			}
+		}
 		// Broken transmutation altars.
-		for (int xit = -5; xit <= 5; xit += 5)
-			for (int zit = -5; zit <= 5; zit += 5)
+		for (int xit = -5; xit <= 5; xit += 5) {
+			for (int zit = -5; zit <= 5; zit += 5) {
 				w.setBlock(x + xit, y + 2, z + zit, NyxBlocks.transmutationAltarBroken);
+			}
+		}
 	}
 
 	@Override
@@ -128,9 +139,10 @@ public class GenRuinsCentral extends GenRuins {
 	public boolean generate(World var1, Random var2, int x, int y, int z) {
 		if (canGenerateHere(var1, var2, x, y, z)) {
 			y = GenRuinsCentral.getGenHeight(var1, x, z);
-			if (IaSFlags.flag_report_ruins_gen)
+			if (IaSFlags.flag_report_ruins_gen) {
 				IceAndShadow2.getLogger()
 						.info("[DEV] Generating " + getLowercaseName() + " @ (" + x + "," + y + "," + z + ").");
+			}
 			buildPass(var1, var2, x, y, z);
 			damagePass(var1, var2, x, y, z);
 			rewardPass(var1, var2, x, y, z);
@@ -184,35 +196,42 @@ public class GenRuinsCentral extends GenRuins {
 				final int rewardid = r.nextInt(100);
 
 				// Primed Ingots!
-				if (rewardid < 20)
+				if (rewardid < 20) {
 					itemz = new ItemStack(NyxItems.echirIngot, 8 - r.nextInt(5) / 2, 1);
-				else if (rewardid < 35)
+				} else if (rewardid < 35) {
 					itemz = new ItemStack(NyxItems.devora, 2 + r.nextInt(3));
-				else if (rewardid < 55)
+				} else if (rewardid < 55) {
 					itemz = new ItemStack(NyxItems.boneSanctified);
-				else if (rewardid < 70)
+				} else if (rewardid < 70) {
 					itemz = new ItemStack(Items.experience_bottle, 2 + r.nextInt(4));
+				}
 
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1), itemz);
 			}
-			if (chestpos == tightropeA)
+			if (chestpos == tightropeA) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.kitTightrope));
-			if (chestpos == tightropeB)
+			}
+			if (chestpos == tightropeB) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.kitTightrope));
-			if (chestpos == cortrachest)
+			}
+			if (chestpos == cortrachest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.cortra, 1 + r.nextInt(2)));
-			if (chestpos == hookchest)
+			}
+			if (chestpos == hookchest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxBlocks.hookClimbing));
-			if (chestpos == ropechest)
+			}
+			if (chestpos == ropechest) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.rope, 2));
-			if (chestpos == lorepages)
+			}
+			if (chestpos == lorepages) {
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1),
 						new ItemStack(NyxItems.page));
+			}
 			if (chestpos == bootchest) {
 				final ItemStack is = new ItemStack(IaSTools.armorNavistra[3]);
 				chestent.setInventorySlotContents(1 + r.nextInt(chestent.getSizeInventory() - 1), is);

@@ -35,8 +35,9 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 		if (!is.getTagCompound().hasKey("iasMaterial"))
 			return IaSRegistry.getDefaultMaterial();
 		final IaSToolMaterial m = IaSRegistry.getToolMaterial(is.getTagCompound().getString("iasMaterial"));
-		if (m == null)
+		if (m == null) {
 			IaSRegistry.getDefaultMaterial();
+		}
 		return m;
 	}
 
@@ -116,7 +117,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 	/**
 	 * Called to determine harvest effectiveness. In the future, will be used to
 	 * add fortune-like effects to harvesting.
-	 * 
+	 *
 	 * @param bl
 	 * @param is
 	 * @return -1 if this tool cannot harvest a given block, 0 if the tool
@@ -297,10 +298,12 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 	public float getToolDamage(ItemStack is, EntityLivingBase user, Entity target) {
 		final EnumIaSToolClass t = ((IIaSTool) is.getItem()).getIaSToolClass();
 		float baseDmg = getBaseDamage();
-		if (user instanceof IIaSMobGetters)
+		if (user instanceof IIaSMobGetters) {
 			baseDmg += ((IIaSMobGetters)user).getAttackStrength(target);
-		if (target instanceof EntityLivingBase)
+		}
+		if (target instanceof EntityLivingBase) {
 			baseDmg += EnchantmentHelper.getEnchantmentModifierLiving(user, (EntityLivingBase) target);
+		}
 		if (t == EnumIaSToolClass.AXE)
 			return baseDmg + 3;
 		if (t == EnumIaSToolClass.PICKAXE)
@@ -366,11 +369,12 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 	 */
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase)
-			if (user instanceof EntityPlayer)
+			if (user instanceof EntityPlayer) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user),
 						getToolDamage(is, user, target));
-			else
+			} else {
 				target.attackEntityFrom(DamageSource.causeMobDamage(user), getToolDamage(is, user, target));
+			}
 		return damageToolOnAttack(is, user, target);
 	}
 
@@ -460,7 +464,7 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 
 	/**
 	 * Called before a tool harvests a block.
-	 * 
+	 *
 	 * @param is
 	 * @param user
 	 * @param block
@@ -504,18 +508,21 @@ public abstract class IaSToolMaterial implements IIaSApiSacrificeXp, IIaSAspect 
 	public void registerIcons(IIconRegister reg) {
 		int lTool = 0, lWeapon = 0;
 		for (final EnumIaSToolClass cl : EnumIaSToolClass.values())
-			if (cl.isWeapon() && cl.getClassId() >= lWeapon)
+			if (cl.isWeapon() && cl.getClassId() >= lWeapon) {
 				lWeapon = cl.getClassId() + 1;
-			else if (!cl.isWeapon() && cl.getClassId() >= lTool)
+			} else if (!cl.isWeapon() && cl.getClassId() >= lTool) {
 				lTool = cl.getClassId() + 1;
+			}
 		iconTool = new IIcon[lTool];
 		iconWeapon = new IIcon[lWeapon];
-		for (int i = 0; i < iconTool.length; ++i)
+		for (int i = 0; i < iconTool.length; ++i) {
 			iconTool[i] = reg.registerIcon(
 					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, false).toString());
-		for (int i = 0; i < iconWeapon.length; ++i)
+		}
+		for (int i = 0; i < iconWeapon.length; ++i) {
 			iconWeapon[i] = reg.registerIcon(
 					getTextureNamePrefix() + getMaterialName() + EnumIaSToolClass.fromId(i, true).toString());
+		}
 
 	}
 }

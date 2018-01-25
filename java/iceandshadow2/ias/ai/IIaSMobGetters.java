@@ -18,7 +18,7 @@ public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
 	public double getMoveSpeed();
 
 	public double getScaledMaxHealth();
-	
+
 	public float getAttackStrength(Entity target);
 
 	public EntityLivingBase getSearchTarget();

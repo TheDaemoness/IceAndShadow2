@@ -2,7 +2,6 @@ package iceandshadow2.ias.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -26,7 +25,7 @@ public class BlockPos2 extends IntPair {
 		xSub = other.xSub;
 		zSub = other.zSub;
 	}
-	
+
 	public double distEuclid2(BlockPos2 b) {
 		final long dx = ((long)b.xValue << 4) - ((long)xValue << 4) + b.xSub - xSub;
 		final long dz = ((long)b.zValue << 4) - ((long)zValue << 4) + b.zSub - zSub;
@@ -48,7 +47,7 @@ public class BlockPos2 extends IntPair {
 		xSub &= 15;
 		zSub &= 15;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof BlockPos2)
@@ -65,7 +64,7 @@ public class BlockPos2 extends IntPair {
 	 * Converts the sub-chunk x/z values to an index value used by IaS's worldgen system for column data in chunks (like biome values).
 	 */
 	public int toChunkColumnIndex() {
-		return xSub + (int)(zSub << 4);
+		return xSub + (zSub << 4);
 	}
 	/**
 	 * As toChunkColumnIndex(), but returns -1 if the chunk coordinates do not equal the values passed.
@@ -75,7 +74,7 @@ public class BlockPos2 extends IntPair {
 			return -1;
 		return toChunkColumnIndex();
 	}
-	
+
 	public Block block(World w, int y) {return w.getChunkFromChunkCoords(xValue, zValue).getBlock(xSub, y, zSub);}
 	public Block block(World w, int y, Block newBlock, int newMeta) {
 		if(y<0 || y>255)
@@ -87,7 +86,7 @@ public class BlockPos2 extends IntPair {
 		return oldBlock;
 	}
 	public Block block(World w, int y, Block newBlock) {return block(w, y, newBlock, 0);}
-	
+
 	@Override
 	public int x(int newX) {
 		final int temp = x();
@@ -102,9 +101,9 @@ public class BlockPos2 extends IntPair {
 		zSub = (byte)(newZ & 15);
 		return temp;
 	}
-	
+
 	@Override
-	public int x() {return (xValue << 4) + (int)xSub;}
+	public int x() {return (xValue << 4) + xSub;}
 	@Override
-	public int z() {return (zValue << 4) + (int)zSub;}
+	public int z() {return (zValue << 4) + zSub;}
 }

@@ -26,7 +26,7 @@ public class StyxBlockGatestone extends IaSBaseBlockSingle {
 	public int getMixedBrightnessForBlock(IBlockAccess w, int x, int y, int z) {
 		return w.getLightBrightnessForSkyBlocks(x, y, z, 15) - w.getLightBrightnessForSkyBlocks(x, y, z, 0);
 	}
-	
+
 	@Override
 	public boolean isNormalCube() {
 		return false;

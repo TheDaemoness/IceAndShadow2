@@ -60,15 +60,20 @@ public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
 			final NyxTeExaminationTable nteet = (NyxTeExaminationTable) ent;
 			final Map<String, Integer> chknow = new TreeMap<String, Integer>();
 			Map<String, Integer> temp = IaSRegistry.handleExamination(pl, nteet.knowledge);
-			if (temp != null)
-				for (final String key : temp.keySet())
+			if (temp != null) {
+				for (final String key : temp.keySet()) {
 					chknow.put(key, temp.get(key));
+				}
+			}
 			temp = IaSRegistry.handleExaminationBook(pl, x, y, z, nteet.knowledge);
-			if (temp != null)
-				for (final String key : temp.keySet())
+			if (temp != null) {
+				for (final String key : temp.keySet()) {
 					chknow.put(key, temp.get(key));
-			for (final String key : chknow.keySet())
+				}
+			}
+			for (final String key : chknow.keySet()) {
 				nteet.knowledge.put(key, chknow.get(key));
+			}
 			return true;
 		}
 		return false;

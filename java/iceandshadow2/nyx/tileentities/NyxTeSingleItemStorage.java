@@ -10,8 +10,9 @@ public class NyxTeSingleItemStorage extends IaSTileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound par1) {
 		super.readFromNBT(par1);
-		if (par1.hasKey("nyxItem"))
+		if (par1.hasKey("nyxItem")) {
 			item.readFromNBT(par1.getCompoundTag("nyxItem"));
+		}
 	}
 
 	@Override

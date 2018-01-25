@@ -2,12 +2,12 @@ package iceandshadow2.ias.util;
 
 public class IntPair implements Comparable {
 	protected int xValue, zValue;
-	
+
 	public IntPair(int x, int z) {
 		xValue = x;
 		zValue = z;
 	}
-	
+
 	public IntPair() {
 		xValue = 0;
 		zValue = 0;
@@ -16,20 +16,20 @@ public class IntPair implements Comparable {
 	public boolean nonzero() {
 		return xValue != 0 || zValue != 0;
 	}
-	
+
 	public int x(int newX) {
-		final int temp = x();
+		x();
 		xValue = newX;
 		return xValue;
 	}
 	public int z(int newZ) {
-		final int temp = z();
+		z();
 		zValue = newZ;
 		return zValue;
 	}
 	public int x() {return xValue;}
 	public int z() {return zValue;}
-	
+
 	@Override
 	public boolean equals(Object b) {
 		if(b instanceof IntPair)
@@ -39,11 +39,10 @@ public class IntPair implements Comparable {
 	public boolean equals(IntPair b) {
 		return x()==b.x() && z()==b.z();
 	}
-	
+
 	@Override
 	public int compareTo(Object b) {
 		if(b instanceof IntPair) {
-			IntPair ip = (IntPair)b;
 		}
 		return 0;
 	}

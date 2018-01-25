@@ -42,16 +42,16 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			xc += dir.offsetX;
 			zc += dir.offsetZ;
 			final Block bl = w.getBlock(xc, yc, zc);
-			if (IaSBlockHelper.isAir(bl))
+			if (IaSBlockHelper.isAir(bl)) {
 				++ilen;
-			else if (IaSBlockHelper.isFluid(bl)) {
+			} else if (IaSBlockHelper.isFluid(bl)) {
 				IaSPlayerHelper.messagePlayer(pl, "The rope cannot travel through liquids.");
 				return false;
-			} else if (bl.isReplaceable(w, xc, yc, zc))
+			} else if (bl.isReplaceable(w, xc, yc, zc)) {
 				++ilen;
-			else if (w.isSideSolid(xc, yc, zc, dir.getOpposite()))
+			} else if (w.isSideSolid(xc, yc, zc, dir.getOpposite())) {
 				break;
-			else {
+			} else {
 				IaSPlayerHelper.messagePlayer(pl, "There's something in the way of the rope.");
 				return false;
 			}
@@ -68,20 +68,23 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 		}
 		w.playSoundAtEntity(pl, "random.bow", 1.0F, 1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F));
 
-		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST) {
 			w.setBlock(x + dir.offsetX, y, z, NyxBlocks.hookTightropeX);
-		else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+		} else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH) {
 			w.setBlock(x, y, z + dir.offsetZ, NyxBlocks.hookTightropeZ);
+		}
 
 		for (int i = 2; i < ilen; ++i)
-			if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+			if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST) {
 				w.setBlock(x + i * dir.offsetX, y, z, NyxBlocks.ropeX);
-			else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+			} else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH) {
 				w.setBlock(x, y, z + i * dir.offsetZ, NyxBlocks.ropeZ);
-		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+			}
+		if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST) {
 			w.setBlock(x + (ilen - 1) * dir.offsetX, y, z, NyxBlocks.hookTightropeX);
-		else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+		} else if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH) {
 			w.setBlock(x, y, z + (ilen - 1) * dir.offsetZ, NyxBlocks.hookTightropeZ);
+		}
 		w.playSoundEffect(x + (ilen - 1) * dir.offsetX + 0.5, y + 0.5, z + (ilen - 1) * dir.offsetZ + 0.5, "dig.stone",
 				1.0F, 1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F));
 
@@ -105,19 +108,23 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			if (el.isSneaking() && !el.isOnLadder()) {
 				final Vec3 v = el.getLookVec();
 				if (Math.abs(v.xCoord) > Math.abs(v.zCoord)) {
-					if (v.xCoord > 0)
+					if (v.xCoord > 0) {
 						dir = ForgeDirection.EAST;
-					else
+					} else {
 						dir = ForgeDirection.WEST;
-				} else if (v.zCoord > 0)
+					}
+				} else if (v.zCoord > 0) {
 					dir = ForgeDirection.SOUTH;
-				else
+				} else {
 					dir = ForgeDirection.NORTH;
+				}
 				int modX = 0, modZ = 0;
-				if (el.posX < 0)
+				if (el.posX < 0) {
 					modX = -1;
-				if (el.posZ < 0)
+				}
+				if (el.posZ < 0) {
 					modZ = -1;
+				}
 				mop = new MovingObjectPosition(modX + (int) el.posX, (int) el.posY - 2, modZ + (int) el.posZ,
 						dir.ordinal(), v);
 			} else {
@@ -139,15 +146,15 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 				xc += dir.offsetX;
 				zc += dir.offsetZ;
 				final Block bl = w.getBlock(xc, mop.blockY, zc);
-				if (bl.getMaterial() == Material.air)
+				if (bl.getMaterial() == Material.air) {
 					++ilen;
-				else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava)
+				} else if (bl.getMaterial() == Material.water || bl.getMaterial() == Material.lava)
 					return;
-				else if (bl.isReplaceable(w, xc, mop.blockY, zc))
+				else if (bl.isReplaceable(w, xc, mop.blockY, zc)) {
 					++ilen;
-				else if (w.isSideSolid(xc, mop.blockY, zc, dir.getOpposite()))
+				} else if (w.isSideSolid(xc, mop.blockY, zc, dir.getOpposite())) {
 					break;
-				else
+				} else
 					return;
 			}
 			if (ilen == 0)
@@ -157,10 +164,12 @@ public class NyxItemKitTightrope extends IaSBaseItemSingle {
 			if (ilen >= NyxItemKitTightrope.LENGTH_MAX)
 				return;
 			for (int i = 1; i < ilen + 1; ++i) {
-				if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST)
+				if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST) {
 					spawnParticlesX(w, mop.blockX + dir.offsetX * i, mop.blockY, mop.blockZ + dir.offsetZ * i);
-				if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH)
+				}
+				if (dir == ForgeDirection.SOUTH || dir == ForgeDirection.NORTH) {
 					spawnParticlesZ(w, mop.blockX + dir.offsetX * i, mop.blockY, mop.blockZ + dir.offsetZ * i);
+				}
 			}
 		}
 

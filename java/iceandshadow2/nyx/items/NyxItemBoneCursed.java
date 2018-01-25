@@ -61,8 +61,9 @@ public class NyxItemBoneCursed extends IaSBaseItemSingle implements IIaSGlowing 
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1Stack, World par2World, EntityPlayer player) {
-		if (!par2World.isRemote)
+		if (!par2World.isRemote) {
 			par2World.spawnEntityInWorld(new EntityShadowBall(par2World, player, true, true));
+		}
 		if (!player.capabilities.isCreativeMode) {
 			par1Stack.stackSize -= 1;
 			player.attackEntityFrom(DamageSource.magic,

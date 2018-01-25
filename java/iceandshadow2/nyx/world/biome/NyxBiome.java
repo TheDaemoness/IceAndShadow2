@@ -4,7 +4,6 @@ import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
-import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
 import iceandshadow2.nyx.world.gen.GenOre;
 import iceandshadow2.nyx.world.gen.WorldGenNyxOre;
@@ -16,7 +15,6 @@ import iceandshadow2.styx.Styx;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -52,11 +50,11 @@ public class NyxBiome extends BiomeGenBase {
 
 		setColor(255 << 16 | 255 << 8 | 255);
 	}
-	
+
 	public float getWeight() {
 		return 1;
 	}
-	
+
 	public boolean deepSurfaceLayer() {
 		return false;
 	}
@@ -69,9 +67,9 @@ public class NyxBiome extends BiomeGenBase {
 		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
 
 		GenOre.genOreWater(NyxBlocks.oreExousium, par1World, xchunk, zchunk, 1 + par2Random.nextInt(3));
-		
+
 		GenOre.genOreStandard(genSalt, par1World, xchunk, zchunk, 8, 64, 5);
-		
+
 		{
 		final int randx = par2Random.nextInt(16),
 				randz = par2Random.nextInt(16);
@@ -95,20 +93,23 @@ public class NyxBiome extends BiomeGenBase {
 				final Block bl = par1World.getBlock(xchunk+randx, i, zchunk+randz);
 				if(prevair) {
 					if(bl instanceof NyxBlockStone) {
-						for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-							if(par2Random.nextBoolean())
+						for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+							if(par2Random.nextBoolean()) {
 								par1World.setBlock(xchunk+randx+dir.offsetX, i+dir.offsetY, zchunk+randz+dir.offsetZ, NyxBlocks.oreDevora);
+							}
 						}
 						par1World.setBlock(xchunk+randx, i, zchunk+randz, NyxBlocks.oreDevora);
 						break;
 					}
-				} else
+				} else {
 					prevair = (bl == null || bl.getMaterial() instanceof MaterialTransparent);
+				}
 			}
-			if(doGenDevora)
+			if(doGenDevora) {
 				doGenDevora = false;
-			else
+			} else {
 				break;
+			}
 		} while (true);
 
 		// Unstable ice.
@@ -123,19 +124,20 @@ public class NyxBiome extends BiomeGenBase {
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 8, 24, 2);
 
-		if (doGenNifelhium)
+		if (doGenNifelhium) {
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
+		}
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
 
-		for (int xit = 0; xit < 16; ++xit)
+		for (int xit = 0; xit < 16; ++xit) {
 			for (int zit = 0; zit < 16; ++zit)
 				if (par2Random.nextInt(24) == 0) {
 					boolean inair = false;
 					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 63; --yit)
-						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit))
+						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
 							inair = true;
-						else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
+						} else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
 							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
 									&& par2Random.nextBoolean()) {
 								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
@@ -144,6 +146,7 @@ public class NyxBiome extends BiomeGenBase {
 							inair = false;
 						}
 				}
+		}
 
 		genFoliage(par1World, par2Random, xchunk, zchunk);
 
@@ -152,13 +155,17 @@ public class NyxBiome extends BiomeGenBase {
 		final int y = IaSBlockHelper.getHeight(par1World, x, z);
 		if (y >= 230 && IaSWorldHelper.getRegionLevel(par1World, x, y, z) > 0) {
 			boolean makestone = true;
-			for (int xit = -32; xit <= 32 && makestone; ++xit)
-				for (int zit = -32; zit <= 32 && makestone; ++zit)
+			for (int xit = -32; xit <= 32 && makestone; ++xit) {
+				for (int zit = -32; zit <= 32 && makestone; ++zit) {
 					for (int yit = 230; yit <= 255 && makestone; ++yit)
-						if (par1World.getBlock(x + xit, yit, z + zit) == NyxBlocks.crystalBloodstone)
+						if (par1World.getBlock(x + xit, yit, z + zit) == NyxBlocks.crystalBloodstone) {
 							makestone = false;
-			if (makestone)
+						}
+				}
+			}
+			if (makestone) {
 				par1World.setBlock(x, y, z, NyxBlocks.crystalBloodstone);
+			}
 		}
 	}
 
@@ -180,12 +187,14 @@ public class NyxBiome extends BiomeGenBase {
 				return;
 			GenRuins gengen = null;
 			int i = 0;
-			if (hasTowers() && par2Random.nextInt(3) == 0)
+			if (hasTowers() && par2Random.nextInt(3) == 0) {
 				gengen = new GenRuinsTowerLookout();
-			else
+			} else {
 				gengen = supplyRuins(i++);
-			while(gengen != null && !gengen.generate(par1World, par2Random, x, y, z))
+			}
+			while(gengen != null && !gengen.generate(par1World, par2Random, x, y, z)) {
 				gengen = supplyRuins(i++);
+			}
 		}
 	}
 
@@ -204,8 +213,9 @@ public class NyxBiome extends BiomeGenBase {
 		blocks[xzmod + 2] = Styx.air;
 		blocks[xzmod + 3] = Styx.ground;
 		blocks[xzmod + 4] = Blocks.bedrock;
-		if (rand.nextBoolean())
+		if (rand.nextBoolean()) {
 			blocks[xzmod + 5] = Blocks.bedrock;
+		}
 		if (blocks[xzmod + 64] == null || blocks[xzmod + 64].isAir(world, a, 64, b)) {
 			final boolean iced =
 					blocks[xzmod + 61] != NyxBlocks.exousicWater
@@ -241,8 +251,9 @@ public class NyxBiome extends BiomeGenBase {
 					break;
 				}
 				--k;
-			} else
+			} else {
 				k = Math.max(k, -1);
+			}
 		}
 	}
 

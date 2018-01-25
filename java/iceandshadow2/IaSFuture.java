@@ -18,7 +18,7 @@ public class IaSFuture<T> extends FutureTask<T> {
 	public T get() {
 		try {
 			return super.get();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			this.e = e;
 			return null;
 		}

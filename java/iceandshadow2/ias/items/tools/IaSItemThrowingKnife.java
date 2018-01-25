@@ -62,8 +62,9 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 
 		aroundThe.playSoundAtEntity(plai, "random.bow", 0.5F, 0.75F);
 
-		if (!plai.capabilities.isCreativeMode)
+		if (!plai.capabilities.isCreativeMode) {
 			is.stackSize -= 1;
+		}
 
 		if (!aroundThe.isRemote) {
 			plai.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID,
@@ -88,7 +89,8 @@ public class IaSItemThrowingKnife extends IaSItemWeapon {
 																								// pay
 																								// no
 																								// attention.
-		if (par5 && tom > 0 && !world.isRemote)
+		if (par5 && tom > 0 && !world.isRemote) {
 			player.getEntityData().setInteger(IaSItemThrowingKnife.PLAYER_NBT_ID, tom - 1);
+		}
 	}
 }

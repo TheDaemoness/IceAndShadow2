@@ -26,7 +26,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 		setTickRandomly(true);
 		this.setHarvestLevel("spade", 0);
 	}
-	
+
 	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.LAND;
@@ -49,16 +49,18 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 
 	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
-		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
+		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
+		}
 	}
 
 	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null
-				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0)
+				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0) {
 			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
 					par5EntityPlayer.worldObj.difficultySetting.getDifficultyId());
+		}
 	}
 
 	@Override
@@ -90,17 +92,20 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
-		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
+		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
+		}
 
 	}
 
 	@Override
 	public void updateTick(World par1World, int x, int y, int z, Random par5Random) {
 		if (IaSBlockHelper.isAdjacent(par1World, x, y, z, NyxBlocks.stone)) {
-			if (!par1World.isRemote)
+			if (!par1World.isRemote) {
 				par1World.setBlock(x, y, z, NyxBlocks.stone);
-		} else
+			}
+		} else {
 			super.updateTick(par1World, x, y, z, par5Random);
+		}
 	}
 }

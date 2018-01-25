@@ -87,8 +87,9 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (!target.worldObj.isRemote)
-			if (target instanceof EntityLivingBase)
+			if (target instanceof EntityLivingBase) {
 				((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 25, 3));
+			}
 		return super.onAttack(is, user, target);
 	}
 
@@ -100,10 +101,12 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 		for (final Object o : ents)
 			if (o instanceof EntityLivingBase) {
 				final EntityLivingBase elb = (EntityLivingBase) o;
-				if (o instanceof EntityPlayer && !(user instanceof EntityPlayer))
+				if (o instanceof EntityPlayer && !(user instanceof EntityPlayer)) {
 					continue;
-				if (o instanceof EntityMob && user instanceof EntityMob)
+				}
+				if (o instanceof EntityMob && user instanceof EntityMob) {
 					continue;
+				}
 				elb.attackEntityFrom(DamageSource.causeThrownDamage((Entity) o, user), getBaseDamage());
 			}
 		knife.setDead();
@@ -114,8 +117,9 @@ public class NyxMaterialIcicle extends IaSToolMaterial {
 	public boolean onKnifeHit(EntityLivingBase user, IaSEntityKnifeBase knife, Entity target) {
 		if (knife.worldObj.isRemote)
 			return false;
-		if (target instanceof EntityLivingBase)
+		if (target instanceof EntityLivingBase) {
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 25, 3));
+		}
 		knife.setDead();
 		return false;
 	}

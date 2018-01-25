@@ -18,8 +18,9 @@ public class NyxBlockRopeX extends NyxBlockRope {
 			return;
 		}
 		n = w.getBlock(x - 1, y, z);
-		if (!(n instanceof NyxBlockRopeX) && !(n instanceof NyxBlockHookTightropeX))
+		if (!(n instanceof NyxBlockRopeX) && !(n instanceof NyxBlockHookTightropeX)) {
 			w.setBlockToAir(x, y, z);
+		}
 	}
 
 }

@@ -44,8 +44,9 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem) {
-		if (entityItem.getEntityItem().isItemDamaged())
+		if (entityItem.getEntityItem().isItemDamaged()) {
 			entityItem.setDead();
+		}
 		return false;
 	}
 
@@ -80,9 +81,9 @@ public class NyxItemBoneSanctified extends IaSBaseItemSingleGlow {
 		}
 		final int dmg = stack.getItemDamage();
 		if (stack.isItemDamaged())
-			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode)
+			if (((EntityPlayer) par3Entity).capabilities.isCreativeMode) {
 				stack.setItemDamage(0);
-			else if (dmg > 0)
+			} else if (dmg > 0)
 				if (stack.attemptDamageItem(1, par2World.rand)) {
 					stack.setItemDamage(15);
 					stack.func_150996_a(Items.dye);

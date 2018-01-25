@@ -33,18 +33,22 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 
 	public static void makeClimbable(World w, int x, int y, int z) {
 		final Block bl = w.getBlock(x, y, z);
-		if (bl == Blocks.air)
+		if (bl == Blocks.air) {
 			w.setBlock(x, y, z, NyxBlocks.virtualLadder);
-		else if (bl instanceof IaSBaseBlockAirlike)
+		} else if (bl instanceof IaSBaseBlockAirlike) {
 			((IaSBaseBlockAirlike) bl).setClimbable(w, x, y, z, true);
+		}
 	}
 
 	public static void spreadClimbable(World w, int x, int y, int z) {
-		for (int xit = -1; xit <= 1; ++xit)
-			for (int yit = -1; yit <= 1; ++yit)
+		for (int xit = -1; xit <= 1; ++xit) {
+			for (int yit = -1; yit <= 1; ++yit) {
 				for (int zit = -1; zit <= 1; ++zit)
-					if (testClimbable(w, x + xit, y + yit, z + zit))
+					if (testClimbable(w, x + xit, y + yit, z + zit)) {
 						makeClimbable(w, x + xit, y + yit, z + zit);
+					}
+			}
+		}
 	}
 
 	public static boolean testClimbable(IBlockAccess w, int x, int y, int z) {
@@ -133,13 +137,13 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return false;
 	}
-	
+
 	@Override
 	public void onBlockDestroyedByExplosion(World w, int x, int y, int z,
 			Explosion e) {
 		w.setBlock(x, y, z, this);
 	}
-	
+
 	@Override
 	public void onBlockExploded(World w, int x, int y, int z,
 			Explosion e) {
@@ -150,16 +154,18 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
 		if (w.getBlockMetadata(x, y, z) < 8)
 			return;
-		if (e instanceof EntityPlayer)
+		if (e instanceof EntityPlayer) {
 			spreadClimbable(w, x, y, z);
+		}
 	}
 
 	// Override if the block needs to do something special upon changing
 	// climbability.
 	public void setClimbable(World w, int x, int y, int z, boolean yes) {
 		w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, x) & 7 | (yes ? 8 : 0), 2);
-		if (yes)
+		if (yes) {
 			w.scheduleBlockUpdateWithPriority(x, y, z, this, 3, 2);
+		}
 	}
 
 	@Override
@@ -175,9 +181,10 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 		final boolean byClimbable = testClimbable(w, x, y, z);
 		final boolean isUsed = w.getEntitiesWithinAABB(EntityPlayer.class,
 				AxisAlignedBB.getBoundingBox(x - 1, y - 1, z - 1, x + 2, y + 2, z + 2)).size() > 0;
-		if (byClimbable && isUsed)
+		if (byClimbable && isUsed) {
 			w.scheduleBlockUpdateWithPriority(x, y, z, this, tickRate(w), 2);
-		else
+		} else {
 			setClimbable(w, x, y, z, false);
+		}
 	}
 }

@@ -4,18 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerWorkbench;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemDoublePlant;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -25,10 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSTool;
-import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.util.IntPair;
-import iceandshadow2.nyx.items.NyxItemIngot;
 
 /**
  * Reverses crafting recipes that obey two rules:
@@ -36,7 +22,7 @@ import iceandshadow2.nyx.items.NyxItemIngot;
  * 2: The recipe must be a standard/oredict shaped/shapeless recipe.
  */
 public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
-	
+
 	protected IntPair costs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean sanitycheck) {
 		if(recipe.getRecipeOutput() == null)
 			return new IntPair();
@@ -60,13 +46,13 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 		final int targetdrain = Math.min(sizeOut, target.stackSize);
 		return new IntPair(targetdrain, sizeOut-targetdrain);
 	}
-	
+
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(!target.isItemEqual(catalyst))
 			return 0;
 		final List l = CraftingManager.getInstance().getRecipeList();
-		for(Object o : l) {
+		for(final Object o : l) {
 			if(o instanceof IRecipe && costs((IRecipe)o, target, catalyst, true).nonzero())
 					return 25;
 		}
@@ -75,11 +61,11 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>(11);
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(11);
 		IntPair cost = null;
 		IRecipe toReverse = null;
 		final List l = CraftingManager.getInstance().getRecipeList();
-		for(Object o : l) {
+		for(final Object o : l) {
 			if(o instanceof IRecipe) {
 				cost = costs((IRecipe)o, target, catalyst, true);
 				if(cost.nonzero()) {
@@ -105,19 +91,20 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 				ins = Arrays.asList(((ShapedOreRecipe)toReverse).getInput());
 			} else
 				return ret;
-			for(Object o : ins) {
+			for(final Object o : ins) {
 				try {
 					ItemStack is;
-					if(o instanceof List)
+					if(o instanceof List) {
 						is = (ItemStack)((List)o).get(0);
-					else
+					} else {
 						is = (ItemStack)o;
+					}
 					is = is.copy();
 					if(is.getItemDamage() == IaSHandlerTransmutationCraft.ANY_METADATA_MAGIC_NUMBER) {
 						is.setItemDamage(0);
 					}
 					ret.add(is);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					continue;
 				}
 			}

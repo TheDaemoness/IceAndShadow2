@@ -32,8 +32,9 @@ public class NyxBlockStoneMemory extends IaSBaseBlockAirlike {
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone)
+			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.stoneGrowing);
+			}
 		super.updateTick(w, x, y, z, r);
 	}
 }

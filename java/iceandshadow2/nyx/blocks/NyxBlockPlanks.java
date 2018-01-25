@@ -41,22 +41,24 @@ public class NyxBlockPlanks extends IaSBaseBlockMulti implements IIaSNoInfest {
 	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		final int dmg = par1World.getBlockMetadata(par2, par3, par4);
-		if (dmg == 1)
+		if (dmg == 1) {
 			NyxBlocks.infestLog.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
-		else
+		} else {
 			NyxBlocks.poisonLog.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
+		}
 	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		final int dmg = par1World.getBlockMetadata(par2, par3, par4);
-		if (dmg == 1)
+		if (dmg == 1) {
 			NyxBlocks.infestLog.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-		else if (par5Entity instanceof EntityLivingBase) {
+		} else if (par5Entity instanceof EntityLivingBase) {
 			((EntityLivingBase) par5Entity).attackEntityFrom(IaSDamageSources.dmgPoisonwood, 1);
-			if (!((EntityLivingBase) par5Entity).isPotionActive(Potion.poison))
+			if (!((EntityLivingBase) par5Entity).isPotionActive(Potion.poison)) {
 				((EntityLivingBase) par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id,
 						35 * (par1World.difficultySetting.getDifficultyId() + 1), 1));
+			}
 		}
 	}
 }

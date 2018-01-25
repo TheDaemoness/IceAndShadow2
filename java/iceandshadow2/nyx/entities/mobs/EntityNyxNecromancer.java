@@ -62,8 +62,9 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
 		addPotionEffect(new PotionEffect(Potion.hunger.id, 25, 1));
-		if (par1DamageSource.isMagicDamage())
+		if (par1DamageSource.isMagicDamage()) {
 			dmg /= 2;
+		}
 		return super.attackEntityFrom(par1DamageSource, dmg);
 	}
 
@@ -104,12 +105,14 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 		if (!par1 || worldObj.isRemote)
 			return;
 
-		if (rand.nextInt(4 - (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 1 : 0)) == 0)
+		if (rand.nextInt(4 - (IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 1 : 0)) == 0) {
 			this.dropItem(NyxItems.nifelhiumPowder, 1);
-		else if (IaSWorldHelper.getDifficulty(worldObj) < 3)
+		} else if (IaSWorldHelper.getDifficulty(worldObj) < 3) {
 			this.dropItem(NyxItems.boneCursed, 1);
-		if (IaSWorldHelper.getDifficulty(worldObj) >= 3)
+		}
+		if (IaSWorldHelper.getDifficulty(worldObj) >= 3) {
 			this.dropItem(NyxItems.boneCursed, 1);
+		}
 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 5));
 	}
@@ -141,22 +144,25 @@ public class EntityNyxNecromancer extends EntityNyxSkeleton {
 				li.add(sucker);
 				for (; count < IaSWorldHelper.getDifficulty(worldObj) && getHealth() > 6 && !li.isEmpty(); ++count) {
 					EntityMob summon;
-					if (rand.nextInt(3) == 0)
+					if (rand.nextInt(3) == 0) {
 						summon = new EntityNyxSkeleton(worldObj, EnumNyxSkeletonType.MAGIC_SHADOW);
-					else
+					} else {
 						summon = new EntityNyxSkeleton(worldObj, EnumNyxSkeletonType.RAPIER);
+					}
 					summon.setPosition(posX, posY, posZ);
 					summon.setAttackTarget((EntityLivingBase) li.get(0));
 					li.remove(0);
 					worldObj.playSoundAtEntity(this, "mob.wither.shoot", 0.5F, 0.33F + 0.33F * rand.nextFloat());
 
-					if (worldObj.spawnEntityInWorld(summon))
+					if (worldObj.spawnEntityInWorld(summon)) {
 						worldObj.playSoundAtEntity(summon, "mob.silverfish.kill", 0.7F,
 								0.33F + 0.33F * rand.nextFloat());
+					}
 					heal(-5);
 				}
-				if (count > 0)
+				if (count > 0) {
 					addPotionEffect(new PotionEffect(Potion.hunger.id, 85, 0));
+				}
 			}
 		}
 	}

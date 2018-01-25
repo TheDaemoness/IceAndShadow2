@@ -94,28 +94,32 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 			 * PotionEffect(Potion.regeneration.id,51,1));
 			 */
 			if (elb instanceof EntityPlayer) {
-				if (par1World.rand.nextBoolean())
+				if (par1World.rand.nextBoolean()) {
 					IaSPlayerHelper.regen((EntityPlayer) elb, 1);
+				}
 				if (elb.isSneaking())
-					if (elb.isPotionActive(Potion.confusion))
+					if (elb.isPotionActive(Potion.confusion)) {
 						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));
-					else {
+					} else {
 						final EntityPlayer playuh = (EntityPlayer) elb;
-						for (int xit = -1; xit <= 1; ++xit)
+						for (int xit = -1; xit <= 1; ++xit) {
 							for (int zit = -1; zit <= 1; ++zit)
 								if (par1World.getBlock(x + xit, y, z + zit) != this)
 									return;
+						}
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 1, z))
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
 							return;
 						if (IaSPlayerHelper.drainXP(playuh, 19, "Something forcefully binds your life to the obsidian.",
-								true) >= 19)
+								true) >= 19) {
 							;
+						}
 						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
 					}
-			} else
+			} else {
 				elb.heal(0.5F);
+			}
 		}
 	}
 

@@ -20,7 +20,7 @@ public class NyxBiomeForestDense extends NyxBiome {
 
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 60, 1, 1));
-		
+
 		setColor(127 << 16 | 32 << 8 | 127);
 	}
 
@@ -31,14 +31,16 @@ public class NyxBiomeForestDense extends NyxBiome {
 			final int x = xchunk + par2Random.nextInt(16) + 8;
 			final int z = zchunk + par2Random.nextInt(16) + 8;
 			int y;
-			if (i % 2 == 0)
+			if (i % 2 == 0) {
 				y = 192;
-			else
+			} else {
 				y = 64;
+			}
 			while (y >= 64 && y <= 192) {
 				final Block bid = par1World.getBlock(x, y, z);
-				if (bid == Blocks.snow_layer)
+				if (bid == Blocks.snow_layer) {
 					break;
+				}
 				if (i % 2 == 0) {
 					if (!IaSBlockHelper.isAir(bid)) {
 						++y;
@@ -46,13 +48,15 @@ public class NyxBiomeForestDense extends NyxBiome {
 					}
 					--y;
 				} else {
-					if (IaSBlockHelper.isAir(bid))
+					if (IaSBlockHelper.isAir(bid)) {
 						break;
+					}
 					++y;
 				}
 			}
-			if (y == 0)
+			if (y == 0) {
 				continue;
+			}
 			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
 			var5.generate(par1World, par2Random, x, y, z);
 		}

@@ -84,12 +84,14 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 		--catalyst.stackSize;
 		final List<ItemStack> retval = new ArrayList<ItemStack>();
 		int i = 0;
-		for (; i < 3 && target.stackSize > 0; ++i)
+		for (; i < 3 && target.stackSize > 0; ++i) {
 			--target.stackSize;
-		if(target.getItem() == NyxItems.cortra)
+		}
+		if(target.getItem() == NyxItems.cortra) {
 			retval.add(new ItemStack(NyxItems.draconium, i*2, 1));
-		else
+		} else {
 			retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
+		}
 		return retval;
 	}
 
@@ -110,8 +112,9 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		if(world.rand.nextBoolean())
+		if(world.rand.nextBoolean()) {
 			IaSFxManager.spawnParticle(world, "dripBlood", ent.posX+0.05+world.rand.nextFloat()/10, ent.posY+0.125+world.rand.nextFloat()/4, ent.posZ+0.05+world.rand.nextFloat()/10, false, false);
+		}
 		return true;
 	}
 

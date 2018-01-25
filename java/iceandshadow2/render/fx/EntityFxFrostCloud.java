@@ -43,8 +43,9 @@ public class EntityFxFrostCloud extends EntityFX {
 
 		moveEntity(motionX, motionY, motionZ);
 
-		if (particleAge++ >= particleMaxAge)
+		if (particleAge++ >= particleMaxAge) {
 			setDead();
+		}
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
 
@@ -58,11 +59,13 @@ public class EntityFxFrostCloud extends EntityFX {
 			float par7) {
 		float f6 = (particleAge + par2) / particleMaxAge * 32.0F;
 
-		if (f6 < 0.0F)
+		if (f6 < 0.0F) {
 			f6 = 0.0F;
+		}
 
-		if (f6 > 1.0F)
+		if (f6 > 1.0F) {
 			f6 = 1.0F;
+		}
 
 		particleScale = field_70569_a * f6;
 		super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);

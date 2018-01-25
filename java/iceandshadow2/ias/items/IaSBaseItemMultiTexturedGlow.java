@@ -7,11 +7,11 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.item.ItemStack;
 
 public class IaSBaseItemMultiTexturedGlow extends IaSBaseItemMultiTextured implements IIaSGlowing {
-	
+
 	public IaSBaseItemMultiTexturedGlow(EnumIaSModule mod, String id, int subtypes) {
 		super(mod, id, subtypes);
 	}
-	
+
 	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;

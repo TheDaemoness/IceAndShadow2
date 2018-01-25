@@ -56,8 +56,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 
-		if (usingItem != stack)
+		if (usingItem != stack) {
 			inuse = false;
+		}
 
 		if (!((NyxItemBow) stack.getItem()).inuse)
 			return renderPass > 0 ? glow : itemIcon;
@@ -115,8 +116,9 @@ public abstract class NyxItemBow extends IaSBaseItemSingle implements IIaSGlowin
 		if (!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
 			target.getTagCompound().setInteger(NyxItemBow.nbtTierID, 1);
-		} else
+		} else {
 			target.getTagCompound().setInteger(NyxItemBow.nbtTierID, getSpeedModifier(target) + 1);
+		}
 		catalyst.stackSize -= getUpgradeCost(getSpeedModifier(target));
 		return null;
 	}

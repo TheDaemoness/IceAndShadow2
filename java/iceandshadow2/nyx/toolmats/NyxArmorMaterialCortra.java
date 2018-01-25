@@ -13,8 +13,9 @@ public class NyxArmorMaterialCortra extends IaSArmorMaterial {
 
 	@Override
 	public float onHurt(EntityLivingBase wearer, DamageSource dmg, float amount, double coverage, boolean major) {
-		if (dmg.isMagicDamage())
+		if (dmg.isMagicDamage()) {
 			amount = (float) Math.max(0, amount - (coverage / (major ? 2 : 3)));
+		}
 		return amount;
 	}
 }

@@ -52,8 +52,9 @@ public class NyxItemResinCurative extends IaSItemFood implements IIaSGlowing {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
-		if (pwai.isPotionActive(Potion.poison))
+		if (pwai.isPotionActive(Potion.poison)) {
 			pwai.setItemInUse(heap, getMaxItemUseDuration(heap));
+		}
 		return heap;
 	}
 

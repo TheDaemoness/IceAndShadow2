@@ -95,11 +95,13 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 
-				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0)
+				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0) {
 					--par3;
+				}
 
-				if (par3 > 0)
+				if (par3 > 0) {
 					par1World.setBlock(par2, par3, par4, this);
+				}
 			}
 		}
 	}
