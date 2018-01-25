@@ -214,7 +214,7 @@ public class GenRuinsMines extends GenRuins {
 					slantIndex = (i/(1+length/slant.length));
 				for(int xi = -6; xi <= 6; ++xi) {
 					for(int zi = -6; zi <= 6; ++zi) {
-						for(int yi = -1; yi <= 5; ++yi) {
+						for(int yi = -2; yi <= 5; ++yi) {
 							final Block bl = w.getBlock(x+xi, y+yi, z+zi);
 							if(bl == NyxBlocks.exousicWater || bl == Blocks.chest)
 								return true;
@@ -222,7 +222,7 @@ public class GenRuinsMines extends GenRuins {
 								++y;
 								slope[slopeIndex] = 0;
 							} else if(bl == NyxBlocks.infestSpawner && w.getBlockMetadata(x+xi, y+yi, z+zi) == 0) {
-								w.setBlock(x+xi, y-2, z+zi, NyxBlocks.infestSpawner);
+								w.setBlock(x+xi, y-3, z+zi, NyxBlocks.infestSpawner);
 								w.setBlockToAir(x+xi, y+yi, z+zi);
 							}
 						}
@@ -234,7 +234,7 @@ public class GenRuinsMines extends GenRuins {
 					z-1+r.nextInt(3),
 					r.nextInt(3)==0?4:3, Blocks.air, 0);
 				if(r.nextInt(14) == 0 && !nospawner) {
-					w.setBlock(x, y-2, z, NyxBlocks.infestSpawner);
+					w.setBlock(x, y-3, z, NyxBlocks.infestSpawner);
 					nospawner = true;
 				} else
 					nospawner = false;
@@ -263,9 +263,9 @@ public class GenRuinsMines extends GenRuins {
 				ndir = dir;
 			result=genArm(w, r, x, y, z, ndir, antichance+1);
 		}
-		if(dir == dir.UNKNOWN)
+		if(dir == dir.UNKNOWN || dir == dir.DOWN)
 			genRewardsChest(w, r, x, y, z, EnumRarity.uncommon);
-		if(dir != dir.DOWN && dir != dir.UP) {
+		else if(dir != dir.UP) {
 			if(!result) {
 				genRewardsChest(w, r, x, y, z, EnumRarity.common);
 			} else
