@@ -213,17 +213,19 @@ public class GenRuinsTowerLookout extends GenRuins {
 				boneflag = false;
 			}
 
-			// Experience bottles and food.
+			// Experience bottles and potions.
 			else if (rewardid < 50) {
-				final int foodtype = var2.nextInt(20);
+				final int foodtype = var2.nextInt(24);
 				if (foodtype < 6) {
 					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
-				} else if (foodtype < 14) {
-					itemz = new ItemStack(NyxItems.bread, 2 + var2.nextInt(4));
-				} else if (foodtype < 18) {
-					itemz = new ItemStack(NyxItems.cookie, 3 + var2.nextInt(5));
+				} else if (foodtype < 12) {
+					itemz = new ItemStack(Items.potionitem, 1, 8262); //Night Vis.
+				} else if (foodtype < 16) {
+					itemz = new ItemStack(Items.potionitem, 1, 8258); //Swiftness
+				} else if (foodtype < 20) {
+					itemz = new ItemStack(Items.potionitem, 1, 8265); //Strength
 				} else {
-					itemz = new ItemStack(NyxItems.silkBerries, 3 + var2.nextInt(3));
+					itemz = new ItemStack(Items.potionitem, 1, 8257); //Regen
 				}
 			}
 
