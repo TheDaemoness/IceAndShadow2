@@ -6,6 +6,7 @@ import iceandshadow2.api.EnumIaSAspect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.Vec3;
@@ -69,7 +70,7 @@ public class IaSBlockHelper {
 	}
 
 	public static boolean isAir(Block bl) {
-		return bl.getMaterial() == Material.air;
+		return bl == null || bl.getMaterial() instanceof MaterialTransparent;
 	}
 
 	public static boolean isFluid(Block bl) {

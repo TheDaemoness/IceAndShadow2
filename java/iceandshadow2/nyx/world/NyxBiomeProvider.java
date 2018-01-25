@@ -7,11 +7,12 @@ import java.util.TreeMap;
 import iceandshadow2.ias.util.BlockPos2;
 import iceandshadow2.ias.util.ChunkRandom;
 import iceandshadow2.ias.util.IaSWorldHelper;
+import iceandshadow2.nyx.world.biome.NyxBiome;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 class BiomePoint {
-	public BiomeGenBase biome;
+	public NyxBiome biome;
 	public long x;
 	public long z;
 };
@@ -20,7 +21,7 @@ class BiomePoint {
  * Nyx's biome selection system.
  */
 public class NyxBiomeProvider {
-	public static final int SCALE=133;
+	public static final int SCALE=96;
 	private static final Map<Long, BiomePoint> points = new TreeMap<Long, BiomePoint>();
 	
 	public static void clean() {
@@ -55,12 +56,12 @@ public class NyxBiomeProvider {
 	
 	protected static BiomeGenBase getBiomeAtPoint(long seed, long x, long z, BiomePoint[] points, int xDelta, int zDelta) {
 		BiomePoint bp = points[(xDelta+1)+(zDelta+1)*4];
-		long closestDistance = IaSWorldHelper.distance2(bp.x-x, bp.z-z);
+		long closestDistance = (long)(IaSWorldHelper.distance2(bp.x-x, bp.z-z)/bp.biome.getWeight());
 		BiomeGenBase retval = bp.biome;
 		final int[] indices = {0, 1, 2, 3, 5, 6, 7, 8}; //Skip i = 4.
 		for(int i : indices) {
 			bp  = points[(xDelta+i%3)+(zDelta+i/3)*4];
-			final long newDistance = IaSWorldHelper.distance2(bp.x-x, bp.z-z);
+			final long newDistance = (long)(IaSWorldHelper.distance2(bp.x-x, bp.z-z)/bp.biome.getWeight());
 			if(newDistance < closestDistance) {
 				closestDistance = newDistance;
 				retval = bp.biome;
@@ -104,7 +105,7 @@ public class NyxBiomeProvider {
 			bm = (b+bD)%3==0;
 		return (am&&bm?1:0);
 	}
-	protected static BiomeGenBase getBiomeForBoxPoint(Random r, int biomeNum, long x, long z) {
+	protected static NyxBiome getBiomeForBoxPoint(Random r, int biomeNum, long x, long z) {
 		if(biomeNum == 2)
 			return NyxBiomes.nyxMesaForest;
 		final int

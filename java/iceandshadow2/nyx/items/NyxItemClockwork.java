@@ -9,10 +9,11 @@ public class NyxItemClockwork extends IaSBaseItemMultiTexturedGlow {
 
 	public NyxItemClockwork(String id) {
 		super(EnumIaSModule.NYX, id, 3);
+		this.setMaxStackSize(1);
 	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack is) {
-		return is.getItemDamage()>1?EnumRarity.common:EnumRarity.uncommon;
+		return is.getItemDamage()<2?EnumRarity.common:EnumRarity.uncommon;
 	}
 }

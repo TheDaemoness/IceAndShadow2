@@ -47,11 +47,18 @@ public class NyxBiome extends BiomeGenBase {
 
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 50, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 2, 1, 1));
 
 		setBiomeName("Nyx");
 
 		setColor(255 << 16 | 255 << 8 | 255);
+	}
+	
+	public float getWeight() {
+		return 1;
+	}
+	
+	public boolean deepSurfaceLayer() {
+		return false;
 	}
 
 	@Override
@@ -167,7 +174,9 @@ public class NyxBiome extends BiomeGenBase {
 		if ((xchunk & 127) == 0 && (zchunk & 127) == 0) {
 			(new GenRuinsGatestone()).generate(par1World, par2Random, xchunk+8, y, zchunk+8);
 		} else {
-			if((xchunk/16)%2 != 1 || ((zchunk)/16)%2 != 1)
+			xchunk = Math.abs(xchunk);
+			zchunk = Math.abs(zchunk);
+			if(((xchunk>>4)&1) != 1 || (((zchunk>>4)&1) != 1))
 				return;
 			GenRuins gengen = null;
 			int i = 0;
@@ -207,6 +216,7 @@ public class NyxBiome extends BiomeGenBase {
 			meta[xzmod + 62] = 15;
 		}
 
+		boolean deepsurface = deepSurfaceLayer();
 		for (int yit = 255; yit >= 64; --yit) {
 			final int index = xzmod + yit;
 			final Block current = blocks[index];
@@ -216,12 +226,15 @@ public class NyxBiome extends BiomeGenBase {
 					blocks[index] = topBlock;
 					break;
 				case -1:
-					blocks[index] = fillerBlock;
+					blocks[index] = deepsurface?topBlock:fillerBlock;
+					deepsurface = false;
 					break;
 				case -2:
 				case -3:
-					if (rand.nextInt(5 + k) != 0)
+					if (rand.nextInt(5 + k) != 0) {
 						blocks[index] = fillerBlock;
+						break;
+					}
 					// PRESERVE FALLTHROUGH;
 				default:
 					k = -4;

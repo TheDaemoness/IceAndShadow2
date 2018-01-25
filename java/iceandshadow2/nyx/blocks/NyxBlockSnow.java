@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -24,6 +25,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockFalling;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.world.NyxChunkManager;
 
@@ -63,5 +65,24 @@ public class NyxBlockSnow extends IaSBaseBlockFalling {
 			float f) {
 		e.fallDistance /= 2f;
 		w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
+		w.getBlock(x, y-1, z).onFallenUpon(w, x, y-1, z, e, f);
 	}
+
+	@Override
+	public void onEntityWalking(World w, int x, int y, int z,
+			Entity e) {
+		if(e instanceof EntityMob) {
+		} else {
+			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
+			w.getBlock(x, y-1, z).onEntityWalking(w, x, y-1, z, e);
+		}
+		super.onEntityWalking(w, x, y, z, e);
+	}
+	
+    public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block bl)
+    {
+    	if(!IaSBlockHelper.isAir(bl))
+    		p_149695_1_.scheduleBlockUpdate(p_149695_2_, p_149695_3_, p_149695_4_, this, this.tickRate(p_149695_1_));
+    }
+	
 }

@@ -35,7 +35,7 @@ public abstract class GenRuins extends WorldGenerator {
 		if(cGH) {
 			if (IaSFlags.flag_report_ruins_gen)
 				IceAndShadow2.getLogger()
-					.info("[DEV] Generating " + getLowercaseName() + " @ (" + x + "," + y + "," + z + ").");
+					.info("[DEV] Generating " + getLowercaseName() + " @ <" + x + " " + y + " " + z + ">.");
 			buildPass(w, r, x, y, z);
 			for(int i = 0; i < damage; ++i)
 				damagePass(w, r, x, y, z);

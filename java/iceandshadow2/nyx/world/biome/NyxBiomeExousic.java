@@ -23,7 +23,6 @@ public class NyxBiomeExousic extends NyxBiome {
 
 		setColor(32 << 16 | 225 << 8 | 192);
 
-		spawnableMonsterList.clear();
 		/*
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSkeleton.class, 65, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 5, 1, 1));

@@ -30,6 +30,11 @@ public class NyxBiomeInfested extends NyxBiome {
 
 		setColor(32 << 16 | 255 << 8 | 255);
 	}
+	
+	@Override
+	public float getWeight() {
+		return 2;
+	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {

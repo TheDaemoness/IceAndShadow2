@@ -4,11 +4,13 @@ import java.util.Random;
 
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWightToxic;
 import iceandshadow2.nyx.world.gen.GenPoisonTrees;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class NyxBiomeForestSparse extends NyxBiome {
@@ -18,6 +20,7 @@ public class NyxBiomeForestSparse extends NyxBiome {
 		setBlocks(NyxBlocks.permafrost, NyxBlocks.stone);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityNyxWightToxic.class, 40, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxNecromancer.class, 2, 1, 1));
 		
 		setColor(127 << 16 | 32 << 8 | 127);
 	}

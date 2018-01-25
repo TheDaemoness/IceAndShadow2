@@ -19,6 +19,11 @@ public class NyxBiomeMountains extends NyxBiome {
 		
 		setColor(96 << 16 | 96 << 8 | 96);
 	}
+	
+	@Override
+	public boolean deepSurfaceLayer() {
+		return true;
+	}
 
 	@Override
 	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {

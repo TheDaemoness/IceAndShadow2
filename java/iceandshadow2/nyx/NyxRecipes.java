@@ -61,9 +61,10 @@ public class NyxRecipes {
 				new ItemStack(NyxBlocks.hookClimbing), 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 'r',
 				new ItemStack(NyxItems.rope));
 
-		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar), "cdc", "coc", 'd',
-				new ItemStack(NyxItems.draconium), 'c', new ItemStack(NyxItems.cortra, 1, 1), 'o',
-				new ItemStack(NyxBlocks.sanctifiedObsidian));
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar), "cdc", "coc",
+				'd', new ItemStack(NyxItems.clockwork, 1, 2),
+				'c', new ItemStack(NyxItems.cortra, 1, 1),
+				'o', new ItemStack(NyxBlocks.sanctifiedObsidian));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 2), new ItemStack(NyxItems.heat, 1, 3));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.heat, 4, 1), new ItemStack(NyxItems.heat, 1, 2));
@@ -111,5 +112,15 @@ public class NyxRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.rail, 24), "e e", "ese", "e e",
 			'e', new ItemStack(NyxItems.echirIngot, 1, 1),
 			's', new ItemStack(Items.stick));
+
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.clockwork, 1, 1), new ItemStack(NyxItems.clockwork, 1, 0),
+				new ItemStack(NyxItems.cortraIngot, 1, 1), new ItemStack(NyxItems.cortraIngot, 1, 1),
+				new ItemStack(NyxItems.cortraIngot, 1, 1), new ItemStack(NyxItems.cortraIngot, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.clockwork, 1, 2), new ItemStack(NyxItems.clockwork, 1, 0),
+				new ItemStack(NyxItems.draconiumIngot, 1, 1), new ItemStack(NyxItems.draconiumIngot, 1, 1),
+				new ItemStack(NyxItems.draconiumIngot, 1, 1), new ItemStack(NyxItems.draconiumIngot, 1, 1));
+		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 0), new ItemStack(NyxItems.echirIngot, 4, 1), 13);
+		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 1), new ItemStack(NyxItems.cortraIngot, 4, 1), 13);
+		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 2), new ItemStack(NyxItems.draconiumIngot, 4, 1), 13);
 	}
 }
