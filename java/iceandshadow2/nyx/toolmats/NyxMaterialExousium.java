@@ -91,7 +91,7 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public ItemStack getTransmutationCatalyst() {
-		return new ItemStack(NyxItems.exousium, 1, 1);
+		return new ItemStack(NyxItems.exousium, 1, 0);
 	}
 
 	@Override

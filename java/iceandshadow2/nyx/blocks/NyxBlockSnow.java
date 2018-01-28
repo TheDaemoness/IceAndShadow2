@@ -18,7 +18,7 @@ import iceandshadow2.ias.util.IaSBlockHelper;
 public class NyxBlockSnow extends IaSBaseBlockFalling {
 
 	public NyxBlockSnow(String texName) {
-		super(EnumIaSModule.NYX, texName, Material.craftedSnow);
+		super(EnumIaSModule.NYX, texName, Material.snow);
 		setHardness(0.3F);
 		this.setHarvestLevel("spade", 0);
 		setStepSound(Block.soundTypeSnow);
@@ -60,7 +60,10 @@ public class NyxBlockSnow extends IaSBaseBlockFalling {
 		if(e instanceof EntityMob) {
 		} else {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-			w.getBlock(x, y-1, z).onEntityWalking(w, x, y-1, z, e);
+			final Block beneath = w.getBlock(x, y-1, z);
+			if(beneath instanceof NyxBlockSnow) {
+				beneath.onEntityWalking(w, x, y-1, z, e);
+			}
 		}
 		super.onEntityWalking(w, x, y, z, e);
 	}

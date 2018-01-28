@@ -3,6 +3,7 @@ package iceandshadow2.nyx.items;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
@@ -26,18 +27,12 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSApiTransmute {
+public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSApiTransmute, IIaSDescriptive {
 
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -20, 0.0F, false);
 		setAlwaysEdible();
 		setMaxStackSize(4);
-	}
-
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString()
-				+ "Your life bleeds freely.");
 	}
 
 	@Override
@@ -121,5 +116,20 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return this.getModName();
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return true;
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return this.getModName();
 	}
 }

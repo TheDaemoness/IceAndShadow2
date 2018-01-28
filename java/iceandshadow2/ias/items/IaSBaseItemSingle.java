@@ -2,6 +2,8 @@ package iceandshadow2.ias.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class IaSBaseItemSingle extends IaSBaseItem {
 
@@ -19,5 +21,20 @@ public class IaSBaseItemSingle extends IaSBaseItem {
 	@Override
 	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
+	}
+	
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return getModName();
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return false;
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return getModName();
 	}
 }

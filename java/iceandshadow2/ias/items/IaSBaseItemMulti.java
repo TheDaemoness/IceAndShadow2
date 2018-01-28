@@ -1,6 +1,7 @@
 package iceandshadow2.ias.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.IaSRegistry;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class IaSBaseItemMulti extends IaSBaseItemSingle {
 		super(mod, id);
 		setHasSubtypes(true);
 		subtypeCount = subtypes;
+		IaSRegistry.blacklistUncraft(this.getClass());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

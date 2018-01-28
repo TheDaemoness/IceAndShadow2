@@ -1,5 +1,6 @@
 package iceandshadow2.ias.util;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +17,9 @@ public class IaSPlayerHelper {
 
 	public static void alertPlayer(EntityPlayer plai, String str) {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
-			final ChatComponentText txt = new ChatComponentText(str);
+			final String localized = LanguageRegistry.instance().getStringLocalization("ias2.message."+str);
+			final ChatComponentText txt =
+				new ChatComponentText(localized.isEmpty()?str:localized);
 			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
 			plai.addChatMessage(new ChatComponentText(""));
 			plai.addChatMessage(txt);

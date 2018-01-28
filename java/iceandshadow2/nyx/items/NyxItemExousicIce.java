@@ -66,6 +66,11 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 			IaSBlockHelper.breakBlock(w, x, y, z);
 			w.setBlock(x, y, z, NyxBlocks.brickExousic);
 			return true;
+		} else if (bl == NyxBlocks.gravel) {
+			is.stackSize -= 1;
+			IaSBlockHelper.breakBlock(w, x, y, z);
+			w.setBlock(x, y, z, NyxBlocks.brickExousicCracked);
+			return true;
 		}
 		return false;
 	}

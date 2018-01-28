@@ -144,4 +144,11 @@ public class NyxItemSilkBerries extends IaSItemFood {
 		itemIcon = reg.registerIcon(getTextureName());
 		matureIcon = reg.registerIcon(getTextureName() + "Mature");
 	}
+	
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		if(itemStack.getItemDamage() > 0)
+			return getModName();
+		return "";
+	}
 }

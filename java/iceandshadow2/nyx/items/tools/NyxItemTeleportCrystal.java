@@ -97,17 +97,17 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
 		if ((heap.getItemDamage() & 4) == 4 && pwai.dimension == IaSFlags.dim_nyx_id) {
 			IaSPlayerHelper.messagePlayer(pwai,
-					"You find strange thoughts coming to your mind. Something about getting power from either alabaster or the Wither...");
+					"tpcDischarged");
 			pwai.setItemInUse(heap, 72000);
 			return heap;
 		}
 		if ((heap.getItemDamage() & 1) == 0) {
 			if (pwai.dimension == IaSFlags.dim_nyx_id) {
 				IaSPlayerHelper.messagePlayer(pwai,
-						"You find strange thoughts coming to your mind. Something about needing to be standing on sanguine obsidian...");
+						"tpcInvalidNyx");
 			} else {
 				IaSPlayerHelper.messagePlayer(pwai,
-						"The crystal barely responds. It seems to prefer cold and dark places.");
+						"tpcInvalidElsewhere");
 			}
 			pwai.setItemInUse(heap, 72000);
 			return heap;

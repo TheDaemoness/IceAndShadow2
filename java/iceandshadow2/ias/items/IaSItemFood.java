@@ -8,14 +8,16 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSRegistration;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect, IIaSGlowing {
+public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect, IIaSGlowing, IIaSDescriptive {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;
@@ -87,6 +89,21 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
+	}
+
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return getModName();
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return false;
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return "";
 	}
 
 }

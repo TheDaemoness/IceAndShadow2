@@ -11,13 +11,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
+	
+	@SideOnly(Side.CLIENT)
+	protected IIcon small; //This happens often enough that I'm half considering adding a new base item.
 
 	public NyxItemAmber(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -78,17 +84,9 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 					EnchantmentHelper.getEnchantments(catalyst));
 			synchronized (ench) { // Dodge concurrent access issues?
 				EnchantmentHelper.setEnchantments(ench, target);
-				for (final Integer i : ench.keySet())
-					if (ench.get(i).intValue() <= 1) {
-						ench.remove(i);
-					} else {
-						ench.put(i, ench.get(i) - 1);
-					}
-				EnchantmentHelper.setEnchantments(ench, catalyst);
-				if(ench.isEmpty()) {
-					catalyst.setItemDamage(0);
-				}
 			}
+			catalyst.stackSize = 0;
+			return Arrays.asList(new Object[] {new ItemStack(NyxItems.amberNugget, 4)});
 		}
 		return null;
 	}

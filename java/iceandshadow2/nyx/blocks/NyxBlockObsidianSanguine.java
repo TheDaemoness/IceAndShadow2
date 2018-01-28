@@ -111,7 +111,7 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
 							return;
-						if (IaSPlayerHelper.drainXP(playuh, 19, "Something forcefully binds your life to the obsidian.",
+						if (IaSPlayerHelper.drainXP(playuh, 19, "setrespawnObsidian",
 								true) >= 19) {
 							;
 						}

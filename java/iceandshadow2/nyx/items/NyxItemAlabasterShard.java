@@ -3,9 +3,11 @@ package iceandshadow2.nyx.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemAlabasterShard extends NyxItemAlabaster {
@@ -13,6 +15,12 @@ public class NyxItemAlabasterShard extends NyxItemAlabaster {
 	public NyxItemAlabasterShard(String texName) {
 		super(texName);
 		setMaxStackSize(16);
+		IaSRegistry.blacklistUncraft(this.getClass());
+	}
+	
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return false;
 	}
 
 	@Override
@@ -36,5 +44,4 @@ public class NyxItemAlabasterShard extends NyxItemAlabaster {
 		}
 		return retval;
 	}
-
 }

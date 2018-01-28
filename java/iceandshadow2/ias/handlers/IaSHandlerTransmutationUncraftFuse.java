@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IaSRegistry;
+import iceandshadow2.ias.util.IaSItemHelper;
 import iceandshadow2.ias.util.IntPair;
 
 /**
@@ -50,6 +52,8 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(!target.isItemEqual(catalyst))
+			return 0;
+		if(IaSRegistry.isBlacklistedUncraft(IaSItemHelper.extractItem(target).getClass()))
 			return 0;
 		final List l = CraftingManager.getInstance().getRecipeList();
 		for(final Object o : l) {

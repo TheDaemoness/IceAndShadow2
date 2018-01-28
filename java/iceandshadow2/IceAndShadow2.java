@@ -123,6 +123,7 @@ public class IceAndShadow2 {
 		}
 
 		NyxBiomes.registerBiomes();
+		MinecraftForge.EVENT_BUS.register(new IaSTooltipHandler());
 		MinecraftForge.EVENT_BUS.register(new NyxEventHandlerCold());
 		MinecraftForge.EVENT_BUS.register(new NyxBlockHandler());
 		MinecraftForge.EVENT_BUS.register(new NyxEquipmentHandler());

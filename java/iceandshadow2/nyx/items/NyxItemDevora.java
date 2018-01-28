@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.nyx.NyxBlocks;
@@ -134,6 +135,13 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		if(itemStack.getItemDamage() == 0)
+			return "devora";
+		return "";
 	}
 
 }

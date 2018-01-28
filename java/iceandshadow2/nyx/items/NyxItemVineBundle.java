@@ -18,12 +18,6 @@ public class NyxItemVineBundle extends IaSBaseItemSingleGlow {
 	}
 
 	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
-				+ "One could make paper or bread from this.");
-	}
-
-	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int i, int j,
 			int k, int sideHit, float par8, float par9, float par10) {
 

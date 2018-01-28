@@ -10,6 +10,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -77,7 +78,7 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 
 	@Override
 	public String getTextureName() {
-		return ((IIaSModName) NyxBlocks.transmutationAltar).getTextureName();
+		return ((NyxBlockAltarTransmutation)NyxBlocks.transmutationAltar).getTextureName();
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 				w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, z) + 1, 2);
 			}
 		} else {
-			IaSPlayerHelper.messagePlayer(ep, "It appears to be broken. The sides are covered in an aquamarine dust.");
+			IaSPlayerHelper.messagePlayer(ep, "altarTransmutationBroken");
 		}
 		return true;
 	}

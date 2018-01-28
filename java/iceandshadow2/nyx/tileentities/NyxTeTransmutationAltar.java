@@ -52,7 +52,7 @@ public class NyxTeTransmutationAltar extends IaSTileEntity {
 		if (target == null) {
 			if (!canPlace(is)) {
 				if(ep != null) {
-					IaSPlayerHelper.messagePlayer(ep, "Something about doing that seems unsafe.");
+					IaSPlayerHelper.messagePlayer(ep, "badIdea");
 				}
 				return false;
 			}

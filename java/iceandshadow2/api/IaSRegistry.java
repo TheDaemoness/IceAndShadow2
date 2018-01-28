@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBow;
@@ -36,7 +37,15 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiTransmute> handlersTransmutable = new ArrayList<IIaSApiTransmute>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
-
+	private static HashSet<Class> uncraftBlacklist = new HashSet<Class>();
+	
+	public static void blacklistUncraft(Class classy) {
+		uncraftBlacklist.add(classy);
+	}
+	public static boolean isBlacklistedUncraft(Class classy) {
+		return uncraftBlacklist.contains(classy);
+	}
+	
 	public static void add(Object o) {
 		if (IceAndShadow2.isRegistrationPublic()) {
 			IaSRegistry.doAdd(o);

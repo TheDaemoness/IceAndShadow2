@@ -24,25 +24,19 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
-public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
+public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSDescriptive {
 
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);
 		setMaxStackSize(4);
 		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
-	}
-
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 0) {
-			l.add(EnumChatFormatting.DARK_RED.toString() + EnumChatFormatting.ITALIC.toString() + "They are coming.");
-		}
 	}
 
 	@Override
@@ -54,6 +48,11 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	@Override
 	public IIcon getIconFromDamage(int dmg) {
 		return itemIcon;
+	}
+	
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return true;
 	}
 
 	@Override
@@ -143,6 +142,16 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		IaSFxManager.spawnParticle(world, "cloudSmall", ent.posX, ent.posY - world.rand.nextFloat() + 0.25, ent.posZ,
 				0.0, 0.0, 0.0, false, false);
+		return true;
+	}
+	
+	@Override
+	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
+		return "nyxAlabaster";
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
 		return true;
 	}
 

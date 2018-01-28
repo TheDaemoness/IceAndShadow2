@@ -35,9 +35,9 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(ent);
-		if (aspect != EnumIaSAspect.VIRTUAL && aspect != EnumIaSAspect.NAVISTRA && aspect != EnumIaSAspect.EXOUSIUM)
+		if (aspect != EnumIaSAspect.VIRTUAL && aspect != EnumIaSAspect.NAVISTRA && aspect != EnumIaSAspect.EXOUSIUM) {
+			ent.attackEntityFrom(DamageSource.wither, 2);
 			if (!ent.worldObj.isRemote) {
-				ent.attackEntityFrom(DamageSource.wither, 2);
 				if (ent instanceof EntityLivingBase) {
 					((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
 					for (int i = 0; i <= 4; ++i) {
@@ -53,10 +53,11 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 						}
 					}
 				}
-			} else if (world.rand.nextBoolean()) {
+			} else if (ent.isDead) {
 				IaSFxManager.spawnParticle(ent.worldObj, "shadowSmokeLarge", ent.posX, ent.posY, ent.posZ, 0, 0, 0,
 						false, true);
 			}
+		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
 

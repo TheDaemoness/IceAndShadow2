@@ -138,7 +138,7 @@ public class NyxChunkProvider implements IChunkProvider {
 								} else if (yi * 8 + yj < NyxBlockAir.ATMOS_HEIGHT) {
 									blockArr[arrIndex] = Blocks.air;
 								} else {
-									blockArr[arrIndex] = NyxBlocks.air;
+									blockArr[arrIndex] = NyxBlocks.airDrain;
 								}
 							}
 							d10 += d12;

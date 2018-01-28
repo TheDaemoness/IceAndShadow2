@@ -6,6 +6,7 @@ import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
@@ -26,6 +27,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 
 public class NyxEventHandlerCold {
@@ -186,32 +188,23 @@ public class NyxEventHandlerCold {
 	}
 
 	@SubscribeEvent
-	public void onTryToPotion(PlayerInteractEvent e) {
-		if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR
-				&& e.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
-			return;
-		if (e.entityPlayer.isInsideOfMaterial(Material.fire))
-			return;
+	public void onTryToPotion(PlayerUseItemEvent.Start e) {
 		if (e.entity.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
-			final ItemStack ite = e.entityPlayer.getEquipmentInSlot(0);
+			final ItemStack ite = e.item;
 			if (ite == null)
 				return;
 			else if (ite.getItem() instanceof ItemPotion) {
-				if (!e.isCanceled()) {
-					e.setCanceled(true);
-					IaSPlayerHelper.messagePlayer(e.entityPlayer, "The contents of the bottle have frozen solid.");
-				}
+				IaSPlayerHelper.messagePlayer(e.entityPlayer, "The contents of the bottle have frozen solid.");
+				e.setCanceled(true);
 			} else if (ite.getItem() == Items.milk_bucket) {
-				if (!e.isCanceled()) {
-					e.setCanceled(true);
-					IaSPlayerHelper.messagePlayer(e.entityPlayer, "The milk has frozen solid.");
-				}
+				IaSPlayerHelper.messagePlayer(e.entityPlayer, "The milk has frozen solid.");
+				e.setCanceled(true);
 			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood))
-				if (!e.isCanceled()) {
-					e.setCanceled(true);
-					IaSPlayerHelper.messagePlayer(e.entityPlayer,
-							"It's been frozen solid. Eating it would be dangerous.");
-				}
+				IaSPlayerHelper.messagePlayer(e.entityPlayer,
+						"It's been frozen solid. Eating it would be dangerous.");
+				e.setCanceled(true);
+			if(e.isCanceled())
+				e.entityPlayer.stopUsingItem();
 		}
 	}
 

@@ -8,6 +8,7 @@ import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.nyx.items.tools.*;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -16,7 +17,7 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt, flask, amber, clockwork;
+			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
@@ -90,7 +91,11 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.amber = new NyxItemAmber("Amber").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.amberNugget = new NyxItemAmberNugget("AmberNugget").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.clockwork = new NyxItemClockwork("Clockwork").register()
+				.setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.clockworkSmall = new NyxItemClockworkSmall("ClockworkSmall").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
 	}
 

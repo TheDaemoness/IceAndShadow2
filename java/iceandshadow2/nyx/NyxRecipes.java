@@ -123,5 +123,9 @@ public class NyxRecipes {
 		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 0), new ItemStack(NyxItems.echirIngot, 4, 1), 13);
 		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 1), new ItemStack(NyxItems.cortraIngot, 4, 1), 13);
 		GameRegistry.addSmelting(new ItemStack(NyxItems.clockwork, 1, 2), new ItemStack(NyxItems.draconiumIngot, 4, 1), 13);
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.clockworkSmall, 4, 1), new ItemStack(NyxItems.clockwork, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.clockworkSmall, 1, 1), new ItemStack(NyxItems.clockwork, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.amberNugget, 4), new ItemStack(NyxItems.amber));
 	}
 }

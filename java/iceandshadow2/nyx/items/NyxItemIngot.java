@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
@@ -20,7 +21,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemIngot extends IaSBaseItemSingleGlow {
+public class NyxItemIngot extends IaSBaseItemSingleGlow implements IIaSDescriptive {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon active, invisible;
@@ -33,17 +34,6 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		association = associated;
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1));
 		GameRegistry.addSmelting(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), 0);
-	}
-
-	@Override
-	public void addInformation(ItemStack s, EntityPlayer p, List l, boolean b) {
-		if (s.getItemDamage() == 1) {
-			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
-					+ "Sneak and Use Item to finalize.");
-		} else {
-			l.add(EnumChatFormatting.GRAY.toString() + EnumChatFormatting.ITALIC.toString()
-					+ "This needs to be heated up...");
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -100,5 +90,21 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		super.registerIcons(reg);
 		active = reg.registerIcon(getTextureName() + "Active");
 		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
+	}
+
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer p, ItemStack is) {
+		if(is.getItemDamage() == 1)
+			return "ingotPrimed";
+		else if(association instanceof IIaSDescriptive)
+			return "ingot"+((IIaSDescriptive)association).getUnlocalizedDescription(p, null);
+		return "ingot";
+	}
+	
+	@Override
+	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
+		if(is.getItemDamage() == 1)
+			return "ingotPrimed";
+		return "ingot";
 	}
 }
