@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IaSRegistry;
+import iceandshadow2.IaSRegistry;
 
 import java.util.List;
 

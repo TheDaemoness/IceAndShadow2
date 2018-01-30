@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBlockAltar;
 import iceandshadow2.render.fx.IaSFxManager;

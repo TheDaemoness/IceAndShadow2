@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IaSRegistry;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.items.IaSBaseItem;

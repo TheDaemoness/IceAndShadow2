@@ -1,6 +1,9 @@
-package iceandshadow2.api;
+package iceandshadow2;
 
-import iceandshadow2.IceAndShadow2;
+import iceandshadow2.api.IIaSApiExaminable;
+import iceandshadow2.api.IIaSApiSacrificeXp;
+import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirToolActive;

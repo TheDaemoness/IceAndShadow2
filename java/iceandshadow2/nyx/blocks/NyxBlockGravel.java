@@ -13,9 +13,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public NyxBlockGravel(String par1) {
@@ -51,7 +53,10 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public void onBlockAdded(World w, int x, int y, int z) {
 		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-		}
+		} else for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
+				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.stoneGrowing);
+			}
 	}
 
 	@Override
@@ -61,20 +66,6 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
 					par5EntityPlayer.worldObj.difficultySetting.getDifficultyId());
 		}
-	}
-
-	@Override
-	public void onBlockDestroyedByExplosion(World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_,
-			Explosion p_149723_5_) {
-		super.onBlockDestroyedByExplosion(p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
-		p_149723_1_.setBlock(p_149723_2_, p_149723_3_, p_149723_4_, NyxBlocks.stoneMemory);
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_,
-			int p_149664_5_) {
-		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
-		p_149664_1_.setBlock(p_149664_2_, p_149664_3_, p_149664_4_, NyxBlocks.stoneMemory);
 	}
 
 	@Override

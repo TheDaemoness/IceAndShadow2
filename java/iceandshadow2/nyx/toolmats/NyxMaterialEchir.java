@@ -19,7 +19,7 @@ public class NyxMaterialEchir extends IaSToolMaterial {
 
 	@Override
 	public float getBaseSpeed() {
-		return 10;
+		return 12;
 	}
 
 	@Override

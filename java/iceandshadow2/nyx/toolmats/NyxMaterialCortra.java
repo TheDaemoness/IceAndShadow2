@@ -1,19 +1,27 @@
 package iceandshadow2.nyx.toolmats;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSEntityHelper;
+import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class NyxMaterialCortra extends IaSToolMaterial {
 
@@ -32,7 +40,7 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public float getBaseSpeed() {
-		return 8;
+		return 10;
 	}
 
 	@Override
@@ -84,9 +92,9 @@ public class NyxMaterialCortra extends IaSToolMaterial {
 
 	@Override
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World w, int x, int y, int z, Block bl) {
-		final int metadata = w.getBlockMetadata(x, y, z);
-		final boolean getXP = bl.canHarvestBlock(user, metadata) && bl.getHarvestLevel(metadata) >= 1;
-		user.addExperience(getXP ? 1 : 0);
+		List<ItemStack> items = IaSBlockHelper.harvest(user, x, y, z);
+		for(ItemStack drop : items)
+			IaSPlayerHelper.giveItem(user, drop);
 		return super.onPreHarvest(is, user, w, x, y, z, bl);
 	}
 }

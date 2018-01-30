@@ -1,8 +1,11 @@
 package iceandshadow2.nyx.toolmats;
 
+import java.util.List;
+
 import iceandshadow2.api.IaSEntityKnifeBase;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -84,10 +87,8 @@ public class NyxMaterialSanctified extends IaSToolMaterial {
 	@Override
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block block) {
 		final int fortune = Math.max(0, (5 + user.experienceLevel) / 10);
-		final int metadata = worldObj.getBlockMetadata(x, y, z);
-		block.dropBlockAsItem(worldObj, x, y, z, metadata, fortune);
-		block.onBlockDestroyedByPlayer(worldObj, x, y, z, metadata);
-		IaSBlockHelper.breakBlock(worldObj, x, y, z, false);
+		List<ItemStack> items = IaSBlockHelper.harvest(user, x, y, z, fortune);
+		IaSEntityHelper.spawnItems(worldObj, items, x, y, z, block);
 		return false;
 	}
 }

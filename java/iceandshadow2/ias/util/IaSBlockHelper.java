@@ -1,20 +1,78 @@
 package iceandshadow2.ias.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import iceandshadow2.api.EnumIaSAspect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.MaterialTransparent;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class IaSBlockHelper {
+	/**
+	 * Forcibly harvests the specified block.
+	 * Does NOT spawn the block's items, rather leaving that task up to the callee.
+	 * Note that blocks that perform additional actions in harvestBlock may malfunction.
+	 * @param fortune The fortune level. Negative levels imply silk touch with a fortune level = |fortune|-1
+	 */
+	public static List<ItemStack> harvest(EntityPlayer breaker, int x, int y, int z, int fortune, float chance, boolean hunger) {
+		final World w = breaker.worldObj;
+		final Block bl = w.getBlock(x, y, z);
+		final int meta = w.getBlockMetadata(x, y, z);
+		if(hunger)
+			breaker.addExhaustion(0.025F);
+		if(isAir(bl) || bl.isAir(w, x, y, z))
+			return Arrays.asList();
+		breaker.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(bl)], 1);
+		
+		final boolean silktouch = fortune<0;
+		fortune = Math.abs(fortune)-(silktouch?1:0);
+		final ArrayList ret = new ArrayList<ItemStack>();
+        if (!w.isRemote && !w.restoringBlockSnapshots) {
+    		ArrayList<ItemStack> items;
+        	if(silktouch && bl.canSilkHarvest(w, breaker, x, y, z, meta)) {
+        		items = (ArrayList<ItemStack>)Arrays.asList(new ItemStack(Item.getItemFromBlock(bl)));
+        	} else
+        		items = bl.getDrops(w, x, y, z, meta, fortune);
+            chance = ForgeEventFactory.fireBlockHarvesting(items, w, bl, x, y, z, meta, fortune, chance, silktouch, breaker);
+
+            ret.ensureCapacity(items.size());
+            for (ItemStack is : items) {
+                if (w.rand.nextFloat() <= chance)
+                    ret.add(is);
+            }
+        }
+        bl.onBlockHarvested(w, x, y, z, meta, breaker);
+        bl.onBlockDestroyedByPlayer(w, x, y, z, meta);
+        if(w.getBlock(x, y, z) == bl && w.getBlockMetadata(x, y, z) == meta)
+        	breakBlock(w, x, y, z, false);
+        return ret;
+	}
+	public static List<ItemStack> harvest(EntityPlayer breaker, int x, int y, int z, int fortune, float chance) {
+		return harvest(breaker, x, y, z, fortune, chance, true);
+	}
+	public static List<ItemStack> harvest(EntityPlayer breaker, int x, int y, int z, int fortune) {
+		return harvest(breaker, x, y, z, fortune, 1f);
+	}
+	public static List<ItemStack> harvest(EntityPlayer breaker, int x, int y, int z) {
+		return harvest(breaker, x, y, z, EnchantmentHelper.getFortuneModifier(breaker));
+	}
+	
 	public static boolean breakBlock(World w, int x, int y, int z) {
 		return breakBlock(w, x, y, z, true);
 	}

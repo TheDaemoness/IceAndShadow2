@@ -20,6 +20,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -88,8 +90,10 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 	@Override
 	public void onBlockDestroyedByExplosion(World w, int x, int y, int z, Explosion ex) {
 		super.onBlockDestroyedByExplosion(w, x, y, z, ex);
-		w.setBlock(x, y, z, IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stoneMemory) ? NyxBlocks.gravel
-				: NyxBlocks.stoneMemory);
+		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
+				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.gravel);
+			}
 	}
 
 	@Override

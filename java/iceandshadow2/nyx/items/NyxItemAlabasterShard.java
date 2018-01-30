@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.api.IaSRegistry;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemAlabasterShard extends NyxItemAlabaster {

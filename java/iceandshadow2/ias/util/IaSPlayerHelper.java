@@ -66,13 +66,13 @@ public class IaSPlayerHelper {
 	}
 
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
-		final boolean added = plai.inventory.addItemStackToInventory(is);
-		if (!added && !plai.worldObj.isRemote) {
+		if(!plai.worldObj.isRemote) {
 			final EntityItem item = new EntityItem(plai.worldObj, plai.posX, plai.posY + plai.getEyeHeight() / 2.0,
-					plai.posZ, is);
+				plai.posZ, is);
+			item.delayBeforeCanPickup = 0;
 			plai.worldObj.spawnEntityInWorld(item);
 		}
-		return added;
+		return true;
 	}
 
 	public static void messagePlayer(EntityPlayer plai, String str) {

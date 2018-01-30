@@ -250,4 +250,41 @@ public class IaSEntityHelper {
 		}
 		return ret;
 	}
+	
+	public static void spawnItems(World w, List<ItemStack> items,
+			int x, int y, int z) {
+		spawnItems(w, items, x, y, z,
+			0, 0, 0,
+			1, 1, 1);
+	}
+	
+	public static void spawnItems(World w, List<ItemStack> items,
+			int x, int y, int z, Block bl) {
+		spawnItems(w, items, x, y, z,
+			bl.getBlockBoundsMinX(),
+			bl.getBlockBoundsMinY(),
+			bl.getBlockBoundsMinZ(),
+			bl.getBlockBoundsMaxX(),
+			bl.getBlockBoundsMaxY(),
+			bl.getBlockBoundsMaxZ());
+	}
+
+	public static void spawnItems(World w, List<ItemStack> items,
+			int x, int y, int z,
+			double xL, double yL, double zL,
+			double xH, double yH, double zH) {
+		final double
+			xW = (xH-xL)/2,
+			yW = (yH-yL)/2,
+			zW = (zH-zL)/2;
+		for(ItemStack is : items) {
+			final double
+				xOffset = w.rand.nextFloat() * xW + xL + xW/2,
+				yOffset = w.rand.nextFloat() * yW + yL + yW/2,
+				zOffset = w.rand.nextFloat() * zW + zL + zW/2;
+			EntityItem eis = new EntityItem(w, x + xOffset, y + yOffset, z + zOffset, is);
+			eis.delayBeforeCanPickup = 10; //Standard Minecraft delay.
+			w.spawnEntityInWorld(eis);
+		}
+	}
 }
