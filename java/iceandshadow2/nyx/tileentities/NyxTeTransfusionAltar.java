@@ -13,7 +13,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class NyxTeTransmutationAltar extends IaSTileEntity {
+public class NyxTeTransfusionAltar extends IaSTileEntity {
 	public ItemStack target;
 	public ItemStack catalyst;
 	public IIaSApiTransmute handler;

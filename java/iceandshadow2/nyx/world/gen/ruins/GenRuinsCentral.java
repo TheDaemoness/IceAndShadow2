@@ -121,7 +121,7 @@ public class GenRuinsCentral extends GenRuins {
 		// Broken transmutation altars.
 		for (int xit = -5; xit <= 5; xit += 5) {
 			for (int zit = -5; zit <= 5; zit += 5) {
-				w.setBlock(x + xit, y + 2, z + zit, NyxBlocks.transmutationAltarBroken);
+				w.setBlock(x + xit, y + 2, z + zit, NyxBlocks.transfusionAltarBroken);
 			}
 		}
 	}

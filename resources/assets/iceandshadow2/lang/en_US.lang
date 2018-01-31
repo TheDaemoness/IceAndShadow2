@@ -122,6 +122,7 @@ item.nyxClockwork0.name=Sentient Clockwork
 item.nyxClockwork1.name=Sentient Cortra Clockwork
 item.nyxClockwork2.name=Sentient Draconium Clockwork
 item.nyxClockworkSmall.name=Programmable Clockwork
+item.nyxGrenade.name=Improvised Grenade
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 item.nyxEchirShears.name=Echir Shears
@@ -223,7 +224,7 @@ entity.IceAndShadow2.nyxMobWalkerInfested.name=Infested Walker
 
 ias2.message.drainAir=Your life begins to bleed into your surroundings.
 ias2.message.badIdea=Something about doing that seems unsafe.
-ias2.message.altarTransmuteBroken=It appears to be broken. The sides are covered in an aquamarine dust.
+ias2.message.altarTransfusionBroken=It appears to be broken. The sides are covered in an aquamarine dust.
 ias2.message.tpcDischarged=You find strange thoughts coming to your mind. Something about getting power from either alabaster or the Wither...
 ias2.message.tpcInvalidNyx=You find strange thoughts coming to your mind. Something about needing to be standing on sanguine obsidian...
 ias2.message.tpcInvalidElsewhere=The crystal barely responds. It seems to prefer cold and dark places.
@@ -275,3 +276,6 @@ ias2.hint.nyxSilkBerries=It should be possible to plant these.
 
 ias2.warning.nyxAlabaster=They are coming.
 ias2.warning.nyxBloodstone=Your life bleeds freely.
+
+ias2.grenade.nyxExplosive=Explosive
+ias2.grenade.nyxIceWall=Ice Wall

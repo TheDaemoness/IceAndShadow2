@@ -1,7 +1,7 @@
 package iceandshadow2.render.tileentity;
 
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
+import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,7 +24,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 		// This will move our renderer so that it will be on proper place in the
 		// world
 		GL11.glTranslatef((float) x + 0.5F, (float) y, (float) z + 0.5F);
-		final NyxTeTransmutationAltar alt = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar alt = (NyxTeTransfusionAltar) te;
 
 		if (cat == null && alt.catalyst != null) {
 			cat = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, alt.catalyst);
@@ -67,7 +67,7 @@ public class RenderNyxTeTransmutationAltar extends TileEntitySpecialRenderer {
 			tar.hoverStart = 0.0F;
 			RenderItem.renderInFrame = true;
 			GL11.glPushMatrix();
-			final float height = (float)NyxBlocks.transmutationAltar.getBlockBoundsMaxY();
+			final float height = (float)NyxBlocks.transfusionAltar.getBlockBoundsMaxY();
 			float bias = 0;
 			boolean asitem = false;
 			if (alt.target.getItem() instanceof ItemBlock) {

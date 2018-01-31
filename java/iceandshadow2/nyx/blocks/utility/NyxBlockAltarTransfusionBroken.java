@@ -10,7 +10,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
+import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,12 +21,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
+public class NyxBlockAltarTransfusionBroken extends IaSBaseBlockSingle {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon side0, side1, side2, bot;
 
-	public NyxBlockAltarTransmutationBroken(String id) {
+	public NyxBlockAltarTransfusionBroken(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setLightLevel(0.4F);
 		setResistance(Blocks.obsidian.getExplosionResistance(null));
@@ -78,7 +78,7 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 
 	@Override
 	public String getTextureName() {
-		return ((NyxBlockAltarTransmutation)NyxBlocks.transmutationAltar).getTextureName();
+		return ((NyxBlockAltarTransfusion)NyxBlocks.transfusionAltar).getTextureName();
 	}
 
 	@Override
@@ -94,12 +94,12 @@ public class NyxBlockAltarTransmutationBroken extends IaSBaseBlockSingle {
 			final int meta = w.getBlockMetadata(x, y, z);
 			is.stackSize -= 1;
 			if (meta == 7) {
-				w.setBlock(x, y, z, NyxBlocks.transmutationAltar);
+				w.setBlock(x, y, z, NyxBlocks.transfusionAltar);
 			} else {
 				w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, z) + 1, 2);
 			}
 		} else {
-			IaSPlayerHelper.messagePlayer(ep, "altarTransmutationBroken");
+			IaSPlayerHelper.messagePlayer(ep, "altarTransfusionBroken");
 		}
 		return true;
 	}

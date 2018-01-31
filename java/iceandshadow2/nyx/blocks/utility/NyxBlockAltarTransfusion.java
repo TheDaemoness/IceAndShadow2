@@ -14,7 +14,7 @@ import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
+import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialTransparent;
@@ -31,12 +31,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 //See, this is why we need some form of MI in Java, be it mixins or traits.
-public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
+public class NyxBlockAltarTransfusion extends IaSBaseBlockTileEntity {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon side, bot;
 
-	public NyxBlockAltarTransmutation(String id) {
+	public NyxBlockAltarTransfusion(String id) {
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setResistance(Blocks.obsidian.getExplosionResistance(null));
 		setHardness(Blocks.obsidian.getBlockHardness(null, 0, 0, 0));
@@ -49,22 +49,22 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public void breakBlockPre(World w, int x, int y, int z, Block bl, int meta) {
 		final TileEntity te = w.getTileEntity(x, y, z);
-		if (!(te instanceof NyxTeTransmutationAltar))
+		if (!(te instanceof NyxTeTransfusionAltar))
 			return;
-		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 		tte.dropItems();
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World w, int p_149915_2_) {
-		return new NyxTeTransmutationAltar();
+		return new NyxTeTransfusionAltar();
 	}
 
 	public void doTransmutation(World w, int x, int y, int z, Random r) {
 		final TileEntity te = w.getTileEntity(x, y, z);
-		if (!(te instanceof NyxTeTransmutationAltar))
+		if (!(te instanceof NyxTeTransfusionAltar))
 			return;
-		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 		if (!tte.canAttemptTransmutation())
 			return;
 		if (tte.handler == null) {
@@ -169,7 +169,7 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> arl = new ArrayList<ItemStack>(2);
-		arl.add(new ItemStack(NyxBlocks.transmutationAltarBroken.getItem(world, x, y, z)));
+		arl.add(new ItemStack(NyxBlocks.transfusionAltarBroken.getItem(world, x, y, z)));
 		fortune = Math.min(4, fortune);
 		arl.add(new ItemStack(NyxItems.cortra, 4 + fortune + world.rand.nextInt(5 - fortune)));
 		return arl;
@@ -179,8 +179,8 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess w, int x, int y, int z, int side) {
 		final TileEntity e = w.getTileEntity(x, y, z);
-		if (e instanceof NyxTeTransmutationAltar) {
-			final ItemStack tar = ((NyxTeTransmutationAltar) e).target;
+		if (e instanceof NyxTeTransfusionAltar) {
+			final ItemStack tar = ((NyxTeTransfusionAltar) e).target;
 			if (tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
 				final IIcon retval = ((IIaSApiTransmuteLens) tar.getItem()).getAltarTopTexture(tar);
 				if (retval != null)
@@ -228,9 +228,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 			return false;
 		}
 		final TileEntity te = w.getTileEntity(x, y, z);
-		if (!(te instanceof NyxTeTransmutationAltar))
+		if (!(te instanceof NyxTeTransfusionAltar))
 			return false;
-		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 		final ItemStack is = ep.getEquipmentInSlot(0);
 		if (is == null) {
 			final ItemStack its = tte.handleRemove(ep, ep.isSneaking());
@@ -258,9 +258,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 		final Block check = w.getBlock(x, y + 1, z);
 		if (check != null && !(check.getMaterial() instanceof MaterialTransparent)) {
 			final TileEntity te = w.getTileEntity(x, y, z);
-			if (!(te instanceof NyxTeTransmutationAltar))
+			if (!(te instanceof NyxTeTransfusionAltar))
 				return;
-			final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+			final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 			tte.dropItems();
 			w.markBlockForUpdate(x, y, z);
 			w.setBlockToAir(x, y, z);
@@ -271,9 +271,9 @@ public class NyxBlockAltarTransmutation extends IaSBaseBlockTileEntity {
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
 		final TileEntity te = w.getTileEntity(x, y, z);
-		if (!(te instanceof NyxTeTransmutationAltar))
+		if (!(te instanceof NyxTeTransfusionAltar))
 			return;
-		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 		if (tte.handler != null && tte.canAttemptTransmutation()) {
 			Blocks.ender_chest.randomDisplayTick(w, x, y + 1, z, r);
 		}

@@ -84,7 +84,7 @@ public class IaSRenderers {
 		}
 
 
-		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransmutationAltar.class,
+		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransfusionAltar.class,
 				new RenderNyxTeTransmutationAltar());
 	}
 

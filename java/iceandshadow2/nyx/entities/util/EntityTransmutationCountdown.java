@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.entities.util;
 
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.nyx.blocks.utility.NyxBlockAltarTransmutation;
-import iceandshadow2.nyx.tileentities.NyxTeTransmutationAltar;
+import iceandshadow2.nyx.blocks.utility.NyxBlockAltarTransfusion;
+import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -107,11 +107,11 @@ public class EntityTransmutationCountdown extends Entity {
 					z+0.7+worldObj.rand.nextDouble()/10, 0, 0, 0, false, false);
 		}
 		final TileEntity te = worldObj.getTileEntity(x, y, z);
-		if (!(te instanceof NyxTeTransmutationAltar)) {
+		if (!(te instanceof NyxTeTransfusionAltar)) {
 			setDead();
 			return;
 		}
-		final NyxTeTransmutationAltar tte = (NyxTeTransmutationAltar) te;
+		final NyxTeTransfusionAltar tte = (NyxTeTransfusionAltar) te;
 		if (worldObj.getBlock(x, y + 1, z).getMaterial() != Material.air) {
 			setDead();
 			return;
@@ -122,8 +122,8 @@ public class EntityTransmutationCountdown extends Entity {
 		}
 		++age;
 		if (age >= dataWatcher.getWatchableObjectInt(16) && !worldObj.isRemote)
-			if (worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransmutation) {
-				final NyxBlockAltarTransmutation bl = (NyxBlockAltarTransmutation) worldObj.getBlock(x, y, z);
+			if (worldObj.getBlock(x, y, z) instanceof NyxBlockAltarTransfusion) {
+				final NyxBlockAltarTransfusion bl = (NyxBlockAltarTransfusion) worldObj.getBlock(x, y, z);
 				bl.doTransmutation(worldObj, x, y, z, worldObj.rand);
 				worldObj.markBlockForUpdate(x, y, z);
 				worldObj.markTileEntityChunkModified(x, y, z, tte);

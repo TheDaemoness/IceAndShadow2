@@ -16,8 +16,8 @@ public class NyxBlocks {
 	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
-			transmutationAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			airDrain, transmutationAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner;
+			transfusionAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
+			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -72,8 +72,8 @@ public class NyxBlocks {
 		NyxBlocks.gatestone = new NyxBlockGatestone("Gatestone").register();
 		NyxBlocks.sanctifiedObsidian = new NyxBlockObsidianSanctified("SanctifiedObsidian").register();
 
-		NyxBlocks.transmutationAltar = new NyxBlockAltarTransmutation("TransmutationAltar").register();
-		NyxBlocks.transmutationAltarBroken = new NyxBlockAltarTransmutationBroken("TransmutationAltarBroken")
+		NyxBlocks.transfusionAltar = new NyxBlockAltarTransfusion("TransmutationAltar").register();
+		NyxBlocks.transfusionAltarBroken = new NyxBlockAltarTransfusionBroken("TransmutationAltarBroken")
 				.register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 		NyxBlocks.infestSpawner = new NyxBlockInfestedSpawner("InfestedSpawner").register();
@@ -89,7 +89,7 @@ public class NyxBlocks {
 		NyxBlocks.unstableDevora = new NyxBlockUnstableDevora("UnstableDevora").register();
 		NyxBlocks.airDrain = new NyxBlockAir("Air").register();
 
-		GameRegistry.registerTileEntity(NyxTeTransmutationAltar.class, "nyxTeTransmutationAltar");
+		GameRegistry.registerTileEntity(NyxTeTransfusionAltar.class, "nyxTeTransmutationAltar");
 
 		NyxBlocks.stoneMemory = new NyxBlockStoneMemory("StoneRegen").register();
 		NyxBlocks.stoneGrowing = new NyxBlockStoneGrowing("StoneGrowing").register();

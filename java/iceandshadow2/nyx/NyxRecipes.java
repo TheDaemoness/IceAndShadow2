@@ -61,7 +61,7 @@ public class NyxRecipes {
 				new ItemStack(NyxBlocks.hookClimbing), 'e', new ItemStack(NyxItems.echirIngot, 1, 1), 'r',
 				new ItemStack(NyxItems.rope));
 
-		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transmutationAltar), "cdc", "coc",
+		GameRegistry.addRecipe(new ItemStack(NyxBlocks.transfusionAltar), "cdc", "coc",
 				'd', new ItemStack(NyxItems.clockwork, 1, 2),
 				'c', new ItemStack(NyxItems.cortra, 1, 1),
 				'o', new ItemStack(NyxBlocks.sanctifiedObsidian));

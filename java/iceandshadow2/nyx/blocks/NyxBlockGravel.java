@@ -26,7 +26,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 		setHardness(0.5F);
 		setResistance(1.0F);
 		setTickRandomly(true);
-		this.setHarvestLevel("spade", 0);
+		this.setHarvestLevel("shovel", 1);
 	}
 
 	@Override

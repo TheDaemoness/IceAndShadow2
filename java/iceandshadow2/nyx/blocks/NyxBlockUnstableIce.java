@@ -25,7 +25,7 @@ public class NyxBlockUnstableIce extends IaSBaseBlockFalling {
 		setLightOpacity(4);
 		setTickRandomly(true);
 		slipperiness = 1.08F;
-		this.setHarvestLevel("spade", 0);
+		this.setHarvestLevel("shovel", 0);
 	}
 
 	@Override

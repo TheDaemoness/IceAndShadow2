@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.api.EnumIaSToolClass;
 import iceandshadow2.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.world.NyxChunkManager;
@@ -26,7 +27,7 @@ public class NyxBlockDirt extends IaSBaseBlockMulti implements IIaSBlockThawable
 		super(EnumIaSModule.NYX, texName, Material.ground, 2);
 		setHardness(NyxBlockDirt.HARDNESS);
 		setResistance(NyxBlockDirt.RESISTANCE);
-		this.setHarvestLevel("spade", 0);
+		this.setHarvestLevel("shovel", 0);
 		setStepSound(Block.soundTypeGravel);
 		setTickRandomly(true);
 	}
