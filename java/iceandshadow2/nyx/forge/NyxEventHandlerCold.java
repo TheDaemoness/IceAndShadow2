@@ -191,20 +191,24 @@ public class NyxEventHandlerCold {
 	public void onTryToPotion(PlayerUseItemEvent.Start e) {
 		if (e.entity.dimension == IaSFlags.dim_nyx_id && !e.entityPlayer.capabilities.isCreativeMode) {
 			final ItemStack ite = e.item;
+			boolean stopped = false;
 			if (ite == null)
 				return;
 			else if (ite.getItem() instanceof ItemPotion) {
 				IaSPlayerHelper.messagePlayer(e.entityPlayer, "The contents of the bottle have frozen solid.");
-				e.setCanceled(true);
+				stopped = true;
 			} else if (ite.getItem() == Items.milk_bucket) {
 				IaSPlayerHelper.messagePlayer(e.entityPlayer, "The milk has frozen solid.");
-				e.setCanceled(true);
-			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood))
+				stopped = true;
+			} else if (ite.getItem() instanceof ItemFood && !(ite.getItem() instanceof IaSItemFood)) {
 				IaSPlayerHelper.messagePlayer(e.entityPlayer,
 						"It's been frozen solid. Eating it would be dangerous.");
+				stopped = true;
+			}
+			if(stopped) {
 				e.setCanceled(true);
-			if(e.isCanceled())
 				e.entityPlayer.stopUsingItem();
+			}
 		}
 	}
 
