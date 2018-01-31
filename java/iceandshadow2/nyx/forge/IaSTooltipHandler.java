@@ -43,16 +43,22 @@ public class IaSTooltipHandler {
 		Object it = IaSItemHelper.extractItem(e.itemStack);
 		boolean isWarning = false;
 		if(it instanceof IIaSDescriptive) {
+			IIaSDescriptive desc = ((IIaSDescriptive)it);
 			String localized = null;
 			String unlocalized = 
 					((IIaSDescriptive)it).getUnlocalizedHint(e.entityPlayer, e.itemStack);
 				if(unlocalized != null && !unlocalized.isEmpty()) {
 					isWarning = 
 						((IIaSDescriptive)it).isHintWarning(e.entityPlayer, e.itemStack);
-					if(isWarning || true) { //TODO: Inventory search for a player guide.
+					if(isWarning || IaSFlags.flag_hints) {
 						final String prefix = isWarning?"ias2.warning.":"ias2.hint.";
 						localized = LanguageRegistry.instance().getStringLocalization(prefix+unlocalized);
 					}
+			}
+			if(localized != null) {
+				String argument = desc.getLocalizedHintArgument(e.entityPlayer, e.itemStack);
+				if(argument != null)
+					localized = localized.replaceAll("%1\\$s", argument);
 			}
 			if(isWarning)
 				addTooltip(e.toolTip, localized, true);

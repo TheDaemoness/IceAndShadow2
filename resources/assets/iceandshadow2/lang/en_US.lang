@@ -261,10 +261,11 @@ ias2.description.nyxClockworkSmall=It ticks away mindlessly.
 ias2.description.nyxClockworkSmallKilled=You monster!
 ias2.description.nyxToxicCore=Better not lick it.
 ias2.description.nyxCurativeResin=It smells like relief!
+ias2.description.nyxGrenade=Should these really be kept together?
 
 ias2.hint.nyxEchirDust=This needs to be smelted.
 ias2.hint.ingot=This needs to be heated up.
-ias2.hint.ingotPrimed=Sneak and Use Item to finalize.
+ias2.hint.ingotPrimed=Sneak+Use to finalize.
 ias2.hint.nyxVineBundle=You could make paper from this.
 ias2.hint.nyxDevora=This seems highly explosive.
 ias2.hint.nyxCursedBone=Throw to cause a blast of shadow.
@@ -273,9 +274,14 @@ ias2.hint.nyxRope=This seems ideal for climbing.
 ias2.hint.nyxShapedLeaf=You could make curative resin from this.
 ias2.hint.nyxFlask=You can fill this with certain potions.
 ias2.hint.nyxSilkBerries=It should be possible to plant these.
+ias2.hint.grenade=Sneak+Use to arm. Explodes after %1$s.
+ias2.hint.grenadeImpact=Sneak+Use to arm. Explodes %1$s after impact.
 
 ias2.warning.nyxAlabaster=They are coming.
 ias2.warning.nyxBloodstone=Your life bleeds freely.
 
 ias2.grenade.nyxExplosive=Explosive
 ias2.grenade.nyxIceWall=Ice Wall
+
+ias2.unit.second=sec
+ias2.unit.seconds=secs

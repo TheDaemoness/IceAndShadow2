@@ -14,6 +14,11 @@ import net.minecraft.item.ItemStack;
 
 public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspect, IIaSGlowing, IIaSDescriptive {
 
+	@Override
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return null;
+	}
+
 	private final EnumIaSModule MODULE;
 
 	protected IaSBaseItem(EnumIaSModule mod) {

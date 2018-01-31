@@ -27,7 +27,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSApiTransmute, IIaSDescriptive {
+public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSApiTransmute {
 
 	public NyxItemBloodstone(String texName) {
 		super(EnumIaSModule.NYX, texName, -20, 0.0F, false);

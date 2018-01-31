@@ -106,4 +106,9 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 		return "";
 	}
 
+	@Override
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return null;
+	}
+
 }

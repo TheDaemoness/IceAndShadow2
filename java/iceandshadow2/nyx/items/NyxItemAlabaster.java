@@ -31,7 +31,7 @@ import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
-public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute, IIaSDescriptive {
+public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
 
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);

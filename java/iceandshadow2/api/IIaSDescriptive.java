@@ -29,4 +29,10 @@ public interface IIaSDescriptive {
 	 * @return
 	 */
 	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack);
+	
+	/**
+	 * Returns localized text for the first argument for a hint.
+	 * @return null if the hint has no parameters.
+	 */
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack);
 }

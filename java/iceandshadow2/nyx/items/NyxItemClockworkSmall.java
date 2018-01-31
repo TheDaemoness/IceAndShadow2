@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
-public class NyxItemClockworkSmall extends IaSBaseItemSingleGlow implements IIaSDescriptive {
+public class NyxItemClockworkSmall extends IaSBaseItemSingleGlow {
 	
 	static {
 		IaSRegistry.blacklistUncraft(NyxItemClockworkSmall.class);

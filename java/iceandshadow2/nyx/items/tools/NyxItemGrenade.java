@@ -71,4 +71,17 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 				pl.destroyCurrentEquippedItem();
 		}
 	}
+	
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return IaSRegistry.getGrenadeLogic(itemStack.getItemDamage()).fuseOnImpact?"grenadeImpact":"grenade";
+	}
+
+	@Override
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		final int fusetime = IaSRegistry.getGrenadeLogic(itemStack.getItemDamage()).fuseLimit;
+		final String fuse = String.format("%.2f", fusetime/20f);
+		final String hint = LanguageRegistry.instance().getStringLocalization(Math.abs(fusetime)==20?"ias2.unit.second":"ias2.unit.seconds");
+		return fuse+" "+hint;
+	}
 }
