@@ -3,6 +3,7 @@ package iceandshadow2;
 import iceandshadow2.api.IIaSApiExaminable;
 import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;
@@ -11,7 +12,11 @@ import iceandshadow2.ias.items.tools.IaSItemToolBroken;
 import iceandshadow2.nyx.items.tools.NyxItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemFlask;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
+import iceandshadow2.nyx.toolmats.NyxGrenadeExplosive;
 import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,6 +44,7 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiExaminable> handlersExaminable = new ArrayList<IIaSApiExaminable>();
 	private static ArrayList<IIaSApiTransmute> handlersTransmutable = new ArrayList<IIaSApiTransmute>();
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
+	private static ArrayList<IaSGrenadeLogic> grenadeLogics = new ArrayList<IaSGrenadeLogic>();
 	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
 	private static HashSet<Class> uncraftBlacklist = new HashSet<Class>();
 	
@@ -221,5 +227,23 @@ public final class IaSRegistry {
 		setPrimarilyTransfusionTarget(NyxItemBow.class);
 		setPrimarilyTransfusionTarget(NyxItemFlask.class);
 		setPrimarilyTransfusionTarget(NyxItemSwordFrost.class);
+		
+		addGrenadeLogic(new NyxGrenadeExplosive());
+	}
+	public static int addGrenadeLogic(IaSGrenadeLogic evidenceAndReasons) {
+		if(evidenceAndReasons.setId(grenadeLogics.size()))
+			grenadeLogics.add(evidenceAndReasons);
+		else
+			throw new IllegalArgumentException(
+				"setId previously called on "
+				+IaSGrenadeLogic.class.getSimpleName()
+				+" passed to "+IaSRegistry.class.getSimpleName());
+		return grenadeLogics.size()-1;
+	}
+	public static IaSGrenadeLogic getGrenadeLogic(int flag) {
+		return grenadeLogics.get(flag % grenadeLogics.size());
+	}
+	public static int getGrenadeLogicCount() {
+		return grenadeLogics.size();
 	}
 }

@@ -21,7 +21,8 @@ public class NyxItems {
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
-	public static Item potion; //NOTE: Initialized during postinit.
+	//WARNING: MUST BE INITIALIZED DURING POSTINIT, NOT EARLIER!
+	public static Item potion, grenade; 
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
@@ -101,5 +102,6 @@ public class NyxItems {
 
 	public static void lateInit() {
 		potion = new NyxItemPotion("Potion").register().setCreativeTab(IaSCreativeTabs.misc);
+		grenade = new NyxItemGrenade("Grenade").register().setCreativeTab(IaSCreativeTabs.tools);
 	}
 }

@@ -65,6 +65,8 @@ public class NyxEntities {
 
 		registerModEntity(EntityNyxSpiderBaby.class, "nyxMobSpiderWispBaby", 60, 1, true);
 		NyxEntities.registerEntityEgg(EntityNyxSpiderBaby.class, 0x44ffdd, 0x774444);
+
+		registerModEntity(EntityGrenade.class, "nyxProjectileGrenade", 80, 2, true);
 	}
 
 	public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {

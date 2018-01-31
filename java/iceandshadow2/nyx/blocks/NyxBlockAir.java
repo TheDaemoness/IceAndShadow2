@@ -3,6 +3,7 @@ package iceandshadow2.nyx.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import net.minecraft.block.Block;
@@ -41,7 +42,7 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 			if (dir == ForgeDirection.DOWN && y <= ATMOS_HEIGHT) {
 				continue;
 			}
-			if (w.isAirBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)) {
+			if (bl != this && !IaSBlockHelper.isAir(bl) && IaSBlockHelper.isAir(w.getBlock(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ))) {
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, this);
 			}
 		}

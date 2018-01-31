@@ -1,6 +1,6 @@
 package iceandshadow2;
 
-//Class for trinary/trilean logic.
+//Class for trinary/trilean logic. Currently unused.
 public enum L3 {
 	FALSE(-1), NULL(0), TRUE(1);
 
