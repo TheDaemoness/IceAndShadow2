@@ -2,6 +2,7 @@ package iceandshadow2.api;
 
 import iceandshadow2.ias.util.IntFlagged;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
+import iceandshadow2.nyx.items.tools.NyxItemGrenade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
@@ -59,7 +60,14 @@ public abstract class IaSGrenadeLogic {
 	public abstract void onDetonate(EntityGrenade ent);
 	
 	/**
-	 * Called every tick on the client side only.
+	 * Called every tick on the client side only while the fuse is lit
 	 */
-	public abstract void onSpawnParticle(World w, double x, double y, double z, boolean fuseLit);
+	public void onSpawnParticle(World w, double x, double y, double z) {
+		w.spawnParticle("smoke", x, y, z, 0, 0.01, 0);
+	}
+	public abstract String getName();
+	
+	public void playFuseSound(Entity ent) {
+		ent.playSound("game.tnt.primed", 0.5F, 0.75F);
+	}
 }

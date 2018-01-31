@@ -8,13 +8,14 @@ public class NyxGrenadeExplosive extends IaSGrenadeLogic {
 
 	@Override
 	public void onDetonate(EntityGrenade ent) {
-		if(!ent.worldObj.isRemote)
-			ent.worldObj.createExplosion(ent.getThrower(), ent.posX, ent.posY, ent.posZ, 2, true);
+		if(!ent.worldObj.isRemote) {
+			ent.worldObj.createExplosion(ent.getThrower(), ent.posX, ent.posY, ent.posZ, 3.5f, false);
+			ent.worldObj.createExplosion(ent.getThrower(), ent.posX, ent.posY, ent.posZ, 2f, true);
+		}
 	}
-
+	
 	@Override
-	public void onSpawnParticle(World w, double x, double y, double z, boolean fuseLit) {
-		
+	public String getName() {
+		return "nyxExplosive";
 	}
-
 }

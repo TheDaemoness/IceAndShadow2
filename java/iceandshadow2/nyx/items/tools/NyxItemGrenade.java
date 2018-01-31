@@ -1,11 +1,13 @@
 package iceandshadow2.nyx.items.tools;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
+import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -20,8 +22,21 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer ep) {
-		ep.setItemInUse(is, getMaxItemUseDuration(is));
+	public String getItemStackDisplayName(ItemStack is) {
+		final IaSGrenadeLogic explosiveReasoning = IaSRegistry.getGrenadeLogic(is.getItemDamage());
+		final String original = LanguageRegistry.instance().getStringLocalization("item."+this.getModName()+".name");
+		return original + " ("+LanguageRegistry.instance().getStringLocalization("ias2.grenade."+explosiveReasoning.getName())+")";
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer pl) {
+		final IaSGrenadeLogic techno = IaSRegistry.getGrenadeLogic(is.getItemDamage());
+		if(pl.isSneaking()) {
+			pl.setItemInUse(is, getMaxItemUseDuration(is));
+			if(!techno.fuseOnImpact) {
+				techno.playFuseSound(pl);
+			}
+		}
 		return is;
 	}
 

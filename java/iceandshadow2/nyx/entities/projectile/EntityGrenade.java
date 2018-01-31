@@ -11,9 +11,11 @@ import iceandshadow2.render.fx.IaSFxManager;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -33,26 +35,26 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 		super(par1World);
 		this.dataWatcher.addObject(16, 0);
 		this.dataWatcher.addObject(17, 0);
-		setType(0);
+		fusetime = 0;
 	}
 
 	public EntityGrenade(World par1World, double par2, double par4, double par6, int type, int elapsed) {
 		super(par1World, par2, par4, par6);
 		this.dataWatcher.addObject(16, type);
-		this.dataWatcher.addObject(17, elapsed);
 		setType(type);
+		this.dataWatcher.addObject(17, elapsed*fusetime);
 	}
 	
 	public EntityGrenade(World par1World, EntityLivingBase par2EntityLivingBase, int type, int elapsed) {
 		super(par1World, par2EntityLivingBase);
 		this.dataWatcher.addObject(16, type);
-		this.dataWatcher.addObject(17, elapsed);
 		setType(type);
+		this.dataWatcher.addObject(17, elapsed*fusetime);
 	}
 
 	@Override
 	protected float func_70182_d() {
-		return 0.75F;
+		return 1F;
 	}
 
 	@Override
@@ -62,7 +64,7 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 
 	@Override
 	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NYX;
+		return EnumIaSAspect.NATIVE;
 	}
 
 	/**
@@ -92,15 +94,20 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 	protected void onImpact(MovingObjectPosition mop) {
 		if(mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 			final ForgeDirection dir = ForgeDirection.getOrientation(mop.sideHit);
-			this.motionX = (dir.offsetX==0?this.motionX:Math.abs(this.motionX)*dir.offsetX)/3;
+			final Block bl = worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ);
+			final float slip = (bl != null)?bl.slipperiness:Blocks.stone.slipperiness; //I know, but just in case.
+			this.motionX = (dir.offsetX==0?this.motionX:Math.abs(this.motionX)*dir.offsetX)*slip*slip;
 			this.motionY = (dir.offsetY==0?this.motionY:Math.abs(this.motionY)*dir.offsetY)/4;
-			this.motionZ = (dir.offsetZ==0?this.motionZ:Math.abs(this.motionZ)*dir.offsetZ)/3;
+			this.motionZ = (dir.offsetZ==0?this.motionZ:Math.abs(this.motionZ)*dir.offsetZ)*slip*slip;
 		} else if(mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
 			motionX = motionY = motionZ = 0;
 			mop.entityHit.applyEntityCollision(this);
 		}
-		if(fusetime == 0)
-			fusetime = 1;
+		if(fusetime == 0) {
+			if(!worldObj.isRemote)
+				dataWatcher.updateObject(17, 1);
+			getLogic().playFuseSound(this);
+		}
 	}
 
 	@Override
@@ -113,13 +120,30 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 			fusetime = dataWatcher.getWatchableObjectInt(17);
 		
 		if(fusetime > getLogic().fuseLimit) {
-			al.onDetonate(this);
 			this.setDead();
+			al.onDetonate(this);
 			return;
-		} else if(fusetime > 0)
+		} else if(fusetime > 0) {
 			++fusetime;
+			if(worldObj.isRemote)
+				al.onSpawnParticle(worldObj, posX, posY, posZ);
+		}
 		
-		if(worldObj.isRemote)
-			al.onSpawnParticle(worldObj, posX, posY, posZ, fusetime > 0);
 	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource ds, float f) {
+		if(this.isDead)
+			return false;
+		final IaSGrenadeLogic rapper=getLogic();
+		if(!ds.isMagicDamage()) {
+			this.setDead();
+			if(ds.isExplosion() || fusetime > 0)
+				rapper.onDetonate(this);
+			return true;
+		}
+		return false;
+	}
+	
+	
 }
