@@ -45,9 +45,9 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconium = new NyxItemDraconium("Draconium").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.salt = new NyxItemSalt("Salt").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.echirIngot = new NyxItemIngot("EchirIngot", (IaSBaseItem)NyxItems.echirDust).register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.cortraIngot = new NyxItemIngot("CortraIngot", (IaSBaseItem)NyxItems.cortra).register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.draconiumIngot = new NyxItemIngot("DraconiumIngot", (IaSBaseItem)NyxItems.draconium).register()
+		NyxItems.echirIngot = new NyxItemIngot("Echir", (IaSBaseItem)NyxItems.echirDust).register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.cortraIngot = new NyxItemIngot("Cortra", (IaSBaseItem)NyxItems.cortra).register().setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.draconiumIngot = new NyxItemIngot("Draconium", (IaSBaseItem)NyxItems.draconium).register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);

@@ -74,12 +74,6 @@ item.nyxDevora1.name=Small Devora Chunk
 item.nyxExousicIceShard.name=Exousic Ice Shard
 item.nyxDraconium0.name=Lump of Draconium
 item.nyxDraconium1.name=Pinch of Draconium
-item.nyxEchirIngot.name=Echir Ingot
-item.nyxEchirIngotActive.name=Primed Echir Ingot
-item.nyxCortraIngot.name=Cortra Alloy Ingot
-item.nyxCortraIngotActive.name=Primed Cortra Alloy Ingot
-item.nyxDraconiumIngot.name=Draconium Alloy Ingot
-item.nyxDraconiumIngotActive.name=Primed Draconium Alloy Ingot
 item.nyxPoisonFruit.name=Poisonwood Plum
 item.nyxPoisonFruitFertile.name=Fertile Poisonwood Plum
 item.nyxSilkBerries.name=Silk Berries
@@ -123,9 +117,23 @@ item.nyxClockwork1.name=Sentient Cortra Clockwork
 item.nyxClockwork2.name=Sentient Draconium Clockwork
 item.nyxClockworkSmall.name=Programmable Clockwork
 item.nyxGrenade.name=Improvised Grenade
+item.nyxEchirShears.name=Echir Shears
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
-item.nyxEchirShears.name=Echir Shears
+
+item.nyxEchirIngot.name=Echir Ingot
+item.nyxEchirIngotActive.name=Primed Echir Ingot
+item.nyxCortraIngot.name=Cortra Alloy Ingot
+item.nyxCortraIngotActive.name=Primed Cortra Alloy Ingot
+item.nyxDraconiumIngot.name=Draconium Alloy Ingot
+item.nyxDraconiumIngotActive.name=Primed Draconium Alloy Ingot
+
+item.nyxEchirNugget.name=Echir Nugget
+item.nyxEchirNuggetActive.name=Primed Echir Nugget
+item.nyxCortraNugget.name=Cortra Alloy Nugget
+item.nyxCortraNuggetActive.name=Primed Cortra Alloy Nugget
+item.nyxDraconiumNugget.name=Draconium Alloy Nugget
+item.nyxDraconiumNuggetActive.name=Primed Draconium Alloy Nugget
 
 item.iasToolIciclePickaxe.name=Ice Pickaxe
 item.iasToolIcicleSpade.name=Ice Spade
