@@ -250,6 +250,7 @@ ias2.description.nyxExousium=OW!
 ias2.description.nyxIcicle=Somehow harder than stone, if barely.
 ias2.description.nyxDraconium=It's trying to absorb your fingers.
 ias2.description.nyxToughGossamer=Slightly sticky and awfully strong.
+ias2.description.nyxSalt=It's hot and staticky.
 ias2.description.nyxFlask=Drinking from this will be disgusting.
 ias2.description.nyxPotion=Only take small sips.
 ias2.description.nyxAmber=It pulses with a hunger for magic.
@@ -262,6 +263,8 @@ ias2.description.nyxClockworkSmallKilled=You monster!
 ias2.description.nyxToxicCore=Better not lick it.
 ias2.description.nyxCurativeResin=It smells like relief!
 ias2.description.nyxGrenade=Should these really be kept together?
+ias2.description.nyxPoisonFruit=Why does poison taste so good?
+ias2.description.nyxPoisonFruitFertile=Ashen and bitter.
 
 ias2.hint.nyxEchirDust=This needs to be smelted.
 ias2.hint.ingot=This needs to be heated up.
@@ -276,6 +279,8 @@ ias2.hint.nyxFlask=You can fill this with certain potions.
 ias2.hint.nyxSilkBerries=It should be possible to plant these.
 ias2.hint.grenade=Sneak+Use to arm. Explodes after %1$s.
 ias2.hint.grenadeImpact=Sneak+Use to arm. Explodes %1$s after impact.
+ias2.hint.nyxPoisonFruitFertile=Place on permafrost to grow a tree.
+ias2.hint.nyxKitTightrope=Place on the side of a block.
 
 ias2.warning.nyxAlabaster=They are coming.
 ias2.warning.nyxBloodstone=Your life bleeds freely.

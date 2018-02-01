@@ -14,20 +14,32 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class IaSPlayerHelper {
 	private static boolean dochat = true;
-
-	public static void alertPlayer(EntityPlayer plai, String str) {
+	
+	protected static void doMessagePlayer(EntityPlayer plai, String str, final boolean alert) {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
 			final String localized = LanguageRegistry.instance().getStringLocalization("ias2.message."+str);
-			final ChatComponentText txt =
-				new ChatComponentText(localized.isEmpty()?str:localized);
-			txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
-			plai.addChatMessage(new ChatComponentText(""));
-			plai.addChatMessage(txt);
-			plai.addChatMessage(new ChatComponentText(""));
-			IaSPlayerHelper.dochat = false;
+			if(!localized.isEmpty()) {
+				final ChatComponentText
+					txt = new ChatComponentText(localized);
+				if(alert)
+					txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
+				else
+					txt.setChatStyle(new ChatStyle().setItalic(true).setColor(EnumChatFormatting.GRAY));
+				if(alert) {
+					plai.addChatMessage(new ChatComponentText(""));
+					plai.addChatMessage(txt);
+					plai.addChatMessage(new ChatComponentText(""));
+				} else
+					plai.addChatMessage(txt);
+				IaSPlayerHelper.dochat = false;
+			}
 		} else {
 			IaSPlayerHelper.dochat = true;
 		}
+	}
+
+	public static void alertPlayer(EntityPlayer plai, String str) {
+		doMessagePlayer(plai, str, true);
 	}
 
 	public static int drainXP(EntityPlayer pl, final int amount, String warning, boolean bypass) {
@@ -76,14 +88,7 @@ public class IaSPlayerHelper {
 	}
 
 	public static void messagePlayer(EntityPlayer plai, String str) {
-		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
-			final ChatComponentText txt = new ChatComponentText(str);
-			txt.setChatStyle(new ChatStyle().setItalic(true).setColor(EnumChatFormatting.GRAY));
-			plai.addChatMessage(txt);
-			IaSPlayerHelper.dochat = false;
-		} else {
-			IaSPlayerHelper.dochat = true;
-		}
+		doMessagePlayer(plai, str, false);
 	}
 
 	public static void regen(EntityPlayer pl, int amount) {

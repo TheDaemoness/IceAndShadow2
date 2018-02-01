@@ -56,12 +56,10 @@ public class IaSTooltipHandler {
 					}
 			}
 			if(localized != null) {
-				String argument = desc.getLocalizedHintArgument(e.entityPlayer, e.itemStack);
+				final String argument = desc.getLocalizedHintArgument(e.entityPlayer, e.itemStack);
 				if(argument != null)
 					localized = localized.replaceAll("%1\\$s", argument);
 			}
-			if(isWarning)
-				addTooltip(e.toolTip, localized, true);
 			if(GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak)) {
 				if(!isWarning)
 					addTooltip(e.toolTip, localized, false);
@@ -71,7 +69,8 @@ public class IaSTooltipHandler {
 					localized = LanguageRegistry.instance().getStringLocalization("ias2.description."+unlocalized);
 				}
 				addTooltip(e.toolTip, localized, false);
-			}
+			} else if(isWarning)
+				addTooltip(e.toolTip, localized, true);
 		}
 	}
 }
