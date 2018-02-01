@@ -94,7 +94,6 @@ public class NyxDeathSystem {
 	public void onDrop(PlayerDropsEvent e) {
 		final boolean gr = e.entityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory");
 		if (!e.entityPlayer.worldObj.isRemote && e.entityPlayer.dimension == IaSFlags.dim_nyx_id && !gr) {
-			System.out.println(e.entityPlayer.getEntityId());
 			e.setCanceled(true);
 			NyxDeathSystem.plai_inv = NyxDeathSystem.determineRespawnInventory(NyxDeathSystem.plai_inv, true);
 			e.entityPlayer.inventory.copyInventory(NyxDeathSystem.plai_inv);

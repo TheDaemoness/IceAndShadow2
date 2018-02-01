@@ -118,6 +118,7 @@ item.nyxClockwork2.name=Sentient Draconium Clockwork
 item.nyxClockworkSmall.name=Programmable Clockwork
 item.nyxGrenade.name=Improvised Grenade
 item.nyxEchirShears.name=Echir Shears
+item.nyxCursedPowder.name=Cursed Bonemeal
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 
@@ -237,6 +238,8 @@ ias2.message.tpcDischarged=You find strange thoughts coming to your mind. Someth
 ias2.message.tpcInvalidNyx=You find strange thoughts coming to your mind. Something about needing to be standing on sanguine obsidian...
 ias2.message.tpcInvalidElsewhere=The crystal barely responds. It seems to prefer cold and dark places.
 ias2.message.setrespawnObsidian=Something forcefully binds your life to the obsidian.
+ias2.message.badPlayerNoBone=The bone becomes thicker than before, as if resentful of your use of creative mode.
+ias2.message.offNyxNoBone=The bone refuses to break. Perhaps it relies on some power in Nyx that is absent here.
 
 ias2.description.nyxEchirDust=It's like soft warm sand.
 ias2.description.ingotnyxEchirDust=It's oddly warm.
@@ -273,13 +276,14 @@ ias2.description.nyxCurativeResin=It smells like relief!
 ias2.description.nyxGrenade=Should these really be kept together?
 ias2.description.nyxPoisonFruit=Why does poison taste so good?
 ias2.description.nyxPoisonFruitFertile=Ashen and bitter.
+ias2.description.nyxCursedPowder=Like powdered black mold.
 
 ias2.hint.nyxEchirDust=This needs to be smelted.
 ias2.hint.ingot=This needs to be heated up.
 ias2.hint.ingotPrimed=Sneak+Use to finalize.
 ias2.hint.nyxVineBundle=You could make paper from this.
 ias2.hint.nyxDevora=This seems highly explosive.
-ias2.hint.nyxCursedBone=Throw to cause a blast of shadow.
+ias2.hint.nyxCursedBone=Break to clothe yourself in shadow.
 ias2.hint.nyxSanctifiedBone=Break to reduce the pain of oncoming death.
 ias2.hint.nyxRope=This seems ideal for climbing.
 ias2.hint.nyxShapedLeaf=You could make curative resin from this.
@@ -292,9 +296,11 @@ ias2.hint.nyxKitTightrope=Place on the side of a block.
 
 ias2.warning.nyxAlabaster=They are coming.
 ias2.warning.nyxBloodstone=Your life bleeds freely.
+ias2.warning.nyxCursedPowder=Decays to shadow.
 
 ias2.grenade.nyxExplosive=Explosive
 ias2.grenade.nyxIceWall=Ice Wall
+ias2.grenade.nyxShadow=Shadow
 
 ias2.unit.second=sec
 ias2.unit.seconds=secs

@@ -6,11 +6,14 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.util.ArmorMaterialInstance;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.items.NyxItemBoneCursed;
+import iceandshadow2.nyx.items.NyxItemBoneSanctified;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -19,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import java.util.Map;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class NyxEquipmentHandler {
 
@@ -60,6 +64,17 @@ public class NyxEquipmentHandler {
 				EnchantmentHelper.setEnchantments(enchmaps[i], victim.getEquipmentInSlot(i));
 			}
 	}
+	
+	public boolean hasActiveCursedBone(InventoryPlayer plai_inv) {
+		for (int i = 0; i < plai_inv.mainInventory.length; ++i)
+			if (plai_inv.mainInventory[i] != null) {
+				final ItemStack is = plai_inv.mainInventory[i];
+				if (is.getItem() instanceof NyxItemBoneCursed && is.isItemDamaged()) {
+					return true;
+				}
+			}
+		return false;
+	}
 
 	@SubscribeEvent
 	public void handleArmor(LivingHurtEvent e) {
@@ -72,6 +87,10 @@ public class NyxEquipmentHandler {
 				}
 			if (e.source.isMagicDamage()) {
 				doDrainEnchantments(victim, e.ammount*(isDrain?4:0));
+			} else if(!e.source.isDamageAbsolute() && hasActiveCursedBone(victim.inventory)) {
+				e.ammount = 0;
+				e.setResult(Result.DENY);
+				return;
 			}
 		}
 		final EntityLivingBase elb = e.entityLiving;

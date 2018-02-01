@@ -1,10 +1,12 @@
 package iceandshadow2.nyx.entities.ai.senses;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.item.ItemStack;
 
 public class IaSSenseVision extends IaSSenseOld {
 
@@ -12,13 +14,15 @@ public class IaSSenseVision extends IaSSenseOld {
 		if (ent.isInvisible()) {
 			if (ent instanceof EntityLivingBase) {
 				final EntityLivingBase seekable = (EntityLivingBase) ent;
-				for (int i = 0; i <= 4; ++i)
-					if (seekable.getEquipmentInSlot(i) != null) {
-						if (i == 0)
+				for (int i = 0; i <= 4; ++i) {
+					final ItemStack equip = seekable.getEquipmentInSlot(i);
+					if (equip != null) {
+						if (i == 0 && EnumIaSAspect.getAspect(equip) != EnumIaSAspect.NYX)
 							return false;
 						if (i >= 2 && !(seekable.getEquipmentInSlot(i).getItem() instanceof IaSItemArmor))
 							return false;
 					}
+				}
 			}
 			return !ent.isBurning();
 		}

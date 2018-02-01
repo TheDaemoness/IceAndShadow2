@@ -14,6 +14,7 @@ import iceandshadow2.nyx.items.tools.NyxItemFlask;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import iceandshadow2.nyx.toolmats.NyxGrenadeExplosive;
 import iceandshadow2.nyx.toolmats.NyxGrenadeIceWall;
+import iceandshadow2.nyx.toolmats.NyxGrenadeShadow;
 import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
 
 import java.lang.reflect.Constructor;
@@ -231,6 +232,7 @@ public final class IaSRegistry {
 		
 		addGrenadeLogic(new NyxGrenadeExplosive());
 		addGrenadeLogic(new NyxGrenadeIceWall());
+		addGrenadeLogic(new NyxGrenadeShadow());
 	}
 	public static int addGrenadeLogic(IaSGrenadeLogic evidenceAndReasons) {
 		if(evidenceAndReasons.setId(grenadeLogics.size()))

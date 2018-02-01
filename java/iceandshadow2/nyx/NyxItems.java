@@ -17,12 +17,12 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall;
+			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall, cursedPowder;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
 	//WARNING: MUST BE INITIALIZED DURING POSTINIT, NOT EARLIER!
-	public static Item potion, grenade; 
+	public static Item potion, grenade;
 
 	public static void init() {
 		NyxItems.teleportCrystal = new NyxItemTeleportCrystal("TeleportCrystal").register()
@@ -98,6 +98,8 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.clockworkSmall = new NyxItemClockworkSmall("ClockworkSmall").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.cursedPowder = new NyxItemCursedPowder("CursedPowder").register()
+				.setCreativeTab(IaSCreativeTabs.resources);
 	}
 
 	public static void lateInit() {
