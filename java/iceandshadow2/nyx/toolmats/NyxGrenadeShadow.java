@@ -3,6 +3,7 @@ package iceandshadow2.nyx.toolmats;
 import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
+import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.world.World;
 
 public class NyxGrenadeShadow extends IaSGrenadeLogic {
@@ -17,5 +18,14 @@ public class NyxGrenadeShadow extends IaSGrenadeLogic {
 	@Override
 	public String getName() {
 		return "nyxShadow";
+	}
+	
+	@Override
+	public void onSpawnParticle(World w, double x, double y, double z) {
+		IaSFxManager.spawnParticle(w, "shadowSmokeSmall", x, y, z,
+				0.25-w.rand.nextDouble()/2,
+				0.25-w.rand.nextDouble()/2,
+				0.25-w.rand.nextDouble()/2,
+				true, false);
 	}
 }

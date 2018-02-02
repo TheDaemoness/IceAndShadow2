@@ -15,14 +15,14 @@ import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 
-public abstract class NyxItemLens extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmuteLens {
+public abstract class NyxBaseItemLens extends IaSBaseItemSingle implements IIaSGlowing, IIaSApiTransmuteLens {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon lensicon, altaricon;
 
 	boolean overrideAltar;
 
-	public NyxItemLens(String id, boolean altar) {
+	public NyxBaseItemLens(String id, boolean altar) {
 		super(EnumIaSModule.NYX, id);
 		overrideAltar = altar;
 	}

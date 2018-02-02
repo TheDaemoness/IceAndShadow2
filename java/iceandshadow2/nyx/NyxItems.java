@@ -17,7 +17,8 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall, cursedPowder;
+			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall, cursedPowder,
+			remote, remoteDetonator, antenna;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
@@ -100,6 +101,10 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.cursedPowder = new NyxItemCursedPowder("CursedPowder").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.remote = new NyxItemRemote("Remote").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
+		NyxItems.remoteDetonator = new NyxItemRemoteDetonator("RemoteDetonator").register()
+				.setCreativeTab(IaSCreativeTabs.tools);
 	}
 
 	public static void lateInit() {

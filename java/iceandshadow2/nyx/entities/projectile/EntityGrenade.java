@@ -1,10 +1,12 @@
 package iceandshadow2.nyx.entities.projectile;
 
 import iceandshadow2.nyx.entities.mobs.EntityNyxSkeleton;
+import iceandshadow2.nyx.items.tools.NyxItemRemoteDetonator;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.api.IaSGrenadeLogic;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.mobs.EntityNyxNecromancer;
 import iceandshadow2.render.fx.IaSFxManager;
 
@@ -16,6 +18,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -34,22 +37,20 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 	public EntityGrenade(World par1World) {
 		super(par1World);
 		this.dataWatcher.addObject(16, 0);
-		this.dataWatcher.addObject(17, 0);
-		fusetime = 0;
+		this.dataWatcher.addObject(17, Integer.MIN_VALUE);
+		fusetime = Integer.MIN_VALUE;
 	}
 
 	public EntityGrenade(World par1World, double par2, double par4, double par6, int type, int elapsed) {
 		super(par1World, par2, par4, par6);
 		this.dataWatcher.addObject(16, type);
-		setType(type);
-		this.dataWatcher.addObject(17, elapsed*fusetime);
+		setType(type, elapsed);
 	}
 	
 	public EntityGrenade(World par1World, EntityLivingBase par2EntityLivingBase, int type, int elapsed) {
 		super(par1World, par2EntityLivingBase);
 		this.dataWatcher.addObject(16, type);
-		setType(type);
-		this.dataWatcher.addObject(17, elapsed*fusetime);
+		setType(type, elapsed);
 	}
 
 	@Override
@@ -79,10 +80,13 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 		return IaSRegistry.getGrenadeLogic(this.dataWatcher.getWatchableObjectInt(16));
 	}
 
-	public void setType(int type) {
+	public void setType(int type, int elapsed) {
 		this.dataWatcher.updateObject(16, type);
 		final IaSGrenadeLogic gate = IaSRegistry.getGrenadeLogic(type);
-		this.fusetime = gate.fuseOnImpact?0:1;
+		if(elapsed == 0)
+			elapsed = (int)-(getLogic().fuseLimit*(15+worldObj.rand.nextFloat()*10));
+		this.dataWatcher.addObject(17, elapsed);
+		this.fusetime = elapsed;
 	}
 
 	/**
@@ -99,14 +103,27 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 			this.motionX = (dir.offsetX==0?this.motionX:Math.abs(this.motionX)*dir.offsetX)*slip*slip;
 			this.motionY = (dir.offsetY==0?this.motionY:Math.abs(this.motionY)*dir.offsetY)/4;
 			this.motionZ = (dir.offsetZ==0?this.motionZ:Math.abs(this.motionZ)*dir.offsetZ)*slip*slip;
+			//TODO: Rewrite this minefield into a pair of functions in IaSBlockHelper.
+			final double
+				xW = (bl.getBlockBoundsMaxX()-bl.getBlockBoundsMinX())/2,
+				yW = (bl.getBlockBoundsMaxY()-bl.getBlockBoundsMinY())/2,
+				zW = (bl.getBlockBoundsMaxZ()-bl.getBlockBoundsMinZ())/2,
+				xM = (bl.getBlockBoundsMaxX()+bl.getBlockBoundsMinX())/2,
+				yM = (bl.getBlockBoundsMaxY()+bl.getBlockBoundsMinY())/2,
+				zM = (bl.getBlockBoundsMaxZ()+bl.getBlockBoundsMinZ())/2;
+			final double
+				xD = xM+xW*dir.offsetX*1.001,
+				yD = yM+yW*dir.offsetY*1.001,
+				zD = zM+zW*dir.offsetZ*1.001;
+			if(dir.offsetX != 0)
+				this.posX = mop.blockX+xD;
+			if(dir.offsetY != 0)
+				this.posY = mop.blockY+yD;
+			if(dir.offsetZ != 0)
+				this.posZ = mop.blockZ+zD;
 		} else if(mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
 			motionX = motionY = motionZ = 0;
 			mop.entityHit.applyEntityCollision(this);
-		}
-		if(fusetime == 0) {
-			if(!worldObj.isRemote)
-				dataWatcher.updateObject(17, 1);
-			getLogic().playFuseSound(this);
 		}
 	}
 
@@ -118,14 +135,27 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 		
 		if(dataWatcher.getWatchableObjectInt(17) > fusetime)
 			fusetime = dataWatcher.getWatchableObjectInt(17);
+
+		if(fusetime < 0 && this.getThrower() != null) {
+			final ItemStack is = this.getThrower().getHeldItem();
+			if(is != null && is.getItem() == NyxItems.remoteDetonator && NyxItemRemoteDetonator.isPressed(is)) {
+				fusetime = 0;
+			}
+		}
+		
+		if(fusetime == 0) {
+			if(!worldObj.isRemote)
+				dataWatcher.updateObject(17, getLogic().fuseLimit/2+worldObj.rand.nextInt(getLogic().fuseLimit/4));
+			getLogic().playFuseSound(this);
+		}
 		
 		if(fusetime > getLogic().fuseLimit) {
 			this.setDead();
 			al.onDetonate(this);
 			return;
-		} else if(fusetime > 0) {
+		} else {
 			++fusetime;
-			if(worldObj.isRemote)
+			if(fusetime > 0 && worldObj.isRemote)
 				al.onSpawnParticle(worldObj, posX, posY, posZ);
 		}
 		

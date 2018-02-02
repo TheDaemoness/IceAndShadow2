@@ -9,7 +9,7 @@ import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirToolActive;
 import iceandshadow2.ias.items.tools.IaSItemToolBroken;
-import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.nyx.items.tools.NyxBaseItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemFlask;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import iceandshadow2.nyx.toolmats.NyxGrenadeExplosive;
@@ -226,7 +226,7 @@ public final class IaSRegistry {
 		setPrimarilyTransfusionTarget(IaSItemEchirKnifeActive.class);
 		setPrimarilyTransfusionTarget(IaSItemEchirToolActive.class);
 		setPrimarilyTransfusionTarget(IaSItemToolBroken.class);
-		setPrimarilyTransfusionTarget(NyxItemBow.class);
+		setPrimarilyTransfusionTarget(NyxBaseItemBow.class);
 		setPrimarilyTransfusionTarget(NyxItemFlask.class);
 		setPrimarilyTransfusionTarget(NyxItemSwordFrost.class);
 		

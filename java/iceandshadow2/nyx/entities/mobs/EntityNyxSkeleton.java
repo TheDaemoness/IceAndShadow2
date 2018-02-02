@@ -22,7 +22,7 @@ import iceandshadow2.nyx.entities.projectile.EntityIceArrow;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;
 import iceandshadow2.nyx.entities.projectile.EntityThrowingKnife;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
-import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.nyx.items.tools.NyxBaseItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemBowFrostLong;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
 import net.minecraft.block.Block;
@@ -258,7 +258,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving, float par2) {
 		final ItemStack wielding = getHeldItem();
-		if (wielding != null && wielding.getItem() instanceof NyxItemBow) {
+		if (wielding != null && wielding.getItem() instanceof NyxBaseItemBow) {
 			doBowAttack(par1EntityLiving, par2, wielding.getItem() instanceof NyxItemBowFrostLong);
 		} else {
 			doShadowAttack(par1EntityLiving, par2);
@@ -616,7 +616,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		tasks.removeTask(shadowAttack);
 		final ItemStack var1 = getHeldItem();
 
-		if (var1 != null && var1.getItem() instanceof NyxItemBow) {
+		if (var1 != null && var1.getItem() instanceof NyxBaseItemBow) {
 			if (typpe == EnumNyxSkeletonType.BOW_FROST_LONG) {
 				tasks.addTask(4, rangedAttackLong);
 			} else {

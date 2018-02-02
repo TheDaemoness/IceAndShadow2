@@ -1,6 +1,6 @@
 package iceandshadow2.api;
 
-import iceandshadow2.ias.util.IntFlagged;
+import iceandshadow2.ias.util.IntBits;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import iceandshadow2.nyx.items.tools.NyxItemGrenade;
 import net.minecraft.entity.Entity;
@@ -13,10 +13,8 @@ import net.minecraft.world.World;
  */
 public abstract class IaSGrenadeLogic {
 	public static final int BASE_FUSE = 40; //Translates to two seconds.
-	public static final int BASE_FUSE_IMPACT = -11; //Translates to half a second after impact.
 	
 	public final int fuseLimit;
-	public final boolean fuseOnImpact;
 	private int id;
 	
 	/**
@@ -31,9 +29,8 @@ public abstract class IaSGrenadeLogic {
 	 * @param fuse How long the fuse lasts for. If passed a negative or zero value, the grenade will detonate that many ticks after impact.
 	 * @param cooked How long the grenade has been held in-hand for. Ignored if the fuse starts on impact.
 	 */
-	public IaSGrenadeLogic(int fuse)  {
-		fuseOnImpact = IntFlagged.flag(fuse);
-		fuseLimit = IntFlagged.value(fuse);
+	protected IaSGrenadeLogic(int fuse)  {
+		fuseLimit = IntBits.value(fuse);
 		id = -1;
 	}
 	

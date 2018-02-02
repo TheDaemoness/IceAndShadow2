@@ -117,8 +117,11 @@ item.nyxClockwork1.name=Sentient Cortra Clockwork
 item.nyxClockwork2.name=Sentient Draconium Clockwork
 item.nyxClockworkSmall.name=Programmable Clockwork
 item.nyxGrenade.name=Improvised Grenade
+item.nyxGrenadeRemote.name=Remote Grenade
 item.nyxEchirShears.name=Echir Shears
 item.nyxCursedPowder.name=Cursed Bonemeal
+item.nyxRemote.name=Remote
+item.nyxRemoteDetonator.name=Grenade Detonator
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 
@@ -289,8 +292,8 @@ ias2.hint.nyxRope=This seems ideal for climbing.
 ias2.hint.nyxShapedLeaf=You could make curative resin from this.
 ias2.hint.nyxFlask=You can fill this with certain potions.
 ias2.hint.nyxSilkBerries=It should be possible to plant these.
-ias2.hint.grenade=Sneak+Use to arm. Explodes after %1$s.
-ias2.hint.grenadeImpact=Sneak+Use to arm. Explodes %1$s after impact.
+ias2.hint.grenade=Sneak+Use to light the %1$s fuse.
+ias2.hint.grenadeRemote=Sneak+Use to prime for remote detonation.
 ias2.hint.nyxPoisonFruitFertile=Place on permafrost to grow a tree.
 ias2.hint.nyxKitTightrope=Place on the side of a block.
 

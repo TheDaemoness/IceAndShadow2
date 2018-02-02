@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemBowFrostLong extends NyxItemBow implements IIaSModName, IIaSGlowing, IIaSEntityWeaponRanged {
+public class NyxItemBowFrostLong extends NyxBaseItemBow implements IIaSModName, IIaSGlowing, IIaSEntityWeaponRanged {
 
 	public NyxItemBowFrostLong(String par1) {
 		super(par1);

@@ -16,7 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class NyxItemBowFrostShort extends NyxItemBow implements IIaSModName, IIaSGlowing, IIaSEntityWeaponRanged {
+public class NyxItemBowFrostShort extends NyxBaseItemBow implements IIaSModName, IIaSGlowing, IIaSEntityWeaponRanged {
 
 	public NyxItemBowFrostShort(String par1) {
 		super(par1);

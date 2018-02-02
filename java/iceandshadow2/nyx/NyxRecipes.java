@@ -129,5 +129,8 @@ public class NyxRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.amberNugget, 4), new ItemStack(NyxItems.amber));
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.cursedPowder, 3), new ItemStack(NyxItems.boneCursed));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remoteDetonator, 1), new ItemStack(NyxItems.remote, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remote, 1), new ItemStack(NyxItems.remoteDetonator, 0));
 	}
 }

@@ -8,6 +8,7 @@ import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
+import iceandshadow2.ias.util.IntBits;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -15,16 +16,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class NyxItemGrenade extends IaSBaseItemMulti {
+	
+	public static IaSGrenadeLogic getGrenadeLogic(ItemStack is) {
+		return IaSRegistry.getGrenadeLogic(is.getItemDamage() >>> 1);
+	}
+	public static boolean isRemoteDetonated(ItemStack is) {
+		return IntBits.areAllSet(is.getItemDamage(), 1);
+	}
 
 	public NyxItemGrenade(String id) {
-		super(EnumIaSModule.NYX, id, IaSRegistry.getGrenadeLogicCount());
+		super(EnumIaSModule.NYX, id, IaSRegistry.getGrenadeLogicCount()*2);
 		setMaxStackSize(4); //Three more than it should be for safety.
 	}
 	
 	@Override
 	public String getItemStackDisplayName(ItemStack is) {
-		final IaSGrenadeLogic explosiveReasoning = IaSRegistry.getGrenadeLogic(is.getItemDamage());
-		final String original = LanguageRegistry.instance().getStringLocalization("item."+this.getModName()+".name");
+		final IaSGrenadeLogic explosiveReasoning = getGrenadeLogic(is);
+		final String suffix = isRemoteDetonated(is)?"Remote.name":".name";
+		final String original = LanguageRegistry.instance().getStringLocalization("item."+this.getModName()+suffix);
 		return original + " ("+LanguageRegistry.instance().getStringLocalization("ias2.grenade."+explosiveReasoning.getName())+")";
 	}
 	
@@ -33,7 +42,7 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 		final IaSGrenadeLogic techno = IaSRegistry.getGrenadeLogic(is.getItemDamage());
 		if(pl.isSneaking()) {
 			pl.setItemInUse(is, getMaxItemUseDuration(is));
-			if(!techno.fuseOnImpact) {
+			if(!IntBits.areAllSet(is.getItemDamage(), 1)) {
 				techno.playFuseSound(pl);
 			}
 		}
@@ -47,8 +56,7 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack is) {
-		final IaSGrenadeLogic logos = IaSRegistry.getGrenadeLogic(is.getItemDamage());
-		return logos.fuseOnImpact?72000:logos.fuseLimit;
+		return isRemoteDetonated(is)?72000:getGrenadeLogic(is).fuseLimit;
 	}
 
 	@Override
@@ -60,9 +68,13 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack is, World w, EntityPlayer pl, int time) {
 		w.playSoundAtEntity(pl, "random.bow", 0.5F, 0.75F);
-		time = getMaxItemUseDuration(is)-time;
+		if(isRemoteDetonated(is)) {
+			time = 0;
+		} else {
+			time = Math.max(1, getMaxItemUseDuration(is)-time);
+		}
 		if(!w.isRemote) {
-			EntityGrenade eg = new EntityGrenade(w, pl, IaSRegistry.getGrenadeLogic(is.getItemDamage()).getId(), time);
+			EntityGrenade eg = new EntityGrenade(w, pl, getGrenadeLogic(is).getId(), time);
 			w.spawnEntityInWorld(eg);
 		}
 		if (!pl.capabilities.isCreativeMode) {
@@ -74,11 +86,13 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 	
 	@Override
 	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return IaSRegistry.getGrenadeLogic(itemStack.getItemDamage()).fuseOnImpact?"grenadeImpact":"grenade";
+		return isRemoteDetonated(itemStack)?"grenadeRemote":"grenade";
 	}
 
 	@Override
 	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		if(isRemoteDetonated(itemStack))
+			return null;
 		final int fusetime = IaSRegistry.getGrenadeLogic(itemStack.getItemDamage()).fuseLimit;
 		final String fuse = String.format("%.2f", fusetime/20f);
 		final String hint = LanguageRegistry.instance().getStringLocalization(Math.abs(fusetime)==20?"ias2.unit.second":"ias2.unit.seconds");

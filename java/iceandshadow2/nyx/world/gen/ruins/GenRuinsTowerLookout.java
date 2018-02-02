@@ -5,7 +5,7 @@ import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.items.tools.NyxItemBow;
+import iceandshadow2.nyx.items.tools.NyxBaseItemBow;
 
 import java.util.Random;
 
@@ -181,7 +181,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 				} else {
 					itemz = new ItemStack(NyxItems.frostBowLong, 1, 32 + var2.nextInt(64));
 				}
-				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3) == 0 ? 1 : 2);
+				c.setInteger(NyxBaseItemBow.nbtTierID, var2.nextInt(3) == 0 ? 1 : 2);
 				itemz.setTagCompound(c);
 				rareflag = false;
 			}
@@ -190,7 +190,7 @@ public class GenRuinsTowerLookout extends GenRuins {
 			else if (rewardid < 5 && rareflag) {
 				final NBTTagCompound c = new NBTTagCompound();
 				itemz = new ItemStack(NyxItems.frostSword, 1, 64 + var2.nextInt(128));
-				c.setInteger(NyxItemBow.nbtTierID, var2.nextInt(3) == 0 ? 2 : 1);
+				c.setInteger(NyxBaseItemBow.nbtTierID, var2.nextInt(3) == 0 ? 2 : 1);
 				itemz.setTagCompound(c);
 				rareflag = false;
 			}

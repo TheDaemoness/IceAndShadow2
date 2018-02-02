@@ -11,10 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class NyxGrenadeIceWall extends IaSGrenadeLogic {
-
-	public NyxGrenadeIceWall() {
-		super(IaSGrenadeLogic.BASE_FUSE_IMPACT);
-	}
 	
 	//TODO: Need a better system for block freezing.
 	private void replace(World w, int x, int y, int z) {
