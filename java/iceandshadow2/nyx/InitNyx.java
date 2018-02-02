@@ -24,5 +24,6 @@ public class InitNyx {
 
 	public static void lateInit(IceAndShadow2 iceAndShadow2) {
 		NyxItems.lateInit();
+		NyxRecipes.lateInit();
 	}
 }

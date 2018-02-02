@@ -106,7 +106,7 @@ public abstract class NyxBaseItemBow extends IaSBaseItemSingle implements IIaSGl
 			return 0;
 		if (catalyst.stackSize < getUpgradeCost(getSpeedModifier(target)))
 			return 0;
-		if (catalyst.getItem() == NyxItems.nifelhiumPowder)
+		if (catalyst.getItem() == NyxItems.nifelhiumPowder && catalyst.getItemDamage() == 0)
 			return 160;
 		return 0;
 	}

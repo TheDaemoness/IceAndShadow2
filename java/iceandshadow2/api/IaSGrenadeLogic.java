@@ -67,4 +67,6 @@ public abstract class IaSGrenadeLogic {
 	public void playFuseSound(Entity ent) {
 		ent.playSound("game.tnt.primed", 0.5F, 0.75F);
 	}
+	
+	public abstract ItemStack getCraftingStack(boolean second);
 }

@@ -24,7 +24,8 @@ public class NyxBlockOreNifelhium extends NyxBlockOre {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		is.add(new ItemStack(NyxItems.nifelhiumPowder, world.rand.nextInt(1 + fortune) >= 2 ? 2 : 1));
+		final int base = 3+fortune-world.rand.nextInt(1+fortune);
+		is.add(new ItemStack(NyxItems.nifelhiumPowder, base+world.rand.nextInt(3), 1));
 		return is;
 	}
 

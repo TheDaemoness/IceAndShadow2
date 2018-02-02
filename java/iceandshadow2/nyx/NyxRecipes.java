@@ -4,6 +4,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
+import iceandshadow2.IaSRegistry;
+import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 
 public class NyxRecipes {
@@ -143,5 +145,22 @@ public class NyxRecipes {
 				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
 				, 'd', new ItemStack(NyxItems.devora, 1, 1));
 
+	}
+	
+	public static void lateInit() {
+		for(int i = 0; i < IaSRegistry.getGrenadeLogicCount(); ++i) {
+			final IaSGrenadeLogic evanescenceAndReason = IaSRegistry.getGrenadeLogic(i);
+			final ItemStack
+				a = evanescenceAndReason.getCraftingStack(false),
+				b = evanescenceAndReason.getCraftingStack(true);
+			if(a == null || b == null)
+				continue;
+			for(int j = 0; j <= 1; ++j) {
+				GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.grenade, 1, j|(i<<1))
+					, new ItemStack(NyxItems.grenadeHandle, 1, j)
+					, new ItemStack(NyxItems.flask, 1, 0)
+					, a, b);
+			}
+		}
 	}
 }

@@ -5,9 +5,11 @@ import iceandshadow2.ias.util.BlockPos3;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.gen.Sculptor;
 import iceandshadow2.nyx.NyxBlocks;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import iceandshadow2.render.fx.IaSFxManager;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class NyxGrenadeIceWall extends IaSGrenadeLogic {
@@ -62,5 +64,13 @@ public class NyxGrenadeIceWall extends IaSGrenadeLogic {
 				w.rand.nextDouble()/4,
 				0.5-w.rand.nextDouble(),
 				true, true);
+	}
+	
+	@Override
+	public ItemStack getCraftingStack(boolean second) {
+		if(second)
+			return new ItemStack(NyxItems.nifelhiumPowder, 1, 1);
+		else
+			return new ItemStack(NyxBlocks.unstableIce);
 	}
 }
