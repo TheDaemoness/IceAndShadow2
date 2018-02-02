@@ -83,9 +83,12 @@ public class IaSRenderers {
 			}
 		}
 
-
 		ClientRegistry.bindTileEntitySpecialRenderer(NyxTeTransfusionAltar.class,
 				new RenderNyxTeTransmutationAltar());
+	}
+	
+	public static void lateInit() {
+		MinecraftForgeClient.registerItemRenderer(NyxItems.grenade, new RenderItemVanillaGlowing());
 	}
 
 }

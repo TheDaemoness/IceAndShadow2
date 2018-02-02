@@ -132,5 +132,16 @@ public class NyxRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remoteDetonator, 1), new ItemStack(NyxItems.remote, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remote, 1), new ItemStack(NyxItems.remoteDetonator, 0));
+		
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.grenadeHandle, 2, 0)
+				, "c ", "de", " e"
+				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
+				, 'd', new ItemStack(NyxItems.devora, 1, 1)
+				, 'e', new ItemStack(NyxItems.echirIngot, 1, 3));
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.grenadeHandle, 2, 1)
+				, "c ", "dc", " c"
+				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
+				, 'd', new ItemStack(NyxItems.devora, 1, 1));
+
 	}
 }

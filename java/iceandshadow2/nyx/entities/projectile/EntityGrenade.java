@@ -100,9 +100,10 @@ public class EntityGrenade extends EntityThrowable implements IIaSAspect {
 			final ForgeDirection dir = ForgeDirection.getOrientation(mop.sideHit);
 			final Block bl = worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ);
 			final float slip = (bl != null)?bl.slipperiness:Blocks.stone.slipperiness; //I know, but just in case.
-			this.motionX = (dir.offsetX==0?this.motionX:Math.abs(this.motionX)*dir.offsetX)*slip*slip;
+			final float realslip = Math.min(0.99f, slip*slip);
+			this.motionX = (dir.offsetX==0?this.motionX:Math.abs(this.motionX)*dir.offsetX)*realslip;
 			this.motionY = (dir.offsetY==0?this.motionY:Math.abs(this.motionY)*dir.offsetY)/4;
-			this.motionZ = (dir.offsetZ==0?this.motionZ:Math.abs(this.motionZ)*dir.offsetZ)*slip*slip;
+			this.motionZ = (dir.offsetZ==0?this.motionZ:Math.abs(this.motionZ)*dir.offsetZ)*realslip;
 			//TODO: Rewrite this minefield into a pair of functions in IaSBlockHelper.
 			final double
 				xW = (bl.getBlockBoundsMaxX()-bl.getBlockBoundsMinX())/2,

@@ -122,6 +122,8 @@ item.nyxEchirShears.name=Echir Shears
 item.nyxCursedPowder.name=Cursed Bonemeal
 item.nyxRemote.name=Remote
 item.nyxRemoteDetonator.name=Grenade Detonator
+item.nyxGrenadeHandle0.name=Grenade Handle
+item.nyxGrenadeHandle1.name=Remote Grenade Handle
 
 item.iasStarterKit.name=Ice and Shadow Starter Kit
 

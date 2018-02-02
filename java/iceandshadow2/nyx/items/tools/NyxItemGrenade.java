@@ -1,21 +1,30 @@
 package iceandshadow2.nyx.items.tools;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
+import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.util.IntBits;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class NyxItemGrenade extends IaSBaseItemMulti {
+public class NyxItemGrenade extends IaSBaseItemMultiGlow {
+	
+	@SideOnly(Side.CLIENT)
+	protected IIcon payloadIcons[];
 	
 	public static IaSGrenadeLogic getGrenadeLogic(ItemStack is) {
 		return IaSRegistry.getGrenadeLogic(is.getItemDamage() >>> 1);
@@ -97,5 +106,32 @@ public class NyxItemGrenade extends IaSBaseItemMulti {
 		final String fuse = String.format("%.2f", fusetime/20f);
 		final String hint = LanguageRegistry.instance().getStringLocalization(Math.abs(fusetime)==20?"ias2.unit.second":"ias2.unit.seconds");
 		return fuse+" "+hint;
+	}
+	
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 2;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 3;
+	}
+	
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass) {
+		if(pass > 0)
+			return NyxItems.grenadeHandle.getIconFromDamage(isRemoteDetonated(stack)?1:0);
+		return payloadIcons[getGrenadeLogic(stack).getId()];
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		payloadIcons = new IIcon[IaSRegistry.getGrenadeLogicCount()];
+		for (int i = 0; i < IaSRegistry.getGrenadeLogicCount(); ++i) {
+			payloadIcons[i] = reg.registerIcon(getTextureName() + IaSRegistry.getGrenadeLogic(i).getName());
+		}
 	}
 }

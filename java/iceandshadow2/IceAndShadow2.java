@@ -140,6 +140,10 @@ public class IceAndShadow2 {
 		IaSRegistry.postInit();
 		IceAndShadow2.toPostRegister.clear();
 		InitNyx.lateInit(this);
+		
+		if (event.getSide() == Side.CLIENT) {
+			IaSRenderers.lateInit();
+		}
 	}
 
 	@EventHandler
