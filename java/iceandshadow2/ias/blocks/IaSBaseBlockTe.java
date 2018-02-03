@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class IaSBaseBlockTileEntity extends IaSBaseBlockSingle implements ITileEntityProvider {
+public abstract class IaSBaseBlockTe extends IaSBaseBlockSingle implements ITileEntityProvider {
 
-	public IaSBaseBlockTileEntity(EnumIaSModule mod, String texName, Material mat) {
+	public IaSBaseBlockTe(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, texName, mat);
 	}
 

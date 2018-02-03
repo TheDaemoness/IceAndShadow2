@@ -36,6 +36,7 @@ tile.nyxUnstableDevora.name=Unstable Devora
 tile.nyxInfestedSpawner0.name=Infested Phylactery (Miner)
 tile.nyxInfestedSpawner1.name=Infested Phylactery (Spider)
 tile.nyxInfestedSpawner2.name=Infested Phylactery (Wight)
+tile.nyxAntenna.name=Antenna
 
 tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore

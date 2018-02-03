@@ -9,13 +9,15 @@ import iceandshadow2.nyx.entities.mobs.*;
 import iceandshadow2.nyx.entities.projectile.*;
 import iceandshadow2.nyx.entities.util.*;
 import iceandshadow2.nyx.tileentities.*;
+import iceandshadow2.render.block.*;
 import iceandshadow2.render.entity.mobs.*;
 import iceandshadow2.render.entity.projectiles.*;
 import iceandshadow2.render.item.*;
-import iceandshadow2.render.tileentity.*;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -25,6 +27,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class IaSRenderers {
+	protected static HashMap<Integer, Integer> blockRenderIDs = new HashMap<Integer, Integer>();
+	
 	public static void init() {
 
 		// Mobs.
@@ -90,5 +94,4 @@ public class IaSRenderers {
 	public static void lateInit() {
 		MinecraftForgeClient.registerItemRenderer(NyxItems.grenade, new RenderItemVanillaGlowing());
 	}
-
 }

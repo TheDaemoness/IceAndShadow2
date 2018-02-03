@@ -10,9 +10,16 @@ import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAspect {
 	public final EnumIaSModule MODULE;
+	protected boolean fullCube;
 
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
@@ -20,6 +27,7 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 		if (mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock)) {
 			setCreativeTab(IaSCreativeTabs.blocks);
 		}
+		fullCube = true;
 	}
 
 	@Override
@@ -57,5 +65,60 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 		}
 		setLightLevel(lum);
 		return this;
+	}
+	
+	@Override
+	public boolean isNormalCube(IBlockAccess world, int x, int y, int z) {
+		return fullCube;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return fullCube;
+	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		switch(side) {
+		case NORTH:
+			return
+				minZ == 0
+				&& minY <= 0
+				&& maxY >= 1
+				&& minX <= 0
+				&& maxX >= 1;
+		case SOUTH:
+			return maxZ == 1
+				&& minY <= 0
+				&& maxY >= 1
+				&& minX <= 0
+				&& maxX >= 1;
+		case WEST:
+			return minX == 0
+				&& minY <= 0
+				&& maxY >= 1
+				&& minZ <= 0
+				&& maxZ >= 1;
+		case EAST:
+			return maxX == 1
+				&& minY <= 0
+				&& maxY >= 1
+				&& minZ <= 0
+				&& maxZ >= 1;
+		case DOWN:
+			return minY == 0
+				&& minX <= 0
+				&& maxX >= 1
+				&& minZ <= 0
+				&& maxZ >= 1;
+		case UP:
+			return maxY == 1
+				&& minX <= 0
+				&& maxX >= 1
+				&& minZ <= 0
+				&& maxZ >= 1;
+		default:
+			return fullCube;
+		}	
 	}
 }

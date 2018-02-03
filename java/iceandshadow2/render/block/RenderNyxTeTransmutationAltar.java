@@ -1,4 +1,4 @@
-package iceandshadow2.render.tileentity;
+package iceandshadow2.render.block;
 
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;

@@ -4,6 +4,7 @@ import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.IaSTileEntity;
+import iceandshadow2.ias.util.EnumNBTType;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
 import net.minecraft.entity.Entity;
@@ -89,19 +90,19 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1) {
-		super.readFromNBT(par1);
+	public void readFromNBT(NBTTagCompound tags) {
+		super.readFromNBT(tags);
 		target = new ItemStack(Items.egg);
 		catalyst = new ItemStack(Items.feather);
 
-		if (par1.hasKey("nyxItemTarget")) {
-			target.readFromNBT(par1.getCompoundTag("nyxItemTarget"));
+		if (EnumNBTType.COMPOUND.has(tags, "nyxItemTarget")) {
+			target.readFromNBT(tags.getCompoundTag("nyxItemTarget"));
 		} else {
 			target = null;
 		}
 
-		if (par1.hasKey("nyxItemCatalyst")) {
-			catalyst.readFromNBT(par1.getCompoundTag("nyxItemCatalyst"));
+		if (EnumNBTType.COMPOUND.has(tags, "nyxItemCatalyst")) {
+			catalyst.readFromNBT(tags.getCompoundTag("nyxItemCatalyst"));
 		} else {
 			catalyst = null;
 		}
@@ -117,14 +118,14 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1) {
-		super.writeToNBT(par1);
+	public void writeToNBT(NBTTagCompound tags) {
+		super.writeToNBT(tags);
 
 		if (target != null) {
-			par1.setTag("nyxItemTarget", target.writeToNBT(par1.getCompoundTag("nyxItemTarget")));
+			tags.setTag("nyxItemTarget", target.writeToNBT(tags.getCompoundTag("nyxItemTarget")));
 		}
 		if (catalyst != null) {
-			par1.setTag("nyxItemCatalyst", catalyst.writeToNBT(par1.getCompoundTag("nyxItemCatalyst")));
+			tags.setTag("nyxItemCatalyst", catalyst.writeToNBT(tags.getCompoundTag("nyxItemCatalyst")));
 		}
 	}
 }

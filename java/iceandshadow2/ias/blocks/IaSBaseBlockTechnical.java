@@ -9,6 +9,7 @@ public class IaSBaseBlockTechnical extends IaSBaseBlockSingle implements IIaSTec
 
 	public IaSBaseBlockTechnical(EnumIaSModule mod, String texName, Material mat) {
 		super(mod, texName, mat);
+		disableStats();
 	}
 
 	@Override

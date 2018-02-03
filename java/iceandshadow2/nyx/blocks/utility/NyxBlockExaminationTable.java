@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
+import iceandshadow2.ias.blocks.IaSBaseBlockTe;
 import iceandshadow2.nyx.blocks.NyxBlockStone;
 import iceandshadow2.nyx.tileentities.NyxTeExaminationTable;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class NyxBlockExaminationTable extends IaSBaseBlockTileEntity {
+public class NyxBlockExaminationTable extends IaSBaseBlockTe {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon iconTop, iconSide, iconBottom;

@@ -10,7 +10,7 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmuteLens;
-import iceandshadow2.ias.blocks.IaSBaseBlockTileEntity;
+import iceandshadow2.ias.blocks.IaSBaseBlockTe;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 //See, this is why we need some form of MI in Java, be it mixins or traits.
-public class NyxBlockAltarTransfusion extends IaSBaseBlockTileEntity {
+public class NyxBlockAltarTransfusion extends IaSBaseBlockTe {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon side, bot;

@@ -61,6 +61,7 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 	public IaSBaseBlockAirlike(EnumIaSModule mod, String texName) {
 		super(mod, texName, new MaterialTransparent(MapColor.airColor));
 		setBlockBounds(0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
+		this.fullCube = false;
 		disableStats();
 	}
 
@@ -116,16 +117,6 @@ public class IaSBaseBlockAirlike extends IaSBaseBlockTechnical {
 		if (!(entity instanceof EntityPlayer) && (entity.isCollidedHorizontally || entity.isSneaking()))
 			return false;
 		return testClimbable(world, x, y, z);
-	}
-
-	@Override
-	public boolean isNormalCube(IBlockAccess world, int x, int y, int z) {
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 
 	@Override

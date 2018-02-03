@@ -144,6 +144,13 @@ public class NyxRecipes {
 				, "c ", "dc", " c"
 				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
 				, 'd', new ItemStack(NyxItems.devora, 1, 1));
+		
+		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.antenna, 2)
+				, " c ", "ece", "cCr"
+				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 1)
+				, 'e', new ItemStack(NyxItems.echirIngot, 1, 1)
+				, 'C', new ItemStack(NyxItems.clockworkSmall)
+				, 'r', new ItemStack(Items.redstone));
 
 	}
 	

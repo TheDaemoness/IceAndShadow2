@@ -17,7 +17,7 @@ public class NyxBlocks {
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transfusionAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner;
+			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner, antenna;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -90,11 +90,14 @@ public class NyxBlocks {
 		NyxBlocks.airDrain = new NyxBlockAir("Air").register();
 
 		GameRegistry.registerTileEntity(NyxTeTransfusionAltar.class, "nyxTeTransmutationAltar");
+		GameRegistry.registerTileEntity(NyxTeRefCount.class, "nyxTeRefCount");
 
 		NyxBlocks.stoneMemory = new NyxBlockStoneMemory("StoneRegen").register();
 		NyxBlocks.stoneGrowing = new NyxBlockStoneGrowing("StoneGrowing").register();
 		NyxBlocks.virtualLadder = new NyxBlockVirtualLadder("StoneVirtualLadder").register();
 
 		NyxBlocks.rail = new NyxBlockRail("Rail", false, true).register();
+		
+		NyxBlocks.antenna = new NyxBlockAntenna("Antenna").register();
 	}
 }
