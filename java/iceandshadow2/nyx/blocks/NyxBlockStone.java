@@ -53,6 +53,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		super(EnumIaSModule.NYX, id, Material.rock);
 		setResistance(NyxBlockStone.HARDNESS);
 		setHardness(NyxBlockStone.RESISTANCE);
+		this.setLightOpacity(14);
 		this.setHarvestLevel("pickaxe", 1);
 		GameRegistry.addSmelting(this, new ItemStack(Blocks.cobblestone), 0);
 	}
@@ -93,6 +94,7 @@ public class NyxBlockStone extends IaSBaseBlockSingle implements IIaSBlockThawab
 		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.gravel);
+				NyxBlocks.stoneMemory.onBlockAdded(w, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 			}
 	}
 

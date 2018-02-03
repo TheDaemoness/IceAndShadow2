@@ -30,6 +30,7 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 		setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
 		setTickRandomly(true);
 		setLuminescence(0.5F);
+		this.fullCube = false;
 	}
 
 	@Override
@@ -52,11 +53,6 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
 		return new ItemStack(NyxItems.devora);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 
 	@Override
@@ -90,8 +86,7 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (!w.isRemote) {
 			IaSBlockHelper.breakBlock(w, x, y, z, false);
-			w.createExplosion(null, x + 0.5, y + 0.25, z + 0.5, 4.5F, true);
+			w.newExplosion(null, x+0.5, y+0.25, z+0.5, 4.5f, true, true);
 		}
 	}
-
 }

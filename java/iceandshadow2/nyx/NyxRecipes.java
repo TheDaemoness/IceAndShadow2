@@ -132,8 +132,8 @@ public class NyxRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.cursedPowder, 3), new ItemStack(NyxItems.boneCursed));
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remoteDetonator, 1), new ItemStack(NyxItems.remote, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remote, 1), new ItemStack(NyxItems.remoteDetonator, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remoteDetonator, 1), new ItemStack(NyxItems.remote, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.remote, 1), new ItemStack(NyxItems.remoteDetonator, 1, 0));
 		
 		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.grenadeHandle, 2, 0)
 				, "c ", "de", " e"
@@ -144,6 +144,14 @@ public class NyxRecipes {
 				, "c ", "dc", " c"
 				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
 				, 'd', new ItemStack(NyxItems.devora, 1, 1));
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.grenadeHandle, 2, 0)
+				, "d ", " n", " n"
+				, 'n', new ItemStack(NyxItems.cortraIngot, 1, 3)
+				, 'd', new ItemStack(NyxBlocks.detonator, 1, 0));
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.grenadeHandle, 2, 1)
+				, "d ", " n", " n"
+				, 'n', new ItemStack(NyxItems.echirIngot, 1, 3)
+				, 'd', new ItemStack(NyxBlocks.detonator, 1, 0));
 		
 		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.antenna, 2)
 				, " c ", "ece", "cCr"
@@ -151,6 +159,19 @@ public class NyxRecipes {
 				, 'e', new ItemStack(NyxItems.echirIngot, 1, 1)
 				, 'C', new ItemStack(NyxItems.clockworkSmall)
 				, 'r', new ItemStack(Items.redstone));
+		
+		GameRegistry.addShapedRecipe(new ItemStack(NyxItems.remote), "r", "b", "b"
+				, 'r', new ItemStack(NyxBlocks.antenna)
+				, 'b', new ItemStack(NyxItems.echirIngot, 1, 3));
+		
+
+		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.detonator, 1), "c", "d"
+				, 'c', new ItemStack(NyxItems.cortraIngot, 1, 3)
+				, 'd', new ItemStack(NyxItems.devora, 1, 1));
+		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.stableDevora, 2), "dgd", "grg", "dgd"
+				, 'r', new ItemStack(NyxItems.resin, 1, 0)
+				, 'd', new ItemStack(NyxItems.devora, 1, 0)
+				, 'g', new ItemStack(NyxBlocks.gravel, 1, 0));
 
 	}
 	

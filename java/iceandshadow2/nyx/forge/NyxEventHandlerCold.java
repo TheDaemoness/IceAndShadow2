@@ -29,6 +29,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 
 public class NyxEventHandlerCold {
 
@@ -218,5 +219,11 @@ public class NyxEventHandlerCold {
 			e.ammount = Math.max(0, e.ammount-1);
 			e.entityLiving.extinguish();
 		}
+	}
+	
+	@SubscribeEvent
+	public void stopBurningExplosions(ExplosionEvent.Start e) {
+		if(e.world.provider.dimensionId == IaSFlags.dim_nyx_id)
+			e.explosion.isFlaming = false;
 	}
 }

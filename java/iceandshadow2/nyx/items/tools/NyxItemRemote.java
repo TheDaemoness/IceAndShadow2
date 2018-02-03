@@ -4,15 +4,19 @@ import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
+import iceandshadow2.api.IIaSSignalReceiverBlock;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.items.tools.IaSBaseItemEquippable;
+import iceandshadow2.ias.items.tools.IaSBaseItemLocational;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.ias.util.IntBits;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.utility.NyxBlockAntenna;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -27,7 +31,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NyxItemRemote extends IaSBaseItemEquippable implements IIaSGlowing {
+public class NyxItemRemote extends IaSBaseItemLocational implements IIaSGlowing {
 
 	public static boolean isPressed(ItemStack is) {
 		return IntBits.areAllSet(is.getItemDamage(), 2);
@@ -40,18 +44,43 @@ public class NyxItemRemote extends IaSBaseItemEquippable implements IIaSGlowing 
 		super(EnumIaSModule.NYX, par1);
 	}
 	
-	public void onPress(ItemStack is) {}
-	public void onRelease(ItemStack is) {}
+	public void onPress(World w, ItemStack is) {
+		if(IaSBaseItemLocational.hasPos(is)) {
+			final int
+			x = IaSBaseItemLocational.getX(is),
+			y = IaSBaseItemLocational.getY(is),
+			z = IaSBaseItemLocational.getZ(is);
+			final Block bl = w.getBlock(x, y, z);
+			if(bl instanceof IIaSSignalReceiverBlock) {
+				((IIaSSignalReceiverBlock)bl).onSignalStart(w, x, y, z, null);
+			}
+		}
+	}
+	public void onRelease(World w, ItemStack is) {
+		if(IaSBaseItemLocational.hasPos(is)) {
+			final int
+			x = IaSBaseItemLocational.getX(is),
+			y = IaSBaseItemLocational.getY(is),
+			z = IaSBaseItemLocational.getZ(is);
+			final Block bl = w.getBlock(x, y, z);
+			if(bl instanceof IIaSSignalReceiverBlock) {
+				((IIaSSignalReceiverBlock)bl).onSignalStop(w, x, y, z, null);
+			}
+		}
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer pl) {
 		if(!pl.isUsingItem()) {
-			if(!isPressed(is)) {
-				onPress(is);
-				pl.playSound("random.click", 0.2F, 1.2F);
-			}
-			is.setItemDamage(is.getItemDamage() | 2);
-			pl.setItemInUse(is, getMaxItemUseDuration(is));
+			if(!pl.isSneaking()) {
+				if(!isPressed(is)) {
+					onPress(w, is);
+					pl.playSound("random.click", 0.2F, 1.2F);
+				}
+				is.setItemDamage(is.getItemDamage() | 2);
+				pl.setItemInUse(is, getMaxItemUseDuration(is));
+			} else
+				return super.onItemRightClick(is, w, pl);
 		}
 		return is;
 	}
@@ -71,7 +100,7 @@ public class NyxItemRemote extends IaSBaseItemEquippable implements IIaSGlowing 
 		e.playSound("random.click", 0.2F, 0.8F);
 		if(e instanceof EntityPlayer)
 			((EntityPlayer)e).clearItemInUse();
-		onRelease(is);
+		onRelease(e.worldObj, is);
 	}
 	
 	@Override
@@ -128,5 +157,7 @@ public class NyxItemRemote extends IaSBaseItemEquippable implements IIaSGlowing 
 		this.pressed = reg.registerIcon(getTextureName() + "Pressed");
 	}
 	
-	
+	public boolean canBindTo(World w, int x, int y, int z) {
+		return w.getBlock(x, y, z) instanceof IIaSSignalReceiverBlock;
+	}
 }

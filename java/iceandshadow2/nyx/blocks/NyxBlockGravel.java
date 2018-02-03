@@ -26,6 +26,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 		setHardness(0.5F);
 		setResistance(1.0F);
 		setTickRandomly(true);
+		this.setLightOpacity(14);
 		this.setHarvestLevel("shovel", 1);
 	}
 
@@ -53,10 +54,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public void onBlockAdded(World w, int x, int y, int z) {
 		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-		} else for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
-				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.stoneGrowing);
-			}
+		}
 	}
 
 	@Override

@@ -18,7 +18,6 @@ public class StyxBlockGatestone extends IaSBaseBlockSingle {
 		setBlockBounds(0.1f, 0.2f, 0.1f, 0.9f, 0.9f, 0.9f);
 		setBlockUnbreakable();
 		setResistance(Float.MAX_VALUE);
-		setCreativeTab(IaSCreativeTabs.blocks);
 	}
 
 	@Override

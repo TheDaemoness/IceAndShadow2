@@ -1,6 +1,7 @@
 package iceandshadow2.nyx;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import iceandshadow2.ias.blocks.IaSBaseBlock;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.util.IaSRegistration;
 import iceandshadow2.nyx.blocks.*;
@@ -17,7 +18,8 @@ public class NyxBlocks {
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transfusionAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner, antenna;
+			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner, antenna,
+			detonator, stableDevora;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
@@ -99,5 +101,7 @@ public class NyxBlocks {
 		NyxBlocks.rail = new NyxBlockRail("Rail", false, true).register();
 		
 		NyxBlocks.antenna = new NyxBlockAntenna("Antenna").register();
+		NyxBlocks.detonator = new NyxBlockDetonator("Detonator").register();
+		NyxBlocks.stableDevora = new NyxBlockStableDevora("StableDevora").register();
 	}
 }

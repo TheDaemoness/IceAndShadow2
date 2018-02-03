@@ -17,7 +17,6 @@ public class StyxBlockBarrier extends IaSBaseBlockSingle {
 		setBlockUnbreakable();
 		setResistance(Float.MAX_VALUE);
 		slipperiness = 1;
-		setCreativeTab(IaSCreativeTabs.blocks);
 	}
 
 	@Override

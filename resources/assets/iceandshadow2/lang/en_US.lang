@@ -37,6 +37,8 @@ tile.nyxInfestedSpawner0.name=Infested Phylactery (Miner)
 tile.nyxInfestedSpawner1.name=Infested Phylactery (Spider)
 tile.nyxInfestedSpawner2.name=Infested Phylactery (Wight)
 tile.nyxAntenna.name=Antenna
+tile.nyxDetonator.name=Detonator
+tile.nyxStableDevora.name=Devora Explosive
 
 tile.nyxOreGemstone.name=Gemstone Ore
 tile.nyxOreEchir.name=Echir Ore
@@ -123,7 +125,7 @@ item.nyxGrenadeRemote.name=Remote Grenade
 item.nyxEchirShears.name=Echir Shears
 item.nyxCursedPowder.name=Cursed Bonemeal
 item.nyxRemote.name=Remote
-item.nyxRemoteDetonator.name=Grenade Detonator
+item.nyxRemoteDetonator.name=Detonator Trigger
 item.nyxGrenadeHandle0.name=Grenade Handle
 item.nyxGrenadeHandle1.name=Remote Grenade Handle
 

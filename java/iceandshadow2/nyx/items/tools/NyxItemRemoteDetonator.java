@@ -11,6 +11,7 @@ import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.ias.util.IntBits;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.utility.NyxBlockDetonator;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -30,11 +31,16 @@ public class NyxItemRemoteDetonator extends NyxItemRemote {
 	public NyxItemRemoteDetonator(String par1) {
 		super(par1);
 	}
-
+	
+	//Possible todo: allow signaling of certain detonator blocks.
 	@Override
-	public boolean canAcceptAmmo(ItemStack ammo) {
-		return false;
+	public boolean canBindTo(World w, int x, int y, int z) {
+		return w.getBlock(x, y, z) instanceof NyxBlockDetonator;
 	}
 	
-	//NOTE: Do not set on press/on release, since the grenades detect an active remote detonator on their own.
+	@Override
+	public void onRelease(World w, ItemStack is) {
+		super.onRelease(w, is);
+		is.setItemDamage(is.getItemDamage() & (~1));
+	}
 }

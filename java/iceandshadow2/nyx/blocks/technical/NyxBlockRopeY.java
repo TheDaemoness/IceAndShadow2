@@ -2,7 +2,7 @@ package iceandshadow2.nyx.blocks.technical;
 
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.blocks.NyxBlockHookClimbing;
+import iceandshadow2.nyx.blocks.utility.NyxBlockHookClimbing;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

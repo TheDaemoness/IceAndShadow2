@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSFlags;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSSignalReceiverBlock;
@@ -14,9 +15,11 @@ import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.blocks.IaSBaseBlockTe;
 import iceandshadow2.ias.blocks.IaSBaseBlockTeRefCount;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
+import iceandshadow2.nyx.blocks.NyxBlockUnstableDevora;
 import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import iceandshadow2.render.block.RenderBlockAntenna;
 import net.minecraft.block.Block;
@@ -34,55 +37,42 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class NyxBlockAntenna extends IaSBaseBlockTeRefCount implements IIaSSignalReceiverBlock {
+public class NyxBlockDetonator extends IaSBaseBlockSingle implements IIaSSignalReceiverBlock {
 	
-	public NyxBlockAntenna(String id) {
-		super(EnumIaSModule.NYX, id, Material.rock);
-		setResistance(Blocks.stone.getExplosionResistance(null));
-		setHardness(Blocks.stone.getBlockHardness(null, 0, 0, 0));
-		setLightOpacity(4);
-		setStepSound(Block.soundTypeMetal);
-		this.setLightLevel(0.5f);
-		this.setTickRandomly(true);
-		this.setBlockBounds(0.4f, 0.0f, 0.4f, 0.6f, 1.1f, 0.6f);
+	public NyxBlockDetonator(String id) {
+		super(EnumIaSModule.NYX, id, Material.clay);
+		this.setBlockBounds(0.4f, 0.0f, 0.4f, 0.6f, 0.15f, 0.6f);
+		this.setLightOpacity(0);
 		this.fullCube = false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getRenderType() {
-		return RenderBlockAntenna.id;
-	}
-
-	@Override
-	public boolean canProvidePower() {
-		return true;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int s) {
-		return true;
-	}
-	
-	@Override
-	public int isProvidingWeakPower(IBlockAccess w, int x, int y, int z,
-			int s) {
-		return w.getBlockMetadata(x, y, z) > 0?15:0;
-	}
-
-	@Override
-	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-		return true;
 	}
 
 	@Override
 	public void onSignalStart(World w, int x, int y, int z, Object data) {
-		this.addRef(w, x, y, z);
+		IaSBlockHelper.breakBlock(w, x, y, z, false);
+		if(!w.isRemote)
+			w.newExplosion(null, x+0.5, y, z+0.5, 0.5f, true, true);
 	}
 
 	@Override
 	public void onSignalStop(World w, int x, int y, int z, Object data) {
-		this.rmRef(w, x, y, z);
 	}
+	
+	
+	public void tryBlowUp(World w, int x, int y, int z) {
+		if(w.isBlockIndirectlyGettingPowered(x, y, z))
+			onSignalStart(w, x, y, z, null);
+	}
+
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {
+		tryBlowUp(w, x, y, z);
+	}
+
+	@Override
+	public void onNeighborBlockChange(World w, int x, int y, int z,
+			Block bl) {
+		tryBlowUp(w, x, y, z);
+	}
+
+	
 }

@@ -196,6 +196,8 @@ public enum EnumNBTType {
 	}
 	
 	public boolean has(NBTTagCompound tags, String key) {
+		if(tags == null || key == null || key.isEmpty())
+			return false;
 		return tags.hasKey(key, getId());
 	}
 	

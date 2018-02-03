@@ -1,4 +1,4 @@
-package iceandshadow2.nyx.blocks;
+package iceandshadow2.nyx.blocks.utility;
 
 import java.util.Random;
 

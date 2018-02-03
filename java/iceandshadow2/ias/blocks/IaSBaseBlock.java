@@ -24,8 +24,11 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 	protected IaSBaseBlock(EnumIaSModule mod, Material mat) {
 		super(mat);
 		MODULE = mod;
-		if (mod == EnumIaSModule.NYX && !(this instanceof IIaSTechnicalBlock)) {
-			setCreativeTab(IaSCreativeTabs.blocks);
+		if (!(this instanceof IIaSTechnicalBlock)) {
+			if(mod == EnumIaSModule.NYX)
+				setCreativeTab(IaSCreativeTabs.blocks);
+			else
+				setCreativeTab(IaSCreativeTabs.misc);
 		}
 		fullCube = true;
 	}
