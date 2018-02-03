@@ -6,6 +6,7 @@ import iceandshadow2.ias.ai.EnumIaSSenses;
 import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.ai.IIaSSensate;
 import iceandshadow2.nyx.entities.util.EntityOrbNourishment;
+import iceandshadow2.styx.Styx;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,6 +22,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.TempCategory;
+import net.minecraft.world.chunk.Chunk;
 
 public class IaSEntityHelper {
 
@@ -286,5 +288,21 @@ public class IaSEntityHelper {
 			eis.delayBeforeCanPickup = 10; //Standard Minecraft delay.
 			w.spawnEntityInWorld(eis);
 		}
+	}
+
+	public static void teleport(EntityLivingBase ent, int x, int y, int z) {
+		if(!ent.worldObj.isRemote)
+			return;
+		final Chunk ck = IaSWorldHelper.loadChunk(ent.worldObj, x, z);
+		if(ck == null || !ck.isChunkLoaded || ck.isEmpty())
+			return;
+		for (int gateY = 255; gateY >= 4; --gateY) {
+			if (ck.getBlock(x&15, y, z&15) == Styx.gatestone) {
+				y = gateY;
+				break;
+			}
+		}
+		ent.setSneaking(false);
+		ent.setPositionAndUpdate(x + 0.5 , y+1, z + 0.5);
 	}
 }

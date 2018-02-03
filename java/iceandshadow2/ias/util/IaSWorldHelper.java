@@ -11,9 +11,12 @@ public class IaSWorldHelper {
 	 * Loads a chunk at the specified block coordinates.
 	 */
 	public static Chunk loadChunk(World w, int x, int z) {
-		return w.getChunkProvider().loadChunk(
+		final Chunk ck = w.getChunkFromChunkCoords(x/16-(x<0?1:0), z/16-(z<0?1:0));
+		if(ck == null || ck.isEmpty() || !ck.isChunkLoaded)
+			return w.getChunkProvider().loadChunk(
 				x/16-(x<0?1:0),
 				z/16-(z<0?1:0));
+		else return ck;
 	}
 
 	public static int getDifficulty(World w) {
