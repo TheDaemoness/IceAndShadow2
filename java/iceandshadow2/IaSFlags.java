@@ -3,13 +3,13 @@ package iceandshadow2;
 public class IaSFlags {
 	/** Enables the alternate death system on Nyx. */
 	public static boolean flag_death_system = true;
-	
+
 	/** Forces low particles even on fancy graphics. */
 	public static boolean flag_low_particles = false;
-	
+
 	/** Prints the generation of ruins to standard output. */
 	public static boolean flag_report_ruins_gen = false;
-	
+
 	/** Adds hint messages to item tooltips. */
 	public static boolean flag_hints = true;
 

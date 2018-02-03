@@ -18,29 +18,29 @@ public class IaSExecutor implements ExecutorService {
 	private static final IaSExecutor obj = new IaSExecutor();
 	public static IaSExecutor instance() {return obj;}
 
-	ExecutorService executor;
-	protected IaSExecutor() {
-		executor = Executors.newWorkStealingPool(Math.max(1, Runtime.getRuntime().availableProcessors()-1));
+	public static IaSFuture push(Callable r) {
+		final IaSFuture f = new IaSFuture(r);
+		obj.execute(f);
+		return f;
 	}
 	public static IaSFuture push(Runnable r) {
 		final IaSFuture f = new IaSFuture(r, null);
 		obj.execute(f);
 		return f;
 	}
-	public static IaSFuture push(Callable r) {
-		final IaSFuture f = new IaSFuture(r);
-		obj.execute(f);
-		return f;
-	}
-
-	@Override
-	public void execute(Runnable arg0) {
-		executor.execute(arg0);
+	ExecutorService executor;
+	protected IaSExecutor() {
+		executor = Executors.newWorkStealingPool(Math.max(1, Runtime.getRuntime().availableProcessors()-1));
 	}
 
 	@Override
 	public boolean awaitTermination(long arg0, TimeUnit arg1) throws InterruptedException {
 		return executor.awaitTermination(arg0, arg1);
+	}
+
+	@Override
+	public void execute(Runnable arg0) {
+		executor.execute(arg0);
 	}
 
 	@Override

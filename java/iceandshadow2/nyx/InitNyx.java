@@ -13,7 +13,6 @@ public class InitNyx {
 		NyxBlocks.init();
 		NyxBiomes.init();
 		NyxItems.init();
-		NyxRecipes.init();
 		NyxEntities.init(owner);
 
 		GameRegistry.registerTileEntity(NyxTeSingleItemStorage.class, "NyxTeSingleItemStorage");

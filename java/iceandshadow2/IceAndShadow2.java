@@ -10,6 +10,7 @@ import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.items.IaSItemStarterKit;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.nyx.InitNyx;
+import iceandshadow2.nyx.NyxRecipes;
 import iceandshadow2.ias.handlers.*;
 import iceandshadow2.nyx.forge.*;
 import iceandshadow2.nyx.toolmats.*;
@@ -34,7 +35,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(name = "Ice and Shadow 2", modid = IceAndShadow2.MODID, dependencies = "required-after:FML;", version = IceAndShadow2.VERSION)
 public class IceAndShadow2 {
 	public static final String MODID = "IceAndShadow2";
-	public static final String VERSION = "Pre-Alpha 17";
+	public static final String VERSION = "Pre-Alpha 18";
 	public static final int CONFIG_MAJ = 3;
 	public static final int CONFIG_MIN = 1;
 
@@ -117,6 +118,8 @@ public class IceAndShadow2 {
 
 	@EventHandler
 	public void init2(FMLInitializationEvent event) {
+		NyxRecipes.init();
+
 		if (IaSFlags.flag_death_system) {
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
 		}
@@ -140,7 +143,7 @@ public class IceAndShadow2 {
 		IaSRegistry.postInit();
 		IceAndShadow2.toPostRegister.clear();
 		InitNyx.lateInit(this);
-		
+
 		if (event.getSide() == Side.CLIENT) {
 			IaSRenderers.lateInit();
 		}

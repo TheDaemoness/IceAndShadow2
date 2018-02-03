@@ -17,8 +17,6 @@ import iceandshadow2.nyx.toolmats.NyxGrenadeIceWall;
 import iceandshadow2.nyx.toolmats.NyxGrenadeShadow;
 import iceandshadow2.nyx.toolmats.NyxMaterialEchir;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,7 +25,6 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBow;
@@ -49,18 +46,21 @@ public final class IaSRegistry {
 	private static ArrayList<IaSGrenadeLogic> grenadeLogics = new ArrayList<IaSGrenadeLogic>();
 	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
 	private static HashSet<Class> uncraftBlacklist = new HashSet<Class>();
-	
-	public static void blacklistUncraft(Class classy) {
-		uncraftBlacklist.add(classy);
-	}
-	public static boolean isBlacklistedUncraft(Class classy) {
-		return uncraftBlacklist.contains(classy);
-	}
-	
+
 	public static void add(Object o) {
 		if (IceAndShadow2.isRegistrationPublic()) {
 			IaSRegistry.doAdd(o);
 		}
+	}
+	public static int addGrenadeLogic(IaSGrenadeLogic evidenceAndReasons) {
+		if(evidenceAndReasons.setId(grenadeLogics.size())) {
+			grenadeLogics.add(evidenceAndReasons);
+		} else
+			throw new IllegalArgumentException(
+				"setId previously called on "
+				+IaSGrenadeLogic.class.getSimpleName()
+				+" passed to "+IaSRegistry.class.getSimpleName());
+		return grenadeLogics.size()-1;
 	}
 
 	private static void addHandler(IIaSApiExaminable handler) {
@@ -79,6 +79,10 @@ public final class IaSRegistry {
 		if (IaSRegistry.toolMaterials.containsKey(mat.getMaterialName()))
 			throw new IllegalArgumentException("Material '" + mat.getMaterialName() + "' already exists!");
 		IaSRegistry.toolMaterials.put(mat.getMaterialName(), mat);
+	}
+
+	public static void blacklistUncraft(Class classy) {
+		uncraftBlacklist.add(classy);
 	}
 
 	private static void doAdd(Object o) {
@@ -100,23 +104,12 @@ public final class IaSRegistry {
 		return IaSRegistry.defaultMaterial;
 	}
 
-	public static boolean isPrimarilyTransfusionTarget(ItemStack is) {
-		if(is == null)
-			return false;
-		final Object item = is.getItem() instanceof ItemBlock?
-				((ItemBlock)is.getItem()).field_150939_a:
-					is.getItem();
-		if(transfusionTargetFirstClasses.contains(item.getClass()))
-			return true;
-		for(final Class c : transfusionTargetFirstClasses) {
-			if(c.isInstance(item))
-				return true;
-		}
-		return false;
+	public static IaSGrenadeLogic getGrenadeLogic(int flag) {
+		return grenadeLogics.get(flag % grenadeLogics.size());
 	}
 
-	public static void setPrimarilyTransfusionTarget(Class c) {
-		transfusionTargetFirstClasses.add(c);
+	public static int getGrenadeLogicCount() {
+		return grenadeLogics.size();
 	}
 
 	public static IIaSApiTransmute getHandlerTransmutation(ItemStack target, ItemStack catalyst) {
@@ -204,12 +197,29 @@ public final class IaSRegistry {
 		return null;
 	}
 
+	public static boolean isBlacklistedUncraft(Class classy) {
+		return uncraftBlacklist.contains(classy);
+	}
+
+	public static boolean isPrimarilyTransfusionTarget(ItemStack is) {
+		if(is == null)
+			return false;
+		final Object item = is.getItem() instanceof ItemBlock?
+				((ItemBlock)is.getItem()).field_150939_a:
+					is.getItem();
+		if(transfusionTargetFirstClasses.contains(item.getClass()))
+			return true;
+		for(final Class c : transfusionTargetFirstClasses) {
+			if(c.isInstance(item))
+				return true;
+		}
+		return false;
+	}
 	public static void postInit() {
 		for (final Object o : IceAndShadow2.getPostRegistrationHandlers()) {
 			IaSRegistry.doAdd(o);
 		}
 	}
-
 	public static void preInit() {
 		for (final Object o : IceAndShadow2.getPreRegistrationHandlers()) {
 			IaSRegistry.doAdd(o);
@@ -229,25 +239,12 @@ public final class IaSRegistry {
 		setPrimarilyTransfusionTarget(NyxBaseItemBow.class);
 		setPrimarilyTransfusionTarget(NyxItemFlask.class);
 		setPrimarilyTransfusionTarget(NyxItemSwordFrost.class);
-		
+
 		addGrenadeLogic(new NyxGrenadeExplosive());
 		addGrenadeLogic(new NyxGrenadeIceWall());
 		addGrenadeLogic(new NyxGrenadeShadow());
 	}
-	public static int addGrenadeLogic(IaSGrenadeLogic evidenceAndReasons) {
-		if(evidenceAndReasons.setId(grenadeLogics.size()))
-			grenadeLogics.add(evidenceAndReasons);
-		else
-			throw new IllegalArgumentException(
-				"setId previously called on "
-				+IaSGrenadeLogic.class.getSimpleName()
-				+" passed to "+IaSRegistry.class.getSimpleName());
-		return grenadeLogics.size()-1;
-	}
-	public static IaSGrenadeLogic getGrenadeLogic(int flag) {
-		return grenadeLogics.get(flag % grenadeLogics.size());
-	}
-	public static int getGrenadeLogicCount() {
-		return grenadeLogics.size();
+	public static void setPrimarilyTransfusionTarget(Class c) {
+		transfusionTargetFirstClasses.add(c);
 	}
 }
