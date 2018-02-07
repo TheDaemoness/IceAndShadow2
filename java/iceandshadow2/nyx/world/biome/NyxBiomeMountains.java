@@ -15,7 +15,7 @@ public class NyxBiomeMountains extends NyxBiome {
 		super(par1, register, heightRoot, heightVari, isRare);
 		setBlocks(NyxBlocks.snow, NyxBlocks.stone);
 
-		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 10, 2, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityNyxSpider.class, 15, 2, 3));
 
 		setColor(96 << 16 | 96 << 8 | 96);
 	}
