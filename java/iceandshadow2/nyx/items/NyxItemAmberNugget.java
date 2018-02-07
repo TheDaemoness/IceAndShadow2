@@ -25,7 +25,7 @@ public class NyxItemAmberNugget extends IaSBaseItemSingleGlow implements IIaSApi
 		super(EnumIaSModule.NYX, texName);
 		setHasSubtypes(true);
 		setMaxStackSize(16);
-		IaSRegistry.blacklistUncraft(this.getClass());
+		IaSRegistry.blacklistUncraft(this);
 	}
 
 	@Override

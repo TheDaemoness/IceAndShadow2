@@ -22,6 +22,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IIaSDescriptive;
@@ -36,7 +37,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public NyxItemAlabaster(String texName) {
 		super(EnumIaSModule.NYX, texName, 1);
 		setMaxStackSize(4);
-		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
+		IaSRegistry.blacklistUncraft(this);
 	}
 
 	@Override
@@ -66,13 +67,7 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			return 0;
 		if (catalyst.getItemDamage() == 0) {
 			do
-				if (target.getItem() == Item.getItemFromBlock(Blocks.coal_block)) {
-					break;
-				} else if (target.getItem() == Item.getItemFromBlock(Blocks.gold_ore)) {
-					break;
-				} else if (target.getItem() == Item.getItemFromBlock(Blocks.redstone_block)) {
-					break;
-				} else if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
+				if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
 					break;
 				} else
 					return 0;
@@ -89,16 +84,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 		catalyst.stackSize -= 1;
 		if (catalyst.getItem() == this && catalyst.getItemDamage() == 0) {
 			final Item tem = target.getItem(); // No Undertale.
-			if (tem == Item.getItemFromBlock(Blocks.coal_block)) {
-				target.stackSize -= 1;
-				retval.add(new ItemStack(NyxItems.devora, 27));
-			} else if (tem == Item.getItemFromBlock(Blocks.gold_block)) {
-				target.stackSize -= 1;
-				retval.add(new ItemStack(NyxItems.echirIngot, 27, 1));
-			} else if (tem == Item.getItemFromBlock(Blocks.redstone_block)) {
-				target.stackSize -= 1;
-				retval.add(new ItemStack(NyxItems.cortra, 27, 1));
-			}
 			if (tem == Item.getItemFromBlock(Blocks.obsidian)) {
 				target.stackSize -= 1;
 				retval.add(new ItemStack(NyxBlocks.sanctifiedObsidian, 1));

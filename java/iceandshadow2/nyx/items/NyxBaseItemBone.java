@@ -2,6 +2,7 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
@@ -32,6 +33,7 @@ public abstract class NyxBaseItemBone extends IaSBaseItemSingle implements IIaSG
 		setMaxDamage(300);
 		setNoRepair();
 		setFull3D();
+		IaSRegistry.blacklistUncraft(this);
 	}
 	
 	public abstract void onBoneDone(ItemStack is);

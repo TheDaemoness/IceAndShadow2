@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ public class NyxItemClockwork extends IaSBaseItemMultiTexturedGlow {
 	public NyxItemClockwork(String id) {
 		super(EnumIaSModule.NYX, id, 3);
 		setMaxStackSize(1);
+		IaSRegistry.blacklistUncraft(this);
 	}
 
 	@Override

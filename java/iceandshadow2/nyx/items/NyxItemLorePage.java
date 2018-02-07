@@ -1,6 +1,7 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;

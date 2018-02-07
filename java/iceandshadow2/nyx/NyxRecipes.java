@@ -54,6 +54,7 @@ public class NyxRecipes {
 				new ItemStack(NyxItems.exousium, 1, 0));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.string, 4), new ItemStack(NyxItems.toughGossamer));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.string, 12), new ItemStack(NyxItems.rope));
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.rope), new ItemStack(NyxItems.toughGossamer),
 				new ItemStack(NyxItems.toughGossamer), new ItemStack(NyxItems.toughGossamer));
 
@@ -90,6 +91,7 @@ public class NyxRecipes {
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.permafrost), new ItemStack(NyxBlocks.dirt), 0);
 		GameRegistry.addSmelting(new ItemStack(NyxBlocks.dirt, 1, 1), new ItemStack(NyxBlocks.dirt), 0);
 
+		GameRegistry.addSmelting(NyxItems.alabaster, new ItemStack(Items.nether_star), 1);
 		for (int i = 0; i < ((IaSBaseItemMulti) NyxItems.alabaster).getSubtypeCount(); ++i) {
 			GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.alabasterShard, 9, i),
 					new ItemStack(NyxItems.alabaster, 1, i));

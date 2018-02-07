@@ -17,7 +17,7 @@ public class IaSBaseItemMulti extends IaSBaseItemSingle {
 		super(mod, id);
 		setHasSubtypes(true);
 		subtypeCount = subtypes;
-		IaSRegistry.blacklistUncraft(this.getClass());
+		IaSRegistry.blacklistUncraft(this);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

@@ -5,10 +5,13 @@ import iceandshadow2.api.IIaSApiSacrificeXp;
 import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.handlers.IaSHandlerTransmutationCraft;
 import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirToolActive;
 import iceandshadow2.ias.items.tools.IaSItemToolBroken;
+import iceandshadow2.ias.util.IaSCraftingHelper;
+import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.items.tools.NyxBaseItemBow;
 import iceandshadow2.nyx.items.tools.NyxItemFlask;
 import iceandshadow2.nyx.items.tools.NyxItemSwordFrost;
@@ -24,7 +27,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBow;
@@ -45,7 +51,7 @@ public final class IaSRegistry {
 	private static ArrayList<IIaSApiSacrificeXp> handlersSacrificeXp = new ArrayList<IIaSApiSacrificeXp>();
 	private static ArrayList<IaSGrenadeLogic> grenadeLogics = new ArrayList<IaSGrenadeLogic>();
 	private static HashSet<Class> transfusionTargetFirstClasses = new HashSet<Class>();
-	private static HashSet<Class> uncraftBlacklist = new HashSet<Class>();
+	private static HashSet<Object> uncraftBlacklist = new HashSet<Object>(); //Possible TODO: Metadata sensitivity.
 
 	public static void add(Object o) {
 		if (IceAndShadow2.isRegistrationPublic()) {
@@ -80,9 +86,14 @@ public final class IaSRegistry {
 			throw new IllegalArgumentException("Material '" + mat.getMaterialName() + "' already exists!");
 		IaSRegistry.toolMaterials.put(mat.getMaterialName(), mat);
 	}
-
-	public static void blacklistUncraft(Class classy) {
-		uncraftBlacklist.add(classy);
+	
+	public static void blacklistUncraft(Item itemic) {
+		if(itemic != null)
+			uncraftBlacklist.add(itemic);
+	}
+	public static void blacklistUncraft(Block blocky) {
+		if(blocky != null)
+			uncraftBlacklist.add(blocky);
 	}
 
 	private static void doAdd(Object o) {
@@ -197,8 +208,8 @@ public final class IaSRegistry {
 		return null;
 	}
 
-	public static boolean isBlacklistedUncraft(Class classy) {
-		return uncraftBlacklist.contains(classy);
+	public static boolean isBlacklistedUncraft(ItemStack ite) {
+		return uncraftBlacklist.contains(IaSCraftingHelper.extractItem(ite));
 	}
 
 	public static boolean isPrimarilyTransfusionTarget(ItemStack is) {

@@ -15,13 +15,14 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.ias.util.IaSItemHelper;
+import iceandshadow2.ias.util.IaSCraftingHelper;
 import iceandshadow2.ias.util.IntPair;
 
 /**
- * Reverses crafting recipes that obey two rules:
+ * Reverses crafting recipes that obey three rules:
  * 1: The recipe must generate at least double the output items from input items.
  * 2: The recipe must be a standard/oredict shaped/shapeless recipe.
+ * 3: None of the inputs from the recipe can be on the uncraft blacklist.
  */
 public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 
@@ -43,6 +44,10 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 					recipe.getClass() != ShapedOreRecipe.class)
 				return new IntPair();
 		}
+		for(Object o : IaSCraftingHelper.getCraftingRecipeInputs(recipe)) {
+			if(IaSRegistry.isBlacklistedUncraft(IaSCraftingHelper.extractStack(o)))
+				return new IntPair();
+		}
 		if(target.stackSize+catalyst.stackSize < sizeOut)
 			return new IntPair();
 		final int targetdrain = Math.min(sizeOut, target.stackSize);
@@ -53,12 +58,11 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		if(!target.isItemEqual(catalyst))
 			return 0;
-		if(IaSRegistry.isBlacklistedUncraft(IaSItemHelper.extractItem(target).getClass()))
-			return 0;
 		final List l = CraftingManager.getInstance().getRecipeList();
 		for(final Object o : l) {
-			if(o instanceof IRecipe && costs((IRecipe)o, target, catalyst, true).nonzero())
-					return 25;
+			if(o instanceof IRecipe && costs((IRecipe)o, target, catalyst, true).nonzero()) {
+				return 25;
+			}
 		}
 		return 0;
 	}
@@ -80,31 +84,16 @@ public class IaSHandlerTransmutationUncraftFuse implements IIaSApiTransmute {
 		}
 		if(cost == null || toReverse == null)
 			return Arrays.asList(); //Something went horribly wrong.
-		final Class toReverseClass = toReverse.getClass();
 		do {
+			final List ins = IaSCraftingHelper.getCraftingRecipeInputs(toReverse);
+			if(ins.isEmpty())
+				return ret;
 			target.stackSize -= cost.x();
 			catalyst.stackSize -= cost.z();
-			List ins;
-			if(toReverseClass == ShapelessRecipes.class) {
-				ins = ((ShapelessRecipes)toReverse).recipeItems;
-			} else if(toReverseClass == ShapelessOreRecipe.class) {
-				ins = ((ShapelessOreRecipe)toReverse).getInput();
-			} else if(toReverseClass == ShapedRecipes.class) {
-				ins = Arrays.asList(((ShapedRecipes)toReverse).recipeItems);
-			} else if(toReverseClass == ShapedOreRecipe.class) {
-				ins = Arrays.asList(((ShapedOreRecipe)toReverse).getInput());
-			} else
-				return ret;
 			for(final Object o : ins) {
 				try {
-					ItemStack is;
-					if(o instanceof List) {
-						is = (ItemStack)((List)o).get(0);
-					} else {
-						is = (ItemStack)o;
-					}
-					is = is.copy();
-					if(is.getItemDamage() == IaSHandlerTransmutationCraft.ANY_METADATA_MAGIC_NUMBER) {
+					ItemStack is = IaSCraftingHelper.extractStack(o);
+					if(is.getItemDamage() == IaSCraftingHelper.ANY_METADATA_MAGIC_NUMBER) {
 						is.setItemDamage(0);
 					}
 					ret.add(is);

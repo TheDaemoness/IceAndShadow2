@@ -11,10 +11,6 @@ import net.minecraft.item.ItemStack;
 
 public class NyxItemClockworkSmall extends IaSBaseItemSingleGlow {
 	
-	static {
-		IaSRegistry.blacklistUncraft(NyxItemClockworkSmall.class);
-	}
-	
 	public NyxItemClockworkSmall(String id) {
 		super(EnumIaSModule.NYX, id);
 		setMaxStackSize(16);

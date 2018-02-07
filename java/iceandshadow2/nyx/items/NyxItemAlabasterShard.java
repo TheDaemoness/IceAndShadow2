@@ -15,7 +15,6 @@ public class NyxItemAlabasterShard extends NyxItemAlabaster {
 	public NyxItemAlabasterShard(String texName) {
 		super(texName);
 		setMaxStackSize(16);
-		IaSRegistry.blacklistUncraft(this.getClass());
 	}
 	
 	@Override

@@ -22,6 +22,6 @@ public class IaSHandlerTransmutationCraft9 extends IaSHandlerTransmutationCraft 
 	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
 		if((recipe.getRecipeSize() != 9 && recipe.getRecipeSize() != 1) || !target.isItemEqual(catalyst))
 			return null;
-		return Arrays.asList(orerecipe?((ShapedOreRecipe)recipe).getInput():((ShapedRecipes)recipe).recipeItems);
+		return super.getInputs(recipe, target, catalyst, orerecipe);
 	}
 }

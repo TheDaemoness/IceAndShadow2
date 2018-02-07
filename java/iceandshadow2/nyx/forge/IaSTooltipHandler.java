@@ -8,7 +8,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import iceandshadow2.IaSFlags;
 import iceandshadow2.api.IIaSDescriptive;
-import iceandshadow2.ias.util.IaSItemHelper;
+import iceandshadow2.ias.util.IaSCraftingHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
@@ -40,7 +40,7 @@ public class IaSTooltipHandler {
 
 	@SubscribeEvent
 	public void onTooltip(ItemTooltipEvent e) {
-		Object it = IaSItemHelper.extractItem(e.itemStack);
+		Object it = IaSCraftingHelper.extractItem(e.itemStack);
 		boolean isWarning = false;
 		if(it instanceof IIaSDescriptive) {
 			IIaSDescriptive desc = ((IIaSDescriptive)it);

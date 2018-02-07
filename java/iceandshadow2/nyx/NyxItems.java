@@ -54,7 +54,7 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.poisonFruitFertile = new NyxItemPlumPoisonFertile("PoisonFruitFertile").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.toughGossamer = new IaSBaseItemSingle(EnumIaSModule.NYX, "ToughGossamer").register()
+		NyxItems.toughGossamer = new NyxItemGossamer("ToughGossamer").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.silkBerries = new NyxItemSilkBerries("SilkBerries").register()
 				.setCreativeTab(IaSCreativeTabs.resources);

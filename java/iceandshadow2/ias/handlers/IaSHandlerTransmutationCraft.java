@@ -8,8 +8,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.util.IaSCraftingHelper;
 import iceandshadow2.ias.util.IntPair;
 
 /**
@@ -17,9 +22,9 @@ import iceandshadow2.ias.util.IntPair;
  */
 public abstract class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 
-	public static int ANY_METADATA_MAGIC_NUMBER = 32767;
-
-	protected abstract List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe);
+	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
+		return IaSCraftingHelper.getCraftingRecipeInputs(recipe);
+	}
 
 	protected IntPair costs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
 		final List l = getInputs(recipe, target, catalyst, orerecipe);
@@ -44,7 +49,7 @@ public abstract class IaSHandlerTransmutationCraft implements IIaSApiTransmute {
 				if(is.getItem() == null) {
 					continue;
 				}
-				final boolean noDmgCheck = is.getItemDamage() == ANY_METADATA_MAGIC_NUMBER;
+				final boolean noDmgCheck = is.getItemDamage() == IaSCraftingHelper.ANY_METADATA_MAGIC_NUMBER;
 				if(is.getItem() == target.getItem()
 						&& target.stackSize-targcount > 0
 						&& (noDmgCheck || is.getItemDamage() == target.getItemDamage())) {
