@@ -3,6 +3,7 @@ package iceandshadow2.nyx.world;
 import iceandshadow2.IaSExecutor;
 import iceandshadow2.IaSFuture;
 import iceandshadow2.ias.util.ChunkRandom;
+import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockAir;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
@@ -18,6 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -40,14 +42,14 @@ public class NyxChunkProvider implements IChunkProvider {
 	final byte magic = 5; //DO NOT CHANGE.
 	final int radius = 7;
 	private final Block[] ablock;
-	private final byte[] abyte;
+	private final byte[] ameta;
 
 	//private BiomeGenBase[] biomesForGeneration;
 
 	public NyxChunkProvider(World par1World, long seed, boolean par4) {
 		final Random rand = new Random(~seed);
 		ablock = new Block[1 << 16];
-		abyte = new byte[1 << 16];
+		ameta = new byte[1 << 16];
 		worldObj = par1World;
 		noiseGen = new NoiseGeneratorOctaves[4];
 		noiseGen[0] = new NoiseGeneratorOctaves(rand, 16);
@@ -368,20 +370,29 @@ public class NyxChunkProvider implements IChunkProvider {
 	@Override
 	public Chunk provideChunk(final int xChunk, final int zChunk) {
 		Arrays.fill(ablock, Blocks.air);
-		Arrays.fill(abyte, (byte) 0);
+		Arrays.fill(ameta, (byte) 0);
 		//biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
-		final BiomeGenBase biomesForGeneration[] = genTerrain(xChunk, zChunk, ablock, abyte);
-		replaceBlocksForBiome(xChunk, zChunk, ablock, abyte, biomesForGeneration);
+		final BiomeGenBase biomesForGeneration[] = genTerrain(xChunk, zChunk, ablock, ameta);
+		replaceBlocksForBiome(xChunk, zChunk, ablock, ameta, biomesForGeneration);
 
-		final Chunk chunk = new Chunk(worldObj, ablock, abyte, xChunk, zChunk);
+		final Chunk chunk = new Chunk(worldObj, ablock, ameta, xChunk, zChunk);
 
 		final byte[] abyte1 = chunk.getBiomeArray();
 		for (int k = 0; k < abyte1.length; ++k) {
 			abyte1[k] = (byte)biomesForGeneration[k].biomeID;
 		}
 
-		chunk.generateSkylightMap();
-		chunk.enqueueRelightChecks();
+		for(int i = 0; i < 16*16*256; ++i) {
+			final int
+			x = (i >> 12),
+			z = (i >> 8)&15,
+			y = i&255;
+			int light = chunk.getSavedLightValue(EnumSkyBlock.Block, x, y, z);
+			light = Math.max(light, IaSBlockHelper.getDefaultLight(ablock[i], ameta[i]));
+			chunk.setLightValue(EnumSkyBlock.Block, x, y, z, light);
+		}
+		chunk.resetRelightChecks();
+		
 		return chunk;
 	}
 

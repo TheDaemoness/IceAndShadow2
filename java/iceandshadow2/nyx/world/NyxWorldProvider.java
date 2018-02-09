@@ -19,7 +19,7 @@ public class NyxWorldProvider extends WorldProvider {
 
 	public NyxWorldProvider() {
 		isHellWorld = false;
-		hasNoSky = true;
+		hasNoSky = false;
 		registerWorldChunkManager();
 	}
 

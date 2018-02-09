@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.blocks.IIaSBlockLight;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.MaterialTransparent;
@@ -157,5 +158,10 @@ public class IaSBlockHelper {
 		w.setBlock(x, y, z, Blocks.mob_spawner);
 		final TileEntityMobSpawner tes = (TileEntityMobSpawner) w.getTileEntity(x, y, z);
 		tes.func_145881_a().setEntityName(entityName);
+	}
+	public static int getDefaultLight(Block block, int meta) {
+		if(block instanceof IIaSBlockLight)
+			return ((IIaSBlockLight)block).getLightValue(meta);
+		return block.getLightValue();
 	}
 }

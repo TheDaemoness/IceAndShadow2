@@ -58,10 +58,51 @@ public class NyxBiome extends BiomeGenBase {
 	public boolean deepSurfaceLayer() {
 		return false;
 	}
+	
+	protected void generateCortra(World w, int x, int z, boolean reverse) {
+		boolean prevsalt = false;
+		final int
+		ystart = reverse?56:5,
+		yend = reverse?5:56;		
+		for(int i = ystart; i != yend; i+=reverse?-1:1) {
+			if(w.getBlock(x, i, z) == NyxBlocks.salt) {
+				if(prevsalt) {
+					w.setBlock(x, i, z, NyxBlocks.oreCortra);
+					break;
+				}
+				prevsalt = true;
+			}
+		 }
+	}
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
+		genOre(par1World, par2Random, xchunk, zchunk);
 
+		genStructures(par1World, par2Random, xchunk, zchunk);
+
+		for (int xit = 0; xit < 16; ++xit) {
+			for (int zit = 0; zit < 16; ++zit)
+				if (par2Random.nextInt(24) == 0) {
+					boolean inair = false;
+					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 63; --yit)
+						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
+							inair = true;
+						} else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
+							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
+									&& par2Random.nextBoolean()) {
+								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
+								break;
+							}
+							inair = false;
+						}
+				}
+		}
+
+		genFoliage(par1World, par2Random, xchunk, zchunk);
+	}
+	
+	protected void genOre(World par1World, Random par2Random, int xchunk, int zchunk) {
 		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
 		genSalt = new WorldGenNyxOre(NyxBlocks.salt, 48);
 		genGemstone = new WorldGenNyxOre(NyxBlocks.oreGemstone, 4);
@@ -70,20 +111,8 @@ public class NyxBiome extends BiomeGenBase {
 
 		GenOre.genOreStandard(genSalt, par1World, xchunk, zchunk, 8, 64, 5);
 
-		{
-		final int randx = par2Random.nextInt(16),
-				randz = par2Random.nextInt(16);
-		boolean prevsalt = false;
-		for(int i = 7; i < 64; ++i) {
-			if(par1World.getBlock(xchunk+randx, i, zchunk+randz) == NyxBlocks.salt) {
-				if(prevsalt) {
-					par1World.setBlock(xchunk+randx, i, zchunk+randz, NyxBlocks.oreCortra);
-					break;
-				}
-				prevsalt = true;
-			}
-		 }
-		}
+		generateCortra(par1World, xchunk+par2Random.nextInt(16), zchunk+par2Random.nextInt(16), false);
+		generateCortra(par1World, xchunk+par2Random.nextInt(16), zchunk+par2Random.nextInt(16), true);
 
 		do {
 			final int randx = par2Random.nextInt(16),
@@ -128,28 +157,6 @@ public class NyxBiome extends BiomeGenBase {
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
 		}
 
-		genStructures(par1World, par2Random, xchunk, zchunk);
-
-		for (int xit = 0; xit < 16; ++xit) {
-			for (int zit = 0; zit < 16; ++zit)
-				if (par2Random.nextInt(24) == 0) {
-					boolean inair = false;
-					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 63; --yit)
-						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
-							inair = true;
-						} else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
-							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
-									&& par2Random.nextBoolean()) {
-								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
-								break;
-							}
-							inair = false;
-						}
-				}
-		}
-
-		genFoliage(par1World, par2Random, xchunk, zchunk);
-
 		final int x = xchunk + par1World.rand.nextInt(16);
 		final int z = zchunk + par1World.rand.nextInt(16);
 		final int y = IaSBlockHelper.getHeight(par1World, x, z);
@@ -167,6 +174,7 @@ public class NyxBiome extends BiomeGenBase {
 				par1World.setBlock(x, y, z, NyxBlocks.crystalBloodstone);
 			}
 		}
+		
 	}
 
 	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {

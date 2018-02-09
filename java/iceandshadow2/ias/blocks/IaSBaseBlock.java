@@ -10,6 +10,7 @@ import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.Explosion;
@@ -17,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAspect {
+public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAspect, IIaSBlockLight {
 	public final EnumIaSModule MODULE;
 	protected boolean fullCube;
 
@@ -30,7 +31,8 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 			else
 				setCreativeTab(IaSCreativeTabs.misc);
 		}
-		fullCube = true;
+		fullCube = !(mat instanceof MaterialTransparent);
+        lightOpacity = fullCube?15:0;
 	}
 
 	@Override
@@ -61,12 +63,14 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 	public IaSBaseBlock setLightColor(float r, float g, float b) {
 		return this;
 	}
-
+	
 	public IaSBaseBlock setLuminescence(float lum) {
-		if (this.getLightOpacity() >= 15) {
-			setLightOpacity(14);
-		}
-		setLightLevel(lum);
+		return setLuminescence((int)(15 * lum));
+	}
+
+	public IaSBaseBlock setLuminescence(int lum) {
+		this.lightOpacity = Math.min(this.lightOpacity, 14);
+		this.lightValue = Math.min(lum, 15);
 		return this;
 	}
 	
@@ -80,6 +84,17 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 		return fullCube;
 	}
 	
+	@Override
+	public String getModName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean func_149730_j() {
+		return fullCube;
+	}
+
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		switch(side) {
@@ -124,4 +139,21 @@ public abstract class IaSBaseBlock extends Block implements IIaSModName, IIaSAsp
 			return fullCube;
 		}	
 	}
+	
+	@Override
+	public int getMixedBrightnessForBlock(IBlockAccess w, int x, int y, int z) {
+		return w.getLightBrightnessForSkyBlocks(x, y, z, this.getLightValue(w, x, y, z));
+	}
+
+	@Override
+	public int getLightValue(int meta) {
+		return getLightValue();
+	}
+
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		return getLightValue(world.getBlockMetadata(x, y, z));
+	}
+	
+	
 }

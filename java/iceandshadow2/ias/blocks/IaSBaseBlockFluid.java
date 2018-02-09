@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, IIaSAspect {
+public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, IIaSAspect, IIaSBlockLight {
 
 	private final EnumIaSModule MODULE;
 
@@ -86,5 +86,17 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 		final ForgeDirection dir = ForgeDirection.getOrientation(side);
 		final Block bl = world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 		return dir == ForgeDirection.UP || (!bl.isOpaqueCube() && bl != this);
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		return getLightValue(world.getBlockMetadata(x, y, z));
+	}
+
+	@Override
+	public int getLightValue(int meta) {
+		if(maxScaledLight == 0)
+			return super.getLightValue();
+		return (int) (meta / quantaPerBlockFloat * maxScaledLight);
 	}
 }

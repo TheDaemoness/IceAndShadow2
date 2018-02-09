@@ -26,7 +26,7 @@ public class NyxBlockOreExousium extends NyxBlockOre {
 	public NyxBlockOreExousium(String texName) {
 		super(texName);
 		setHardness(20.0F);
-		setLuminescence(1.0F);
+		setLuminescence(9);
 		setLightColor(0.9F, 1.0F, 0.9F);
 		setResistance(2.5F);
 		setTickRandomly(true);
