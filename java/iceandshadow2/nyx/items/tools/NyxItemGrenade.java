@@ -123,7 +123,12 @@ public class NyxItemGrenade extends IaSBaseItemMultiGlow {
 	public IIcon getIcon(ItemStack stack, int pass) {
 		if(pass > 0)
 			return NyxItems.grenadeHandle.getIconFromDamage(isRemoteDetonated(stack)?1:0);
-		return payloadIcons[getGrenadeLogic(stack).getId()];
+		return getPayloadIcon(getGrenadeLogic(stack).getId());
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public IIcon getPayloadIcon(int logic) {
+		return payloadIcons[logic];
 	}
 	
 	@SideOnly(Side.CLIENT)

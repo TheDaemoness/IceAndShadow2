@@ -1,5 +1,6 @@
 package iceandshadow2.render;
 
+import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.items.tools.IaSTools;
@@ -93,5 +94,6 @@ public class IaSRenderers {
 	
 	public static void lateInit() {
 		MinecraftForgeClient.registerItemRenderer(NyxItems.grenade, new RenderItemVanillaGlowing());
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
 	}
 }
