@@ -43,7 +43,8 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					// TODO: Pushing mechanics.
 					final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
 					final Block bl = w.getBlock(i, j, k);
-					if (bl instanceof NyxBlockStone) {
+					final float hardness = bl.getBlockHardness(w, i, j, k);
+					if (bl instanceof NyxBlockStone || hardness < 0) {
 						continue;
 					}
 					finished = false;
@@ -51,7 +52,7 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					if (aspect == EnumIaSAspect.EXOUSIUM || aspect == EnumIaSAspect.LAND) {
 						continue;
 					}
-					if (bl.isReplaceable(w, i, j, k) || bl.getBlockHardness(w, i, j, k) < NyxBlockStone.HARDNESS) {
+					if (bl.isReplaceable(w, i, j, k) || hardness < NyxBlockStone.HARDNESS) {
 						IaSBlockHelper.breakBlock(w, i, j, k, true);
 						w.setBlock(i, j, k, NyxBlocks.gravel);
 					}

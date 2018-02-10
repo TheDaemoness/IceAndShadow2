@@ -117,6 +117,10 @@ public class NyxRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.rail, 24), "e e", "ese", "e e",
 			'e', new ItemStack(NyxItems.echirIngot, 1, 1),
 			's', new ItemStack(Items.stick));
+		GameRegistry.addShapedRecipe(new ItemStack(NyxBlocks.railPowered, 9), "e e", "ese", "ece",
+				'e', new ItemStack(NyxItems.echirIngot, 1, 1),
+				's', new ItemStack(Items.stick),
+				'c', new ItemStack(NyxItems.cortra, 1, 0));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(NyxItems.clockwork, 1, 1), new ItemStack(NyxItems.clockwork, 1, 0),
 				new ItemStack(NyxItems.cortraIngot, 1, 1), new ItemStack(NyxItems.cortraIngot, 1, 1),

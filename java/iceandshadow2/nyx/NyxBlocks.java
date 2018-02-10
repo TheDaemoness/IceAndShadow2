@@ -25,7 +25,7 @@ public class NyxBlocks {
 			oreGemstone;
 
 
-	public static Block rail;
+	public static Block rail, railPowered;
 
 	public static IaSBaseBlockTechnical hookTightropeX, hookTightropeZ, ropeX, ropeY, ropeZ, fakeFurnace, stoneMemory,
 			virtualLadder;
@@ -99,6 +99,7 @@ public class NyxBlocks {
 		NyxBlocks.virtualLadder = new NyxBlockVirtualLadder("StoneVirtualLadder").register();
 
 		NyxBlocks.rail = new NyxBlockRail("Rail", false, true).register();
+		NyxBlocks.railPowered = new NyxBlockRailPowered("RailPowered").register();
 		
 		NyxBlocks.antenna = new NyxBlockAntenna("Antenna").register();
 		NyxBlocks.detonator = new NyxBlockDetonator("Detonator").register();
