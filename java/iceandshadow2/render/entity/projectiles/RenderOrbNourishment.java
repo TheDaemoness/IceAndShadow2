@@ -3,12 +3,16 @@ package iceandshadow2.render.entity.projectiles;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import iceandshadow2.render.IaSRenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderXPOrb;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.util.MathHelper;
 
+@SideOnly(Side.CLIENT)
 public class RenderOrbNourishment extends RenderXPOrb {
 
 	@Override
@@ -16,33 +20,24 @@ public class RenderOrbNourishment extends RenderXPOrb {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		bindEntityTexture(orb);
-		final int i = orb.getTextureByXP();
-		final float f2 = (i % 4 * 16 + 0) / 64.0F;
-		final float f3 = (i % 4 * 16 + 16) / 64.0F;
-		final float f4 = (i / 4 * 16 + 0) / 64.0F;
-		final float f5 = (i / 4 * 16 + 16) / 64.0F;
-		final float f6 = 1.0F;
-		final float f7 = 0.5F;
-		final float f8 = 0.25F;
-		final int j = orb.getBrightnessForRender(b);
-		final int k = j % 65536;
-		final int l = j / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, k / 1.0F, l / 1.0F);
+		final int iconIndex = orb.getTextureByXP();
+		final float
+		minU = (iconIndex % 4 * 16 + 0) / 64f,
+		maxU = (iconIndex % 4 * 16 + 16) / 64f,
+		minV = (iconIndex / 4 * 16 + 0) / 64f,
+		maxV = (iconIndex / 4 * 16 + 16) / 64f;
+		final int
+		luma = orb.getBrightnessForRender(b),
+		lumaLSB = luma & 65535,
+		lumaMSB = luma / 65536;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lumaLSB, lumaMSB);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		final float f11 = (orb.xpColor + b) / 2.0F;
-		final int color = 255 << 16 | 0 << 8 | (int) (((MathHelper.sin(f11) + 1) / 2) * 64); // Color.
-		GL11.glRotatef(180.0F - renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-		final float f9 = 0.3F;
-		GL11.glScalef(f9, f9, f9);
+		final int color = 255 << 16 | 0 << 8 | (int) (((MathHelper.sin((orb.xpColor + b) / 2.0F) + 1) / 2) * 64); // Color.
+		IaSRenderHelper.rotateTowardPlayer(renderManager);
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.setColorRGBA_I(color, 128);
-		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		tessellator.addVertexWithUV(0.0F - f7, 0.0F - f8, 0.0D, f2, f5);
-		tessellator.addVertexWithUV(f6 - f7, 0.0F - f8, 0.0D, f3, f5);
-		tessellator.addVertexWithUV(f6 - f7, 1.0F - f8, 0.0D, f3, f4);
-		tessellator.addVertexWithUV(0.0F - f7, 1.0F - f8, 0.0D, f2, f4);
+		IaSRenderHelper.addUVSquare(tessellator, minU, maxU, minV, maxV, 0.3f);
 		tessellator.draw();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
