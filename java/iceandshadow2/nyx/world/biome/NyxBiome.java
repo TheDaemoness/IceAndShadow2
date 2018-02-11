@@ -77,6 +77,9 @@ public class NyxBiome extends BiomeGenBase {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
+		if(Math.abs(xchunk) <= 16 && Math.abs(zchunk) <= 16)
+			return;
+		
 		genOre(par1World, par2Random, xchunk, zchunk);
 
 		genStructures(par1World, par2Random, xchunk, zchunk);

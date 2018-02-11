@@ -39,23 +39,8 @@ public class GenRuinsCentral extends GenRuins {
 
 	@Override
 	public void buildPass(World w, Random r, int x, int y, int z) {
-		for (int i = 2; i <= 6; ++i) {
-			final ForgeDirection dir = ForgeDirection.getOrientation(i);
-			int distance = 0;
-			for (int j = 15; j <= 96
-					&& !IaSBlockHelper.isTransient(w, x + j * dir.offsetX, y + 1, z + j * dir.offsetZ); ++j) {
-				++distance;
-			}
-			if (distance >= 2 && distance < 96) {
-				for (int j = 0; j < distance; ++j) {
-					w.setBlock(x + j * dir.offsetX, y, z + j * dir.offsetZ, NyxBlocks.brickExousic);
-					w.setBlockToAir(x + j * dir.offsetX, y + 1, z + j * dir.offsetZ);
-					w.setBlockToAir(x + j * dir.offsetX, y + 2, z + j * dir.offsetZ);
-				}
-			}
-		}
-
-		Sculptor.cylinder(w, x, y, z, 16, 1, Blocks.snow, 0);
+		
+		Sculptor.cylinder(w, x, y, z, 16, 1, NyxBlocks.snow, 0);
 		Sculptor.cylinder(w, x, y - 1, z, 16, 1, NyxBlocks.permafrost, 0);
 		Sculptor.cylinder(w, x, y - 2, z, 15, 1, NyxBlocks.permafrost, 0);
 		for (int i = 3; i <= 30; ++i) {
@@ -124,6 +109,8 @@ public class GenRuinsCentral extends GenRuins {
 				w.setBlock(x + xit, y + 2, z + zit, NyxBlocks.transfusionAltarBroken);
 			}
 		}
+		//Bonus anvil.
+		w.setBlock(r.nextBoolean()?x-3:x+3, y+2, r.nextBoolean()?z-3:z+3, Blocks.anvil);
 	}
 
 	@Override
