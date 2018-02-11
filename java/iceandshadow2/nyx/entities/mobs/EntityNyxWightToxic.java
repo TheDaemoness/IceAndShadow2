@@ -290,7 +290,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 
 	@Override
 	public boolean hates(EnumIaSAspect aspect) {
-		return aspect == null || aspect == EnumIaSAspect.INFESTATION || aspect == EnumIaSAspect.ANCIENT;
+		return aspect == EnumIaSAspect.ALIEN || aspect == EnumIaSAspect.INFESTATION || aspect == EnumIaSAspect.ANCIENT;
 	}
 
 	@Override
@@ -332,8 +332,7 @@ public class EntityNyxWightToxic extends EntityZombie implements IIaSMobGetters 
 							posZ - EntityNyxWightToxic.TELEPORT_RANGE, posX + EntityNyxWightToxic.TELEPORT_RANGE,
 							posY + EntityNyxWightToxic.TELEPORT_RANGE, posZ + EntityNyxWightToxic.TELEPORT_RANGE));
 					for (final Object ent : ents)
-						if (ent instanceof EntityAgeable || ent instanceof EntityPlayer
-								|| EnumIaSAspect.getAspect(ent) == EnumIaSAspect.INFESTATION) {
+						if (ent instanceof EntityLivingBase && hates(EnumIaSAspect.getAspect(ent))) {
 							final EntityLivingBase elb = (EntityLivingBase) ent;
 							if ((elb == getAttackTarget() && getHealth() >= getMaxHealth())
 									|| elb.isPotionActive(Potion.poison)) {

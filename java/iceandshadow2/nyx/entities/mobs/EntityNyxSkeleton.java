@@ -494,7 +494,7 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 
 	@Override
 	public boolean hates(EnumIaSAspect aspect) {
-		return aspect == null || aspect == EnumIaSAspect.ANCIENT;
+		return aspect == EnumIaSAspect.ALIEN || aspect == EnumIaSAspect.ANCIENT;
 	}
 
 	public boolean isUsingAlternateWeapon() {

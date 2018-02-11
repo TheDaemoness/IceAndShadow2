@@ -241,7 +241,7 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 
 	@Override
 	public boolean hates(EnumIaSAspect aspect) {
-		return aspect == null || aspect == EnumIaSAspect.ANCIENT || aspect == EnumIaSAspect.NYX;
+		return aspect == EnumIaSAspect.ALIEN || aspect == EnumIaSAspect.ANCIENT || aspect == EnumIaSAspect.NYX;
 	}
 
 	@Override

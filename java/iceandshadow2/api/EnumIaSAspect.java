@@ -10,11 +10,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public enum EnumIaSAspect {
-	VIRTUAL, NATIVE, LAND, FROZEN, NYX, POISONWOOD, INFESTATION, EXOUSIUM, NAVISTRA, ANCIENT, STYX, PURE;
+	ALIEN, NATIVE, LAND, FROZEN, NYX, POISONWOOD, INFESTATION, EXOUSIUM, NAVISTRA, ANCIENT, STYX, PURE;
 
 	public static EnumIaSAspect getAspect(Object o) {
-		if (o == null)
-			return VIRTUAL;
 		if (o instanceof IIaSAspect)
 			return ((IIaSAspect) o).getAspect();
 		if (o instanceof EntityItem)
@@ -28,11 +26,13 @@ public enum EnumIaSAspect {
 		if (o instanceof ItemBlock)
 			return getAspect(((ItemBlock) o).field_150939_a);
 		if (o instanceof EntityPlayer)
+			return ALIEN;
+		if (o == null)
 			return null;
 		final SideOnly side = o.getClass().getAnnotation(SideOnly.class);
 		if (side != null && side.value() == Side.CLIENT)
-			return VIRTUAL;
-		return null;
+			return null;
+		return ALIEN;
 	}
 
 	public static EnumRarity getRarity(EnumIaSAspect aspect) {

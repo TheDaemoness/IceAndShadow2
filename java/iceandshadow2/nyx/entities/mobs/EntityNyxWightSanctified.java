@@ -285,7 +285,7 @@ public class EntityNyxWightSanctified extends EntityZombie implements IIaSMobGet
 
 	@Override
 	public boolean hates(EnumIaSAspect aspect) {
-		return aspect == null || aspect == EnumIaSAspect.NYX;
+		return aspect == EnumIaSAspect.ALIEN || aspect == EnumIaSAspect.NYX;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package iceandshadow2.api;
 
 import java.util.List;
 
+import iceandshadow2.ias.interfaces.IaSItemStackCriteria;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

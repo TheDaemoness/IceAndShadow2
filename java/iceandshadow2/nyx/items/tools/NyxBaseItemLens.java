@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSLenses;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
@@ -28,11 +27,6 @@ public abstract class NyxBaseItemLens extends IaSBaseItemSingle implements IIaSG
 	}
 
 	@Override
-	public IIcon getAltarTopTexture(ItemStack lens) {
-		return altaricon;
-	}
-
-	@Override
 	public int getFirstGlowPass(ItemStack is) {
 		return 1;
 	}
@@ -44,19 +38,11 @@ public abstract class NyxBaseItemLens extends IaSBaseItemSingle implements IIaSG
 		return itemIcon;
 	}
 
-	public abstract EnumIaSLenses getLensType();
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderPasses(int metadata) {
 		return 2;
 	}
-
-	@Override
-	public abstract int getTransmuteLensRate(EnumIaSLenses lenstype, ItemStack lens, ItemStack target);
-
-	@Override
-	public abstract List<ItemStack> getTransmuteLensYield(ItemStack lens, ItemStack target);
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -72,11 +58,6 @@ public abstract class NyxBaseItemLens extends IaSBaseItemSingle implements IIaSG
 	@SideOnly(Side.CLIENT)
 	public boolean requiresMultipleRenderPasses() {
 		return true;
-	}
-
-	@Override
-	public boolean spawnParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		return false;
 	}
 
 	@Override

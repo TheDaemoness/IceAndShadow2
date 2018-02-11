@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.interfaces;
 
 import net.minecraft.item.ItemStack;
 

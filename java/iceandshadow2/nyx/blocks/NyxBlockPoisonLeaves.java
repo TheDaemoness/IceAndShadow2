@@ -2,8 +2,8 @@ package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.api.IIaSNoInfest;
 import iceandshadow2.ias.blocks.IaSBaseBlockLeaves;
-import iceandshadow2.ias.interfaces.IIaSNoInfest;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsPoisonwood;
 import iceandshadow2.render.fx.IaSFxManager;

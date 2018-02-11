@@ -35,7 +35,7 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(ent);
-		if (aspect != EnumIaSAspect.VIRTUAL && aspect != EnumIaSAspect.NAVISTRA && aspect != EnumIaSAspect.EXOUSIUM) {
+		if (aspect != null && aspect != EnumIaSAspect.NAVISTRA && aspect != EnumIaSAspect.EXOUSIUM) {
 			ent.attackEntityFrom(DamageSource.wither, 2);
 			if (!ent.worldObj.isRemote) {
 				if (ent instanceof EntityLivingBase) {

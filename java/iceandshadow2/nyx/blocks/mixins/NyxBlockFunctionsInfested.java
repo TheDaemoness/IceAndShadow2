@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.blocks.mixins;
 
-import iceandshadow2.ias.interfaces.IIaSNoInfest;
+import iceandshadow2.api.IIaSNoInfest;
 import iceandshadow2.nyx.NyxBlocks;
 
 import java.util.Random;

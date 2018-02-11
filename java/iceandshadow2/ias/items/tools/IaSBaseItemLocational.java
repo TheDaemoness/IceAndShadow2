@@ -15,7 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSLenses;
 import iceandshadow2.api.IIaSApiTransmuteLens;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
