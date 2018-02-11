@@ -49,7 +49,7 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					}
 					finished = false;
 					final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
-					if (aspect == EnumIaSAspect.EXOUSIUM || aspect == EnumIaSAspect.LAND) {
+					if (aspect.indestructible || aspect == EnumIaSAspect.LAND) {
 						continue;
 					}
 					if (bl.isReplaceable(w, i, j, k) || hardness < NyxBlockStone.HARDNESS) {

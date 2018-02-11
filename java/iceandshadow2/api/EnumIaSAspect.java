@@ -10,12 +10,31 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public enum EnumIaSAspect {
-	ALIEN, NATIVE, LAND, FROZEN, NYX, POISONWOOD, INFESTATION, EXOUSIUM, NAVISTRA, ANCIENT, STYX, PURE;
+	NULL(true),
+	ALIEN(false),
+	NATIVE(false),
+	LAND(false),
+	FROZEN(false),
+	NYX(false),
+	POISONWOOD(false),
+	INFESTATION(false),
+	EXOUSIUM(true),
+	NAVISTRA(true),
+	ANCIENT(false),
+	STYX(false),
+	PURE(false);
+	
+	public boolean indestructible;
 
+	EnumIaSAspect(boolean noExousium) {
+		indestructible = noExousium;
+	}
+	
 	public static EnumIaSAspect getAspect(Object o) {
-		if (o instanceof IIaSAspect)
-			return ((IIaSAspect) o).getAspect();
-		if (o instanceof EntityItem)
+		if (o instanceof IIaSAspect) {
+			final EnumIaSAspect ret = ((IIaSAspect) o).getAspect();
+			return (ret == null || ret == NULL)?ALIEN:ret;
+		} if (o instanceof EntityItem)
 			return getAspect(((EntityItem) o).getEntityItem());
 		if (o instanceof ItemStack) {
 			final Item it = ((ItemStack) o).getItem();
@@ -28,10 +47,10 @@ public enum EnumIaSAspect {
 		if (o instanceof EntityPlayer)
 			return ALIEN;
 		if (o == null)
-			return null;
+			return NULL;
 		final SideOnly side = o.getClass().getAnnotation(SideOnly.class);
 		if (side != null && side.value() == Side.CLIENT)
-			return null;
+			return NULL;
 		return ALIEN;
 	}
 
