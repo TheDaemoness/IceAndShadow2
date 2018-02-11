@@ -6,6 +6,7 @@ import iceandshadow2.IceAndShadow2;
 import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.interfaces.IIaSBlockLight;
 import iceandshadow2.ias.interfaces.IIaSTechnicalBlock;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.block.Block;

@@ -4,9 +4,11 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.Vec3;
 
 @SideOnly(Side.CLIENT)
 public class IaSRenderHelper {
