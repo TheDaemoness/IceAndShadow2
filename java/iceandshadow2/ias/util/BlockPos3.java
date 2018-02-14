@@ -22,6 +22,19 @@ public class BlockPos3 extends BlockPos2 {
 		super(e);
 		y = (short)e.posY;
 	}
+	
+
+	public double distEuclid2(BlockPos3 b) {
+		final int dy = b.y - y;
+		return distEuclid2((BlockPos2)b) + dy*dy;
+	}
+	public double distEuclid(BlockPos3 b) {
+		return Math.sqrt(distEuclid2(b));
+	}
+	public double distManhattan(BlockPos3 b) {
+		final int dy = b.y - y;
+		return distManhattan((BlockPos2)b) + Math.abs(dy);
+	}
 
 	public int y() {return y;}
 

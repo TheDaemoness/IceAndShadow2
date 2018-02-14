@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.boilerplate;
 
 import java.util.Random;
 
@@ -19,9 +19,6 @@ public class ChunkRandom extends Random {
 	}
 	public ChunkRandom() {
 		super(0);
-	}
-	public ChunkRandom(World w, int modifier, int x, int z) {
-		this(w.getSeed(), modifier, x, z);
 	}
 	public ChunkRandom(long seed, int modifier, int x, int z) {
 		super(calculateSeed(seed, modifier, x, z));

@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.boilerplate.IntPair;
 import iceandshadow2.ias.util.IaSCraftingHelper;
-import iceandshadow2.ias.util.IntPair;
 
 /**
  * Handles any shapeless crafting recipes as a fallback.

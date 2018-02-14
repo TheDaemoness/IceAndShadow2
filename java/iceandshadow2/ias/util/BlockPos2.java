@@ -1,5 +1,6 @@
 package iceandshadow2.ias.util;
 
+import iceandshadow2.boilerplate.IntPair;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -35,9 +36,9 @@ public class BlockPos2 extends IntPair {
 		return Math.sqrt(distEuclid2(b));
 	}
 	public double distManhattan(BlockPos2 b) {
-		final long dx = ((long)xValue << 4) - ((long)xValue << 4) + b.xSub - xSub;
-		final long dz = ((long)zValue << 4) - ((long)zValue << 4) + b.zSub - zSub;
-		return 0.5*(Math.abs(dx) + Math.abs(dz));
+		final long dx = ((long)b.xValue << 4) - ((long)xValue << 4) + b.xSub - xSub;
+		final long dz = ((long)b.zValue << 4) - ((long)zValue << 4) + b.zSub - zSub;
+		return Math.abs(dx) + Math.abs(dz);
 	}
 	public void plus(BlockPos2 b) {
 		xSub += b.xSub;

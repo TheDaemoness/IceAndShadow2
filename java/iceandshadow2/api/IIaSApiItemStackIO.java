@@ -2,7 +2,7 @@ package iceandshadow2.api;
 
 import java.util.List;
 
-import iceandshadow2.ias.interfaces.IaSItemStackCriteria;
+import iceandshadow2.boilerplate.Pipeline;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -83,7 +83,7 @@ public interface IIaSApiItemStackIO {
 	 *            returned stack is invalid. Usually the stack will be
 	 *            discarded.
 	 */
-	public ItemStack handleInput(World w, int x, int y, int z, IaSItemStackCriteria cmp, int tx, int ty, int tz);
+	public ItemStack handleInput(World w, int x, int y, int z, Pipeline<ItemStack> cmp, int tx, int ty, int tz);
 
 	/**
 	 * Does the actual work of placing item stacks into a This method is

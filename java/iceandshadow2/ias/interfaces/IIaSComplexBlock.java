@@ -1,6 +1,6 @@
 package iceandshadow2.ias.interfaces;
 
-import iceandshadow2.ias.util.Cuboid;
+import iceandshadow2.boilerplate.Cuboid;
 import net.minecraft.item.ItemStack;
 
 public interface IIaSComplexBlock {

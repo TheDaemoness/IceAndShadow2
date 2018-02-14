@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import iceandshadow2.ias.util.ChunkRandom;
+import iceandshadow2.boilerplate.ChunkRandom;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.world.biome.NyxBiome;
 import net.minecraft.world.biome.BiomeGenBase;

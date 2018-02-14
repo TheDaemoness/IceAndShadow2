@@ -15,8 +15,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import iceandshadow2.IaSRegistry;
 import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.boilerplate.IntPair;
 import iceandshadow2.ias.util.IaSCraftingHelper;
-import iceandshadow2.ias.util.IntPair;
 
 /**
  * Reverses crafting recipes that obey three rules:

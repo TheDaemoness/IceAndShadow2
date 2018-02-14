@@ -16,11 +16,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.api.IIaSApiTransmuteLens;
+import iceandshadow2.boilerplate.IntBits;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.util.BlockPos3;
 import iceandshadow2.ias.util.EnumNBTType;
-import iceandshadow2.ias.util.IntBits;
 import iceandshadow2.nyx.NyxItems;
 
 /**

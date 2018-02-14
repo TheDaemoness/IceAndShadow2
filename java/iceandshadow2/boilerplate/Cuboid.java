@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.boilerplate;
 
 import java.util.Random;
 
@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 
 /**
  * IaS2's homebrew axis-aligned cuboid.
- * Somewhat memory-heavy.
  */
 public class Cuboid {
 	public final Vec3 mid, halfwidth;

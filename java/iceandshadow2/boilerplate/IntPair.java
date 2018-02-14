@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.boilerplate;
 
 public class IntPair implements Comparable {
 	protected int xValue, zValue;

@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.boilerplate;
 
 /**
  * Utility functions for using the bits (esp. the sign bit) on an integer for something else.

@@ -1,6 +1,6 @@
 package iceandshadow2.api;
 
-import iceandshadow2.ias.util.IntBits;
+import iceandshadow2.boilerplate.IntBits;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import iceandshadow2.nyx.items.tools.NyxItemGrenade;
 import net.minecraft.entity.Entity;

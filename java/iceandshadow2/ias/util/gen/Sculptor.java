@@ -1,5 +1,8 @@
 package iceandshadow2.ias.util.gen;
 
+import iceandshadow2.boilerplate.IteratorConcat;
+import iceandshadow2.ias.util.BlockPos2;
+import iceandshadow2.ias.util.BlockPos3;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -47,11 +50,13 @@ public class Sculptor {
 	 */
 	public static void corners(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
 			int meta) {
-		for (int yit = yLow; yit <= yHigh; ++yit) {
-			world.setBlock(xLow, yit, zLow, bl, meta, 0x2);
-			world.setBlock(xLow, yit, zHigh, bl, meta, 0x2);
-			world.setBlock(xHigh, yit, zLow, bl, meta, 0x2);
-			world.setBlock(xHigh, yit, zHigh, bl, meta, 0x2);
+		final IteratorConcatBlock bic = new IteratorConcatBlock();
+		bic.add(new SupplierBlockPosCuboid(xLow, yLow, zLow, xLow, yHigh, zLow));
+		bic.add(new SupplierBlockPosCuboid(xLow, yLow, zHigh, xLow, yHigh, zHigh));
+		bic.add(new SupplierBlockPosCuboid(xHigh, yLow, zLow, xHigh, yHigh, zLow));
+		bic.add(new SupplierBlockPosCuboid(xHigh, yLow, zHigh, xHigh, yHigh, zHigh));
+		for(BlockPos3 bp : bic) {
+			bp.block(world, bl, meta);
 		}
 	}
 
@@ -70,12 +75,9 @@ public class Sculptor {
 	 */
 	public static void cube(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
 			int meta) {
-		for (int yit = yLow; yit <= yHigh; ++yit) {
-			for (int xit = xLow; xit <= xHigh; ++xit) {
-				for (int zit = zLow; zit <= zHigh; ++zit) {
-					world.setBlock(xit, yit, zit, bl, meta, 0x2);
-				}
-			}
+		final ISupplierBlock bli = new SupplierBlockPosCuboid(xLow, yLow, zLow, xHigh, yHigh, zHigh);
+		for(BlockPos3 bp3 : bli) {
+			bp3.block(world, bl, meta);
 		}
 	}
 
@@ -90,14 +92,15 @@ public class Sculptor {
 	 * @param radius
 	 * @param height
 	 */
-	public static void cylinder(World world, int x, int y, int z, int radius, int height, Block bl, int meta) {
-		for (int yit = 0; yit <= height; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit)
-					if (Math.sqrt(xit * xit + zit * zit) < radius) {
-						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-					}
-			}
+	public static void cylinder(World world, int x, int y, int z, double radius, int height, Block bl, int meta) {
+		final int intradius = (int)Math.ceil(radius);
+		final ISupplierBlock bli = new SupplierBlockPosCuboid(
+				-intradius, 0, -intradius,
+				intradius, height, intradius);
+		bli.addFilter(new BlockFilterRadius<BlockPos2>(new BlockPos2(x, z), radius));
+		bli.offsetCenter(x, y, z);
+		for(BlockPos3 bp3 : bli) {
+			bp3.block(world, bl, meta);
 		}
 	}
 
@@ -110,14 +113,15 @@ public class Sculptor {
 	 * @param z
 	 * @param radius
 	 */
-	public static void dome(World world, int x, int y, int z, int radius, Block bl, int meta) {
-		for (int yit = 0; yit <= radius; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit)
-					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < radius) {
-						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-					}
-			}
+	public static void dome(World world, int x, int y, int z, double radius, Block bl, int meta) {
+		final int intradius = (int)Math.ceil(radius);
+		final ISupplierBlock bli = new SupplierBlockPosCuboid(
+				-intradius, 0, -intradius,
+				intradius, intradius, intradius);
+		bli.addFilter(new BlockFilterRadius<BlockPos3>(new BlockPos3(x, y, z), radius));
+		bli.offsetCenter(x, y, z);
+		for(BlockPos3 bp3 : bli) {
+			bp3.block(world, bl, meta);
 		}
 	}
 
@@ -131,13 +135,14 @@ public class Sculptor {
 	 * @param radius
 	 */
 	public static void sphere(World world, int x, int y, int z, int radius, Block bl, int meta) {
-		for (int yit = -radius; yit <= radius; ++yit) {
-			for (int xit = -radius; xit <= radius; ++xit) {
-				for (int zit = -radius; zit <= radius; ++zit)
-					if (Math.sqrt(xit * xit + yit * yit + zit * zit) < radius) {
-						world.setBlock(x + xit, y + yit, z + zit, bl, meta, 0x2);
-					}
-			}
+		final int intradius = (int)Math.ceil(radius);
+		final ISupplierBlock bli = new SupplierBlockPosCuboid(
+				-intradius, -intradius, -intradius,
+				intradius, intradius, intradius);
+		bli.addFilter(new BlockFilterRadius<BlockPos3>(new BlockPos3(x, y, z), radius));
+		bli.offsetCenter(x, y, z);
+		for(BlockPos3 bp3 : bli) {
+			bp3.block(world, bl, meta);
 		}
 	}
 
@@ -191,15 +196,21 @@ public class Sculptor {
 	 */
 	public static void walls(World world, int xLow, int yLow, int zLow, int xHigh, int yHigh, int zHigh, Block bl,
 			int meta) {
-		for (int yit = yLow; yit <= yHigh; ++yit) {
-			for (int xit = xLow + 1; xit < xHigh; ++xit) {
-				world.setBlock(xit, yit, zLow, bl, meta, 0x2);
-				world.setBlock(xit, yit, zHigh, bl, meta, 0x2);
-			}
-			for (int zit = zLow + 1; zit < zHigh; ++zit) {
-				world.setBlock(xLow, yit, zit, bl, meta, 0x2);
-				world.setBlock(xHigh, yit, zit, bl, meta, 0x2);
-			}
+		final IteratorConcatBlock bic = new IteratorConcatBlock();
+		bic.add(new SupplierBlockPosCuboid(
+				xLow+1, yLow, zLow, 
+				xHigh-1, yHigh, zLow));
+		bic.add(new SupplierBlockPosCuboid(
+				xLow+1, yLow, zHigh, 
+				xHigh-1, yHigh, zHigh));
+		bic.add(new SupplierBlockPosCuboid(
+				xLow, yLow, zLow+1, 
+				xLow, yHigh, zHigh-1));
+		bic.add(new SupplierBlockPosCuboid(
+				xHigh, yLow, zLow+1, 
+				xHigh, yHigh, zHigh-1));
+		for(BlockPos3 bp : bic) {
+			bp.block(world, bl, meta);
 		}
 	}
 }

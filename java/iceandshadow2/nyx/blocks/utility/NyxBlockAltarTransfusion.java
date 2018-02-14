@@ -181,11 +181,6 @@ public class NyxBlockAltarTransfusion extends IaSBaseBlockTe {
 		final TileEntity e = w.getTileEntity(x, y, z);
 		if (e instanceof NyxTeTransfusionAltar) {
 			final ItemStack tar = ((NyxTeTransfusionAltar) e).target;
-			if (tar != null && tar.getItem() instanceof IIaSApiTransmuteLens) {
-				final IIcon retval = ((IIaSApiTransmuteLens) tar.getItem()).getAltarTopTexture(tar);
-				if (retval != null)
-					return retval;
-			}
 		}
 		return getIcon(side, 0);
 	}
