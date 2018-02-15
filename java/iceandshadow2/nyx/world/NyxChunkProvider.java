@@ -2,10 +2,15 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSExecutor;
 import iceandshadow2.IaSFuture;
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.boilerplate.ChunkRandom;
+import iceandshadow2.boilerplate.IntBits;
+import iceandshadow2.ias.util.BlockPos3;
 import iceandshadow2.ias.util.IaSBlockHelper;
+import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.blocks.NyxBlockAir;
+import iceandshadow2.nyx.world.biome.NyxBiome;
 import iceandshadow2.nyx.world.gen.ruins.GenRuinsCentral;
 
 import java.util.Arrays;
@@ -24,7 +29,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxChunkProvider implements IChunkProvider {
 
@@ -142,6 +149,7 @@ public class NyxChunkProvider implements IChunkProvider {
 								} else {
 									blockArr[arrIndex] = NyxBlocks.airDrain;
 								}
+								
 							}
 							d10 += d12;
 							d11 += d13;
@@ -327,7 +335,7 @@ public class NyxChunkProvider implements IChunkProvider {
 	}
 
 	/**
-	 * Populates chunk with ores etc etc
+	 * Populates chunk with ores and buildings. DO NOT add snow or icicle generation here.
 	 */
 	@Override
 	public void populate(IChunkProvider cp, int xchunk, int zchunk) {
@@ -338,24 +346,25 @@ public class NyxChunkProvider implements IChunkProvider {
 		final BiomeGenBase biomegenbase = NyxBiomeManager.instance().getBiomeAt(worldObj.getSeed(), k+rand.nextInt(16), l+rand.nextInt(16));
 		int xit, zit, yval;
 
-		if (xchunk == 0 && zchunk == 0) {
+		if(!(biomegenbase instanceof NyxBiome))
+			return;
+		
+		
+		if (xchunk == -1 && zchunk == -1) {
 			new GenRuinsCentral().generate(worldObj, rand, 0, 0, 0);
 		}
 
-		biomegenbase.decorate(worldObj, rand, k, l);
+		final int
+		xchunkdist = Math.abs(xchunk<0?xchunk+1:xchunk),
+		zchunkdist = Math.abs(zchunk<0?zchunk+1:zchunk);
+		if(xchunkdist > 2 || zchunkdist > 2 || (xchunkdist > 1 && zchunkdist > 1))
+			biomegenbase.decorate(worldObj, rand, k, l);
 		// SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k
 		// + 8, l + 8, 16, 16, this.rand);
-		k += 8;
-		l += 8;
-
-		for (xit = 0; xit < 16; ++xit) {
-			for (zit = 0; zit < 16; ++zit) {
-				yval = worldObj.getPrecipitationHeight(k + xit, l + zit);
-				if (worldObj.func_147478_e(xit + k, yval, zit + l, true)) {
-					if (worldObj.getBlock(xit + k, yval - 1, zit + l) != NyxBlocks.stone) {
-						worldObj.setBlock(xit + k, yval, zit + l, Blocks.snow_layer, 0, 2);
-					}
-				}
+		
+		for(int xi = k; xi <= k + 15; ++xi) {
+			for(int zi = l; zi <= l + 15; ++zi) {
+				((NyxBiome)biomegenbase).snow(worldObj, rand, xi, zi);
 			}
 		}
 
@@ -382,15 +391,6 @@ public class NyxChunkProvider implements IChunkProvider {
 			abyte1[k] = (byte)biomesForGeneration[k].biomeID;
 		}
 
-		for(int i = 0; i < 16*16*256; ++i) {
-			final int
-			x = (i >> 12),
-			z = (i >> 8)&15,
-			y = i&255;
-			int light = chunk.getSavedLightValue(EnumSkyBlock.Block, x, y, z);
-			light = Math.max(light, IaSBlockHelper.getDefaultLight(ablock[i], ameta[i]));
-			chunk.setLightValue(EnumSkyBlock.Block, x, y, z, light);
-		}
 		chunk.resetRelightChecks();
 		
 		return chunk;

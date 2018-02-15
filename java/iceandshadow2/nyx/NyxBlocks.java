@@ -14,7 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;
 
 public class NyxBlocks {
-	public static Block stone, cryingObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
+	public static Block stone, sanguineObsidian, unstableIce, permafrost, dirt, exousicIce, exousicWater,
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transfusionAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
@@ -40,7 +40,7 @@ public class NyxBlocks {
 		NyxBlocks.permafrost = new NyxBlockPermafrost("Permafrost").register();
 		NyxBlocks.salt = new NyxBlockSalt("SaltBlock").register();
 		NyxBlocks.dirt = new NyxBlockDirt("Dirt").register();
-		NyxBlocks.cryingObsidian = new NyxBlockObsidianSanguine("CryingObsidian").register();
+		NyxBlocks.sanguineObsidian = new NyxBlockObsidianSanguine("CryingObsidian").register();
 		NyxBlocks.thornyVines = new NyxBlockThornyVines("ThornyVines").register();
 		NyxBlocks.exousicIce = new NyxBlockIce("ExousicIce").register();
 		NyxBlocks.poisonLeaves = new NyxBlockPoisonLeaves("PoisonwoodLeaves").register();

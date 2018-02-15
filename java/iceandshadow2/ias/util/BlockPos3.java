@@ -45,4 +45,8 @@ public class BlockPos3 extends BlockPos2 {
 	public Block block(World w) {return block(w, y);}
 	public Block block(World w, Block newBlock) {return block(w, y, newBlock);}
 	public Block block(World w, Block newBlock, int newMeta) {return block(w, y, newBlock, newMeta);}
+	
+	public int variant(World w) {
+		return variant(w, y);
+	}
 }

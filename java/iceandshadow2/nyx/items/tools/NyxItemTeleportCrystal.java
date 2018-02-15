@@ -138,7 +138,7 @@ public class NyxItemTeleportCrystal extends IaSBaseItemSingle {
 				active &= IaSEntityHelper.getLight(tree) <= 5;
 			}
 		} else {
-			active = IaSEntityHelper.getBlock(tree, 0, -0.1, 0) == NyxBlocks.cryingObsidian;
+			active = IaSEntityHelper.getBlock(tree, 0, -0.1, 0) == NyxBlocks.sanguineObsidian;
 			active &= pile.getItemDamage() < 4;
 		}
 		if (!active & (pile.getItemDamage() & 1) == 1) {

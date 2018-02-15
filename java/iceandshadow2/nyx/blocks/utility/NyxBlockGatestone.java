@@ -102,7 +102,7 @@ public class NyxBlockGatestone extends IaSBaseBlockMulti {
 					par5EntityPlayer.getEquipmentInSlot(0).stackSize -= 1;
 				}
 				if (par1World.getBlockMetadata(x, y, z) == 0) {
-					par1World.setBlock(x, y - 1, z, NyxBlocks.cryingObsidian, 1, 0x2);
+					par1World.setBlock(x, y - 1, z, NyxBlocks.sanguineObsidian, 1, 0x2);
 					par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, x, y, z));
 				}
 			}

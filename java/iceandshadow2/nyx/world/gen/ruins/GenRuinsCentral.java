@@ -77,7 +77,7 @@ public class GenRuinsCentral extends GenRuins {
 
 		// Platform
 		Sculptor.cube(w, x - 2, y + 4, z - 2, x + 2, y + 4, z + 2, Blocks.obsidian, 0);
-		Sculptor.cube(w, x - 1, y + PLATFORM_OFFSET, z - 1, x + 1, y + PLATFORM_OFFSET, z + 1, NyxBlocks.cryingObsidian, 1);
+		Sculptor.cube(w, x - 1, y + PLATFORM_OFFSET, z - 1, x + 1, y + PLATFORM_OFFSET, z + 1, NyxBlocks.sanguineObsidian, 1);
 
 		// Walls
 		Sculptor.walls(w, x - 7, y, z - 7, x + 7, y + 9, z + 7, Blocks.obsidian, 0);

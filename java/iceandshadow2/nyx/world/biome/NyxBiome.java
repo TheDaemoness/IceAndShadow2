@@ -1,5 +1,6 @@
 package iceandshadow2.nyx.world.biome;
 
+import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;
@@ -14,11 +15,14 @@ import iceandshadow2.styx.Styx;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.IWorldGenerator;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBiome extends BiomeGenBase {
@@ -81,25 +85,33 @@ public class NyxBiome extends BiomeGenBase {
 
 		genStructures(par1World, par2Random, xchunk, zchunk);
 
-		for (int xit = 0; xit < 16; ++xit) {
-			for (int zit = 0; zit < 16; ++zit)
-				if (par2Random.nextInt(24) == 0) {
-					boolean inair = false;
-					for (int yit = IaSBlockHelper.getHeight(par1World, xchunk + xit, zchunk + zit) - 1; yit > 63; --yit)
-						if (!inair && IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
-							inair = true;
-						} else if (inair && !IaSBlockHelper.isTransient(par1World, xchunk + xit, yit, zchunk + zit)) {
-							if (par1World.isSideSolid(xchunk + xit, yit, zchunk + zit, ForgeDirection.UP)
-									&& par2Random.nextBoolean()) {
-								par1World.setBlock(xchunk + xit, yit + 1, zchunk + zit, NyxBlocks.icicles);
-								break;
-							}
-							inair = false;
-						}
+		genFoliage(par1World, par2Random, xchunk, zchunk);
+	}
+	
+	/**
+	 * Called after the above decorate pass in order to add snow, icicles, etc.
+	 */
+	public final void snow(World w, Random r, int x, int z) {
+		int yval = w.getPrecipitationHeight(x, z);
+		final Block bl = w.getBlock(x, yval-1, z);
+		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl); 
+		if (aspect != EnumIaSAspect.LAND && aspect != EnumIaSAspect.EXOUSIUM && bl != NyxBlocks.sanguineObsidian
+				&& Blocks.snow_layer.canPlaceBlockAt(w, x, yval, z))
+			w.setBlock(x, yval, z, Blocks.snow_layer, 0, 2);
+		if (r.nextInt(24) == 0) {
+			boolean inair = false;
+			for (int yit = IaSBlockHelper.getHeight(w, x, z) - 1; yit > 63; --yit)
+				if (!inair && IaSBlockHelper.isTransient(w, x, yit, z)) {
+					inair = true;
+				} else if (inair && !IaSBlockHelper.isTransient(w, x, yit, z)) {
+					if (w.isSideSolid(x, yit, z, ForgeDirection.UP)
+							&& r.nextBoolean()) {
+						w.setBlock(x, yit + 1, z, NyxBlocks.icicles);
+						break;
+					}
+					inair = false;
 				}
 		}
-
-		genFoliage(par1World, par2Random, xchunk, zchunk);
 	}
 	
 	protected void genOre(World par1World, Random par2Random, int xchunk, int zchunk) {

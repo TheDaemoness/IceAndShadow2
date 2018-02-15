@@ -4,18 +4,25 @@ import iceandshadow2.IaSFlags;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkProvider;
 
 public class IaSWorldHelper {
 
+	public static boolean isChunkOkay(Chunk ck) {
+		return ck == null || ck.isEmpty() || !ck.isChunkLoaded;
+	}
+	
 	/**
 	 * Loads a chunk at the specified block coordinates.
 	 */
-	public static Chunk loadChunk(World w, int x, int z) {
-		final Chunk ck = w.getChunkFromChunkCoords(x/16-(x<0?1:0), z/16-(z<0?1:0));
-		if(ck == null || ck.isEmpty() || !ck.isChunkLoaded)
-			return w.getChunkProvider().loadChunk(
-				x/16-(x<0?1:0),
-				z/16-(z<0?1:0));
+	public static Chunk loadChunk(World w, long x, long z) {
+		final int
+		cx = (int)(x >> 4),
+		cz = (int)(z >> 4);
+		final IChunkProvider ckp = w.getChunkProvider();
+		final Chunk ck = ckp.provideChunk(cx, cz);
+		if(!isChunkOkay(ck))
+			return ckp.loadChunk(cx, cz);
 		else return ck;
 	}
 

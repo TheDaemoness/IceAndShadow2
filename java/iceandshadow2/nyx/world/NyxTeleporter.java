@@ -71,7 +71,7 @@ public class NyxTeleporter extends Teleporter {
 			Block bid = world.getBlock(x, y, z);
 			final int bmet = world.getBlockMetadata(x, y, z);
 
-			if (bid == NyxBlocks.cryingObsidian && bmet == 1) {
+			if (bid == NyxBlocks.sanguineObsidian && bmet == 1) {
 				bid = world.getBlock(x, y + 1, z);
 				final Block bid2 = world.getBlock(x, y + 2, z);
 				if (bid == Styx.reserved && bid2 == Styx.reserved) {

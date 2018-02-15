@@ -85,7 +85,7 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 		if(target.getItem() == NyxItems.cortra) {
 			retval.add(new ItemStack(NyxItems.draconium, i*2, 1));
 		} else {
-			retval.add(new ItemStack(NyxBlocks.cryingObsidian, i));
+			retval.add(new ItemStack(NyxBlocks.sanguineObsidian, i));
 		}
 		return retval;
 	}

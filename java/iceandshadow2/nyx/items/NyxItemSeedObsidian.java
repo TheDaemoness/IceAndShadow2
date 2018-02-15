@@ -41,7 +41,7 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle {
 					if (Math.abs(xit) == 2 || Math.abs(zit) == 2) {
 						wurld.setBlock(ehx + xit, uay, zee + zit, Blocks.obsidian);
 					} else {
-						wurld.setBlock(ehx + xit, uay, zee + zit, NyxBlocks.cryingObsidian, 1, 0x2);
+						wurld.setBlock(ehx + xit, uay, zee + zit, NyxBlocks.sanguineObsidian, 1, 0x2);
 					}
 
 					if (xit == 0 && zit == 0) {

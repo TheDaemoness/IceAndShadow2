@@ -164,4 +164,7 @@ public class IaSBlockHelper {
 			return ((IIaSBlockLight)block).getLightValue(meta);
 		return block.getLightValue();
 	}
+	public static int getDefaultLight(World w, BlockPos3 blp) {
+		return getDefaultLight(blp.block(w), blp.variant(w));
+	}
 }

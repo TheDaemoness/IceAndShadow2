@@ -3,6 +3,7 @@ package iceandshadow2.ias.util;
 import iceandshadow2.boilerplate.IntPair;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -75,12 +76,16 @@ public class BlockPos2 extends IntPair {
 			return -1;
 		return toChunkColumnIndex();
 	}
+	
+	public Chunk chunk(World w) {
+		return IaSWorldHelper.loadChunk(w, (long)xValue << 4, (long)zValue << 4);
+	}
 
-	public Block block(World w, int y) {return w.getChunkFromChunkCoords(xValue, zValue).getBlock(xSub, y, zSub);}
+	public Block block(World w, int y) {return chunk(w).getBlock(xSub, y, zSub);}
 	public Block block(World w, int y, Block newBlock, int newMeta) {
 		if(y<0 || y>255)
 			return null;
-		final Chunk ck = w.getChunkFromChunkCoords(xValue, zValue);
+		final Chunk ck = chunk(w);
 		final Block oldBlock = ck.getBlock(xSub, y, zSub);
 		final boolean update = ck.func_150807_a(xSub, y, zSub, newBlock, newMeta);
 		ck.worldObj.markAndNotifyBlock(xSub, y, zSub, ck, oldBlock, newBlock, 2+(update?1:0));
@@ -107,4 +112,7 @@ public class BlockPos2 extends IntPair {
 	public int x() {return (xValue << 4) + xSub;}
 	@Override
 	public int z() {return (zValue << 4) + zSub;}
+	public int variant(World w, int y) {
+		return w.getChunkFromChunkCoords(xValue, zValue).getBlockMetadata(xSub, y, zSub);
+	}
 }
