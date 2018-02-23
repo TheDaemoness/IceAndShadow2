@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.world.gen;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.nyx.NyxBlocks;
 

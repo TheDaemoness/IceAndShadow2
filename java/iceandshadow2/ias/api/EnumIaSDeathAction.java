@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 /**
  * Used to indicate what should be done with a given item stack on death.

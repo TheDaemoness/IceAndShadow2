@@ -1,7 +1,7 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;

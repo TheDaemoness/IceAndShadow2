@@ -3,9 +3,9 @@ package iceandshadow2.ias.items.tools;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IIaSTool;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.EnumIaSToolClass;
+import iceandshadow2.ias.api.IIaSTool;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 
 import java.util.Collection;

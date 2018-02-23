@@ -1,9 +1,9 @@
 package iceandshadow2.nyx.tileentities;
 
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSApiTransmute;
 import iceandshadow2.ias.IaSTileEntity;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.util.EnumNBTType;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;

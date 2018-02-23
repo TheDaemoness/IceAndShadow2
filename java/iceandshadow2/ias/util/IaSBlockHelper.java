@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSBlockLight;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;

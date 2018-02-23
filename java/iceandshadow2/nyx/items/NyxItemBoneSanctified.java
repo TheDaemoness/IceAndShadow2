@@ -2,7 +2,7 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;

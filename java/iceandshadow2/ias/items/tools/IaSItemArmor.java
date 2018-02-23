@@ -2,8 +2,8 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

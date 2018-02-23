@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.items.tools;
 
 import iceandshadow2.IIaSModName;
-import iceandshadow2.api.IIaSEntityWeaponRanged;
+import iceandshadow2.ias.api.IIaSEntityWeaponRanged;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.entities.ai.EntityAINyxRangedAttack;

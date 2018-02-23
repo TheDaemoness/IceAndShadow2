@@ -2,8 +2,8 @@ package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 
 import java.util.List;

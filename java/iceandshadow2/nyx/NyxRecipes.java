@@ -5,7 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.IaSGrenadeLogic;
+import iceandshadow2.ias.api.IaSGrenadeLogic;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 
 public class NyxRecipes {

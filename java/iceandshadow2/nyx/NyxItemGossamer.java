@@ -2,7 +2,7 @@ package iceandshadow2.nyx;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 
 public class NyxItemGossamer extends IaSBaseItemSingle {

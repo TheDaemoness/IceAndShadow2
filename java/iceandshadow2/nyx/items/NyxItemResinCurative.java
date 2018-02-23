@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import net.minecraft.entity.player.EntityPlayer;

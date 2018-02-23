@@ -1,10 +1,10 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSDescriptive;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.ias.util.IaSEntityHelper;

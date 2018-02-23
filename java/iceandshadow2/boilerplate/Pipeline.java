@@ -6,10 +6,6 @@ import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import iceandshadow2.ias.util.BlockPos3;
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-
 /**
  * Chainable system for providing a same-type output as an input object.
  * 

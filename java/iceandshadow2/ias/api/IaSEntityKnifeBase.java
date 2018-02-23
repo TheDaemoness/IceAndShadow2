@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;

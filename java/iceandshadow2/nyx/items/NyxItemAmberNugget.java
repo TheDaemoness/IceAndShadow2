@@ -15,7 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.render.fx.IaSFxManager;
 

@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

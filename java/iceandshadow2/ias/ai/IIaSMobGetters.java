@@ -1,7 +1,7 @@
 package iceandshadow2.ias.ai;
 
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSAspect;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

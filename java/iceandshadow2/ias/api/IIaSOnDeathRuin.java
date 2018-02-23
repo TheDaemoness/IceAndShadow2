@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 /**
  * Marks an item or block as one that should be destroyed upon death. Should be

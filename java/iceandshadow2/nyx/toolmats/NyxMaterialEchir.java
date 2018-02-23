@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.toolmats;
 
-import iceandshadow2.api.IaSEntityKnifeBase;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.IaSEntityKnifeBase;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

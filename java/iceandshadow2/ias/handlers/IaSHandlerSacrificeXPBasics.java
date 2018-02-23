@@ -2,9 +2,9 @@ package iceandshadow2.ias.handlers;
 
 import java.util.Random;
 
+import iceandshadow2.ias.api.IIaSApiSacrificeXp;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import iceandshadow2.api.IIaSApiSacrificeXp;
 
 public class IaSHandlerSacrificeXPBasics implements IIaSApiSacrificeXp {
 

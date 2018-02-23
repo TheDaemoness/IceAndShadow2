@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.ai;
 
-import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 
 import java.util.List;

@@ -3,8 +3,8 @@ package iceandshadow2.ias.blocks;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSAspect;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.api.IIaSAspect;
 import iceandshadow2.ias.util.IaSRegistration;
 
 import java.util.ArrayList;

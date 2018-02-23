@@ -2,8 +2,8 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSDescriptive;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 

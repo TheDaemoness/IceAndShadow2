@@ -2,11 +2,11 @@ package iceandshadow2.nyx.entities.mobs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSTool;
-import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSTool;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;

@@ -4,9 +4,9 @@ import java.util.List;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IaSGrenadeLogic;
 import iceandshadow2.boilerplate.IntBits;
+import iceandshadow2.ias.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IaSGrenadeLogic;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 import iceandshadow2.ias.util.IaSPlayerHelper;

@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.toolmats;
 
-import iceandshadow2.api.IaSGrenadeLogic;
+import iceandshadow2.ias.api.IaSGrenadeLogic;
 import iceandshadow2.ias.util.BlockPos3;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.gen.Sculptor;

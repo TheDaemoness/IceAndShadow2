@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.toolmats;
 
-import iceandshadow2.api.IaSGrenadeLogic;
+import iceandshadow2.ias.api.IaSGrenadeLogic;
 import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;
 import iceandshadow2.nyx.entities.projectile.EntityShadowBall;

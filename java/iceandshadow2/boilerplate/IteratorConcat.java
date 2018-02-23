@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.world.World;
-
 /**
  * Implements a list of iterators whose outputs are seamlessly concatenated.
  */

@@ -1,9 +1,9 @@
 package iceandshadow2.nyx.blocks;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSBlockClimbable;
-import iceandshadow2.api.IIaSBlockThawable;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSBlockClimbable;
+import iceandshadow2.ias.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;

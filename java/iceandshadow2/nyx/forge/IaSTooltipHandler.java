@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSDescriptive;
+import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.util.IaSCraftingHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;

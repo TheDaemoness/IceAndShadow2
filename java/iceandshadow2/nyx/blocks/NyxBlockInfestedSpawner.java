@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.blocks;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.nyx.blocks.mixins.NyxBlockFunctionsInfested;
 import iceandshadow2.nyx.entities.mobs.EntityNyxSpider;
 import iceandshadow2.nyx.entities.mobs.EntityNyxWalker;

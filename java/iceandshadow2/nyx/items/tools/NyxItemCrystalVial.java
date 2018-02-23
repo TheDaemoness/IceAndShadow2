@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.nyx.NyxItems;
 

@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.forge;
 
-import iceandshadow2.api.IIaSBlockClimbable;
+import iceandshadow2.ias.api.IIaSBlockClimbable;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

@@ -3,9 +3,9 @@ package iceandshadow2.nyx.toolmats;
 import java.util.ArrayList;
 import java.util.List;
 
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IaSEntityKnifeBase;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IaSEntityKnifeBase;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSPlayerHelper;

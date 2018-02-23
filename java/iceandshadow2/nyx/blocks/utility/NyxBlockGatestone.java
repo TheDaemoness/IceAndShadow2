@@ -2,8 +2,8 @@ package iceandshadow2.nyx.blocks.utility;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;

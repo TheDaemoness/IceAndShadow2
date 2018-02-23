@@ -3,7 +3,7 @@ package iceandshadow2.nyx.blocks;
 import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSPlayerHelper;

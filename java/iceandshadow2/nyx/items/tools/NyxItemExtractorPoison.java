@@ -13,7 +13,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemSingle;
 
 public class NyxItemExtractorPoison extends IaSBaseItemSingle implements IIaSApiTransmute {

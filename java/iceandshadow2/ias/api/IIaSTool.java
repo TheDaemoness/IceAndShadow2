@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 /**
  * Implemented by IaS's tools and material-based weapons.

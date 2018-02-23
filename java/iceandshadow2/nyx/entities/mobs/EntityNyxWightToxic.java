@@ -5,8 +5,8 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.NyxBlocks;

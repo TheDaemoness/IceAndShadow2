@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.entities.ai;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.util.IaSWorldHelper;
 import iceandshadow2.nyx.entities.ai.senses.IIaSSensateOld;
 

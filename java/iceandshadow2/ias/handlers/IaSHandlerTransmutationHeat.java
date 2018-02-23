@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.nyx.NyxItems;
 
 public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {

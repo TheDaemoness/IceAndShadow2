@@ -1,7 +1,7 @@
 package iceandshadow2.nyx.entities.projectile;
 
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSAspect;
 import iceandshadow2.render.fx.IaSFxManager;
 import java.util.List;
 

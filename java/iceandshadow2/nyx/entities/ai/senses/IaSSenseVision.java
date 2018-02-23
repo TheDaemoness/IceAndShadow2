@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.entities.ai.senses;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.items.tools.IaSItemArmor;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import net.minecraft.entity.Entity;

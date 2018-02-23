@@ -4,8 +4,8 @@ import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSAspect;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;

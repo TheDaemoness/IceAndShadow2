@@ -2,9 +2,9 @@ package iceandshadow2.ias.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IIaSModName;
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IIaSAspect;
-import iceandshadow2.api.IIaSDescriptive;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IIaSAspect;
+import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.util.IaSRegistration;
 import net.minecraft.entity.player.EntityPlayer;

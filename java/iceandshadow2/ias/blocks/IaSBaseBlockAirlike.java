@@ -5,7 +5,7 @@ import java.util.Random;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSBlockClimbable;
+import iceandshadow2.ias.api.IIaSBlockClimbable;
 import iceandshadow2.nyx.NyxBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

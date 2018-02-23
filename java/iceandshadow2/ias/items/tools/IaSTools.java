@@ -1,9 +1,9 @@
 package iceandshadow2.ias.items.tools;
 
 import iceandshadow2.IaSRegistry;
-import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.api.EnumIaSToolClass;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.items.IaSBaseItem;
 import iceandshadow2.nyx.toolmats.*;
 import iceandshadow2.nyx.NyxItems;

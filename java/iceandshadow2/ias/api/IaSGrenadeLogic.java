@@ -1,4 +1,4 @@
-package iceandshadow2.api;
+package iceandshadow2.ias.api;
 
 import iceandshadow2.boilerplate.IntBits;
 import iceandshadow2.nyx.entities.projectile.EntityGrenade;

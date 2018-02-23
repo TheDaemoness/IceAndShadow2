@@ -13,8 +13,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.EnumIaSToolClass;
-import iceandshadow2.api.IIaSBlockThawable;
+import iceandshadow2.ias.api.EnumIaSToolClass;
+import iceandshadow2.ias.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockMulti;
 import iceandshadow2.nyx.world.NyxChunkManager;
 

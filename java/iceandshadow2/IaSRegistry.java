@@ -1,10 +1,10 @@
 package iceandshadow2;
 
-import iceandshadow2.api.IIaSApiExaminable;
-import iceandshadow2.api.IIaSApiSacrificeXp;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IaSGrenadeLogic;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.IIaSApiExaminable;
+import iceandshadow2.ias.api.IIaSApiSacrificeXp;
+import iceandshadow2.ias.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IaSGrenadeLogic;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.handlers.IaSHandlerTransmutationCraft;
 import iceandshadow2.ias.items.tools.IaSItemEchirArmorActive;
 import iceandshadow2.ias.items.tools.IaSItemEchirKnifeActive;

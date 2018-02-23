@@ -2,9 +2,9 @@ package iceandshadow2.nyx.world;
 
 import iceandshadow2.IaSExecutor;
 import iceandshadow2.IaSFuture;
-import iceandshadow2.api.EnumIaSAspect;
 import iceandshadow2.boilerplate.ChunkRandom;
 import iceandshadow2.boilerplate.IntBits;
+import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.util.BlockPos3;
 import iceandshadow2.ias.util.IaSBlockHelper;
 import iceandshadow2.ias.util.IaSWorldHelper;

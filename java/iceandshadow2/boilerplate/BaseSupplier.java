@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import net.minecraft.world.World;
-
 /**
  * Quick and dirty base code for suppliers, requiring implementation of only the iterator functions.
  */

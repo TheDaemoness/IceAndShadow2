@@ -1,6 +1,6 @@
 package iceandshadow2;
 
-import iceandshadow2.api.EnumIaSAspect;
+import iceandshadow2.ias.api.EnumIaSAspect;
 
 public enum EnumIaSModule {
 	IAS("ias", null), NYX("nyx", EnumIaSAspect.NATIVE), STYX("nyxcosmos", EnumIaSAspect.STYX);

@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.IceAndShadow2;
-import iceandshadow2.api.IIaSBlockThawable;
+import iceandshadow2.ias.api.IIaSBlockThawable;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.render.fx.IaSFxManager;
 

@@ -2,8 +2,8 @@ package iceandshadow2.ias.items;
 
 import java.util.List;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.IaSCreativeTabs;
+import iceandshadow2.ias.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxItems;
 import net.minecraft.enchantment.Enchantment;

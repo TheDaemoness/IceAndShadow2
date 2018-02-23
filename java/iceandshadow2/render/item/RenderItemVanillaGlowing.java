@@ -1,7 +1,7 @@
 package iceandshadow2.render.item;
 
-import iceandshadow2.api.IIaSTool;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.IIaSTool;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;

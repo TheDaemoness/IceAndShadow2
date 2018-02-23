@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import iceandshadow2.api.IIaSApiTransmute;
-import iceandshadow2.api.IIaSTool;
-import iceandshadow2.api.IaSToolMaterial;
+import iceandshadow2.ias.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSTool;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.nyx.items.NyxItemIngot;
 
 public class IaSHandlerTransmutationRepair implements IIaSApiTransmute {

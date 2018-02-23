@@ -1,8 +1,8 @@
 package iceandshadow2.nyx.forge;
 
 import iceandshadow2.IaSFlags;
-import iceandshadow2.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.IaSDamageSources;
+import iceandshadow2.ias.api.IIaSOnDeathRuin;
 import iceandshadow2.ias.util.IaSEntityHelper;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.items.NyxItemBoneSanctified;

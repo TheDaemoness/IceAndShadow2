@@ -1,6 +1,6 @@
 package iceandshadow2.nyx.entities.util;
 
-import iceandshadow2.api.IIaSApiTransmute;
+import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.nyx.blocks.utility.NyxBlockAltarTransfusion;
 import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import iceandshadow2.render.fx.IaSFxManager;

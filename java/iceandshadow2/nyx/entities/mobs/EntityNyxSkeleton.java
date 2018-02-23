@@ -3,9 +3,9 @@ package iceandshadow2.nyx.entities.mobs;
 import java.util.List;
 import java.util.Random;
 
-import iceandshadow2.api.EnumIaSAspect;
-import iceandshadow2.api.IaSToolMaterial;
 import iceandshadow2.ias.ai.IIaSMobGetters;
+import iceandshadow2.ias.api.EnumIaSAspect;
+import iceandshadow2.ias.api.IaSToolMaterial;
 import iceandshadow2.ias.items.tools.IaSItemThrowingKnife;
 import iceandshadow2.ias.items.tools.IaSTools;
 import iceandshadow2.ias.util.IaSWorldHelper;

@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.adapters;
 
 import iceandshadow2.boilerplate.IntPair;
 import net.minecraft.block.Block;

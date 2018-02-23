@@ -1,4 +1,4 @@
-package iceandshadow2.ias.util;
+package iceandshadow2.adapters;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
