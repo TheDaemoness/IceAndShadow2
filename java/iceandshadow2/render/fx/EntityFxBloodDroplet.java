@@ -45,18 +45,16 @@ public class EntityFxBloodDroplet extends EntityFX {
 			motionY *= 0.02D;
 			motionZ *= 0.02D;
 			setParticleTextureIndex(113);
-		} else {
+		} else
 			setParticleTextureIndex(112);
-		}
 
 		moveEntity(motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
 
-		if (particleMaxAge-- <= 0) {
+		if (particleMaxAge-- <= 0)
 			setDead();
-		}
 
 		if (isCollidedVertically && onGround) {
 			setParticleTextureIndex(114);
@@ -73,9 +71,8 @@ public class EntityFxBloodDroplet extends EntityFX {
 					- BlockLiquid.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
 							MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
 
-			if (posY < d0) {
+			if (posY < d0)
 				setDead();
-			}
 		}
 	}
 }

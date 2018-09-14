@@ -47,16 +47,16 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 	}
 
 	/**
-	 * Called when the falling block entity for this block hits the ground and
-	 * turns back into a block
+	 * Called when the falling block entity for this block hits the ground and turns
+	 * back into a block
 	 */
 	public void onFinishFalling(World par1World, int par2, int par3, int par4, int par5) {
 	}
 
 	/**
 	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
-	 * neighbor blockID
+	 * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
+	 * blockID
 	 */
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		tryFalling = true;
@@ -95,13 +95,11 @@ public class IaSBlockFalling extends IaSBaseBlockSingle {
 			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 
-				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0) {
+				while (IaSBlockFalling.canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0)
 					--par3;
-				}
 
-				if (par3 > 0) {
+				if (par3 > 0)
 					par1World.setBlock(par2, par3, par4, this);
-				}
 			}
 		}
 	}

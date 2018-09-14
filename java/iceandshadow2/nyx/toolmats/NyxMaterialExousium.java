@@ -113,19 +113,17 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 				final ItemStack eqi = elb.getEquipmentInSlot(i);
 				if (eqi != null) {
 					final int severity = (int) (16 * getToolDamage(is, user, target) + Math.cbrt(eqi.getMaxDamage()));
-					if (eqi.attemptDamageItem(severity, user.getRNG())) {
+					if (eqi.attemptDamageItem(severity, user.getRNG()))
 						elb.setCurrentItemOrArmor(i, null);
-					}
 				}
 			}
-			if (user instanceof EntityPlayer) {
+			if (user instanceof EntityPlayer)
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user).setDamageBypassesArmor()
 						.setDamageIsAbsolute(), getToolDamage(is, user, target));
-			} else {
+			else
 				target.attackEntityFrom(
 						DamageSource.causeMobDamage(user).setDamageBypassesArmor().setDamageIsAbsolute(),
 						getToolDamage(is, user, target));
-			}
 		}
 		return damageToolOnAttack(is, user, target);
 	}
@@ -146,9 +144,8 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 				if (eqi != null) {
 					final int severity = (int) (16 * getKnifeDamage(knife, user, target)
 							+ Math.cbrt(eqi.getMaxDamage()));
-					if (eqi.attemptDamageItem(severity, user.getRNG())) {
+					if (eqi.attemptDamageItem(severity, user.getRNG()))
 						elb.setCurrentItemOrArmor(i, null);
-					}
 				}
 			}
 			elb.addPotionEffect(new PotionEffect(Potion.wither.id, 45, 2));
@@ -158,9 +155,8 @@ public class NyxMaterialExousium extends IaSToolMaterial {
 
 	@Override
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block bl) {
-		if (!worldObj.isRemote) {
+		if (!worldObj.isRemote)
 			worldObj.setBlockToAir(x, y, z);
-		}
 		return true;
 	}
 }

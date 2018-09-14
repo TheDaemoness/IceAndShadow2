@@ -40,9 +40,8 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
-		if (target.getItem() == Items.lava_bucket) {
+		if (target.getItem() == Items.lava_bucket)
 			is.add(new ItemStack(Items.bucket, 1));
-		}
 		final int timeInit = IaSHandlerTransmutationHeat.getTime(target);
 		int resinCredit = 0;
 		for (int i = 0; i < 4 && target.stackSize > 0; ++i) {
@@ -72,9 +71,8 @@ public class IaSHandlerTransmutationHeat implements IIaSApiTransmute {
 						time -= 200 * count;
 					}
 				}
-			if (time < timeInit) {
+			if (time < timeInit)
 				--target.stackSize;
-			}
 		}
 		return is;
 	}

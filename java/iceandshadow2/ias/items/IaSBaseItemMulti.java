@@ -23,9 +23,8 @@ public class IaSBaseItemMulti extends IaSBaseItemSingle {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for (int meta = 0; meta < getSubtypeCount(); ++meta) {
+		for (int meta = 0; meta < getSubtypeCount(); ++meta)
 			par3List.add(new ItemStack(par1, 1, meta));
-		}
 	}
 
 	public int getSubtypeCount() {

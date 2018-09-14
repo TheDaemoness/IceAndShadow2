@@ -33,8 +33,8 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 	}
 
 	/**
-	 * Checks to see if its valid to put this block at the specified
-	 * coordinates. Args: world, x, y, z
+	 * Checks to see if its valid to put this block at the specified coordinates.
+	 * Args: world, x, y, z
 	 */
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
@@ -74,11 +74,10 @@ public class NyxBlockThornyVines extends BlockVine implements IIaSModName {
 			movflag |= theEntity.posZ != theEntity.prevPosZ;
 			if (theEntity instanceof EntityMob || !movflag)
 				return;
-			if (theWorld.difficultySetting == EnumDifficulty.HARD) {
+			if (theWorld.difficultySetting == EnumDifficulty.HARD)
 				theEntity.attackEntityFrom(IaSDamageSources.dmgVines, 2);
-			} else {
+			else
 				theEntity.attackEntityFrom(IaSDamageSources.dmgVines, 1);
-			}
 		}
 	}
 

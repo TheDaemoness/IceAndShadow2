@@ -8,16 +8,16 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class IaSTileEntity extends TileEntity {
 
-	public void markUpdate() {
-		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
-		getWorldObj().markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
-	}
-
 	@Override
 	public Packet getDescriptionPacket() {
 		final NBTTagCompound syncData = new NBTTagCompound();
 		writeToNBT(syncData);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, syncData);
+	}
+
+	public void markUpdate() {
+		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+		getWorldObj().markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	@Override

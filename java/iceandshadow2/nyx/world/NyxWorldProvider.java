@@ -135,7 +135,8 @@ public class NyxWorldProvider extends WorldProvider {
 
 	@Override
 	public ChunkCoordinates getSpawnPoint() {
-		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(worldObj, 0, 0)-GenRuinsCentral.PLATFORM_OFFSET, 0);
+		return new ChunkCoordinates(0, GenRuinsCentral.getGenHeight(worldObj, 0, 0) - GenRuinsCentral.PLATFORM_OFFSET,
+				0);
 	}
 
 	@Override

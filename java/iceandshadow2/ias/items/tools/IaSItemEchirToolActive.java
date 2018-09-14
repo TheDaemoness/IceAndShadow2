@@ -52,14 +52,12 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final IaSToolMaterial mat = IaSRegistry.getTransmutationMaterial(catalyst);
 		catalyst.stackSize -= 3;
-		if (wep) {
+		if (wep)
 			target.func_150996_a(IaSTools.weapons[slot]);
-		} else {
+		else
 			target.func_150996_a(IaSTools.tools[slot]);
-		}
-		if (target.stackTagCompound == null) {
+		if (target.stackTagCompound == null)
 			target.setTagCompound(new NBTTagCompound());
-		}
 		final NBTTagCompound nbt = target.stackTagCompound;
 		nbt.setString(IaSTools.NBT_ID, mat.getMaterialName());
 		return null;
@@ -69,11 +67,10 @@ public class IaSItemEchirToolActive extends IaSBaseItemSingleGlow implements IIa
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer ninja) {
 		if (ninja.isSneaking())
 			// actually isn't redundant.
-			if (wep) {
+			if (wep)
 				par1 = new ItemStack(IaSTools.weapons[slot], 1, par1.getItemDamage());
-			} else {
+			else
 				par1 = new ItemStack(IaSTools.tools[slot], 1, par1.getItemDamage());
-			}
 		return par1;
 	}
 

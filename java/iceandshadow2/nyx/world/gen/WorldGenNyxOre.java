@@ -68,28 +68,24 @@ public class WorldGenNyxOre extends WorldGenerator {
 			for (int xit = x1; xit <= x2; ++xit) {
 				final double d12 = (xit + 0.5D - d6) / (d10 / 2.0D);
 
-				if (d12 * d12 < 1.0D) {
+				if (d12 * d12 < 1.0D)
 					for (int yit = y1; yit <= y2; ++yit) {
 						final double d13 = (yit + 0.5D - d7) / (d11 / 2.0D);
 
-						if (d12 * d12 + d13 * d13 < 1.0D) {
+						if (d12 * d12 + d13 * d13 < 1.0D)
 							for (int zit = z1; zit <= z2; ++zit) {
 								final double d14 = (zit + 0.5D - d8) / (d10 / 2.0D);
 
-								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
-									if (oreAspect == EnumIaSAspect.EXOUSIUM ||
-										oreAspect == EnumIaSAspect.NAVISTRA ||
-										!IaSBlockHelper.isAdjacent(w, xit, yit, zit, EnumIaSAspect.EXOUSIUM))
+								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D)
+									if (oreAspect == EnumIaSAspect.EXOUSIUM || oreAspect == EnumIaSAspect.NAVISTRA
+											|| !IaSBlockHelper.isAdjacent(w, xit, yit, zit, EnumIaSAspect.EXOUSIUM))
 										if (w.getBlock(xit, yit, zit).isReplaceableOreGen(w, xit, yit, zit, target)) {
 											w.setBlock(xit, yit, zit, ore, mineableBlockMeta, 2);
 											w.updateLightByType(EnumSkyBlock.Block, xit, yit, zit);
 											w.updateLightByType(EnumSkyBlock.Sky, xit, yit, zit);
 										}
-								}
 							}
-						}
 					}
-				}
 			}
 		}
 

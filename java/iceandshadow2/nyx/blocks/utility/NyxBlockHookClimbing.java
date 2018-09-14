@@ -43,9 +43,8 @@ public class NyxBlockHookClimbing extends BlockFence {
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = super.getDrops(world, x, y, z, metadata, fortune);
-		if (world.getBlock(x, y - 1, z) == NyxBlocks.ropeY) {
+		if (world.getBlock(x, y - 1, z) == NyxBlocks.ropeY)
 			is.add(new ItemStack(NyxItems.rope));
-		}
 		return is;
 	}
 

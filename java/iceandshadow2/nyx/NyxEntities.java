@@ -16,14 +16,10 @@ public class NyxEntities {
 	public static int internalId = 0;
 
 	public static int getUniqueEntityId() {
-		do {
+		do
 			NyxEntities.startEntityId++;
-		} while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
+		while (EntityList.getStringFromID(NyxEntities.startEntityId) != null);
 		return NyxEntities.startEntityId;
-	}
-
-	public static void registerModEntity(Class c, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates) {
-		EntityRegistry.registerModEntity(c, name, ++internalId, IceAndShadow2.instance, trackingRange, updateFrequency, sendVelocityUpdates);
 	}
 
 	public static void init(IceAndShadow2 owner) {
@@ -73,5 +69,11 @@ public class NyxEntities {
 		final int id = NyxEntities.getUniqueEntityId();
 		EntityList.IDtoClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, primaryColor, secondaryColor));
+	}
+
+	public static void registerModEntity(Class c, String name, int trackingRange, int updateFrequency,
+			boolean sendVelocityUpdates) {
+		EntityRegistry.registerModEntity(c, name, ++internalId, IceAndShadow2.instance, trackingRange, updateFrequency,
+				sendVelocityUpdates);
 	}
 }

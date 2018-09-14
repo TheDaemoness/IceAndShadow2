@@ -36,23 +36,6 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	}
 
 	@Override
-	public boolean requiresMultipleRenderPasses() {
-		return mat.getRenderPasses()>1;
-	}
-
-
-
-	@Override
-	public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_) {
-		return itemIcon;
-	}
-
-	@Override
-	public int getRenderPasses(int metadata) {
-		return mat.getRenderPasses();
-	}
-
-	@Override
 	public EnumIaSAspect getAspect() {
 		return mat.getAspect();
 	}
@@ -60,6 +43,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	@Override
 	public int getDamage(ItemStack stack) {
 		return !mat.isBreakable() ? 0 : super.getDamage(stack);
+	}
+
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return mat.getFirstGlowPass(is);
 	}
 
 	public IaSArmorMaterial getIaSArmorMaterial() {
@@ -72,6 +60,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	}
 
 	@Override
+	public IIcon getIconFromDamageForRenderPass(int p_77618_1_, int p_77618_2_) {
+		return itemIcon;
+	}
+
+	@Override
 	public String getModName() {
 		return this.getUnlocalizedName().substring(5);
 	}
@@ -79,6 +72,11 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	@Override
 	public EnumRarity getRarity(ItemStack is) {
 		return mat.getRarity();
+	}
+
+	@Override
+	public int getRenderPasses(int metadata) {
+		return mat.getRenderPasses();
 	}
 
 	@Override
@@ -110,8 +108,8 @@ public class IaSItemArmor extends ItemArmor implements IIaSModName, IIaSAspect, 
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return mat.getFirstGlowPass(is);
+	public boolean requiresMultipleRenderPasses() {
+		return mat.getRenderPasses() > 1;
 	}
 
 	@Override

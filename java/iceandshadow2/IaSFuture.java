@@ -8,12 +8,15 @@ import java.util.concurrent.FutureTask;
  */
 public class IaSFuture<T> extends FutureTask<T> {
 	protected Exception e = null;
+
 	public IaSFuture(Callable arg0) {
 		super(arg0);
 	}
+
 	public IaSFuture(Runnable arg0, T arg1) {
 		super(arg0, arg1);
 	}
+
 	@Override
 	public T get() {
 		try {
@@ -23,6 +26,7 @@ public class IaSFuture<T> extends FutureTask<T> {
 			return null;
 		}
 	}
+
 	public Exception getException() {
 		return e;
 	}

@@ -15,17 +15,17 @@ public class NyxBiomes {
 
 	public static NyxBiome nyxMountains, nyxHillForest, nyxMesaForest;
 
-	public static NyxBiome  // Special.
+	public static NyxBiome // Special.
 	nyxExousic, nyxInfested;
 
 	public static void init() {
-		NyxBiomes.nyxMountains = (NyxBiome) new NyxBiomeMountains(IaSFlags.biome_id_nyxMountains, true, 1.0F, 2.5F, false)
-				.setBiomeName("NyxMountains");
+		NyxBiomes.nyxMountains = (NyxBiome) new NyxBiomeMountains(IaSFlags.biome_id_nyxMountains, true, 1.0F, 2.5F,
+				false).setBiomeName("NyxMountains");
 
-		NyxBiomes.nyxHillForest = (NyxBiome) new NyxBiomeForestDense(IaSFlags.biome_id_nyxForest, true, 0.4F, 0.5F, false)
-				.setBiomeName("NyxForest");
-		NyxBiomes.nyxMesaForest = (NyxBiome) new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesa, true, 1.5F, 0.15F, false)
-				.setBiomeName("NyxMesa");
+		NyxBiomes.nyxHillForest = (NyxBiome) new NyxBiomeForestDense(IaSFlags.biome_id_nyxForest, true, 0.4F, 0.5F,
+				false).setBiomeName("NyxForest");
+		NyxBiomes.nyxMesaForest = (NyxBiome) new NyxBiomeForestSparse(IaSFlags.biome_id_nyxMesa, true, 1.5F, 0.15F,
+				false).setBiomeName("NyxMesa");
 
 		NyxBiomes.nyxExousic = (NyxBiome) new NyxBiomeExousic(IaSFlags.biome_id_nyxRugged, true, 1.0F, 1.2F, false)
 				.setBiomeName("NyxExousic");

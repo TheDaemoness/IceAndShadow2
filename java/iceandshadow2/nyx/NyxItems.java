@@ -8,7 +8,6 @@ import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.ias.items.IaSItemShears;
 import iceandshadow2.nyx.items.*;
 import iceandshadow2.nyx.items.tools.*;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -17,12 +16,12 @@ public class NyxItems {
 			exousicIceShard, toughGossamer, poisonFruit, poisonFruitFertile, silkBerries, resin, frostBowShort,
 			frostBowLong, frostSword, boneCursed, boneSanctified, heat, alabaster, vineBundle, bread, cookie, icicle,
 			page, rope, kitTightrope, echirShears, crystalVial, extractorPoison, magicRepo, toxicCore, echirDust,
-			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall, cursedPowder,
-			remote, remoteDetonator, antenna, grenadeHandle, anchor;
+			alabasterShard, leaf, resinCurative, salt, flask, amber, amberNugget, clockwork, clockworkSmall,
+			cursedPowder, remote, remoteDetonator, antenna, grenadeHandle, anchor;
 
 	public static Item echirIngot, cortraIngot, draconiumIngot;
 
-	//WARNING: MUST BE INITIALIZED DURING POSTINIT, NOT EARLIER!
+	// WARNING: MUST BE INITIALIZED DURING POSTINIT, NOT EARLIER!
 	public static Item potion, grenade;
 
 	public static void init() {
@@ -46,9 +45,11 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.draconium = new NyxItemDraconium("Draconium").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.salt = new NyxItemSalt("Salt").register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.echirIngot = new NyxItemIngot("Echir", (IaSBaseItem)NyxItems.echirDust).register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.cortraIngot = new NyxItemIngot("Cortra", (IaSBaseItem)NyxItems.cortra).register().setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.draconiumIngot = new NyxItemIngot("Draconium", (IaSBaseItem)NyxItems.draconium).register()
+		NyxItems.echirIngot = new NyxItemIngot("Echir", (IaSBaseItem) NyxItems.echirDust).register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.cortraIngot = new NyxItemIngot("Cortra", (IaSBaseItem) NyxItems.cortra).register()
+				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.draconiumIngot = new NyxItemIngot("Draconium", (IaSBaseItem) NyxItems.draconium).register()
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.poisonFruit = new NyxItemPlumPoison("PoisonFruit").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
@@ -89,26 +90,21 @@ public class NyxItems {
 				.setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.resinCurative = new NyxItemResinCurative("CurativeResin").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
-		NyxItems.flask = new NyxItemFlask("Flask").register()
-				.setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.amber = new NyxItemAmber("Amber").register()
-				.setCreativeTab(IaSCreativeTabs.resources);
+		NyxItems.flask = new NyxItemFlask("Flask").register().setCreativeTab(IaSCreativeTabs.tools);
+		NyxItems.amber = new NyxItemAmber("Amber").register().setCreativeTab(IaSCreativeTabs.resources);
 		NyxItems.amberNugget = new NyxItemAmberNugget("AmberNugget").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.clockwork = new NyxItemClockwork("Clockwork").register()
-				.setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.clockwork = new NyxItemClockwork("Clockwork").register().setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.clockworkSmall = new NyxItemClockworkSmall("ClockworkSmall").register()
 				.setCreativeTab(IaSCreativeTabs.misc);
 		NyxItems.cursedPowder = new NyxItemCursedPowder("CursedPowder").register()
 				.setCreativeTab(IaSCreativeTabs.resources);
-		NyxItems.remote = new NyxItemRemote("Remote").register()
-				.setCreativeTab(IaSCreativeTabs.tools);
+		NyxItems.remote = new NyxItemRemote("Remote").register().setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.remoteDetonator = new NyxItemRemoteDetonator("RemoteDetonator").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
 		NyxItems.grenadeHandle = new NyxItemGrenadeHandle("GrenadeHandle").register()
 				.setCreativeTab(IaSCreativeTabs.tools);
-		NyxItems.anchor = new NyxItemAnchor("Anchor").register()
-				.setCreativeTab(IaSCreativeTabs.misc);
+		NyxItems.anchor = new NyxItemAnchor("Anchor").register().setCreativeTab(IaSCreativeTabs.misc);
 	}
 
 	public static void lateInit() {

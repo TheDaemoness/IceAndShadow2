@@ -31,11 +31,10 @@ public class NyxItemExousicIce extends IaSBaseItemSingle implements IIaSApiTrans
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
 		return 0;
 		/*
-		 * if (catalyst.getItem() != this) return 0; if (target.getItem()
-		 * instanceof ItemBlock) { final Block bl = ((ItemBlock)
-		 * target.getItem()).field_150939_a; if (bl == NyxBlocks.brickFrozen &&
-		 * catalyst.stackSize >= 3) return 25; if (bl ==
-		 * NyxBlocks.brickPaleCracked) return 25; } return 0;
+		 * if (catalyst.getItem() != this) return 0; if (target.getItem() instanceof
+		 * ItemBlock) { final Block bl = ((ItemBlock) target.getItem()).field_150939_a;
+		 * if (bl == NyxBlocks.brickFrozen && catalyst.stackSize >= 3) return 25; if (bl
+		 * == NyxBlocks.brickPaleCracked) return 25; } return 0;
 		 */
 	}
 

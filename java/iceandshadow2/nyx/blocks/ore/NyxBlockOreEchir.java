@@ -22,9 +22,8 @@ public class NyxBlockOreEchir extends NyxBlockOre {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		final int e = world.rand.nextInt(2 + fortune) + 1;
-		for (int i = 0; i < e; ++i) {
+		for (int i = 0; i < e; ++i)
 			is.add(new ItemStack(NyxItems.echirDust));
-		}
 		return is;
 	}
 

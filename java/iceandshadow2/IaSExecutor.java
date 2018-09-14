@@ -11,26 +11,33 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * A singleton that wraps provided runnables and callables in futures, then hands them off to a work-stealing thread pool.
- * A more interesting setup may be worked out later.
+ * A singleton that wraps provided runnables and callables in futures, then
+ * hands them off to a work-stealing thread pool. A more interesting setup may
+ * be worked out later.
  */
 public class IaSExecutor implements ExecutorService {
 	private static final IaSExecutor obj = new IaSExecutor();
-	public static IaSExecutor instance() {return obj;}
+
+	public static IaSExecutor instance() {
+		return obj;
+	}
 
 	public static IaSFuture push(Callable r) {
 		final IaSFuture f = new IaSFuture(r);
 		obj.execute(f);
 		return f;
 	}
+
 	public static IaSFuture push(Runnable r) {
 		final IaSFuture f = new IaSFuture(r, null);
 		obj.execute(f);
 		return f;
 	}
+
 	ExecutorService executor;
+
 	protected IaSExecutor() {
-		executor = Executors.newWorkStealingPool(Math.max(1, Runtime.getRuntime().availableProcessors()-1));
+		executor = Executors.newWorkStealingPool(Math.max(1, Runtime.getRuntime().availableProcessors() - 1));
 	}
 
 	@Override

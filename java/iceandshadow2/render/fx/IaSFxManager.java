@@ -21,25 +21,22 @@ public class IaSFxManager {
 	protected static void doParticleSpawn(World woild, String name, double x, double y, double z, double velX,
 			double velY, double velZ, Object extra, boolean unbounded, boolean isDecorative) {
 
-		int range = 24*24;
+		int range = 24 * 24;
 		if (!Minecraft.isFancyGraphicsEnabled() || IaSFlags.flag_low_particles) {
 			if (isDecorative)
 				return;
-			if(!unbounded) {
-				range = 16*16;
-			}
+			if (!unbounded)
+				range = 16 * 16;
 			unbounded = false;
 		}
-
 
 		if (!unbounded && Minecraft.getMinecraft().renderViewEntity.getDistanceSq(x, y, z) > range)
 			return;
 
 		final EntityFX effex = IaSFxManager.getParticleInstanceByName(woild, name, x, y, z, velX, velY, velZ, extra);
 
-		if (effex != null) {
+		if (effex != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(effex);
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -48,11 +45,11 @@ public class IaSFxManager {
 
 		EntityFX efx = null;
 
-		if (name == "dripPoison") {
+		if (name == "dripPoison")
 			efx = new EntityFxPoisonDroplet(woild, x, y, z);
-		} else if (name == "dripBlood") {
+		else if (name == "dripBlood")
 			efx = new EntityFxBloodDroplet(woild, x, y, z);
-		} else if (name == "blackMagic") {
+		else if (name == "blackMagic") {
 			efx = new EntitySpellParticleFX(woild, x, y, z, velX, velY, velZ);
 			efx.setRBGColorF(0.01F * woild.rand.nextFloat(), 0.01F * woild.rand.nextFloat(),
 					0.01F * woild.rand.nextFloat());
@@ -76,9 +73,9 @@ public class IaSFxManager {
 			return new EntityFlameFX(woild, x, y, z, velX, velY, velZ);
 		else if (name == "vanilla_smoke")
 			return new EntitySmokeFX(woild, x, y, z, velX, velY, velZ);
-		else if (name == "poisonSmoke") {
+		else if (name == "poisonSmoke")
 			efx = new EntityFxToxicMist(woild, x, y, z);
-		} else if (name == "shadowSmokeSmall") {
+		else if (name == "shadowSmokeSmall") {
 			efx = new EntityReddustFX(woild, x, y, z, 2.0F, 0.005F, 0.0F, 0.0F);
 			efx.setRBGColorF(0.005F, 0.0F, 0.0F);
 		} else if (name == "shadowSmokeLarge") {
@@ -97,9 +94,8 @@ public class IaSFxManager {
 	public static void spawnItemParticle(World woild, ItemStack is, double x, double y, double z, double velX,
 			double velY, double velZ, boolean unbounded, boolean isDecorative) {
 
-		if (woild.isRemote) {
+		if (woild.isRemote)
 			IaSFxManager.doParticleSpawn(woild, "breakingItem", x, y, z, velX, velY, velZ, is, unbounded, isDecorative);
-		}
 	}
 
 	public static void spawnParticle(World woild, String name, double x, double y, double z) {
@@ -128,8 +124,7 @@ public class IaSFxManager {
 	public static void spawnParticle(World woild, String name, double x, double y, double z, double velX, double velY,
 			double velZ, boolean unbounded, boolean isDecorative) {
 
-		if (woild.isRemote) {
+		if (woild.isRemote)
 			IaSFxManager.doParticleSpawn(woild, name, x, y, z, velX, velY, velZ, null, unbounded, isDecorative);
-		}
 	}
 }

@@ -23,15 +23,15 @@ public class NyxBlockSalt extends IaSBaseBlockMulti {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
-		ret.add(new ItemStack(NyxItems.salt, metadata>0?4:4+world.rand.nextInt(2+fortune)));
-		return ret;
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.NATIVE;
 	}
 
 	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.NATIVE;
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
+		ret.add(new ItemStack(NyxItems.salt, metadata > 0 ? 4 : 4 + world.rand.nextInt(2 + fortune)));
+		return ret;
 	}
 
 	@Override

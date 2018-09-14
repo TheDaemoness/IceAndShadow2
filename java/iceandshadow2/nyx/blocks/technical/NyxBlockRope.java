@@ -109,9 +109,8 @@ public abstract class NyxBlockRope extends IaSBaseBlockTechnical {
 
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity e) {
-		if (e instanceof EntityPlayer) {
+		if (e instanceof EntityPlayer)
 			IaSBaseBlockAirlike.spreadClimbable(w, x, y, z);
-		}
 	}
 
 	@Override

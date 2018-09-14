@@ -87,7 +87,7 @@ public class NyxMaterialSanctified extends IaSToolMaterial {
 	@Override
 	public boolean onPreHarvest(ItemStack is, EntityPlayer user, World worldObj, int x, int y, int z, Block block) {
 		final int fortune = Math.max(0, (5 + user.experienceLevel) / 10);
-		List<ItemStack> items = IaSBlockHelper.harvest(user, x, y, z, fortune);
+		final List<ItemStack> items = IaSBlockHelper.harvest(user, x, y, z, fortune);
 		IaSEntityHelper.spawnItems(worldObj, items, x, y, z, block);
 		return false;
 	}

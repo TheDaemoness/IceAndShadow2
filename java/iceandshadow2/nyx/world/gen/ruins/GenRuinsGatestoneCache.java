@@ -76,13 +76,13 @@ public class GenRuinsGatestoneCache extends GenRuins {
 			ItemStack itemz = new ItemStack(NyxItems.boneSanctified);
 
 			// Bloodstone.
-			if (rewardid == 0) {
+			if (rewardid == 0)
 				itemz = new ItemStack(NyxItems.bloodstone);
-			} else if (rewardid < 5) {
+			else if (rewardid < 5)
 				itemz = new ItemStack(NyxItems.exousium, 1, 2);
-			} else if (rewardid < 15) {
+			else if (rewardid < 15)
 				itemz = new ItemStack(NyxItems.exousium, 1, 1);
-			} else if (rewardid < 25) {
+			else if (rewardid < 25) {
 				if (var2.nextInt(3) == 0) {
 					itemz = new ItemStack(IaSTools.knife, 8 + var2.nextInt(8));
 					itemz.addEnchantment(Enchantment.smite, 1 + var2.nextInt(2));
@@ -110,13 +110,12 @@ public class GenRuinsGatestoneCache extends GenRuins {
 			}
 
 			// Draconium
-			else if (rewardid < 30) {
+			else if (rewardid < 30)
 				itemz = new ItemStack(NyxItems.draconium);
-			} else if (rewardid < 60) {
+			else if (rewardid < 60)
 				itemz = new ItemStack(NyxItems.heat, 2 + var2.nextInt(4), 2);
-			} else if (rewardid < 70) {
+			else if (rewardid < 70)
 				itemz = new ItemStack(Items.ender_pearl, 3 + var2.nextInt(6));
-			}
 
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}

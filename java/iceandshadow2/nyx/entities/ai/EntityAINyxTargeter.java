@@ -40,17 +40,14 @@ public class EntityAINyxTargeter extends EntityAINyxAttack {
 		for (final Entity ent : list) {
 
 			// Basic checks.
-			if (!(ent instanceof EntityLivingBase)) {
+			if (!(ent instanceof EntityLivingBase))
 				continue;
-			}
-			if (!isSuitableTarget((EntityLivingBase) ent, false)) {
+			if (!isSuitableTarget((EntityLivingBase) ent, false))
 				continue;
-			}
 
 			boolean hates = true;
-			if (taskOwner instanceof IIaSMobGetters) {
+			if (taskOwner instanceof IIaSMobGetters)
 				hates = ((IIaSMobGetters) taskOwner).hates(EnumIaSAspect.getAspect(ent));
-			}
 			// Give priority to players.
 			if (hates)
 				if (ent instanceof EntityPlayer) {

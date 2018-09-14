@@ -35,11 +35,10 @@ public class IaSEntityHelper {
 			final EntityItem entityitem = new EntityItem(ent.worldObj, ent.posX + ent.width / 2, ent.posY,
 					ent.posZ + ent.width / 2, par1ItemStack);
 			entityitem.delayBeforeCanPickup = 10;
-			if (ent.captureDrops) {
+			if (ent.captureDrops)
 				ent.capturedDrops.add(entityitem);
-			} else {
+			else
 				ent.worldObj.spawnEntityInWorld(entityitem);
-			}
 			return entityitem;
 		}
 	}
@@ -49,12 +48,10 @@ public class IaSEntityHelper {
 	}
 
 	public static BiomeGenBase getBiome(Entity ent, double offsetX, double offsetZ) {
-		if (ent.posX < 0) {
+		if (ent.posX < 0)
 			offsetX -= 1;
-		}
-		if (ent.posZ < 0) {
+		if (ent.posZ < 0)
 			offsetZ -= 1;
-		}
 		final int x = (int) (ent.posX + offsetX);
 		final int z = (int) (ent.posZ + offsetZ);
 		final int[] c = IaSEntityHelper.splitCoords(x, z);
@@ -67,12 +64,10 @@ public class IaSEntityHelper {
 	}
 
 	public static Block getBlock(Entity ent, double offsetX, double offsetY, double offsetZ) {
-		if (ent.posX < 0) {
+		if (ent.posX < 0)
 			offsetX -= 1;
-		}
-		if (ent.posZ < 0) {
+		if (ent.posZ < 0)
 			offsetZ -= 1;
-		}
 		final long x = (int) (ent.posX + offsetX);
 		final long y = (int) (ent.posY + offsetY);
 		final long z = (int) (ent.posZ + offsetZ);
@@ -86,12 +81,10 @@ public class IaSEntityHelper {
 	}
 
 	public static int getLight(Entity ent, double offsetX, double offsetY, double offsetZ) {
-		if (ent.posX < 0) {
+		if (ent.posX < 0)
 			offsetX -= 1;
-		}
-		if (ent.posZ < 0) {
+		if (ent.posZ < 0)
 			offsetZ -= 1;
-		}
 		final int x = (int) (ent.posX + offsetX);
 		final int y = (int) (ent.posY + offsetY);
 		final int z = (int) (ent.posZ + offsetZ);
@@ -133,9 +126,8 @@ public class IaSEntityHelper {
 		final float f7 = f4 * f5;
 		final float f8 = f3 * f5;
 		double d3 = 5.0D;
-		if (ent instanceof EntityPlayerMP) {
+		if (ent instanceof EntityPlayerMP)
 			d3 = ((EntityPlayerMP) ent).theItemInWorldManager.getBlockReachDistance();
-		}
 		final Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
 		return world.func_147447_a(vec3, vec31, flag, !flag, false);
 	}
@@ -153,12 +145,10 @@ public class IaSEntityHelper {
 	}
 
 	public static float getTemperatureFloat(Entity ent, double offsetX, double offsetY, double offsetZ) {
-		if (ent.posX < 0) {
+		if (ent.posX < 0)
 			offsetX -= 1;
-		}
-		if (ent.posZ < 0) {
+		if (ent.posZ < 0)
 			offsetZ -= 1;
-		}
 		final int x = (int) (ent.posX + offsetX);
 		final int y = (int) (ent.posY + offsetY);
 		final int z = (int) (ent.posZ + offsetZ);
@@ -175,18 +165,16 @@ public class IaSEntityHelper {
 		if (1 + 2 * Math.sqrt(xdif * xdif + zdif * zdif) < (b.posY - a.posY))
 			return false;
 
-		if (xdif == 0.0) {
+		if (xdif == 0.0)
 			ratio = zdif / xdif;
-		} else {
+		else
 			ratio = 0;
-		}
 
 		double ang = Math.atan(ratio) * 180.0 / Math.PI;
-		if (xdif < 0) {
+		if (xdif < 0)
 			ang += 180.0;
-		} else if (zdif < 0) {
+		else if (zdif < 0)
 			ang += 360.0;
-		}
 
 		return ((ang - a.rotationYaw) % 360 <= 180);
 	}
@@ -211,10 +199,30 @@ public class IaSEntityHelper {
 			final Entity ent = (Entity) o;
 			final IIaSSensate senses = (IIaSSensate) o;
 			range = Math.min(range, senses.getMaxSenseRange(sense));
-			if (ent.getDistanceSq(what.posX, what.posY, what.posZ) > range * range) {
+			if (ent.getDistanceSq(what.posX, what.posY, what.posZ) > range * range)
 				continue;
-			}
 			senses.notice(what, sense);
+		}
+	}
+
+	public static void spawnItems(World w, List<ItemStack> items, int x, int y, int z) {
+		spawnItems(w, items, x, y, z, 0, 0, 0, 1, 1, 1);
+	}
+
+	public static void spawnItems(World w, List<ItemStack> items, int x, int y, int z, Block bl) {
+		spawnItems(w, items, x, y, z, bl.getBlockBoundsMinX(), bl.getBlockBoundsMinY(), bl.getBlockBoundsMinZ(),
+				bl.getBlockBoundsMaxX(), bl.getBlockBoundsMaxY(), bl.getBlockBoundsMaxZ());
+	}
+
+	public static void spawnItems(World w, List<ItemStack> items, int x, int y, int z, double xL, double yL, double zL,
+			double xH, double yH, double zH) {
+		final double xW = (xH - xL) / 2, yW = (yH - yL) / 2, zW = (zH - zL) / 2;
+		for (final ItemStack is : items) {
+			final double xOffset = w.rand.nextFloat() * xW + xL + xW / 2,
+					yOffset = w.rand.nextFloat() * yW + yL + yW / 2, zOffset = w.rand.nextFloat() * zW + zL + zW / 2;
+			final EntityItem eis = new EntityItem(w, x + xOffset, y + yOffset, z + zOffset, is);
+			eis.delayBeforeCanPickup = 10; // Standard Minecraft delay.
+			w.spawnEntityInWorld(eis);
 		}
 	}
 
@@ -223,86 +231,43 @@ public class IaSEntityHelper {
 	}
 
 	public static void spawnNourishment(World w, double x, double y, double z, int amount) {
-		if (!w.isRemote) {
+		if (!w.isRemote)
 			w.spawnEntityInWorld(new EntityOrbNourishment(w, x, y, z, amount));
-		}
 	}
 
 	public static int[] splitCoords(long x, long z) {
 		final int[] ret = new int[4];
-		if (x < 0) {
+		if (x < 0)
 			ret[0] = (int) (x / 16 - 1);
-		} else {
+		else
 			ret[0] = (int) (x / 16);
-		}
-		if (z < 0) {
+		if (z < 0)
 			ret[1] = (int) (z / 16 - 1);
-		} else {
+		else
 			ret[1] = (int) (z / 16);
-		}
-		if (x < 0) {
+		if (x < 0)
 			ret[2] = (int) (15 - Math.abs(x % 16));
-		} else {
+		else
 			ret[2] = (int) (x % 16);
-		}
-		if (z < 0) {
+		if (z < 0)
 			ret[3] = (int) (15 - Math.abs(z % 16));
-		} else {
+		else
 			ret[3] = (int) (z % 16);
-		}
 		return ret;
-	}
-	
-	public static void spawnItems(World w, List<ItemStack> items,
-			int x, int y, int z) {
-		spawnItems(w, items, x, y, z,
-			0, 0, 0,
-			1, 1, 1);
-	}
-	
-	public static void spawnItems(World w, List<ItemStack> items,
-			int x, int y, int z, Block bl) {
-		spawnItems(w, items, x, y, z,
-			bl.getBlockBoundsMinX(),
-			bl.getBlockBoundsMinY(),
-			bl.getBlockBoundsMinZ(),
-			bl.getBlockBoundsMaxX(),
-			bl.getBlockBoundsMaxY(),
-			bl.getBlockBoundsMaxZ());
-	}
-
-	public static void spawnItems(World w, List<ItemStack> items,
-			int x, int y, int z,
-			double xL, double yL, double zL,
-			double xH, double yH, double zH) {
-		final double
-			xW = (xH-xL)/2,
-			yW = (yH-yL)/2,
-			zW = (zH-zL)/2;
-		for(ItemStack is : items) {
-			final double
-				xOffset = w.rand.nextFloat() * xW + xL + xW/2,
-				yOffset = w.rand.nextFloat() * yW + yL + yW/2,
-				zOffset = w.rand.nextFloat() * zW + zL + zW/2;
-			EntityItem eis = new EntityItem(w, x + xOffset, y + yOffset, z + zOffset, is);
-			eis.delayBeforeCanPickup = 10; //Standard Minecraft delay.
-			w.spawnEntityInWorld(eis);
-		}
 	}
 
 	public static void teleport(EntityLivingBase ent, int x, int y, int z) {
-		if(!ent.worldObj.isRemote)
+		if (!ent.worldObj.isRemote)
 			return;
 		final Chunk ck = IaSWorldHelper.loadChunk(ent.worldObj, x, z);
-		if(ck == null || !ck.isChunkLoaded || ck.isEmpty())
+		if (ck == null || !ck.isChunkLoaded || ck.isEmpty())
 			return;
-		for (int gateY = 255; gateY >= 4; --gateY) {
-			if (ck.getBlock(x&15, y, z&15) == Styx.gatestone) {
+		for (int gateY = 255; gateY >= 4; --gateY)
+			if (ck.getBlock(x & 15, y, z & 15) == Styx.gatestone) {
 				y = gateY;
 				break;
 			}
-		}
 		ent.setSneaking(false);
-		ent.setPositionAndUpdate(x + 0.5 , y+1, z + 0.5);
+		ent.setPositionAndUpdate(x + 0.5, y + 1, z + 0.5);
 	}
 }

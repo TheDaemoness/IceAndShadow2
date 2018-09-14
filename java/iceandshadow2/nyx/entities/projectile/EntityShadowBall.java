@@ -97,11 +97,10 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 				return;
 			if (par1MovingObjectPosition.entityHit instanceof EntityNyxSkeleton
 					&& getThrower() instanceof EntityNyxNecromancer) {
-				if (isUndeadHarming() && !getThrower().isDead && getThrower().getHealth() >= 1) {
+				if (isUndeadHarming() && !getThrower().isDead && getThrower().getHealth() >= 1)
 					par1MovingObjectPosition.entityHit.attackEntityFrom(
 							DamageSource.causeIndirectMagicDamage(par1MovingObjectPosition.entityHit, getThrower()),
 							666);
-				}
 				return;
 			}
 		}
@@ -124,25 +123,22 @@ public class EntityShadowBall extends EntityThrowable implements IIaSAspect {
 
 						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id, 39, 0));
 
-						if (!isUndeadHarming() && elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+						if (!isUndeadHarming() && elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 							elmo.heal(power);
-						} else if (getThrower() != null && elmo.getEntityId() == getThrower().getEntityId()) {
-							if (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+						else if (getThrower() != null && elmo.getEntityId() == getThrower().getEntityId()) {
+							if (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 								elmo.heal(power);
-							} else {
+							else
 								elmo.attackEntityFrom(DamageSource.magic, power / 2);
-							}
-						} else {
+						} else
 							elmo.attackEntityFrom(
 									DamageSource.causeIndirectMagicDamage(elmo,
 											getThrower() == null ? this : getThrower()),
 									power * (elmo.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? 3.0F
 											: 1.0F));
-						}
 						elmo.addPotionEffect(new PotionEffect(Potion.blindness.id, 69, 1));
-						if (getThrower() != null) {
+						if (getThrower() != null)
 							getThrower().heal(power / Math.min(1 + list1.size(), 4));
-						}
 					}
 				}
 			}

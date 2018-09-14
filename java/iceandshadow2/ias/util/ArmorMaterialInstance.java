@@ -10,21 +10,17 @@ public class ArmorMaterialInstance implements Comparable {
 		java.util.Arrays.fill(materialMap, new ArmorMaterialInstance());
 		for (int i = 1; i <= 4; ++i) {
 			final ItemStack armor = elb.getEquipmentInSlot(i);
-			if (armor == null || armor.getItem() == null) {
+			if (armor == null || armor.getItem() == null)
 				continue;
-			}
 			final IaSArmorMaterial mat = IaSArmorMaterial.getArmorMaterial(armor);
-			if (mat == null) {
+			if (mat == null)
 				continue;
-			}
 			int index = 0;
 			while (index < materialMap.length && materialMap[index].material != null
-					&& materialMap[index].material != mat) {
+					&& materialMap[index].material != mat)
 				++index;
-			}
-			if (index >= materialMap.length) {
+			if (index >= materialMap.length)
 				continue;
-			}
 			materialMap[index].material = mat;
 			final double maxDmg = Math.max(1, armor.getMaxDamage());
 			final double curDmg = Math.max(0, armor.getItemDamage());

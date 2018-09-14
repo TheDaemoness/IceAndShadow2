@@ -23,9 +23,8 @@ public class StyxBlockEscape extends StyxBlockNoReplace {
 			final EntityLivingBase elb = (EntityLivingBase) ent;
 			int i = 6;
 			for (; i < 255; ++i)
-				if (world.getBlock(x, i, z) == Styx.gatestone) {
+				if (world.getBlock(x, i, z) == Styx.gatestone)
 					break;
-				}
 			elb.setPositionAndUpdate(ent.posX, i + 1.1, ent.posZ);
 		}
 	}

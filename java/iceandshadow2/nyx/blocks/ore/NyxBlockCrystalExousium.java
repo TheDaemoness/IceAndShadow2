@@ -47,9 +47,8 @@ public class NyxBlockCrystalExousium extends NyxBlockCrystal {
 
 	@Override
 	public void onEntityCollidedWithBlock(World w, int x, int y, int z, Entity ent) {
-		if (ent instanceof EntityLivingBase) {
+		if (ent instanceof EntityLivingBase)
 			((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 81, 2));
-		}
 		super.onEntityCollidedWithBlock(w, x, y, z, ent);
 	}
 }

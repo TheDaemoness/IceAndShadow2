@@ -11,15 +11,12 @@ import net.minecraft.item.ItemStack;
  */
 public interface IIaSApiDeathHook {
 	/**
-	 * Called if the relevant item function returned one of the ALTER actions.
-	 * If ALTER_BOTH had been returned, willDrop will be false.
+	 * Called if the relevant item function returned one of the ALTER actions. If
+	 * ALTER_BOTH had been returned, willDrop will be false.
 	 *
-	 * @param willDrop
-	 *            Indicates if this item stack will be dropped or not.
-	 * @param pwai
-	 *            The player.
-	 * @param is
-	 *            The item stack to alter.
+	 * @param willDrop Indicates if this item stack will be dropped or not.
+	 * @param pwai     The player.
+	 * @param is       The item stack to alter.
 	 */
 	void alterItemStack(boolean willDrop, EntityPlayer pwai, ItemStack is);
 
@@ -27,24 +24,20 @@ public interface IIaSApiDeathHook {
 	 * Called when the handler is processing an item stack that the player has
 	 * equipped.
 	 *
-	 * @param pwai
-	 *            The player.
-	 * @param is
-	 *            The item stack in question.
-	 * @return The action the death system should take. Returning default will
-	 *         keep the item, unless another handler returns non-default.
+	 * @param pwai The player.
+	 * @param is   The item stack in question.
+	 * @return The action the death system should take. Returning default will keep
+	 *         the item, unless another handler returns non-default.
 	 */
 	EnumIaSDeathAction getActionArmor(EntityPlayer pwai, ItemStack is);
 
 	/**
 	 * Called when the handler is processing an item stack on the hotbar.
 	 *
-	 * @param pwai
-	 *            The player.
-	 * @param is
-	 *            The item stack in question.
-	 * @return The action the death system should take. Returning default will
-	 *         call getActionInventory().
+	 * @param pwai The player.
+	 * @param is   The item stack in question.
+	 * @return The action the death system should take. Returning default will call
+	 *         getActionInventory().
 	 */
 	EnumIaSDeathAction getActionHotbar(EntityPlayer pwai, ItemStack is);
 
@@ -52,22 +45,18 @@ public interface IIaSApiDeathHook {
 	 * Called when the handler is processing an item stack in the player's
 	 * inventory.
 	 *
-	 * @param pwai
-	 *            The player.
-	 * @param is
-	 *            The item stack in question.
-	 * @return The action the death system should take. Returning default will
-	 *         drop the item, unless another handler returns non-default.
+	 * @param pwai The player.
+	 * @param is   The item stack in question.
+	 * @return The action the death system should take. Returning default will drop
+	 *         the item, unless another handler returns non-default.
 	 */
 	EnumIaSDeathAction getActionInventory(EntityPlayer pwai, ItemStack is);
 
 	/**
 	 * Called before alterItemStack if ALTER_BOTH was returned.
 	 *
-	 * @param pwai
-	 *            The player.
-	 * @param is
-	 *            The item stack being processed.
+	 * @param pwai The player.
+	 * @param is   The item stack being processed.
 	 * @return The altered item stack to drop.
 	 */
 	ItemStack getAlterBothDrop(EntityPlayer pwai, ItemStack is);

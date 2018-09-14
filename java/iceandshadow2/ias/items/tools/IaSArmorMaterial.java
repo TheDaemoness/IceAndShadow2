@@ -42,17 +42,14 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	}
 
 	/**
-	 * Gets the armor coverage as a function of what slot the armor is in and
-	 * its durability.
+	 * Gets the armor coverage as a function of what slot the armor is in and its
+	 * durability.
 	 *
-	 * @param slot
-	 *            The slot the armor is in. Cheat sheet: 1 - Head, 4 - Feet.
-	 * @param durability
-	 *            The armor's durability, expressed as a value from 0 to 1,
-	 *            where 1 is fully repaired.
-	 * @return The coverage provided by that piece of armor. The cumulative
-	 *         coverage from a full set of same-type armor at full durability
-	 *         should be 10.
+	 * @param slot       The slot the armor is in. Cheat sheet: 1 - Head, 4 - Feet.
+	 * @param durability The armor's durability, expressed as a value from 0 to 1,
+	 *                   where 1 is fully repaired.
+	 * @return The coverage provided by that piece of armor. The cumulative coverage
+	 *         from a full set of same-type armor at full durability should be 10.
 	 */
 	public double getCoverage(int slot, double durability) {
 		switch (slot) {
@@ -69,11 +66,20 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 		}
 	}
 
+	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
 	/**
 	 * Gets the rarity to display.
 	 */
 	public EnumRarity getRarity() {
 		return EnumRarity.common;
+	}
+
+	public int getRenderPasses() {
+		return 2;
 	}
 
 	/**
@@ -84,14 +90,12 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	}
 
 	/**
-	 * Called by Nyxian armors upon their wearer taking damage. Called one for
-	 * each type of armor the player wears.
+	 * Called by Nyxian armors upon their wearer taking damage. Called one for each
+	 * type of armor the player wears.
 	 *
-	 * @param coverage
-	 *            A value from 1-10 representing how much of that type of armor
-	 *            the player has equipped.
-	 * @param major
-	 *            Whether the player has major coverage. Given for convenience.
+	 * @param coverage A value from 1-10 representing how much of that type of armor
+	 *                 the player has equipped.
+	 * @param major    Whether the player has major coverage. Given for convenience.
 	 * @return The amount of damage the player should take.
 	 */
 	public float onHurt(EntityLivingBase wearer, DamageSource dmg, float amount, double coverage, boolean major) {
@@ -101,25 +105,13 @@ public class IaSArmorMaterial implements IIaSAspect, IIaSGlowing {
 	/**
 	 * Called every tick when the wearer is wielding armor.
 	 *
-	 * @param coverage
-	 *            A value from 1-10 representing how much of that type of armor
-	 *            the player has equipped.
-	 * @param boots
-	 *            Whether the boots are equipped, for convenience.
-	 * @param major
-	 *            Whether the player has major coverage. Given for convenience.
+	 * @param coverage A value from 1-10 representing how much of that type of armor
+	 *                 the player has equipped.
+	 * @param boots    Whether the boots are equipped, for convenience.
+	 * @param major    Whether the player has major coverage. Given for convenience.
 	 */
 	public void onTick(EntityLivingBase wearer, double coverage, boolean major) {
 
-	}
-
-	public int getRenderPasses() {
-		return 2;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
 	}
 
 	@Override

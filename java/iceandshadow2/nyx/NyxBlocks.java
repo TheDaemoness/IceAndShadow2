@@ -1,7 +1,6 @@
 package iceandshadow2.nyx;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import iceandshadow2.ias.blocks.IaSBaseBlock;
 import iceandshadow2.ias.blocks.IaSBaseBlockTechnical;
 import iceandshadow2.ias.util.IaSRegistration;
 import iceandshadow2.nyx.blocks.*;
@@ -18,12 +17,11 @@ public class NyxBlocks {
 			crystalBloodstone, crystalExousium, thornyVines, silkBerryPod, infestLog, infestLeaves, poisonLeaves,
 			poisonLog, brickFrozen, planks, gatestone, brickExousic, brickExousicCracked, hookClimbing,
 			transfusionAltar, examinationTable, hardShadow, unstableDevora, xpAltar, icicles, gravel, stoneGrowing,
-			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner, antenna,
-			detonator, stableDevora;
+			airDrain, transfusionAltarBroken, sanctifiedObsidian, snow, salt, infestSpawner, antenna, detonator,
+			stableDevora;
 
 	public static Block oreEchir, oreDevora, oreNavistra, oreCortra, oreNifelhium, oreExousium, oreDraconium,
 			oreGemstone;
-
 
 	public static Block rail, railPowered;
 
@@ -75,8 +73,7 @@ public class NyxBlocks {
 		NyxBlocks.sanctifiedObsidian = new NyxBlockObsidianSanctified("SanctifiedObsidian").register();
 
 		NyxBlocks.transfusionAltar = new NyxBlockAltarTransfusion("TransmutationAltar").register();
-		NyxBlocks.transfusionAltarBroken = new NyxBlockAltarTransfusionBroken("TransmutationAltarBroken")
-				.register();
+		NyxBlocks.transfusionAltarBroken = new NyxBlockAltarTransfusionBroken("TransmutationAltarBroken").register();
 		NyxBlocks.xpAltar = new NyxBlockAltarExperience("AltarExperience").register();
 		NyxBlocks.infestSpawner = new NyxBlockInfestedSpawner("InfestedSpawner").register();
 
@@ -100,7 +97,7 @@ public class NyxBlocks {
 
 		NyxBlocks.rail = new NyxBlockRail("Rail", false, true).register();
 		NyxBlocks.railPowered = new NyxBlockRailPowered("RailPowered").register();
-		
+
 		NyxBlocks.antenna = new NyxBlockAntenna("Antenna").register();
 		NyxBlocks.detonator = new NyxBlockDetonator("Detonator").register();
 		NyxBlocks.stableDevora = new NyxBlockStableDevora("StableDevora").register();

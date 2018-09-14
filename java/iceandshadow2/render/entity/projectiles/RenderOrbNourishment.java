@@ -21,15 +21,9 @@ public class RenderOrbNourishment extends RenderXPOrb {
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		bindEntityTexture(orb);
 		final int iconIndex = orb.getTextureByXP();
-		final float
-		minU = (iconIndex % 4 * 16 + 0) / 64f,
-		maxU = (iconIndex % 4 * 16 + 16) / 64f,
-		minV = (iconIndex / 4 * 16 + 0) / 64f,
-		maxV = (iconIndex / 4 * 16 + 16) / 64f;
-		final int
-		luma = orb.getBrightnessForRender(b),
-		lumaLSB = luma & 65535,
-		lumaMSB = luma / 65536;
+		final float minU = (iconIndex % 4 * 16 + 0) / 64f, maxU = (iconIndex % 4 * 16 + 16) / 64f,
+				minV = (iconIndex / 4 * 16 + 0) / 64f, maxV = (iconIndex / 4 * 16 + 16) / 64f;
+		final int luma = orb.getBrightnessForRender(b), lumaLSB = luma & 65535, lumaMSB = luma / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lumaLSB, lumaMSB);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		final int color = 255 << 16 | 0 << 8 | (int) (((MathHelper.sin((orb.xpColor + b) / 2.0F) + 1) / 2) * 64); // Color.

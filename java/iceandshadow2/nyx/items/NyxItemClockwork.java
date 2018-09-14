@@ -16,6 +16,6 @@ public class NyxItemClockwork extends IaSBaseItemMultiTexturedGlow {
 
 	@Override
 	public EnumRarity getRarity(ItemStack is) {
-		return is.getItemDamage()<2?EnumRarity.common:EnumRarity.uncommon;
+		return is.getItemDamage() < 2 ? EnumRarity.common : EnumRarity.uncommon;
 	}
 }

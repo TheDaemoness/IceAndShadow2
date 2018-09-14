@@ -39,8 +39,8 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	}
 
 	/**
-	 * Can this block stay at this position. Similar to canPlaceBlockAt except
-	 * gets checked often with plants.
+	 * Can this block stay at this position. Similar to canPlaceBlockAt except gets
+	 * checked often with plants.
 	 */
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
@@ -59,9 +59,8 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getCocoaIcon(int par1) {
-		if (par1 < 0 || par1 >= icons.length) {
+		if (par1 < 0 || par1 >= icons.length)
 			par1 = icons.length - 1;
-		}
 
 		return icons[par1];
 	}
@@ -82,15 +81,13 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 
 		if (j1 >= 2) {
 			b0 = (byte) (2 + world.rand.nextInt(2));
-			if (world.rand.nextInt(4) == 0) {
+			if (world.rand.nextInt(4) == 0)
 				dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
-			}
 		}
 
 		dropped.add(new ItemStack(NyxItems.silkBerries, 1, 1));
-		for (int k1 = 0; k1 < b0; ++k1) {
+		for (int k1 = 0; k1 < b0; ++k1)
 			dropped.add(new ItemStack(NyxItems.silkBerries, 1));
-		}
 		return dropped;
 	}
 
@@ -133,16 +130,14 @@ public class NyxBlockSilkBerryPod extends BlockCocoa implements IIaSModName, IIa
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[3];
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < 3; ++i)
 			icons[i] = reg.registerIcon(getTextureName() + (i + 1));
-		}
 		blockIcon = icons[2];
 	}
 
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		if (par5Random.nextBoolean()) {
+		if (par5Random.nextBoolean())
 			super.updateTick(par1World, par2, par3, par4, par5Random);
-		}
 	}
 }

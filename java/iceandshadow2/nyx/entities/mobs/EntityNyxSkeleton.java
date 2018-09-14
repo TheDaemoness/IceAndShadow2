@@ -133,15 +133,13 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		targetTasks.addTask(1, new EntityAINyxRevenge(this));
 		targetTasks.addTask(2, new EntityAINyxTargeter(this));
 
-		if (par1World != null && !par1World.isRemote) {
+		if (par1World != null && !par1World.isRemote)
 			setCombatTask();
-		}
 
-		if (type != EnumNyxSkeletonType.RANDOM) {
+		if (type != EnumNyxSkeletonType.RANDOM)
 			setNyxSkeletonCombatType(type);
-		} else {
+		else
 			typpe = type;
-		}
 	}
 
 	@Override
@@ -153,22 +151,19 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 			final float f = IaSWorldHelper.getDifficulty(worldObj) == 3 ? 0.1F : 0.25F;
 
 			for (int val = 0; val < 3; ++val)
-				if (rand.nextFloat() < 0.095F) {
+				if (rand.nextFloat() < 0.095F)
 					++i;
-				}
 
 			for (int j = 3; j >= 1; --j) {
-				if (j < 3 && rand.nextFloat() < f) {
+				if (j < 3 && rand.nextFloat() < f)
 					break;
-				}
 
 				if (getEquipmentInSlot(j) == null) {
 					final ItemStack arm = IaSTools.getArmorForSlot(j, i);
 					arm.setItemDamage(3 * arm.getMaxDamage() / 4 + rand.nextInt(arm.getMaxDamage() / 4) - 1);
 
-					if (arm != null) {
+					if (arm != null)
 						setCurrentItemOrArmor(j, arm);
-					}
 				}
 			}
 		}
@@ -205,9 +200,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 
 			final int j = EnchantmentHelper.getFireAspectModifier(this);
 
-			if (j > 0) {
+			if (j > 0)
 				par1Entity.setFire(j * 4);
-			}
 
 			if (par1Entity instanceof EntityLivingBase) {
 				if (getEquipmentInSlot(0) == null)
@@ -222,9 +216,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float dmg) {
-		if (par1DamageSource.getEntity() != null) {
+		if (par1DamageSource.getEntity() != null)
 			removePotionEffect(Potion.confusion.id);
-		}
 		if (isEntityInvulnerable() || par1DamageSource == DamageSource.drown)
 			return false;
 		if (getEquipmentInSlot(2) != null && !par1DamageSource.isUnblockable()
@@ -258,13 +251,12 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving, float par2) {
 		final ItemStack wielding = getHeldItem();
-		if (wielding != null && wielding.getItem() instanceof NyxBaseItemBow) {
+		if (wielding != null && wielding.getItem() instanceof NyxBaseItemBow)
 			doBowAttack(par1EntityLiving, par2, wielding.getItem() instanceof NyxItemBowFrostLong);
-		} else {
+		else {
 			doShadowAttack(par1EntityLiving, par2);
-			if (typpe != EnumNyxSkeletonType.MAGIC_SHADOW) {
+			if (typpe != EnumNyxSkeletonType.MAGIC_SHADOW)
 				attackEntityFrom(DamageSource.magic, 6.0F);
-			}
 		}
 	}
 
@@ -295,13 +287,11 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 
 		var2.setDamage(getAttackStrength(par1EntityLiving));
 
-		if (var3 > 0) {
+		if (var3 > 0)
 			var2.setDamage(var2.getDamage() + var3 * 0.5D + 0.5D);
-		}
 
-		if (var4 > 0) {
+		if (var4 > 0)
 			var2.setKnockbackStrength(var4);
-		}
 
 		playSound("random.bow", 1.0F, 1.0F / (getRNG().nextFloat() * 0.3F + 0.6F));
 		worldObj.spawnEntityInWorld(var2);
@@ -317,19 +307,18 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		final double d2 = par1EntityLiving.posZ + par1EntityLiving.motionZ - posZ;
 		final float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
-		if (f1 <= 2.0) {
+		if (f1 <= 2.0)
 			entityball.setThrowableHeading(d0, d1, d2, 0.40F, 8.0F);
-		} else {
+		else
 			entityball.rotationPitch += 20.0F;
-		}
 		entityball.setThrowableHeading(d0, d1 + f1 * 0.2F, d2, 0.80F, 8.0F);
 		worldObj.spawnEntityInWorld(entityball);
 	}
 
 	/**
-	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity
-	 * has recently been hit by a player. @param par2 - Level of Looting used to
-	 * kill this mob.
+	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity has
+	 * recently been hit by a player. @param par2 - Level of Looting used to kill
+	 * this mob.
 	 */
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
@@ -342,11 +331,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 2));
 
 		/*
-		 * Calendar var1 = this.worldObj.getCurrentDate(); if (var1.get(2) + 1
-		 * == 10 && var1.get(5) == 31) this.dropItem(new
-		 * ItemStack(IaSItems.nyxCandy,1,1)); if (var1.get(2) + 1 == 12 &&
-		 * (var1.get(5) == 25 || var1.get(5) == 24)) this.dropItem(new
-		 * ItemStack(IaSItems.nyxCandy,1,2));
+		 * Calendar var1 = this.worldObj.getCurrentDate(); if (var1.get(2) + 1 == 10 &&
+		 * var1.get(5) == 31) this.dropItem(new ItemStack(IaSItems.nyxCandy,1,1)); if
+		 * (var1.get(2) + 1 == 12 && (var1.get(5) == 25 || var1.get(5) == 24))
+		 * this.dropItem(new ItemStack(IaSItems.nyxCandy,1,2));
 		 */
 	}
 
@@ -356,11 +344,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		else {
 			final EntityItem entityitem = new EntityItem(worldObj, posX, posY, posZ, par1ItemStack);
 			entityitem.delayBeforeCanPickup = 10;
-			if (captureDrops) {
+			if (captureDrops)
 				capturedDrops.add(entityitem);
-			} else {
+			else
 				worldObj.spawnEntityInWorld(entityitem);
-			}
 			return entityitem;
 		}
 	}
@@ -384,11 +371,10 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 	public float getAttackStrength(Entity par1Entity) {
 		getHeldItem();
 		int var3;
-		if (worldObj != null) {
+		if (worldObj != null)
 			var3 = IaSWorldHelper.getDifficulty(worldObj) >= 3 ? 7 : 8;
-		} else {
+		else
 			var3 = 8;
-		}
 
 		/*
 		 * if (var2 != null) { if (var2.getItem() instanceof IIaSTool) var3 +=
@@ -405,9 +391,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		final int lightb = worldObj.getBlockLightValue(i, j, k);
 		float mod = 0F;
 		final Block bl = worldObj.getBlock(i, j, k);
-		if (bl instanceof IIaSBlockPathDesirability) {
+		if (bl instanceof IIaSBlockPathDesirability)
 			mod = ((IIaSBlockPathDesirability) bl).getBlockPathWeight(worldObj, i, j, k);
-		}
 		return mod + (lightb >= 7 ? lightb * 2 : 0);
 	}
 
@@ -535,9 +520,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 					mat.onKnifeThrow(is, this, etn);
 					worldObj.spawnEntityInWorld(etn);
 					throwDelay = mat.getKnifeCooldown(is, worldObj, this) * 2;
-				} else {
+				} else
 					--throwDelay;
-				}
 		}
 	}
 
@@ -570,9 +554,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 			} else if (reg >= 3 && rand.nextBoolean()) {
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.RAPIER);
 				equipmentDropChances[0] = 0.1F;
-			} else {
+			} else
 				setNyxSkeletonCombatType(EnumNyxSkeletonType.MAGIC_SHADOW);
-			}
 		}
 
 		// Bow skeleton.
@@ -591,9 +574,8 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 	 */
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		if (par1NBTTagCompound.hasKey("NyxSkeletonCombatStyle")) {
+		if (par1NBTTagCompound.hasKey("NyxSkeletonCombatStyle"))
 			this.setNyxSkeletonCombatType(par1NBTTagCompound.getByte("NyxSkeletonCombatStyle"));
-		}
 
 		super.readEntityFromNBT(par1NBTTagCompound);
 
@@ -617,26 +599,22 @@ public class EntityNyxSkeleton extends EntitySkeleton implements IIaSMobGetters 
 		final ItemStack var1 = getHeldItem();
 
 		if (var1 != null && var1.getItem() instanceof NyxBaseItemBow) {
-			if (typpe == EnumNyxSkeletonType.BOW_FROST_LONG) {
+			if (typpe == EnumNyxSkeletonType.BOW_FROST_LONG)
 				tasks.addTask(4, rangedAttackLong);
-			} else {
+			else
 				tasks.addTask(4, rangedAttackDefault);
-			}
-		} else if (typpe == EnumNyxSkeletonType.MAGIC_SHADOW) {
+		} else if (typpe == EnumNyxSkeletonType.MAGIC_SHADOW)
 			tasks.addTask(4, shadowAttack);
-		}
-		else {
+		else
 			tasks.addTask(4, meleeAttack);
 		// this.tasks.addTask(4, this.meleeAttackPassive);
-		}
 	}
 
 	@Override
 	public void setCurrentItemOrArmor(int par1, ItemStack par2ItemStack) {
 		super.setCurrentItemOrArmor(par1, par2ItemStack);
-		if (!worldObj.isRemote && par1 == 0) {
+		if (!worldObj.isRemote && par1 == 0)
 			setCombatTask();
-		}
 	}
 
 	public void setNyxSkeletonCombatType(EnumNyxSkeletonType taipe) {

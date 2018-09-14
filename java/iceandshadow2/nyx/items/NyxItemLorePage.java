@@ -1,7 +1,6 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -27,8 +26,7 @@ public class NyxItemLorePage extends IaSBaseItemMulti {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		pages = new IIcon[getSubtypeCount()];
-		for (int i = 0; i < pages.length; ++i) {
+		for (int i = 0; i < pages.length; ++i)
 			pages[i] = reg.registerIcon(getTextureName() + i);
-		}
 	}
 }

@@ -4,11 +4,8 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxBlocks;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class NyxItemVineBundle extends IaSBaseItemSingleGlow {

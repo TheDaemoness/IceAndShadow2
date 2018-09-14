@@ -8,26 +8,18 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 public class IaSWorldHelper {
 
-	public static boolean isChunkOkay(Chunk ck) {
-		return ck == null || ck.isEmpty() || !ck.isChunkLoaded;
-	}
-	
 	/**
-	 * Loads a chunk at the specified block coordinates.
+	 * IaS's screwy in-house distance formula. Do not feed to infants. Values
+	 * returned are approximately double what they should be.
 	 */
-	public static Chunk loadChunk(World w, long x, long z) {
-		final int
-		cx = (int)(x >> 4),
-		cz = (int)(z >> 4);
-		final IChunkProvider ckp = w.getChunkProvider();
-		final Chunk ck = ckp.provideChunk(cx, cz);
-		if(!isChunkOkay(ck))
-			return ckp.loadChunk(cx, cz);
-		else return ck;
+	public static long distance2(long x, long z) {
+		x = Math.abs(x);
+		z = Math.abs(z);
+		return Math.max(x, z) * 2 + Math.min(x, z);
 	}
 
 	public static int getDifficulty(World w) {
-		if(w == null)
+		if (w == null)
 			return 2;
 		return w.difficultySetting.getDifficultyId();
 	}
@@ -45,18 +37,8 @@ public class IaSWorldHelper {
 		return lvl + (IaSWorldHelper.getDifficulty(ent.worldObj) >= 3 ? 1 : 0);
 	}
 
-	/**
-	 * IaS's screwy in-house distance formula. Do not feed to infants.
-	 * Values returned are approximately double what they should be.
-	 */
-	public static long distance2(long x, long z) {
-		x = Math.abs(x);
-		z = Math.abs(z);
-		return Math.max(x, z)*2+Math.min(x,z);
-	}
-
 	public static int getRegionLevel(World w, int x, int y, int z) {
-		final int dist = (int)distance2(x, z)/2;
+		final int dist = (int) distance2(x, z) / 2;
 		if (dist < 96)
 			return 0;
 		if (dist < 192)
@@ -76,5 +58,22 @@ public class IaSWorldHelper {
 		if (dist < 24576)
 			return 8;
 		return 9;
+	}
+
+	public static boolean isChunkOkay(Chunk ck) {
+		return ck == null || ck.isEmpty() || !ck.isChunkLoaded;
+	}
+
+	/**
+	 * Loads a chunk at the specified block coordinates.
+	 */
+	public static Chunk loadChunk(World w, long x, long z) {
+		final int cx = (int) (x >> 4), cz = (int) (z >> 4);
+		final IChunkProvider ckp = w.getChunkProvider();
+		final Chunk ck = ckp.provideChunk(cx, cz);
+		if (!isChunkOkay(ck))
+			return ckp.loadChunk(cx, cz);
+		else
+			return ck;
 	}
 }

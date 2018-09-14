@@ -1,10 +1,8 @@
 package iceandshadow2.boilerplate;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Implements a list of iterators whose outputs are seamlessly concatenated.
@@ -13,32 +11,31 @@ public class IteratorConcat<T, It extends Iterator<T>> extends BaseSupplier<T> i
 	protected List<It> iters;
 	protected Iterator<It> listiter;
 	protected It currentiter;
-	
+
 	public IteratorConcat() {
 		iters = new LinkedList<It>();
 	}
-	
+
 	public boolean add(It newiter) {
 		iters.add(newiter);
 		reset();
 		return true;
 	}
-	
+
 	protected void assureValidIter() {
-		while(!currentiter.hasNext()) {
-			if(listiter.hasNext())
+		while (!currentiter.hasNext())
+			if (listiter.hasNext())
 				currentiter = listiter.next();
 			else {
 				currentiter = null;
 				break;
 			}
-		}
 	}
 
 	@Override
 	public boolean hasNext() {
 		assureValidIter();
-		return currentiter != null; //Weak.
+		return currentiter != null; // Weak.
 	}
 
 	/**
@@ -51,12 +48,13 @@ public class IteratorConcat<T, It extends Iterator<T>> extends BaseSupplier<T> i
 	}
 
 	/**
-	 * Resets the collection as much as possible. Does NOT reset contained iterators.
+	 * Resets the collection as much as possible. Does NOT reset contained
+	 * iterators.
 	 */
 	@Override
 	public boolean reset() {
 		listiter = iters.iterator();
 		currentiter = listiter.next();
-		return false; //Does not reset individual iterators.
+		return false; // Does not reset individual iterators.
 	}
 }

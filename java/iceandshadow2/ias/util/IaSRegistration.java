@@ -11,13 +11,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class IaSRegistration {
 	public static void register(Object obj) {
-		if (obj instanceof Block) {
+		if (obj instanceof Block)
 			IaSRegistration.registerBlock((Block) obj);
-		} else if (obj instanceof Item) {
+		else if (obj instanceof Item)
 			IaSRegistration.registerItem((Item) obj);
-		} else if (obj instanceof Fluid) {
+		else if (obj instanceof Fluid)
 			IaSRegistration.registerFluid((Fluid) obj);
-		}
 	}
 
 	private static Block registerBlock(Block block) {
@@ -34,11 +33,10 @@ public class IaSRegistration {
 	}
 
 	private static Item registerItem(Item it) {
-		if (it instanceof IIaSModName) {
+		if (it instanceof IIaSModName)
 			GameRegistry.registerItem(it, ((IIaSModName) it).getModName());
-		} else {
+		else
 			GameRegistry.registerItem(it, it.getUnlocalizedName().substring(5));
-		}
 		return it;
 	}
 }

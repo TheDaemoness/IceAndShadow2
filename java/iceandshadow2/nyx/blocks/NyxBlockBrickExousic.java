@@ -33,13 +33,13 @@ public class NyxBlockBrickExousic extends IaSBaseBlockSingle implements IIaSBloc
 	}
 
 	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.EXOUSIUM;
+	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
+		return false;
 	}
 
 	@Override
-	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
-		return false;
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.EXOUSIUM;
 	}
 
 	@Override

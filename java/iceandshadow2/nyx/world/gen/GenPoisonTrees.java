@@ -26,25 +26,21 @@ public class GenPoisonTrees extends WorldGenerator {
 			int var15;
 
 			for (var11 = y; var11 <= y + 1 + var6 && var10; ++var11) {
-				if (var11 - y < var7) {
+				if (var11 - y < var7)
 					var21 = 0;
-				} else {
+				else
 					var21 = var9;
-				}
 
-				for (var13 = x - var21; var13 <= x + var21 && var10; ++var13) {
+				for (var13 = x - var21; var13 <= x + var21 && var10; ++var13)
 					for (int var14 = z - var21; var14 <= z + var21 && var10; ++var14)
 						if (var11 >= 0 && var11 < 256) {
 							final Block block = par1World.getBlock(var13, var11, var14);
 
 							if (!par1World.isAirBlock(var13, var11, var14)
-									&& !block.isLeaves(par1World, var13, var11, var14)) {
+									&& !block.isLeaves(par1World, var13, var11, var14))
 								var10 = false;
-							}
-						} else {
+						} else
 							var10 = false;
-						}
-				}
 			}
 
 			if (!var10)
@@ -72,9 +68,8 @@ public class GenPoisonTrees extends WorldGenerator {
 
 								if ((Math.abs(var18) != var21 || Math.abs(var20) != var21 || var21 <= 0)
 										&& (block == null
-												|| block.canBeReplacedByLeaves(par1World, var17, var16, var19))) {
+												|| block.canBeReplacedByLeaves(par1World, var17, var16, var19)))
 									par1World.setBlock(var17, var16, var19, NyxBlocks.poisonLeaves);
-								}
 							}
 						}
 
@@ -83,21 +78,18 @@ public class GenPoisonTrees extends WorldGenerator {
 							var22 = 1;
 							++var13;
 
-							if (var13 > var9) {
+							if (var13 > var9)
 								var13 = var9;
-							}
-						} else {
+						} else
 							++var21;
-						}
 					}
 
 					var15 = par2Random.nextInt(3);
 
 					for (var16 = 0; var16 < var6 - var15; ++var16) {
 						final Block b = par1World.getBlock(x, y + var16, z);
-						if (IaSBlockHelper.isAir(b) || b == NyxBlocks.poisonLeaves) {
+						if (IaSBlockHelper.isAir(b) || b == NyxBlocks.poisonLeaves)
 							par1World.setBlock(x, y + var16, z, NyxBlocks.poisonLog);
-						}
 					}
 
 					return true;

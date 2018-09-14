@@ -3,7 +3,6 @@ package iceandshadow2.nyx.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,12 +12,10 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
@@ -26,10 +23,8 @@ import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.ai.IIaSMobGetters;
 import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.api.IIaSApiTransmute;
-import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.items.IaSBaseItemMultiGlow;
 import iceandshadow2.nyx.NyxBlocks;
-import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTransmute {
@@ -50,11 +45,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public IIcon getIconFromDamage(int dmg) {
 		return itemIcon;
 	}
-	
-	@Override
-	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
-		return true;
-	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
@@ -67,9 +57,9 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 			return 0;
 		if (catalyst.getItemDamage() == 0) {
 			do
-				if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
+				if (target.getItem() == Item.getItemFromBlock(Blocks.obsidian))
 					break;
-				} else
+				else
 					return 0;
 			while (false);
 			return 240;
@@ -93,6 +83,21 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	}
 
 	@Override
+	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
+		return "nyxAlabaster";
+	}
+
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return true;
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return true;
+	}
+
+	@Override
 	public void onUpdate(ItemStack is, World w, Entity e, int i, boolean isHeld) {
 		if (w.isRemote || is.getItemDamage() > 0)
 			return;
@@ -107,11 +112,10 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 						if (ent instanceof EntityMob) {
 							final EntityMob joker = (EntityMob) ent;
 							if (joker.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-								if (ent instanceof IIaSMobGetters) {
+								if (ent instanceof IIaSMobGetters)
 									((IIaSMobGetters) ent).setSearchTarget(sucker);
-								} else if (!joker.isInvisible() && joker.getAttackTarget() == null) {
+								else if (!joker.isInvisible() && joker.getAttackTarget() == null)
 									joker.setTarget(sucker);
-								}
 						}
 				}
 		}
@@ -127,16 +131,6 @@ public class NyxItemAlabaster extends IaSBaseItemMultiGlow implements IIaSApiTra
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		IaSFxManager.spawnParticle(world, "cloudSmall", ent.posX, ent.posY - world.rand.nextFloat() + 0.25, ent.posZ,
 				0.0, 0.0, 0.0, false, false);
-		return true;
-	}
-	
-	@Override
-	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
-		return "nyxAlabaster";
-	}
-
-	@Override
-	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
 		return true;
 	}
 

@@ -17,7 +17,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect, IIaSGlowing, IIaSDescriptive {
+public class IaSItemFood extends ItemFood
+		implements IIaSApiSacrificeXp, IIaSModName, IIaSAspect, IIaSGlowing, IIaSDescriptive {
 
 	protected int xpAltarValue, consume;
 	private final EnumIaSModule MODULE;
@@ -37,8 +38,18 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	}
 
 	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
 	public EnumIaSModule getIaSModule() {
 		return MODULE;
+	}
+
+	@Override
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return null;
 	}
 
 	@Override
@@ -62,8 +73,23 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	}
 
 	@Override
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return getModName();
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return "";
+	}
+
+	@Override
 	public float getXpValue(ItemStack is, Random rand) {
 		return xpAltarValue;
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return false;
 	}
 
 	public final IaSItemFood register() {
@@ -82,33 +108,8 @@ public class IaSItemFood extends ItemFood implements IIaSApiSacrificeXp, IIaSMod
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
-	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-
-	@Override
-	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
-		return getModName();
-	}
-
-	@Override
-	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return false;
-	}
-
-	@Override
-	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return "";
-	}
-
-	@Override
-	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return null;
 	}
 
 }

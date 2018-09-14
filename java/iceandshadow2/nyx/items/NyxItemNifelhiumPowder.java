@@ -11,7 +11,6 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.api.IIaSApiTransmute;
 import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import iceandshadow2.nyx.NyxItems;
 
 public class NyxItemNifelhiumPowder extends IaSBaseItemMultiTexturedGlow implements IIaSApiTransmute {
@@ -19,11 +18,9 @@ public class NyxItemNifelhiumPowder extends IaSBaseItemMultiTexturedGlow impleme
 	public NyxItemNifelhiumPowder(String texName) {
 		super(EnumIaSModule.NYX, texName, 2);
 		setMaxStackSize(16);
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1)
-				, new ItemStack(this, 1, 0));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0)
-				, new ItemStack(this, 1, 1), new ItemStack(this, 1, 1)
-				, new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 4, 1), new ItemStack(this, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 0), new ItemStack(this, 1, 1), new ItemStack(this, 1, 1),
+				new ItemStack(this, 1, 1), new ItemStack(this, 1, 1));
 	}
 
 	@Override

@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 public class GenRuinsGatestone extends GenRuins {
 
 	/**
-	 * Generates the basic structure of the building. May also even out terrain
-	 * that the building is on.
+	 * Generates the basic structure of the building. May also even out terrain that
+	 * the building is on.
 	 */
 	@Override
 	public void buildPass(World var1, Random var2, int x, int y, int z) {
@@ -38,8 +38,8 @@ public class GenRuinsGatestone extends GenRuins {
 	}
 
 	/**
-	 * "Ruins" the basic structure and adds a few decorative and functional
-	 * touches to the building, like ladders, doorways, and spawners.
+	 * "Ruins" the basic structure and adds a few decorative and functional touches
+	 * to the building, like ladders, doorways, and spawners.
 	 */
 
 	@Override
@@ -52,12 +52,12 @@ public class GenRuinsGatestone extends GenRuins {
 	}
 
 	/**
-	 * Adds primarily reward chests. Not all ruins will have rewards, but most
-	 * will and a coder is free to have this return instantly.
+	 * Adds primarily reward chests. Not all ruins will have rewards, but most will
+	 * and a coder is free to have this return instantly.
 	 */
 	@Override
 	public void rewardPass(World var1, Random var2, int x, int y, int z) {
-		var1.setBlock(x, y, z, NyxBlocks.gatestone, 1+var2.nextInt(2), 2);
+		var1.setBlock(x, y, z, NyxBlocks.gatestone, 1 + var2.nextInt(2), 2);
 	}
 
 }

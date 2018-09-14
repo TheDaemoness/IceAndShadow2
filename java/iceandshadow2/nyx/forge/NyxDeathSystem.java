@@ -36,9 +36,8 @@ public class NyxDeathSystem {
 		for (int i = 0; i < plai_inv.mainInventory.length; ++i)
 			if (plai_inv.mainInventory[i] != null) {
 				final ItemStack is = plai_inv.mainInventory[i];
-				if (is.getItem() instanceof NyxItemBoneSanctified && is.isItemDamaged()) {
+				if (is.getItem() instanceof NyxItemBoneSanctified && is.isItemDamaged())
 					drop_main = false;
-				}
 			}
 		for (int i = 0; i < plai_inv.mainInventory.length; ++i)
 			if (plai_inv.mainInventory[i] != null) {
@@ -54,19 +53,16 @@ public class NyxDeathSystem {
 					continue;
 				}
 				if (rarity == EnumRarity.rare || it instanceof ItemBook) {
-					if (i < 9) {
+					if (i < 9)
 						continue;
-					}
 					plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 					plai_inv.mainInventory[i] = null;
 				}
-				if (!drop_main) {
+				if (!drop_main)
 					continue;
-				}
 				if (i < 9)
-					if (it == Items.arrow || it instanceof ItemSword || it instanceof ItemBow || it instanceof ItemTool) {
+					if (it == Items.arrow || it instanceof ItemSword || it instanceof ItemBow || it instanceof ItemTool)
 						continue;
-					}
 				plai_inv.player.dropPlayerItemWithRandomChoice(plai_inv.mainInventory[i], true);
 				plai_inv.mainInventory[i] = null;
 			}
@@ -81,9 +77,8 @@ public class NyxDeathSystem {
 	public void onDeath(LivingDeathEvent e) {
 		if (e.entity instanceof EntityPlayerMP) {
 			final EntityPlayerMP playNoMore = (EntityPlayerMP) e.entityLiving;
-			if (e.source != IaSDamageSources.dmgDrain) {
+			if (e.source != IaSDamageSources.dmgDrain)
 				IaSPlayerHelper.drainXP(playNoMore, playNoMore.experienceTotal / 2, null, true);
-			}
 			IaSEntityHelper.spawnNourishment(playNoMore, playNoMore.getFoodStats().getFoodLevel());
 			NyxDeathSystem.plai_inv = new InventoryPlayer(playNoMore);
 			NyxDeathSystem.plai_inv.copyInventory(playNoMore.inventory);
@@ -104,11 +99,10 @@ public class NyxDeathSystem {
 	@SubscribeEvent
 	public void onLogin(PlayerLoggedInEvent e) {
 		final InventoryPlayer inv = new InventoryPlayer(e.player);
-		if (e.player.isDead) {
+		if (e.player.isDead)
 			inv.copyInventory(NyxDeathSystem.determineRespawnInventory(e.player.inventory, false));
-		} else {
+		else
 			inv.copyInventory(e.player.inventory);
-		}
 		NyxDeathSystem.death_inv.put(e.player.getEntityId(), inv);
 
 	}
@@ -125,10 +119,8 @@ public class NyxDeathSystem {
 			if (!e.original.isDead)
 				return;
 			if (NyxDeathSystem.death_inv.get(e.original.getEntityId()) != null)
-			 {
 				e.entityPlayer.inventory.copyInventory(NyxDeathSystem.death_inv.get(e.original.getEntityId()));
 			// Raise madness.
-			}
 		}
 	}
 }

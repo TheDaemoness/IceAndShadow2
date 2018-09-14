@@ -81,12 +81,10 @@ public class EntityAINyxAttack extends EntityAITarget {
 		for (final Entity ent : list) {
 
 			// Basic checks.
-			if (!(ent instanceof EntityLivingBase)) {
+			if (!(ent instanceof EntityLivingBase))
 				continue;
-			}
-			if (!isSuitableTarget((EntityLivingBase) ent, false)) {
+			if (!isSuitableTarget((EntityLivingBase) ent, false))
 				continue;
-			}
 
 			// Give priority to players.
 			if (ent instanceof EntityPlayer) {
@@ -123,10 +121,10 @@ public class EntityAINyxAttack extends EntityAITarget {
 		while (iterator.hasNext()) {
 			final EntityCreature ally = (EntityCreature) iterator.next();
 
-			final boolean isFriends = taskOwner.getAttackTarget() != null && ally.isOnSameTeam(taskOwner.getAttackTarget());
-			if (taskOwner != ally && ally.getAttackTarget() == null && !isFriends) {
+			final boolean isFriends = taskOwner.getAttackTarget() != null
+					&& ally.isOnSameTeam(taskOwner.getAttackTarget());
+			if (taskOwner != ally && ally.getAttackTarget() == null && !isFriends)
 				ally.setAttackTarget(taskOwner.getAttackTarget());
-			}
 		}
 		super.startExecuting();
 	}
@@ -143,8 +141,7 @@ public class EntityAINyxAttack extends EntityAITarget {
 				taskOwner.getNavigator().clearPathEntity();
 				taskOwner.getNavigator().tryMoveToXYZ(elb.posX, elb.posY, elb.posZ, taskOwner.getAIMoveSpeed());
 			}
-		} else {
+		} else
 			lastSeen = 0;
-		}
 	}
 }

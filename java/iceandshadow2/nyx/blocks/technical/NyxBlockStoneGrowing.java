@@ -44,25 +44,21 @@ public class NyxBlockStoneGrowing extends NyxBlockStone implements IIaSTechnical
 					final int i = x + dir.offsetX, j = y + dir.offsetY, k = z + dir.offsetZ;
 					final Block bl = w.getBlock(i, j, k);
 					final float hardness = bl.getBlockHardness(w, i, j, k);
-					if (bl instanceof NyxBlockStone || hardness < 0) {
+					if (bl instanceof NyxBlockStone || hardness < 0)
 						continue;
-					}
 					finished = false;
 					final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
-					if (aspect.indestructible || aspect == EnumIaSAspect.LAND) {
+					if (aspect.indestructible || aspect == EnumIaSAspect.LAND)
 						continue;
-					}
 					if (bl.isReplaceable(w, i, j, k) || hardness < NyxBlockStone.HARDNESS) {
 						IaSBlockHelper.breakBlock(w, i, j, k, true);
 						w.setBlock(i, j, k, NyxBlocks.gravel);
 					}
 				}
-				if (finished) {
+				if (finished)
 					w.setBlock(x, y, z, NyxBlocks.stone);
-				}
-			} else {
+			} else
 				w.setBlockMetadataWithNotify(x, y, z, 1, 2);
-			}
 		super.updateTick(w, x, y, z, r);
 	}
 

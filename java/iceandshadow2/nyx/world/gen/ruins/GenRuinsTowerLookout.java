@@ -21,21 +21,20 @@ import net.minecraft.world.World;
 public class GenRuinsTowerLookout extends GenRuins {
 
 	/**
-	 * Generates the basic structure of the building. May also even out terrain
-	 * that the building is on.
+	 * Generates the basic structure of the building. May also even out terrain that
+	 * the building is on.
 	 */
 	@Override
 	public void buildPass(World world, Random var2, int x, int y, int z) {
 
-		for(int i = y - 2; world.getBlock(x, i, z) == NyxBlocks.exousicWater; i -= 2) {
-			Sculptor.cylinder(world, x, i-1, z, 2, 2, NyxBlocks.stone, 0);
-			Sculptor.corners(world, x-2, i-2, z-2, x+2, i, z+2, NyxBlocks.stone, 0);
+		for (int i = y - 2; world.getBlock(x, i, z) == NyxBlocks.exousicWater; i -= 2) {
+			Sculptor.cylinder(world, x, i - 1, z, 2, 2, NyxBlocks.stone, 0);
+			Sculptor.corners(world, x - 2, i - 2, z - 2, x + 2, i, z + 2, NyxBlocks.stone, 0);
 		}
 
 		Sculptor.terrainFlatten(world, x - 3, y - 1, z - 3, x + 3, 4, z + 3);
 
-		Sculptor.walls(world, x - 1, y - 3, z - 1, x + 1, y - 3, z + 1, NyxBlocks.stone,
-				0);
+		Sculptor.walls(world, x - 1, y - 3, z - 1, x + 1, y - 3, z + 1, NyxBlocks.stone, 0);
 		Sculptor.cube(world, x - 2, y - 2, z - 2, x + 2, y - 2, z + 2, NyxBlocks.stone, 0);
 		Sculptor.walls(world, x - 3, y - 1, z - 3, x + 3, y - 1, z + 3, world.getBiomeGenForCoords(x, z).fillerBlock,
 				0);
@@ -47,53 +46,45 @@ public class GenRuinsTowerLookout extends GenRuins {
 		Sculptor.corners(world, x - 2, y + 10, z - 2, x + 2, y + 10, z + 2, NyxBlocks.brickExousic, 0);
 
 		final int f = var2.nextInt(4);
-		for (int xdim = -2; xdim <= 2; ++xdim) {
+		for (int xdim = -2; xdim <= 2; ++xdim)
 			for (int zdim = -2; zdim <= 2; ++zdim) {
 
 				// Check to make sure we're dealing with a wall.
-				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2) {
+				if (MathHelper.abs_int(xdim) == 2 || MathHelper.abs_int(zdim) == 2)
 					// Swiss cheese pass.
 					for (int ydim = 1; ydim < 10; ++ydim)
 						if (!world.isAirBlock(x + xdim, y + ydim, z + zdim))
-							if (var2.nextInt(5) == 0) {
+							if (var2.nextInt(5) == 0)
 								world.setBlock(x + xdim, y + ydim, z + zdim, Blocks.air);
-							} else if (var2.nextInt(3) == 0) {
+							else if (var2.nextInt(3) == 0)
 								world.setBlock(x + xdim, y + ydim, z + zdim, NyxBlocks.brickExousicCracked);
-							}
-				}
 
 				// LADDER!
 				for (int ydim = 10; ydim > -1; --ydim)
 					if (f == 0) {
-						if (!world.isAirBlock(x, y + ydim, z - 2)) {
+						if (!world.isAirBlock(x, y + ydim, z - 2))
 							world.setBlock(x, y + ydim, z - 1, Blocks.ladder, 0x3, 0x2);
-						}
 					} else if (f == 1) {
-						if (!world.isAirBlock(x + 2, y + ydim, z)) {
+						if (!world.isAirBlock(x + 2, y + ydim, z))
 							world.setBlock(x + 1, y + ydim, z, Blocks.ladder, 0x4, 0x2);
-						}
 					} else if (f == 2) {
-						if (!world.isAirBlock(x, y + ydim, z + 2)) {
+						if (!world.isAirBlock(x, y + ydim, z + 2))
 							world.setBlock(x, y + ydim, z + 1, Blocks.ladder, 0x2, 0x2);
-						}
 					} else if (f == 3)
-						if (!world.isAirBlock(x - 2, y + ydim, z)) {
+						if (!world.isAirBlock(x - 2, y + ydim, z))
 							world.setBlock(x - 1, y + ydim, z, Blocks.ladder, 0x5, 0x2);
-						}
 
 				// Add an entrance to the tower.
 				for (int ydim = 0; ydim < 2; ++ydim)
-					if (f == 0) {
+					if (f == 0)
 						world.setBlockToAir(x, y + ydim, z + 2);
-					} else if (f == 1) {
+					else if (f == 1)
 						world.setBlockToAir(x - 2, y + ydim, z);
-					} else if (f == 2) {
+					else if (f == 2)
 						world.setBlockToAir(x, y + ydim, z - 2);
-					} else {
+					else
 						world.setBlockToAir(x + 2, y + ydim, z);
-					}
 			}
-		}
 	}
 
 	/**
@@ -106,23 +97,22 @@ public class GenRuinsTowerLookout extends GenRuins {
 	}
 
 	/**
-	 * "Ruins" the basic structure and adds a few decorative and functional
-	 * touches to the building, like ladders, doorways, and spawners.
+	 * "Ruins" the basic structure and adds a few decorative and functional touches
+	 * to the building, like ladders, doorways, and spawners.
 	 */
 	@Override
 	public void damagePass(World var1, Random var2, int x, int y, int z) {
 		/*
-		 * Direction (f) variable cheat sheet: 0: South (+z) 1: West (-x) 2:
-		 * North (-z) 3: East (+x)
+		 * Direction (f) variable cheat sheet: 0: South (+z) 1: West (-x) 2: North (-z)
+		 * 3: East (+x)
 		 */
 
 		// Destruction pass.
 		for (int ydim = 4; ydim <= 12; ydim += 2) {
 			final int xpos = x - 2 + var2.nextInt(5);
 			final int zpos = z - 2 + var2.nextInt(5);
-			if (var2.nextInt(3) != 0) {
+			if (var2.nextInt(3) != 0)
 				Sculptor.blast(var1, xpos, y + ydim, zpos, 1.5 + var2.nextDouble());
-			}
 		}
 	}
 
@@ -132,8 +122,8 @@ public class GenRuinsTowerLookout extends GenRuins {
 	}
 
 	/**
-	 * Adds primarily reward chests. Not all ruins will have rewards, but most
-	 * will and a coder is free to have this return instantly.
+	 * Adds primarily reward chests. Not all ruins will have rewards, but most will
+	 * and a coder is free to have this return instantly.
 	 */
 	@Override
 	public void rewardPass(World var1, Random var2, int x, int y, int z) {
@@ -176,11 +166,10 @@ public class GenRuinsTowerLookout extends GenRuins {
 			// Bow.
 			if (rewardid < 2 && rareflag) {
 				final NBTTagCompound c = new NBTTagCompound();
-				if (var2.nextInt(3) == 0) {
+				if (var2.nextInt(3) == 0)
 					itemz = new ItemStack(NyxItems.frostBowShort, 1, 48 + var2.nextInt(96));
-				} else {
+				else
 					itemz = new ItemStack(NyxItems.frostBowLong, 1, 32 + var2.nextInt(64));
-				}
 				c.setInteger(NyxBaseItemBow.nbtTierID, var2.nextInt(3) == 0 ? 1 : 2);
 				itemz.setTagCompound(c);
 				rareflag = false;
@@ -206,9 +195,9 @@ public class GenRuinsTowerLookout extends GenRuins {
 			}
 
 			// Rope.
-			else if (rewardid < 20) {
+			else if (rewardid < 20)
 				itemz = new ItemStack(NyxItems.rope);
-			} else if (rewardid < 30 && boneflag) {
+			else if (rewardid < 30 && boneflag) {
 				itemz = new ItemStack(NyxItems.boneCursed, 1);
 				boneflag = false;
 			}
@@ -216,37 +205,33 @@ public class GenRuinsTowerLookout extends GenRuins {
 			// Experience bottles and potions.
 			else if (rewardid < 50) {
 				final int foodtype = var2.nextInt(24);
-				if (foodtype < 6) {
+				if (foodtype < 6)
 					itemz = new ItemStack(Items.experience_bottle, 1 + var2.nextInt(2));
-				} else if (foodtype < 12) {
-					itemz = new ItemStack(Items.potionitem, 1, 8262); //Night Vis.
-				} else if (foodtype < 16) {
-					itemz = new ItemStack(Items.potionitem, 1, 8258); //Swiftness
-				} else if (foodtype < 20) {
-					itemz = new ItemStack(Items.potionitem, 1, 8265); //Strength
-				} else {
-					itemz = new ItemStack(Items.potionitem, 1, 8257); //Regen
-				}
+				else if (foodtype < 12)
+					itemz = new ItemStack(Items.potionitem, 1, 8262); // Night Vis.
+				else if (foodtype < 16)
+					itemz = new ItemStack(Items.potionitem, 1, 8258); // Swiftness
+				else if (foodtype < 20)
+					itemz = new ItemStack(Items.potionitem, 1, 8265); // Strength
+				else
+					itemz = new ItemStack(Items.potionitem, 1, 8257); // Regen
 			}
 
 			// Ingots.
-			else if (rewardid < 65) {
+			else if (rewardid < 65)
 				itemz = new ItemStack(NyxItems.echirIngot, 2 + var2.nextInt(3), 1);
-			} else if (rewardid < 80) {
+			else if (rewardid < 80)
 				itemz = new ItemStack(Items.ender_pearl, 1 + var2.nextInt(4), 1);
-			}
 
 			chestent.setInventorySlotContents(1 + var2.nextInt(26), itemz);
 		}
 
-		if (var2.nextInt(4) != 0) {
+		if (var2.nextInt(4) != 0)
 			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.boneSanctified));
-		}
-		if (var2.nextInt(3) != 0) {
+		if (var2.nextInt(3) != 0)
 			chestent.setInventorySlotContents(1 + var2.nextInt(chestent.getSizeInventory() - 1),
 					new ItemStack(NyxItems.cortra));
-		}
 		chestent.setInventorySlotContents(0, new ItemStack(NyxItems.page, 1, 0));
 	}
 

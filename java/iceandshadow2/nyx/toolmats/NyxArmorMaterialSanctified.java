@@ -20,10 +20,9 @@ public class NyxArmorMaterialSanctified extends IaSArmorMaterial {
 
 	@Override
 	public float onHurt(EntityLivingBase wearer, DamageSource dmg, float amount, double coverage, boolean major) {
-		if (dmg.getEntity() != null) {
+		if (dmg.getEntity() != null)
 			dmg.getEntity().attackEntityFrom(DamageSource.causeIndirectMagicDamage(wearer, wearer),
 					(float) (coverage / 2 + IaSEntityHelper.getMagicLevel(wearer) * coverage / 30));
-		}
 		return amount;
 	}
 }

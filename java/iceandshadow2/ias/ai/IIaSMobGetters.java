@@ -15,11 +15,11 @@ public interface IIaSMobGetters extends IIaSAspect, IIaSSensateOld {
 	 */
 	public boolean couldFlyFasterWithBoots();
 
+	public float getAttackStrength(Entity target);
+
 	public double getMoveSpeed();
 
 	public double getScaledMaxHealth();
-
-	public float getAttackStrength(Entity target);
 
 	public EntityLivingBase getSearchTarget();
 

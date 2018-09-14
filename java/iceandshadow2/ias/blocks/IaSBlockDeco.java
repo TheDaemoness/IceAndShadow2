@@ -14,7 +14,7 @@ public class IaSBlockDeco extends IaSBaseBlockSingle {
 		setLightOpacity(4);
 		fullCube = false;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getRenderType() {

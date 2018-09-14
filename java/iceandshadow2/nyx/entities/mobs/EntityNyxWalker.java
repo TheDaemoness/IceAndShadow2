@@ -100,20 +100,19 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public boolean attackEntityAsMob(Entity victim) {
 		final ItemStack is = getHeldItem();
-		if(is != null && is.getItem() instanceof IIaSTool) {
+		if (is != null && is.getItem() instanceof IIaSTool) {
 			final IaSToolMaterial mat = IaSToolMaterial.extractMaterial(is);
-			if(victim instanceof EntityLivingBase) {
-				final EntityLivingBase elb = (EntityLivingBase)victim;
+			if (victim instanceof EntityLivingBase) {
+				final EntityLivingBase elb = (EntityLivingBase) victim;
 				final float basedmg = mat.getToolDamage(is, this, elb) + getAttackStrength(elb);
 				int headshotresist = 0;
-				if(elb.getEquipmentInSlot(4) != null && elb.getEquipmentInSlot(4).getItem() instanceof ItemArmor) {
-					headshotresist = Math.max(0, ((ItemArmor)elb.getEquipmentInSlot(4).getItem()).damageReduceAmount);
-					elb.getEquipmentInSlot(4).damageItem((int)(1+basedmg)*2, elb);
+				if (elb.getEquipmentInSlot(4) != null && elb.getEquipmentInSlot(4).getItem() instanceof ItemArmor) {
+					headshotresist = Math.max(0, ((ItemArmor) elb.getEquipmentInSlot(4).getItem()).damageReduceAmount);
+					elb.getEquipmentInSlot(4).damageItem((int) (1 + basedmg) * 2, elb);
 				}
-				if(headshotresist<=2) {
-					victim.attackEntityFrom(IaSDamageSources.dmgHeadshot,
-							1 + basedmg + IaSWorldHelper.getDifficulty(worldObj)*elb.getMaxHealth()/(4+headshotresist));
-				}
+				if (headshotresist <= 2)
+					victim.attackEntityFrom(IaSDamageSources.dmgHeadshot, 1 + basedmg
+							+ IaSWorldHelper.getDifficulty(worldObj) * elb.getMaxHealth() / (4 + headshotresist));
 			}
 			mat.onAttack(is, this, victim);
 		}
@@ -141,19 +140,19 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 		final int diff = IaSWorldHelper.getDifficulty(worldObj);
 		final int baite = rand.nextInt(8 + par2) - par2 - diff;
 
-		if (baite <= 0) {
+		if (baite <= 0)
 			IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.salt, 1, 1));
-		}
 
 		IaSEntityHelper.dropItem(this, new ItemStack(NyxItems.toughGossamer));
 
 		worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 3));
 
-		final int spiders = rand.nextInt(3+IaSWorldHelper.getDifficulty(worldObj)*2)/2;
-		for(int i = 0; i < spiders; ++i) {
+		final int spiders = rand.nextInt(3 + IaSWorldHelper.getDifficulty(worldObj) * 2) / 2;
+		for (int i = 0; i < spiders; ++i) {
 			worldObj.spawnEntityInWorld(new EntityOrbNourishment(worldObj, posX, posY, posZ, 1));
 			final EntityNyxSpiderBaby kiddo = new EntityNyxSpiderBaby(worldObj);
-			kiddo.setPosition(posX-0.25+rand.nextDouble()/2, posY+rand.nextDouble()/2, posZ-0.25+rand.nextDouble()/2);
+			kiddo.setPosition(posX - 0.25 + rand.nextDouble() / 2, posY + rand.nextDouble() / 2,
+					posZ - 0.25 + rand.nextDouble() / 2);
 			worldObj.spawnEntityInWorld(kiddo);
 		}
 	}
@@ -177,22 +176,26 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	}
 
 	@Override
+	public float getAttackStrength(Entity victim) {
+		return 3 + IaSWorldHelper.getDifficulty(worldObj) * 2;
+	}
+
+	@Override
 	public float getBrightness(float par1) {
-		return 4*super.getBrightness(par1)/5 + 3f;
+		return 4 * super.getBrightness(par1) / 5 + 3f;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getBrightnessForRender(float par1) {
-        final int i = MathHelper.floor_double(posX);
-        final int j = MathHelper.floor_double(posZ);
+		final int i = MathHelper.floor_double(posX);
+		final int j = MathHelper.floor_double(posZ);
 
-        if (worldObj.blockExists(i, 0, j))
-        {
-            final double d0 = (boundingBox.maxY - boundingBox.minY) * 0.66D;
-            final int k = MathHelper.floor_double(posY - yOffset + d0);
-            return worldObj.getLightBrightnessForSkyBlocks(i, k, j, 3);
-        } else
+		if (worldObj.blockExists(i, 0, j)) {
+			final double d0 = (boundingBox.maxY - boundingBox.minY) * 0.66D;
+			final int k = MathHelper.floor_double(posY - yOffset + d0);
+			return worldObj.getLightBrightnessForSkyBlocks(i, k, j, 3);
+		} else
 			return 3;
 	}
 
@@ -247,14 +250,14 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		rotationYawHead+=40*(rand.nextFloat()-0.5f);
+		rotationYawHead += 40 * (rand.nextFloat() - 0.5f);
 	}
 
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData dat) {
 		equipmentDropChances[0] = 0.05F;
 		String material;
-		switch(rand.nextInt(2+2*IaSWorldHelper.getDifficulty(worldObj))) {
+		switch (rand.nextInt(2 + 2 * IaSWorldHelper.getDifficulty(worldObj))) {
 		case 0:
 		case 1:
 		case 2:
@@ -280,10 +283,5 @@ public class EntityNyxWalker extends EntityZombie implements IIaSMobGetters {
 	@Override
 	public void setSearchTarget(EntityLivingBase ent) {
 		searched = ent;
-	}
-
-	@Override
-	public float getAttackStrength(Entity victim) {
-		return 3 + IaSWorldHelper.getDifficulty(worldObj)*2;
 	}
 }

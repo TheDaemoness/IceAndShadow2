@@ -13,11 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBlockGravel extends IaSBaseBlockFalling {
 	public NyxBlockGravel(String par1) {
@@ -26,7 +23,7 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 		setHardness(0.5F);
 		setResistance(1.0F);
 		setTickRandomly(true);
-		this.setLightOpacity(14);
+		setLightOpacity(14);
 		this.setHarvestLevel("shovel", 1);
 	}
 
@@ -52,18 +49,16 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 
 	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
-		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
+		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-		}
 	}
 
 	@Override
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer.getCurrentEquippedItem() == null
-				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0) {
+				&& par5EntityPlayer.worldObj.difficultySetting.getDifficultyId() > 0)
 			par5EntityPlayer.attackEntityFrom(IaSDamageSources.dmgStone,
 					par5EntityPlayer.worldObj.difficultySetting.getDifficultyId());
-		}
 	}
 
 	@Override
@@ -81,20 +76,17 @@ public class NyxBlockGravel extends IaSBaseBlockFalling {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
-		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone)) {
+		if (!IaSBlockHelper.isAdjacent(w, x, y, z, NyxBlocks.stone))
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-		}
 
 	}
 
 	@Override
 	public void updateTick(World par1World, int x, int y, int z, Random par5Random) {
 		if (IaSBlockHelper.isAdjacent(par1World, x, y, z, NyxBlocks.stone)) {
-			if (!par1World.isRemote) {
+			if (!par1World.isRemote)
 				par1World.setBlock(x, y, z, NyxBlocks.stone);
-			}
-		} else {
+		} else
 			super.updateTick(par1World, x, y, z, par5Random);
-		}
 	}
 }

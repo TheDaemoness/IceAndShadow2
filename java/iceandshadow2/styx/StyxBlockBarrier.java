@@ -3,7 +3,6 @@ package iceandshadow2.styx;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.ias.IaSCreativeTabs;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.Explosion;

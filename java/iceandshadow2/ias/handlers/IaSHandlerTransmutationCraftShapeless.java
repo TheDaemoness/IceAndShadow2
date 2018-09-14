@@ -13,14 +13,14 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class IaSHandlerTransmutationCraftShapeless extends IaSHandlerTransmutationCraft {
 
 	@Override
-	public Class getRecipeClass(boolean ore) {
-		return ore?ShapelessOreRecipe.class:ShapelessRecipes.class;
+	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
+		if (recipe.getRecipeSize() == 1 && !(target.isItemEqual(catalyst)))
+			return null;
+		return orerecipe ? ((ShapelessOreRecipe) recipe).getInput() : ((ShapelessRecipes) recipe).recipeItems;
 	}
 
 	@Override
-	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
-		if(recipe.getRecipeSize() == 1 && !(target.isItemEqual(catalyst)))
-			return null;
-		return orerecipe?((ShapelessOreRecipe)recipe).getInput():((ShapelessRecipes)recipe).recipeItems;
+	public Class getRecipeClass(boolean ore) {
+		return ore ? ShapelessOreRecipe.class : ShapelessRecipes.class;
 	}
 }

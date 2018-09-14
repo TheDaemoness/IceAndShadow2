@@ -38,15 +38,12 @@ public class NyxItemIcicle extends IaSBaseItemSingle implements IIaSApiTransmute
 	@Override
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World w) {
 		catalyst.stackSize -= 1;
-		if (target.getItem() == NyxItems.frostBowLong) {
+		if (target.getItem() == NyxItems.frostBowLong)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 1));
-		}
-		if (target.getItem() == NyxItems.frostBowShort) {
+		if (target.getItem() == NyxItems.frostBowShort)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 2));
-		}
-		if (target.getItem() == NyxItems.frostSword) {
+		if (target.getItem() == NyxItems.frostSword)
 			target.setItemDamage(Math.max(0, target.getItemDamage() - 2));
-		}
 		return null;
 	}
 

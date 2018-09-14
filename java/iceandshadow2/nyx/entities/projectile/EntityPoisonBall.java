@@ -80,23 +80,20 @@ public class EntityPoisonBall extends EntityThrowable implements IIaSAspect {
 					victim.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 165, 3));
 					victim.addPotionEffect(new PotionEffect(Potion.wither.id, 165, 1));
 				} else {
-					if (getThrower() != null) {
+					if (getThrower() != null)
 						victim.attackEntityFrom(DamageSource.causeIndirectMagicDamage(victim, getThrower()), 2);
-					} else {
+					else
 						victim.attackEntityFrom(DamageSource.magic, 1);
-					}
-					if (victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+					if (victim.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 						victim.addPotionEffect(new PotionEffect(Potion.wither.id, 165, 1));
-					} else if (getThrower() instanceof EntityMob) {
+					else if (getThrower() instanceof EntityMob) {
 						final PotionEffect pot = victim.getActivePotionEffect(Potion.poison);
-						if (pot != null) {
+						if (pot != null)
 							victim.addPotionEffect(new PotionEffect(Potion.poison.id, 125, 1 + pot.getAmplifier()));
-						} else {
+						else
 							victim.addPotionEffect(new PotionEffect(Potion.poison.id, 125, 0));
-						}
-					} else {
+					} else
 						victim.addPotionEffect(new PotionEffect(Potion.poison.id, 165, 0));
-					}
 				}
 				victim.addPotionEffect(new PotionEffect(Potion.confusion.id, 85, 0));
 			}

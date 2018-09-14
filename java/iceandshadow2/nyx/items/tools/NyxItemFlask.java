@@ -22,8 +22,8 @@ public class NyxItemFlask extends IaSBaseItemMultiTextured implements IIaSApiTra
 
 	@Override
 	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() == this && target.getItemDamage() == 0 && catalyst.getItem() instanceof ItemPotion)
-			return (NyxItemPotion.convertVanilla(catalyst.getItemDamage()) >= 0)?80:0;
+		if (target.getItem() == this && target.getItemDamage() == 0 && catalyst.getItem() instanceof ItemPotion)
+			return (NyxItemPotion.convertVanilla(catalyst.getItemDamage()) >= 0) ? 80 : 0;
 		return 0;
 	}
 

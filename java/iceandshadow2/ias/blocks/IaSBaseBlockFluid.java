@@ -57,6 +57,18 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 	}
 
 	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		return getLightValue(world.getBlockMetadata(x, y, z));
+	}
+
+	@Override
+	public int getLightValue(int meta) {
+		if (maxScaledLight == 0)
+			return super.getLightValue();
+		return (int) (meta / quantaPerBlockFloat * maxScaledLight);
+	}
+
+	@Override
 	public String getModName() {
 		return getUnlocalizedName().substring(5);
 	}
@@ -87,17 +99,5 @@ public class IaSBaseBlockFluid extends BlockFluidFinite implements IIaSModName, 
 		final ForgeDirection dir = ForgeDirection.getOrientation(side);
 		final Block bl = world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 		return dir == ForgeDirection.UP || (!bl.isOpaqueCube() && bl != this);
-	}
-	
-	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		return getLightValue(world.getBlockMetadata(x, y, z));
-	}
-
-	@Override
-	public int getLightValue(int meta) {
-		if(maxScaledLight == 0)
-			return super.getLightValue();
-		return (int) (meta / quantaPerBlockFloat * maxScaledLight);
 	}
 }

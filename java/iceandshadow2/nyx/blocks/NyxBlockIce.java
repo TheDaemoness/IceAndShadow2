@@ -40,9 +40,8 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		final ArrayList is = new ArrayList<ItemStack>();
 		final int r = 2 + world.rand.nextInt(3);
-		for (int i = 0; i < r; ++i) {
+		for (int i = 0; i < r; ++i)
 			is.add(new ItemStack(NyxItems.exousicIceShard, 1));
-		}
 		return is;
 	}
 
@@ -71,17 +70,14 @@ public class NyxBlockIce extends IaSBaseBlockSingle {
 
 	@Override
 	public void updateTick(World w, int x, int y, int z, Random r) {
-		for (int xit = -1; xit <= 1; ++xit) {
+		for (int xit = -1; xit <= 1; ++xit)
 			for (int zit = -1; zit <= 1; ++zit) {
-				if (xit != 0 && zit != 0) {
+				if (xit != 0 && zit != 0)
 					continue;
-				}
 				if (w.isAirBlock(x + xit, y, z + zit) && r.nextInt(3) != 0)
 					if (w.getBlock(x + xit, y - 1, z + zit) == NyxBlocks.exousicWater
-						&& w.getBlock(x + xit, y - 2, z + zit) != NyxBlocks.exousicWater) {
+							&& w.getBlock(x + xit, y - 2, z + zit) != NyxBlocks.exousicWater)
 						w.setBlock(x + xit, y, z + zit, this);
-					}
 			}
-		}
 	}
 }

@@ -14,18 +14,21 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class IaSPlayerHelper {
 	private static boolean dochat = true;
-	
+
+	public static void alertPlayer(EntityPlayer plai, String str) {
+		doMessagePlayer(plai, str, true);
+	}
+
 	protected static void doMessagePlayer(EntityPlayer plai, String str, final boolean alert) {
 		if (IaSPlayerHelper.dochat && plai.worldObj.isRemote) {
-			final String localized = LanguageRegistry.instance().getStringLocalization("ias2.message."+str);
-			if(!localized.isEmpty()) {
-				final ChatComponentText
-					txt = new ChatComponentText(localized);
-				if(alert)
+			final String localized = LanguageRegistry.instance().getStringLocalization("ias2.message." + str);
+			if (!localized.isEmpty()) {
+				final ChatComponentText txt = new ChatComponentText(localized);
+				if (alert)
 					txt.setChatStyle(new ChatStyle().setItalic(true).setBold(true).setColor(EnumChatFormatting.RED));
 				else
 					txt.setChatStyle(new ChatStyle().setItalic(true).setColor(EnumChatFormatting.GRAY));
-				if(alert) {
+				if (alert) {
 					plai.addChatMessage(new ChatComponentText(""));
 					plai.addChatMessage(txt);
 					plai.addChatMessage(new ChatComponentText(""));
@@ -33,13 +36,8 @@ public class IaSPlayerHelper {
 					plai.addChatMessage(txt);
 				IaSPlayerHelper.dochat = false;
 			}
-		} else {
+		} else
 			IaSPlayerHelper.dochat = true;
-		}
-	}
-
-	public static void alertPlayer(EntityPlayer plai, String str) {
-		doMessagePlayer(plai, str, true);
 	}
 
 	public static int drainXP(EntityPlayer pl, final int amount, String warning, boolean bypass) {
@@ -48,16 +46,14 @@ public class IaSPlayerHelper {
 		if (amount <= 0)
 			return -1;
 		pl.xpCooldown = pl.maxHurtResistantTime / (pl.inventory.hasItem(NyxItems.bloodstone) ? 2 : 1);
-		if (!pl.isPotionActive(Potion.confusion) && warning != null) {
+		if (!pl.isPotionActive(Potion.confusion) && warning != null)
 			IaSPlayerHelper.alertPlayer(pl, warning);
-		}
 		pl.addPotionEffect(new PotionEffect(Potion.confusion.id, 45, 0));
 		int original = (int) (pl.experience * pl.xpBarCap());
 		pl.experience = 0;
 		final int originalLevel = pl.experienceLevel;
-		for (pl.experienceLevel = 0; pl.experienceLevel < originalLevel; ++pl.experienceLevel) {
+		for (pl.experienceLevel = 0; pl.experienceLevel < originalLevel; ++pl.experienceLevel)
 			original += pl.xpBarCap();
-		}
 		pl.experienceLevel = 0;
 		pl.experienceTotal = Math.max(0, original - amount);
 		int xpPool = pl.experienceTotal;
@@ -67,9 +63,8 @@ public class IaSPlayerHelper {
 		}
 		pl.experience = (float) xpPool / pl.xpBarCap();
 		final int drained = original - pl.experienceTotal;
-		if (drained < amount) {
+		if (drained < amount)
 			pl.attackEntityFrom(IaSDamageSources.dmgDrain, amount - drained);
-		}
 		return drained;
 	}
 
@@ -78,9 +73,9 @@ public class IaSPlayerHelper {
 	}
 
 	public static boolean giveItem(EntityPlayer plai, ItemStack is) {
-		if(!plai.worldObj.isRemote) {
+		if (!plai.worldObj.isRemote) {
 			final EntityItem item = new EntityItem(plai.worldObj, plai.posX, plai.posY + plai.getEyeHeight() / 2.0,
-				plai.posZ, is);
+					plai.posZ, is);
 			item.delayBeforeCanPickup = 0;
 			plai.worldObj.spawnEntityInWorld(item);
 		}
@@ -103,14 +98,12 @@ public class IaSPlayerHelper {
 			if (overflow) {
 				int time = (int) ((heals - delta) * 25);
 				final PotionEffect pe = pl.getActivePotionEffect(Potion.regeneration);
-				if (pe != null && pe.getAmplifier() >= 0) {
+				if (pe != null && pe.getAmplifier() >= 0)
 					time += pe.getDuration() / (pe.getAmplifier() + 1);
-				}
 				pl.addPotionEffect(new PotionEffect(Potion.regeneration.id, time, 1));
 			}
-		} else {
+		} else
 			pl.heal(heals);
-		}
 		pl.getFoodStats().addStats((int) (heals * 2), (int) (heals * 2));
 	}
 }

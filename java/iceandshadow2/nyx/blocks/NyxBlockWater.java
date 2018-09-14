@@ -42,21 +42,17 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 					((EntityLivingBase) ent).addPotionEffect(new PotionEffect(Potion.wither.id, 65, 1));
 					for (int i = 0; i <= 4; ++i) {
 						final ItemStack is = ((EntityLivingBase) ent).getEquipmentInSlot(i);
-						if (is == null) {
+						if (is == null)
 							continue;
-						}
-						if (EnumIaSAspect.getAspect(is) == EnumIaSAspect.NAVISTRA) {
+						if (EnumIaSAspect.getAspect(is) == EnumIaSAspect.NAVISTRA)
 							continue;
-						}
-						if (is.attemptDamageItem(2, world.rand)) {
+						if (is.attemptDamageItem(2, world.rand))
 							((EntityLivingBase) ent).setCurrentItemOrArmor(i, null);
-						}
 					}
 				}
-			} else if (ent.isDead) {
+			} else if (ent.isDead)
 				IaSFxManager.spawnParticle(ent.worldObj, "shadowSmokeLarge", ent.posX, ent.posY, ent.posZ, 0, 0, 0,
 						false, true);
-			}
 		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
@@ -66,9 +62,8 @@ public class NyxBlockWater extends IaSBaseBlockFluid {
 		super.updateTick(world, x, y, z, rand);
 		final Block bl = world.getBlock(x, y - 1, z);
 		if (!world.isRemote && !(bl instanceof BlockFluidBase)
-				&& bl.getHarvestLevel(world.getBlockMetadata(x, y - 1, z)) < rand.nextInt(2)) {
+				&& bl.getHarvestLevel(world.getBlockMetadata(x, y - 1, z)) < rand.nextInt(2))
 			IaSBlockHelper.breakBlock(world, x, y - 1, z, false);
-		}
 	}
 
 }

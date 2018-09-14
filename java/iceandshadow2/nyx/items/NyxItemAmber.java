@@ -22,9 +22,9 @@ import iceandshadow2.nyx.NyxItems;
 import iceandshadow2.render.fx.IaSFxManager;
 
 public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransmute {
-	
+
 	@SideOnly(Side.CLIENT)
-	protected IIcon small; //This happens often enough that I'm half considering adding a new base item.
+	protected IIcon small; // This happens often enough that I'm half considering adding a new base item.
 
 	public NyxItemAmber(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -34,18 +34,13 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 	}
 
 	@Override
-	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return stack.getItemDamage()==1;
-	}
-
-	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return stack.getItemDamage()==1?32:0;
+		return stack.getItemDamage() == 1 ? 32 : 0;
 	}
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
-		return stack.getItemDamage()>0?1:4;
+		return stack.getItemDamage() > 0 ? 1 : 4;
 	}
 
 	@Override
@@ -70,16 +65,14 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 			final Map<Integer, Integer> ench = EnchantmentHelper.getEnchantments(catalyst);
 			synchronized (ench) { // Dodge concurrent access issues?
 				for (final Integer i : ench.keySet())
-					if (ench.get(i).intValue() <= 1) {
+					if (ench.get(i).intValue() <= 1)
 						ench.remove(i);
-					} else {
+					else
 						ench.put(i, ench.get(i) - 1);
-					}
 				EnchantmentHelper.setEnchantments(ench, target);
 				EnchantmentHelper.setEnchantments(ench, catalyst);
-				if (!ench.isEmpty()) {
+				if (!ench.isEmpty())
 					target.setItemDamage(1);
-				}
 			}
 		} else if (catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
 			final Map<Integer, Integer> ench = new HashMap<Integer, Integer>(
@@ -88,7 +81,7 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 				EnchantmentHelper.setEnchantments(ench, target);
 			}
 			catalyst.stackSize = 0;
-			return Arrays.asList(new Object[] {new ItemStack(NyxItems.amberNugget, 4)});
+			return Arrays.asList(new Object[] { new ItemStack(NyxItems.amberNugget, 4) });
 		}
 		return null;
 	}
@@ -100,12 +93,16 @@ public class NyxItemAmber extends IaSBaseItemSingleGlow implements IIaSApiTransm
 	}
 
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return stack.getItemDamage() == 1;
+	}
+
+	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity pos) {
-		if(world.rand.nextBoolean()) {
+		if (world.rand.nextBoolean())
 			IaSFxManager.spawnParticle(world, "vanilla_spell", pos.posX - 0.1 + world.rand.nextDouble() / 5,
-				pos.posY - 0.2 - world.rand.nextDouble() / 3, pos.posZ - 0.1 + world.rand.nextDouble() / 5,
-				-0.025 + world.rand.nextDouble() / 20, -0.05F, -0.025 + world.rand.nextDouble() / 20, false, false);
-		}
+					pos.posY - 0.2 - world.rand.nextDouble() / 3, pos.posZ - 0.1 + world.rand.nextDouble() / 5,
+					-0.025 + world.rand.nextDouble() / 20, -0.05F, -0.025 + world.rand.nextDouble() / 20, false, false);
 		return true;
 	}
 

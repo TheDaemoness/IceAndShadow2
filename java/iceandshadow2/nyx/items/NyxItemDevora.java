@@ -2,7 +2,6 @@ package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.api.IIaSApiTransmute;
-import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSBaseItemMulti;
 import iceandshadow2.nyx.NyxBlocks;
@@ -53,6 +52,41 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 	}
 
 	@Override
+	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
+		if (target.getItem() == catalyst.getItem() && catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
+			final int total = catalyst.stackSize + (target.getItemDamage() == 1 ? target.stackSize : 0);
+			if (total > 8)
+				return total * 8;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
+		if (target.getItemDamage() == 0) {
+			final int count = catalyst.stackSize / 8;
+			catalyst.stackSize -= count * 8;
+			ret.add(new ItemStack(this, count + target.stackSize));
+			target.stackSize = 0;
+		} else {
+			final int totalstack = target.stackSize + catalyst.stackSize;
+			catalyst.stackSize = 0;
+			final int count = totalstack / 8;
+			ret.add(new ItemStack(this, count));
+			target.stackSize = totalstack % 8;
+		}
+		return ret;
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		if (itemStack.getItemDamage() == 0)
+			return "devora";
+		return "";
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		if (par2World.isRemote)
 			return par1ItemStack;
@@ -78,9 +112,8 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 					return par1ItemStack;
 				if (par2World.getBlock(i, j - 1, k).isSideSolid(par2World, i, j - 1, k, ForgeDirection.UP)) {
 					par2World.setBlock(i, j, k, NyxBlocks.unstableDevora);
-					if (!par3EntityPlayer.capabilities.isCreativeMode) {
+					if (!par3EntityPlayer.capabilities.isCreativeMode)
 						--par1ItemStack.stackSize;
-					}
 				}
 			}
 		return par1ItemStack;
@@ -100,48 +133,13 @@ public class NyxItemDevora extends IaSBaseItemMulti implements IIaSGlowing, IIaS
 	}
 
 	@Override
-	public boolean usesDefaultGlowRenderer() {
-		return true;
-	}
-
-	@Override
-	public int getTransmuteTime(ItemStack target, ItemStack catalyst) {
-		if(target.getItem() == catalyst.getItem() && catalyst.getItem() == this && catalyst.getItemDamage() == 1) {
-			final int total = catalyst.stackSize+(target.getItemDamage() == 1?target.stackSize:0);
-			if(total > 8)
-				return total*8;
-		}
-		return 0;
-	}
-
-	@Override
-	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
-		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>(1);
-		if(target.getItemDamage() == 0) {
-			final int count = catalyst.stackSize/8;
-			catalyst.stackSize -= count*8;
-			ret.add(new ItemStack(this, count+target.stackSize));
-			target.stackSize = 0;
-		} else {
-			final int totalstack = target.stackSize + catalyst.stackSize;
-			catalyst.stackSize = 0;
-			final int count = totalstack/8;
-			ret.add(new ItemStack(this, count));
-			target.stackSize = totalstack%8;
-		}
-		return ret;
-	}
-
-	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
 		return false;
 	}
 
 	@Override
-	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
-		if(itemStack.getItemDamage() == 0)
-			return "devora";
-		return "";
+	public boolean usesDefaultGlowRenderer() {
+		return true;
 	}
 
 }

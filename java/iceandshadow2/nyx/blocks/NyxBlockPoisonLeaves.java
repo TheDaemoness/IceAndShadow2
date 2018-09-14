@@ -36,9 +36,8 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 		final ArrayList<ItemStack> is = new ArrayList<ItemStack>();
 		if (!world.isRemote) {
 			is.add(new ItemStack(Items.stick, 1 + world.rand.nextInt(2 + fortune)));
-			if (world.rand.nextInt(20) == 0) {
+			if (world.rand.nextInt(20) == 0)
 				is.add(new ItemStack(NyxItems.poisonFruit));
-			}
 		}
 		return is;
 	}
@@ -62,9 +61,9 @@ public class NyxBlockPoisonLeaves extends IaSBaseBlockLeaves implements IIaSNoIn
 
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random r) {
-		if(r.nextInt(16) == 0 && w.getBlock(x, y-1, z) != this) {
-			IaSFxManager.spawnParticle(w, "dripPoison", x+r.nextDouble(), y, z+r.nextDouble(), 0, 0, 0, false, true);
-		}
+		if (r.nextInt(16) == 0 && w.getBlock(x, y - 1, z) != this)
+			IaSFxManager.spawnParticle(w, "dripPoison", x + r.nextDouble(), y, z + r.nextDouble(), 0, 0, 0, false,
+					true);
 		super.randomDisplayTick(w, x, y, z, r);
 	}
 

@@ -20,9 +20,8 @@ public class NyxBlockStoneMemory extends IaSBaseBlockAirlike {
 	@Override
 	public void onBlockAdded(World w, int x, int y, int z) {
 		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone) {
+			if (w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == NyxBlocks.stone)
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, NyxBlocks.stoneGrowing);
-			}
 	}
 
 	@Override

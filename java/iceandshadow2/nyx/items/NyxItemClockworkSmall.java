@@ -1,34 +1,30 @@
 package iceandshadow2.nyx.items;
 
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IaSRegistry;
-import iceandshadow2.ias.api.IIaSDescriptive;
-import iceandshadow2.ias.items.IaSBaseItemMultiTexturedGlow;
 import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 public class NyxItemClockworkSmall extends IaSBaseItemSingleGlow {
-	
+
 	public NyxItemClockworkSmall(String id) {
 		super(EnumIaSModule.NYX, id);
 		setMaxStackSize(16);
-		this.setHasSubtypes(false); //Defensive.
-	}
-	
-	@Override
-	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
-		return getModName()+(is.getItemDamage()>0?"Killed":"");
+		setHasSubtypes(false); // Defensive.
 	}
 
 	@Override
-	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return false;
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return getModName() + (is.getItemDamage() > 0 ? "Killed" : "");
 	}
 
 	@Override
 	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
 		return "clockworkSmall";
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return false;
 	}
 }

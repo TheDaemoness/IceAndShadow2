@@ -82,13 +82,12 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 	@Override
 	public int onAttack(ItemStack is, EntityLivingBase user, Entity target) {
 		if (target instanceof EntityLivingBase) {
-			if (user instanceof EntityPlayer) {
+			if (user instanceof EntityPlayer)
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) user).setDamageBypassesArmor(),
 						getToolDamage(is, user, target));
-			} else {
+			else
 				target.attackEntityFrom(DamageSource.causeMobDamage(user).setDamageBypassesArmor(),
 						getToolDamage(is, user, target));
-			}
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.confusion.id, 55, 0));
 		}
 		final float force = (3 + Math.abs(user.getEyeHeight())) / (1 + Math.abs(target.getEyeHeight()));
@@ -107,9 +106,8 @@ public class NyxMaterialNavistra extends IaSToolMaterial {
 			if (victim.isPotionActive(Potion.confusion.id)
 					|| (isMob && ((EntityMob) target).getAttackTarget() != user)) {
 				if (!isMob || (victim.getEquipmentInSlot(0) != null
-						&& victim.getEquipmentInSlot(0).getRarity() == EnumRarity.common)) {
+						&& victim.getEquipmentInSlot(0).getRarity() == EnumRarity.common))
 					IaSEntityHelper.dropItem(victim, victim.getEquipmentInSlot(0));
-				}
 				victim.setCurrentItemOrArmor(0, null);
 			}
 			victim.addPotionEffect(new PotionEffect(Potion.confusion.id, 35, 0));

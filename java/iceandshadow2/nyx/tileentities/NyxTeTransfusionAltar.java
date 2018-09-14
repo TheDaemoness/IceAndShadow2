@@ -4,7 +4,7 @@ import iceandshadow2.IaSRegistry;
 import iceandshadow2.ias.IaSTileEntity;
 import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.api.IIaSApiTransmute;
-import iceandshadow2.ias.util.EnumNBTType;
+import iceandshadow2.adapters.EnumNBTType;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.entities.util.EntityTransmutationCountdown;
 import net.minecraft.entity.Entity;
@@ -52,9 +52,8 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 			}
 		if (target == null) {
 			if (!canPlace(is)) {
-				if(ep != null) {
+				if (ep != null)
 					IaSPlayerHelper.messagePlayer(ep, "badIdea");
-				}
 				return false;
 			}
 			target = is.copy();
@@ -67,13 +66,11 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 	public ItemStack handleRemove(EntityPlayer ep, boolean isSneaking) {
 		if ((target != null ^ catalyst != null) && isSneaking) {
 			final boolean which = target != null;
-			if(handlePlace(ep, (which?target:catalyst))) {
-				if(which) {
+			if (handlePlace(ep, (which ? target : catalyst)))
+				if (which)
 					target = null;
-				} else {
+				else
 					catalyst = null;
-				}
-			}
 			return null;
 		}
 		ItemStack temp = null;
@@ -95,21 +92,18 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 		target = new ItemStack(Items.egg);
 		catalyst = new ItemStack(Items.feather);
 
-		if (EnumNBTType.COMPOUND.has(tags, "nyxItemTarget")) {
+		if (EnumNBTType.COMPOUND.has(tags, "nyxItemTarget"))
 			target.readFromNBT(tags.getCompoundTag("nyxItemTarget"));
-		} else {
+		else
 			target = null;
-		}
 
-		if (EnumNBTType.COMPOUND.has(tags, "nyxItemCatalyst")) {
+		if (EnumNBTType.COMPOUND.has(tags, "nyxItemCatalyst"))
 			catalyst.readFromNBT(tags.getCompoundTag("nyxItemCatalyst"));
-		} else {
+		else
 			catalyst = null;
-		}
 
-		if (canAttemptTransmutation()) {
+		if (canAttemptTransmutation())
 			handler = IaSRegistry.getHandlerTransmutation(target, catalyst);
-		}
 	}
 
 	public void scheduleUpdate(int x, int y, int z, int time) {
@@ -121,11 +115,9 @@ public class NyxTeTransfusionAltar extends IaSTileEntity {
 	public void writeToNBT(NBTTagCompound tags) {
 		super.writeToNBT(tags);
 
-		if (target != null) {
+		if (target != null)
 			tags.setTag("nyxItemTarget", target.writeToNBT(tags.getCompoundTag("nyxItemTarget")));
-		}
-		if (catalyst != null) {
+		if (catalyst != null)
 			tags.setTag("nyxItemCatalyst", catalyst.writeToNBT(tags.getCompoundTag("nyxItemCatalyst")));
-		}
 	}
 }

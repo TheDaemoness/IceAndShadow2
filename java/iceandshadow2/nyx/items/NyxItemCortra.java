@@ -36,7 +36,7 @@ public class NyxItemCortra extends IaSBaseItemMultiTexturedGlow implements IIaSA
 	public List<ItemStack> getTransmuteYield(ItemStack target, ItemStack catalyst, World world) {
 		final List<ItemStack> it = new ArrayList<ItemStack>();
 		catalyst.stackSize -= 1;
-		if(target.getItem() == NyxItems.echirIngot)
+		if (target.getItem() == NyxItems.echirIngot)
 			it.add(new ItemStack(NyxItems.cortraIngot, Math.min(2, target.stackSize), 1));
 		else
 			it.add(new ItemStack(NyxItems.anchor));

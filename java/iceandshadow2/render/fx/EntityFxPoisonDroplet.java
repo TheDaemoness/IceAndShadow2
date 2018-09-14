@@ -31,7 +31,7 @@ public class EntityFxPoisonDroplet extends EntityFX {
 
 	@Override
 	public int getBrightnessForRender(float par1) {
-		return worldObj.getLightBrightnessForSkyBlocks((int)posX, (int)posY, (int)posZ, 3);
+		return worldObj.getLightBrightnessForSkyBlocks((int) posX, (int) posY, (int) posZ, 3);
 	}
 
 	/**
@@ -50,25 +50,21 @@ public class EntityFxPoisonDroplet extends EntityFX {
 			motionY *= 0.02D;
 			motionZ *= 0.02D;
 			setParticleTextureIndex(113);
-		} else {
+		} else
 			setParticleTextureIndex(112);
-		}
 
 		moveEntity(motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
 
-		if (particleMaxAge-- <= 0) {
+		if (particleMaxAge-- <= 0)
 			setDead();
-		}
 
 		if (isCollidedVertically && onGround)
-		 {
 			setDead();
 		// this.worldObj.spawnParticle("splash", this.posX, this.posY,
 		// this.posZ, 0.0D, 0.0D, 0.0D);
-		}
 
 		final Material material = worldObj
 				.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))
@@ -79,9 +75,8 @@ public class EntityFxPoisonDroplet extends EntityFX {
 					- BlockLiquid.getLiquidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX),
 							MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
 
-			if (posY < d0) {
+			if (posY < d0)
 				setDead();
-			}
 		}
 	}
 }

@@ -22,19 +22,19 @@ public class IaSBaseItemSingle extends IaSBaseItem {
 	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + getModName();
 	}
-	
+
 	@Override
 	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
 		return getModName();
 	}
 
 	@Override
-	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return false;
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return getModName();
 	}
 
 	@Override
-	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return getModName();
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return false;
 	}
 }

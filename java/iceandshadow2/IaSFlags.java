@@ -20,7 +20,9 @@ public class IaSFlags {
 	public static short biome_id_nyxMountains = 254, biome_id_nyxForest = 253, biome_id_nyxMesa = 252,
 			biome_id_nyxRugged = 251, biome_id_nyxInfested = 250;
 
-	/** The IDs at which IaS2 starts mapping its entities to Minecraft spawn eggs. */
+	/**
+	 * The IDs at which IaS2 starts mapping its entities to Minecraft spawn eggs.
+	 */
 	public static int entity_id_start = 512;
 
 	/** Not yet implemented. Add extra support for Thaumcraft 4. */

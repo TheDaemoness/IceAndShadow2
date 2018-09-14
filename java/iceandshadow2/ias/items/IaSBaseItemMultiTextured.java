@@ -21,18 +21,17 @@ public class IaSBaseItemMultiTextured extends IaSBaseItemMulti {
 	public IIcon getIconFromDamage(int dmg) {
 		if (dmg == 0 || dmg >= getSubtypeCount())
 			return itemIcon;
-		return altIcons[dmg-1];
+		return altIcons[dmg - 1];
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTextureName()+"0");
-		if(getSubtypeCount() > 1) {
-		altIcons = new IIcon[getSubtypeCount()-1];
-			for(int i = 1; i < getSubtypeCount(); ++i) {
-				altIcons[i-1] = reg.registerIcon(getTextureName()+Integer.toString(i));
-			}
+		itemIcon = reg.registerIcon(getTextureName() + "0");
+		if (getSubtypeCount() > 1) {
+			altIcons = new IIcon[getSubtypeCount() - 1];
+			for (int i = 1; i < getSubtypeCount(); ++i)
+				altIcons[i - 1] = reg.registerIcon(getTextureName() + Integer.toString(i));
 		}
 	}
 }

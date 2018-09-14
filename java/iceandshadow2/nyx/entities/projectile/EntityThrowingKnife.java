@@ -179,16 +179,14 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				worldObj.playSoundAtEntity(this, mat.getKnifeMissSound(),
 						(float) (vel.lengthVector() / 5.0F > 1.0F ? 1.0F : vel.lengthVector() / 5.0F),
 						1.6F / (rand.nextFloat() * 0.2F + 0.4F));
-				if (mat.onKnifeHit(shootingEntity, this, new ChunkCoordinates(xTile, yTile, zTile))) {
+				if (mat.onKnifeHit(shootingEntity, this, new ChunkCoordinates(xTile, yTile, zTile)))
 					doDrop(mat);
-				}
 				setDead();
 			}
 		}
 
-		if (arrowShake > 0) {
+		if (arrowShake > 0)
 			arrowShake = 0;
-		}
 
 		++ticksInAir;
 		Vec3 var17 = Vec3.createVectorHelper(posX, posY, posZ);
@@ -197,9 +195,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		var17 = Vec3.createVectorHelper(posX, posY, posZ);
 		var3 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ);
 
-		if (var4 != null) {
+		if (var4 != null)
 			var3 = Vec3.createVectorHelper(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
-		}
 
 		Entity var5 = null;
 		@SuppressWarnings("rawtypes")
@@ -228,9 +225,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 			}
 		}
 
-		if (var5 != null) {
+		if (var5 != null)
 			var4 = new MovingObjectPosition(var5);
-		}
 
 		float var20;
 		float var26;
@@ -250,20 +246,20 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 				final Entity target = var4.entityHit;
 				Item equip = null;
 				boolean swordInUse = false;
-				if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getEquipmentInSlot(0) != null) {
+				if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getEquipmentInSlot(0) != null)
 					equip = ((EntityLivingBase) target).getEquipmentInSlot(0).getItem();
-				}
-				if (target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf((target), this)) {
+				if (target instanceof EntityPlayer && IaSEntityHelper.isInFrontOf((target), this))
 					swordInUse = ((EntityPlayer) target).isUsingItem();
-				}
 				if (equip == NyxItems.frostSword && (swordInUse || target instanceof EntityMob)) {
 					final int itemDamage = (IaSWorldHelper.getDifficulty(worldObj) + (int) basedmg);
 					((EntityLivingBase) target).getEquipmentInSlot(0).damageItem(itemDamage, (EntityLivingBase) target);
 					motionX = -motionX;
 					motionY = -motionY;
 					motionZ = -motionZ;
-					worldObj.playSoundAtEntity(this, "random.bow", (float) (var4.hitVec.lengthVector() / 5.0F > 1.0
-							? 1.0F : var4.hitVec.lengthVector() / 5.0F), 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+					worldObj.playSoundAtEntity(this, "random.bow",
+							(float) (var4.hitVec.lengthVector() / 5.0F > 1.0 ? 1.0F
+									: var4.hitVec.lengthVector() / 5.0F),
+							1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 					shootingEntity = null;
 					shouldKill = false;
 				}
@@ -294,36 +290,31 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 					if (origin != null) {
 						final int enchant = EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId,
 								origin);
-						if (enchant >= 1) {
+						if (enchant >= 1)
 							var4.entityHit.setFire(enchant * 4 - 1);
-						}
 					}
 					if (var4.entityHit instanceof EntityLiving) {
 						int knockbackStrength = 0;
-						if (origin != null) {
+						if (origin != null)
 							knockbackStrength += EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId,
 									origin);
-						}
 
 						var26 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
 
-						if (var26 > 0.0F) {
+						if (var26 > 0.0F)
 							var4.entityHit.addVelocity(motionX * knockbackStrength * 0.6000000238418579D / var26,
 									0.1D * knockbackStrength,
 									motionZ * knockbackStrength * 0.6000000238418579D / var26);
-						}
 
 						if (shootingEntity != null && var4.entityHit != shootingEntity
-								&& var4.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP) {
+								&& var4.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP)
 							((EntityPlayerMP) shootingEntity).playerNetServerHandler
 									.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
-						}
 					}
 
 					if (shouldKill && !(var4.entityHit instanceof EntityEnderman)) {
-						if (drop) {
+						if (drop)
 							doDrop(mat);
-						}
 						setDead();
 					}
 
@@ -351,9 +342,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 									: var4.hitVec.lengthVector() / 5.0F),
 							1.6F / (rand.nextFloat() * 0.2F + 0.4F));
 
-					if (mat.onKnifeHit(shootingEntity, this, new ChunkCoordinates(xTile, yTile, zTile))) {
+					if (mat.onKnifeHit(shootingEntity, this, new ChunkCoordinates(xTile, yTile, zTile)))
 						doDrop(mat);
-					}
 
 					setDead();
 				}
@@ -366,21 +356,17 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
 		for (rotationPitch = (float) (Math.atan2(motionY, var20) * 180.0D / Math.PI); rotationPitch
-				- prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F) {
+				- prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
 			;
-		}
 
-		while (rotationPitch - prevRotationPitch >= 180.0F) {
+		while (rotationPitch - prevRotationPitch >= 180.0F)
 			prevRotationPitch += 360.0F;
-		}
 
-		while (rotationYaw - prevRotationYaw < -180.0F) {
+		while (rotationYaw - prevRotationYaw < -180.0F)
 			prevRotationYaw -= 360.0F;
-		}
 
-		while (rotationYaw - prevRotationYaw >= 180.0F) {
+		while (rotationYaw - prevRotationYaw >= 180.0F)
 			prevRotationYaw += 360.0F;
-		}
 
 		rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
 		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
@@ -411,9 +397,8 @@ public class EntityThrowingKnife extends IaSEntityKnifeBase {
 		zTile = nbt.getShort("zTile");
 		inData = nbt.getByte("inData") & 255;
 		arrowShake = nbt.getByte("shake") & 255;
-		if (nbt.hasKey("iasSourceStack")) {
+		if (nbt.hasKey("iasSourceStack"))
 			origin.readFromNBT(nbt.getCompoundTag("iasSourceStack"));
-		}
 	}
 
 	/**

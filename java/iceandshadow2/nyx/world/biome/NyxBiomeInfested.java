@@ -32,11 +32,6 @@ public class NyxBiomeInfested extends NyxBiome {
 	}
 
 	@Override
-	public float getWeight() {
-		return 2;
-	}
-
-	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4) {
 		super.decorate(par1World, par2Random, par3, par4);
 		int count = 0;
@@ -50,26 +45,28 @@ public class NyxBiomeInfested extends NyxBiome {
 					++y;
 					break;
 				}
-				if (bid == Blocks.snow_layer) {
+				if (bid == Blocks.snow_layer)
 					break;
-				}
 				if (!IaSBlockHelper.isAir(bid)) {
 					y = 0;
 					break;
 				}
 			}
-			if (y == 0) {
+			if (y == 0)
 				continue;
-			}
 			final WorldGenerator var5 = getRandomWorldGenForTrees(par2Random);
-			if (var5.generate(par1World, par2Random, x, y, z)) {
+			if (var5.generate(par1World, par2Random, x, y, z))
 				++count;
-			}
 		}
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random rand) {
 		return new GenInfestedTrees();
+	}
+
+	@Override
+	public float getWeight() {
+		return 2;
 	}
 
 	@Override
@@ -79,12 +76,11 @@ public class NyxBiomeInfested extends NyxBiome {
 
 	@Override
 	protected GenRuins supplyRuins(int i) {
-		if(i == 0)
+		if (i == 0)
 			return new GenRuinsMines();
-		if(i == 1)
+		if (i == 1)
 			return new GenRuinsInfestedPhylactery();
 		return null;
 	}
-
 
 }

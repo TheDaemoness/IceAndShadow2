@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class NyxChunkManager extends WorldChunkManager {
 	private final World w;
+
 	public NyxChunkManager(World w) {
 		this.w = w;
 	}
@@ -51,9 +52,8 @@ public class NyxChunkManager extends WorldChunkManager {
 	}
 
 	/**
-	 * Finds a valid position within a range, that is in one of the listed
-	 * biomes. Searches {par1,par2} +-par3 blocks. Strongly favors positive y
-	 * positions.
+	 * Finds a valid position within a range, that is in one of the listed biomes.
+	 * Searches {par1,par2} +-par3 blocks. Strongly favors positive y positions.
 	 */
 	@Override
 	public ChunkPosition findBiomePosition(int x, int z, int width, List par4List, Random par5Random) {
@@ -74,9 +74,8 @@ public class NyxChunkManager extends WorldChunkManager {
 			final int var16 = var6 + var15 % xlim << 2;
 			final int var17 = var7 + var15 / xlim << 2;
 			final BiomeGenBase var18 = var12[var15];
-			if (var18 == null) {
+			if (var18 == null)
 				continue;
-			}
 
 			if (par4List.contains(var18) && (var13 == null || par5Random.nextInt(var14 + 1) == 0)) {
 				var13 = new ChunkPosition(var16, 0, var17);
@@ -88,8 +87,8 @@ public class NyxChunkManager extends WorldChunkManager {
 	}
 
 	/**
-	 * Return a list of biomes for the specified blocks. Args: listToReuse, x,
-	 * z, width, length, cacheFlag (unused).
+	 * Return a list of biomes for the specified blocks. Args: listToReuse, x, z,
+	 * width, length, cacheFlag (unused).
 	 */
 	@Override
 	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] biomeArray, int x, int z, int xwidth, int zwidth,
@@ -105,6 +104,18 @@ public class NyxChunkManager extends WorldChunkManager {
 		return NyxBiomeManager.instance().getBiomeAt(w.getSeed(), x, z);
 	}
 
+	protected BiomeGenBase[] getBiomes(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
+		if ((x & 15) == 0 && (z & 15) == 0 && xlim == 16 && zlim == 16)
+			return NyxBiomeManager.instance().getBiomeArray(w.getSeed(), x >> 4, z >> 4).get();
+		if (biomes == null || biomes.length < xlim * zlim)
+			biomes = new BiomeGenBase[xlim * zlim];
+		for (int xi = 0; xi < xlim; ++xi)
+			for (int zi = 0; zi < zlim; ++zi)
+				biomes[xi | (zi << 4)] = NyxBiomeManager.instance().getBiomeAt(w.getSeed(), (long) x + xi,
+						(long) z + zi);
+		return biomes;
+	}
+
 	/**
 	 * Returns an array of biomes for the location input.
 	 */
@@ -116,20 +127,6 @@ public class NyxChunkManager extends WorldChunkManager {
 	@Override
 	public List getBiomesToSpawnIn() {
 		return new ArrayList<BiomeGenBase>();
-	}
-
-	protected BiomeGenBase[] getBiomes(BiomeGenBase[] biomes, int x, int z, int xlim, int zlim) {
-		if((x&15)==0 && (z&15)==0 && xlim==16 && zlim==16)
-			return NyxBiomeManager.instance().getBiomeArray(w.getSeed(), x>>4, z>>4).get();
-		if(biomes == null || biomes.length < xlim*zlim) {
-			biomes = new BiomeGenBase[xlim*zlim];
-		}
-		for(int xi = 0; xi < xlim; ++xi) {
-			for(int zi = 0; zi < zlim; ++zi) {
-				biomes[xi|(zi<<4)] = NyxBiomeManager.instance().getBiomeAt(w.getSeed(), (long)x+xi, (long)z+zi);
-			}
-		}
-		return biomes;
 	}
 
 	@Override
@@ -144,18 +141,16 @@ public class NyxChunkManager extends WorldChunkManager {
 	@Override
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
 
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5) {
+		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
 			par1ArrayOfFloat = new float[par4 * par5];
-		}
 
 		final BiomeGenBase[] var6 = getBiomes(null, par2, par3, par4, par5);
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7) {
 			float var8 = var6[var7].getIntRainfall() / 65536.0F;
 
-			if (var8 > 1.0F) {
+			if (var8 > 1.0F)
 				var8 = 1.0F;
-			}
 
 			par1ArrayOfFloat[var7] = var8;
 		}
@@ -174,8 +169,8 @@ public class NyxChunkManager extends WorldChunkManager {
 
 	/**
 	 * Returns biomes to use for the blocks and loads the other data like
-	 * temperature and humidity onto the WorldChunkManager Args: oldBiomeList,
-	 * x, z, width, depth
+	 * temperature and humidity onto the WorldChunkManager Args: oldBiomeList, x, z,
+	 * width, depth
 	 */
 	@Override
 	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4,

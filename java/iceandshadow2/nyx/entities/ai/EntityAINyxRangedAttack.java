@@ -19,8 +19,8 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	private EntityLivingBase attackTarget;
 
 	/**
-	 * A decrementing tick that spawns a ranged attack once this value reaches
-	 * 0. It is then set back to the maxRangedAttackTime.
+	 * A decrementing tick that spawns a ranged attack once this value reaches 0. It
+	 * is then set back to the maxRangedAttackTime.
 	 */
 	private int rangedAttackTime;
 	private double entityMoveSpeed;
@@ -28,8 +28,7 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	private int minRangedAttackTime;
 
 	/**
-	 * The maximum time the AI has to wait before performing another ranged
-	 * attack.
+	 * The maximum time the AI has to wait before performing another ranged attack.
 	 */
 	private int maxRangedAttackTime;
 	private float range;
@@ -104,26 +103,22 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 	public void updateTask() {
 		final double d0 = entityHost.getDistanceSq(attackTarget.posX, attackTarget.boundingBox.minY, attackTarget.posZ);
 		boolean flag;
-		if (entityHost instanceof IIaSSensateOld) {
+		if (entityHost instanceof IIaSSensateOld)
 			flag = ((IIaSSensateOld) entityHost).getSense().canSense(attackTarget);
-		} else {
+		else
 			flag = true;
-		}
 		flag &= !reqLOS || entityHost.getEntitySenses().canSee(attackTarget);
 
 		if (flag) {
-			if (stopMovingDelay < 10) {
+			if (stopMovingDelay < 10)
 				++stopMovingDelay;
-			}
-		} else {
+		} else
 			stopMovingDelay = 0;
-		}
 
-		if (d0 > rangeSq || stopMovingDelay < 10) {
+		if (d0 > rangeSq || stopMovingDelay < 10)
 			entityHost.getNavigator().tryMoveToEntityLiving(attackTarget, entityMoveSpeed);
-		} else {
+		else
 			entityHost.getNavigator().clearPathEntity();
-		}
 
 		float f;
 		entityHost.getLookHelper().setLookPositionWithEntity(attackTarget, 30.0F, 30.0F);
@@ -135,19 +130,17 @@ public class EntityAINyxRangedAttack extends EntityAIBase {
 			f = MathHelper.sqrt_double(d0) / range;
 			float f1 = f;
 
-			if (f < 0.05F) {
+			if (f < 0.05F)
 				f1 = 0.05F;
-			}
 
-			if (f1 > 1.1F) {
+			if (f1 > 1.1F)
 				f1 = 1.1F;
-			}
 
 			rangedAttackTime = MathHelper
 					.floor_float(f * (maxRangedAttackTime - minRangedAttackTime) + minRangedAttackTime);
-			if (reflexDelay) {
+			if (reflexDelay)
 				rangedAttackEntityHost.attackEntityWithRangedAttack(attackTarget, f1);
-			} else {
+			else {
 				reflexDelay = true;
 				rangedAttackTime /= 2;
 			}

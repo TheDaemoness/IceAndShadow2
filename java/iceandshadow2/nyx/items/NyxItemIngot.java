@@ -15,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -37,10 +36,15 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 2), new ItemStack(this, 1, 3));
 		GameRegistry.addSmelting(new ItemStack(this, 1, 2), new ItemStack(this, 1, 3), 0);
 		GameRegistry.addShapelessRecipe(new ItemStack(this, 9, 3), new ItemStack(this, 1, 1));
-		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 1)
-			, new ItemStack(this, 1, 3), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3)
-			, new ItemStack(this, 1, 3), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3)
-			, new ItemStack(this, 1, 3), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3));
+		GameRegistry.addShapelessRecipe(new ItemStack(this, 1, 1), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3),
+				new ItemStack(this, 1, 3), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3),
+				new ItemStack(this, 1, 3), new ItemStack(this, 1, 3), new ItemStack(this, 1, 3),
+				new ItemStack(this, 1, 3));
+	}
+
+	@Override
+	public EnumIaSAspect getAspect() {
+		return association.getAspect();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -65,11 +69,6 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 	}
 
 	@Override
-	public EnumIaSAspect getAspect() {
-		return association.getAspect();
-	}
-
-	@Override
 	public EnumRarity getRarity(ItemStack p_77613_1_) {
 		return association.getRarity(new ItemStack(association));
 	}
@@ -81,15 +80,36 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		l.add(new ItemStack(this, 1, 2));
 		l.add(new ItemStack(this, 1, 3));
 	}
-	
+
+	@Override
+	public String getTextureName() {
+		return IceAndShadow2.MODID + ':' + super.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer p, ItemStack is) {
+		if ((is.getItemDamage() & 1) == 1)
+			return "ingotPrimed";
+		else if (association instanceof IIaSDescriptive)
+			return "ingot" + ((IIaSDescriptive) association).getUnlocalizedDescription(p, null);
+		return "ingot";
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
+		if ((is.getItemDamage() & 1) == 1)
+			return "ingotPrimed";
+		return "ingot";
+	}
+
 	@Override
 	public String getUnlocalizedName() {
-		return super.getUnlocalizedName()+"Ingot";
+		return super.getUnlocalizedName() + "Ingot";
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		final String naem = super.getUnlocalizedName()+((stack.getItemDamage() & 2)==2?"Nugget":"Ingot");
+		final String naem = super.getUnlocalizedName() + ((stack.getItemDamage() & 2) == 2 ? "Nugget" : "Ingot");
 		if ((stack.getItemDamage() & 1) == 1)
 			return naem + "Active";
 		return naem;
@@ -97,15 +117,9 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack heap, World order, EntityPlayer pwai) {
-		if (pwai.isSneaking()) {
-			heap.setItemDamage(heap.getItemDamage()&(~1));
-		}
+		if (pwai.isSneaking())
+			heap.setItemDamage(heap.getItemDamage() & (~1));
 		return heap;
-	}
-	
-	@Override
-	public String getTextureName() {
-		return IceAndShadow2.MODID + ':' + super.getUnlocalizedName().substring(5);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -116,21 +130,5 @@ public class NyxItemIngot extends IaSBaseItemSingleGlow {
 		activeNugget = reg.registerIcon(getTextureName() + "NuggetActive");
 		nugget = reg.registerIcon(getTextureName() + "Nugget");
 		invisible = reg.registerIcon("IceAndShadow2:iasInvisible");
-	}
-
-	@Override
-	public String getUnlocalizedDescription(EntityPlayer p, ItemStack is) {
-		if((is.getItemDamage() & 1) == 1)
-			return "ingotPrimed";
-		else if(association instanceof IIaSDescriptive)
-			return "ingot"+((IIaSDescriptive)association).getUnlocalizedDescription(p, null);
-		return "ingot";
-	}
-	
-	@Override
-	public String getUnlocalizedHint(EntityPlayer p, ItemStack is) {
-		if((is.getItemDamage() & 1) == 1)
-			return "ingotPrimed";
-		return "ingot";
 	}
 }

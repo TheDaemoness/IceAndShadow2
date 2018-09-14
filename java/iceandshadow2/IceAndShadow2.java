@@ -88,10 +88,9 @@ public class IceAndShadow2 {
 	public void init1(FMLPreInitializationEvent event) {
 		event.getModLog().info("Ice and Shadow 2, version " + IceAndShadow2.VERSION + ".");
 		IceAndShadow2.logger = event.getModLog();
-		if (event.getSide() == Side.SERVER) {
+		if (event.getSide() == Side.SERVER)
 			event.getModLog().info(
 					"While designed to be mostly multiplayer compatible, pings > 200 can make Ice and Shadow exponentially harder. You've been warned.");
-		}
 		IceAndShadow2.cfg = new IaSConfigManager(event.getSuggestedConfigurationFile(), IceAndShadow2.CONFIG_MAJ,
 				IceAndShadow2.CONFIG_MIN);
 
@@ -110,9 +109,8 @@ public class IceAndShadow2 {
 		IceAndShadow2.toPreRegister.clear();
 		IaSTools.init();
 
-		if (event.getSide() == Side.CLIENT) {
+		if (event.getSide() == Side.CLIENT)
 			IaSRenderers.init();
-		}
 		IceAndShadow2.acceptRegistration = true;
 	}
 
@@ -120,9 +118,8 @@ public class IceAndShadow2 {
 	public void init2(FMLInitializationEvent event) {
 		NyxRecipes.init();
 
-		if (IaSFlags.flag_death_system) {
+		if (IaSFlags.flag_death_system)
 			MinecraftForge.EVENT_BUS.register(new NyxDeathSystem());
-		}
 
 		NyxBiomes.registerBiomes();
 		MinecraftForge.EVENT_BUS.register(new IaSTooltipHandler());
@@ -144,9 +141,8 @@ public class IceAndShadow2 {
 		IceAndShadow2.toPostRegister.clear();
 		InitNyx.lateInit(this);
 
-		if (event.getSide() == Side.CLIENT) {
+		if (event.getSide() == Side.CLIENT)
 			IaSRenderers.lateInit();
-		}
 	}
 
 	@EventHandler

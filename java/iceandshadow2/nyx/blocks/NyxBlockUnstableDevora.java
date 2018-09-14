@@ -30,7 +30,7 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 		setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
 		setTickRandomly(true);
 		setLuminescence(0.5F);
-		this.fullCube = false;
+		fullCube = false;
 	}
 
 	@Override
@@ -72,9 +72,8 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
-		if (!w.getBlock(x, y - 1, z).isSideSolid(w, x, y, z, ForgeDirection.UP)) {
+		if (!w.getBlock(x, y - 1, z).isSideSolid(w, x, y, z, ForgeDirection.UP))
 			updateTick(w, x, y, z, w.rand);
-		}
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class NyxBlockUnstableDevora extends IaSBaseBlockSingle implements IIaSTe
 	public void updateTick(World w, int x, int y, int z, Random r) {
 		if (!w.isRemote) {
 			IaSBlockHelper.breakBlock(w, x, y, z, false);
-			w.newExplosion(null, x+0.5, y+0.25, z+0.5, 4.5f, true, true);
+			w.newExplosion(null, x + 0.5, y + 0.25, z + 0.5, 4.5f, true, true);
 		}
 	}
 }

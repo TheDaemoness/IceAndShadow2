@@ -4,7 +4,6 @@ import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.IaSDamageSources;
 import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.api.IIaSApiTransmute;
-import iceandshadow2.ias.api.IIaSDescriptive;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
 import iceandshadow2.ias.items.IaSItemFood;
 import iceandshadow2.ias.util.IaSEntityHelper;
@@ -18,7 +17,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -79,15 +77,28 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 		--catalyst.stackSize;
 		final List<ItemStack> retval = new ArrayList<ItemStack>();
 		int i = 0;
-		for (; i < 3 && target.stackSize > 0; ++i) {
+		for (; i < 3 && target.stackSize > 0; ++i)
 			--target.stackSize;
-		}
-		if(target.getItem() == NyxItems.cortra) {
-			retval.add(new ItemStack(NyxItems.draconium, i*2, 1));
-		} else {
+		if (target.getItem() == NyxItems.cortra)
+			retval.add(new ItemStack(NyxItems.draconium, i * 2, 1));
+		else
 			retval.add(new ItemStack(NyxBlocks.sanguineObsidian, i));
-		}
 		return retval;
+	}
+
+	@Override
+	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
+		return getModName();
+	}
+
+	@Override
+	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return getModName();
+	}
+
+	@Override
+	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return true;
 	}
 
 	@Override
@@ -107,29 +118,15 @@ public class NyxItemBloodstone extends IaSItemFood implements IIaSGlowing, IIaSA
 
 	@Override
 	public boolean spawnTransmuteParticles(ItemStack target, ItemStack catalyst, World world, Entity ent) {
-		if(world.rand.nextBoolean()) {
-			IaSFxManager.spawnParticle(world, "dripBlood", ent.posX+0.05+world.rand.nextFloat()/10, ent.posY+0.125+world.rand.nextFloat()/4, ent.posZ+0.05+world.rand.nextFloat()/10, false, false);
-		}
+		if (world.rand.nextBoolean())
+			IaSFxManager.spawnParticle(world, "dripBlood", ent.posX + 0.05 + world.rand.nextFloat() / 10,
+					ent.posY + 0.125 + world.rand.nextFloat() / 4, ent.posZ + 0.05 + world.rand.nextFloat() / 10, false,
+					false);
 		return true;
 	}
 
 	@Override
 	public boolean usesDefaultGlowRenderer() {
 		return true;
-	}
-
-	@Override
-	public String getUnlocalizedDescription(EntityPlayer entityPlayer, ItemStack is) {
-		return this.getModName();
-	}
-
-	@Override
-	public boolean isHintWarning(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return true;
-	}
-
-	@Override
-	public String getUnlocalizedHint(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return this.getModName();
 	}
 }

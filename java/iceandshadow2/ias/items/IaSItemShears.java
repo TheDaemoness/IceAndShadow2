@@ -30,6 +30,11 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 	}
 
 	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
 	public EnumIaSModule getIaSModule() {
 		return MODULE;
 	}
@@ -45,6 +50,12 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderPasses(int metadata) {
+		return 2;
+	}
+
+	@Override
 	public String getTextureName() {
 		return IceAndShadow2.MODID + ':' + MODULE.prefix + getModName();
 	}
@@ -55,24 +66,13 @@ public class IaSItemShears extends ItemShears implements IIaSModName, IIaSAspect
 	}
 
 	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
-	}
-
-	@Override
-	public boolean usesDefaultGlowRenderer() {
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
 		return true;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderPasses(int metadata) {
-		return 2;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
+	public boolean usesDefaultGlowRenderer() {
 		return true;
 	}
 }

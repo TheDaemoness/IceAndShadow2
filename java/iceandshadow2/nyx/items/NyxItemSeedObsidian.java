@@ -29,44 +29,36 @@ public class NyxItemSeedObsidian extends IaSBaseItemSingle {
 	public boolean onItemUse(ItemStack staq, EntityPlayer playuh, World wurld, int ehx, int uay, int zee, int metuh,
 			float pex, float pay, float pez) {
 		boolean trans = true;
-		for (int xit = -2; xit <= 2; ++xit) {
+		for (int xit = -2; xit <= 2; ++xit)
 			for (int zit = -2; zit <= 2; ++zit)
-				if (wurld.getBlock(ehx + xit, uay, zee + zit) != NyxBlocks.stone) {
+				if (wurld.getBlock(ehx + xit, uay, zee + zit) != NyxBlocks.stone)
 					trans = false;
-				}
-		}
 		if (trans) {
-			for (int xit = -2; xit <= 2; ++xit) {
+			for (int xit = -2; xit <= 2; ++xit)
 				for (int zit = -2; zit <= 2; ++zit) {
-					if (Math.abs(xit) == 2 || Math.abs(zit) == 2) {
+					if (Math.abs(xit) == 2 || Math.abs(zit) == 2)
 						wurld.setBlock(ehx + xit, uay, zee + zit, Blocks.obsidian);
-					} else {
+					else
 						wurld.setBlock(ehx + xit, uay, zee + zit, NyxBlocks.sanguineObsidian, 1, 0x2);
-					}
 
-					if (xit == 0 && zit == 0) {
+					if (xit == 0 && zit == 0)
 						wurld.func_147480_a(ehx + xit, uay + 3, zee + zit, true);
-					}
-					if (xit <= 1 && zit <= 1) {
+					if (xit <= 1 && zit <= 1)
 						wurld.func_147480_a(ehx + xit, uay + 2, zee + zit, true);
-					}
 					wurld.func_147480_a(ehx + xit, uay + 1, zee + zit, true);
 				}
-			}
 			staq.stackSize -= 1;
 			wurld.spawnEntityInWorld(new EntityLightningBolt(wurld, ehx, uay, zee));
 			IaSPlayerHelper.messagePlayer(playuh, "You feel something bind your life force to the obsidian.");
 			playuh.setSpawnChunk(new ChunkCoordinates(ehx, uay + 1, zee), true);
-			if (playuh.getHealth() > 2.0F) {
+			if (playuh.getHealth() > 2.0F)
 				playuh.attackEntityFrom(DamageSource.magic, 1);
-			}
 			IaSPlayerHelper.messagePlayer(playuh,
 					"You may be able to rebind it to other platforms, simply by crouching on the center block.");
 			return true;
-		} else {
+		} else
 			IaSPlayerHelper.messagePlayer(playuh,
 					"That seed needs a larger flat area of Nyxian stone to avoid being wasteful. How do I know that...?");
-		}
 		return false;
 	}
 }

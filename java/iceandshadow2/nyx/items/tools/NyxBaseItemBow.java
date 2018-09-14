@@ -56,9 +56,8 @@ public abstract class NyxBaseItemBow extends IaSBaseItemSingle implements IIaSGl
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 
-		if (usingItem != stack) {
+		if (usingItem != stack)
 			inuse = false;
-		}
 
 		if (!((NyxBaseItemBow) stack.getItem()).inuse)
 			return renderPass > 0 ? glow : itemIcon;
@@ -116,9 +115,8 @@ public abstract class NyxBaseItemBow extends IaSBaseItemSingle implements IIaSGl
 		if (!target.hasTagCompound()) {
 			target.setTagCompound(new NBTTagCompound());
 			target.getTagCompound().setInteger(NyxBaseItemBow.nbtTierID, 1);
-		} else {
+		} else
 			target.getTagCompound().setInteger(NyxBaseItemBow.nbtTierID, getSpeedModifier(target) + 1);
-		}
 		catalyst.stackSize -= getUpgradeCost(getSpeedModifier(target));
 		return null;
 	}

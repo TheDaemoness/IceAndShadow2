@@ -38,12 +38,10 @@ public class NyxItemBowFrostLong extends NyxBaseItemBow implements IIaSModName, 
 		final int damage = dif >= 3 ? 8 : 7;
 		arrow.setDamage(damage);
 
-		if (power > 0) {
+		if (power > 0)
 			arrow.setDamage(arrow.getDamage() + power * 0.5D + 0.5D);
-		}
-		if (punch > 0) {
+		if (punch > 0)
 			arrow.setKnockbackStrength(punch);
-		}
 
 		user.playSound("random.bow", 1.0F, 1.0F / (user.getRNG().nextFloat() * 0.3F + 0.6F));
 		user.worldObj.spawnEntityInWorld(arrow);
@@ -86,9 +84,8 @@ public class NyxItemBowFrostLong extends NyxBaseItemBow implements IIaSModName, 
 		if (var7 < 0.6F)
 			return;
 
-		if (var7 > 0.95F) {
+		if (var7 > 0.95F)
 			var7 = 1.0F;
-		}
 
 		var7 = var7 * var7;
 
@@ -97,25 +94,21 @@ public class NyxItemBowFrostLong extends NyxBaseItemBow implements IIaSModName, 
 		final EntityIceArrow var8 = new EntityIceArrow(par2World, par3EntityPlayer, var7 * 3.5F, var10 + 3,
 				var9 * 30 + 70);
 
-		if (var7 > 0.95F) {
+		if (var7 > 0.95F)
 			var8.setIsCritical(true);
-		}
 
-		if (var9 > 0) {
+		if (var9 > 0)
 			var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
-		}
 
 		var8.setKnockbackStrength(var10);
 
-		if (!par3EntityPlayer.capabilities.isCreativeMode) {
+		if (!par3EntityPlayer.capabilities.isCreativeMode)
 			par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() + 1);
-		}
 
 		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 				1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
-		if (!par2World.isRemote) {
+		if (!par2World.isRemote)
 			par2World.spawnEntityInWorld(var8);
-		}
 	}
 }

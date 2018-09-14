@@ -27,24 +27,21 @@ public class NyxBlockAir extends IaSBaseBlockAirlike {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity ent) {
 		final int hardness = IaSWorldHelper.getDifficulty(world);
-		if (ent instanceof EntityPlayer) {
-			IaSPlayerHelper.drainXP((EntityPlayer) ent, hardness, "drainAir",
-					false);
-		} else if (ent instanceof EntityAgeable) {
+		if (ent instanceof EntityPlayer)
+			IaSPlayerHelper.drainXP((EntityPlayer) ent, hardness, "drainAir", false);
+		else if (ent instanceof EntityAgeable)
 			ent.attackEntityFrom(IaSDamageSources.dmgDrain, 1 + hardness);
-		}
 		super.onEntityCollidedWithBlock(world, x, y, z, ent);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block bl) {
 		for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			if (dir == ForgeDirection.DOWN && y <= ATMOS_HEIGHT) {
+			if (dir == ForgeDirection.DOWN && y <= ATMOS_HEIGHT)
 				continue;
-			}
-			if (bl != this && !IaSBlockHelper.isAir(bl) && IaSBlockHelper.isAir(w.getBlock(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ))) {
+			if (bl != this && !IaSBlockHelper.isAir(bl)
+					&& IaSBlockHelper.isAir(w.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)))
 				w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, this);
-			}
 		}
 	}
 }

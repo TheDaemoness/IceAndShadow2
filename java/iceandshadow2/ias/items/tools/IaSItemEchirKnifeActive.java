@@ -52,9 +52,8 @@ public class IaSItemEchirKnifeActive extends IaSBaseItemSingleGlow implements II
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1, World w, EntityPlayer pirate) {
-		if (pirate.isSneaking()) {
+		if (pirate.isSneaking())
 			par1 = new ItemStack(IaSTools.knife, par1.stackSize);
-		}
 		return par1;
 	}
 

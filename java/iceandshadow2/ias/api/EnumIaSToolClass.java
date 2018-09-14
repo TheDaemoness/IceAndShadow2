@@ -5,9 +5,10 @@ import java.util.Set;
 import com.google.common.collect.ImmutableSet;
 
 public enum EnumIaSToolClass {
-	AXE(0, 3.0F, ImmutableSet.of("axe"), false), PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe"), false), SPADE(2, 1.0F,
-			ImmutableSet.of("shovel"), //SOME CONSISTENCY MIGHT BE NICE.
-			false), SWORD(0, 4.0F, ImmutableSet.of("sword"), true), KNIFE(1, 2.0F, ImmutableSet.of("sword"), true);
+	AXE(0, 3.0F, ImmutableSet.of("axe"), false), PICKAXE(1, 2.0F, ImmutableSet.of("pickaxe"), false),
+	SPADE(2, 1.0F, ImmutableSet.of("shovel"), // SOME CONSISTENCY MIGHT BE NICE.
+			false),
+	SWORD(0, 4.0F, ImmutableSet.of("sword"), true), KNIFE(1, 2.0F, ImmutableSet.of("sword"), true);
 
 	public static EnumIaSToolClass fromId(int itemDamage, boolean isSword) {
 		for (final EnumIaSToolClass cl : EnumIaSToolClass.values())
@@ -26,12 +27,12 @@ public enum EnumIaSToolClass {
 	EnumIaSToolClass(int id, float dmg, ImmutableSet cls, boolean isSword) {
 		this.id = id;
 		attackDmg = dmg;
-		if(cls == null || cls.isEmpty()) {
+		if (cls == null || cls.isEmpty()) {
 			classes = ImmutableSet.of();
 			tool = null;
 		} else {
 			classes = cls;
-			tool = (String)cls.toArray()[0];
+			tool = (String) cls.toArray()[0];
 		}
 		this.isSword = isSword;
 	}
@@ -47,7 +48,7 @@ public enum EnumIaSToolClass {
 	public String getPrimaryToolClass() {
 		return tool;
 	}
-	
+
 	public Set<String> getToolClassSet() {
 		return classes;
 	}
@@ -60,9 +61,8 @@ public enum EnumIaSToolClass {
 	public String toString() {
 		final String s = super.toString();
 		String sl = s.substring(0, 1);
-		for (int i = 1; i < s.length(); ++i) {
+		for (int i = 1; i < s.length(); ++i)
 			sl += Character.toLowerCase(s.charAt(i));
-		}
 		return sl;
 	}
 }

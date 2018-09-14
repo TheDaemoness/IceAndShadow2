@@ -7,21 +7,26 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderBlockAntenna implements ISimpleBlockRenderingHandler {
-	
+
 	public static final int id;
-	
+
 	static {
 		id = RenderingRegistry.getNextAvailableRenderId();
 		try {
 			RenderingRegistry.registerBlockHandler(RenderBlockAntenna.class.newInstance());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
+	public int getRenderId() {
+		return id;
+	}
+
+	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
-		//Does nothing.
+		// Does nothing.
 	}
 
 	@Override
@@ -41,11 +46,6 @@ public class RenderBlockAntenna implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
-	}
-
-	@Override
-	public int getRenderId() {
-		return id;
 	}
 
 }

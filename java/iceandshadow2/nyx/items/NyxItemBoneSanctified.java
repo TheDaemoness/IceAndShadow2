@@ -1,19 +1,10 @@
 package iceandshadow2.nyx.items;
 
-import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IaSFlags;
 import iceandshadow2.ias.api.EnumIaSAspect;
-import iceandshadow2.ias.items.IaSBaseItemSingleGlow;
-import iceandshadow2.ias.util.IaSPlayerHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,15 +15,13 @@ public class NyxItemBoneSanctified extends NyxBaseItemBone {
 	}
 
 	@Override
+	public void doEffect(Entity ent) {
+		// Obligatory no-op.
+	}
+
+	@Override
 	public EnumIaSAspect getAspect() {
 		return EnumIaSAspect.PURE;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		itemIcon = reg.registerIcon(getTextureName());
-		glow = itemIcon;
 	}
 
 	@Override
@@ -42,7 +31,9 @@ public class NyxItemBoneSanctified extends NyxBaseItemBone {
 	}
 
 	@Override
-	public void doEffect(Entity ent) {
-		//Obligatory no-op.
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		itemIcon = reg.registerIcon(getTextureName());
+		glow = itemIcon;
 	}
 }

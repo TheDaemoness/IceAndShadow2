@@ -112,9 +112,8 @@ public class EntityWightTeleport extends EntityThrowable {
 				}
 				spawn.setPositionAndRotation(pom.blockX + 0.5, pom.blockY + 1, pom.blockZ + 0.5,
 						worldObj.rand.nextFloat() * 360F, 0.0F);
-				if (target != null && !target.isDead) {
+				if (target != null && !target.isDead)
 					spawn.setTarget(target);
-				}
 				worldObj.spawnEntityInWorld(spawn);
 			}
 			setDead();

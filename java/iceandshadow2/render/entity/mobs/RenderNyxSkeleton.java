@@ -47,9 +47,8 @@ public class RenderNyxSkeleton extends RenderBiped {
 	}
 
 	protected void func_82438_a(EntitySkeleton par1EntitySkeleton, float par2) {
-		if (par1EntitySkeleton.getSkeletonType() == 1) {
+		if (par1EntitySkeleton.getSkeletonType() == 1)
 			GL11.glScalef(1.1F, 1.2F, 1.1F);
-		}
 	}
 
 	@Override
@@ -58,8 +57,8 @@ public class RenderNyxSkeleton extends RenderBiped {
 	}
 
 	/**
-	 * Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime
+	 * Allows the render to do any OpenGL state modifications necessary before the
+	 * model is rendered. Args: entityLiving, partialTickTime
 	 */
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
@@ -75,11 +74,10 @@ public class RenderNyxSkeleton extends RenderBiped {
 		else {
 			final float f1 = 1.0F;
 
-			if (par1Entity.getSkeletonType() == 1) {
+			if (par1Entity.getSkeletonType() == 1)
 				bindTexture(RenderNyxSkeleton.wickednecromancer_eyes);
-			} else {
+			else
 				bindTexture(RenderNyxSkeleton.winterskeleton_eyes);
-			}
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);

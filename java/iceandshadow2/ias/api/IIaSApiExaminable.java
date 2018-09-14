@@ -16,27 +16,23 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IIaSApiExaminable {
 
 	/**
-	 * Indicates whether the examination of a certain item or block is possible
-	 * by this handler.
+	 * Indicates whether the examination of a certain item or block is possible by
+	 * this handler.
 	 *
-	 * @param toExam
-	 *            The item stack being examined.
-	 * @param knowledge
-	 *            The knowledge currently recorded in the book or examination
-	 *            table.
+	 * @param toExam    The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the book or examination
+	 *                  table.
 	 */
 	public NBTTagCompound canExamine(ItemStack toExam, Set<String> knowledge);
 
 	/**
-	 * Returns a list of any knowledge that should be changed after examining
-	 * the item, in addition to the knowledge gained from simply examining the
-	 * item or block.
+	 * Returns a list of any knowledge that should be changed after examining the
+	 * item, in addition to the knowledge gained from simply examining the item or
+	 * block.
 	 *
-	 * @param toExam
-	 *            The item stack being examined.
-	 * @param knowledge
-	 *            The knowledge currently recorded in the book or examination
-	 *            table.
+	 * @param toExam    The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the book or examination
+	 *                  table.
 	 * @return A list of any CHANGED knowledge, including new knowledge. Null is
 	 *         acceptable if no new knowledge was learned.
 	 */
@@ -46,24 +42,20 @@ public interface IIaSApiExaminable {
 	 * Gets information about this item to put into a book. If multiple handlers
 	 * have book information, the first one registered is the only one called.
 	 *
-	 * @param toExam
-	 *            The item stack being examined.
-	 * @param knowledge
-	 *            The knowledge currently recorded in the book or examination
-	 *            table.
+	 * @param toExam    The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the book or examination
+	 *                  table.
 	 * @return An NBTTagCompound to be applied to a book, or null otherwise.
 	 */
 	public NBTTagCompound getExamineInfo(ItemStack toExam, Set<String> knowledge);
 
 	/**
-	 * Stops the execution of further relevant handlers. This should generally
-	 * be false.
+	 * Stops the execution of further relevant handlers. This should generally be
+	 * false.
 	 *
-	 * @param toExam
-	 *            The item stack being examined.
-	 * @param knowledge
-	 *            The knowledge currently recorded in the book or examination
-	 *            table.
+	 * @param toExam    The item stack being examined.
+	 * @param knowledge The knowledge currently recorded in the book or examination
+	 *                  table.
 	 * @return A list of any CHANGED knowledge, including new knowledge. Null is
 	 *         acceptable if no new knowledge was learned.
 	 */

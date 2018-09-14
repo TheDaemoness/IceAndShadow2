@@ -26,11 +26,10 @@ public class NyxItemToxicCore extends IaSBaseItemMultiTexturedGlow {
 		for (final Entity ent : l)
 			if (ent instanceof EntityMob && EnumIaSAspect.getAspect(ent) != EnumIaSAspect.POISONWOOD) {
 				EntityPoisonBall pb;
-				if (caster instanceof EntityLivingBase) {
+				if (caster instanceof EntityLivingBase)
 					pb = new EntityPoisonBall(w, (EntityLivingBase) caster);
-				} else {
+				else
 					pb = new EntityPoisonBall(w);
-				}
 				pb.setThrowableHeading(ent.posX - caster.posX,
 						ent.posY - caster.posY + ((EntityMob) ent).getEyeHeight() * 1.25 - caster.getEyeHeight(),
 						ent.posZ - caster.posZ, 1.0F, 1.0F);

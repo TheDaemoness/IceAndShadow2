@@ -25,25 +25,32 @@ public class NyxBlockInfestedSpawner extends NyxBaseBlockSpawner {
 	}
 
 	@Override
-	protected boolean hasDifferentTopIcon() {
-		return false;
+	public Class<? extends EntityLiving> getSpawn(int metadata) {
+		switch (metadata) {
+		case 1:
+			return EntityNyxSpider.class;
+		case 2:
+			return EntityNyxWightSanctified.class;
+		default:
+			return EntityNyxWalker.class;
+		}
 	}
 
 	@Override
-	public Class<? extends EntityLiving> getSpawn(int metadata) {
-		switch(metadata) {
-			case 1: return EntityNyxSpider.class;
-			case 2: return EntityNyxWightSanctified.class;
-			default: return EntityNyxWalker.class;
+	public int getSpawnCount(int metadata) {
+		switch (metadata) {
+		case 1:
+			return 3;
+		case 2:
+			return 2;
+		default:
+			return 1;
 		}
 	}
+
 	@Override
-	public int getSpawnCount(int metadata) {
-		switch(metadata) {
-			case 1: return 3;
-			case 2: return 2;
-			default: return 1;
-		}
+	protected boolean hasDifferentTopIcon() {
+		return false;
 	}
 
 	@Override

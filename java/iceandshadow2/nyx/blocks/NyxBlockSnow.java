@@ -26,24 +26,6 @@ public class NyxBlockSnow extends IaSBaseBlockFalling {
 		setLightOpacity(5);
 	}
 
-	@Override
-	public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
-		return false;
-	}
-
-	@Override
-	public void onBlockAdded(World w, int x, int y, int z) {}
-
-	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		return side != ForgeDirection.DOWN;
-	}
-
-	@Override
-	public EnumIaSAspect getAspect() {
-		return EnumIaSAspect.FROZEN;
-	}
-
 	// Apparently this stops updates during chunk generation, which should speed
 	// things up.
 	@Override
@@ -52,33 +34,47 @@ public class NyxBlockSnow extends IaSBaseBlockFalling {
 	}
 
 	@Override
-	public void onFallenUpon(World w, int x, int y, int z, Entity e,
-			float f) {
-		e.fallDistance /= 2f;
-		w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-		w.getBlock(x, y-1, z).onEntityWalking(w, x, y-1, z, e);
+	public EnumIaSAspect getAspect() {
+		return EnumIaSAspect.FROZEN;
 	}
 
 	@Override
-	public void onEntityWalking(World w, int x, int y, int z,
-			Entity e) {
-		if(e instanceof EntityMob) {
+	public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+		return false;
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return side != ForgeDirection.DOWN;
+	}
+
+	@Override
+	public void onBlockAdded(World w, int x, int y, int z) {
+	}
+
+	@Override
+	public void onEntityWalking(World w, int x, int y, int z, Entity e) {
+		if (e instanceof EntityMob) {
 		} else {
 			w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
-			final Block beneath = w.getBlock(x, y-1, z);
-			if(beneath instanceof NyxBlockSnow) {
-				w.scheduleBlockUpdate(x, y-1, z, this, tickRate(w));
-			}
+			final Block beneath = w.getBlock(x, y - 1, z);
+			if (beneath instanceof NyxBlockSnow)
+				w.scheduleBlockUpdate(x, y - 1, z, this, tickRate(w));
 		}
 		super.onEntityWalking(w, x, y, z, e);
 	}
 
-    @Override
-	public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block bl)
-    {
-    	if(!IaSBlockHelper.isAir(bl)) {
+	@Override
+	public void onFallenUpon(World w, int x, int y, int z, Entity e, float f) {
+		e.fallDistance /= 2f;
+		w.scheduleBlockUpdate(x, y, z, this, tickRate(w));
+		w.getBlock(x, y - 1, z).onEntityWalking(w, x, y - 1, z, e);
+	}
+
+	@Override
+	public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block bl) {
+		if (!IaSBlockHelper.isAir(bl))
 			p_149695_1_.scheduleBlockUpdate(p_149695_2_, p_149695_3_, p_149695_4_, this, tickRate(p_149695_1_));
-		}
-    }
+	}
 
 }

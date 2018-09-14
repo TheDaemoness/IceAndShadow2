@@ -15,14 +15,11 @@ import iceandshadow2.styx.Styx;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class NyxBiome extends BiomeGenBase {
@@ -55,30 +52,6 @@ public class NyxBiome extends BiomeGenBase {
 		setColor(255 << 16 | 255 << 8 | 255);
 	}
 
-	public float getWeight() {
-		return 1;
-	}
-
-	public boolean deepSurfaceLayer() {
-		return false;
-	}
-	
-	protected void generateCortra(World w, int x, int z, boolean reverse) {
-		boolean prevsalt = false;
-		final int
-		ystart = reverse?56:5,
-		yend = reverse?5:56;		
-		for(int i = ystart; i != yend; i+=reverse?-1:1) {
-			if(w.getBlock(x, i, z) == NyxBlocks.salt) {
-				if(prevsalt) {
-					w.setBlock(x, i, z, NyxBlocks.oreCortra);
-					break;
-				}
-				prevsalt = true;
-			}
-		 }
-	}
-
 	@Override
 	public void decorate(World par1World, Random par2Random, int xchunk, int zchunk) {
 		genOre(par1World, par2Random, xchunk, zchunk);
@@ -87,33 +60,28 @@ public class NyxBiome extends BiomeGenBase {
 
 		genFoliage(par1World, par2Random, xchunk, zchunk);
 	}
-	
-	/**
-	 * Called after the above decorate pass in order to add snow, icicles, etc.
-	 */
-	public final void snow(World w, Random r, int x, int z) {
-		int yval = w.getPrecipitationHeight(x, z);
-		final Block bl = w.getBlock(x, yval-1, z);
-		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl); 
-		if (aspect != EnumIaSAspect.LAND && aspect != EnumIaSAspect.EXOUSIUM && bl != NyxBlocks.sanguineObsidian
-				&& Blocks.snow_layer.canPlaceBlockAt(w, x, yval, z))
-			w.setBlock(x, yval, z, Blocks.snow_layer, 0, 2);
-		if (r.nextInt(24) == 0) {
-			boolean inair = false;
-			for (int yit = IaSBlockHelper.getHeight(w, x, z) - 1; yit > 63; --yit)
-				if (!inair && IaSBlockHelper.isTransient(w, x, yit, z)) {
-					inair = true;
-				} else if (inair && !IaSBlockHelper.isTransient(w, x, yit, z)) {
-					if (w.isSideSolid(x, yit, z, ForgeDirection.UP)
-							&& r.nextBoolean()) {
-						w.setBlock(x, yit + 1, z, NyxBlocks.icicles);
-						break;
-					}
-					inair = false;
-				}
-		}
+
+	public boolean deepSurfaceLayer() {
+		return false;
 	}
-	
+
+	protected void generateCortra(World w, int x, int z, boolean reverse) {
+		boolean prevsalt = false;
+		final int ystart = reverse ? 56 : 5, yend = reverse ? 5 : 56;
+		for (int i = ystart; i != yend; i += reverse ? -1 : 1)
+			if (w.getBlock(x, i, z) == NyxBlocks.salt) {
+				if (prevsalt) {
+					w.setBlock(x, i, z, NyxBlocks.oreCortra);
+					break;
+				}
+				prevsalt = true;
+			}
+	}
+
+	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
+
+	}
+
 	protected void genOre(World par1World, Random par2Random, int xchunk, int zchunk) {
 		genEchir = new WorldGenNyxOre(NyxBlocks.oreEchir, 12);
 		genSalt = new WorldGenNyxOre(NyxBlocks.salt, 48);
@@ -123,34 +91,30 @@ public class NyxBiome extends BiomeGenBase {
 
 		GenOre.genOreStandard(genSalt, par1World, xchunk, zchunk, 8, 64, 5);
 
-		generateCortra(par1World, xchunk+par2Random.nextInt(16), zchunk+par2Random.nextInt(16), false);
-		generateCortra(par1World, xchunk+par2Random.nextInt(16), zchunk+par2Random.nextInt(16), true);
+		generateCortra(par1World, xchunk + par2Random.nextInt(16), zchunk + par2Random.nextInt(16), false);
+		generateCortra(par1World, xchunk + par2Random.nextInt(16), zchunk + par2Random.nextInt(16), true);
 
 		do {
-			final int randx = par2Random.nextInt(16),
-					randz = par2Random.nextInt(16);
+			final int randx = par2Random.nextInt(16), randz = par2Random.nextInt(16);
 			boolean prevair = false;
-			for(int i = 64; i < 192; ++i) {
-				final Block bl = par1World.getBlock(xchunk+randx, i, zchunk+randz);
-				if(prevair) {
-					if(bl instanceof NyxBlockStone) {
-						for(final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-							if(par2Random.nextBoolean()) {
-								par1World.setBlock(xchunk+randx+dir.offsetX, i+dir.offsetY, zchunk+randz+dir.offsetZ, NyxBlocks.oreDevora);
-							}
-						}
-						par1World.setBlock(xchunk+randx, i, zchunk+randz, NyxBlocks.oreDevora);
+			for (int i = 64; i < 192; ++i) {
+				final Block bl = par1World.getBlock(xchunk + randx, i, zchunk + randz);
+				if (prevair) {
+					if (bl instanceof NyxBlockStone) {
+						for (final ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+							if (par2Random.nextBoolean())
+								par1World.setBlock(xchunk + randx + dir.offsetX, i + dir.offsetY,
+										zchunk + randz + dir.offsetZ, NyxBlocks.oreDevora);
+						par1World.setBlock(xchunk + randx, i, zchunk + randz, NyxBlocks.oreDevora);
 						break;
 					}
-				} else {
+				} else
 					prevair = (bl == null || bl.getMaterial() instanceof MaterialTransparent);
-				}
 			}
-			if(doGenDevora) {
+			if (doGenDevora)
 				doGenDevora = false;
-			} else {
+			else
 				break;
-			}
 		} while (true);
 
 		// Unstable ice.
@@ -165,31 +129,22 @@ public class NyxBiome extends BiomeGenBase {
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 96, 192, 10);
 		GenOre.genOreStandard(genGemstone, par1World, xchunk, zchunk, 8, 24, 2);
 
-		if (doGenNifelhium) {
+		if (doGenNifelhium)
 			GenOre.genOreSurface(NyxBlocks.oreNifelhium, par1World, xchunk, zchunk);
-		}
 
 		final int x = xchunk + par1World.rand.nextInt(16);
 		final int z = zchunk + par1World.rand.nextInt(16);
 		final int y = IaSBlockHelper.getHeight(par1World, x, z);
 		if (y >= 230 && IaSWorldHelper.getRegionLevel(par1World, x, y, z) > 0) {
 			boolean makestone = true;
-			for (int xit = -32; xit <= 32 && makestone; ++xit) {
-				for (int zit = -32; zit <= 32 && makestone; ++zit) {
+			for (int xit = -32; xit <= 32 && makestone; ++xit)
+				for (int zit = -32; zit <= 32 && makestone; ++zit)
 					for (int yit = 230; yit <= 255 && makestone; ++yit)
-						if (par1World.getBlock(x + xit, yit, z + zit) == NyxBlocks.crystalBloodstone) {
+						if (par1World.getBlock(x + xit, yit, z + zit) == NyxBlocks.crystalBloodstone)
 							makestone = false;
-						}
-				}
-			}
-			if (makestone) {
+			if (makestone)
 				par1World.setBlock(x, y, z, NyxBlocks.crystalBloodstone);
-			}
 		}
-		
-	}
-
-	protected void genFoliage(World par1World, Random par2Random, int xchunk, int zchunk) {
 
 	}
 
@@ -198,23 +153,21 @@ public class NyxBiome extends BiomeGenBase {
 		final int x = xchunk - 4 + par2Random.nextInt(20);
 		final int z = zchunk - 4 + par2Random.nextInt(20);
 		final int y = Math.max(64, par1World.getTopSolidOrLiquidBlock(x, z));
-		if ((xchunk & 127) == 0 && (zchunk & 127) == 0) {
-			(new GenRuinsGatestone()).generate(par1World, par2Random, xchunk+8, y, zchunk+8);
-		} else {
+		if ((xchunk & 127) == 0 && (zchunk & 127) == 0)
+			(new GenRuinsGatestone()).generate(par1World, par2Random, xchunk + 8, y, zchunk + 8);
+		else {
 			xchunk = Math.abs(xchunk);
 			zchunk = Math.abs(zchunk);
-			if(((xchunk>>4)&1) != 1 || (((zchunk>>4)&1) != 1))
+			if (((xchunk >> 4) & 1) != 1 || (((zchunk >> 4) & 1) != 1))
 				return;
 			GenRuins gengen = null;
 			int i = 0;
-			if (hasTowers() && par2Random.nextInt(3) == 0) {
+			if (hasTowers() && par2Random.nextInt(3) == 0)
 				gengen = new GenRuinsTowerLookout();
-			} else {
+			else
 				gengen = supplyRuins(i++);
-			}
-			while(gengen != null && !gengen.generate(par1World, par2Random, x, y, z)) {
+			while (gengen != null && !gengen.generate(par1World, par2Random, x, y, z))
 				gengen = supplyRuins(i++);
-			}
 		}
 	}
 
@@ -233,15 +186,12 @@ public class NyxBiome extends BiomeGenBase {
 		blocks[xzmod + 2] = Styx.air;
 		blocks[xzmod + 3] = Styx.ground;
 		blocks[xzmod + 4] = Blocks.bedrock;
-		if (rand.nextBoolean()) {
+		if (rand.nextBoolean())
 			blocks[xzmod + 5] = Blocks.bedrock;
-		}
 		if (blocks[xzmod + 64] == null || blocks[xzmod + 64].isAir(world, a, 64, b)) {
-			final boolean iced =
-					blocks[xzmod + 61] != NyxBlocks.exousicWater
-					|| blocks[xzmod + 60] != NyxBlocks.exousicWater
-					|| blocks[xzmod + 59] != NyxBlocks.exousicWater;
-			blocks[xzmod + 63] = iced?NyxBlocks.exousicIce:Blocks.air;
+			final boolean iced = blocks[xzmod + 61] != NyxBlocks.exousicWater
+					|| blocks[xzmod + 60] != NyxBlocks.exousicWater || blocks[xzmod + 59] != NyxBlocks.exousicWater;
+			blocks[xzmod + 63] = iced ? NyxBlocks.exousicIce : Blocks.air;
 			blocks[xzmod + 62] = NyxBlocks.exousicWater;
 			meta[xzmod + 62] = 15;
 		}
@@ -256,7 +206,7 @@ public class NyxBiome extends BiomeGenBase {
 					blocks[index] = topBlock;
 					break;
 				case -1:
-					blocks[index] = deepsurface?topBlock:fillerBlock;
+					blocks[index] = deepsurface ? topBlock : fillerBlock;
 					deepsurface = false;
 					break;
 				case -2:
@@ -271,10 +221,13 @@ public class NyxBiome extends BiomeGenBase {
 					break;
 				}
 				--k;
-			} else {
+			} else
 				k = Math.max(k, -1);
-			}
 		}
+	}
+
+	public float getWeight() {
+		return 1;
 	}
 
 	protected boolean hasTowers() {
@@ -285,6 +238,31 @@ public class NyxBiome extends BiomeGenBase {
 		topBlock = top;
 		fillerBlock = filler;
 		return this;
+	}
+
+	/**
+	 * Called after the above decorate pass in order to add snow, icicles, etc.
+	 */
+	public final void snow(World w, Random r, int x, int z) {
+		final int yval = w.getPrecipitationHeight(x, z);
+		final Block bl = w.getBlock(x, yval - 1, z);
+		final EnumIaSAspect aspect = EnumIaSAspect.getAspect(bl);
+		if (aspect != EnumIaSAspect.LAND && aspect != EnumIaSAspect.EXOUSIUM && bl != NyxBlocks.sanguineObsidian
+				&& Blocks.snow_layer.canPlaceBlockAt(w, x, yval, z))
+			w.setBlock(x, yval, z, Blocks.snow_layer, 0, 2);
+		if (r.nextInt(24) == 0) {
+			boolean inair = false;
+			for (int yit = IaSBlockHelper.getHeight(w, x, z) - 1; yit > 63; --yit)
+				if (!inair && IaSBlockHelper.isTransient(w, x, yit, z))
+					inair = true;
+				else if (inair && !IaSBlockHelper.isTransient(w, x, yit, z)) {
+					if (w.isSideSolid(x, yit, z, ForgeDirection.UP) && r.nextBoolean()) {
+						w.setBlock(x, yit + 1, z, NyxBlocks.icicles);
+						break;
+					}
+					inair = false;
+				}
+		}
 	}
 
 	protected GenRuins supplyRuins(int i) {

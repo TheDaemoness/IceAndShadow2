@@ -38,12 +38,10 @@ public class NyxItemRope extends IaSBaseItemSingle {
 			for (final int e = Math.max(0, y - NyxItemRope.LENGTH_MAX); y > e; --y) {
 				final Block bl = w.getBlock(x, y, z);
 				if (!IaSBlockHelper.isAir(bl)) {
-					if (IaSBlockHelper.isFluid(bl)) {
+					if (IaSBlockHelper.isFluid(bl))
 						break;
-					}
-					if (!bl.isReplaceable(w, x, y, z)) {
+					if (!bl.isReplaceable(w, x, y, z))
 						break;
-					}
 				}
 				w.func_147480_a(x, y, z, true);
 				w.setBlock(x, y, z, NyxBlocks.ropeY);

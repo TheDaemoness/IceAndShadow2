@@ -4,8 +4,7 @@ import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.blocks.IaSBaseBlockAirlike;
 
-public class NyxBlockVirtualLadder
-		extends IaSBaseBlockAirlike /* DO NOT MARK CLIMBABLE! */ {
+public class NyxBlockVirtualLadder extends IaSBaseBlockAirlike /* DO NOT MARK CLIMBABLE! */ {
 
 	public NyxBlockVirtualLadder(String texName) {
 		super(EnumIaSModule.NYX, texName);
@@ -27,11 +26,10 @@ public class NyxBlockVirtualLadder
 
 	@Override
 	public void setClimbable(World w, int x, int y, int z, boolean yes) {
-		if (yes) {
+		if (yes)
 			super.setClimbable(w, x, y, z, yes);
-		} else {
+		else
 			w.setBlockToAir(x, y, z);
-		}
 	}
 
 	@Override

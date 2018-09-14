@@ -1,6 +1,5 @@
 package iceandshadow2.ias.handlers;
 
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -14,14 +13,14 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class IaSHandlerTransmutationCraft9 extends IaSHandlerTransmutationCraft {
 
 	@Override
-	public Class getRecipeClass(boolean ore) {
-		return ore?ShapedOreRecipe.class:ShapedRecipes.class;
+	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
+		if ((recipe.getRecipeSize() != 9 && recipe.getRecipeSize() != 1) || !target.isItemEqual(catalyst))
+			return null;
+		return super.getInputs(recipe, target, catalyst, orerecipe);
 	}
 
 	@Override
-	protected List getInputs(IRecipe recipe, ItemStack target, ItemStack catalyst, boolean orerecipe) {
-		if((recipe.getRecipeSize() != 9 && recipe.getRecipeSize() != 1) || !target.isItemEqual(catalyst))
-			return null;
-		return super.getInputs(recipe, target, catalyst, orerecipe);
+	public Class getRecipeClass(boolean ore) {
+		return ore ? ShapedOreRecipe.class : ShapedRecipes.class;
 	}
 }

@@ -14,15 +14,12 @@ import net.minecraft.item.ItemStack;
  */
 public interface IIaSApiSacrificeXp {
 	/**
-	 * Gets the experience spat out by an experience altar for a given item
-	 * stack.
+	 * Gets the experience spat out by an experience altar for a given item stack.
 	 *
-	 * @param is
-	 *            The item stack put into an experience altar.
-	 * @param rand
-	 *            A random object, for convenience.
-	 * @return The experience to be returned, or 0 if the item should be
-	 *         destroyed with no yield. Negative numbers are treated as 0.
+	 * @param is   The item stack put into an experience altar.
+	 * @param rand A random object, for convenience.
+	 * @return The experience to be returned, or 0 if the item should be destroyed
+	 *         with no yield. Negative numbers are treated as 0.
 	 */
 	public float getXpValue(ItemStack is, Random rand);
 }

@@ -29,9 +29,8 @@ public class NyxTeExaminationTable extends IaSTileEntity {
 	public void writeToNBT(NBTTagCompound in) {
 		super.writeToNBT(in);
 		final NBTTagCompound nbt = in.getCompoundTag("nyxKnowledge");
-		for (final String keys : knowledge.keySet()) {
+		for (final String keys : knowledge.keySet())
 			nbt.setInteger(keys, knowledge.get(keys));
-		}
 		in.setTag("nyxKnowledge", nbt);
 	}
 }

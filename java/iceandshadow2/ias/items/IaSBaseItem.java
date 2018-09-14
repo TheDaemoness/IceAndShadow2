@@ -14,11 +14,6 @@ import net.minecraft.item.ItemStack;
 
 public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspect, IIaSGlowing, IIaSDescriptive {
 
-	@Override
-	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
-		return null;
-	}
-
 	private final EnumIaSModule MODULE;
 
 	protected IaSBaseItem(EnumIaSModule mod) {
@@ -32,8 +27,18 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 	}
 
 	@Override
+	public int getFirstGlowPass(ItemStack is) {
+		return 1;
+	}
+
+	@Override
 	public EnumIaSModule getIaSModule() {
 		return MODULE;
+	}
+
+	@Override
+	public String getLocalizedHintArgument(EntityPlayer entityPlayer, ItemStack itemStack) {
+		return null;
 	}
 
 	@Override
@@ -44,11 +49,6 @@ public abstract class IaSBaseItem extends Item implements IIaSModName, IIaSAspec
 	public final IaSBaseItem register() {
 		IaSRegistration.register(this);
 		return this;
-	}
-
-	@Override
-	public int getFirstGlowPass(ItemStack is) {
-		return 1;
 	}
 
 	@Override

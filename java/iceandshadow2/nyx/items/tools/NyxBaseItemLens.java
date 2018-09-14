@@ -1,14 +1,10 @@
 package iceandshadow2.nyx.items.tools;
 
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 import iceandshadow2.EnumIaSModule;
 import iceandshadow2.ias.api.IIaSApiTransmuteLens;
 import iceandshadow2.ias.interfaces.IIaSGlowing;
@@ -49,9 +45,8 @@ public abstract class NyxBaseItemLens extends IaSBaseItemSingle implements IIaSG
 	public void registerIcons(IIconRegister reg) {
 		itemIcon = reg.registerIcon(getTextureName());
 		lensicon = reg.registerIcon(getTextureName() + "Glow");
-		if (overrideAltar) {
+		if (overrideAltar)
 			altaricon = reg.registerIcon(getTextureName() + "Altar");
-		}
 	}
 
 	@Override

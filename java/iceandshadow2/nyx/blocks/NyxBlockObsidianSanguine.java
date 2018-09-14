@@ -86,40 +86,34 @@ public class NyxBlockObsidianSanguine extends IaSBaseBlockSingle {
 		if (par5Entity instanceof EntityLivingBase && !(par5Entity instanceof EntityMob)) {
 			final EntityLivingBase elb = (EntityLivingBase) par5Entity;
 			/*
-			 * if (!elb.isPotionActive(Potion.resistance)) {
-			 * elb.addPotionEffect(new PotionEffect(23, 1, 0));
-			 * elb.addPotionEffect(new PotionEffect(Potion.resistance.id, 39,
-			 * 3)); } if(!elb.isPotionActive(Potion.regeneration))
-			 * elb.addPotionEffect(new
+			 * if (!elb.isPotionActive(Potion.resistance)) { elb.addPotionEffect(new
+			 * PotionEffect(23, 1, 0)); elb.addPotionEffect(new
+			 * PotionEffect(Potion.resistance.id, 39, 3)); }
+			 * if(!elb.isPotionActive(Potion.regeneration)) elb.addPotionEffect(new
 			 * PotionEffect(Potion.regeneration.id,51,1));
 			 */
 			if (elb instanceof EntityPlayer) {
-				if (par1World.rand.nextBoolean()) {
+				if (par1World.rand.nextBoolean())
 					IaSPlayerHelper.regen((EntityPlayer) elb, 1);
-				}
 				if (elb.isSneaking())
-					if (elb.isPotionActive(Potion.confusion)) {
+					if (elb.isPotionActive(Potion.confusion))
 						elb.addPotionEffect(new PotionEffect(Potion.confusion.id, 2, 0));
-					} else {
+					else {
 						final EntityPlayer playuh = (EntityPlayer) elb;
-						for (int xit = -1; xit <= 1; ++xit) {
+						for (int xit = -1; xit <= 1; ++xit)
 							for (int zit = -1; zit <= 1; ++zit)
 								if (par1World.getBlock(x + xit, y, z + zit) != this)
 									return;
-						}
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 1, z))
 							return;
 						if (!IaSBlockHelper.isTransient(par1World, x, y + 2, z))
 							return;
-						if (IaSPlayerHelper.drainXP(playuh, 19, "setrespawnObsidian",
-								true) >= 19) {
+						if (IaSPlayerHelper.drainXP(playuh, 19, "setrespawnObsidian", true) >= 19)
 							;
-						}
 						playuh.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true);
 					}
-			} else {
+			} else
 				elb.heal(0.5F);
-			}
 		}
 	}
 

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import iceandshadow2.EnumIaSModule;
-import iceandshadow2.IIaSModName;
 import iceandshadow2.ias.api.EnumIaSAspect;
 import iceandshadow2.ias.blocks.IaSBaseBlockSingle;
 import iceandshadow2.ias.util.IaSPlayerHelper;
 import iceandshadow2.nyx.NyxBlocks;
 import iceandshadow2.nyx.NyxItems;
-import iceandshadow2.nyx.tileentities.NyxTeTransfusionAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -78,7 +76,7 @@ public class NyxBlockAltarTransfusionBroken extends IaSBaseBlockSingle {
 
 	@Override
 	public String getTextureName() {
-		return ((NyxBlockAltarTransfusion)NyxBlocks.transfusionAltar).getTextureName();
+		return ((NyxBlockAltarTransfusion) NyxBlocks.transfusionAltar).getTextureName();
 	}
 
 	@Override
@@ -93,14 +91,12 @@ public class NyxBlockAltarTransfusionBroken extends IaSBaseBlockSingle {
 		if (is != null && is.getItem() == NyxItems.cortra) {
 			final int meta = w.getBlockMetadata(x, y, z);
 			is.stackSize -= 1;
-			if (meta == 7) {
+			if (meta == 7)
 				w.setBlock(x, y, z, NyxBlocks.transfusionAltar);
-			} else {
+			else
 				w.setBlockMetadataWithNotify(x, y, z, w.getBlockMetadata(x, y, z) + 1, 2);
-			}
-		} else {
+		} else
 			IaSPlayerHelper.messagePlayer(ep, "altarTransfusionBroken");
-		}
 		return true;
 	}
 
