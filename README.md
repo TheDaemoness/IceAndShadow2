@@ -1,3 +1,5 @@
+_I'm sorry, all of my fucks given about this codebase are currently unavailable. Please hold for IaS3._
+
 # Ice and Shadow II
 _A brutal new realm for the avaricious and masochistic._
 
